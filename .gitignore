@@ -3,3 +3,7 @@
 ################################################################################
 
 /RecNForget/obj/Debug
+/.vs/RecNForget/v15
+/packages
+/RecNForget/bin/Release
+/RecNForget/obj/Release
