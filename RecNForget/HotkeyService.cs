@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RecNForget
 {
-	public class RecordingService
+	public class HotkeyService
 	{
 		private bool hotkeyWaitingForRelease;
 		private bool paused;
@@ -24,7 +24,7 @@ namespace RecNForget
 		public bool CurrentlyRecording { get; set; }
 
 
-		public RecordingService(Action startRecordingAction, Action stopRecordingAction)
+		public HotkeyService(Action startRecordingAction, Action stopRecordingAction)
 		{
 			keyboardHook = new Hook("Global Action Hook");
 			keyboardHook.KeyDownEvent = KeyDown;
@@ -85,14 +85,14 @@ namespace RecNForget
 			}
 		}
 
-		public void Pause(bool pause = true)
+		public void PauseRecording(bool pause = true)
 		{
 			this.paused = pause;
 		}
 
-		public void Resume()
+		public void ResumeRecording()
 		{
-			Pause(false);
+			PauseRecording(false);
 		}
 
 		public void StartRecording()

@@ -13,7 +13,7 @@ namespace RecNForget
 	/// </summary>
 	public partial class MainWindow : INotifyPropertyChanged
 	{
-		private RecordingService recordingService;
+		private HotkeyService hotkeyService;
 		private bool currentlyRecording = false;
 		private bool currentlyNotRecording = true;
 		private string taskBar_ProgressState = "Paused";
@@ -192,7 +192,7 @@ namespace RecNForget
 			DataContext = this;
 			InitializeComponent();
 
-			this.recordingService = new RecordingService(
+			this.hotkeyService = new HotkeyService(
 				startRecordingAction:() =>
 				{
 					CurrentlyRecording = true;
@@ -219,7 +219,7 @@ namespace RecNForget
 
 		private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
 		{
-			this.recordingService.Pause();
+			this.hotkeyService.PauseRecording();
 
 			var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey");
 
@@ -228,12 +228,12 @@ namespace RecNForget
 				HotKey_StartStopRecording = dialog.HotkeysText;
 			}
 
-			this.recordingService.Resume();
+			this.hotkeyService.ResumeRecording();
 		}
 
 		private void ConfigureHotkey_OpenLastRecording_Click(object sender, RoutedEventArgs e)
 		{
-			this.recordingService.Pause();
+			this.hotkeyService.PauseRecording();
 
 			var dialog = new HotkeyPromptWindow("Configure open last recording hotkey");
 
@@ -242,12 +242,12 @@ namespace RecNForget
 				HotKey_OpenLastRecording = dialog.HotkeysText;
 			}
 
-			this.recordingService.Resume();
+			this.hotkeyService.ResumeRecording();
 		}
 
 		private void ConfigureHotkey_OpenOutputPath_Click(object sender, RoutedEventArgs e)
 		{
-			this.recordingService.Pause();
+			this.hotkeyService.PauseRecording();
 
 			var dialog = new HotkeyPromptWindow("Configure open output path hotkey");
 
@@ -256,12 +256,12 @@ namespace RecNForget
 				HotKey_OpenOutputPath = dialog.HotkeysText;
 			}
 
-			this.recordingService.Resume();
+			this.hotkeyService.ResumeRecording();
 		}
 
 		private void ConfigureHotkey_SetFileNamePrefix_Click(object sender, RoutedEventArgs e)
 		{
-			this.recordingService.Pause();
+			this.hotkeyService.PauseRecording();
 
 			var dialog = new HotkeyPromptWindow("Configure set file name prefix hotkey");
 
@@ -270,12 +270,12 @@ namespace RecNForget
 				HotKey_SetFileNamePrefix = dialog.HotkeysText;
 			}
 
-			this.recordingService.Resume();
+			this.hotkeyService.ResumeRecording();
 		}
 
 		private void ConfigureHotkey_ToggleFileNamePromptMode_Click(object sender, RoutedEventArgs e)
 		{
-			this.recordingService.Pause();
+			this.hotkeyService.PauseRecording();
 
 			var dialog = new HotkeyPromptWindow("Configure toggle file name prompt mode hotkey");
 
@@ -284,12 +284,12 @@ namespace RecNForget
 				HotKey_ToggleFileNamePromptMode = dialog.HotkeysText;
 			}
 
-			this.recordingService.Resume();
+			this.hotkeyService.ResumeRecording();
 		}
 
 		private void ConfigureHotkey_SetOutputPath_Click(object sender, RoutedEventArgs e)
 		{
-			this.recordingService.Pause();
+			this.hotkeyService.PauseRecording();
 
 			var dialog = new HotkeyPromptWindow("Configure set output path hotkey");
 
@@ -298,7 +298,7 @@ namespace RecNForget
 				HotKey_SetOutputPath = dialog.HotkeysText;
 			}
 
-			this.recordingService.Resume();
+			this.hotkeyService.ResumeRecording();
 		}
 
 		private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
@@ -333,11 +333,11 @@ namespace RecNForget
 		{
 			if (CurrentlyRecording)
 			{
-				recordingService.StopRecording();
+				hotkeyService.StopRecording();
 			}
 			else
 			{
-				recordingService.StartRecording();
+				hotkeyService.StartRecording();
 			}
 		}
 
