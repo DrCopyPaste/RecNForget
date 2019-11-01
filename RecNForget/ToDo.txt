@@ -1,0 +1,30 @@
+﻿readme howto file
+
+suppress not allowed characters for filenames
+
+show balloon tips (configurable (conditionally))
+	show in file browser
+	instant replay recorded audio?
+
+show record (red circle) in bottom right corner when recording
+
+peep sound for recording start/stop (configurable (conditionally))
+
+Program can run in background as a windows process listening to keystrokes
+
+how to build
+	include batch files?
+	include nssm for service installation?
+
+refactor ioc constants magic strings identifiers etc
+
+sound level normalization (configurable (conditionally))
+enable output as mp3/other (configurable (conditionally))
+target paths are (visually) configurable
+
+Is a keyhook expensive (cpu etc)?
+	=> maybe it could be worth letting hotkeys be handled by professionals (like Auto hotkey)
+	=> think about it
+
+Allow including screenshots with sampled audio file (for later remembering which movie/whatever thing the sample belonged to)
+	This could also be the fraps replacement :D (well kinda)

@@ -1,0 +1,20 @@
+﻿<Window x:Class="RecNForget.HotkeyPromptWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecNForget"
+        mc:Ignorable="d"
+        Title="Configure hotkey" Height="90" Width="460" WindowStyle="ToolWindow" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="Hold down all modifier keys you wish to set ([Shift], [Ctrl], [Alt], [Win])." />
+        <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Finish hotkey configuration by adding the key (any non-modifier key) then release." />
+        <TextBox Grid.Row="2" Grid.Column="0" x:Name="HotkeysTextBox" IsReadOnly="True" />
+    </Grid>
+</Window>

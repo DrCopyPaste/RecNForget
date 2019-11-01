@@ -1,0 +1,127 @@
+﻿<Window x:Class="RecNForget.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecNForget"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="RecNForget" Height="530" Width="600" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Status" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
+            <Grid>
+                <Grid.Resources>
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="currently recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+
+                <Canvas Height="Auto" Width="Auto" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
+                    <Ellipse Width="10" Height="10" Fill="Red" Canvas.Left="85" Canvas.Top="5" Visibility="{Binding Path=CurrentlyRecording, Converter={StaticResource BooleanToVisibility}}"/>
+                    <Rectangle Width="10" Height="10" Fill="Black" Canvas.Left="85" Canvas.Top="5" Visibility="{Binding Path=CurrentlyNotRecording, Converter={StaticResource BooleanToVisibility}}"/>
+                </Canvas>
+
+                <Button Grid.Row="0" Grid.Column="2" Name="ToggleRecordButton" Content="Record" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="RecordButton_Click"/>
+                
+                <Grid Grid.Column="2" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                </Grid>
+
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Hotkeys" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="start/stop recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_StartStopRecording_Click" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="[inactive] open last recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=HotKey_OpenLastRecording, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_OpenLastRecording_Click"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="[inactive] open output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="2" Grid.Column="1" Content="{Binding Path=HotKey_OpenOutputPath, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button Grid.Row="2" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_OpenOutputPath_Click"/>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="[inactive] set file name prefix:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="3" Grid.Column="1" Content="{Binding Path=HotKey_SetFileNamePrefix, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button Grid.Row="3" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_SetFileNamePrefix_Click"/>
+
+                <Label Grid.Row="4" Grid.Column="0" Content="[inactive] toggle file name prompt mode:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="4" Grid.Column="1" Content="{Binding Path=HotKey_ToggleFileNamePromptMode, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button Grid.Row="4" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_ToggleFileNamePromptMode_Click"/>
+
+                <Label Grid.Row="5" Grid.Column="0" Content="[inactive] set output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="5" Grid.Column="1" Content="{Binding Path=HotKey_SetOutputPath, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button Grid.Row="5" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_SetOutputPath_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Grid.Column="0" Header="File name and path" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="[inactive] prompt for file name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+
+                <ComboBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Width="164" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type local:PromptForFilenameMode}}}" SelectedValue="{Binding Path=PromptForFilename}"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="file name prefix:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" TextChanged="FilenamePrefix_Changed"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Content="output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis" />
+                </Label>
+                <Button Grid.Row="2" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Configure_OutputPath_Click"/>
+            </Grid>
+        </GroupBox>
+
+    </Grid>
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo Description="An app with a taskbar info description" 
+                     ProgressValue="1" ProgressState="{Binding Path=TaskBar_ProgressState}"/>
+    </Window.TaskbarItemInfo>
+</Window>
