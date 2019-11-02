@@ -2,6 +2,8 @@
 
 readme howto file
 
+icons for buttons
+
 suppress not allowed characters for filenames
 
 show balloon tips (configurable (conditionally))
