@@ -33,8 +33,8 @@
                     <TextBlock Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis" />
                 </Label>
                 <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Configure_OutputPath_Click"/>
-                <Label Grid.Row="1" Grid.Column="0" Content="[inactive] prompt for file name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Width="164" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type localEnums:PromptForFilenameMode}}}" SelectedValue="{Binding Path=PromptForFilename}"/>
+                <!--<Label Grid.Row="1" Grid.Column="0" Content="[inactive] prompt for file name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Width="164" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type localEnums:PromptForFilenameMode}}}" SelectedValue="{Binding Path=PromptForFilename}"/>-->
             </Grid>
         </GroupBox>
         <GroupBox  Grid.Row="1" Grid.Column="0" Header="Hotkeys" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">

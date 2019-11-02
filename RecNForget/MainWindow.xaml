@@ -7,7 +7,7 @@
         xmlns:localEnums="clr-namespace:RecNForget.Enums"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="RecNForget" Height="450" Width="600" ResizeMode="CanMinimize">
+        Title="RecNForget" Height="330" Width="600" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -23,7 +23,7 @@
                     <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
                 </Grid.Resources>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -32,16 +32,15 @@
                     <ColumnDefinition Width="350" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="currently recording:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="0" Content="recording to:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=CurrentFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="330" Margin="10,10,0,0" VerticalAlignment="Top"/>
-
-                <Canvas Height="40" Width="350" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                    <Ellipse Width="20" Height="20" Fill="Red" Canvas.Left="185" Canvas.Top="10" Visibility="{Binding Path=CurrentlyRecording, Converter={StaticResource BooleanToVisibility}}"/>
-                    <Rectangle Width="20" Height="20" Fill="Black" Canvas.Left="185" Canvas.Top="10" Visibility="{Binding Path=CurrentlyNotRecording, Converter={StaticResource BooleanToVisibility}}"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="currently recording:" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                <Canvas Height="20" Width="20" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center">
+                    <Ellipse Width="20" Height="20" Fill="Red" Canvas.Left="0" Canvas.Top="0" Visibility="{Binding Path=CurrentlyRecording, Converter={StaticResource BooleanToVisibility}}"/>
+                    <Rectangle Width="20" Height="20" Fill="Black" Canvas.Left="0" Canvas.Top="0" Visibility="{Binding Path=CurrentlyNotRecording, Converter={StaticResource BooleanToVisibility}}"/>
                 </Canvas>
-
                 <Button Grid.Row="0" Grid.Column="2" Name="ToggleRecordButton" Content="Record" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="RecordButton_Click"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="recording to:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=CurrentFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="330" Margin="10,10,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="0" Header="File name and settings" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">

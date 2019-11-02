@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
-        Title="RecNForget - Configure hotkey" Height="90" Width="460" WindowStyle="ToolWindow" ResizeMode="CanMinimize">
+        Title="RecNForget - Configure hotkey" Height="110" Width="460" WindowStyle="ToolWindow" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="Hold down all modifier keys you wish to set ([Shift], [Ctrl], [Alt], [Win])." />
-        <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Finish hotkey configuration by adding the key (any non-modifier key) then release." />
-        <TextBox Grid.Row="2" Grid.Column="0" x:Name="HotkeysTextBox" IsReadOnly="True" />
+        <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="" />
+        <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Finish hotkey configuration by adding the key (any non-modifier key) then release." />
+        <TextBox Grid.Row="3" Grid.Column="0" x:Name="HotkeysTextBox" IsReadOnly="True" />
     </Grid>
 </Window>
