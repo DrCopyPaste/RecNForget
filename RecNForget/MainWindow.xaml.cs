@@ -21,6 +21,9 @@ namespace RecNForget
 		private bool currentlyNotRecording = true;
 		private string taskBar_ProgressState = "Paused";
 
+		private string currentFileName;
+		private string lastFileName;
+
 		#region bound values
 
 		public string TaskBar_ProgressState
@@ -32,6 +35,34 @@ namespace RecNForget
 			set
 			{
 				taskBar_ProgressState = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public string CurrentFileName
+		{
+			get
+			{
+				return currentFileName;
+			}
+
+			set
+			{
+				currentFileName = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public string LastFileName
+		{
+			get
+			{
+				return lastFileName;
+			}
+
+			set
+			{
+				lastFileName = value;
 				OnPropertyChanged();
 			}
 		}
@@ -99,6 +130,7 @@ namespace RecNForget
 					CurrentlyNotRecording = false;
 					ToggleRecordButton.Content = "Stop";
 					TaskBar_ProgressState = "Error";
+					UpdateCurrentFileName();
 				},
 				stopRecordingAction: () =>
 				{
@@ -106,6 +138,8 @@ namespace RecNForget
 					CurrentlyNotRecording = true;
 					ToggleRecordButton.Content = "Record";
 					TaskBar_ProgressState = "Paused";
+					UpdateCurrentFileName();
+					UpdateLastFileName();
 				});
 		}
 
@@ -136,6 +170,16 @@ namespace RecNForget
 			{
 				hotkeyService.StartRecording();
 			}
+		}
+
+		private void UpdateCurrentFileName()
+		{
+			CurrentFileName = hotkeyService == null ? string.Empty : hotkeyService.CurrentFileName;
+		}
+
+		private void UpdateLastFileName()
+		{
+			LastFileName = hotkeyService == null ? string.Empty : hotkeyService.LastFileName;
 		}
 
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)

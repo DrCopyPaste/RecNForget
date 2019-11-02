@@ -21,6 +21,9 @@ namespace RecNForget.Services
 		private static WasapiLoopbackCapture captureInstance;
 		private Hook keyboardHook;
 
+		public string CurrentFileName { get; set; } = string.Empty;
+		public string LastFileName { get; set; } = string.Empty;
+
 		public bool CurrentlyRecording { get; set; }
 
 
@@ -97,7 +100,6 @@ namespace RecNForget.Services
 
 		public void StartRecording()
 		{
-			startRecordingAction();
 			CurrentlyRecording = true;
 
 			var settingOutputPath = System.Configuration.ConfigurationManager.AppSettings["OutputPath"];
@@ -123,6 +125,7 @@ namespace RecNForget.Services
 
 			// Redefine the audio writer instance with the given configuration
 			WaveFileWriter RecordedAudioWriter = new WaveFileWriter(file.FullName, captureInstance.WaveFormat);
+			CurrentFileName = file.FullName;
 
 			// When the capturer receives audio, start writing the buffer into the mentioned file
 			captureInstance.DataAvailable += (s, a) =>
@@ -141,14 +144,21 @@ namespace RecNForget.Services
 
 			// Start audio recording !
 			captureInstance.StartRecording();
+
+			// Actions passed to HotkeyService as Parameter shall be executed after all start actions
+			startRecordingAction();
 		}
 
 		public void StopRecording()
 		{
-			stopRecordingAction();
 			CurrentlyRecording = false;
 
 			captureInstance.StopRecording();
+			LastFileName = CurrentFileName;
+			CurrentFileName = string.Empty;
+
+			// Actions passed to HotkeyService as Parameter shall be executed after all stop actions
+			stopRecordingAction();
 		}
 	}
 }

@@ -18,6 +18,10 @@ how to build
 	include batch files?
 	include nssm for service installation?
 
+break down HotkeyService into HotkeyService and AudioRecordingService
+
+allow disabling some hotkeys explicitly (decreasing the amount of hotkeys, the listener has to listen to)
+
 refactor ioc constants magic strings identifiers etc
 
 sound level normalization (configurable (conditionally))
