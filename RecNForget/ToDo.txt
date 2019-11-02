@@ -1,4 +1,8 @@
-﻿readme howto file
+﻿hide hotkey settings in seperate window
+
+have always on top option for the main window
+
+readme howto file
 
 suppress not allowed characters for filenames
 

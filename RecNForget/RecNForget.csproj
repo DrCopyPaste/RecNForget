@@ -69,7 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="HotkeyService.cs" />
+    <Compile Include="Services\HotkeyService.cs" />
     <Page Include="HotkeyPromptWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,14 +86,14 @@
     <Compile Include="HotkeyPromptWindow.xaml.cs">
       <DependentUpon>HotkeyPromptWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HotkeyToStringTranslator.cs" />
+    <Compile Include="Services\HotkeyToStringTranslator.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PromptForFilenameMode.cs" />
+    <Compile Include="Enums\PromptForFilenameMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -125,5 +125,6 @@
   <ItemGroup>
     <Resource Include="ToDo.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
