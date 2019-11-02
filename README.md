@@ -19,6 +19,7 @@ You should be able to just extract RecNForget from the latest release and run th
 - you can replay the last recorded file from the running session
 
 # Features missing for version 1.0
+- add auto-start-option
 - show record (red circle) in bottom right corner when recording (configurable)
 - have always on top option for the main window (configurable)
 - show balloon tips (configurable)
