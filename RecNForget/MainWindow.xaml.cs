@@ -1,4 +1,5 @@
-﻿using Ookii.Dialogs.Wpf;
+﻿using NAudio.Wave;
+using Ookii.Dialogs.Wpf;
 using RecNForget.Enums;
 using RecNForget.Services;
 using System;
@@ -19,11 +20,15 @@ namespace RecNForget
 	/// </summary>
 	public partial class MainWindow : INotifyPropertyChanged
 	{
+		private WaveOutEvent audioOutputDevice = null;
+		private AudioFileReader audioFileReader = null;
+
 		private HotkeyService hotkeyService;
 		private bool currentlyRecording = false;
 		private bool currentlyNotRecording = true;
 		private string taskBar_ProgressState = "Paused";
 
+		private bool hasLastRecording = false;
 		private string currentFileName;
 		private string lastFileName;
 
@@ -56,6 +61,19 @@ namespace RecNForget
 			}
 		}
 
+		public bool HasLastRecording
+		{
+			get
+			{
+				return hasLastRecording;
+			}
+			set
+			{
+				hasLastRecording = value;
+				OnPropertyChanged();
+			}
+		}
+
 		public string LastFileName
 		{
 			get
@@ -66,6 +84,16 @@ namespace RecNForget
 			set
 			{
 				lastFileName = value;
+
+				if (!string.IsNullOrWhiteSpace(lastFileName))
+				{
+					HasLastRecording = true;
+				}
+				else
+				{
+					HasLastRecording = false;
+				}
+
 				OnPropertyChanged();
 			}
 		}
@@ -192,6 +220,37 @@ namespace RecNForget
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
 		{
 			Process.Start(OutputPath);
+		}
+
+		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
+		private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
+		{
+			if (audioOutputDevice == null || audioOutputDevice.PlaybackState == PlaybackState.Stopped)
+			{
+				audioOutputDevice = new WaveOutEvent();
+				audioOutputDevice.PlaybackStopped += OnPlaybackStopped;
+
+				audioFileReader = new AudioFileReader(LastFileName);
+				audioOutputDevice.Init(audioFileReader);
+				audioOutputDevice.Play();
+			}
+			else if (audioOutputDevice.PlaybackState == PlaybackState.Paused)
+			{
+				audioOutputDevice.Play();
+			}
+			else if (audioOutputDevice.PlaybackState == PlaybackState.Playing)
+			{
+				audioOutputDevice.Pause();
+			}
+		}
+
+		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
+		private void OnPlaybackStopped(object sender, StoppedEventArgs args)
+		{
+			audioOutputDevice.Dispose();
+			audioOutputDevice = null;
+			audioFileReader.Dispose();
+			audioFileReader = null;
 		}
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)

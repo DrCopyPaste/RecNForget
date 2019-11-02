@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="Neues Dokument 1">
+   sodipodi:docname="logo.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -53,7 +53,10 @@
      id="layer1">
     <g
        id="g2989"
-       transform="translate(-1594.2853,-299.06639)">
+       transform="translate(-1594.2853,-299.06639)"
+       inkscape:export-filename="D:\__devProjects\git_projects\RecNForget\logo.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <g
          id="g2991">
         <path
@@ -65,7 +68,10 @@
     <g
        id="g3010"
        transform="matrix(0.60562983,0,0,0.60562983,-1397.1007,17.779632)"
-       style="fill:#ffffff;fill-opacity:1">
+       style="fill:#ffffff;fill-opacity:1"
+       inkscape:export-filename="D:\__devProjects\git_projects\RecNForget\logo.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
       <path
          id="path3012"
          d="m 632.5,66.3 c -14.1,-7.1 -31,-5.8 -43.7,3.6 L 287.3,290.6 H 96 c -22.6,0 -43.9,8.4 -60.1,23.8 -16.7,15.9 -25.9,37.2 -25.9,60 v 251.3 c 0,22.7 9.2,44 25.9,60 16.2,15.4 37.5,23.8 60,23.8 h 191.3 l 301.5,220.8 c 7.3,5.4 16,8.1 24.8,8.1 6.5,0 12.9,-1.5 19,-4.6 14,-7.1 22.9,-21.5 22.9,-37.4 V 103.6 c 0,-15.8 -8.9,-30.2 -22.9,-37.3 z m -60.8,747.5 -245.9,-180 c -7.2,-5.3 -15.9,-8 -24.8,-8 H 93.8 V 500.1 L 96,374.4 v 0 h 205 c 8.9,0 17.6,-2.8 24.8,-8.1 l 245.9,-180 v 627.5 z"

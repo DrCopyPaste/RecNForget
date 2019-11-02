@@ -65,7 +65,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -79,6 +79,8 @@
                 <Label Grid.Row="0" Grid.Column="0" Content="last result:" HorizontalAlignment="Left" Width="Auto" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
 
                 <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Path=LastFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="335" Height="Auto"  Margin="5,0,0,0" VerticalAlignment="Top"/>
+
+                <Button Grid.Row="1" Grid.Column="2" Content="Replay Last" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="{Binding Path=HasLastRecording}" Click="ReplayLastRecording_Click"/>
             </Grid>
         </GroupBox>
 
