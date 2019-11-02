@@ -43,7 +43,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return currentFileName;
+				return currentFileName == string.Empty ? "(not recording)" : currentFileName;
 			}
 
 			set
@@ -191,8 +191,6 @@ namespace RecNForget
 		{
 			var settingsWindow = new SettingsWindow(hotkeyService);
 			settingsWindow.ShowDialog();
-
-
 		}
 
 		#endregion
