@@ -7,7 +7,7 @@
         xmlns:localEnums="clr-namespace:RecNForget.Enums"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="RecNForget - Settings" Height="265" Width="600" ResizeMode="NoResize">
+        Title="RecNForget - Settings" Height="205" Width="600" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -17,30 +17,30 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <GroupBox  Grid.Row="0" Grid.Column="0" Header="Output path" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
+        <GroupBox  Grid.Row="0" Grid.Column="0" Header="Output path" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="27" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="140" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
+                <Label Grid.Row="0" Grid.Column="0" Content="output path:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top">
                     <TextBlock Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis" />
                 </Label>
-                <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Configure_OutputPath_Click"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Stretch"  Click="Configure_OutputPath_Click"/>
                 <!--<Label Grid.Row="1" Grid.Column="0" Content="[inactive] prompt for file name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Width="164" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type localEnums:PromptForFilenameMode}}}" SelectedValue="{Binding Path=PromptForFilename}"/>-->
             </Grid>
         </GroupBox>
-        <GroupBox  Grid.Row="1" Grid.Column="0" Header="Hotkeys" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
+        <GroupBox  Grid.Row="1" Grid.Column="0" Header="Hotkeys" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="27" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -48,13 +48,13 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="140" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="start/stop recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_StartStopRecording_Click" />
+                <Label Grid.Row="0" Grid.Column="0" Content="start/stop recording:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="ConfigureHotkey_StartStopRecording_Click" />
 
                 <!--<Label Grid.Row="1" Grid.Column="0" Content="[inactive] open last recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=HotKey_OpenLastRecording, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -78,17 +78,17 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
+        <GroupBox  Grid.Row="2" Grid.Column="0" Header="General" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
             <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="27" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="140" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-                <Button Grid.Row="0" Grid.Column="2" Content="Ok" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="OkButton_Click"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="Ok" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="OkButton_Click"/>
             </Grid>
         </GroupBox>
     </Grid>
