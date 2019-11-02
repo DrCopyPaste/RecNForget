@@ -227,7 +227,7 @@ namespace RecNForget
 
 			if (dialog.ShowDialog() == true)
 			{
-				HotKey_StartStopRecording = dialog.HotkeysText;
+				HotKey_StartStopRecording = dialog.HotkeysAppSetting;
 			}
 
 			this.hotkeyService.ResumeRecording();
@@ -241,7 +241,7 @@ namespace RecNForget
 
 			if (dialog.ShowDialog() == true)
 			{
-				HotKey_OpenLastRecording = dialog.HotkeysText;
+				HotKey_OpenLastRecording = dialog.HotkeysAppSetting;
 			}
 
 			this.hotkeyService.ResumeRecording();
@@ -255,7 +255,7 @@ namespace RecNForget
 
 			if (dialog.ShowDialog() == true)
 			{
-				HotKey_OpenOutputPath = dialog.HotkeysText;
+				HotKey_OpenOutputPath = dialog.HotkeysAppSetting;
 			}
 
 			this.hotkeyService.ResumeRecording();
@@ -269,7 +269,7 @@ namespace RecNForget
 
 			if (dialog.ShowDialog() == true)
 			{
-				HotKey_SetFileNamePrefix = dialog.HotkeysText;
+				HotKey_SetFileNamePrefix = dialog.HotkeysAppSetting;
 			}
 
 			this.hotkeyService.ResumeRecording();
@@ -283,7 +283,7 @@ namespace RecNForget
 
 			if (dialog.ShowDialog() == true)
 			{
-				HotKey_ToggleFileNamePromptMode = dialog.HotkeysText;
+				HotKey_ToggleFileNamePromptMode = dialog.HotkeysAppSetting;
 			}
 
 			this.hotkeyService.ResumeRecording();
@@ -297,7 +297,7 @@ namespace RecNForget
 
 			if (dialog.ShowDialog() == true)
 			{
-				HotKey_SetOutputPath = dialog.HotkeysText;
+				HotKey_SetOutputPath = dialog.HotkeysAppSetting;
 			}
 
 			this.hotkeyService.ResumeRecording();

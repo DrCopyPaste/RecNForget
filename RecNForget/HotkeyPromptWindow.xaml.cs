@@ -42,12 +42,19 @@ namespace RecNForget
 			set { HotkeysTextBox.Text = value; }
 		}
 
+		public string HotkeysAppSetting
+		{
+			get;
+			set;
+		}
+
 		private void KeyHookDown(KeyboardHookEventArgs e)
 		{
 			HotkeysText = HotkeyToStringTranslator.GetKeyboardHookEventArgsAsString(e);
 
 			if (e.Key != Keys.None)
 			{
+				HotkeysAppSetting = e.ToString();
 				HotkeysText = HotkeyToStringTranslator.GetKeyboardHookEventArgsAsString(e);
 
 				this.keyboardHook.isPaused = true;
