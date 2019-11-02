@@ -7,7 +7,7 @@
         xmlns:localEnums="clr-namespace:RecNForget.Enums"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="RecNForget - Settings" Height="530" Width="600" ResizeMode="CanResizeWithGrip">
+        Title="RecNForget - Settings" Height="265" Width="600" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -56,7 +56,7 @@
                 <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_StartStopRecording_Click" />
 
-                <Label Grid.Row="1" Grid.Column="0" Content="[inactive] open last recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <!--<Label Grid.Row="1" Grid.Column="0" Content="[inactive] open last recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=HotKey_OpenLastRecording, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Button Grid.Row="1" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_OpenLastRecording_Click"/>
 
@@ -74,7 +74,7 @@
 
                 <Label Grid.Row="5" Grid.Column="0" Content="[inactive] set output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Label Grid.Row="5" Grid.Column="1" Content="{Binding Path=HotKey_SetOutputPath, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Button Grid.Row="5" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_SetOutputPath_Click"/>
+                <Button Grid.Row="5" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_SetOutputPath_Click"/>-->
             </Grid>
         </GroupBox>
 

@@ -162,75 +162,75 @@ namespace RecNForget
 			this.hotkeyService.ResumeCapturingHotkeys();
 		}
 
-		private void ConfigureHotkey_OpenLastRecording_Click(object sender, RoutedEventArgs e)
-		{
-			this.hotkeyService.PauseCapturingHotkeys();
+		//private void ConfigureHotkey_OpenLastRecording_Click(object sender, RoutedEventArgs e)
+		//{
+		//	this.hotkeyService.PauseCapturingHotkeys();
 
-			var dialog = new HotkeyPromptWindow("Configure open last recording hotkey");
+		//	var dialog = new HotkeyPromptWindow("Configure open last recording hotkey");
 
-			if (dialog.ShowDialog() == true)
-			{
-				HotKey_OpenLastRecording = dialog.HotkeysAppSetting;
-			}
+		//	if (dialog.ShowDialog() == true)
+		//	{
+		//		HotKey_OpenLastRecording = dialog.HotkeysAppSetting;
+		//	}
 
-			this.hotkeyService.ResumeCapturingHotkeys();
-		}
+		//	this.hotkeyService.ResumeCapturingHotkeys();
+		//}
 
-		private void ConfigureHotkey_OpenOutputPath_Click(object sender, RoutedEventArgs e)
-		{
-			this.hotkeyService.PauseCapturingHotkeys();
+		//private void ConfigureHotkey_OpenOutputPath_Click(object sender, RoutedEventArgs e)
+		//{
+		//	this.hotkeyService.PauseCapturingHotkeys();
 
-			var dialog = new HotkeyPromptWindow("Configure open output path hotkey");
+		//	var dialog = new HotkeyPromptWindow("Configure open output path hotkey");
 
-			if (dialog.ShowDialog() == true)
-			{
-				HotKey_OpenOutputPath = dialog.HotkeysAppSetting;
-			}
+		//	if (dialog.ShowDialog() == true)
+		//	{
+		//		HotKey_OpenOutputPath = dialog.HotkeysAppSetting;
+		//	}
 
-			this.hotkeyService.ResumeCapturingHotkeys();
-		}
+		//	this.hotkeyService.ResumeCapturingHotkeys();
+		//}
 
-		private void ConfigureHotkey_SetFileNamePrefix_Click(object sender, RoutedEventArgs e)
-		{
-			this.hotkeyService.PauseCapturingHotkeys();
+		//private void ConfigureHotkey_SetFileNamePrefix_Click(object sender, RoutedEventArgs e)
+		//{
+		//	this.hotkeyService.PauseCapturingHotkeys();
 
-			var dialog = new HotkeyPromptWindow("Configure set file name prefix hotkey");
+		//	var dialog = new HotkeyPromptWindow("Configure set file name prefix hotkey");
 
-			if (dialog.ShowDialog() == true)
-			{
-				HotKey_SetFileNamePrefix = dialog.HotkeysAppSetting;
-			}
+		//	if (dialog.ShowDialog() == true)
+		//	{
+		//		HotKey_SetFileNamePrefix = dialog.HotkeysAppSetting;
+		//	}
 
-			this.hotkeyService.ResumeCapturingHotkeys();
-		}
+		//	this.hotkeyService.ResumeCapturingHotkeys();
+		//}
 
-		private void ConfigureHotkey_ToggleFileNamePromptMode_Click(object sender, RoutedEventArgs e)
-		{
-			this.hotkeyService.PauseCapturingHotkeys();
+		//private void ConfigureHotkey_ToggleFileNamePromptMode_Click(object sender, RoutedEventArgs e)
+		//{
+		//	this.hotkeyService.PauseCapturingHotkeys();
 
-			var dialog = new HotkeyPromptWindow("Configure toggle file name prompt mode hotkey");
+		//	var dialog = new HotkeyPromptWindow("Configure toggle file name prompt mode hotkey");
 
-			if (dialog.ShowDialog() == true)
-			{
-				HotKey_ToggleFileNamePromptMode = dialog.HotkeysAppSetting;
-			}
+		//	if (dialog.ShowDialog() == true)
+		//	{
+		//		HotKey_ToggleFileNamePromptMode = dialog.HotkeysAppSetting;
+		//	}
 
-			this.hotkeyService.ResumeCapturingHotkeys();
-		}
+		//	this.hotkeyService.ResumeCapturingHotkeys();
+		//}
 
-		private void ConfigureHotkey_SetOutputPath_Click(object sender, RoutedEventArgs e)
-		{
-			this.hotkeyService.PauseCapturingHotkeys();
+		//private void ConfigureHotkey_SetOutputPath_Click(object sender, RoutedEventArgs e)
+		//{
+		//	this.hotkeyService.PauseCapturingHotkeys();
 
-			var dialog = new HotkeyPromptWindow("Configure set output path hotkey");
+		//	var dialog = new HotkeyPromptWindow("Configure set output path hotkey");
 
-			if (dialog.ShowDialog() == true)
-			{
-				HotKey_SetOutputPath = dialog.HotkeysAppSetting;
-			}
+		//	if (dialog.ShowDialog() == true)
+		//	{
+		//		HotKey_SetOutputPath = dialog.HotkeysAppSetting;
+		//	}
 
-			this.hotkeyService.ResumeCapturingHotkeys();
-		}
+		//	this.hotkeyService.ResumeCapturingHotkeys();
+		//}
 
 		private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
 		{

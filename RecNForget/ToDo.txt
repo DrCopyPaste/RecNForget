@@ -4,6 +4,8 @@ readme howto file
 
 icons for buttons
 
+Make main window tabable
+
 suppress not allowed characters for filenames
 
 show balloon tips (configurable (conditionally))
