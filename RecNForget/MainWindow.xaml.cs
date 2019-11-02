@@ -26,6 +26,7 @@ namespace RecNForget
 		private HotkeyService hotkeyService;
 		private bool currentlyRecording = false;
 		private bool currentlyNotRecording = true;
+		private bool currentAudioPlayState = true;
 		private string taskBar_ProgressState = "Paused";
 
 		private bool hasLastRecording = false;
@@ -57,6 +58,19 @@ namespace RecNForget
 			set
 			{
 				currentFileName = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public bool CurrentAudioPlayState
+		{
+			get
+			{
+				return currentAudioPlayState;
+			}
+			set
+			{
+				currentAudioPlayState = value;
 				OnPropertyChanged();
 			}
 		}
@@ -233,14 +247,23 @@ namespace RecNForget
 				audioFileReader = new AudioFileReader(LastFileName);
 				audioOutputDevice.Init(audioFileReader);
 				audioOutputDevice.Play();
+
+				CurrentAudioPlayState = true;
+				ReplayLastRecordingButton.Content = "Pause";
 			}
 			else if (audioOutputDevice.PlaybackState == PlaybackState.Paused)
 			{
 				audioOutputDevice.Play();
+
+				CurrentAudioPlayState = true;
+				ReplayLastRecordingButton.Content = "Pause";
 			}
 			else if (audioOutputDevice.PlaybackState == PlaybackState.Playing)
 			{
 				audioOutputDevice.Pause();
+
+				CurrentAudioPlayState = false;
+				ReplayLastRecordingButton.Content = "Resume";
 			}
 		}
 
@@ -251,6 +274,9 @@ namespace RecNForget
 			audioOutputDevice = null;
 			audioFileReader.Dispose();
 			audioFileReader = null;
+
+			CurrentAudioPlayState = false;
+			ReplayLastRecordingButton.Content = "Replay Last";
 		}
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)

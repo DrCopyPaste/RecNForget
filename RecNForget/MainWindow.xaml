@@ -80,7 +80,7 @@
 
                 <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Path=LastFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="335" Height="Auto"  Margin="5,0,0,0" VerticalAlignment="Top"/>
 
-                <Button Grid.Row="1" Grid.Column="2" Content="Replay Last" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="{Binding Path=HasLastRecording}" Click="ReplayLastRecording_Click"/>
+                <Button Grid.Row="1" Grid.Column="2" Name="ReplayLastRecordingButton"  Content="Replay Last" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="{Binding Path=HasLastRecording}" Click="ReplayLastRecording_Click"/>
             </Grid>
         </GroupBox>
 
