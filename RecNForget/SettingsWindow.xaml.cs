@@ -11,68 +11,18 @@ using System.Windows;
 namespace RecNForget
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Interaction logic for SettingsWindow.xaml
 	/// </summary>
-	public partial class MainWindow : INotifyPropertyChanged
+	public partial class SettingsWindow : INotifyPropertyChanged
 	{
 		private HotkeyService hotkeyService;
-		private bool currentlyRecording = false;
-		private bool currentlyNotRecording = true;
-		private string taskBar_ProgressState = "Paused";
 
-		#region bound values
-
-		public string TaskBar_ProgressState
+		public SettingsWindow(HotkeyService hotkeyService)
 		{
-			get
-			{
-				return taskBar_ProgressState;
-			}
-			set
-			{
-				taskBar_ProgressState = value;
-				OnPropertyChanged();
-			}
-		}
+			this.hotkeyService = hotkeyService;
 
-		public bool CurrentlyRecording
-		{
-			get
-			{
-				return currentlyRecording;
-			}
-
-			set
-			{
-				currentlyRecording = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public bool CurrentlyNotRecording
-		{
-			get
-			{
-				return currentlyNotRecording;
-			}
-			set
-			{
-				currentlyNotRecording = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public PromptForFilenameMode PromptForFilename
-		{
-			get
-			{
-				return (PromptForFilenameMode)Enum.Parse(typeof(PromptForFilenameMode), System.Configuration.ConfigurationManager.AppSettings["PromptForFileName"]);
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting("PromptForFileName", value.ToString());
-			}
+			DataContext = this;
+			InitializeComponent();
 		}
 
 		public string HotKey_StartStopRecording
@@ -159,58 +109,6 @@ namespace RecNForget
 			}
 		}
 
-		public string FilenamePrefix
-		{
-			get
-			{
-				return System.Configuration.ConfigurationManager.AppSettings["FilenamePrefix"];
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting("FilenamePrefix", value);
-				OnPropertyChanged();
-			}
-		}
-
-		public string OutputPath
-		{
-			get
-			{
-				return System.Configuration.ConfigurationManager.AppSettings["OutputPath"];
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting("OutputPath", value);
-				OnPropertyChanged();
-			}
-		}
-
-		#endregion
-
-		public MainWindow()
-		{
-			DataContext = this;
-			InitializeComponent();
-
-			this.hotkeyService = new HotkeyService(
-				startRecordingAction:() =>
-				{
-					CurrentlyRecording = true;
-					CurrentlyNotRecording = false;
-					ToggleRecordButton.Content = "Stop";
-					TaskBar_ProgressState = "Error";
-				},
-				stopRecordingAction: () =>
-				{
-					CurrentlyRecording = false;
-					CurrentlyNotRecording = true;
-					ToggleRecordButton.Content = "Record";
-					TaskBar_ProgressState = "Paused";
-				});
-		}
-
 		#region configuration event handlers
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -218,6 +116,10 @@ namespace RecNForget
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+
+		#endregion
+
+		#region runtime event handlers
 
 		private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
 		{
@@ -301,43 +203,6 @@ namespace RecNForget
 			}
 
 			this.hotkeyService.ResumeRecording();
-		}
-
-		private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
-		{
-			AppSettingHelper.SetAppConfigSetting("FilenamePrefix", FilenamePrefix);
-		}
-
-		private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
-		{
-			var dialog = new VistaFolderBrowserDialog();
-
-			if (dialog.ShowDialog() == true)
-			{
-				OutputPath = dialog.SelectedPath;
-			}
-		}
-
-		#endregion
-
-		#region runtime event handlers
-
-		private void RecordButton_Click(object sender, RoutedEventArgs e)
-		{
-			if (CurrentlyRecording)
-			{
-				hotkeyService.StopRecording();
-			}
-			else
-			{
-				hotkeyService.StartRecording();
-			}
-		}
-
-		private void SettingsButton_Click(object sender, RoutedEventArgs e)
-		{
-			var settingsWindow = new SettingsWindow(hotkeyService);
-			settingsWindow.Show();
 		}
 
 		#endregion

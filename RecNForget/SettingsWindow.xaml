@@ -1,0 +1,52 @@
+﻿<Window x:Class="RecNForget.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecNForget"
+        xmlns:localEnums="clr-namespace:RecNForget.Enums"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="RecNForget - Settings" Height="530" Width="600" ResizeMode="CanResizeWithGrip">
+    <GroupBox Grid.Row="1" Grid.Column="0" Header="Hotkeys" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="start/stop recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_StartStopRecording_Click" />
+
+            <Label Grid.Row="1" Grid.Column="0" Content="[inactive] open last recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=HotKey_OpenLastRecording, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button Grid.Row="1" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_OpenLastRecording_Click"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="[inactive] open output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Path=HotKey_OpenOutputPath, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button Grid.Row="2" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_OpenOutputPath_Click"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="[inactive] set file name prefix:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Row="3" Grid.Column="1" Content="{Binding Path=HotKey_SetFileNamePrefix, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button Grid.Row="3" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_SetFileNamePrefix_Click"/>
+
+            <Label Grid.Row="4" Grid.Column="0" Content="[inactive] toggle file name prompt mode:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Row="4" Grid.Column="1" Content="{Binding Path=HotKey_ToggleFileNamePromptMode, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button Grid.Row="4" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_ToggleFileNamePromptMode_Click"/>
+
+            <Label Grid.Row="5" Grid.Column="0" Content="[inactive] set output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Row="5" Grid.Column="1" Content="{Binding Path=HotKey_SetOutputPath, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Button Grid.Row="5" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_SetOutputPath_Click"/>
+        </Grid>
+    </GroupBox>
+
+</Window>
