@@ -23,6 +23,8 @@ namespace RecNForget
 
 			DataContext = this;
 			InitializeComponent();
+
+			OkButton.Focus();
 		}
 
 		public string HotKey_StartStopRecording

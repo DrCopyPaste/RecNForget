@@ -141,6 +141,8 @@ namespace RecNForget
 					UpdateCurrentFileName();
 					UpdateLastFileName();
 				});
+
+			ToggleRecordButton.Focus();
 		}
 
 		#region configuration event handlers
