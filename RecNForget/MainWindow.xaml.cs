@@ -4,6 +4,7 @@ using RecNForget.Services;
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -76,6 +77,14 @@ namespace RecNForget
 			}
 		}
 
+		public string OutputPath
+		{
+			get
+			{
+				return System.Configuration.ConfigurationManager.AppSettings["OutputPath"];
+			}
+		}
+
 		#endregion
 
 		public MainWindow()
@@ -129,10 +138,17 @@ namespace RecNForget
 			}
 		}
 
+		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
+		{
+			Process.Start(OutputPath);
+		}
+
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
 			var settingsWindow = new SettingsWindow(hotkeyService);
 			settingsWindow.ShowDialog();
+
+
 		}
 
 		#endregion

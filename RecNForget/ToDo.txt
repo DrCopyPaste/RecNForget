@@ -1,6 +1,4 @@
-﻿hide hotkey settings in seperate window
-
-have always on top option for the main window
+﻿have always on top option for the main window
 
 readme howto file
 
@@ -25,10 +23,6 @@ refactor ioc constants magic strings identifiers etc
 sound level normalization (configurable (conditionally))
 enable output as mp3/other (configurable (conditionally))
 target paths are (visually) configurable
-
-Is a keyhook expensive (cpu etc)?
-	=> maybe it could be worth letting hotkeys be handled by professionals (like Auto hotkey)
-	=> think about it
 
 Allow including screenshots with sampled audio file (for later remembering which movie/whatever thing the sample belonged to)
 	This could also be the fraps replacement :D (well kinda)
