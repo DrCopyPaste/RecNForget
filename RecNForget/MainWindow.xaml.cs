@@ -5,9 +5,12 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace RecNForget
 {
@@ -120,6 +123,8 @@ namespace RecNForget
 
 		public MainWindow()
 		{
+			this.Icon = new BitmapImage(new Uri(Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png")));
+
 			DataContext = this;
 			InitializeComponent();
 

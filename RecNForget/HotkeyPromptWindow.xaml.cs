@@ -3,6 +3,7 @@ using RecNForget.Services;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -28,6 +29,8 @@ namespace RecNForget
 
 		public HotkeyPromptWindow(string title)
 		{
+			this.Icon = new BitmapImage(new Uri(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png")));
+
 			InitializeComponent();
 
 			this.Title = title;

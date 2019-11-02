@@ -4,9 +4,11 @@ using RecNForget.Services;
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace RecNForget
 {
@@ -19,6 +21,8 @@ namespace RecNForget
 
 		public SettingsWindow(HotkeyService hotkeyService)
 		{
+			this.Icon = new BitmapImage(new Uri(Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png")));
+
 			this.hotkeyService = hotkeyService;
 
 			DataContext = this;
