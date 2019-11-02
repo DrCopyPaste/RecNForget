@@ -150,7 +150,7 @@ namespace RecNForget
 
 		private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
 		{
-			this.hotkeyService.PauseRecording();
+			this.hotkeyService.PauseCapturingHotkeys();
 
 			var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey");
 
@@ -159,12 +159,12 @@ namespace RecNForget
 				HotKey_StartStopRecording = dialog.HotkeysAppSetting;
 			}
 
-			this.hotkeyService.ResumeRecording();
+			this.hotkeyService.ResumeCapturingHotkeys();
 		}
 
 		private void ConfigureHotkey_OpenLastRecording_Click(object sender, RoutedEventArgs e)
 		{
-			this.hotkeyService.PauseRecording();
+			this.hotkeyService.PauseCapturingHotkeys();
 
 			var dialog = new HotkeyPromptWindow("Configure open last recording hotkey");
 
@@ -173,12 +173,12 @@ namespace RecNForget
 				HotKey_OpenLastRecording = dialog.HotkeysAppSetting;
 			}
 
-			this.hotkeyService.ResumeRecording();
+			this.hotkeyService.ResumeCapturingHotkeys();
 		}
 
 		private void ConfigureHotkey_OpenOutputPath_Click(object sender, RoutedEventArgs e)
 		{
-			this.hotkeyService.PauseRecording();
+			this.hotkeyService.PauseCapturingHotkeys();
 
 			var dialog = new HotkeyPromptWindow("Configure open output path hotkey");
 
@@ -187,12 +187,12 @@ namespace RecNForget
 				HotKey_OpenOutputPath = dialog.HotkeysAppSetting;
 			}
 
-			this.hotkeyService.ResumeRecording();
+			this.hotkeyService.ResumeCapturingHotkeys();
 		}
 
 		private void ConfigureHotkey_SetFileNamePrefix_Click(object sender, RoutedEventArgs e)
 		{
-			this.hotkeyService.PauseRecording();
+			this.hotkeyService.PauseCapturingHotkeys();
 
 			var dialog = new HotkeyPromptWindow("Configure set file name prefix hotkey");
 
@@ -201,12 +201,12 @@ namespace RecNForget
 				HotKey_SetFileNamePrefix = dialog.HotkeysAppSetting;
 			}
 
-			this.hotkeyService.ResumeRecording();
+			this.hotkeyService.ResumeCapturingHotkeys();
 		}
 
 		private void ConfigureHotkey_ToggleFileNamePromptMode_Click(object sender, RoutedEventArgs e)
 		{
-			this.hotkeyService.PauseRecording();
+			this.hotkeyService.PauseCapturingHotkeys();
 
 			var dialog = new HotkeyPromptWindow("Configure toggle file name prompt mode hotkey");
 
@@ -215,12 +215,12 @@ namespace RecNForget
 				HotKey_ToggleFileNamePromptMode = dialog.HotkeysAppSetting;
 			}
 
-			this.hotkeyService.ResumeRecording();
+			this.hotkeyService.ResumeCapturingHotkeys();
 		}
 
 		private void ConfigureHotkey_SetOutputPath_Click(object sender, RoutedEventArgs e)
 		{
-			this.hotkeyService.PauseRecording();
+			this.hotkeyService.PauseCapturingHotkeys();
 
 			var dialog = new HotkeyPromptWindow("Configure set output path hotkey");
 
@@ -229,7 +229,7 @@ namespace RecNForget
 				HotKey_SetOutputPath = dialog.HotkeysAppSetting;
 			}
 
-			this.hotkeyService.ResumeRecording();
+			this.hotkeyService.ResumeCapturingHotkeys();
 		}
 
 		private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)

@@ -85,14 +85,14 @@ namespace RecNForget.Services
 			}
 		}
 
-		public void PauseRecording(bool pause = true)
+		public void PauseCapturingHotkeys(bool pause = true)
 		{
 			this.paused = pause;
 		}
 
-		public void ResumeRecording()
+		public void ResumeCapturingHotkeys()
 		{
-			PauseRecording(false);
+			PauseCapturingHotkeys(false);
 		}
 
 		public void StartRecording()
