@@ -57,7 +57,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return lastFileName;
+				return lastFileName == string.Empty ? "(nothing)" : lastFileName;
 			}
 
 			set

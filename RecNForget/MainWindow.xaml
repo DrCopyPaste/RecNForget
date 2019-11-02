@@ -7,7 +7,7 @@
         xmlns:localEnums="clr-namespace:RecNForget.Enums"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="RecNForget" Height="350" Width="600" ResizeMode="CanMinimize">
+        Title="RecNForget" Height="450" Width="600" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -29,19 +29,19 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="125" />
-                    <ColumnDefinition Width="375" />
+                    <ColumnDefinition Width="350" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="currently recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center"/>
                 <Label Grid.Row="1" Grid.Column="0" Content="recording to:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=CurrentFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="355" Margin="10,10,10,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=CurrentFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="330" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
-                <Canvas Height="40" Width="375" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
+                <Canvas Height="40" Width="350" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
                     <Ellipse Width="20" Height="20" Fill="Red" Canvas.Left="185" Canvas.Top="10" Visibility="{Binding Path=CurrentlyRecording, Converter={StaticResource BooleanToVisibility}}"/>
                     <Rectangle Width="20" Height="20" Fill="Black" Canvas.Left="185" Canvas.Top="10" Visibility="{Binding Path=CurrentlyNotRecording, Converter={StaticResource BooleanToVisibility}}"/>
                 </Canvas>
 
-                <Button Grid.Row="0" Grid.Column="2" Name="ToggleRecordButton" Content="Record" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="1,1,1,1" Width="60" Click="RecordButton_Click"/>
+                <Button Grid.Row="0" Grid.Column="2" Name="ToggleRecordButton" Content="Record" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="RecordButton_Click"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="0" Header="File name and settings" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
@@ -67,7 +67,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="125" />
@@ -77,9 +77,9 @@
 
                 <Button Grid.Row="0" Grid.Column="2" Content="Output Folder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OpenOutputFolder_Click"/>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="last result:" HorizontalAlignment="Center" Width="Auto" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                
-                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Path=LastFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="355" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="last result:" HorizontalAlignment="Left" Width="Auto" Margin="10,10,0,0" VerticalAlignment="Top"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Path=LastFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="335" Height="Auto"  Margin="10,10,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
 
