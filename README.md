@@ -6,10 +6,10 @@ RecNForget requires .Net Framework 4.7 to run.
 You should be able to just extract the application from the latest release and run the program.
 
 # How to Use
-- By default RecNForget sets [Ctrl] + [F12] as the Record hotkey. (changeable in settings)
-- Have RecNForget running
-- Start the audio which you want to capure
+- by default RecNForget sets [Ctrl] + [F12] as the Record hotkey. (changeable in settings)
+- aave RecNForget running
 - press the configured Record hotkey
+- start the audio which you want to capure
 - let the audio play
 - to stop captureing press the configured Record hotkey again
 - the file will be saved to the configured output folder (shown to you in main menu, changeable in settings)
@@ -27,7 +27,7 @@ You should be able to just extract the application from the latest release and r
 - allow disabling some hotkeys explicitly (decreasing the amount of hotkeys, the listener has to listen to)
 
 # Nice to haves in future releases
-- Program can run in background as a windows process listening to keystrokes
+- program can run in background as a windows process listening to keystrokes
 (maybe only allow if some visual or audio feedback for start/stop recording is active - to not make this a spyware)
 - suppress not allowed characters for filenames
 - include how-to-build-file (maybe batch with msbuild)
