@@ -62,19 +62,6 @@ namespace RecNForget
 			}
 		}
 
-		public PromptForFilenameMode PromptForFilename
-		{
-			get
-			{
-				return (PromptForFilenameMode)Enum.Parse(typeof(PromptForFilenameMode), System.Configuration.ConfigurationManager.AppSettings["PromptForFileName"]);
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting("PromptForFileName", value.ToString());
-			}
-		}
-
 		public string FilenamePrefix
 		{
 			get
@@ -85,20 +72,6 @@ namespace RecNForget
 			set
 			{
 				AppSettingHelper.SetAppConfigSetting("FilenamePrefix", value);
-				OnPropertyChanged();
-			}
-		}
-
-		public string OutputPath
-		{
-			get
-			{
-				return System.Configuration.ConfigurationManager.AppSettings["OutputPath"];
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting("OutputPath", value);
 				OnPropertyChanged();
 			}
 		}
@@ -138,16 +111,6 @@ namespace RecNForget
 		private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
 		{
 			AppSettingHelper.SetAppConfigSetting("FilenamePrefix", FilenamePrefix);
-		}
-
-		private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
-		{
-			var dialog = new VistaFolderBrowserDialog();
-
-			if (dialog.ShowDialog() == true)
-			{
-				OutputPath = dialog.SelectedPath;
-			}
 		}
 
 		#endregion

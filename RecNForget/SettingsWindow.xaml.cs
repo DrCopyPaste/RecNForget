@@ -109,6 +109,33 @@ namespace RecNForget
 			}
 		}
 
+		public PromptForFilenameMode PromptForFilename
+		{
+			get
+			{
+				return (PromptForFilenameMode)Enum.Parse(typeof(PromptForFilenameMode), System.Configuration.ConfigurationManager.AppSettings["PromptForFileName"]);
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting("PromptForFileName", value.ToString());
+			}
+		}
+
+		public string OutputPath
+		{
+			get
+			{
+				return System.Configuration.ConfigurationManager.AppSettings["OutputPath"];
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting("OutputPath", value);
+				OnPropertyChanged();
+			}
+		}
+
 		#region configuration event handlers
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -203,6 +230,16 @@ namespace RecNForget
 			}
 
 			this.hotkeyService.ResumeRecording();
+		}
+
+		private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
+		{
+			var dialog = new VistaFolderBrowserDialog();
+
+			if (dialog.ShowDialog() == true)
+			{
+				OutputPath = dialog.SelectedPath;
+			}
 		}
 
 		private void OkButton_Click(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@
         xmlns:localEnums="clr-namespace:RecNForget.Enums"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="RecNForget" Height="290" Width="600" ResizeMode="CanMinimize">
+        Title="RecNForget" Height="215" Width="600" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -66,18 +66,9 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="[inactive] prompt for file name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-
-                <ComboBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Width="164" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type localEnums:PromptForFilenameMode}}}" SelectedValue="{Binding Path=PromptForFilename}"/>
 
                 <Label Grid.Row="1" Grid.Column="0" Content="file name prefix:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" TextChanged="FilenamePrefix_Changed"/>
-
-                <Label Grid.Row="2" Grid.Column="0" Content="output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
-                    <TextBlock Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis" />
-                </Label>
-                <Button Grid.Row="2" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Configure_OutputPath_Click"/>
 
                 <Button Grid.Row="3" Grid.Column="2" Content="Settings" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="SettingsButton_Click"/>
             </Grid>
