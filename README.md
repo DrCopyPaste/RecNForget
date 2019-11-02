@@ -3,11 +3,13 @@ Set a global Windows hotkey to capture and save default audio output to wave fil
 
 # How to install
 RecNForget requires .Net Framework 4.7 to run.
-You should be able to just extract the application from the latest release and run the program.
+
+You should be able to just extract RecNForget from the latest release and run the program.
+(https://github.com/DrCopyPaste/RecNForget/releases)
 
 # How to Use
 - by default RecNForget sets [Ctrl] + [F12] as the Record hotkey. (changeable in settings)
-- aave RecNForget running
+- have RecNForget running
 - press the configured Record hotkey
 - start the audio which you want to capure
 - let the audio play
@@ -24,11 +26,12 @@ You should be able to just extract the application from the latest release and r
 - peep sound for recording start/stop (configurable)
 - instant replay recorded audio? (configurable)
 - different peep sound for replay start/stop (configurable)
-- allow disabling some hotkeys explicitly (decreasing the amount of hotkeys, the listener has to listen to)
 
 # Nice to haves in future releases
 - program can run in background as a windows process listening to keystrokes
 (maybe only allow if some visual or audio feedback for start/stop recording is active - to not make this a spyware)
 - suppress not allowed characters for filenames
+- allow disabling some hotkeys explicitly (decreasing the amount of hotkeys, the listener has to listen to)
 - include how-to-build-file (maybe batch with msbuild)
 - icons for buttons
+- RecNForget can self-update (possibly querying github's releases page)
