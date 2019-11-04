@@ -25,6 +25,12 @@ You should be able to just extract RecNForget from the latest release and run th
 - file names will be generated using a file name prefix that you can specify plus a timestamp of the start time of recording
 - you can replay the last recorded file from the running session
 
+# upcoming features in next version
+(commited changes not yet released)
+- can enable balloon tips (toast messages) for when recording starts or stops (enabled by default)
+- can enable running main window as a background process (minimized to tray)
+- can set main window to be always in foreground (always on top)
+
 # Features missing for version 1.0
 - add auto-start-option
 - show record (red circle) in bottom right corner when recording (configurable)
