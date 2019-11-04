@@ -31,6 +31,20 @@ namespace RecNForget
 			OkButton.Focus();
 		}
 
+		public bool ShowBalloonTipsForRecording
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["ShowBalloonTipsForRecording"]);
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting("ShowBalloonTipsForRecording", value.ToString());
+				OnPropertyChanged();
+			}
+		}
+
 		public string HotKey_StartStopRecording
 		{
 			get

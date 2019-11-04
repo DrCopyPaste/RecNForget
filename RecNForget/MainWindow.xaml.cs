@@ -1,4 +1,5 @@
-﻿using NAudio.Wave;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Enums;
 using RecNForget.Services;
@@ -20,6 +21,8 @@ namespace RecNForget
 	/// </summary>
 	public partial class MainWindow : INotifyPropertyChanged
 	{
+		private TaskbarIcon taskBarIcon;
+
 		private WaveOutEvent audioOutputDevice = null;
 		private AudioFileReader audioFileReader = null;
 
@@ -58,8 +61,8 @@ namespace RecNForget
 			set
 			{
 				AppSettingHelper.SetAppConfigSetting("WindowAlwaysOnTop", value.ToString());
-				OnPropertyChanged();
 				this.Topmost = value;
+				OnPropertyChanged();
 			}
 		}
 
@@ -180,6 +183,7 @@ namespace RecNForget
 
 		public MainWindow()
 		{
+			taskBarIcon = new TaskbarIcon();
 			this.Icon = new BitmapImage(new Uri(Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png")));
 			this.Topmost = WindowAlwaysOnTop;
 
@@ -194,6 +198,7 @@ namespace RecNForget
 					ToggleRecordButton.Content = "Stop";
 					TaskBar_ProgressState = "Error";
 					UpdateCurrentFileName();
+					taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileName), BalloonIcon.Info);
 				},
 				stopRecordingAction: () =>
 				{
@@ -203,6 +208,12 @@ namespace RecNForget
 					TaskBar_ProgressState = "Paused";
 					UpdateCurrentFileName();
 					UpdateLastFileName();
+
+					// stop recording is somehow triggered during service start?
+					if (LastFileName != "(nothing)")
+					{
+						taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileName), BalloonIcon.Info);
+					}
 				});
 
 			ToggleRecordButton.Focus();

@@ -37,9 +37,6 @@ namespace RecNForget.Services
 			this.stopRecordingAction = stopRecordingAction;
 
 			CurrentlyRecording = false;
-
-			stopRecordingAction();
-
 			hotkeyWaitingForRelease = false;
 
 

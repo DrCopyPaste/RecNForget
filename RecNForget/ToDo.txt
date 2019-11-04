@@ -1,19 +1,26 @@
-﻿add Signature
+﻿FIX main window should never be on top of settings window ;)
+
+add Signature
+
+catch exception when trying to play the last file (but it was moved or deleted)
+
+FIX taskbar icon bugged when pinning to taskbar (Win 7 only? does not happen in Win 10)
 
 allow restoring app.config defaults
 
 allow self- (maybe auto-) software updates
 	(keep in mind not throwing away custom user configuration)
 
-readme howto file
+readme.md howto file with screenshots
 
 icons for buttons
 
 suppress not allowed characters for filenames
 
 show balloon tips (configurable (conditionally))
-	show in file browser
-	instant replay recorded audio?
+clickable balloon tips (show in file browser)
+
+instant replay recorded audio option
 
 show record (red circle) in bottom right corner when recording
 
