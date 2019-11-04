@@ -1,4 +1,6 @@
-﻿have always on top option for the main window
+﻿add Signature
+
+have always on top option for the main window
 
 readme howto file
 
