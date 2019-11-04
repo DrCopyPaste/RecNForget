@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
+        Topmost="True"
         Title="RecNForget - Configure hotkey" Height="110" Width="460" WindowStyle="ToolWindow" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>

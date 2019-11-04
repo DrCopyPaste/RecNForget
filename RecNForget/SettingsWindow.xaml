@@ -7,6 +7,7 @@
         xmlns:localEnums="clr-namespace:RecNForget.Enums"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
+        Topmost="True"
         Title="RecNForget - Settings" Height="240" Width="600" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
