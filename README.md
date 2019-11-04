@@ -1,6 +1,13 @@
 # RecNForget 0.2
 Set a global Windows hotkey to capture and save default audio output to wave files
 
+With RecNForget running, capturing audio should be as easy as:
+- press "Recording"-hotkey to start recording
+- do your audio thing...
+- press "Recording"-hotkey again to finish the recording
+
+Your recorded audio is now saved to an automatically generated file in RecNForget's output folder.
+
 # How to install
 RecNForget requires .Net Framework 4.7 to run.
 
