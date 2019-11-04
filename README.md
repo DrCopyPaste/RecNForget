@@ -36,3 +36,4 @@ You should be able to just extract RecNForget from the latest release and run th
 - include how-to-build-file (maybe batch with msbuild)
 - icons for buttons
 - RecNForget can self-update (possibly querying github's releases page)
+- "gimmick" mode (allow using application as a sound board, binding hotkeys to different sound outputs, maybe even allow changing the output device they are output to (to insert sounds into a running mic session for example))
