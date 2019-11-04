@@ -212,12 +212,7 @@ namespace RecNForget
 					TaskBar_ProgressState = "Paused";
 					UpdateCurrentFileName();
 					UpdateLastFileName();
-
-					// stop recording is somehow triggered during service start?
-					if (LastFileName != "(nothing)")
-					{
-						taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileName), applicationIcon, true);
-					}
+					taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileName), applicationIcon, true);
 				});
 
 			ToggleRecordButton.Focus();
