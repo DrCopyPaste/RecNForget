@@ -21,6 +21,9 @@ namespace RecNForget
 	/// </summary>
 	public partial class MainWindow : INotifyPropertyChanged
 	{
+		private string logoPath = Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png");
+
+		private Icon applicationIcon;
 		private TaskbarIcon taskBarIcon;
 
 		private WaveOutEvent audioOutputDevice = null;
@@ -183,8 +186,9 @@ namespace RecNForget
 
 		public MainWindow()
 		{
+			applicationIcon = getIcon();
 			taskBarIcon = new TaskbarIcon();
-			this.Icon = new BitmapImage(new Uri(Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png")));
+			this.Icon = new BitmapImage(new Uri(logoPath));
 			this.Topmost = WindowAlwaysOnTop;
 
 			DataContext = this;
@@ -198,7 +202,7 @@ namespace RecNForget
 					ToggleRecordButton.Content = "Stop";
 					TaskBar_ProgressState = "Error";
 					UpdateCurrentFileName();
-					taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileName), BalloonIcon.Info);
+					taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileName), applicationIcon, true);
 				},
 				stopRecordingAction: () =>
 				{
@@ -212,11 +216,19 @@ namespace RecNForget
 					// stop recording is somehow triggered during service start?
 					if (LastFileName != "(nothing)")
 					{
-						taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileName), BalloonIcon.Info);
+						taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileName), applicationIcon, true);
 					}
 				});
 
 			ToggleRecordButton.Focus();
+		}
+
+		private Icon getIcon()
+		{
+			var bmp = Bitmap.FromFile(logoPath);
+			var thumb = (Bitmap)bmp.GetThumbnailImage(64, 64, null, IntPtr.Zero);
+			thumb.MakeTransparent();
+			return System.Drawing.Icon.FromHandle(thumb.GetHicon());
 		}
 
 		#region configuration event handlers
