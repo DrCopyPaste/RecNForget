@@ -4,6 +4,12 @@ catch exception when trying to play the last file (but it was moved or deleted)
 
 FIX taskbar icon bugged when pinning to taskbar (Win 7 only? does not happen in Win 10)
 
+show length of recording time while recording in main window
+
+show length of recorded file in main window and balloon tip
+
+allow closing application via tray icon context menu
+
 allow restoring app.config defaults
 
 allow self- (maybe auto-) software updates
@@ -23,8 +29,6 @@ show record (red circle) in bottom right corner when recording
 
 peep sound for recording start/stop (configurable (conditionally))
 
-Program can run in background as a windows process listening to keystrokes
-
 how to build
 	include batch files?
 	include nssm for service installation?
@@ -33,11 +37,10 @@ break down HotkeyService into HotkeyService and AudioRecordingService
 
 allow disabling some hotkeys explicitly (decreasing the amount of hotkeys, the listener has to listen to)
 
-refactor ioc constants magic strings identifiers etc
+refactor, ioc, constants, magic strings, identifiers etc
 
 sound level normalization (configurable (conditionally))
 enable output as mp3/other (configurable (conditionally))
-target paths are (visually) configurable
 
 Allow including screenshots with sampled audio file (for later remembering which movie/whatever thing the sample belonged to)
 	This could also be the fraps replacement :D (well kinda)

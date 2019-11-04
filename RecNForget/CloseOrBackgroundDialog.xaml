@@ -1,0 +1,29 @@
+﻿<Window x:Class="RecNForget.CloseOrBackgroundDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecNForget"
+        mc:Ignorable="d"
+        Topmost="True"
+        Title="RecNForget - Close or Background" Height="110" Width="460" WindowStyle="ToolWindow" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="You selected the 'run as background process' option in settings." />
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Do you want to close the application or run as background process now?" />
+
+        <Button Grid.Row="3" Grid.Column="0" Name="Close" Content="Close" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="27" Click="Close_Click"/>
+
+        <Button Grid.Row="3" Grid.Column="1" Name="Background" Content="Run in background" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="27" Click="Background_Click"/>
+    </Grid>
+</Window>

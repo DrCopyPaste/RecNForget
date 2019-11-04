@@ -88,11 +88,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CloseOrBackgroundDialog.xaml.cs">
+      <DependentUpon>CloseOrBackgroundDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RestoreMainWindowFromTrayCommand.cs" />
     <Compile Include="Services\AppSettingHelper.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\HotkeyService.cs" />
+    <Page Include="CloseOrBackgroundDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="HotkeyPromptWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

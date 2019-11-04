@@ -18,17 +18,44 @@ namespace RecNForget
 	public partial class SettingsWindow : INotifyPropertyChanged
 	{
 		private HotkeyService hotkeyService;
+		private Action hideToTrayAction;
+		private Action restoreFromTrayAction;
 
-		public SettingsWindow(HotkeyService hotkeyService)
+		public SettingsWindow(HotkeyService hotkeyService, Action hideToTrayAction, Action restoreFromTrayAction)
 		{
 			this.Icon = new BitmapImage(new Uri(Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png")));
 
 			this.hotkeyService = hotkeyService;
+			this.hideToTrayAction = hideToTrayAction;
+			this.restoreFromTrayAction = restoreFromTrayAction;
 
 			DataContext = this;
 			InitializeComponent();
 
 			OkButton.Focus();
+		}
+
+		public bool MinimizedToTray
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["MinimizedToTray"]);
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting("MinimizedToTray", value.ToString());
+				OnPropertyChanged();
+
+				if (value == true)
+				{
+					hideToTrayAction();
+				}
+				else
+				{
+					restoreFromTrayAction();
+				}
+			}
 		}
 
 		public bool ShowBalloonTipsForRecording

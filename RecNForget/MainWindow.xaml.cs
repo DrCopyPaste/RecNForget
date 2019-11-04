@@ -182,12 +182,33 @@ namespace RecNForget
 			}
 		}
 
+		public bool MinimizedToTray
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["MinimizedToTray"]);
+			}
+		}
+
 		#endregion
 
 		public MainWindow()
 		{
 			applicationIcon = getIcon();
+
 			taskBarIcon = new TaskbarIcon();
+			taskBarIcon.Icon = applicationIcon;
+			taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
+
+			if (MinimizedToTray)
+			{
+				SwitchToBackgroundMode();
+			}
+			else
+			{
+				SwitchToForegroundMode();
+			}
+
 			this.Icon = new BitmapImage(new Uri(logoPath));
 			this.Topmost = WindowAlwaysOnTop;
 
@@ -226,7 +247,36 @@ namespace RecNForget
 			return System.Drawing.Icon.FromHandle(thumb.GetHicon());
 		}
 
+		private void SwitchToBackgroundMode()
+		{
+			this.Hide();
+			taskBarIcon.Visibility = Visibility.Visible;
+
+			taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background\ndouble click tray icon to restore", applicationIcon, true);
+		}
+
+		private void SwitchToForegroundMode()
+		{
+			this.Show();
+			taskBarIcon.Visibility = Visibility.Collapsed;
+		}
+
 		#region configuration event handlers
+
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			if (MinimizedToTray)
+			{
+				var closeOrBackgroundDialog = new CloseOrBackgroundDialog();
+				var dialogResult = closeOrBackgroundDialog.ShowDialog();
+
+				if (dialogResult.HasValue && dialogResult.Value)
+				{
+					e.Cancel = true;
+					SwitchToBackgroundMode();
+				}
+			}
+		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -315,7 +365,7 @@ namespace RecNForget
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
-			var settingsWindow = new SettingsWindow(hotkeyService);
+			var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); });
 			settingsWindow.ShowDialog();
 		}
 
