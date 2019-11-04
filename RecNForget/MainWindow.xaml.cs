@@ -48,6 +48,21 @@ namespace RecNForget
 			}
 		}
 
+		public bool WindowAlwaysOnTop
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["WindowAlwaysOnTop"]);
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting("WindowAlwaysOnTop", value.ToString());
+				OnPropertyChanged();
+				this.Topmost = value;
+			}
+		}
+
 		public string CurrentFileName
 		{
 			get
@@ -166,6 +181,7 @@ namespace RecNForget
 		public MainWindow()
 		{
 			this.Icon = new BitmapImage(new Uri(Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png")));
+			this.Topmost = WindowAlwaysOnTop;
 
 			DataContext = this;
 			InitializeComponent();

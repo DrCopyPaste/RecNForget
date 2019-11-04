@@ -7,17 +7,19 @@
         xmlns:localEnums="clr-namespace:RecNForget.Enums"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="RecNForget" Height="330" Width="600" ResizeMode="CanMinimize">
+        Title="RecNForget" Height="350" Width="600" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Header="Status" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
+        <CheckBox IsChecked="{Binding Path=WindowAlwaysOnTop}" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">always on top</CheckBox>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Status" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
             <Grid>
                 <Grid.Resources>
                     <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
@@ -43,7 +45,7 @@
                 <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=CurrentFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="330" Margin="10,10,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="File name and settings" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
+        <GroupBox Grid.Row="2" Grid.Column="0" Header="File name and settings" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
@@ -61,7 +63,7 @@
                 <Button Grid.Row="0" Grid.Column="2" Content="Open Settings" Margin="0,5,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SettingsButton_Click"/>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="2" Grid.Column="0" Header="Results" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Margin="5,5,0,0">
+        <GroupBox Grid.Row="3" Grid.Column="0" Header="Results" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Margin="5,5,0,0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />

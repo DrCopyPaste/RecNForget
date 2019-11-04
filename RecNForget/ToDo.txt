@@ -1,6 +1,9 @@
 ﻿add Signature
 
-have always on top option for the main window
+allow restoring app.config defaults
+
+allow self- (maybe auto-) software updates
+	(keep in mind not throwing away custom user configuration)
 
 readme howto file
 
