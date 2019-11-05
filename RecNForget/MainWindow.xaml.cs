@@ -21,7 +21,7 @@ namespace RecNForget
 	/// </summary>
 	public partial class MainWindow : INotifyPropertyChanged
 	{
-		private string logoPath = Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png");
+		private string logoPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Img", "logo.png");
 
 		private Icon applicationIcon;
 		private TaskbarIcon taskBarIcon;

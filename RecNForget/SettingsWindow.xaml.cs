@@ -23,7 +23,7 @@ namespace RecNForget
 
 		public SettingsWindow(HotkeyService hotkeyService, Action hideToTrayAction, Action restoreFromTrayAction)
 		{
-			this.Icon = new BitmapImage(new Uri(Path.Combine(Directory.GetCurrentDirectory(), "Img", "logo.png")));
+			this.Icon = new BitmapImage(new Uri(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Img", "logo.png")));
 
 			this.hotkeyService = hotkeyService;
 			this.hideToTrayAction = hideToTrayAction;
@@ -33,6 +33,38 @@ namespace RecNForget
 			InitializeComponent();
 
 			OkButton.Focus();
+		}
+
+		public bool AutoStartWithWindows
+		{
+			get
+			{
+				Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+				var recNForgetAutoStartRegistry = regKey.GetValue("RecNForget");
+					
+				if (recNForgetAutoStartRegistry != null)
+				{
+					return true;
+				}
+
+				return false;
+			}
+
+			set
+			{
+				Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+				if (value == true)
+				{
+					regKey.SetValue("RecNForget", System.Reflection.Assembly.GetExecutingAssembly().Location);
+				}
+				else
+				{
+					regKey.DeleteValue("RecNForget");
+				}
+
+				OnPropertyChanged();
+			}
 		}
 
 		public bool MinimizedToTray

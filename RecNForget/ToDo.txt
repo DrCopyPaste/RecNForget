@@ -4,6 +4,8 @@ catch exception when trying to play the last file (but it was moved or deleted)
 
 FIX taskbar icon bugged when pinning to taskbar (Win 7 only? does not happen in Win 10)
 
+maybe settings and hotkey windows are a bit "too always on top"?
+
 show length of recording time while recording in main window
 
 show length of recorded file in main window and balloon tip
