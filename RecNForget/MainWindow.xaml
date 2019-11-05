@@ -26,7 +26,7 @@
                 </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -34,15 +34,13 @@
                     <ColumnDefinition Width="350" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="currently recording:" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Center"/>
                 <Canvas Height="20" Width="20" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center">
                     <Ellipse Width="20" Height="20" Fill="Red" Canvas.Left="0" Canvas.Top="0" Visibility="{Binding Path=CurrentlyRecording, Converter={StaticResource BooleanToVisibility}}"/>
                     <Rectangle Width="20" Height="20" Fill="Black" Canvas.Left="0" Canvas.Top="0" Visibility="{Binding Path=CurrentlyNotRecording, Converter={StaticResource BooleanToVisibility}}"/>
                 </Canvas>
                 <Button Grid.Row="0" Grid.Column="2" Name="ToggleRecordButton" Content="Record" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="RecordButton_Click"/>
 
-                <Label Grid.Row="1" Grid.Column="0" Content="recording to:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=CurrentFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Width="330" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Content="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Row="2" Grid.Column="0" Header="File name and settings" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
@@ -80,7 +78,7 @@
 
                 <Label Grid.Row="0" Grid.Column="0" Content="last result:" HorizontalAlignment="Left" Width="Auto" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
 
-                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Path=LastFileName, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="335" Height="Auto"  Margin="5,0,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=LastFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="Auto" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
 
                 <Button Grid.Row="1" Grid.Column="2" Name="ReplayLastRecordingButton"  Content="Replay Last" Margin="0,5,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="{Binding Path=HasLastRecording}" Click="ReplayLastRecording_Click"/>
             </Grid>

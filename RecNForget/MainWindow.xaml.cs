@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace RecNForget
 {
@@ -35,11 +36,29 @@ namespace RecNForget
 		private bool currentAudioPlayState = true;
 		private string taskBar_ProgressState = "Paused";
 
+		private DispatcherTimer recordingTimer;
+
+		private string recordingTimeInMilliSeconds = string.Empty;
 		private bool hasLastRecording = false;
 		private string currentFileName;
 		private string lastFileName;
 
+		public DateTime RecordingStart { get; set; }
+
 		#region bound values
+
+		public string RecordingTimeInMilliSeconds
+		{
+			get
+			{
+				return CurrentlyRecording ? recordingTimeInMilliSeconds : string.Empty;
+			}
+			set
+			{
+				recordingTimeInMilliSeconds = value;
+				OnPropertyChanged();
+			}
+		}
 
 		public string TaskBar_ProgressState
 		{
@@ -69,11 +88,11 @@ namespace RecNForget
 			}
 		}
 
-		public string CurrentFileName
+		public string CurrentFileNameDisplay
 		{
 			get
 			{
-				return currentFileName == string.Empty ? "(not recording)" : currentFileName;
+				return currentFileName;
 			}
 
 			set
@@ -200,6 +219,10 @@ namespace RecNForget
 			taskBarIcon.Icon = applicationIcon;
 			taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
 
+			recordingTimer = new DispatcherTimer();
+			recordingTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
+			recordingTimer.Tick += new EventHandler(RecordingTimer_Tick);
+
 			if (MinimizedToTray)
 			{
 				SwitchToBackgroundMode();
@@ -222,8 +245,10 @@ namespace RecNForget
 					CurrentlyNotRecording = false;
 					ToggleRecordButton.Content = "Stop";
 					TaskBar_ProgressState = "Error";
-					UpdateCurrentFileName();
-					taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileName), applicationIcon, true);
+					taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileNameDisplay), applicationIcon, true);
+					RecordingStart = DateTime.Now;
+					recordingTimer.Start();
+					UpdateCurrentFileNameDisplay();
 				},
 				stopRecordingAction: () =>
 				{
@@ -231,9 +256,10 @@ namespace RecNForget
 					CurrentlyNotRecording = true;
 					ToggleRecordButton.Content = "Record";
 					TaskBar_ProgressState = "Paused";
-					UpdateCurrentFileName();
+					UpdateCurrentFileNameDisplay();
 					UpdateLastFileName();
 					taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileName), applicationIcon, true);
+					recordingTimer.Stop();
 				});
 
 			ToggleRecordButton.Focus();
@@ -293,6 +319,12 @@ namespace RecNForget
 
 		#region runtime event handlers
 
+		private void RecordingTimer_Tick(object sender, EventArgs e)
+		{
+			RecordingTimeInMilliSeconds = TimeSpan.FromMilliseconds(DateTime.Now.Subtract(RecordingStart).TotalMilliseconds).TotalSeconds.ToString(@"0.##");
+			UpdateCurrentFileNameDisplay();
+		}
+
 		private void RecordButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (CurrentlyRecording)
@@ -305,9 +337,16 @@ namespace RecNForget
 			}
 		}
 
-		private void UpdateCurrentFileName()
+		private void UpdateCurrentFileNameDisplay()
 		{
-			CurrentFileName = hotkeyService == null ? string.Empty : hotkeyService.CurrentFileName;
+			if (CurrentlyRecording)
+			{
+				CurrentFileNameDisplay = hotkeyService == null ? string.Empty : string.Format("recording to {0} (for {1} s)", hotkeyService.CurrentFileName, RecordingTimeInMilliSeconds);
+			}
+			else
+			{
+				CurrentFileNameDisplay = string.Empty;
+			}
 		}
 
 		private void UpdateLastFileName()

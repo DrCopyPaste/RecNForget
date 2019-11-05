@@ -29,6 +29,7 @@ You should be able to just extract RecNForget from the latest release and run th
 (commited changes not yet released)
 - FIX: application icon was not shown when executing from a directory different to the application directory
 
+- show recording time in main window
 - can enable balloon tips (toast messages) for when recording starts or stops (enabled by default)
 - can enable running main window as a background process (minimized to tray)
 - can set main window to be always in foreground (always on top)
@@ -36,16 +37,12 @@ You should be able to just extract RecNForget from the latest release and run th
 
 # Features missing for version 1.0
 - show record (red circle) in bottom right corner when recording (configurable)
-- have always on top option for the main window (configurable)
-- show balloon tips (configurable)
 - show generated file in file browser (configurable)
 - peep sound for recording start/stop (configurable)
 - instant replay recorded audio? (configurable)
 - different peep sound for replay start/stop (configurable)
 
 # Nice to haves in future releases
-- program can run in background as a windows process listening to keystrokes
-(maybe only allow if some visual or audio feedback for start/stop recording is active - to not make this a spyware)
 - suppress not allowed characters for filenames
 - allow disabling some hotkeys explicitly (decreasing the amount of hotkeys, the listener has to listen to)
 - include how-to-build-file (maybe batch with msbuild)
