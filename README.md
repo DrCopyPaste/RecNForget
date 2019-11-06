@@ -29,8 +29,8 @@ You should be able to just extract RecNForget from the latest release and run th
 (commited changes not yet released)
 - FIX: application icon was not shown when executing from a directory different to the application directory
 
-- show recording time in main window
 - can enable balloon tips (toast messages) for when recording starts or stops (enabled by default)
+- show length of recording in main window and balloon tips
 - can enable running main window as a background process (minimized to tray)
 - can set main window to be always in foreground (always on top)
 - added auto-start-option

@@ -4,9 +4,9 @@ catch exception when trying to play the last file (but it was moved or deleted)
 
 FIX taskbar icon bugged when pinning to taskbar (Win 7 only? does not happen in Win 10)
 
-maybe settings and hotkey windows are a bit "too always on top"?
+enable output as mp3/other (configurable (conditionally))
 
-show length of recorded file in main window and balloon tip
+maybe settings and hotkey windows are a bit "too always on top"?
 
 allow closing application via tray icon context menu
 
@@ -40,7 +40,6 @@ allow disabling some hotkeys explicitly (decreasing the amount of hotkeys, the l
 refactor, ioc, constants, magic strings, identifiers etc
 
 sound level normalization (configurable (conditionally))
-enable output as mp3/other (configurable (conditionally))
 
 Allow including screenshots with sampled audio file (for later remembering which movie/whatever thing the sample belonged to)
 	This could also be the fraps replacement :D (well kinda)

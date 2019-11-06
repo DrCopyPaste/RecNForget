@@ -226,6 +226,7 @@ namespace RecNForget
 			taskBarIcon = new TaskbarIcon();
 			taskBarIcon.Icon = applicationIcon;
 			taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
+			taskBarIcon.Visibility = Visibility.Visible;
 
 			recordingTimer = new DispatcherTimer();
 			recordingTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
@@ -253,14 +254,14 @@ namespace RecNForget
 					CurrentlyNotRecording = false;
 					ToggleRecordButton.Content = "Stop";
 					TaskBar_ProgressState = "Error";
-					if (ShowBalloonTipsForRecording)
-					{
-						taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileNameDisplay), applicationIcon, true);
-					}
 					RecordingStart = DateTime.Now;
 					recordingTimer.Start();
 					UpdateLastFileNameDisplay(reset: true);
 					UpdateCurrentFileNameDisplay();
+					if (ShowBalloonTipsForRecording)
+					{
+						taskBarIcon.ShowBalloonTip("Recording started!", "RecNForget now recording...", applicationIcon, true);
+					}
 				},
 				stopRecordingAction: () =>
 				{
@@ -272,7 +273,7 @@ namespace RecNForget
 					TaskBar_ProgressState = "Paused";
 					if (ShowBalloonTipsForRecording)
 					{
-						taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileNameDisplay), applicationIcon, true);
+						taskBarIcon.ShowBalloonTip("Recording saved!", LastFileNameDisplay, applicationIcon, true);
 					}
 					recordingTimer.Stop();
 				});
@@ -291,15 +292,12 @@ namespace RecNForget
 		private void SwitchToBackgroundMode()
 		{
 			this.Hide();
-			taskBarIcon.Visibility = Visibility.Visible;
-
 			taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", applicationIcon, true);
 		}
 
 		private void SwitchToForegroundMode()
 		{
 			this.Show();
-			taskBarIcon.Visibility = Visibility.Collapsed;
 		}
 
 		#region configuration event handlers
@@ -360,7 +358,7 @@ namespace RecNForget
 			}
 			else
 			{
-				CurrentFileNameDisplay = hotkeyService == null ? string.Empty : string.Format("recording to {0} (for {1} s)", hotkeyService.CurrentFileName, RecordingTimeInMilliSeconds);
+				CurrentFileNameDisplay = hotkeyService == null ? string.Empty : string.Format("{0} ({1} s)", hotkeyService.CurrentFileName, RecordingTimeInMilliSeconds);
 			}
 			
 		}
