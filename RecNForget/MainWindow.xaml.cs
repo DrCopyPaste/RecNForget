@@ -201,6 +201,14 @@ namespace RecNForget
 			}
 		}
 
+		public bool ShowBalloonTipsForRecording
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["ShowBalloonTipsForRecording"]);
+			}
+		}
+
 		public bool MinimizedToTray
 		{
 			get
@@ -245,7 +253,10 @@ namespace RecNForget
 					CurrentlyNotRecording = false;
 					ToggleRecordButton.Content = "Stop";
 					TaskBar_ProgressState = "Error";
-					taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileNameDisplay), applicationIcon, true);
+					if (ShowBalloonTipsForRecording)
+					{
+						taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileNameDisplay), applicationIcon, true);
+					}
 					RecordingStart = DateTime.Now;
 					recordingTimer.Start();
 					UpdateLastFileNameDisplay(reset: true);
@@ -259,7 +270,10 @@ namespace RecNForget
 					CurrentlyNotRecording = true;
 					ToggleRecordButton.Content = "Record";
 					TaskBar_ProgressState = "Paused";
-					taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileNameDisplay), applicationIcon, true);
+					if (ShowBalloonTipsForRecording)
+					{
+						taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileNameDisplay), applicationIcon, true);
+					}
 					recordingTimer.Stop();
 				});
 
@@ -279,7 +293,7 @@ namespace RecNForget
 			this.Hide();
 			taskBarIcon.Visibility = Visibility.Visible;
 
-			taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background\ndouble click tray icon to restore", applicationIcon, true);
+			taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", applicationIcon, true);
 		}
 
 		private void SwitchToForegroundMode()
