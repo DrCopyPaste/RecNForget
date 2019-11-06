@@ -41,6 +41,7 @@ namespace RecNForget
 		private string recordingTimeInMilliSeconds = string.Empty;
 		private bool hasLastRecording = false;
 		private string currentFileNameDisplay;
+		private string lastFileName;
 		private string lastFileNameDisplay;
 
 		public DateTime RecordingStart { get; set; }
@@ -256,6 +257,7 @@ namespace RecNForget
 					TaskBar_ProgressState = "Error";
 					RecordingStart = DateTime.Now;
 					recordingTimer.Start();
+					UpdateLastFileName(reset: true);
 					UpdateLastFileNameDisplay(reset: true);
 					UpdateCurrentFileNameDisplay();
 					if (ShowBalloonTipsForRecording)
@@ -265,6 +267,7 @@ namespace RecNForget
 				},
 				stopRecordingAction: () =>
 				{
+					UpdateLastFileName();
 					UpdateLastFileNameDisplay();
 					UpdateCurrentFileNameDisplay(reset: true);
 					CurrentlyRecording = false;
@@ -363,9 +366,14 @@ namespace RecNForget
 			
 		}
 
+		private void UpdateLastFileName(bool reset = false)
+		{
+			lastFileName = reset ? string.Empty : hotkeyService == null ? string.Empty : hotkeyService.LastFileName;
+		}
+
 		private void UpdateLastFileNameDisplay(bool reset = false)
 		{
-			LastFileNameDisplay = reset ? string.Empty : hotkeyService == null ? string.Empty : string.Format("{0} ({1} s)", hotkeyService.LastFileName, RecordingTimeInMilliSeconds);
+			LastFileNameDisplay = reset ? string.Empty : string.Format("{0} ({1} s)", lastFileName, RecordingTimeInMilliSeconds);
 		}
 
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
@@ -381,7 +389,7 @@ namespace RecNForget
 				audioOutputDevice = new WaveOutEvent();
 				audioOutputDevice.PlaybackStopped += OnPlaybackStopped;
 
-				audioFileReader = new AudioFileReader(LastFileNameDisplay);
+				audioFileReader = new AudioFileReader(lastFileName);
 				audioOutputDevice.Init(audioFileReader);
 				audioOutputDevice.Play();
 
