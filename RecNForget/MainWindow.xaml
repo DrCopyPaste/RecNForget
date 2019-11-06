@@ -78,7 +78,7 @@
 
                 <Label Grid.Row="0" Grid.Column="0" Content="last result:" HorizontalAlignment="Left" Width="Auto" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
 
-                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=LastFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="Auto" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
+                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Path=LastFileNameDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="Auto" Margin="5,0,0,0" VerticalAlignment="Top"/>
 
                 <Button Grid.Row="1" Grid.Column="2" Name="ReplayLastRecordingButton"  Content="Replay Last" Margin="0,5,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="{Binding Path=HasLastRecording}" Click="ReplayLastRecording_Click"/>
             </Grid>

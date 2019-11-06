@@ -40,8 +40,8 @@ namespace RecNForget
 
 		private string recordingTimeInMilliSeconds = string.Empty;
 		private bool hasLastRecording = false;
-		private string currentFileName;
-		private string lastFileName;
+		private string currentFileNameDisplay;
+		private string lastFileNameDisplay;
 
 		public DateTime RecordingStart { get; set; }
 
@@ -92,12 +92,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return currentFileName;
+				return currentFileNameDisplay;
 			}
 
 			set
 			{
-				currentFileName = value;
+				currentFileNameDisplay = value;
 				OnPropertyChanged();
 			}
 		}
@@ -128,18 +128,18 @@ namespace RecNForget
 			}
 		}
 
-		public string LastFileName
+		public string LastFileNameDisplay
 		{
 			get
 			{
-				return lastFileName == string.Empty ? "(nothing)" : lastFileName;
+				return lastFileNameDisplay;
 			}
 
 			set
 			{
-				lastFileName = value;
+				lastFileNameDisplay = value;
 
-				if (!string.IsNullOrWhiteSpace(lastFileName))
+				if (!string.IsNullOrWhiteSpace(lastFileNameDisplay))
 				{
 					HasLastRecording = true;
 				}
@@ -248,17 +248,18 @@ namespace RecNForget
 					taskBarIcon.ShowBalloonTip("Recording started!", string.Format("RecNForget now recording to {0}", CurrentFileNameDisplay), applicationIcon, true);
 					RecordingStart = DateTime.Now;
 					recordingTimer.Start();
+					UpdateLastFileNameDisplay(reset: true);
 					UpdateCurrentFileNameDisplay();
 				},
 				stopRecordingAction: () =>
 				{
+					UpdateLastFileNameDisplay();
+					UpdateCurrentFileNameDisplay(reset: true);
 					CurrentlyRecording = false;
 					CurrentlyNotRecording = true;
 					ToggleRecordButton.Content = "Record";
 					TaskBar_ProgressState = "Paused";
-					UpdateCurrentFileNameDisplay();
-					UpdateLastFileName();
-					taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileName), applicationIcon, true);
+					taskBarIcon.ShowBalloonTip("Recording saved!", string.Format("RecNForget saved to {0}", LastFileNameDisplay), applicationIcon, true);
 					recordingTimer.Stop();
 				});
 
@@ -337,21 +338,22 @@ namespace RecNForget
 			}
 		}
 
-		private void UpdateCurrentFileNameDisplay()
+		private void UpdateCurrentFileNameDisplay(bool reset = false)
 		{
-			if (CurrentlyRecording)
-			{
-				CurrentFileNameDisplay = hotkeyService == null ? string.Empty : string.Format("recording to {0} (for {1} s)", hotkeyService.CurrentFileName, RecordingTimeInMilliSeconds);
-			}
-			else
+			if (reset)
 			{
 				CurrentFileNameDisplay = string.Empty;
 			}
+			else
+			{
+				CurrentFileNameDisplay = hotkeyService == null ? string.Empty : string.Format("recording to {0} (for {1} s)", hotkeyService.CurrentFileName, RecordingTimeInMilliSeconds);
+			}
+			
 		}
 
-		private void UpdateLastFileName()
+		private void UpdateLastFileNameDisplay(bool reset = false)
 		{
-			LastFileName = hotkeyService == null ? string.Empty : hotkeyService.LastFileName;
+			LastFileNameDisplay = reset ? string.Empty : hotkeyService == null ? string.Empty : string.Format("{0} ({1} s)", hotkeyService.LastFileName, RecordingTimeInMilliSeconds);
 		}
 
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
@@ -367,7 +369,7 @@ namespace RecNForget
 				audioOutputDevice = new WaveOutEvent();
 				audioOutputDevice.PlaybackStopped += OnPlaybackStopped;
 
-				audioFileReader = new AudioFileReader(LastFileName);
+				audioFileReader = new AudioFileReader(LastFileNameDisplay);
 				audioOutputDevice.Init(audioFileReader);
 				audioOutputDevice.Play();
 
