@@ -273,7 +273,7 @@ namespace RecNForget
 					ReplayLastRecordingButton.Content = "Resume";
 				});
 
-			recordingFeedbackAudioService = new AudioPlayListService(null, null, null);
+			recordingFeedbackAudioService = new AudioPlayListService();
 
 			recordingTimer = new DispatcherTimer();
 			recordingTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
@@ -297,6 +297,10 @@ namespace RecNForget
 			this.hotkeyService = new HotkeyService(
 				startRecordingAction:() =>
 				{
+					CurrentAudioPlayState = false;
+					ReplayLastRecordingButton.Content = "Replay Last";
+					ReplayLastRecordingButton.IsEnabled = false;
+					replayAudioService.KillAudio(reset: true);
 					CurrentlyRecording = true;
 					CurrentlyNotRecording = false;
 					ToggleRecordButton.Content = "Stop";
@@ -337,6 +341,7 @@ namespace RecNForget
 					{
 						ReplayLastRecording();
 					}
+					ReplayLastRecordingButton.IsEnabled = true;
 				});
 
 			ToggleRecordButton.Focus();
@@ -407,7 +412,7 @@ namespace RecNForget
 			}
 			else
 			{
-				PlayRecordingStartAudioFeedback();
+				hotkeyService.StartRecording();
 			}
 		}
 
@@ -447,6 +452,8 @@ namespace RecNForget
 		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
 		private void ReplayLastRecording()
 		{
+			bool replayFileExists = false;
+
 			if (replayAudioService.PlaybackState == PlaybackState.Stopped)
 			{
 				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
@@ -454,14 +461,23 @@ namespace RecNForget
 					replayAudioService.QueueFile(recordStartAudioFeedbackPath);
 				}
 
-				replayAudioService.QueueFile(lastFileName);
+				replayFileExists = replayAudioService.QueueFile(lastFileName);
 
 				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
 				{
 					replayAudioService.QueueFile(recordStopAudioFeedbackPath);
 				}
 
-				replayAudioService.Play();
+				if (replayFileExists)
+				{
+					replayAudioService.Play();
+				}
+				else
+				{
+					CurrentAudioPlayState = false;
+					ReplayLastRecordingButton.Content = "Replay Last";
+					ReplayLastRecordingButton.IsEnabled = false;
+				}
 			}
 			else if (replayAudioService.PlaybackState == PlaybackState.Playing)
 			{
@@ -479,6 +495,8 @@ namespace RecNForget
 			recordingFeedbackAudioService.Play();
 
 			while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
+
+			recordingFeedbackAudioService.KillAudio(reset: true);
 		}
 
 		private void PlayRecordingStopAudioFeedback()
@@ -487,6 +505,8 @@ namespace RecNForget
 			recordingFeedbackAudioService.Play();
 
 			while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
+
+			recordingFeedbackAudioService.KillAudio(reset: true);
 		}
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)

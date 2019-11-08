@@ -1,5 +1,7 @@
 ﻿add Signature
 
+FIX: not all settings from settings window take effect immediately some require restart
+
 catch exception when trying to play the last file (but it was moved or deleted)
 
 FIX taskbar icon bugged when pinning to taskbar (Win 7 only? does not happen in Win 10)

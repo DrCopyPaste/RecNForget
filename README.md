@@ -27,6 +27,8 @@ You should be able to just extract RecNForget from the latest release and run th
 
 # upcoming features in next version
 (commited changes not yet released)
+FIX error when trying to play the last file (but it was moved or deleted),
+(missing replay file leads to button being disabled, missing audio feedback files are silently ignored for now)
 - FIX: application icon was not shown when executing from a directory different to the application directory
 
 - can enable instant auto-replay of audio after recording (disabled by default)
@@ -39,6 +41,8 @@ You should be able to just extract RecNForget from the latest release and run th
 - added auto-start-option
 
 # Features missing for version 1.0
+FIX: not all settings from settings window take effect immediately some require restart
+
 - show record (red circle) in bottom right corner when recording (configurable)
 - show generated file in file browser (configurable)
 - different peep sound for replay start/stop

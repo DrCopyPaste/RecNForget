@@ -15,6 +15,7 @@ namespace RecNForget.Services
 		private Action beforePlayAction = null;
 		private Action afterPauseAction = null;
 		private Action afterStopAction = null;
+		private Action queueErrorAction = null;
 
 		private List<string> filePathList = null;
 		private int currentPlayIndex = 0;
@@ -26,22 +27,28 @@ namespace RecNForget.Services
 			}
 		}
 
-		public AudioPlayListService(Action beforePlayAction, Action afterStopAction, Action afterPauseAction)
+		public AudioPlayListService(Action beforePlayAction = null, Action afterStopAction = null, Action afterPauseAction = null, Action queueErrorAction = null)
 		{
 			this.beforePlayAction = beforePlayAction;
 			this.afterStopAction = afterStopAction;
 			this.afterPauseAction = afterPauseAction;
+			this.queueErrorAction = queueErrorAction;
 
 			filePathList = new List<string>();
 		}
 
-		public void QueueFile(string filePath)
+		public bool QueueFile(string filePath)
 		{
 			FileInfo fileInfo = new FileInfo(filePath);
 			if (fileInfo.Exists)
 			{
 				filePathList.Add(filePath);
+
+				return true;
 			}
+
+			queueErrorAction?.Invoke();
+			return false;
 		}
 
 		public void Play()
@@ -50,8 +57,6 @@ namespace RecNForget.Services
 			{
 				if (filePathList.Count > currentPlayIndex)
 				{
-					audioOutputDevice = new WaveOutEvent();
-					audioOutputDevice.PlaybackStopped += OnAudioDevicePlaybackStopped;
 					beforePlayAction?.Invoke();
 					InitTitle(filePathList[currentPlayIndex]);
 
@@ -71,8 +76,43 @@ namespace RecNForget.Services
 			afterPauseAction?.Invoke();
 		}
 
+		public void Stop()
+		{
+			audioOutputDevice?.Stop();
+		}
+
+		public void KillAudio(bool reset = false)
+		{
+			Stop();
+
+			if (audioOutputDevice != null)
+			{
+				audioOutputDevice.Dispose();
+				audioOutputDevice = null;
+			}
+
+			if (audioOutputDevice != null)
+			{
+				audioOutputDevice.Dispose();
+				audioOutputDevice = null;
+			}
+
+			if (reset)
+			{
+				currentPlayIndex = 0;
+				filePathList.Clear();
+				afterStopAction?.Invoke();
+			}
+		}
+
 		private void InitTitle(string titlePath)
 		{
+			if (audioOutputDevice == null)
+			{
+				audioOutputDevice = new WaveOutEvent();
+				audioOutputDevice.PlaybackStopped += OnAudioDevicePlaybackStopped;
+			}
+
 			audioFileReader = new AudioFileReader(titlePath);
 			audioOutputDevice.Init(audioFileReader);
 		}
@@ -82,20 +122,15 @@ namespace RecNForget.Services
 		{
 			currentPlayIndex++;
 
-			audioFileReader.Dispose();
-			audioFileReader = null;
-
 			if (filePathList.Count > currentPlayIndex)
 			{
+				KillAudio(reset: false);
 				InitTitle(filePathList[currentPlayIndex]);
-				audioOutputDevice.Play();
+				Play();
 			}
 			else
 			{
-				audioOutputDevice.Dispose();
-				audioOutputDevice = null;
-
-				afterStopAction?.Invoke();
+				KillAudio(reset: true);
 			}
 		}
 	}
