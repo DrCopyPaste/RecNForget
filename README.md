@@ -30,19 +30,21 @@ You should be able to just extract RecNForget from the latest release and run th
 - FIX: application icon was not shown when executing from a directory different to the application directory
 
 - can enable short audio beep as feedback marking beginning and end of recording (enabled by default)
+- can enable short audio beep as feedback marking beginning and end of replayed audio (disabled by default)
 - can enable balloon tips (toast messages) for when recording starts or stops (enabled by default)
 - show length of recording in main window and balloon tips
 - can enable running main window as a background process (minimized to tray)
-- can set main window to be always in foreground (always on top)
+- can set main window to be always on top
 - added auto-start-option
 
 # Features missing for version 1.0
 - show record (red circle) in bottom right corner when recording (configurable)
 - show generated file in file browser (configurable)
-- peep sound for recording start/stop (configurable)
 - instant replay recorded audio? (configurable)
-- different peep sound for replay start/stop (configurable)
+- different peep sound for replay start/stop
 - clean up source code for maintainability
+- rework visual layout of windows (more consistency and maybe smaller nicer windwos)
+- have an (Un-)Installer and Updater to set default paths, registry entries for uninstalling and preserving custom settings when updating
 
 # Nice to haves in future releases
 - suppress not allowed characters for filenames

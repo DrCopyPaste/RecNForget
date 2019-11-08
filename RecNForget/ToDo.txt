@@ -27,8 +27,6 @@ instant replay recorded audio option
 
 show record (red circle) in bottom right corner when recording
 
-peep sound for recording start/stop (configurable (conditionally))
-
 how to build
 	include batch files?
 	include nssm for service installation?

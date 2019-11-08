@@ -31,12 +31,8 @@ namespace RecNForget
 		private Icon applicationIcon;
 		private TaskbarIcon taskBarIcon;
 
-		private AudioPlayListService audioPlayListService = null;
-
-		private WaveOutEvent audioFeedbackOutputDevice = null;
-		private WaveOutEvent audioOutputDevice = null;
-		private AudioFileReader audioFileReader = null;
-		private AudioFileReader audioFeedbackFileReader = null;
+		private AudioPlayListService replayAudioService = null;
+		private AudioPlayListService recordingFeedbackAudioService = null;
 
 		private HotkeyService hotkeyService;
 		private bool currentlyRecording = false;
@@ -245,7 +241,7 @@ namespace RecNForget
 			taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
 			taskBarIcon.Visibility = Visibility.Visible;
 
-			audioPlayListService = new AudioPlayListService(
+			replayAudioService = new AudioPlayListService(
 				beforePlayAction: () =>
 				{
 					CurrentAudioPlayState = true;
@@ -260,6 +256,8 @@ namespace RecNForget
 					CurrentAudioPlayState = false;
 					ReplayLastRecordingButton.Content = "Resume";
 				});
+
+			recordingFeedbackAudioService = new AudioPlayListService(null, null, null);
 
 			recordingTimer = new DispatcherTimer();
 			recordingTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
@@ -424,54 +422,37 @@ namespace RecNForget
 		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
 		private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
 		{
-			if (audioPlayListService.PlaybackState == PlaybackState.Stopped)
+			if (replayAudioService.PlaybackState == PlaybackState.Stopped)
 			{
-				audioPlayListService.QueueFile(recordStartAudioFeedbackPath);
-				audioPlayListService.QueueFile(lastFileName);
-				audioPlayListService.QueueFile(recordStopAudioFeedbackPath);
-				audioPlayListService.Play();
+				replayAudioService.QueueFile(recordStartAudioFeedbackPath);
+				replayAudioService.QueueFile(lastFileName);
+				replayAudioService.QueueFile(recordStopAudioFeedbackPath);
+				replayAudioService.Play();
 			}
-			else if (audioPlayListService.PlaybackState == PlaybackState.Playing)
+			else if (replayAudioService.PlaybackState == PlaybackState.Playing)
 			{
-				audioPlayListService.Pause();
+				replayAudioService.Pause();
 			}
-			else if (audioPlayListService.PlaybackState == PlaybackState.Paused)
+			else if (replayAudioService.PlaybackState == PlaybackState.Paused)
 			{
-				audioPlayListService.Play();
+				replayAudioService.Play();
 			}
 		}
 
 		private void PlayRecordingStartAudioFeedback()
 		{
-			audioFeedbackOutputDevice = new WaveOutEvent();
-			audioFeedbackOutputDevice.PlaybackStopped += OnAudioFeedbackDevicePlaybackStopped;
+			recordingFeedbackAudioService.QueueFile(recordStartAudioFeedbackPath);
+			recordingFeedbackAudioService.Play();
 
-			audioFeedbackFileReader = new AudioFileReader(recordStartAudioFeedbackPath);
-			audioFeedbackOutputDevice.Init(audioFeedbackFileReader);
-			audioFeedbackOutputDevice.Play();
-
-			while (audioFeedbackOutputDevice.PlaybackState == PlaybackState.Playing) { }
+			while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
 		}
 
 		private void PlayRecordingStopAudioFeedback()
 		{
-			audioFeedbackOutputDevice = new WaveOutEvent();
-			audioFeedbackOutputDevice.PlaybackStopped += OnAudioFeedbackDevicePlaybackStopped;
+			recordingFeedbackAudioService.QueueFile(recordStopAudioFeedbackPath);
+			recordingFeedbackAudioService.Play();
 
-			audioFeedbackFileReader = new AudioFileReader(recordStopAudioFeedbackPath);
-			audioFeedbackOutputDevice.Init(audioFeedbackFileReader);
-			audioFeedbackOutputDevice.Play();
-
-			while (audioFeedbackOutputDevice.PlaybackState == PlaybackState.Playing) { }
-		}
-
-		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
-		private void OnAudioFeedbackDevicePlaybackStopped(object sender, StoppedEventArgs args)
-		{
-			audioFeedbackOutputDevice.Dispose();
-			audioFeedbackOutputDevice = null;
-			audioFeedbackFileReader.Dispose();
-			audioFeedbackFileReader = null;
+			while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
 		}
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)

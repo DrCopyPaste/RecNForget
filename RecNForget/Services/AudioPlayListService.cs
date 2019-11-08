@@ -28,9 +28,6 @@ namespace RecNForget.Services
 
 		public AudioPlayListService(Action beforePlayAction, Action afterStopAction, Action afterPauseAction)
 		{
-			audioOutputDevice = new WaveOutEvent();
-			audioOutputDevice.PlaybackStopped += OnAudioDevicePlaybackStopped;
-
 			this.beforePlayAction = beforePlayAction;
 			this.afterStopAction = afterStopAction;
 			this.afterPauseAction = afterPauseAction;
@@ -53,7 +50,9 @@ namespace RecNForget.Services
 			{
 				if (filePathList.Count > currentPlayIndex)
 				{
-					beforePlayAction();
+					audioOutputDevice = new WaveOutEvent();
+					audioOutputDevice.PlaybackStopped += OnAudioDevicePlaybackStopped;
+					beforePlayAction?.Invoke();
 					InitTitle(filePathList[currentPlayIndex]);
 
 					audioOutputDevice.Play();
@@ -68,7 +67,8 @@ namespace RecNForget.Services
 		public void Pause()
 		{
 			audioOutputDevice.Pause();
-			afterPauseAction();
+
+			afterPauseAction?.Invoke();
 		}
 
 		private void InitTitle(string titlePath)
@@ -95,7 +95,7 @@ namespace RecNForget.Services
 				audioOutputDevice.Dispose();
 				audioOutputDevice = null;
 
-				afterStopAction();
+				afterStopAction?.Invoke();
 			}
 		}
 	}
