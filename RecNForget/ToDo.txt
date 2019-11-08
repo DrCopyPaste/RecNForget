@@ -23,8 +23,6 @@ suppress not allowed characters for filenames
 
 clickable balloon tips (show in file browser)
 
-instant replay recorded audio option
-
 show record (red circle) in bottom right corner when recording
 
 how to build

@@ -29,6 +29,7 @@ You should be able to just extract RecNForget from the latest release and run th
 (commited changes not yet released)
 - FIX: application icon was not shown when executing from a directory different to the application directory
 
+- can enable instant auto-replay of audio after recording (disabled by default)
 - can enable short audio beep as feedback marking beginning and end of recording (enabled by default)
 - can enable short audio beep as feedback marking beginning and end of replayed audio (disabled by default)
 - can enable balloon tips (toast messages) for when recording starts or stops (enabled by default)
@@ -40,7 +41,6 @@ You should be able to just extract RecNForget from the latest release and run th
 # Features missing for version 1.0
 - show record (red circle) in bottom right corner when recording (configurable)
 - show generated file in file browser (configurable)
-- instant replay recorded audio? (configurable)
 - different peep sound for replay start/stop
 - clean up source code for maintainability
 - rework visual layout of windows (more consistency and maybe smaller nicer windwos)

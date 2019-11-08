@@ -198,11 +198,27 @@ namespace RecNForget
 			}
 		}
 
+		public bool AutoReplayAudioAfterRecording
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["AutoReplayAudioAfterRecording"]);
+			}
+		}
+
 		public bool PlayAudioFeedBackMarkingStartAndStopRecording
 		{
 			get
 			{
 				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["PlayAudioFeedBackMarkingStartAndStopRecording"]);
+			}
+		}
+
+		public bool PlayAudioFeedBackMarkingStartAndStopReplaying
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["PlayAudioFeedBackMarkingStartAndStopReplaying"]);
 			}
 		}
 
@@ -317,6 +333,10 @@ namespace RecNForget
 					{
 						PlayRecordingStopAudioFeedback();
 					}
+					if (AutoReplayAudioAfterRecording)
+					{
+						ReplayLastRecording();
+					}
 				});
 
 			ToggleRecordButton.Focus();
@@ -419,14 +439,28 @@ namespace RecNForget
 			Process.Start(OutputPath);
 		}
 
-		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
 		private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
+		{
+			ReplayLastRecording();
+		}
+
+		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
+		private void ReplayLastRecording()
 		{
 			if (replayAudioService.PlaybackState == PlaybackState.Stopped)
 			{
-				replayAudioService.QueueFile(recordStartAudioFeedbackPath);
+				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
+				{
+					replayAudioService.QueueFile(recordStartAudioFeedbackPath);
+				}
+
 				replayAudioService.QueueFile(lastFileName);
-				replayAudioService.QueueFile(recordStopAudioFeedbackPath);
+
+				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
+				{
+					replayAudioService.QueueFile(recordStopAudioFeedbackPath);
+				}
+
 				replayAudioService.Play();
 			}
 			else if (replayAudioService.PlaybackState == PlaybackState.Playing)

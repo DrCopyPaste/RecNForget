@@ -104,6 +104,20 @@ namespace RecNForget
 			}
 		}
 
+		public bool AutoReplayAudioAfterRecording
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["AutoReplayAudioAfterRecording"]);
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting("AutoReplayAudioAfterRecording", value.ToString());
+				OnPropertyChanged();
+			}
+		}
+
 		public bool PlayAudioFeedBackMarkingStartAndStopRecording
 		{
 			get
