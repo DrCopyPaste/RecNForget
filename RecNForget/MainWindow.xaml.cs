@@ -29,7 +29,6 @@ namespace RecNForget
 		private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
 
 		private Icon applicationIcon;
-		private TaskbarIcon taskBarIcon;
 
 		private AudioPlayListService replayAudioService = null;
 		private AudioPlayListService recordingFeedbackAudioService = null;
@@ -250,11 +249,14 @@ namespace RecNForget
 
 		public MainWindow()
 		{
+			DataContext = this;
+			InitializeComponent();
+
 			applicationIcon = getIcon();
 
-			taskBarIcon = new TaskbarIcon();
 			taskBarIcon.Icon = applicationIcon;
 			taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
+
 			taskBarIcon.Visibility = Visibility.Visible;
 
 			replayAudioService = new AudioPlayListService(
@@ -290,9 +292,6 @@ namespace RecNForget
 
 			this.Icon = new BitmapImage(new Uri(logoPath));
 			this.Topmost = WindowAlwaysOnTop;
-
-			DataContext = this;
-			InitializeComponent();
 
 			this.hotkeyService = new HotkeyService(
 				startRecordingAction:() =>
@@ -507,6 +506,11 @@ namespace RecNForget
 			while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
 
 			recordingFeedbackAudioService.KillAudio(reset: true);
+		}
+
+		private void Exit_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
 		}
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)

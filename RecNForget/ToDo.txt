@@ -10,8 +10,6 @@ enable output as mp3/other (configurable (conditionally))
 
 maybe settings and hotkey windows are a bit "too always on top"?
 
-allow closing application via tray icon context menu
-
 allow restoring app.config defaults
 
 allow self- (maybe auto-) software updates

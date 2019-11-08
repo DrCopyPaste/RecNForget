@@ -27,8 +27,7 @@ You should be able to just extract RecNForget from the latest release and run th
 
 # upcoming features in next version
 (commited changes not yet released)
-FIX error when trying to play the last file (but it was moved or deleted),
-(missing replay file leads to button being disabled, missing audio feedback files are silently ignored for now)
+- FIX error when trying to play the last file (but it was moved or deleted - missing replay file leads to button being disabled, missing audio feedback files are silently ignored for now)
 - FIX: application icon was not shown when executing from a directory different to the application directory
 
 - can enable instant auto-replay of audio after recording (disabled by default)
@@ -37,6 +36,7 @@ FIX error when trying to play the last file (but it was moved or deleted),
 - can enable balloon tips (toast messages) for when recording starts or stops (enabled by default)
 - show length of recording in main window and balloon tips
 - can enable running main window as a background process (minimized to tray)
+- can close application via tray icon context menu
 - can set main window to be always on top
 - added auto-start-option
 

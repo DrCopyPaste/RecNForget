@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:RecNForget"
         xmlns:localEnums="clr-namespace:RecNForget.Enums"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         mc:Ignorable="d"
         Title="RecNForget" Height="350" Width="600" ResizeMode="CanMinimize">
     <Grid>
@@ -18,6 +19,15 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+
+        <tb:TaskbarIcon Name="taskBarIcon">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Click="Exit_Click" Header="Exit" />
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+
         <CheckBox IsChecked="{Binding Path=WindowAlwaysOnTop}" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">always on top</CheckBox>
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Status" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">
             <Grid>
