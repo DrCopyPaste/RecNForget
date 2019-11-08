@@ -426,7 +426,9 @@ namespace RecNForget
 		{
 			if (audioPlayListService.PlaybackState == PlaybackState.Stopped)
 			{
+				audioPlayListService.QueueFile(recordStartAudioFeedbackPath);
 				audioPlayListService.QueueFile(lastFileName);
+				audioPlayListService.QueueFile(recordStopAudioFeedbackPath);
 				audioPlayListService.Play();
 			}
 			else if (audioPlayListService.PlaybackState == PlaybackState.Playing)
