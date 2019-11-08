@@ -14,6 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -81,22 +82,36 @@
         </GroupBox>
         <GroupBox  Grid.Row="2" Grid.Column="0" Header="Application" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
             <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="27" />
-                <RowDefinition Height="27" />
-                <RowDefinition Height="27" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="27" />
+                    <RowDefinition Height="27" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="140" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
                 <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=AutoStartWithWindows}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">auto start RecNForget with Windows</CheckBox>
                 <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding Path=MinimizedToTray}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">run as background process (minimized to tray)</CheckBox>
-                <CheckBox Grid.Row="2" Grid.Column="0" IsChecked="{Binding Path=ShowBalloonTipsForRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">show balloon/toast messages for recording</CheckBox>
             </Grid>
         </GroupBox>
-        <Button Grid.Row="3" Grid.Column="0" Name="OkButton" Content="Ok" HorizontalAlignment="Stretch" Margin="368,5,7,0" VerticalAlignment="Top" Height="27" Click="OkButton_Click"/>
+        <GroupBox  Grid.Row="3" Grid.Column="0" Header="Application" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="27" />
+                    <RowDefinition Height="27" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">play audio feedback beeps to mark recording start and stop</CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="0" IsChecked="{Binding Path=ShowBalloonTipsForRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">show balloon/toast messages for recording</CheckBox>
+            </Grid>
+        </GroupBox>
+        <Button Grid.Row="4" Grid.Column="0" Name="OkButton" Content="Ok" HorizontalAlignment="Stretch" Margin="368,5,7,0" VerticalAlignment="Top" Height="27" Click="OkButton_Click"/>
     </Grid>
 
 </Window>

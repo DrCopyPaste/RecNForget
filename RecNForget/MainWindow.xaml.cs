@@ -24,11 +24,17 @@ namespace RecNForget
 	{
 		private string logoPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Img", "logo.png");
 
+		private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
+
+		private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
+
 		private Icon applicationIcon;
 		private TaskbarIcon taskBarIcon;
 
+		private WaveOutEvent audioFeedbackOutputDevice = null;
 		private WaveOutEvent audioOutputDevice = null;
 		private AudioFileReader audioFileReader = null;
+		private AudioFileReader audioFeedbackFileReader = null;
 
 		private HotkeyService hotkeyService;
 		private bool currentlyRecording = false;
@@ -194,6 +200,14 @@ namespace RecNForget
 			}
 		}
 
+		public bool PlayAudioFeedBackMarkingStartAndStopRecording
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["PlayAudioFeedBackMarkingStartAndStopRecording"]);
+			}
+		}
+
 		public string OutputPath
 		{
 			get
@@ -264,6 +278,10 @@ namespace RecNForget
 					{
 						taskBarIcon.ShowBalloonTip("Recording started!", "RecNForget now recording...", applicationIcon, true);
 					}
+					if (PlayAudioFeedBackMarkingStartAndStopRecording)
+					{
+						PlayRecordingStartAudioFeedback();
+					}
 				},
 				stopRecordingAction: () =>
 				{
@@ -279,6 +297,10 @@ namespace RecNForget
 						taskBarIcon.ShowBalloonTip("Recording saved!", LastFileNameDisplay, applicationIcon, true);
 					}
 					recordingTimer.Stop();
+					if (PlayAudioFeedBackMarkingStartAndStopRecording)
+					{
+						PlayRecordingStopAudioFeedback();
+					}
 				});
 
 			ToggleRecordButton.Focus();
@@ -349,7 +371,7 @@ namespace RecNForget
 			}
 			else
 			{
-				hotkeyService.StartRecording();
+				PlayRecordingStartAudioFeedback();
 			}
 		}
 
@@ -387,7 +409,7 @@ namespace RecNForget
 			if (audioOutputDevice == null || audioOutputDevice.PlaybackState == PlaybackState.Stopped)
 			{
 				audioOutputDevice = new WaveOutEvent();
-				audioOutputDevice.PlaybackStopped += OnPlaybackStopped;
+				audioOutputDevice.PlaybackStopped += OnAudioDevicePlaybackStopped;
 
 				audioFileReader = new AudioFileReader(lastFileName);
 				audioOutputDevice.Init(audioFileReader);
@@ -412,8 +434,41 @@ namespace RecNForget
 			}
 		}
 
+		private void PlayRecordingStartAudioFeedback()
+		{
+			audioFeedbackOutputDevice = new WaveOutEvent();
+			audioFeedbackOutputDevice.PlaybackStopped += OnAudioFeedbackDevicePlaybackStopped;
+
+			audioFeedbackFileReader = new AudioFileReader(recordStartAudioFeedbackPath);
+			audioFeedbackOutputDevice.Init(audioFeedbackFileReader);
+			audioFeedbackOutputDevice.Play();
+
+			while (audioFeedbackOutputDevice.PlaybackState == PlaybackState.Playing) { }
+		}
+
+		private void PlayRecordingStopAudioFeedback()
+		{
+			audioFeedbackOutputDevice = new WaveOutEvent();
+			audioFeedbackOutputDevice.PlaybackStopped += OnAudioFeedbackDevicePlaybackStopped;
+
+			audioFeedbackFileReader = new AudioFileReader(recordStopAudioFeedbackPath);
+			audioFeedbackOutputDevice.Init(audioFeedbackFileReader);
+			audioFeedbackOutputDevice.Play();
+
+			while (audioFeedbackOutputDevice.PlaybackState == PlaybackState.Playing) { }
+		}
+
 		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
-		private void OnPlaybackStopped(object sender, StoppedEventArgs args)
+		private void OnAudioFeedbackDevicePlaybackStopped(object sender, StoppedEventArgs args)
+		{
+			audioFeedbackOutputDevice.Dispose();
+			audioFeedbackOutputDevice = null;
+			audioFeedbackFileReader.Dispose();
+			audioFeedbackFileReader = null;
+		}
+
+		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
+		private void OnAudioDevicePlaybackStopped(object sender, StoppedEventArgs args)
 		{
 			audioOutputDevice.Dispose();
 			audioOutputDevice = null;

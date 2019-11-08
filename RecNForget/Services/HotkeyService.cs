@@ -139,11 +139,11 @@ namespace RecNForget.Services
 				captureInstance.Dispose();
 			};
 
+			// Actions passed to HotkeyService as Parameter shall be executed after all start actions besides recording itself
+			startRecordingAction();
+
 			// Start audio recording !
 			captureInstance.StartRecording();
-
-			// Actions passed to HotkeyService as Parameter shall be executed after all start actions
-			startRecordingAction();
 		}
 
 		public void StopRecording()

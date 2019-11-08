@@ -90,6 +90,20 @@ namespace RecNForget
 			}
 		}
 
+		public bool PlayAudioFeedBackMarkingStartAndStopRecording
+		{
+			get
+			{
+				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["PlayAudioFeedBackMarkingStartAndStopRecording"]);
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopRecording", value.ToString());
+				OnPropertyChanged();
+			}
+		}
+
 		public bool ShowBalloonTipsForRecording
 		{
 			get
