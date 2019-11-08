@@ -42,6 +42,7 @@ You should be able to just extract RecNForget from the latest release and run th
 - peep sound for recording start/stop (configurable)
 - instant replay recorded audio? (configurable)
 - different peep sound for replay start/stop (configurable)
+- clean up source code for maintainability
 
 # Nice to haves in future releases
 - suppress not allowed characters for filenames

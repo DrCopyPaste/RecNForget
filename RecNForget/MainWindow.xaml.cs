@@ -31,6 +31,8 @@ namespace RecNForget
 		private Icon applicationIcon;
 		private TaskbarIcon taskBarIcon;
 
+		private AudioPlayListService audioPlayListService = null;
+
 		private WaveOutEvent audioFeedbackOutputDevice = null;
 		private WaveOutEvent audioOutputDevice = null;
 		private AudioFileReader audioFileReader = null;
@@ -243,6 +245,22 @@ namespace RecNForget
 			taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
 			taskBarIcon.Visibility = Visibility.Visible;
 
+			audioPlayListService = new AudioPlayListService(
+				beforePlayAction: () =>
+				{
+					CurrentAudioPlayState = true;
+					ReplayLastRecordingButton.Content = "Pause";
+				}
+				, afterStopAction: () =>
+				{
+					CurrentAudioPlayState = false;
+					ReplayLastRecordingButton.Content = "Replay Last";
+				}, afterPauseAction: () =>
+				{
+					CurrentAudioPlayState = false;
+					ReplayLastRecordingButton.Content = "Resume";
+				});
+
 			recordingTimer = new DispatcherTimer();
 			recordingTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
 			recordingTimer.Tick += new EventHandler(RecordingTimer_Tick);
@@ -406,31 +424,18 @@ namespace RecNForget
 		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
 		private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
 		{
-			if (audioOutputDevice == null || audioOutputDevice.PlaybackState == PlaybackState.Stopped)
+			if (audioPlayListService.PlaybackState == PlaybackState.Stopped)
 			{
-				audioOutputDevice = new WaveOutEvent();
-				audioOutputDevice.PlaybackStopped += OnAudioDevicePlaybackStopped;
-
-				audioFileReader = new AudioFileReader(lastFileName);
-				audioOutputDevice.Init(audioFileReader);
-				audioOutputDevice.Play();
-
-				CurrentAudioPlayState = true;
-				ReplayLastRecordingButton.Content = "Pause";
+				audioPlayListService.QueueFile(lastFileName);
+				audioPlayListService.Play();
 			}
-			else if (audioOutputDevice.PlaybackState == PlaybackState.Paused)
+			else if (audioPlayListService.PlaybackState == PlaybackState.Playing)
 			{
-				audioOutputDevice.Play();
-
-				CurrentAudioPlayState = true;
-				ReplayLastRecordingButton.Content = "Pause";
+				audioPlayListService.Pause();
 			}
-			else if (audioOutputDevice.PlaybackState == PlaybackState.Playing)
+			else if (audioPlayListService.PlaybackState == PlaybackState.Paused)
 			{
-				audioOutputDevice.Pause();
-
-				CurrentAudioPlayState = false;
-				ReplayLastRecordingButton.Content = "Resume";
+				audioPlayListService.Play();
 			}
 		}
 
@@ -465,18 +470,6 @@ namespace RecNForget
 			audioFeedbackOutputDevice = null;
 			audioFeedbackFileReader.Dispose();
 			audioFeedbackFileReader = null;
-		}
-
-		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
-		private void OnAudioDevicePlaybackStopped(object sender, StoppedEventArgs args)
-		{
-			audioOutputDevice.Dispose();
-			audioOutputDevice = null;
-			audioFileReader.Dispose();
-			audioFileReader = null;
-
-			CurrentAudioPlayState = false;
-			ReplayLastRecordingButton.Content = "Replay Last";
 		}
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)

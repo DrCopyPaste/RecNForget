@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="RestoreMainWindowFromTrayCommand.cs" />
     <Compile Include="Services\AppSettingHelper.cs" />
+    <Compile Include="Services\AudioPlayListService.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
