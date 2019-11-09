@@ -50,11 +50,6 @@ namespace RecNForget.Services
 				string keyAsString = HotkeyToStringTranslator.GetKeyboardHookEventArgsAsString(e);
 
 				var HotKey_StartStopRecording = HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_StartStopRecording");
-				var HotKey_OpenLastRecording = HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_OpenLastRecording");
-				var HotKey_OpenOutputPath = HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_OpenOutputPath");
-				var HotKey_SetFileNamePrefix = HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_SetFileNamePrefix");
-				var HotKey_ToggleFileNamePromptMode = HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_ToggleFileNamePromptMode");
-				var HotKey_SetOutputPath = HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_SetOutputPath");
 
 				if (keyAsString == HotKey_StartStopRecording)
 				{

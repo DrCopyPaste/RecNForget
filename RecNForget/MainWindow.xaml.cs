@@ -278,6 +278,8 @@ namespace RecNForget
 				return;
 			}
 
+			EnsureAppConfigValuesExist();
+
 			taskBarIcon.Visibility = Visibility.Visible;
 
 			replayAudioService = new AudioPlayListService(
@@ -367,6 +369,11 @@ namespace RecNForget
 				});
 
 			ToggleRecordButton.Focus();
+		}
+
+		private void EnsureAppConfigValuesExist()
+		{
+			AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 		}
 
 		private void TaskBarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)

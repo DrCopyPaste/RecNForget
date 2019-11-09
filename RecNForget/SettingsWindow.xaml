@@ -36,8 +36,6 @@
                     <TextBlock Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis" />
                 </Label>
                 <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"  Click="Configure_OutputPath_Click"/>
-                <!--<Label Grid.Row="1" Grid.Column="0" Content="[inactive] prompt for file name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Center" Width="164" ItemsSource="{Binding Source={local:EnumBindingSource {x:Type localEnums:PromptForFilenameMode}}}" SelectedValue="{Binding Path=PromptForFilename}"/>-->
             </Grid>
         </GroupBox>
         <GroupBox  Grid.Row="1" Grid.Column="0" Header="Hotkeys" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">
@@ -59,25 +57,6 @@
                 <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                 <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="ConfigureHotkey_StartStopRecording_Click" />
 
-                <!--<Label Grid.Row="1" Grid.Column="0" Content="[inactive] open last recording:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Path=HotKey_OpenLastRecording, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Button Grid.Row="1" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_OpenLastRecording_Click"/>
-
-                <Label Grid.Row="2" Grid.Column="0" Content="[inactive] open output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="2" Grid.Column="1" Content="{Binding Path=HotKey_OpenOutputPath, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Button Grid.Row="2" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_OpenOutputPath_Click"/>
-
-                <Label Grid.Row="3" Grid.Column="0" Content="[inactive] set file name prefix:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="3" Grid.Column="1" Content="{Binding Path=HotKey_SetFileNamePrefix, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Button Grid.Row="3" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_SetFileNamePrefix_Click"/>
-
-                <Label Grid.Row="4" Grid.Column="0" Content="[inactive] toggle file name prompt mode:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="4" Grid.Column="1" Content="{Binding Path=HotKey_ToggleFileNamePromptMode, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Button Grid.Row="4" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_ToggleFileNamePromptMode_Click"/>
-
-                <Label Grid.Row="5" Grid.Column="0" Content="[inactive] set output path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="5" Grid.Column="1" Content="{Binding Path=HotKey_SetOutputPath, Mode=TwoWay}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <Button Grid.Row="5" Grid.Column="2" Content="Change" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="ConfigureHotkey_SetOutputPath_Click"/>-->
             </Grid>
         </GroupBox>
         <GroupBox  Grid.Row="2" Grid.Column="0" Header="Application" HorizontalAlignment="Stretch" Height="Auto" Margin="5,5,0,0" VerticalAlignment="Top">

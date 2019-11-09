@@ -1,15 +1,19 @@
-﻿icons for buttons
+﻿allow restoring app.config defaults
 
-show record (red circle) in bottom right corner when recording
+move app.config-value to user-config (%APPDTA%)
 
-enable output as mp3/other (configurable (conditionally))
-
-allow restoring app.config defaults
+create installer for application
 
 allow self- (maybe auto-) software updates
 	(keep in mind not throwing away custom user configuration)
 
 add Signature!?!
+
+icons for buttons
+
+show record (red circle) in bottom right corner when recording
+
+enable output as mp3/other (configurable (conditionally))
 
 add possibility to edit sampled audio (cut it at beginning and end and save as new file or override it)
 
