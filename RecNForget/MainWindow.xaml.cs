@@ -390,6 +390,9 @@ namespace RecNForget
 
 		private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
 		{
+			// https://stackoverflow.com/a/23182807
+			FilenamePrefix = string.Concat(FilenamePrefix.Split(Path.GetInvalidFileNameChars()));
+
 			AppSettingHelper.SetAppConfigSetting("FilenamePrefix", FilenamePrefix);
 		}
 

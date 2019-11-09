@@ -1,6 +1,4 @@
-﻿suppress not allowed characters for filenames
-
-use logo for Window-Explorer-Icon
+﻿use logo for Window-Explorer-Icon
 
 clickable balloon tips (show in file browser)
 
@@ -16,6 +14,8 @@ allow self- (maybe auto-) software updates
 	(keep in mind not throwing away custom user configuration)
 
 add Signature!?!
+
+add possibility to edit sampled audio (cut it at beginning and end and save as new file or override it)
 
 FIX: not all settings from settings window take effect immediately some require restart
 
