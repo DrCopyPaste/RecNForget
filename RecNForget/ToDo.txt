@@ -1,8 +1,8 @@
 ﻿use logo for Window-Explorer-Icon
 
-clickable balloon tips (show in file browser)
-
 icons for buttons
+
+ensure only one instance of RecNForget is running
 
 show record (red circle) in bottom right corner when recording
 

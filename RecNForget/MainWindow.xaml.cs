@@ -312,6 +312,7 @@ namespace RecNForget
 					if (ShowBalloonTipsForRecording)
 					{
 						taskBarIcon.ShowBalloonTip("Recording started!", "RecNForget now recording...", applicationIcon, true);
+						taskBarIcon.TrayBalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
 					}
 					if (PlayAudioFeedBackMarkingStartAndStopRecording)
 					{
@@ -330,6 +331,7 @@ namespace RecNForget
 					if (ShowBalloonTipsForRecording)
 					{
 						taskBarIcon.ShowBalloonTip("Recording saved!", LastFileNameDisplay, applicationIcon, true);
+						taskBarIcon.TrayBalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
 					}
 					recordingTimer.Stop();
 					if (PlayAudioFeedBackMarkingStartAndStopRecording)
@@ -344,6 +346,18 @@ namespace RecNForget
 				});
 
 			ToggleRecordButton.Focus();
+		}
+
+		private void TaskBarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
+		{
+			if (!File.Exists(lastFileName))
+			{
+				return;
+			}
+
+			string argument = "/select, \"" + lastFileName + "\"";
+
+			System.Diagnostics.Process.Start("explorer.exe", argument);
 		}
 
 		private Icon getIcon()

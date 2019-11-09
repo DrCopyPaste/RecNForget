@@ -35,17 +35,18 @@ You should be able to just extract RecNForget from the latest release and run th
 - can enable short audio beep as feedback marking beginning and end of recording (enabled by default)
 - can enable short audio beep as feedback marking beginning and end of replayed audio (disabled by default)
 - can enable balloon tips (toast messages) for when recording starts or stops (enabled by default)
-- show length of recording in main window and balloon tips
-- can enable running main window as a background process (minimized to tray)
+- can enable running main window as a background process (minimized to tray, disabled by default)
+- can set main window to be always on top (disabled by default)
+- added auto-start-option (disabled by default)
+
+- can click balloon top when recording finished to select recorded file in explorer
 - can close application via tray icon context menu
-- can set main window to be always on top
-- added auto-start-option
+- show length of recording in main window and balloon tips
 
 # Features missing for version 1.0
 FIX: not all settings from settings window take effect immediately some require restart
 
 - show record (red circle) in bottom right corner when recording (configurable)
-- show generated file in file browser (configurable)
 - different peep sound for replay start/stop
 - clean up source code for maintainability
 - rework visual layout of windows (more consistency and maybe smaller nicer windwos)
