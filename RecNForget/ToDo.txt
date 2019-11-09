@@ -15,8 +15,6 @@ add possibility to edit sampled audio (cut it at beginning and end and save as n
 
 FIX: not all settings from settings window take effect immediately some require restart
 
-FIX taskbar icon bugged when pinning to taskbar (Win 7 only? does not happen in Win 10)
-
 maybe settings and hotkey windows are a bit "too always on top"?
 
 readme.md howto file with screenshots
