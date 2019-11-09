@@ -11,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -22,6 +23,9 @@ namespace RecNForget
 	/// </summary>
 	public partial class MainWindow : INotifyPropertyChanged
 	{
+		// create a unique mutex string to test against whether any instance of this is already running
+		static Mutex mutex = new Mutex(true, "RecNForget{52B79EA5-FBAF-43A0-9382-A0435A8D2377}");
+
 		private string logoPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Img", "logo.png");
 
 		private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
@@ -256,6 +260,23 @@ namespace RecNForget
 
 			taskBarIcon.Icon = applicationIcon;
 			taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
+
+			if (mutex.WaitOne(TimeSpan.Zero, true))
+			{
+				mutex.ReleaseMutex();
+			}
+			else
+			{
+				// show a balloon tip indicating that RecNForget is already running
+				taskBarIcon.ShowBalloonTip("Recording is already running.", "Another instance of RecNForget is already running, closing this one...", applicationIcon, true);
+				taskBarIcon.TrayBalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
+
+				Thread.Sleep(1000);
+
+				System.Windows.Application.Current.Shutdown();
+
+				return;
+			}
 
 			taskBarIcon.Visibility = Visibility.Visible;
 

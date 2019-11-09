@@ -27,6 +27,7 @@ You should be able to just extract RecNForget from the latest release and run th
 
 # upcoming features in next version
 (commited changes not yet released)
+- RecNForget now enforces that there is only one instance of it running
 - FIX error when trying to play the last file (but it was moved or deleted - missing replay file leads to button being disabled, missing audio feedback files are silently ignored for now)
 - FIX: application icon was not shown when executing from a directory different to the application directory
 - FIX: suppress not allowed characters for filenames in filename prefix pattern

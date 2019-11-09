@@ -1,7 +1,4 @@
-﻿
-icons for buttons
-
-ensure only one instance of RecNForget is running
+﻿icons for buttons
 
 show record (red circle) in bottom right corner when recording
 
