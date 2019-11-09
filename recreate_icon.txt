@@ -1,7 +1,7 @@
 to recreate icon:
 
 1. create png (maybe from svg)
-2. resolution must be at most 256x256
+2. resolution must be at most 256x256 (like logo_small.png)
 3. use ffmpeg to convert to ico:
 
 	ffmpeg -i C:\path\to\source.png C:\path\to\target.ico

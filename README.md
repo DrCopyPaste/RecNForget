@@ -43,6 +43,8 @@ You should be able to just extract RecNForget from the latest release and run th
 - can close application via tray icon context menu
 - show length of recording in main window and balloon tips
 
+- show proper icon for exe in explorer
+
 # Features missing for version 1.0
 FIX: not all settings from settings window take effect immediately some require restart
 
