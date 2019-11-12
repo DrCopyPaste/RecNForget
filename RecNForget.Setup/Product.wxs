@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
    <?define sourceFolder="..\..\..\RecNForget\bin\Release\"?>
-	<Product Id="{E7ABBF59-3E78-4692-8276-5789CFA29251}" Name="RecNForget" Language="1033" Version="0.2.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
+	<Product Id="{9A18A1D8-A985-469B-B2DF-4F7AE083880D}" Name="RecNForget" Language="1033" Version="0.3.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />

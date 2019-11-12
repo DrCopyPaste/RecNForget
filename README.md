@@ -51,13 +51,11 @@ You should be able to just extract RecNForget from the latest release and run th
 - show proper icon for exe in explorer
 
 # Features missing for version 1.0
-FIX: not all settings from settings window take effect immediately some require restart
-
 - show record (red circle) in bottom right corner when recording (configurable)
 - different peep sound for replay start/stop
 - clean up source code for maintainability
 - rework visual layout of windows (more consistency and maybe smaller nicer windwos)
-- have an (Un-)Installer and Updater to set default paths, registry entries for uninstalling and preserving custom settings when updating
+- clean up registry and user app data on uninstall
 
 # Nice to haves in future releases
 - suppress not allowed characters for filenames
