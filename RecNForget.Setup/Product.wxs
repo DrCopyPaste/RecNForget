@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+   <?define sourceFolder="..\..\..\RecNForget\bin\Release\"?>
+	<Product Id="{E7ABBF59-3E78-4692-8276-5789CFA29251}" Name="RecNForget" Language="1033" Version="0.2.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="icon.ico" SourceFile="$(var.sourceFolder)..\..\logo.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+    <Property Id="ARPHELPLINK" Value="https://github.com/DrCopyPaste/RecNForget/issues" />
+	  <Property Id="ARPURLINFOABOUT" Value="https://github.com/DrCopyPaste/RecNForget/blob/master/README.md" />
+	  <Property Id="ARPURLUPDATEINFO" Value="https://github.com/DrCopyPaste/RecNForget/releases/latest" />
+      
+		<Feature Id="ProductFeature" Title="RecNForget" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="MANUFACTURERFOLDER" Name="!(bind.property.Manufacturer)">
+				  <Directory Id="INSTALLFOLDER" Name="!(bind.property.ProductName)">
+            <Directory Id="IMGFOLDER" Name="Img" />
+            <Directory Id="SOUNDSFOLDER" Name="Sounds" />
+          </Directory>
+        </Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents">
+			<Component Id="RecNForget.exe" Guid="{968CCF60-FD1A-41F1-8EB2-575C32C2F14E}" Directory="INSTALLFOLDER">
+        <File Id="RecNForget.exe" Source="$(var.sourceFolder)RecNForget.exe" KeyPath="yes" Checksum="yes">
+        </File>
+      </Component>
+    
+      <Component Id="FMUtils.KeyboardHook.dll" Guid="{3132874D-E3EC-49F2-A301-0D2C96A8EB01}" Directory="INSTALLFOLDER">
+        <File Id="FMUtils.KeyboardHook.dll" Source="$(var.sourceFolder)FMUtils.KeyboardHook.dll" KeyPath="yes" Checksum="yes">
+        </File>
+      </Component>
+    
+      <Component Id="Hardcodet.Wpf.TaskbarNotification.dll" Guid="{2EC12371-54C3-4E18-9E8E-47ACC3DB429C}" Directory="INSTALLFOLDER">
+        <File Id="Hardcodet.Wpf.TaskbarNotification.dll" Source="$(var.sourceFolder)Hardcodet.Wpf.TaskbarNotification.dll" KeyPath="yes" Checksum="yes">
+        </File>
+      </Component>
+    
+      <Component Id="NAudio.dll" Guid="{26188527-54B5-43F6-A0FB-346FF378B5D3}" Directory="INSTALLFOLDER">
+        <File Id="NAudio.dll" Source="$(var.sourceFolder)NAudio.dll" KeyPath="yes" Checksum="yes">
+        </File>
+      </Component>
+    
+      <Component Id="Ookii.Dialogs.Wpf.dll" Guid="{D55CCDC8-E206-4FD9-BBC6-C7CF48E947D5}" Directory="INSTALLFOLDER">
+        <File Id="Ookii.Dialogs.Wpf.dll" Source="$(var.sourceFolder)Ookii.Dialogs.Wpf.dll" KeyPath="yes" Checksum="yes">
+        </File>
+      </Component>
+
+      <Component Id="RecNForget.exe.config" Guid="{EFB424BC-827C-4D17-91FB-4359DBFBA406}" Directory="INSTALLFOLDER">
+        <File Id="RecNForget.exe.config" Source="$(var.sourceFolder)RecNForget.exe.config" KeyPath="yes" Checksum="yes"/>
+      </Component>
+
+      <Component Id="logo.png" Guid="{A8CCF460-DD89-497B-A92B-06F4A76A1261}" Directory="IMGFOLDER">
+        <File Id="logo.png" Source="$(var.sourceFolder)Img\logo.png" KeyPath="yes" Checksum="yes"/>
+      </Component>
+
+      <Component Id="startRec.wav" Guid="{D3278C12-118D-4801-B89E-25FC728C3F34}" Directory="SOUNDSFOLDER">
+        <File Id="startRec.wav" Source="$(var.sourceFolder)Sounds\startRec.wav" KeyPath="yes" Checksum="yes"/>
+      </Component>
+
+      <Component Id="stopRec.wav" Guid="{43FD0758-553C-4A7E-8FAA-CAED1E4FDCB7}" Directory="SOUNDSFOLDER">
+        <File Id="stopRec.wav" Source="$(var.sourceFolder)Sounds\stopRec.wav" KeyPath="yes" Checksum="yes"/>
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

@@ -8,3 +8,7 @@
 /RecNForget/bin/Release
 /RecNForget/obj/Release
 /RecNForget/bin/Debug
+/.vs/RecNForget/v16/.suo
+/.vs/RecNForget/v16/Server/sqlite3
+/RecNForget.Setup/bin/Release
+/RecNForget.Setup/obj/Release
