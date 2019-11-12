@@ -29,10 +29,12 @@ namespace RecNForget
 		private string logoPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Img", "logo.png");
 
 		private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
-
 		private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
 
-		private Icon applicationIcon;
+        private string replayStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStart.wav");
+        private string replayStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStop.wav");
+
+        private Icon applicationIcon;
 
 		private AudioPlayListService replayAudioService = null;
 		private AudioPlayListService recordingFeedbackAudioService = null;
@@ -502,14 +504,14 @@ namespace RecNForget
 			{
 				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
 				{
-					replayAudioService.QueueFile(recordStartAudioFeedbackPath);
+					replayAudioService.QueueFile(replayStartAudioFeedbackPath);
 				}
 
 				replayFileExists = replayAudioService.QueueFile(lastFileName);
 
 				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
 				{
-					replayAudioService.QueueFile(recordStopAudioFeedbackPath);
+					replayAudioService.QueueFile(replayStopAudioFeedbackPath);
 				}
 
 				if (replayFileExists)

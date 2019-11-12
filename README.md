@@ -25,32 +25,9 @@ You should be able to just extract RecNForget from the latest release and run th
 - file names will be generated using a file name prefix that you can specify plus a timestamp of the start time of recording
 - you can replay the last recorded file from the running session
 
-# upcoming features in next version
-(commited changes not yet released)
-(for now just simple "silent" setup: installing to the default programs folder and creating a shortcut in start menu, running msi with higher version will upgrade, also allows repairing via programs/features (in case a file went "missing" for example), clicking "change" will just rerun the msi, not very useful for now
-- RecNForget now has a msi-Installer (generated through WiX)
-- RecNForget now enforces that there is only one instance of it running
-- User configuration has been moved to user/appdata/roaming (is created on program start)
-(even though it could be "funny" to have multiple applications capturing your hotkeys and recording :D)
-- FIX error when trying to play the last file (but it was moved or deleted - missing replay file leads to button being disabled, missing audio feedback files are silently ignored for now)
-- FIX: application icon was not shown when executing from a directory different to the application directory
-- FIX: suppress not allowed characters for filenames in filename prefix pattern
-
-- can enable instant auto-replay of audio after recording (disabled by default)
-- can enable short audio beep as feedback marking beginning and end of recording (enabled by default)
-- can enable short audio beep as feedback marking beginning and end of replayed audio (disabled by default)
-- can enable balloon tips (toast messages) for when recording starts or stops (enabled by default)
-- can enable running main window as a background process (minimized to tray, disabled by default)
-- can set main window to be always on top (disabled by default)
-- added auto-start-option (disabled by default)
-- can click balloon top when recording finished to select recorded file in explorer
-- can close application via tray icon context menu
-- show length of recording in main window and balloon tips
-- show proper icon for exe in explorer
 
 # Features missing for version 1.0
 - show record (red circle) in bottom right corner when recording (configurable)
-- different peep sound for replay start/stop
 - clean up source code for maintainability
 - rework visual layout of windows (more consistency and maybe smaller nicer windwos)
 - clean up registry and user app data on uninstall
@@ -62,3 +39,8 @@ You should be able to just extract RecNForget from the latest release and run th
 - icons for buttons
 - RecNForget can self-update (possibly querying github's releases page)
 - "gimmick" mode (allow using application as a sound board, binding hotkeys to different sound outputs, maybe even allow changing the output device they are output to (to insert sounds into a running mic session for example))
+
+# Credits
+Code by DrCopyPaste
+
+Click sounds for replay by https://soundcloud.com/slutski (litw@gmx.de)

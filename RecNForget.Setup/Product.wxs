@@ -79,6 +79,14 @@
         <File Id="stopRec.wav" Source="$(var.sourceFolder)Sounds\stopRec.wav" KeyPath="yes" Checksum="yes"/>
       </Component>
 
+      <Component Id="playbackStart.wav" Guid="{C398530A-DC91-4569-BE9A-FD55C47E4660}" Directory="SOUNDSFOLDER">
+        <File Id="playbackStart.wav" Source="$(var.sourceFolder)Sounds\playbackStart.wav" KeyPath="yes" Checksum="yes"/>
+      </Component>
+
+      <Component Id="playbackStop.wav" Guid="{EE3C9B53-A281-4C57-9A0F-9535859341B1}" Directory="SOUNDSFOLDER">
+        <File Id="playbackStop.wav" Source="$(var.sourceFolder)Sounds\playbackStop.wav" KeyPath="yes" Checksum="yes"/>
+      </Component>
+
       <Component Id="ApplicationShortcuts" Guid="{3FA4885D-EC94-4023-94AE-BF49C7364D27}" Directory="ApplicationProgramsFolder">
         <Shortcut Id="ApplicationShortcut" Name="!(bind.property.ProductName)" Target="[#RecNForget.exe]" />
         <RegistryValue Root="HKCU" Key="Software\!(bind.property.Manufacturer)\!(bind.property.ProductName)" Name="ApplicationShortcutInstalled" Type="integer" Value="1" KeyPath="yes" />
