@@ -8,7 +8,11 @@ use netfx extension in wix installer to precompile .net dlls and exe into IL to 
 
 enable repairing/upgrading via msi-installer
 
+do something useful with the "change" option when in "programs/features"-menu
+
 add uninstall actions to remove custom registry keys (auto start, and other configuration)
+
+use TargetFileName or similar in wxs file to not explicitly spell out application file name
 
 add Signature!?!
 
