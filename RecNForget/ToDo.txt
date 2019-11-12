@@ -1,4 +1,4 @@
-﻿move app.config values to registry
+﻿move app.config values to appdata
 (now that we install this to a programs folder writing into programs folder is a big nono, this makes running the application require admin rights)
 
 allow restoring app.config defaults via settings window

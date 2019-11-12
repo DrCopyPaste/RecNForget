@@ -71,7 +71,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["MinimizedToTray"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("MinimizedToTray"));
 			}
 
 			set
@@ -94,7 +94,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["PlayAudioFeedBackMarkingStartAndStopReplaying"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopReplaying"));
 			}
 
 			set
@@ -108,7 +108,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["AutoReplayAudioAfterRecording"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("AutoReplayAudioAfterRecording"));
 			}
 
 			set
@@ -122,7 +122,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["PlayAudioFeedBackMarkingStartAndStopRecording"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopRecording"));
 			}
 
 			set
@@ -136,7 +136,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["ShowBalloonTipsForRecording"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("ShowBalloonTipsForRecording"));
 			}
 
 			set
@@ -164,7 +164,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return System.Configuration.ConfigurationManager.AppSettings["OutputPath"];
+				return AppSettingHelper.GetAppConfigSetting("OutputPath");
 			}
 
 			set

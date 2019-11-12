@@ -10,11 +10,25 @@ namespace RecNForget.Services
 {
 	public class AppSettingHelper
 	{
+        public static string GetAppConfigSetting(string settingKey)
+        {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+
+            if (configuration.AppSettings.Settings.AllKeys.Contains(settingKey))
+            {
+                return configuration.AppSettings.Settings[settingKey].Value;
+            }
+            else
+            {
+                throw new ArgumentNullException("User configuration seems corrupted, please go to programs/features menu and hit 'Repair' on RecNForget.");
+            }
+        }
+
 		public static void SetAppConfigSetting(string settingKey, string settingValue)
 		{
 			Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
 
-			if (ConfigurationManager.AppSettings.AllKeys.Contains(settingKey))
+			if (configuration.AppSettings.Settings.AllKeys.Contains(settingKey))
 			{
 				configuration.AppSettings.Settings[settingKey].Value = settingValue;
 			}
@@ -29,7 +43,9 @@ namespace RecNForget.Services
 
 		public static void RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false)
 		{
-			Dictionary<string, string> defaultValues = new Dictionary<string, string>()
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+
+            Dictionary<string, string> defaultValues = new Dictionary<string, string>()
 			{
 				{ "AutoReplayAudioAfterRecording", "False" },
 				{ "PlayAudioFeedBackMarkingStartAndStopReplaying", "False" },
@@ -46,7 +62,7 @@ namespace RecNForget.Services
 			{
 				foreach (var setting in defaultValues)
 				{
-					if (!ConfigurationManager.AppSettings.AllKeys.Contains(setting.Key) || overrideSetting)
+					if (!configuration.AppSettings.Settings.AllKeys.Contains(setting.Key) || overrideSetting)
 					{
 						SetAppConfigSetting(setting.Key, setting.Value);
 					}
@@ -54,7 +70,7 @@ namespace RecNForget.Services
 			}
 			else if (defaultValues.ContainsKey(settingKey))
 			{
-				if (!ConfigurationManager.AppSettings.AllKeys.Contains(settingKey) || overrideSetting)
+				if (!configuration.AppSettings.Settings.AllKeys.Contains(settingKey) || overrideSetting)
 				{
 					SetAppConfigSetting(settingKey, defaultValues[settingKey]);
 				}

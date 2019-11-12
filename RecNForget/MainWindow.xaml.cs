@@ -85,7 +85,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["WindowAlwaysOnTop"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("WindowAlwaysOnTop"));
 			}
 
 			set
@@ -191,7 +191,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return System.Configuration.ConfigurationManager.AppSettings["FilenamePrefix"];
+				return AppSettingHelper.GetAppConfigSetting("FilenamePrefix");
 			}
 
 			set
@@ -203,9 +203,9 @@ namespace RecNForget
 
 		public bool AutoReplayAudioAfterRecording
 		{
-			get
+            get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["AutoReplayAudioAfterRecording"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("AutoReplayAudioAfterRecording"));
 			}
 		}
 
@@ -213,7 +213,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["PlayAudioFeedBackMarkingStartAndStopRecording"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopRecording"));
 			}
 		}
 
@@ -221,7 +221,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["PlayAudioFeedBackMarkingStartAndStopReplaying"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopReplaying"));
 			}
 		}
 
@@ -229,7 +229,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return System.Configuration.ConfigurationManager.AppSettings["OutputPath"];
+				return AppSettingHelper.GetAppConfigSetting("OutputPath");
 			}
 		}
 
@@ -237,7 +237,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["ShowBalloonTipsForRecording"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("ShowBalloonTipsForRecording"));
 			}
 		}
 
@@ -245,7 +245,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(System.Configuration.ConfigurationManager.AppSettings["MinimizedToTray"]);
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("MinimizedToTray"));
 			}
 		}
 
@@ -253,7 +253,9 @@ namespace RecNForget
 
 		public MainWindow()
 		{
-			DataContext = this;
+            EnsureAppConfigValuesExist();
+
+            DataContext = this;
 			InitializeComponent();
 
 			applicationIcon = getIcon();
@@ -277,8 +279,6 @@ namespace RecNForget
 
 				return;
 			}
-
-			EnsureAppConfigValuesExist();
 
 			taskBarIcon.Visibility = Visibility.Visible;
 
