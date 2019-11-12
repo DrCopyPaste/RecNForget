@@ -10,9 +10,23 @@ namespace RecNForget.Services
 {
 	public class AppSettingHelper
 	{
+        private static string UserConfigFileFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RecNForget", "user.config");
+
+        public static string GetEmptyUserConfigFile()
+        {
+            return @"<?xml version=""1.0"" encoding=""utf-8""?>
+ <configuration>
+  <startup>
+   <supportedRuntime version = ""v4.0"" sku = "".NETFramework,Version=v4.7"" />
+  </startup>
+  <appSettings>
+  </appSettings>
+ </configuration>";
+        }
+
         public static string GetAppConfigSetting(string settingKey)
         {
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap() { ExeConfigFilename = UserConfigFileFullPath }, ConfigurationUserLevel.None);
 
             if (configuration.AppSettings.Settings.AllKeys.Contains(settingKey))
             {
@@ -26,9 +40,9 @@ namespace RecNForget.Services
 
 		public static void SetAppConfigSetting(string settingKey, string settingValue)
 		{
-			Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap() { ExeConfigFilename = UserConfigFileFullPath }, ConfigurationUserLevel.None);
 
-			if (configuration.AppSettings.Settings.AllKeys.Contains(settingKey))
+            if (configuration.AppSettings.Settings.AllKeys.Contains(settingKey))
 			{
 				configuration.AppSettings.Settings[settingKey].Value = settingValue;
 			}
@@ -43,7 +57,21 @@ namespace RecNForget.Services
 
 		public static void RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false)
 		{
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            // check if user config file exists
+            FileInfo fileInfo = new FileInfo(UserConfigFileFullPath);
+
+            if (!fileInfo.Exists)
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo(fileInfo.DirectoryName);
+                if (!directoryInfo.Exists)
+                {
+                    directoryInfo.Create();
+                }
+
+                File.WriteAllText(UserConfigFileFullPath, GetEmptyUserConfigFile());
+            }
+
+            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(new ExeConfigurationFileMap() { ExeConfigFilename = UserConfigFileFullPath }, ConfigurationUserLevel.None);
 
             Dictionary<string, string> defaultValues = new Dictionary<string, string>()
 			{

@@ -30,6 +30,7 @@ You should be able to just extract RecNForget from the latest release and run th
 (for now just simple "silent" setup: installing to the default programs folder and creating a shortcut in start menu, running msi with higher version will upgrade, also allows repairing via programs/features (in case a file went "missing" for example), clicking "change" will just rerun the msi, not very useful for now
 - RecNForget now has a msi-Installer (generated through WiX)
 - RecNForget now enforces that there is only one instance of it running
+- User configuration has been moved to user/appdata/roaming (is created on program start)
 (even though it could be "funny" to have multiple applications capturing your hotkeys and recording :D)
 - FIX error when trying to play the last file (but it was moved or deleted - missing replay file leads to button being disabled, missing audio feedback files are silently ignored for now)
 - FIX: application icon was not shown when executing from a directory different to the application directory
