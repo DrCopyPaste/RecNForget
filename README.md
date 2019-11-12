@@ -43,11 +43,9 @@ You should be able to just extract RecNForget from the latest release and run th
 - can enable running main window as a background process (minimized to tray, disabled by default)
 - can set main window to be always on top (disabled by default)
 - added auto-start-option (disabled by default)
-
 - can click balloon top when recording finished to select recorded file in explorer
 - can close application via tray icon context menu
 - show length of recording in main window and balloon tips
-
 - show proper icon for exe in explorer
 
 # Features missing for version 1.0

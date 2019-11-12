@@ -12,7 +12,7 @@ namespace RecNForget.Services
 	{
 		public static string GetHotkeySettingAsString(string settingKey)
 		{
-			var setting = System.Configuration.ConfigurationManager.AppSettings[settingKey];
+			var setting = AppSettingHelper.GetAppConfigSetting(settingKey);
 
 			List<string> keys = new List<string>();
 
