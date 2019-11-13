@@ -27,7 +27,7 @@ namespace RecNForget
                     taskbarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
 
                     // show a balloon tip indicating that RecNForget is already running
-                    taskbarIcon.ShowBalloonTip("Recording is already running.", "Another instance of RecNForget is already running, closing this one...", taskbarIcon.Icon, true);
+                    taskbarIcon.ShowBalloonTip("RecNForget is already running.", "Another instance of RecNForget is already running, closing this one...", taskbarIcon.Icon, true);
                     Thread.Sleep(1000);
 
                     return;
