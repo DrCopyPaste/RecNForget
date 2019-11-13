@@ -32,7 +32,8 @@ how to build
 
 break down HotkeyService into HotkeyService and AudioRecordingService
 
-allow disabling some hotkeys explicitly (decreasing the amount of hotkeys, the listener has to listen to)
+allow disabling some hotkeys explicitly
+(decreasing the amount of hotkeys, the listener has to listen to - this todo actually comes from a time when I thought about hotkeying everything, like chanding output folder, changing prefix etc... - for now this is not needed)
 
 refactor, ioc, constants, magic strings, identifiers etc
 

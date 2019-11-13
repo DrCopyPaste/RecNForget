@@ -1,7 +1,6 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
-using RecNForget.Enums;
 using RecNForget.Services;
 using System;
 using System.ComponentModel;

@@ -22,8 +22,8 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="You selected the 'run as background process' option in settings." />
         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Do you want to close the application or run as background process now?" />
 
-        <Button Grid.Row="3" Grid.Column="0" Name="Close" Content="Close" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="27" Click="Close_Click"/>
+        <Button Grid.Row="3" Grid.Column="0" Name="CloseApplicationButton" Content="Close" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="27" Click="Close_Click"/>
 
-        <Button Grid.Row="3" Grid.Column="1" Name="Background" Content="Run in background" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="27" Click="Background_Click"/>
+        <Button Grid.Row="3" Grid.Column="1" Name="RunInBackgroundButton" Content="Run in background" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="27" Click="Background_Click"/>
     </Grid>
 </Window>
