@@ -315,7 +315,6 @@ namespace RecNForget
 				SwitchToForegroundMode();
 			}
 
-			this.Icon = new BitmapImage(new Uri(logoPath));
 			this.Topmost = WindowAlwaysOnTop;
 
 			this.hotkeyService = new HotkeyService(

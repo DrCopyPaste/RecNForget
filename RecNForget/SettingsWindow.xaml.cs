@@ -23,8 +23,6 @@ namespace RecNForget
 
 		public SettingsWindow(HotkeyService hotkeyService, Action hideToTrayAction, Action restoreFromTrayAction)
 		{
-			this.Icon = new BitmapImage(new Uri(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Img", "logo.png")));
-
 			this.hotkeyService = hotkeyService;
 			this.hideToTrayAction = hideToTrayAction;
 			this.restoreFromTrayAction = restoreFromTrayAction;
