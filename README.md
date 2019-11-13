@@ -1,4 +1,4 @@
-# RecNForget 0.2
+# RecNForget 0.3
 Set a global Windows hotkey to capture and save default audio output to wave files
 
 With RecNForget running, capturing audio should be as easy as:
@@ -29,7 +29,7 @@ You should be able to just extract RecNForget from the latest release and run th
 # Features missing for version 1.0
 - show record (red circle) in bottom right corner when recording (configurable)
 - clean up source code for maintainability
-- rework visual layout of windows (more consistency and maybe smaller nicer windwos)
+- rework visual layout of windows (more consistency and maybe smaller nicer windows)
 - clean up registry and user app data on uninstall
 
 # Nice to haves in future releases
