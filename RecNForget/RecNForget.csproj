@@ -50,7 +50,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FMUtils.KeyboardHook, Version=1.0.140.2145, Culture=neutral, PublicKeyToken=1acd76c568cde84e, processorArchitecture=MSIL">
@@ -121,7 +122,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EnumBindingSourceExtension.cs" />
     <Compile Include="HotkeyPromptWindow.xaml.cs">
       <DependentUpon>HotkeyPromptWindow.xaml</DependentUpon>
     </Compile>
@@ -132,7 +132,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\PromptForFilenameMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -165,7 +164,6 @@
     <Resource Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="logo.ico" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
