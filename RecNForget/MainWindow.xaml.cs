@@ -26,15 +26,11 @@ namespace RecNForget
 		// create a unique mutex string to test against whether any instance of this is already running
 		static Mutex mutex = new Mutex(true, "RecNForget{52B79EA5-FBAF-43A0-9382-A0435A8D2377}");
 
-		private string logoPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Img", "logo.png");
-
 		private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
 		private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
 
         private string replayStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStart.wav");
         private string replayStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStop.wav");
-
-        private Icon applicationIcon;
 
 		private AudioPlayListService replayAudioService = null;
 		private AudioPlayListService recordingFeedbackAudioService = null;
@@ -260,10 +256,9 @@ namespace RecNForget
             DataContext = this;
 			InitializeComponent();
 
-			applicationIcon = getIcon();
+            taskBarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
 
-			taskBarIcon.Icon = applicationIcon;
-			taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
+            taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
 
 			if (mutex.WaitOne(TimeSpan.Zero, true))
 			{
@@ -272,7 +267,7 @@ namespace RecNForget
 			else
 			{
 				// show a balloon tip indicating that RecNForget is already running
-				taskBarIcon.ShowBalloonTip("Recording is already running.", "Another instance of RecNForget is already running, closing this one...", applicationIcon, true);
+				taskBarIcon.ShowBalloonTip("Recording is already running.", "Another instance of RecNForget is already running, closing this one...", taskBarIcon.Icon, true);
 				taskBarIcon.TrayBalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
 
 				Thread.Sleep(1000);
@@ -335,7 +330,7 @@ namespace RecNForget
 					UpdateCurrentFileNameDisplay();
 					if (ShowBalloonTipsForRecording)
 					{
-						taskBarIcon.ShowBalloonTip("Recording started!", "RecNForget now recording...", applicationIcon, true);
+						taskBarIcon.ShowBalloonTip("Recording started!", "RecNForget now recording...", taskBarIcon.Icon, true);
 						taskBarIcon.TrayBalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
 					}
 					if (PlayAudioFeedBackMarkingStartAndStopRecording)
@@ -354,7 +349,7 @@ namespace RecNForget
 					TaskBar_ProgressState = "Paused";
 					if (ShowBalloonTipsForRecording)
 					{
-						taskBarIcon.ShowBalloonTip("Recording saved!", LastFileNameDisplay, applicationIcon, true);
+						taskBarIcon.ShowBalloonTip("Recording saved!", LastFileNameDisplay, taskBarIcon.Icon, true);
 						taskBarIcon.TrayBalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
 					}
 					recordingTimer.Stop();
@@ -389,18 +384,10 @@ namespace RecNForget
 			System.Diagnostics.Process.Start("explorer.exe", argument);
 		}
 
-		private Icon getIcon()
-		{
-			var bmp = Bitmap.FromFile(logoPath);
-			var thumb = (Bitmap)bmp.GetThumbnailImage(64, 64, null, IntPtr.Zero);
-			thumb.MakeTransparent();
-			return System.Drawing.Icon.FromHandle(thumb.GetHicon());
-		}
-
 		private void SwitchToBackgroundMode()
 		{
 			this.Hide();
-			taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", applicationIcon, true);
+			taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", taskBarIcon.Icon, true);
 		}
 
 		private void SwitchToForegroundMode()

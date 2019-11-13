@@ -24,7 +24,6 @@
 			<Directory Id="ProgramFilesFolder">
         <Directory Id="MANUFACTURERFOLDER" Name="!(bind.property.Manufacturer)">
 				  <Directory Id="INSTALLFOLDER" Name="!(bind.property.ProductName)">
-            <Directory Id="IMGFOLDER" Name="Img" />
             <Directory Id="SOUNDSFOLDER" Name="Sounds" />
           </Directory>
         </Directory>
@@ -65,10 +64,6 @@
 
       <Component Id="RecNForget.exe.config" Guid="{EFB424BC-827C-4D17-91FB-4359DBFBA406}" Directory="INSTALLFOLDER">
         <File Id="RecNForget.exe.config" Source="$(var.sourceFolder)RecNForget.exe.config" KeyPath="yes" Checksum="yes"/>
-      </Component>
-
-      <Component Id="logo.png" Guid="{A8CCF460-DD89-497B-A92B-06F4A76A1261}" Directory="IMGFOLDER">
-        <File Id="logo.png" Source="$(var.sourceFolder)Img\logo.png" KeyPath="yes" Checksum="yes"/>
       </Component>
 
       <Component Id="startRec.wav" Guid="{D3278C12-118D-4801-B89E-25FC728C3F34}" Directory="SOUNDSFOLDER">
