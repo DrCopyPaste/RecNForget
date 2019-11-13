@@ -87,10 +87,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Compile Include="SingleInstanceApplicationLock.cs" />
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="CloseOrBackgroundDialog.xaml.cs">
       <DependentUpon>CloseOrBackgroundDialog.xaml</DependentUpon>
     </Compile>
