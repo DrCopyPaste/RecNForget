@@ -253,29 +253,10 @@ namespace RecNForget
 			InitializeComponent();
 
             taskBarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
-
             taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
-
-			//if (mutex.WaitOne(TimeSpan.Zero, true))
-			//{
-			//	mutex.ReleaseMutex();
-			//}
-			//else
-			//{
-			//	// show a balloon tip indicating that RecNForget is already running
-			//	taskBarIcon.ShowBalloonTip("Recording is already running.", "Another instance of RecNForget is already running, closing this one...", taskBarIcon.Icon, true);
-			//	taskBarIcon.TrayBalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
-
-			//	Thread.Sleep(1000);
-
-			//	System.Windows.Application.Current.Shutdown();
-
-			//	return;
-			//}
-
 			taskBarIcon.Visibility = Visibility.Visible;
 
-			replayAudioService = new AudioPlayListService(
+            replayAudioService = new AudioPlayListService(
 				beforePlayAction: () =>
 				{
 					CurrentAudioPlayState = true;

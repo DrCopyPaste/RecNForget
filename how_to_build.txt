@@ -1,0 +1,9 @@
+To reproduce the files the way I did for the github-releases page you will need the following:
+
+Microsoft Visual Studio Community 2019
+.NET Framework SDK 4.7
+WIX Toolset 3.11.2.4516 (see wixtoolset.org)
+currently still built using Windows 7
+
+The Setup-Project "RecNForget.Setup" can be built after "RecNForget" itself was build using the Release-Build-Configuration -
+this will get you a msi-file like the one you see on the github-release page.
