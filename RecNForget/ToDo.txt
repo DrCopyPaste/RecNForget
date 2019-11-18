@@ -10,24 +10,26 @@ add uninstall actions to remove custom registry keys (auto start, and other conf
 
 use TargetFileName or similar in wxs file to not explicitly spell out application file name
 
+msi installer can download and install the required .net version
+
+how to build
+	include batch files?
+
+break down HotkeyService into HotkeyService and AudioRecordingService
+
+enable output as mp3/other (configurable (conditionally))
+
 add Signature!?!
 
 icons for buttons
 
 show record (red circle) in bottom right corner when recording
 
-enable output as mp3/other (configurable (conditionally))
-
 add possibility to edit sampled audio (cut it at beginning and end and save as new file or override it)
 
 maybe settings and hotkey windows are a bit "too always on top"?
 
 readme.md howto file with screenshots
-
-how to build
-	include batch files?
-
-break down HotkeyService into HotkeyService and AudioRecordingService
 
 refactor, ioc, constants, magic strings, identifiers etc
 

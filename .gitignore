@@ -12,3 +12,5 @@
 /.vs/RecNForget/v16/Server/sqlite3
 /RecNForget.Setup/bin/Release
 /RecNForget.Setup/obj/Release
+/RecNForget.Setup/bin/Debug
+/RecNForget.Setup/obj/Debug
