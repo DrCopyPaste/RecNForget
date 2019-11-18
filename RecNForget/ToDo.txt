@@ -1,4 +1,7 @@
-﻿remove user config when uninstalling
+allow fixed time recording
+(sometimes you already know how long the sample you want to record is in advance, but stopping the recording manually would lose you precision - in that case it might be advantageous to set stop recording to, say 2 minutes 12 seconds 123ms in advance...))
+
+remove user config when uninstalling
 
 allow restoring app.config defaults via settings window
 
