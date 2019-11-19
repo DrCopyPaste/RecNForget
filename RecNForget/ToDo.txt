@@ -1,6 +1,3 @@
-allow fixed time recording
-(sometimes you already know how long the sample you want to record is in advance, but stopping the recording manually would lose you precision - in that case it might be advantageous to set stop recording to, say 2 minutes 12 seconds 123ms in advance...))
-
 remove user config when uninstalling
 
 allow restoring app.config defaults via settings window
@@ -10,8 +7,6 @@ enable repairing/upgrading via msi-installer
 do something useful with the "change" option when in "programs/features"-menu
 
 add uninstall actions to remove custom registry keys (auto start, and other configuration)
-
-use TargetFileName or similar in wxs file to not explicitly spell out application file name
 
 msi installer can download and install the required .net version
 
@@ -52,3 +47,6 @@ but instead enter it before or after recording, but I think this is really an ed
 
 Allow including screenshots with sampled audio file (for later remembering which movie/whatever thing the sample belonged to)
 	This could also be the fraps replacement :D (well kinda)
+
+allow fixed time recording
+(sometimes you already know how long the sample you want to record is in advance, but stopping the recording manually would lose you precision - in that case it might be advantageous to set stop recording to, say 2 minutes 12 seconds 123ms in advance...))

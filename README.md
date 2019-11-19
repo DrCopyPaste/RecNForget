@@ -25,6 +25,9 @@ You should be able to just extract RecNForget from the latest release and run th
 - file names will be generated using a file name prefix that you can specify plus a timestamp of the start time of recording
 - you can replay the last recorded file from the running session
 
+# upcoming features in next version (commited, not yet released)
+- installing WiX toolset locally is no longer required to build the setup project
+
 
 # Features missing for version 1.0
 - show record (red circle) in bottom right corner when recording (configurable)
