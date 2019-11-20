@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <?define iconPath="..\..\..\icon_generation\logo.ico"?>
-    <Product Id="{9A18A1D8-A985-469B-B2DF-4F7AE083880D}" Name="RecNForget" Language="1033" Version="0.3.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
-        <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Product Id="{1797362C-C758-4F22-9878-2AF96B9C9524}" Name="RecNForget" Language="1033" Version="0.4.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
+        <Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" />
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
         <MediaTemplate EmbedCab="yes" />
         <Icon Id="icon.ico" SourceFile="$(var.iconPath)" />
@@ -13,6 +13,11 @@
         <Feature Id="ProductFeature" Title="RecNForget" Level="1">
             <ComponentGroupRef Id="ProductComponents" />
         </Feature>
+  
+        <InstallExecuteSequence>
+          <RemoveExistingProducts Before='InstallInitialize' />
+        </InstallExecuteSequence>
+  
     </Product>
     <Fragment>
         <Directory Id="TARGETDIR" Name="SourceDir">
@@ -49,9 +54,6 @@
             <Component Id="Ookii.Dialogs.Wpf.dll" Guid="{D55CCDC8-E206-4FD9-BBC6-C7CF48E947D5}" Directory="INSTALLFOLDER">
                 <File Id="Ookii.Dialogs.Wpf.dll" Source="$(var.RecNForget.TargetDir)Ookii.Dialogs.Wpf.dll" KeyPath="yes" Checksum="yes">
                 </File>
-            </Component>
-            <Component Id="RecNForget.exe.config" Guid="{EFB424BC-827C-4D17-91FB-4359DBFBA406}" Directory="INSTALLFOLDER">
-                <File Id="RecNForget.exe.config" Source="$(var.RecNForget.TargetDir)RecNForget.exe.config" KeyPath="yes" Checksum="yes" />
             </Component>
             <Component Id="startRec.wav" Guid="{D3278C12-118D-4801-B89E-25FC728C3F34}" Directory="SOUNDSFOLDER">
                 <File Id="startRec.wav" Source="$(var.RecNForget.TargetDir)Sounds\startRec.wav" KeyPath="yes" Checksum="yes" />
