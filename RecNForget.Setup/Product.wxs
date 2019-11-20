@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <?define iconPath="..\..\..\icon_generation\logo.ico"?>
     <Product Id="{1797362C-C758-4F22-9878-2AF96B9C9524}" Name="RecNForget" Language="1033" Version="0.4.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
-        <Package InstallerVersion="200" Compressed="yes" InstallScope="perUser" />
+        <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
         <MediaTemplate EmbedCab="yes" />
         <Icon Id="icon.ico" SourceFile="$(var.iconPath)" />
