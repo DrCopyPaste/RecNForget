@@ -25,6 +25,13 @@ You should be able to just extract RecNForget from the latest release and run th
 - file names will be generated using a file name prefix that you can specify plus a timestamp of the start time of recording
 - you can replay the last recorded file from the running session
 
+# Checking out the code
+
+Feel free to download the code and play with it, for now this has mainly prototype quality, but I try to clean up the code as I go.
+Please keep in mind this is my first (and very maybe last) WPF application so this might make it a bit ore messy.
+
+For stable and buildable code please refer to the version tagged commits, in between releases there may very well be errors in the code ;)
+
 # upcoming features in next version (commited, not yet released)
 - Installer now starts with elevated privileges (so it can update the files installed in programs folder)
 - installing WiX toolset locally is no longer required to build the setup project
