@@ -31,7 +31,8 @@ namespace RecNForget
 		private AudioPlayListService replayAudioService = null;
 		private AudioPlayListService recordingFeedbackAudioService = null;
 
-		private HotkeyService hotkeyService;
+        private AudioRecordingService audioRecordingService;
+        private HotkeyService hotkeyService;
 		private bool currentlyRecording = false;
 		private bool currentlyNotRecording = true;
 		private bool currentAudioPlayState = true;
@@ -289,59 +290,64 @@ namespace RecNForget
 
 			this.Topmost = WindowAlwaysOnTop;
 
-			this.hotkeyService = new HotkeyService(
-				startRecordingAction:() =>
-				{
-					CurrentAudioPlayState = false;
-					ReplayLastRecordingButton.Content = "Replay Last";
-					ReplayLastRecordingButton.IsEnabled = false;
-					replayAudioService.KillAudio(reset: true);
-					CurrentlyRecording = true;
-					CurrentlyNotRecording = false;
-					ToggleRecordButton.Content = "Stop";
-					TaskBar_ProgressState = "Error";
-					RecordingStart = DateTime.Now;
-					recordingTimer.Start();
-					UpdateLastFileName(reset: true);
-					UpdateLastFileNameDisplay(reset: true);
-					UpdateCurrentFileNameDisplay();
-					if (ShowBalloonTipsForRecording)
-					{
-						taskBarIcon.ShowBalloonTip("Recording started!", "RecNForget now recording...", taskBarIcon.Icon, true);
-						taskBarIcon.TrayBalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
-					}
-					if (PlayAudioFeedBackMarkingStartAndStopRecording)
-					{
-						PlayRecordingStartAudioFeedback();
-					}
-				},
-				stopRecordingAction: () =>
-				{
-					UpdateLastFileName();
-					UpdateLastFileNameDisplay();
-					UpdateCurrentFileNameDisplay(reset: true);
-					CurrentlyRecording = false;
-					CurrentlyNotRecording = true;
-					ToggleRecordButton.Content = "Record";
-					TaskBar_ProgressState = "Paused";
-					if (ShowBalloonTipsForRecording)
-					{
-						taskBarIcon.ShowBalloonTip("Recording saved!", LastFileNameDisplay, taskBarIcon.Icon, true);
-						taskBarIcon.TrayBalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
-					}
-					recordingTimer.Stop();
-					if (PlayAudioFeedBackMarkingStartAndStopRecording)
-					{
-						PlayRecordingStopAudioFeedback();
-					}
-					if (AutoReplayAudioAfterRecording)
-					{
-						ReplayLastRecording();
-					}
-					ReplayLastRecordingButton.IsEnabled = true;
-				});
+            this.audioRecordingService = new AudioRecordingService(
+                startRecordingAction: () =>
+                {
+                    CurrentAudioPlayState = false;
+                    ReplayLastRecordingButton.Content = "Replay Last";
+                    ReplayLastRecordingButton.IsEnabled = false;
+                    replayAudioService.KillAudio(reset: true);
+                    CurrentlyRecording = true;
+                    CurrentlyNotRecording = false;
+                    ToggleRecordButton.Content = "Stop";
+                    TaskBar_ProgressState = "Error";
+                    RecordingStart = DateTime.Now;
+                    recordingTimer.Start();
+                    UpdateLastFileName(reset: true);
+                    UpdateLastFileNameDisplay(reset: true);
+                    UpdateCurrentFileNameDisplay();
+                    if (ShowBalloonTipsForRecording)
+                    {
+                        taskBarIcon.ShowBalloonTip("Recording started!", "RecNForget now recording...", taskBarIcon.Icon, true);
+                        taskBarIcon.TrayBalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
+                    }
+                    if (PlayAudioFeedBackMarkingStartAndStopRecording)
+                    {
+                        PlayRecordingStartAudioFeedback();
+                    }
+                },
+                stopRecordingAction: () =>
+                {
+                    UpdateLastFileName();
+                    UpdateLastFileNameDisplay();
+                    UpdateCurrentFileNameDisplay(reset: true);
+                    CurrentlyRecording = false;
+                    CurrentlyNotRecording = true;
+                    ToggleRecordButton.Content = "Record";
+                    TaskBar_ProgressState = "Paused";
+                    if (ShowBalloonTipsForRecording)
+                    {
+                        taskBarIcon.ShowBalloonTip("Recording saved!", LastFileNameDisplay, taskBarIcon.Icon, true);
+                        taskBarIcon.TrayBalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
+                    }
+                    recordingTimer.Stop();
+                    if (PlayAudioFeedBackMarkingStartAndStopRecording)
+                    {
+                        PlayRecordingStopAudioFeedback();
+                    }
+                    if (AutoReplayAudioAfterRecording)
+                    {
+                        ReplayLastRecording();
+                    }
+                    ReplayLastRecordingButton.IsEnabled = true;
+                });
 
-			ToggleRecordButton.Focus();
+
+            this.hotkeyService = new HotkeyService();
+            this.hotkeyService.AddHotkey(() => { return HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_StartStopRecording"); }, audioRecordingService.ToggleRecording);
+
+
+            ToggleRecordButton.Focus();
 		}
 
 		private void EnsureAppConfigValuesExist()
@@ -415,15 +421,8 @@ namespace RecNForget
 
 		private void RecordButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (CurrentlyRecording)
-			{
-				hotkeyService.StopRecording();
-			}
-			else
-			{
-				hotkeyService.StartRecording();
-			}
-		}
+            audioRecordingService.ToggleRecording();
+        }
 
 		private void UpdateCurrentFileNameDisplay(bool reset = false)
 		{
@@ -433,14 +432,14 @@ namespace RecNForget
 			}
 			else
 			{
-				CurrentFileNameDisplay = hotkeyService == null ? string.Empty : string.Format("{0} ({1} s)", hotkeyService.CurrentFileName, RecordingTimeInMilliSeconds);
+				CurrentFileNameDisplay = hotkeyService == null ? string.Empty : string.Format("{0} ({1} s)", audioRecordingService.CurrentFileName, RecordingTimeInMilliSeconds);
 			}
 			
 		}
 
 		private void UpdateLastFileName(bool reset = false)
 		{
-			lastFileName = reset ? string.Empty : hotkeyService == null ? string.Empty : hotkeyService.LastFileName;
+			lastFileName = reset ? string.Empty : hotkeyService == null ? string.Empty : audioRecordingService.LastFileName;
 		}
 
 		private void UpdateLastFileNameDisplay(bool reset = false)

@@ -26,6 +26,7 @@ You should be able to just extract RecNForget from the latest release and run th
 - you can replay the last recorded file from the running session
 
 # upcoming features in next version (commited, not yet released)
+- Installer now starts with elevated privileges (so it can update the files installed in programs folder)
 - installing WiX toolset locally is no longer required to build the setup project
 
 

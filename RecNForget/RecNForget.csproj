@@ -87,6 +87,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\AudioRecordingService.cs" />
+    <Compile Include="Services\Types\HotkeyMapping.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
