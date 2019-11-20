@@ -48,8 +48,8 @@ namespace RecNForget.Services
         {
             CurrentlyRecording = true;
 
-            var settingOutputPath = AppSettingHelper.GetAppConfigSetting("OutputPath");
-            var settingFilenamePrefix = AppSettingHelper.GetAppConfigSetting("FilenamePrefix");
+            var settingOutputPath = AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
+            var settingFilenamePrefix = AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
 
             string outputFilePathPattern = @"{0}\{1}{2}.wav";
 

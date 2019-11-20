@@ -9,7 +9,17 @@ using System.Text;
 namespace RecNForget.Services
 {
 	public class AppSettingHelper
-	{
+    {
+        public static string AutoReplayAudioAfterRecording = "AutoReplayAudioAfterRecording";
+		public static string PlayAudioFeedBackMarkingStartAndStopReplaying = "PlayAudioFeedBackMarkingStartAndStopReplaying";
+		public static string PlayAudioFeedBackMarkingStartAndStopRecording = "PlayAudioFeedBackMarkingStartAndStopRecording";
+		public static string MinimizedToTray = "MinimizedToTray";
+		public static string HotKey_StartStopRecording = "HotKey_StartStopRecording";
+		public static string FilenamePrefix = "FilenamePrefix";
+		public static string OutputPath = "OutputPath";
+		public static string WindowAlwaysOnTop = "WindowAlwaysOnTop";
+		public static string ShowBalloonTipsForRecording = "ShowBalloonTipsForRecording";
+
         private static string UserConfigFileFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RecNForget", "user.config");
 
         public static string GetEmptyUserConfigFile()
@@ -75,15 +85,15 @@ namespace RecNForget.Services
 
             Dictionary<string, string> defaultValues = new Dictionary<string, string>()
 			{
-				{ "AutoReplayAudioAfterRecording", "False" },
-				{ "PlayAudioFeedBackMarkingStartAndStopReplaying", "False" },
-				{ "PlayAudioFeedBackMarkingStartAndStopRecording", "True" },
-				{ "MinimizedToTray", "False" },
-				{ "HotKey_StartStopRecording", "Key=F12; Win=False; Alt=False; Ctrl=True; Shift=False" },
-				{ "FilenamePrefix", "RecNForget_" },
-				{ "OutputPath", @"C:\tmp" },
-				{ "WindowAlwaysOnTop", "False" },
-				{ "ShowBalloonTipsForRecording", "True" }
+				{ AppSettingHelper.AutoReplayAudioAfterRecording, "False" },
+				{ AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying, "False" },
+				{ AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording, "True" },
+				{ AppSettingHelper.MinimizedToTray, "False" },
+				{ AppSettingHelper.HotKey_StartStopRecording, "Key=F12; Win=False; Alt=False; Ctrl=True; Shift=False" },
+				{ AppSettingHelper.FilenamePrefix, "RecNForget_" },
+				{ AppSettingHelper.OutputPath, @"C:\tmp" },
+				{ AppSettingHelper.WindowAlwaysOnTop, "False" },
+				{ AppSettingHelper.ShowBalloonTipsForRecording, "True" }
 			};
 
 			if (settingKey == null)

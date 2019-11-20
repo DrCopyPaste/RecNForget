@@ -80,12 +80,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("WindowAlwaysOnTop"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop));
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("WindowAlwaysOnTop", value.ToString());
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop, value.ToString());
 				this.Topmost = value;
 				OnPropertyChanged();
 			}
@@ -186,12 +186,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return AppSettingHelper.GetAppConfigSetting("FilenamePrefix");
+				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("FilenamePrefix", value);
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.FilenamePrefix, value);
 				OnPropertyChanged();
 			}
 		}
@@ -200,7 +200,7 @@ namespace RecNForget
 		{
             get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("AutoReplayAudioAfterRecording"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoReplayAudioAfterRecording));
 			}
 		}
 
@@ -208,7 +208,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopRecording"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording));
 			}
 		}
 
@@ -216,7 +216,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopReplaying"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying));
 			}
 		}
 
@@ -224,7 +224,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return AppSettingHelper.GetAppConfigSetting("OutputPath");
+				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
 			}
 		}
 
@@ -232,7 +232,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("ShowBalloonTipsForRecording"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowBalloonTipsForRecording));
 			}
 		}
 
@@ -240,7 +240,7 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("MinimizedToTray"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MinimizedToTray));
 			}
 		}
 
@@ -344,7 +344,7 @@ namespace RecNForget
 
 
             this.hotkeyService = new HotkeyService();
-            this.hotkeyService.AddHotkey(() => { return HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_StartStopRecording"); }, audioRecordingService.ToggleRecording);
+            this.hotkeyService.AddHotkey(() => { return HotkeyToStringTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
 
 
             ToggleRecordButton.Focus();

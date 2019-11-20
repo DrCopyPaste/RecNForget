@@ -68,12 +68,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("MinimizedToTray"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MinimizedToTray));
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("MinimizedToTray", value.ToString());
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.MinimizedToTray, value.ToString());
 				OnPropertyChanged();
 
 				if (value == true)
@@ -91,12 +91,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopReplaying"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying));
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopReplaying", value.ToString());
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying, value.ToString());
 				OnPropertyChanged();
 			}
 		}
@@ -105,12 +105,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("AutoReplayAudioAfterRecording"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoReplayAudioAfterRecording));
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("AutoReplayAudioAfterRecording", value.ToString());
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.AutoReplayAudioAfterRecording, value.ToString());
 				OnPropertyChanged();
 			}
 		}
@@ -119,12 +119,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopRecording"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording));
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("PlayAudioFeedBackMarkingStartAndStopRecording", value.ToString());
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording, value.ToString());
 				OnPropertyChanged();
 			}
 		}
@@ -133,12 +133,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting("ShowBalloonTipsForRecording"));
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowBalloonTipsForRecording));
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("ShowBalloonTipsForRecording", value.ToString());
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.ShowBalloonTipsForRecording, value.ToString());
 				OnPropertyChanged();
 			}
 		}
@@ -147,12 +147,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return HotkeyToStringTranslator.GetHotkeySettingAsString("HotKey_StartStopRecording");
+				return HotkeyToStringTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording);
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("HotKey_StartStopRecording", value);
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.HotKey_StartStopRecording, value);
 				OnPropertyChanged();
 			}
 		}
@@ -161,12 +161,12 @@ namespace RecNForget
 		{
 			get
 			{
-				return AppSettingHelper.GetAppConfigSetting("OutputPath");
+				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
 			}
 
 			set
 			{
-				AppSettingHelper.SetAppConfigSetting("OutputPath", value);
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPath, value);
 				OnPropertyChanged();
 			}
 		}
