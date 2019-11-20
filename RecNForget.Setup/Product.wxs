@@ -13,11 +13,6 @@
         <Feature Id="ProductFeature" Title="RecNForget" Level="1">
             <ComponentGroupRef Id="ProductComponents" />
         </Feature>
-  
-        <InstallExecuteSequence>
-          <RemoveExistingProducts Before='InstallInitialize' />
-        </InstallExecuteSequence>
-  
     </Product>
     <Fragment>
         <Directory Id="TARGETDIR" Name="SourceDir">
