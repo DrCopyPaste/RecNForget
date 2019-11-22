@@ -33,6 +33,7 @@ Please keep in mind this is my first (and very maybe last) WPF application so th
 For stable and buildable code please refer to the version tagged commits, in between releases there may very well be errors in the code ;)
 
 # upcoming features in next version (commited, not yet released)
+- Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
 - Installer now starts with elevated privileges (so it can update the files installed in programs folder)
 - installing WiX toolset locally is no longer required to build the setup project
 

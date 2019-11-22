@@ -1,3 +1,5 @@
+add "stop replay" button (otherwise in pause mode file is still blocked in case u want to rename or delete it...)
+
 remove user config when uninstalling
 
 allow restoring app.config defaults via settings window

@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Shell;
 using System.Windows.Threading;
 
 namespace RecNForget
@@ -260,14 +261,16 @@ namespace RecNForget
             replayAudioService = new AudioPlayListService(
 				beforePlayAction: () =>
 				{
-					CurrentAudioPlayState = true;
+                    TaskBar_ProgressState = "Normal";
+                    CurrentAudioPlayState = true;
 					ReplayLastRecordingButton.Content = "Pause";
 				}
 				, afterStopAction: () =>
 				{
 					CurrentAudioPlayState = false;
 					ReplayLastRecordingButton.Content = "Replay Last";
-				}, afterPauseAction: () =>
+                    TaskBar_ProgressState = "Paused";
+                }, afterPauseAction: () =>
 				{
 					CurrentAudioPlayState = false;
 					ReplayLastRecordingButton.Content = "Resume";
@@ -337,7 +340,7 @@ namespace RecNForget
                     }
                     if (AutoReplayAudioAfterRecording)
                     {
-                        ReplayLastRecording();
+                        ToggleReplayLastRecording();
                     }
                     ReplayLastRecordingButton.IsEnabled = true;
                 });
@@ -454,11 +457,11 @@ namespace RecNForget
 
 		private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
 		{
-			ReplayLastRecording();
+			ToggleReplayLastRecording();
 		}
 
 		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
-		private void ReplayLastRecording()
+		private void ToggleReplayLastRecording()
 		{
 			bool replayFileExists = false;
 
