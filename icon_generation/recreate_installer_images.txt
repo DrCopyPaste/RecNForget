@@ -1,0 +1,11 @@
+Images used by the Installer are defined in Setup-Project's Product.wxs:
+
+WixUIBannerBmp will be used as a banner shown at the top during installing, 493 × 58 resolution is important, leave a few pixels to the right free so that its not kissing the window border
+WixUIDialogBmp will be used for the start screen or cancel screen, 493 × 312 resolution is important, and also to leave rightmost 2/3 of the image free (thats were text will be shown, like license, etc.)
+
+How to recreate those:
+- Open the WixUI-logo.svg with Inkscape
+- there are two groups in this file (the smaller one is for Banner, the bigger one for Dialog)
+- make modifications while preserving the x-y-ratio of the groups
+- export group to png via inkscape
+- open with paint and save as bmp
