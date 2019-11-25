@@ -34,7 +34,8 @@ For stable and buildable code please refer to the version tagged commits, in bet
 # upcoming features in next version (commited, not yet released)
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
-- Intaller now show a minimal UI with license agreement and logo during installation
+- Installer lets user choose target installation folder
+- Intaller now shows a minimal UI with license agreement and logo during installation
 - Installer now starts with elevated privileges (so it can update the files installed in programs folder)
 
 # Features missing for version 1.0

@@ -3,7 +3,7 @@
     <?define iconPath="..\..\..\icon_generation\logo.ico"?>
     <Product Id="{1797362C-C758-4F22-9878-2AF96B9C9524}" Name="RecNForget" Language="1033" Version="0.4.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
-        <UIRef Id="WixUI_Minimal"/>
+        <UIRef Id="WixUI_InstallDir"/>
         <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
         <MediaTemplate EmbedCab="yes" />
         <Icon Id="icon.ico" SourceFile="$(var.iconPath)" />
@@ -12,6 +12,8 @@
         <Property Id="ARPURLINFOABOUT" Value="https://github.com/DrCopyPaste/RecNForget/blob/master/README.md" />
         <Property Id="ARPURLUPDATEINFO" Value="https://github.com/DrCopyPaste/RecNForget/releases/latest" />
 
+
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
         <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)..\icon_generation\WixUIBannerBmp.bmp" />
         <WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)..\icon_generation\WixUIDialogBmp.bmp" />
         <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)apache2.license.rtf" />
