@@ -72,6 +72,9 @@
         </GroupBox>
         <GroupBox Grid.Row="3" Grid.Column="0" Header="Results" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top" Margin="5,5,0,0">
             <Grid>
+                <Grid.Resources>
+                    <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+                </Grid.Resources>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                     <RowDefinition Height="40" />
@@ -89,7 +92,34 @@
 
                 <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding Path=LastFileNameDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="Auto" Margin="5,0,0,0" VerticalAlignment="Top"/>
 
-                <Button Grid.Row="1" Grid.Column="2" Name="ReplayLastRecordingButton"  Content="Replay Last" Margin="0,5,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="{Binding Path=HasLastRecording}" Click="ReplayLastRecording_Click"/>
+                <!--<Button Grid.Row="0" Grid.Column="1" Name="ReplayLastRecordingButton"  Content="Replay Last" Margin="0,5,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsEnabled="{Binding Path=HasLastRecording}" Click="ReplayLastRecording_Click"/>-->
+
+                <Button Name="ReplayLastRecordingButton" Grid.Row="1" Grid.Column="2" Margin="0,5,0,0" HorizontalAlignment="Left" Width="52" IsEnabled="False" Click="ReplayLastRecording_Click">
+                    <StackPanel>
+                        <Canvas Name="ReplayLastRecordingPlayDisabledIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible">
+                            <Polygon Points="0,0 10,5, 0,10" Stroke="LightGray" Fill="LightGray" />
+                        </Canvas>
+                        <Canvas Name="ReplayLastRecordingPlayIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed">
+                            <Polygon Points="0,0 10,5, 0,10" Stroke="Black" Fill="Black" />
+                        </Canvas>
+                        <Canvas Name="ReplayLastRecordingPauseIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed">
+                            <Rectangle Width="3" Height="10" Fill="Black" Canvas.Left="0" Canvas.Top="0"/>
+                            <Rectangle Width="3" Height="10" Fill="Black" Canvas.Left="6" Canvas.Top="0"/>
+                        </Canvas>
+                    </StackPanel>
+                </Button>
+
+                <Button Name="StopReplayLastRecordingButton" Grid.Row="1" Grid.Column="2" Margin="52,5,0,0" HorizontalAlignment="Left" Width="40" IsEnabled="False" Click="StopReplayLastRecording_Click">
+                    <StackPanel>
+                        <Canvas Name="ReplayLastRecordingStopDisabledIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible">
+                            <Rectangle Width="10" Height="10" Stroke="LightGray" Fill="LightGray" Canvas.Left="0" Canvas.Top="0"/>
+                        </Canvas>
+                        <Canvas Name="ReplayLastRecordingStopIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed">
+                            <Rectangle Width="10" Height="10" Fill="Black" Canvas.Left="0" Canvas.Top="0"/>
+                        </Canvas>
+                    </StackPanel>
+                </Button>
+
             </Grid>
         </GroupBox>
 

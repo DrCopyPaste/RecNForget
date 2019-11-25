@@ -14,7 +14,8 @@ namespace RecNForget.Services
 
 		private Action beforePlayAction = null;
 		private Action afterPauseAction = null;
-		private Action afterStopAction = null;
+        private Action afterResumeAction = null;
+        private Action afterStopAction = null;
 		private Action queueErrorAction = null;
 
 		private List<string> filePathList = null;
@@ -27,12 +28,13 @@ namespace RecNForget.Services
 			}
 		}
 
-		public AudioPlayListService(Action beforePlayAction = null, Action afterStopAction = null, Action afterPauseAction = null, Action queueErrorAction = null)
+		public AudioPlayListService(Action beforePlayAction = null, Action afterStopAction = null, Action afterPauseAction = null, Action afterResumeAction = null, Action queueErrorAction = null)
 		{
 			this.beforePlayAction = beforePlayAction;
 			this.afterStopAction = afterStopAction;
 			this.afterPauseAction = afterPauseAction;
-			this.queueErrorAction = queueErrorAction;
+            this.afterResumeAction = afterResumeAction;
+            this.queueErrorAction = queueErrorAction;
 
 			filePathList = new List<string>();
 		}
@@ -44,7 +46,7 @@ namespace RecNForget.Services
 			{
 				filePathList.Add(filePath);
 
-				return true;
+                return true;
 			}
 
 			queueErrorAction?.Invoke();
@@ -66,42 +68,40 @@ namespace RecNForget.Services
 			else if (audioOutputDevice.PlaybackState == PlaybackState.Paused)
 			{
 				audioOutputDevice.Play();
-			}
+                afterResumeAction?.Invoke();
+            }
 		}
 
 		public void Pause()
 		{
 			audioOutputDevice.Pause();
-
 			afterPauseAction?.Invoke();
 		}
 
 		public void Stop()
 		{
 			audioOutputDevice?.Stop();
-		}
+            afterStopAction?.Invoke();
+        }
 
 		public void KillAudio(bool reset = false)
 		{
-			Stop();
-
 			if (audioOutputDevice != null)
 			{
 				audioOutputDevice.Dispose();
 				audioOutputDevice = null;
 			}
 
-			if (audioOutputDevice != null)
+			if (audioFileReader != null)
 			{
-				audioOutputDevice.Dispose();
-				audioOutputDevice = null;
+                audioFileReader.Dispose();
+                audioFileReader = null;
 			}
 
 			if (reset)
 			{
 				currentPlayIndex = 0;
 				filePathList.Clear();
-				afterStopAction?.Invoke();
 			}
 		}
 
@@ -124,13 +124,13 @@ namespace RecNForget.Services
 
 			if (filePathList.Count > currentPlayIndex)
 			{
-				KillAudio(reset: false);
 				InitTitle(filePathList[currentPlayIndex]);
 				Play();
 			}
 			else
 			{
-				KillAudio(reset: true);
+                Stop();
+                KillAudio(reset: true);
 			}
 		}
 	}

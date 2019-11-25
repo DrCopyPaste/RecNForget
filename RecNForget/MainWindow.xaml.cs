@@ -263,18 +263,35 @@ namespace RecNForget
 				{
                     TaskBar_ProgressState = "Normal";
                     CurrentAudioPlayState = true;
-					ReplayLastRecordingButton.Content = "Pause";
-				}
-				, afterStopAction: () =>
+                    StopReplayLastRecordingButton.IsEnabled = true;
+                    ReplayLastRecordingStopDisabledIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingStopIcon.Visibility = Visibility.Visible;
+                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Visible;
+                }, afterStopAction: () =>
 				{
-					CurrentAudioPlayState = false;
-					ReplayLastRecordingButton.Content = "Replay Last";
+                    replayAudioService.KillAudio(reset: true);
+                    CurrentAudioPlayState = false;
                     TaskBar_ProgressState = "Paused";
+                    StopReplayLastRecordingButton.IsEnabled = false;
+                    ReplayLastRecordingStopDisabledIcon.Visibility = Visibility.Visible;
+                    ReplayLastRecordingStopIcon.Visibility = Visibility.Collapsed;
+
+                    ReplayLastRecordingPlayDisabledIcon.Visibility = HasLastRecording ? Visibility.Collapsed : Visibility.Visible;
+                    ReplayLastRecordingPlayIcon.Visibility = HasLastRecording ? Visibility.Visible : Visibility.Collapsed;
+                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Collapsed;
                 }, afterPauseAction: () =>
-				{
-					CurrentAudioPlayState = false;
-					ReplayLastRecordingButton.Content = "Resume";
-				});
+                {
+                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Visible;
+                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Collapsed;
+                }, afterResumeAction: () =>
+                {
+                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Visible;
+                });
 
 			recordingFeedbackAudioService = new AudioPlayListService();
 
@@ -297,7 +314,6 @@ namespace RecNForget
                 startRecordingAction: () =>
                 {
                     CurrentAudioPlayState = false;
-                    ReplayLastRecordingButton.Content = "Replay Last";
                     ReplayLastRecordingButton.IsEnabled = false;
                     replayAudioService.KillAudio(reset: true);
                     CurrentlyRecording = true;
@@ -338,13 +354,18 @@ namespace RecNForget
                     {
                         PlayRecordingStopAudioFeedback();
                     }
+                    ReplayLastRecordingButton.IsEnabled = true;
+                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Visible;
+                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Collapsed;
+                    StopReplayLastRecordingButton.IsEnabled = true;
+                    ReplayLastRecordingStopDisabledIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingStopIcon.Visibility = Visibility.Visible;
                     if (AutoReplayAudioAfterRecording)
                     {
                         ToggleReplayLastRecording();
                     }
-                    ReplayLastRecordingButton.IsEnabled = true;
                 });
-
 
             this.hotkeyService = new HotkeyService();
             this.hotkeyService.AddHotkey(() => { return HotkeyToStringTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
@@ -447,7 +468,7 @@ namespace RecNForget
 
 		private void UpdateLastFileNameDisplay(bool reset = false)
 		{
-			LastFileNameDisplay = reset ? string.Empty : string.Format("{0} ({1} s)", lastFileName, RecordingTimeInMilliSeconds);
+			LastFileNameDisplay = reset ? string.Empty : string.Format("{0} ({1} s)", audioRecordingService.LastFileName, RecordingTimeInMilliSeconds);
 		}
 
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
@@ -455,7 +476,13 @@ namespace RecNForget
 			Process.Start(OutputPath);
 		}
 
-		private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
+        private void StopReplayLastRecording_Click(object sender, RoutedEventArgs e)
+        {
+            replayAudioService.Stop();
+            replayAudioService.KillAudio(reset: true);
+        }
+
+        private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
 		{
 			ToggleReplayLastRecording();
 		}
@@ -486,7 +513,6 @@ namespace RecNForget
 				else
 				{
 					CurrentAudioPlayState = false;
-					ReplayLastRecordingButton.Content = "Replay Last";
 					ReplayLastRecordingButton.IsEnabled = false;
 				}
 			}
