@@ -512,9 +512,24 @@ namespace RecNForget
 				}
 				else
 				{
+                    UpdateLastFileName(reset: true);
+                    UpdateLastFileNameDisplay(reset: true);
+
+                    HasLastRecording = false;
+
 					CurrentAudioPlayState = false;
 					ReplayLastRecordingButton.IsEnabled = false;
-				}
+                    StopReplayLastRecordingButton.IsEnabled = false;
+
+                    ReplayLastRecordingStopDisabledIcon.Visibility = Visibility.Visible;
+                    ReplayLastRecordingStopIcon.Visibility = Visibility.Collapsed;
+
+                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Visible;
+                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Collapsed;
+                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Collapsed;
+
+                    System.Windows.MessageBox.Show("The last recorded audio file has been moved or deleted.", "File not found", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 			}
 			else if (replayAudioService.PlaybackState == PlaybackState.Playing)
 			{
