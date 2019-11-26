@@ -20,7 +20,7 @@ You should be able to just extract RecNForget from the latest release and run th
 - press the configured Record hotkey
 - start the audio which you want to capure
 - let the audio play
-- to stop captureing press the configured Record hotkey again
+- to stop capturing press the configured Record hotkey again
 - the file will be saved to the configured output folder (shown to you in main menu, changeable in settings)
 - file names will be generated using a file name prefix that you can specify plus a timestamp of the start time of recording
 - you can replay the last recorded file from the running session
@@ -34,6 +34,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 # upcoming features in next version (commited, not yet released)
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
+- Installation is cancelled if .Net framework is not found
 - Installer lets user choose target installation folder
 - Intaller now shows a minimal UI with license agreement and logo during installation
 - Installer now starts with elevated privileges (so it can update the files installed in programs folder)

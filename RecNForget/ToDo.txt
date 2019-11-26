@@ -8,8 +8,6 @@ do something useful with the "change" option when in "programs/features"-menu
 
 add uninstall actions to remove custom registry keys (auto start, and other configuration)
 
-msi installer can download and install the required .net version
-
 how to build
 	include batch files?
 
@@ -53,3 +51,5 @@ allow installing for only one user - move configuration to a user specific folde
 	(user config is really a machine config right now)
 
 use proper bindings to change visibility on replay/pause/stop last recording button
+
+msi installer can download the required .net version (or we include .net into the setup? wont that make it extra fat?)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?define iconPath="..\..\..\icon_generation\logo.ico"?>
     <Product Id="{1797362C-C758-4F22-9878-2AF96B9C9524}" Name="RecNForget" Language="1033" Version="0.4.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
@@ -13,6 +14,11 @@
         <Property Id="ARPURLUPDATEINFO" Value="https://github.com/DrCopyPaste/RecNForget/releases/latest" />
 
 
+        <PropertyRef Id="NETFRAMEWORK45" />
+        <Condition Message="This application requires .NET Framework 4.7 or higher.">
+          <![CDATA[Installed OR (NETFRAMEWORK45 >= "#460798")]]>
+        </Condition>
+      
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
         <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)..\icon_generation\WixUIBannerBmp.bmp" />
         <WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)..\icon_generation\WixUIDialogBmp.bmp" />
