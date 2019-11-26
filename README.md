@@ -53,6 +53,6 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - "gimmick" mode (allow using application as a sound board, binding hotkeys to different sound outputs, maybe even allow changing the output device they are output to (to insert sounds into a running mic session for example))
 
 # Credits
-Code by DrCopyPaste
-
+Code by [DrCopyPaste](https://github.com/DrCopyPaste)
 Click sounds for replay by https://soundcloud.com/slutski (litw@gmx.de)
+Application logo is made by [DrCopyPaste](https://github.com/DrCopyPaste) by combining https://www.onlinewebfonts.com/icon/55290 and https://www.onlinewebfonts.com/icon/715
