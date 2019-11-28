@@ -15,12 +15,12 @@ namespace RecNForget.Setup.Extensions
         // and dont have to duplicate so much in setup project and the application itself
         private static void RemoveAutoStartWithWindowsFromRegistry()
         {
-            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            var recNForgetAutoStartRegistry = regKey.GetValue("RecNForget");
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(AppSettingHelper.WindowsAutoStartRegistryPath, true);
+            var recNForgetAutoStartRegistry = regKey.GetValue(AppSettingHelper.ApplicationName);
 
             if (recNForgetAutoStartRegistry != null)
             {
-                regKey.DeleteValue("RecNForget");
+                regKey.DeleteValue(AppSettingHelper.ApplicationName);
             }
         }
 

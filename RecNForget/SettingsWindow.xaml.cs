@@ -36,8 +36,8 @@ namespace RecNForget
 		{
 			get
 			{
-				Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-				var recNForgetAutoStartRegistry = regKey.GetValue("RecNForget");
+				Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(AppSettingHelper.WindowsAutoStartRegistryPath, true);
+				var recNForgetAutoStartRegistry = regKey.GetValue(AppSettingHelper.ApplicationName);
 					
 				if (recNForgetAutoStartRegistry != null)
 				{
@@ -49,15 +49,15 @@ namespace RecNForget
 
 			set
 			{
-				Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+				Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(AppSettingHelper.WindowsAutoStartRegistryPath, true);
 
 				if (value == true)
 				{
-					regKey.SetValue("RecNForget", System.Reflection.Assembly.GetExecutingAssembly().Location);
+					regKey.SetValue(AppSettingHelper.ApplicationName, System.Reflection.Assembly.GetExecutingAssembly().Location);
 				}
 				else
 				{
-					regKey.DeleteValue("RecNForget");
+					regKey.DeleteValue(AppSettingHelper.ApplicationName);
 				}
 
 				OnPropertyChanged();

@@ -10,6 +10,9 @@ namespace RecNForget.Services
 {
 	public class AppSettingHelper
     {
+        public static string ApplicationName = "RecNForget";
+        public static string WindowsAutoStartRegistryPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+
         public static string AutoReplayAudioAfterRecording = "AutoReplayAudioAfterRecording";
 		public static string PlayAudioFeedBackMarkingStartAndStopReplaying = "PlayAudioFeedBackMarkingStartAndStopReplaying";
 		public static string PlayAudioFeedBackMarkingStartAndStopRecording = "PlayAudioFeedBackMarkingStartAndStopRecording";
@@ -20,7 +23,7 @@ namespace RecNForget.Services
 		public static string WindowAlwaysOnTop = "WindowAlwaysOnTop";
 		public static string ShowBalloonTipsForRecording = "ShowBalloonTipsForRecording";
 
-        private static string UserConfigFileFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RecNForget", "user.config");
+        private static string UserConfigFileFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppSettingHelper.ApplicationName, "user.config");
 
         public static string GetEmptyUserConfigFile()
         {

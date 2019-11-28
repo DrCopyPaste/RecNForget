@@ -249,7 +249,8 @@ namespace RecNForget
 
 		public MainWindow()
 		{
-            EnsureAppConfigValuesExist();
+            // ensure AppConfig Values exist
+            AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 
             DataContext = this;
 			InitializeComponent();
@@ -372,11 +373,6 @@ namespace RecNForget
 
 
             ToggleRecordButton.Focus();
-		}
-
-		private void EnsureAppConfigValuesExist()
-		{
-			AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 		}
 
 		private void TaskBarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
