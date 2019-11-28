@@ -65,7 +65,31 @@ namespace RecNForget.Services
 			ConfigurationManager.RefreshSection("appSettings");
 		}
 
-		public static void RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false)
+        public static void RemoveAppConfigSettingFile()
+        {
+            // check if user config file exists
+            FileInfo fileInfo = new FileInfo(UserConfigFileFullPath);
+            DirectoryInfo directoryInfo = new DirectoryInfo(fileInfo.DirectoryName);
+
+            if (!directoryInfo.Exists)
+            {
+                // we are good, nothing to remove here...
+            }
+            else
+            {
+                if (fileInfo.Exists)
+                {
+                    // remove file if it exists
+                    File.Delete(UserConfigFileFullPath);
+                }
+
+                // remove directory
+                Directory.Delete(directoryInfo.FullName);
+            }
+        }
+
+
+        public static void RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false)
 		{
             // check if user config file exists
             FileInfo fileInfo = new FileInfo(UserConfigFileFullPath);

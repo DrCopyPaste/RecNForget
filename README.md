@@ -32,6 +32,8 @@ Please keep in mind this is my first (and very maybe last) WPF application so th
 For stable and buildable code please refer to the version tagged commits, in between releases there may very well be errors in the code ;)
 
 # upcoming features in next version (commited, not yet released)
+- FIX: uninstalling RecNForget will now also delete all application data (under %APPDATA% machine configuration and in registry for autostart)
+
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
 - Installation is cancelled if .Net framework is not found
@@ -43,7 +45,6 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - show record (red circle) in bottom right corner when recording (configurable)
 - clean up source code for maintainability
 - rework visual layout of windows (more consistency and maybe smaller nicer windows)
-- clean up registry and user app data on uninstall
 
 # Nice to haves in future releases
 - allow hotkeys for other actions (like changing output file or replaying last recorded audio)
