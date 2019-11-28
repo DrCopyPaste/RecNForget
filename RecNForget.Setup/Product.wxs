@@ -13,6 +13,7 @@
         <Property Id="ARPURLINFOABOUT" Value="https://github.com/DrCopyPaste/RecNForget/blob/master/README.md" />
         <Property Id="ARPURLUPDATEINFO" Value="https://github.com/DrCopyPaste/RecNForget/releases/latest" />
 
+        <!--<Property Id="MsiLogging" Value="v" />-->
 
         <PropertyRef Id="NETFRAMEWORK45" />
         <Condition Message="This application requires .NET Framework 4.7 or higher.">
@@ -23,6 +24,14 @@
         <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)..\icon_generation\WixUIBannerBmp.bmp" />
         <WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)..\icon_generation\WixUIDialogBmp.bmp" />
         <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)apache2.license.rtf" />
+
+        <Binary Id="CustomActionDll" SourceFile="$(var.RecNForget.Setup.Extensions.TargetDir)RecNForget.Setup.Extensions.CA.dll" />
+
+        <InstallExecuteSequence>
+          <Custom Action="RemoveApplicationSettingsCA" Before="InstallFinalize">REMOVE="ALL"</Custom>
+        </InstallExecuteSequence>
+
+        <CustomAction Id="RemoveApplicationSettingsCA" Return="check" Execute="immediate" BinaryKey="CustomActionDll" DllEntry="RemoveApplicationSettings" />
       
         <Feature Id="ProductFeature" Title="RecNForget" Level="1">
             <ComponentGroupRef Id="ProductComponents" />

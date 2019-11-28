@@ -24,6 +24,14 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RecNForget.Setup.Extensions\RecNForget.Setup.Extensions.csproj">
+      <Name>RecNForget.Setup.Extensions</Name>
+      <Project>{8e19b8d5-7241-4336-a08e-9e34acecc230}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\RecNForget\RecNForget.csproj">
       <Name>RecNForget</Name>
       <Project>{4038f35f-1022-42f1-83c2-70999de802df}</Project>

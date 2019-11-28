@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget", "RecNForget\Re
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "RecNForget.Setup", "RecNForget.Setup\RecNForget.Setup.wixproj", "{0DE40921-5E11-499F-81AB-C28D267CF4A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.Setup.Extensions", "RecNForget.Setup.Extensions\RecNForget.Setup.Extensions.csproj", "{8E19B8D5-7241-4336-A08E-9E34ACECC230}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{9FA98D49-321F-46E0-A6CC-B8E270208DAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,9 +33,21 @@ Global
 		{0DE40921-5E11-499F-81AB-C28D267CF4A6}.Release|Any CPU.ActiveCfg = Release|x86
 		{0DE40921-5E11-499F-81AB-C28D267CF4A6}.Release|x86.ActiveCfg = Release|x86
 		{0DE40921-5E11-499F-81AB-C28D267CF4A6}.Release|x86.Build.0 = Release|x86
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Debug|x86.Build.0 = Debug|Any CPU
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Release|x86.ActiveCfg = Release|Any CPU
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0DE40921-5E11-499F-81AB-C28D267CF4A6} = {9FA98D49-321F-46E0-A6CC-B8E270208DAF}
+		{8E19B8D5-7241-4336-A08E-9E34ACECC230} = {9FA98D49-321F-46E0-A6CC-B8E270208DAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {472E6DF2-8342-4601-B0FA-61D1071AD01D}

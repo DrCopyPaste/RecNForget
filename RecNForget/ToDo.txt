@@ -1,3 +1,11 @@
+app config should really be user config (right now its a machine configuration,
+ but auto start for instance is only set for the current user, meaning
+ the application is installed for all users, but autostart will only happen for the "current" user)
+
+ OR
+
+ make ALL settings machine settings (i.e. autostart for all users, move reg key into current machine space)
+
 remove user config when uninstalling
 
 allow restoring app.config defaults via settings window
