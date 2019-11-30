@@ -11,8 +11,13 @@ namespace RecNForget.Services
 {
     public class AudioRecordingService
     {
+        public static string OutputFilePathPattern = @"{0}\{1}{2}.wav";
+        public static string OutputFileDateFormat = "yyyyMMdd-HHmmssfff";
+
         private Action startRecordingAction;
         private Action stopRecordingAction;
+        private Func<string> outputPathGetterMethod;
+        private Func<string> filenamePrefixGetterMethod;
 
         // will be newly instantiated every time record starting is triggered
         private static WasapiLoopbackCapture captureInstance;
@@ -22,11 +27,12 @@ namespace RecNForget.Services
 
         public bool CurrentlyRecording { get; set; }
 
-
-        public AudioRecordingService(Action startRecordingAction, Action stopRecordingAction)
+        public AudioRecordingService(Action startRecordingAction, Action stopRecordingAction, Func<string> outputPathGetterMethod, Func<string> filenamePrefixGetterMethod)
         {
             this.startRecordingAction = startRecordingAction;
             this.stopRecordingAction = stopRecordingAction;
+            this.outputPathGetterMethod = outputPathGetterMethod;
+            this.filenamePrefixGetterMethod = filenamePrefixGetterMethod;
 
             CurrentlyRecording = false;
         }
@@ -48,17 +54,12 @@ namespace RecNForget.Services
         {
             CurrentlyRecording = true;
 
-            var settingOutputPath = AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
-            var settingFilenamePrefix = AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
-
-            string outputFilePathPattern = @"{0}\{1}{2}.wav";
-
             FileInfo file;
 
             do
             {
                 // datestrings > GUIDS :D
-                file = new FileInfo(string.Format(outputFilePathPattern, settingOutputPath, settingFilenamePrefix, DateTime.Now.ToString("yyyyMMdd-HHmmssfff")));
+                file = new FileInfo(string.Format(AudioRecordingService.OutputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod(), DateTime.Now.ToString(AudioRecordingService.OutputFileDateFormat)));
             } while (file.Exists);
 
             DirectoryInfo directory = new DirectoryInfo(file.DirectoryName);
@@ -105,6 +106,11 @@ namespace RecNForget.Services
 
             // Actions passed to HotkeyService as Parameter shall be executed after all stop actions
             stopRecordingAction();
+        }
+
+        public string GetTargetPathTemplateString()
+        {
+            return string.Format(AudioRecordingService.OutputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod(), AudioRecordingService.OutputFileDateFormat);
         }
     }
 }

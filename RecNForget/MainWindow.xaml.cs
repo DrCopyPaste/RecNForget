@@ -41,7 +41,7 @@ namespace RecNForget
 
 		private DispatcherTimer recordingTimer;
 
-		private string recordingTimeInMilliSeconds = string.Empty;
+		private string recordingTimeimeDisplay = string.Empty;
 		private bool hasLastRecording = false;
 		private string currentFileNameDisplay;
 		private string lastFileName;
@@ -51,15 +51,15 @@ namespace RecNForget
 
 		#region bound values
 
-		public string RecordingTimeInMilliSeconds
+		public string RecordingTimeDisplay
 		{
 			get
 			{
-				return CurrentlyRecording ? recordingTimeInMilliSeconds : string.Empty;
+				return CurrentlyRecording ? recordingTimeimeDisplay : string.Empty;
 			}
 			set
 			{
-				recordingTimeInMilliSeconds = value;
+                recordingTimeimeDisplay = value;
 				OnPropertyChanged();
 			}
 		}
@@ -194,7 +194,9 @@ namespace RecNForget
 			{
 				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.FilenamePrefix, value);
 				OnPropertyChanged();
-			}
+
+                UpdateCurrentFileNameDisplay();
+            }
 		}
 
 		public bool AutoReplayAudioAfterRecording
@@ -252,13 +254,6 @@ namespace RecNForget
             // ensure AppConfig Values exist
             AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 
-            DataContext = this;
-			InitializeComponent();
-
-            taskBarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
-            taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
-			taskBarIcon.Visibility = Visibility.Visible;
-
             replayAudioService = new AudioPlayListService(
 				beforePlayAction: () =>
 				{
@@ -308,8 +303,6 @@ namespace RecNForget
 			{
 				SwitchToForegroundMode();
 			}
-
-			this.Topmost = WindowAlwaysOnTop;
 
             this.audioRecordingService = new AudioRecordingService(
                 startRecordingAction: () =>
@@ -366,10 +359,28 @@ namespace RecNForget
                     {
                         ToggleReplayLastRecording();
                     }
+                },
+                outputPathGetterMethod: () =>
+                {
+                    return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
+                },
+                filenamePrefixGetterMethod: () =>
+                {
+                    return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
                 });
 
             this.hotkeyService = new HotkeyService();
             this.hotkeyService.AddHotkey(() => { return HotkeyToStringTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
+
+            DataContext = this;
+            InitializeComponent();
+
+            this.Topmost = WindowAlwaysOnTop;
+            taskBarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
+            taskBarIcon.Visibility = Visibility.Visible;
+
+            UpdateCurrentFileNameDisplay(reset: true);
 
             ToggleRecordButton.Focus();
 		}
@@ -424,9 +435,8 @@ namespace RecNForget
 		{
 			// https://stackoverflow.com/a/23182807
 			FilenamePrefix = string.Concat(FilenamePrefix.Split(Path.GetInvalidFileNameChars()));
-
-			AppSettingHelper.SetAppConfigSetting("FilenamePrefix", FilenamePrefix);
-		}
+            AppSettingHelper.SetAppConfigSetting("FilenamePrefix", FilenamePrefix);
+        }
 
 		#endregion
 
@@ -434,7 +444,7 @@ namespace RecNForget
 
 		private void RecordingTimer_Tick(object sender, EventArgs e)
 		{
-			RecordingTimeInMilliSeconds = TimeSpan.FromMilliseconds(DateTime.Now.Subtract(RecordingStart).TotalMilliseconds).TotalSeconds.ToString(@"0.##");
+			RecordingTimeDisplay = TimeSpan.FromMilliseconds(DateTime.Now.Subtract(RecordingStart).TotalMilliseconds).TotalSeconds.ToString(@"0.##");
 			UpdateCurrentFileNameDisplay();
 		}
 
@@ -445,15 +455,9 @@ namespace RecNForget
 
 		private void UpdateCurrentFileNameDisplay(bool reset = false)
 		{
-			if (reset)
-			{
-				CurrentFileNameDisplay = string.Empty;
-			}
-			else
-			{
-				CurrentFileNameDisplay = hotkeyService == null ? string.Empty : string.Format("{0} ({1} s)", audioRecordingService.CurrentFileName, RecordingTimeInMilliSeconds);
-			}
-			
+			CurrentFileNameDisplay = !CurrentlyRecording || reset || hotkeyService == null ?
+                audioRecordingService.GetTargetPathTemplateString() :
+                string.Format("{0} ({1} s)", audioRecordingService.CurrentFileName, RecordingTimeDisplay);
 		}
 
 		private void UpdateLastFileName(bool reset = false)
@@ -463,7 +467,7 @@ namespace RecNForget
 
 		private void UpdateLastFileNameDisplay(bool reset = false)
 		{
-			LastFileNameDisplay = reset ? string.Empty : string.Format("{0} ({1} s)", audioRecordingService.LastFileName, RecordingTimeInMilliSeconds);
+			LastFileNameDisplay = reset ? string.Empty : string.Format("{0} ({1} s)", audioRecordingService.LastFileName, RecordingTimeDisplay);
 		}
 
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
