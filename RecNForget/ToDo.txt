@@ -1,4 +1,6 @@
-catch program is running while (un-) installing
+use semver!?! or something to make changing versions easier and more centralized
+
+allow opacity?
 
 error handling when trying to delete in uninstall (message to prompt to retry and info that file was blocked)
 
@@ -15,6 +17,10 @@ app config should really be user config (right now its a machine configuration,
 allow restoring app.config defaults via settings window
 
 do something useful with the "change" option when in "programs/features"-menu
+
+include about and help link in application
+
+allow toggling recording source
 
 how to build
 	include batch files?

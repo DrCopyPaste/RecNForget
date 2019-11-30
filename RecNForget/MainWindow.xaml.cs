@@ -371,7 +371,6 @@ namespace RecNForget
             this.hotkeyService = new HotkeyService();
             this.hotkeyService.AddHotkey(() => { return HotkeyToStringTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
 
-
             ToggleRecordButton.Focus();
 		}
 
