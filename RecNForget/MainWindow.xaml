@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         mc:Ignorable="d"
-        Title="RecNForget" Height="218" Width="600" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize">
+        Title="RecNForget" Height="230" Width="600" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -36,6 +36,7 @@
                 <RowDefinition Height="39" />
                 <RowDefinition Height="39" />
                 <RowDefinition Height="39" />
+                <RowDefinition Height="18" />
                 <RowDefinition Height="39" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -56,13 +57,11 @@
 
             <Label Grid.Row="2" Grid.Column="0" Content="File prefix:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Center"/>
             <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,0" Height="30" Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilenamePrefix_Changed"/>
-            <Button Grid.Row="2" Grid.Column="2" Content="Open Settings" Margin="10,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SettingsButton_Click"/>
+            <Button Grid.Row="2" Grid.Column="2" Content="Output Folder" Margin="10,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OpenOutputFolder_Click"/>
 
-            <Button Grid.Row="3" Grid.Column="2" Content="Output Folder" Margin="10,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OpenOutputFolder_Click"/>
-
-            <Label Grid.Row="4" Grid.Column="0" Content="Last result:" HorizontalAlignment="Left" Width="Auto" Margin="5,5,0,0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="5,5,0,0" IsEnabled="False" Height="30" Text="{Binding Path=LastFileNameDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-            <Button Name="ReplayLastRecordingButton" Grid.Row="4" Grid.Column="2" Margin="10,3,3,3" HorizontalAlignment="Left" Width="56" IsEnabled="False" Click="ReplayLastRecording_Click">
+            <Label Grid.Row="3" Grid.Column="0" Content="Last result:" HorizontalAlignment="Left" Width="Auto" Margin="5,5,0,0" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="5,5,0,0" IsEnabled="False" Height="30" Text="{Binding Path=LastFileNameDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+            <Button Name="ReplayLastRecordingButton" Grid.Row="3" Grid.Column="2" Margin="10,3,3,3" HorizontalAlignment="Left" Width="56" IsEnabled="False" Click="ReplayLastRecording_Click">
                 <StackPanel>
                     <Canvas Name="ReplayLastRecordingPlayDisabledIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible">
                         <Polygon Points="0,0 10,5, 0,10" Stroke="LightGray" Fill="LightGray" />
@@ -76,7 +75,7 @@
                     </Canvas>
                 </StackPanel>
             </Button>
-            <Button Name="StopReplayLastRecordingButton" Grid.Row="4" Grid.Column="2" Margin="66,3,0,3" HorizontalAlignment="Left" Width="40" IsEnabled="False" Click="StopReplayLastRecording_Click">
+            <Button Name="StopReplayLastRecordingButton" Grid.Row="3" Grid.Column="2" Margin="66,3,0,3" HorizontalAlignment="Left" Width="40" IsEnabled="False" Click="StopReplayLastRecording_Click">
                 <StackPanel>
                     <Canvas Name="ReplayLastRecordingStopDisabledIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible">
                         <Rectangle Width="10" Height="10" Stroke="LightGray" Fill="LightGray" Canvas.Left="0" Canvas.Top="0"/>
@@ -87,6 +86,14 @@
                 </StackPanel>
             </Button>
 
+            <Button Grid.Row="6" Grid.Column="2" Margin="10,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SettingsButton_Click">
+                Settings
+            </Button>
+            <Button Grid.Row="6" Grid.Column="0" Name="AboutButton" Margin="3,3,3,3" HorizontalAlignment="Left" Width="33" Height="33" Click="AboutButton_Click">
+                <StackPanel>
+                    <Image Source="ButtonImages\help_icon.ico" Width="22" />
+                </StackPanel>
+            </Button>
         </Grid>
     </Grid>
     <Window.TaskbarItemInfo>

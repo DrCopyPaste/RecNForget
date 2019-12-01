@@ -571,6 +571,12 @@ namespace RecNForget
 			settingsWindow.ShowDialog();
 		}
 
-		#endregion
-	}
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            var aboutDialog = new AboutDialog();
+            aboutDialog.ShowDialog();
+        }
+
+        #endregion
+    }
 }

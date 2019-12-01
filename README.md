@@ -60,3 +60,5 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - Logo by [DrCopyPaste](https://github.com/DrCopyPaste)
 - Logo source svgs from https://www.onlinewebfonts.com/icon/55290 and https://www.onlinewebfonts.com/icon/715
 - Click sounds for replay by https://soundcloud.com/slutski (litw@gmx.de)
+
+- help icon from https://www.onlinewebfonts.com/icon/1314

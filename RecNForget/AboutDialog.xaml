@@ -1,0 +1,84 @@
+﻿<Window x:Class="RecNForget.AboutDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecNForget"
+        mc:Ignorable="d"
+        Topmost="True"
+        Title="RecNForget - About" Height="324" Width="666" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="13" Source="Images\logo_big.png" Width="170" />
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" FontSize="45" TextWrapping="Wrap" Text="RecNForget"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap" Name="VersionLabel" Text="Version X.Y.Z.A" />
+        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap">
+            <Run>
+                (C) 2019 by 
+            </Run>
+            <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">DrCopyPaste</Hyperlink>
+        </TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap" Text="RecNForget is a free application that helps you sample audio faster."  />
+        <ScrollViewer Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="7">
+            <TextBlock FontSize="11" TextWrapping="Wrap">
+                <Run>
+                    Logo by DrCopyPaste (using icons from https://www.onlinewebfonts.com - see below)
+                </Run>
+                <LineBreak/>
+                <Run>
+                    Beep sounds by a cheap program from DrCopyPaste with love.
+                </Run>
+                <LineBreak/>
+                <Run>
+                    Click sounds by slutski
+                </Run>
+                <Hyperlink NavigateUri="mailto:litw@gmx.de" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">litw@gmx.de</Hyperlink>
+                <Run>
+                    -
+                </Run>
+                <Hyperlink NavigateUri="https://soundcloud.com/slutski" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">soundcloud.com/slutski</Hyperlink>
+                <LineBreak/>
+                <LineBreak/>
+                <Run>
+                    The following images were used for the logo as well as icons in this application:
+                </Run>
+                <!-- for logo-->
+                <LineBreak/>
+                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">onlinewebfonts.com/icon/55290</Hyperlink>
+                <LineBreak/>
+                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">onlinewebfonts.com/icon/715</Hyperlink>
+                <LineBreak/>
+                <!-- for button images -->
+                <!-- help -->
+                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/1314" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">onlinewebfonts.com/icon/1314</Hyperlink>
+                <LineBreak/>
+            </TextBlock>
+        </ScrollViewer>
+        <Button Grid.Row="15" Grid.Column="3" Name="OKButton" Content="OK" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="OKButton_Click"/>
+    </Grid>
+</Window>

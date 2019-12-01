@@ -1,7 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
-<metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
-<g><g><path d="M649.5,463.2c30.7-30.7,46-67.5,46-110.4c0-53.7-19.2-99.7-57.5-138s-84.4-57.5-138-57.5c-53.7,0-99.7,19.2-138,57.5s-57.5,84.4-57.5,138h96.6c0-26.1,10-49.1,29.9-69s42.9-29.9,69-29.9s49.1,10,69,29.9c19.9,19.9,29.9,42.9,29.9,69c0,26.1-10,49.1-29.9,69l-59.8,62.1c-38.3,41.4-57.5,87.4-57.5,138v25.3h96.6c0-50.6,19.2-96.6,57.5-138L649.5,463.2z M548.3,842.8v-96.6h-96.6v96.6H548.3z M500,10c135,0,250.4,47.9,346.2,143.8S990,365,990,500s-47.9,250.4-143.8,346.2S635,990,500,990c-135,0-250.4-47.9-346.2-143.8S10,635,10,500s47.9-250.4,143.8-346.2S365,10,500,10z"/></g></g>
-</svg>
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 1000 1000"
+   enable-background="new 0 0 1000 1000"
+   xml:space="preserve"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   width="100%"
+   height="100%"
+   sodipodi:docname="help_icon.svg"
+   inkscape:export-filename="D:\__devProjects\git_projects\RecNForget\icon_generation\help_icon.png"
+   inkscape:export-xdpi="23.51"
+   inkscape:export-ydpi="23.51"><defs
+   id="defs14" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1018"
+   id="namedview12"
+   showgrid="false"
+   inkscape:zoom="0.236"
+   inkscape:cx="-311.44068"
+   inkscape:cy="500"
+   inkscape:window-x="1272"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg2" />
+<metadata
+   id="metadata4"> Svg Vector Icons : http://www.onlinewebfonts.com/icon <rdf:RDF><cc:Work
+     rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata>
+
+<g
+   transform="translate(204.15256,-348.2203)"
+   id="g3802"><rect
+     y="-260.42377"
+     x="-1537.3729"
+     height="980"
+     width="980"
+     id="rect3762"
+     style="fill:#ffffff;fill-opacity:1" /><path
+     inkscape:connector-curvature="0"
+     id="path10"
+     d="m -897.87289,192.77625 c 30.70003,-30.7 46.00001,-67.5 46.00001,-110.400002 0,-53.699999 -19.19998,-99.7 -57.50001,-138 -38.3,-38.300002 -84.4,-57.499998 -138.00001,-57.499998 -53.7,0 -99.7,19.199996 -138,57.499998 -38.3,38.3 -57.5,84.400001 -57.5,138 h 96.6 c 0,-26.1 10,-49.099999 29.9,-69 19.9,-19.9000002 42.9,-29.9 69,-29.9 26.1,0 49.10001,9.9999998 69.00001,29.9 19.9,19.900001 29.9,42.9 29.9,69 0,26.100002 -10,49.100002 -29.9,69.000002 l -59.80001,62.1 c -38.3,41.4 -57.5,87.39996 -57.5,137.99996 v 25.3 h 96.60001 c 0,-50.6 19.2,-96.59996 57.5,-137.99996 l 43.7,-46 z m -101.2,379.59996 v -96.6 h -96.60001 v 96.6 h 96.60001 z m -48.30001,-832.79996 c 135.00001,0 250.40002,47.9 346.20002,143.8 95.8,95.899998 143.8,211.199998 143.8,346.2 0,134.99996 -47.9,250.39996 -143.8,346.19996 -95.9,95.8 -211.20001,143.8 -346.20002,143.8 -135,0 -250.4,-47.9 -346.2,-143.8 -95.8,-95.9 -143.8,-211.2 -143.8,-346.19996 0,-135.000002 47.9,-250.400002 143.8,-346.2 95.9,-95.8 211.2,-143.8 346.2,-143.8 z" /></g></svg>
