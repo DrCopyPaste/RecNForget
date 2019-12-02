@@ -16,9 +16,7 @@ app config should really be user config (right now its a machine configuration,
 
 allow restoring app.config defaults via settings window
 
-do something useful with the "change" option when in "programs/features"-menu
-
-include about and help link in application
+include help link in application
 
 allow toggling recording source
 
@@ -40,6 +38,9 @@ maybe settings and hotkey windows are a bit "too always on top"?
 readme.md howto file with screenshots
 
 refactor, ioc, constants, magic strings, identifiers etc
+
+do something useful with the "change" option when in "programs/features"-menu
+	-this is no longer an issue? dont see anything like this on win 7 and on win 10 the modify button was disabled...
 
 add option to open just recorded file in "edit mode"
 	if (auto replay is enabled, replay will start in this new "edit window")

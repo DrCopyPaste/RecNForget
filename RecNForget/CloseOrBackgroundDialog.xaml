@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
         Topmost="True"
-        Title="RecNForget - Close or Background" Height="110" Width="460" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize">
+        Title="RecNForget - Close or Background" Height="110" Width="460" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>

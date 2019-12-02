@@ -11,8 +11,7 @@ Your recorded audio is now saved to an automatically generated file in RecNForge
 # How to install
 RecNForget requires .Net Framework 4.7 to run.
 
-You should be able to just extract RecNForget from the latest release and run the program.
-(https://github.com/DrCopyPaste/RecNForget/releases)
+Run msi-file from the [latest release](https://github.com/DrCopyPaste/RecNForget/releases/latest) to install.
 
 # How to Use
 - by default RecNForget sets [Ctrl] + [F12] as the Record hotkey. (changeable in settings)
@@ -27,8 +26,11 @@ You should be able to just extract RecNForget from the latest release and run th
 
 # Cloning and playing with the code
 Feel free to download the code and play with it, for now this has mainly prototype quality, but I try to clean up the code as I go.
-Please keep in mind this is my first (and very maybe last) WPF application so this might make it a bit more messy. (Especially binding logic and similar stuff...)
 
+Currently I use Microsoft's Visual Studio Community 2019 for development.
+To build the setup project you need to have the [WiX Toolset](https://wixtoolset.org/releases/v3.11.2/stable) installed.
+
+Please keep in mind this is my first (and very maybe last) WPF application so this might make it a bit more messy. (Especially binding logic and similar stuff...)
 For stable and buildable code please refer to the version tagged commits, in between releases there may very well be errors in the code ;)
 
 # upcoming features in next version (commited, not yet released)
@@ -49,11 +51,14 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - rework visual layout of windows (more consistency and maybe smaller nicer windows)
 
 # Nice to haves in future releases
+- allow toggling input device (default audio/mic/mixed/other?)
+- allow different output formats (like wave/mp3/ogg?)
 - allow hotkeys for other actions (like changing output file or replaying last recorded audio)
 - include how-to-build-file (maybe batch with msbuild)
 - icons for buttons
 - RecNForget can self-update (possibly querying github's releases page)
 - "gimmick" mode (allow using application as a sound board, binding hotkeys to different sound outputs, maybe even allow changing the output device they are output to (to insert sounds into a running mic session for example))
+- migrate to .net core (this is more out of curiosity than pure necessity, BUT it might be an interesting step towards trying to make RecNForget cross platform (whilst maybe getting smaller and more performant))
 
 # Credits
 - Code by [DrCopyPaste](https://github.com/DrCopyPaste)

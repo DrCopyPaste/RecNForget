@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
         Topmost="True"
-        Title="RecNForget - About" Height="324" Width="666" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize">
+        Title="RecNForget - About" Height="324" Width="666" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -39,15 +39,18 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap" Name="VersionLabel" Text="Version X.Y.Z.A" />
         <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap">
             <Run>
-                (C) 2019 by 
+                (C) 2019 by DrCopyPaste (
             </Run>
-            <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">DrCopyPaste</Hyperlink>
+            <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">visit github.com/DrCopyPaste</Hyperlink>
+            <Run>
+                )
+            </Run>
         </TextBlock>
         <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap" Text="RecNForget is a free application that helps you sample audio faster."  />
         <ScrollViewer Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="7">
             <TextBlock FontSize="11" TextWrapping="Wrap">
                 <Run>
-                    Logo by DrCopyPaste (using icons from https://www.onlinewebfonts.com - see below)
+                    Logo by DrCopyPaste (using icons from onlinewebfonts.com - see below)
                 </Run>
                 <LineBreak/>
                 <Run>
@@ -55,13 +58,16 @@
                 </Run>
                 <LineBreak/>
                 <Run>
-                    Click sounds by slutski
+                    Click sounds by slutski (
                 </Run>
                 <Hyperlink NavigateUri="mailto:litw@gmx.de" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">litw@gmx.de</Hyperlink>
                 <Run>
                     -
                 </Run>
                 <Hyperlink NavigateUri="https://soundcloud.com/slutski" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">soundcloud.com/slutski</Hyperlink>
+                <Run>
+                    )
+                </Run>
                 <LineBreak/>
                 <LineBreak/>
                 <Run>
