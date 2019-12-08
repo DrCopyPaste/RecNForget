@@ -1,3 +1,13 @@
+error handling for no internet/network connection for update/problems writing file etc
+
+automatic (when upgrading from within recnforget) attempt restart after upgrade fails?
+
+automatically restart RecNForget after updating
+
+automatically start RecNForget after install (optional)
+
+add progress indicator when querying releases (might be a few dozen kB)
+
 use semver!?! or something to make changing versions easier and more centralized
 
 allow opacity?

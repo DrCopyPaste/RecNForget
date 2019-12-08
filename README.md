@@ -40,6 +40,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - shrinked main window in size and reorganized controls a bit
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
+- RecNForget can now update itself via clicking the about-button and then "check for updates"
 - Installation is cancelled if .Net framework is not found
 - Installer lets user choose target installation folder
 - Intaller now shows a minimal UI with license agreement and logo during installation

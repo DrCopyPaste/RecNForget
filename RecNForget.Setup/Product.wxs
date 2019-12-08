@@ -69,6 +69,14 @@
                 <File Id="NAudio.dll" Source="$(var.RecNForget.TargetDir)NAudio.dll" KeyPath="yes" Checksum="yes">
                 </File>
             </Component>
+            <Component Id="Newtonsoft.Json.dll" Guid="{D8B52782-E919-4AF6-A991-6C7E9C142578}" Directory="INSTALLFOLDER">
+                <File Id="Newtonsoft.Json.dll" Source="$(var.RecNForget.TargetDir)Newtonsoft.Json.dll" KeyPath="yes" Checksum="yes">
+                </File>
+            </Component>
+            <Component Id="Octokit.dll" Guid="{F47BEBAB-7D12-4E8D-AD52-1867C344B175}" Directory="INSTALLFOLDER">
+                <File Id="Octokit.dll" Source="$(var.RecNForget.TargetDir)Octokit.dll" KeyPath="yes" Checksum="yes">
+                </File>
+            </Component>
             <Component Id="Ookii.Dialogs.Wpf.dll" Guid="{D55CCDC8-E206-4FD9-BBC6-C7CF48E947D5}" Directory="INSTALLFOLDER">
                 <File Id="Ookii.Dialogs.Wpf.dll" Source="$(var.RecNForget.TargetDir)Ookii.Dialogs.Wpf.dll" KeyPath="yes" Checksum="yes">
                 </File>

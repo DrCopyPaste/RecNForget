@@ -46,9 +46,21 @@
                 )
             </Run>
         </TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap" Text="RecNForget is a free application that helps you sample audio faster."  />
-        <ScrollViewer Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="7">
+        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Text="RecNForget is a free application that helps you sample audio faster."  />
+        <ScrollViewer Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="7" Margin="0,0,5,0">
             <TextBlock FontSize="11" TextWrapping="Wrap">
+                <Run>
+                    RecNForget is written in C# using .Net Framework 4.7 and Microsoft WPF
+                </Run>
+                <LineBreak/>
+                <LineBreak/>
+                <Run>
+                    Code by DrCopyPaste (Open Source @
+                </Run>
+                <Hyperlink NavigateUri="https://github.com/DrCopyPaste/RecNForget" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                    github.com/DrCopyPaste/RecNForget
+                </Hyperlink>
+                <LineBreak/>
                 <Run>
                     Logo by DrCopyPaste (using icons from onlinewebfonts.com - see below)
                 </Run>
@@ -60,11 +72,15 @@
                 <Run>
                     Click sounds by slutski (
                 </Run>
-                <Hyperlink NavigateUri="mailto:litw@gmx.de" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">litw@gmx.de</Hyperlink>
+                <Hyperlink NavigateUri="mailto:litw@gmx.de" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                    litw@gmx.de
+                </Hyperlink>
                 <Run>
                     -
                 </Run>
-                <Hyperlink NavigateUri="https://soundcloud.com/slutski" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">soundcloud.com/slutski</Hyperlink>
+                <Hyperlink NavigateUri="https://soundcloud.com/slutski" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                    soundcloud.com/slutski
+                </Hyperlink>
                 <Run>
                     )
                 </Run>
@@ -75,16 +91,23 @@
                 </Run>
                 <!-- for logo-->
                 <LineBreak/>
-                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">onlinewebfonts.com/icon/55290</Hyperlink>
+                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                    onlinewebfonts.com/icon/55290 (speaker icon)
+                </Hyperlink>
                 <LineBreak/>
-                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">onlinewebfonts.com/icon/715</Hyperlink>
+                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                    onlinewebfonts.com/icon/715 (folder icon)
+                </Hyperlink>
                 <LineBreak/>
                 <!-- for button images -->
                 <!-- help -->
-                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/1314" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">onlinewebfonts.com/icon/1314</Hyperlink>
+                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/1314" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                    onlinewebfonts.com/icon/1314 (question mark icon)
+                </Hyperlink>
                 <LineBreak/>
             </TextBlock>
         </ScrollViewer>
+        <Button Grid.Row="15" Grid.Column="0" Name="CheckForUpdateButton" Content="Check for Updates" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="CheckForUpdateButton_Click"/>
         <Button Grid.Row="15" Grid.Column="3" Name="OKButton" Content="OK" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="OKButton_Click"/>
     </Grid>
 </Window>
