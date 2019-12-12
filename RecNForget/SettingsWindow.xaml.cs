@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace RecNForget
@@ -28,8 +29,6 @@ namespace RecNForget
 
 			DataContext = this;
 			InitializeComponent();
-
-			OkButton.Focus();
 		}
 
 		public bool AutoStartWithWindows
@@ -183,6 +182,12 @@ namespace RecNForget
 
 		#region runtime event handlers
 
+		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+				this.DragMove();
+		}
+
 		private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
 		{
 			this.hotkeyService.PauseCapturingHotkeys();
@@ -205,6 +210,11 @@ namespace RecNForget
 			{
 				OutputPath = dialog.SelectedPath;
 			}
+		}
+
+		private void Exit_Click(object sender, RoutedEventArgs e)
+		{
+			DialogResult = true;
 		}
 
 		private void OkButton_Click(object sender, RoutedEventArgs e)

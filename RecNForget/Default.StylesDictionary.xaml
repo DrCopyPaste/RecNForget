@@ -41,6 +41,21 @@
     <Sys:String x:Key="ActionButtonBorder_Color">#cccccc</Sys:String>
     <Sys:String x:Key="ActionButtonBorder_Focused_Color">Black</Sys:String>
 
+    <!-- Window style -->
+    <Style x:Key="DefaultWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="SizeToContent" Value="WidthAndHeight" />
+    </Style>
+
+    <Style x:Key="DefaultWindowBorderStyle" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource ApplicationBorder_Color}}" />
+        <Setter Property="BorderThickness" Value="1,1,1,1" />
+        <Setter Property="CornerRadius" Value="3,3,3,3" />
+    </Style>
+
+
     <!--
         Default Button colors for header buttons as well as action buttons
     -->
@@ -301,17 +316,7 @@
         <Setter Property="SelectedImage" Value="ButtonImages\stop_icon.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\stop_icon.black.png" />
     </Style>
-
-    <Style x:Key="DefaultButtonStyle" TargetType="Button">
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Margin" Value="3,0,1,0" />
-        <Setter Property="Height" Value="30" />
-        <Setter Property="Width" Value="105" />
-        <Setter Property="Background" Value="#eeeeee"/>
-        <Setter Property="Foreground" Value="Transparent"/>
-        <Setter Property="IsEnabled" Value="False"/>
-    </Style>
+    
     <Style x:Key="DefaultLabelStyle" TargetType="Label">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
@@ -333,6 +338,6 @@
     <Style x:Key="DefaultSeparatorStyle" TargetType="Rectangle">
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="Fill" Value="#ffffff" />
+        <Setter Property="Fill" Value="{Binding Source={StaticResource Application_Background_Color}}" />
     </Style>
 </ResourceDictionary>

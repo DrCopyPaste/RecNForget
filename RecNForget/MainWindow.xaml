@@ -7,7 +7,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         mc:Ignorable="d"
-        Title="RecNForget" WindowStyle="None" AllowsTransparency="True" Background="Transparent" SizeToContent="WidthAndHeight">
+        Title="RecNForget" Style="{StaticResource DefaultWindowStyle}" >
 
     <!-- Try to follow this node convention:
         <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
@@ -18,38 +18,35 @@
         </NodeName>
         -->
 
-    <Border Background="{Binding Source={StaticResource Application_Background_Color}}" BorderBrush="{Binding Source={StaticResource ApplicationBorder_Color}}" BorderThickness="1,1,1,1" CornerRadius="3,3,3,3">
-        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" Name="MainGrid">
-            <Grid.Resources>
-                <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
-            </Grid.Resources>
+    <Border Style="{StaticResource DefaultWindowBorderStyle}">
+        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" Name="MainGrid" MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
-                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}" />
                 <!-- row 0 for title bar-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}" />
                 <!-- row 1 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 2 for current file display title-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 3 for current file display-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
                 <!-- row 4 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 5 for file prefix title-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 6 for file prefix-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
                 <!-- row 7 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
-                <!-- row 8 for last result display title-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
-                <!-- row 9 for last result display-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
-                <!-- row 10 for separator-->
+                <!-- row 8 for last result display title-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
-                <!-- row 11 for action buttons title-->
+                <!-- row 9 for last result display-->
                 <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <!-- row 10 for separator-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <!-- row 11 for action buttons title-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 12 for action buttons-->
+                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding Source={StaticResource MainWindow_Width}}" />
@@ -64,9 +61,9 @@
             </tb:TaskbarIcon>
 
             <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{Binding Source={StaticResource HeaderRow_Background_Color}}">
+            <Grid Grid.Row="0" Grid.Column="0" Background="{Binding Source={StaticResource HeaderRow_Background_Color}}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}"></RowDefinition>
+                    <RowDefinition Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />

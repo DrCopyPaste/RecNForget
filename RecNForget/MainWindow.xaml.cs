@@ -366,9 +366,6 @@ namespace RecNForget
             taskBarIcon.DoubleClickCommand = new SimpleActionCommand(() => { SwitchToForegroundMode(); });
             taskBarIcon.Visibility = Visibility.Visible;
 
-			// make window draggable from anywhere when mouse pressed (except on active controls)
-			this.MainGrid.MouseDown += Window_MouseDown;
-
 			UpdateCurrentFileNameDisplay(reset: true);
 			UpdateLastFileName(reset: true);
 			UpdateLastFileNameDisplay(reset: true);
