@@ -80,7 +80,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="output path:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="Output path:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                 <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top">
                     <TextBlock Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis" />
                 </Label>
@@ -98,7 +98,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="start/stop recording:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="Record start/stop" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                 <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                 <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="ConfigureHotkey_StartStopRecording_Click" />
             </Grid>
@@ -114,7 +114,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=AutoStartWithWindows}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">auto start with Windows</CheckBox>
+                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=AutoStartWithWindows}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">auto start</CheckBox>
             </Grid>
             <Grid Grid.Row="10" Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -125,7 +125,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=MinimizedToTray}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">run as background process (minimized to tray)</CheckBox>
+                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=MinimizedToTray}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">run in background</CheckBox>
             </Grid>
             
             <Rectangle Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
@@ -142,7 +142,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=AutoReplayAudioAfterRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">auto-replay audio after recording
+                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=AutoReplayAudioAfterRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">replay audio after recording
                 </CheckBox>
             </Grid>
             <Grid Grid.Row="14" Grid.Column="0">
@@ -157,7 +157,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">play audio feedback beeps marking recording start and stop</CheckBox>
+                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">audio feedback on record start/stop</CheckBox>
             </Grid>
             <Grid Grid.Row="15" Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -171,7 +171,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopReplaying}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">play audio feedback beeps marking replaying last audio start and stop</CheckBox>
+                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopReplaying}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">audio feedback on replay start/stop</CheckBox>
             </Grid>
             <Grid Grid.Row="16" Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -185,7 +185,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=ShowBalloonTipsForRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">show balloon/toast messages for recording</CheckBox>
+                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=ShowBalloonTipsForRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">show toast messages on status change</CheckBox>
             </Grid>
             <Button Grid.Row="17" Grid.Column="0" Name="OkButton" Content="Ok" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="{Binding Source={StaticResource HalfButtonCell_Width}}" Click="OkButton_Click"/>
         </Grid>

@@ -1,5 +1,8 @@
 include real help link in application
 
+maybe make settings in settings window temporary (so they have to be ok'd, right now every change takes effect immediately)
+ -or simply state explicitly that everything is changed ad-hoc in top of window
+
 error handling for no internet/network connection for update/problems writing file etc
 
 automatic (from msi setup, when upgrading from within recnforget) attempt restart after upgrade fails?
