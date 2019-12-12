@@ -41,7 +41,6 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - shrinked main window in size and reorganized controls a bit
 - no more standard title bar
 - all action buttons now are in the same row at the bottom
-- most buttons have an icon now
 - added icons for most buttons
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - clicking the open folder button now selects the last result file in explorer (or just opens folder if there is now result yet)
@@ -62,8 +61,6 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - allow different output formats (like wave/mp3/ogg?)
 - allow hotkeys for other actions (like changing output file or replaying last recorded audio)
 - include how-to-build-file (maybe batch with msbuild)
-- icons for buttons
-- RecNForget can self-update (possibly querying github's releases page)
 - "gimmick" mode (allow using application as a sound board, binding hotkeys to different sound outputs, maybe even allow changing the output device they are output to (to insert sounds into a running mic session for example))
 - migrate to .net core (this is more out of curiosity than pure necessity, BUT it might be an interesting step towards trying to make RecNForget cross platform (whilst maybe getting smaller and more performant))
 
