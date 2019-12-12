@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-    <?define iconPath="..\..\..\icon_generation\logo.ico"?>
+    <?define iconPath="..\..\..\icon_generation\logo\logo.ico"?>
     <Product Id="{1797362C-C758-4F22-9878-2AF96B9C9524}" Name="RecNForget" Language="1033" Version="0.4.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
         <UIRef Id="WixUI_InstallDir"/>
@@ -21,8 +21,8 @@
         </Condition>
       
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-        <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)..\icon_generation\WixUIBannerBmp.bmp" />
-        <WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)..\icon_generation\WixUIDialogBmp.bmp" />
+        <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)..\icon_generation\installerImages\WixUIBannerBmp.bmp" />
+        <WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)..\icon_generation\installerImages\WixUIDialogBmp.bmp" />
         <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)apache2.license.rtf" />
 
         <Binary Id="CustomActionDll" SourceFile="$(var.RecNForget.Setup.Extensions.TargetDir)RecNForget.Setup.Extensions.CA.dll" />

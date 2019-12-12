@@ -1,6 +1,8 @@
+include real help link in application
+
 error handling for no internet/network connection for update/problems writing file etc
 
-automatic (when upgrading from within recnforget) attempt restart after upgrade fails?
+automatic (from msi setup, when upgrading from within recnforget) attempt restart after upgrade fails?
 
 automatically restart RecNForget after updating
 
@@ -8,11 +10,7 @@ automatically start RecNForget after install (optional)
 
 add progress indicator when querying releases (might be a few dozen kB)
 
-buttons that really "click" (icons "move down" when the button is pressed)
-
 tooltips for buttons
-
-context menu in main window for quick settings
 
 use semver!?! or something to make changing versions easier and more centralized
 
@@ -32,8 +30,6 @@ app config should really be user config (right now its a machine configuration,
 
 allow restoring app.config defaults via settings window
 
-include help link in application
-
 allow toggling recording source
 
 how to build
@@ -43,11 +39,7 @@ enable output as mp3/other (configurable (conditionally))
 
 add Signature!?!
 
-icons for buttons
-
 show record (red circle) in bottom right corner when recording
-
-add possibility to edit sampled audio (cut it at beginning and end and save as new file or override it)
 
 maybe settings and hotkey windows are a bit "too always on top"?
 
@@ -58,6 +50,7 @@ refactor, ioc, constants, magic strings, identifiers etc
 do something useful with the "change" option when in "programs/features"-menu
 	-this is no longer an issue? dont see anything like this on win 7 and on win 10 the modify button was disabled...
 
+add possibility to edit sampled audio (cut it at beginning and end and save as new file or override it)
 add option to open just recorded file in "edit mode"
 	if (auto replay is enabled, replay will start in this new "edit window")
 	the edit window allows to cut the sample (only at beginning and end?)
@@ -71,8 +64,7 @@ but instead enter it before or after recording, but I think this is really an ed
 use netfx extension in wix installer to precompile .net dlls and exe into IL to improve startup performance
 (granted, building the setup project requires WiX Toolset to be installed, but is there a way to reference the dll without it being an explicit path? maybe nuget?)
 
-allow disabling some hotkeys explicitly
-(decreasing the amount of hotkeys, the listener has to listen to - this todo actually comes from a time when I thought about hotkeying everything, like chanding output folder, changing prefix etc... - for now this is not needed)
+allow adding additional hotkeys for all actions (but record hotkey stays mandatory?)
 
 balloon tips are not showing when a video is in full screen (netflix for instance, is there a way to enforce it anyway?)
 	there is for instance taskBarIcon.BringIntoView(); but it does not seem to work, dont see any possible always on top or topmost option for the balloon tips
@@ -80,9 +72,9 @@ balloon tips are not showing when a video is in full screen (netflix for instanc
 allow fixed time recording
 (sometimes you already know how long the sample you want to record is in advance, but stopping the recording manually would lose you precision - in that case it might be advantageous to set stop recording to, say 2 minutes 12 seconds 123ms in advance...))
 
-use proper bindings to change visibility on replay/pause/stop last recording button
-
 msi installer can download the required .net version (or we include .net into the setup? wont that make it extra fat?)
 
 Allow including screenshots with sampled audio file (for later remembering which movie/whatever thing the sample belonged to)
 	This could also be the fraps replacement :D (well kinda)
+
+buttons that really "click" (icons "move down" when the button is pressed) => hm not for now, I like the flat style :D
