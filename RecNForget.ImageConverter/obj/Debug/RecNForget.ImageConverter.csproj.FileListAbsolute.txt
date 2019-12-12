@@ -1,6 +1,0 @@
-D:\__devProjects\git_projects\RecNForget\RecNForget.ImageConverter\bin\Debug\RecNForget.ImageConverter.exe.config
-D:\__devProjects\git_projects\RecNForget\RecNForget.ImageConverter\bin\Debug\RecNForget.ImageConverter.exe
-D:\__devProjects\git_projects\RecNForget\RecNForget.ImageConverter\bin\Debug\RecNForget.ImageConverter.pdb
-D:\__devProjects\git_projects\RecNForget\RecNForget.ImageConverter\obj\Debug\RecNForget.ImageConverter.csprojAssemblyReference.cache
-D:\__devProjects\git_projects\RecNForget\RecNForget.ImageConverter\obj\Debug\RecNForget.ImageConverter.exe
-D:\__devProjects\git_projects\RecNForget\RecNForget.ImageConverter\obj\Debug\RecNForget.ImageConverter.pdb
