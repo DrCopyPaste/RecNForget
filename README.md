@@ -37,10 +37,16 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - FIX: uninstalling RecNForget will now also delete all application data (under %APPDATA% machine configuration and in registry for autostart)
 - FIX: changing the file prefix changes the displayed file name with output path
 
+- major UI rework of the main window (see below)
 - shrinked main window in size and reorganized controls a bit
+- no more standard title bar
+- all action buttons now are in the same row at the bottom
+- most buttons have an icon now
+- added icons for most buttons
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
+- clicking the open folder button now selects the last result file in explorer (or just opens folder if there is now result yet)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
-- RecNForget can now update itself via clicking the about-button and then "check for updates"
+- RecNForget can now update itself via clicking the about-button (via top left window button) and then "check for updates"
 - Installation is cancelled if .Net framework is not found
 - Installer lets user choose target installation folder
 - Intaller now shows a minimal UI with license agreement and logo during installation

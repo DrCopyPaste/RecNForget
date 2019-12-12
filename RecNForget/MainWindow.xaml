@@ -7,97 +7,170 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         mc:Ignorable="d"
-        Title="RecNForget" Height="230" Width="600" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        Title="RecNForget" WindowStyle="None" AllowsTransparency="True" Background="Transparent" SizeToContent="WidthAndHeight">
 
-        <tb:TaskbarIcon Name="taskBarIcon">
-            <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Click="Exit_Click" Header="Exit" />
-                </ContextMenu>
-            </tb:TaskbarIcon.ContextMenu>
-        </tb:TaskbarIcon>
+    <!-- Try to follow this node convention:
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+            ...custom style definitions...
+            Content/Text/Value="optional"
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...>
+            ...
+        </NodeName>
+        -->
 
-        <Grid Grid.Row="0" Grid.Column="0">
+    <Border Background="{Binding Source={StaticResource Application_Background_Color}}" BorderBrush="{Binding Source={StaticResource ApplicationBorder_Color}}" BorderThickness="1,1,1,1" CornerRadius="3,3,3,3">
+        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" Name="MainGrid">
             <Grid.Resources>
                 <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-                <RowDefinition Height="39" />
-                <RowDefinition Height="39" />
-                <RowDefinition Height="39" />
-                <RowDefinition Height="18" />
-                <RowDefinition Height="39" />
+                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}" />
+                <!-- row 0 for title bar-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <!-- row 1 for separator-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <!-- row 2 for current file display title-->
+                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <!-- row 3 for current file display-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <!-- row 4 for separator-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <!-- row 5 for file prefix title-->
+                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <!-- row 6 for file prefix-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <!-- row 7 for separator-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <!-- row 8 for last result display title-->
+                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <!-- row 9 for last result display-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <!-- row 10 for separator-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <!-- row 11 for action buttons title-->
+                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <!-- row 12 for action buttons-->
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="375" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="{Binding Source={StaticResource MainWindow_Width}}" />
             </Grid.ColumnDefinitions>
 
-            <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=WindowAlwaysOnTop}" HorizontalAlignment="Stretch" Height="Auto" Margin="5,0,0,0" VerticalAlignment="Center">stay on top</CheckBox>
-            <Canvas Grid.Row="0" Grid.Column="1" Height="15" Width="18" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center">
-                <Ellipse Width="15" Height="15" Fill="Red" Canvas.Left="0" Canvas.Top="0" Visibility="{Binding Path=CurrentlyRecording, Converter={StaticResource BooleanToVisibility}}"/>
-                <Rectangle Width="15" Height="15" Fill="Black" Canvas.Left="0" Canvas.Top="0" Visibility="{Binding Path=CurrentlyNotRecording, Converter={StaticResource BooleanToVisibility}}"/>
-            </Canvas>
+            <tb:TaskbarIcon Name="taskBarIcon">
+                <tb:TaskbarIcon.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Click="Exit_Click" Header="Exit" />
+                    </ContextMenu>
+                </tb:TaskbarIcon.ContextMenu>
+            </tb:TaskbarIcon>
 
-            <Label Grid.Row="1" Grid.Column="0" Height="30" Content="Target:" Margin="5,5,0,0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="1" IsEnabled="False" Height="30" Margin="5,5,0,0" Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-            <Button Grid.Row="1" Grid.Column="2" Name="ToggleRecordButton" Content="Record" Margin="10,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="RecordButton_Click"/>
+            <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{Binding Source={StaticResource HeaderRow_Background_Color}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="2" Grid.Column="0" Content="File prefix:" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="5,5,0,0" Height="30" Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextChanged="FilenamePrefix_Changed"/>
-            <Button Grid.Row="2" Grid.Column="2" Content="Output Folder" Margin="10,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="OpenOutputFolder_Click"/>
+                <local:ImageButton Grid.Row="0" Grid.Column="0" x:Name="WindowOptionsButton" Style="{StaticResource WindowSettingsButton}" Click="WindowOptionsButton_Click">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Cancel" Margin="0" Padding="0" VerticalAlignment="Center" />
+                            <Separator />
+                            <MenuItem Header="Open settings" Margin="0" Padding="0" Click="SettingsButton_Click" VerticalAlignment="Center">
+                                <MenuItem.Icon>
+                                    <Image Source="ButtonImages\settings_icon40863.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="always on top" Margin="0" Padding="0" IsCheckable="true" IsChecked="{Binding Path=WindowAlwaysOnTop}" VerticalAlignment="Center" />
+                            <Separator />
+                            <MenuItem Header="About RecNForget" Click="AboutButton_Click" Margin="0" Padding="0" VerticalAlignment="Center">
+                                <MenuItem.Icon>
+                                    <Image Source="ButtonImages\information_icon280732.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Help" Click="AboutButton_Click" Margin="0" Padding="0" VerticalAlignment="Center">
+                                <MenuItem.Icon>
+                                    <Image Source="ButtonImages\help_icon544157.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Close RecNForget" Click="Exit_Click" Margin="0" Padding="0" VerticalAlignment="Center">
+                                <MenuItem.Icon>
+                                    <Image Source="ButtonImages\close_icon211720.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </local:ImageButton>
+                
+                <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}" Click="MinimizeButton_Click" />
+                <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}" Click="Exit_Click" />
+            </Grid>
 
-            <Label Grid.Row="3" Grid.Column="0" Content="Last result:" HorizontalAlignment="Left" Width="Auto" Margin="5,5,0,0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="5,5,0,0" IsEnabled="False" Height="30" Text="{Binding Path=LastFileNameDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-            <Button Name="ReplayLastRecordingButton" Grid.Row="3" Grid.Column="2" Margin="10,3,3,3" HorizontalAlignment="Left" Width="56" IsEnabled="False" Click="ReplayLastRecording_Click">
-                <StackPanel>
-                    <Canvas Name="ReplayLastRecordingPlayDisabledIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible">
-                        <Polygon Points="0,0 10,5, 0,10" Stroke="LightGray" Fill="LightGray" />
-                    </Canvas>
-                    <Canvas Name="ReplayLastRecordingPlayIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed">
-                        <Polygon Points="0,0 10,5, 0,10" Stroke="Black" Fill="Black" />
-                    </Canvas>
-                    <Canvas Name="ReplayLastRecordingPauseIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed">
-                        <Rectangle Width="3" Height="10" Fill="Black" Canvas.Left="0" Canvas.Top="0"/>
-                        <Rectangle Width="3" Height="10" Fill="Black" Canvas.Left="6" Canvas.Top="0"/>
-                    </Canvas>
-                </StackPanel>
-            </Button>
-            <Button Name="StopReplayLastRecordingButton" Grid.Row="3" Grid.Column="2" Margin="66,3,0,3" HorizontalAlignment="Left" Width="40" IsEnabled="False" Click="StopReplayLastRecording_Click">
-                <StackPanel>
-                    <Canvas Name="ReplayLastRecordingStopDisabledIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Visible">
-                        <Rectangle Width="10" Height="10" Stroke="LightGray" Fill="LightGray" Canvas.Left="0" Canvas.Top="0"/>
-                    </Canvas>
-                    <Canvas Name="ReplayLastRecordingStopIcon" Height="10" Width="10" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Collapsed">
-                        <Rectangle Width="10" Height="10" Fill="Black" Canvas.Left="0" Canvas.Top="0"/>
-                    </Canvas>
-                </StackPanel>
-            </Button>
+            <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
+            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Path"/>
+            <TextBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Button Grid.Row="6" Grid.Column="2" Margin="10,3,3,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SettingsButton_Click">
-                Settings
-            </Button>
-            <Button Grid.Row="6" Grid.Column="0" Name="AboutButton" Margin="3,3,3,3" HorizontalAlignment="Left" Width="33" Height="33" Click="AboutButton_Click">
-                <StackPanel>
-                    <Image Source="ButtonImages\help_icon.ico" Width="22" />
-                </StackPanel>
-            </Button>
+            <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
+            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Use file name" />
+            <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}" IsEnabled="True" Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="FilenamePrefix_Changed"/>
+
+
+            <Rectangle Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
+            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Selected file" />
+            <TextBox Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding Path=LastFileNameDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Rectangle Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
+            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Actions" />
+
+            <Grid Grid.Row="12" Grid.Column="0" Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                </Grid.ColumnDefinitions>
+
+                <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
+                                   Click="OpenOutputFolder_Click" />
+                <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
+                                   IsEnabled="False" />
+                <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PlayButton}"
+                                   IsEnabled="False"
+                                   x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
+                <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PauseButton}"
+                                   IsEnabled="False" Visibility="Collapsed"
+                                   x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />                
+                <local:ImageButton Grid.Row="0" Grid.Column="4" Style="{StaticResource StopButton}"
+                                   IsEnabled="False"
+                                   x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
+                <local:ImageButton Grid.Row="0" Grid.Column="5" Style="{StaticResource NextTrackButton}"
+                                   IsEnabled="False" />
+                <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource RecordButton}"
+                                   x:Name="RecordButton" Click="RecordButton_Click" />
+                <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource StopRecordButton}"
+                                   Visibility="Collapsed"
+                                   x:Name="StopRecordButton" Click="RecordButton_Click" />
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo Description="An app with a taskbar info description" 
+        <TaskbarItemInfo Description="RecNForget" 
                      ProgressValue="1" ProgressState="{Binding Path=TaskBar_ProgressState}"/>
     </Window.TaskbarItemInfo>
 </Window>

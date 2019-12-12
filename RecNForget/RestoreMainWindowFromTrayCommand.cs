@@ -7,13 +7,13 @@ using System.Windows.Input;
 
 namespace RecNForget
 {
-	public class RestoreMainWindowFromTrayCommand : ICommand
+	public class SimpleActionCommand : ICommand
 	{
-		private Action restoreAction;
+		private Action action;
 
-		public RestoreMainWindowFromTrayCommand(Action restoreAction)
+		public SimpleActionCommand(Action action)
 		{
-			this.restoreAction = restoreAction;
+			this.action = action;
 		}
 
 		public event EventHandler CanExecuteChanged
@@ -29,7 +29,7 @@ namespace RecNForget
 
 		public void Execute(object parameter)
 		{
-			restoreAction();
+            action?.Invoke();
 		}
 	}
 }

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:RecNForget"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="Default.StylesDictionary.xaml" />
     </Application.Resources>
 </Application>

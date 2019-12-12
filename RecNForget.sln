@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.Setup.Extensions
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{9FA98D49-321F-46E0-A6CC-B8E270208DAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.ImageConverter", "RecNForget.ImageConverter\RecNForget.ImageConverter.csproj", "{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Release|x86.ActiveCfg = Release|Any CPU
 		{8E19B8D5-7241-4336-A08E-9E34ACECC230}.Release|x86.Build.0 = Release|Any CPU
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}.Debug|x86.Build.0 = Debug|Any CPU
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}.Release|x86.ActiveCfg = Release|Any CPU
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

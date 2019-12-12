@@ -8,6 +8,12 @@ automatically start RecNForget after install (optional)
 
 add progress indicator when querying releases (might be a few dozen kB)
 
+buttons that really "click" (icons "move down" when the button is pressed)
+
+tooltips for buttons
+
+context menu in main window for quick settings
+
 use semver!?! or something to make changing versions easier and more centralized
 
 allow opacity?

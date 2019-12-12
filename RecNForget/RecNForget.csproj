@@ -97,6 +97,7 @@
     <Compile Include="DownloadDialog.xaml.cs">
       <DependentUpon>DownloadDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageButton.cs" />
     <Compile Include="ReleaseInstallationDialog.xaml.cs">
       <DependentUpon>ReleaseInstallationDialog.xaml</DependentUpon>
     </Compile>
@@ -106,6 +107,10 @@
     <Compile Include="Services\AudioRecordingService.cs" />
     <Compile Include="Services\Types\HotkeyMapping.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
+    <Page Include="Default.StylesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DownloadDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -190,9 +195,26 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />
-    <Resource Include="ButtonImages\help_icon.ico" />
-    <Resource Include="ButtonImages\help_icon.png" />
     <Resource Include="Images\logo_big.png" />
+    <Resource Include="ButtonImages\close_icon349388.black.png" />
+    <Resource Include="ButtonImages\help_icon544157.black.png" />
+    <Resource Include="ButtonImages\information_icon280732.black.png" />
+    <Resource Include="ButtonImages\minimize_icon24566.black.png" />
+    <Resource Include="ButtonImages\nextTrack_icon.black.disabled.png" />
+    <Resource Include="ButtonImages\nextTrack_icon.black.png" />
+    <Resource Include="ButtonImages\openFolder_icon192688.black.png" />
+    <Resource Include="ButtonImages\pause_icon.black.disabled.png" />
+    <Resource Include="ButtonImages\pause_icon.black.png" />
+    <Resource Include="ButtonImages\play_icon.black.disabled.png" />
+    <Resource Include="ButtonImages\play_icon.black.png" />
+    <Resource Include="ButtonImages\prevTrack_icon.black.disabled.png" />
+    <Resource Include="ButtonImages\prevTrack_icon.black.png" />
+    <Resource Include="ButtonImages\record_icon.black.png" />
+    <Resource Include="ButtonImages\settings_icon40863.black.png" />
+    <Resource Include="ButtonImages\stop_icon.black.disabled.png" />
+    <Resource Include="ButtonImages\stop_icon.black.png" />
+    <Resource Include="ButtonImages\close_icon211720.black.png" />
+    <Resource Include="ButtonImages\windowSettings_icon248857.black.png" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

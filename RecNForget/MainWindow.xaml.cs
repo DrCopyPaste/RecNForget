@@ -12,6 +12,8 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
@@ -49,9 +51,9 @@ namespace RecNForget
 
 		public DateTime RecordingStart { get; set; }
 
-		#region bound values
+        #region bound values
 
-		public string RecordingTimeDisplay
+        public string RecordingTimeDisplay
 		{
 			get
 			{
@@ -260,34 +262,30 @@ namespace RecNForget
                     TaskBar_ProgressState = "Normal";
                     CurrentAudioPlayState = true;
                     StopReplayLastRecordingButton.IsEnabled = true;
-                    ReplayLastRecordingStopDisabledIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingStopIcon.Visibility = Visibility.Visible;
-                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Visible;
-                }, afterStopAction: () =>
+					PauseReplayLastRecordingButton.IsEnabled = true;
+					ReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+					PauseReplayLastRecordingButton.Visibility = Visibility.Visible;
+				}, afterStopAction: () =>
 				{
                     replayAudioService.KillAudio(reset: true);
                     CurrentAudioPlayState = false;
                     TaskBar_ProgressState = "Paused";
                     StopReplayLastRecordingButton.IsEnabled = false;
-                    ReplayLastRecordingStopDisabledIcon.Visibility = Visibility.Visible;
-                    ReplayLastRecordingStopIcon.Visibility = Visibility.Collapsed;
 
-                    ReplayLastRecordingPlayDisabledIcon.Visibility = HasLastRecording ? Visibility.Collapsed : Visibility.Visible;
-                    ReplayLastRecordingPlayIcon.Visibility = HasLastRecording ? Visibility.Visible : Visibility.Collapsed;
-                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Collapsed;
-                }, afterPauseAction: () =>
+					ReplayLastRecordingButton.IsEnabled = HasLastRecording;
+					ReplayLastRecordingButton.Visibility = Visibility.Visible;
+					PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+				}, afterPauseAction: () =>
                 {
-                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Visible;
-                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Collapsed;
-                }, afterResumeAction: () =>
+					ReplayLastRecordingButton.IsEnabled = true;
+					ReplayLastRecordingButton.Visibility = Visibility.Visible;
+					PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+				}, afterResumeAction: () =>
                 {
-                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Visible;
-                });
+					PauseReplayLastRecordingButton.IsEnabled = true;
+					ReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+					PauseReplayLastRecordingButton.Visibility = Visibility.Visible;
+				});
 
 			recordingFeedbackAudioService = new AudioPlayListService();
 
@@ -295,24 +293,16 @@ namespace RecNForget
 			recordingTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
 			recordingTimer.Tick += new EventHandler(RecordingTimer_Tick);
 
-			if (MinimizedToTray)
-			{
-				SwitchToBackgroundMode();
-			}
-			else
-			{
-				SwitchToForegroundMode();
-			}
-
             this.audioRecordingService = new AudioRecordingService(
                 startRecordingAction: () =>
                 {
-                    CurrentAudioPlayState = false;
+					RecordButton.Visibility = Visibility.Collapsed;
+					StopRecordButton.Visibility = Visibility.Visible;
+					CurrentAudioPlayState = false;
                     ReplayLastRecordingButton.IsEnabled = false;
                     replayAudioService.KillAudio(reset: true);
                     CurrentlyRecording = true;
                     CurrentlyNotRecording = false;
-                    ToggleRecordButton.Content = "Stop";
                     TaskBar_ProgressState = "Error";
                     RecordingStart = DateTime.Now;
                     recordingTimer.Start();
@@ -336,7 +326,6 @@ namespace RecNForget
                     UpdateCurrentFileNameDisplay(reset: true);
                     CurrentlyRecording = false;
                     CurrentlyNotRecording = true;
-                    ToggleRecordButton.Content = "Record";
                     TaskBar_ProgressState = "Paused";
                     if (ShowBalloonTipsForRecording)
                     {
@@ -349,13 +338,10 @@ namespace RecNForget
                         PlayRecordingStopAudioFeedback();
                     }
                     ReplayLastRecordingButton.IsEnabled = true;
-                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Visible;
-                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Collapsed;
                     StopReplayLastRecordingButton.IsEnabled = true;
-                    ReplayLastRecordingStopDisabledIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingStopIcon.Visibility = Visibility.Visible;
-                    if (AutoReplayAudioAfterRecording)
+					RecordButton.Visibility = Visibility.Visible;
+					StopRecordButton.Visibility = Visibility.Collapsed;
+					if (AutoReplayAudioAfterRecording)
                     {
                         ToggleReplayLastRecording();
                     }
@@ -377,12 +363,24 @@ namespace RecNForget
 
             this.Topmost = WindowAlwaysOnTop;
             taskBarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
-            taskBarIcon.DoubleClickCommand = new RestoreMainWindowFromTrayCommand(() => { SwitchToForegroundMode(); });
+            taskBarIcon.DoubleClickCommand = new SimpleActionCommand(() => { SwitchToForegroundMode(); });
             taskBarIcon.Visibility = Visibility.Visible;
 
-            UpdateCurrentFileNameDisplay(reset: true);
+			// make window draggable from anywhere when mouse pressed (except on active controls)
+			this.MainGrid.MouseDown += Window_MouseDown;
 
-            ToggleRecordButton.Focus();
+			UpdateCurrentFileNameDisplay(reset: true);
+			UpdateLastFileName(reset: true);
+			UpdateLastFileNameDisplay(reset: true);
+
+			if (MinimizedToTray)
+			{
+				SwitchToBackgroundMode();
+			}
+			else
+			{
+				SwitchToForegroundMode();
+			}
 		}
 
 		private void TaskBarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
@@ -393,7 +391,6 @@ namespace RecNForget
 			}
 
 			string argument = "/select, \"" + lastFileName + "\"";
-
 			System.Diagnostics.Process.Start("explorer.exe", argument);
 		}
 
@@ -442,6 +439,12 @@ namespace RecNForget
 
 		#region runtime event handlers
 
+		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+				this.DragMove();
+		}
+
 		private void RecordingTimer_Tick(object sender, EventArgs e)
 		{
 			RecordingTimeDisplay = TimeSpan.FromMilliseconds(DateTime.Now.Subtract(RecordingStart).TotalMilliseconds).TotalSeconds.ToString(@"0.##");
@@ -467,13 +470,23 @@ namespace RecNForget
 
 		private void UpdateLastFileNameDisplay(bool reset = false)
 		{
-			LastFileNameDisplay = reset ? string.Empty : string.Format("{0} ({1} s)", audioRecordingService.LastFileName, RecordingTimeDisplay);
+			LastFileNameDisplay = reset ? "(no file found or selected)" : string.Format("{0} ({1} s)", audioRecordingService.LastFileName, RecordingTimeDisplay);
 		}
 
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
 		{
-			Process.Start(OutputPath);
-		}
+            if (audioRecordingService != null && audioRecordingService.LastFileName != string.Empty)
+            {
+                // if there is a result select it in an explorer window
+                string argument = "/select, \"" + lastFileName + "\"";
+                System.Diagnostics.Process.Start("explorer.exe", argument);
+            }
+            else
+            {
+                // otherwise just open output path in explorer
+                Process.Start(OutputPath);
+            }
+        }
 
         private void StopReplayLastRecording_Click(object sender, RoutedEventArgs e)
         {
@@ -520,13 +533,6 @@ namespace RecNForget
 					ReplayLastRecordingButton.IsEnabled = false;
                     StopReplayLastRecordingButton.IsEnabled = false;
 
-                    ReplayLastRecordingStopDisabledIcon.Visibility = Visibility.Visible;
-                    ReplayLastRecordingStopIcon.Visibility = Visibility.Collapsed;
-
-                    ReplayLastRecordingPlayDisabledIcon.Visibility = Visibility.Visible;
-                    ReplayLastRecordingPlayIcon.Visibility = Visibility.Collapsed;
-                    ReplayLastRecordingPauseIcon.Visibility = Visibility.Collapsed;
-
                     System.Windows.MessageBox.Show("The last recorded audio file has been moved or deleted.", "File not found", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 			}
@@ -565,6 +571,11 @@ namespace RecNForget
 			Close();
 		}
 
+		private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.WindowState = WindowState.Minimized;
+		}
+
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
 			var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); });
@@ -576,6 +587,16 @@ namespace RecNForget
             var aboutDialog = new AboutDialog();
             aboutDialog.ShowDialog();
         }
+
+        private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+			Button button = sender as Button;
+			ContextMenu contextMenu = button.ContextMenu;
+			contextMenu.PlacementTarget = button;
+			contextMenu.IsOpen = true;
+
+			e.Handled = true;
+		}
 
         #endregion
     }
