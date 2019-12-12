@@ -1,0 +1,15 @@
+To re-create (new) button icons consider the following:
+
+each button should have 4 different images:
+- image when enabled (default black)
+- image when disabled (default gray)
+- image when selected or mouse over (default black, but hollow icon is filled)
+- image when pressed (inverted color, default white)
+
+use Inkscape to convert source svgs to png
+=> these should be the default-enabled-icons
+
+RecNForget.ImageConverter
+ creates the disabled and inverted icons
+ these are created in the subfolder icon_generation\disabled or icon_generation\white
+for the filled icons use the different svgs that refer to *icon*.filled.svg
