@@ -49,6 +49,12 @@ namespace RecNForget
 			set;
 		}
 
+		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+				this.DragMove();
+		}
+
 		private void KeyHookDown(KeyboardHookEventArgs e)
 		{
 			HotkeysText = HotkeyToStringTranslator.GetKeyboardHookEventArgsAsString(e);

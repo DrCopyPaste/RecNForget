@@ -1,5 +1,7 @@
 update credits for icons
 
+have custom message box (for error or warning messages)
+
 style scrollbar viewer/scrollable textboxes to fit app style (round corners, flat style...)
 - aboutdialog and releaseinstallationdialog
 
