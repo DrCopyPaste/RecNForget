@@ -6,108 +6,122 @@
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
         Topmost="True"
-        Title="RecNForget - About" Height="324" Width="666" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="18"/>
-            <RowDefinition Height="18"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        Title="RecNForget - About" Style="{StaticResource DefaultWindowStyle}" >
+    <Border Style="{StaticResource DefaultWindowBorderStyle}">
+        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" MouseDown="Window_MouseDown">
+            <Grid.RowDefinitions>
+                <!-- row 0 for title bar-->
+                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}"/>
+                <!-- row 1 for spacing?-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <!-- row 2 for Application Title-->
+                <RowDefinition Height="*"/>
+                <!-- row 3 for Version Info-->
+                <RowDefinition Height="*"/>
+                <!-- row 4 for copy right-->
+                <RowDefinition Height="*"/>
+                <!-- row 5 for claim-->
+                <RowDefinition Height="*"/>
+                <!-- row 6 for spacing?-->
+                <RowDefinition Height="*"/>
+                <!-- row 7 for credits box-->
+                <RowDefinition Height="{Binding Source={StaticResource CreditsBox_Height}}"/>
+                <!-- row 8 for spacing-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <!-- row 9 for bottom buttons row-->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
 
-        <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="13" Source="Images\logo_big.png" Width="170" />
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource TitleBarLayout}"/>
+            
+            
+            <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="13" Source="Images\logo_big.png" Width="170" />
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" FontSize="45" TextWrapping="Wrap" Text="RecNForget"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap" Name="VersionLabel" Text="Version X.Y.Z.A" />
-        <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap">
-            <Run>
-                (C) 2019 by DrCopyPaste (
-            </Run>
-            <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">visit github.com/DrCopyPaste</Hyperlink>
-            <Run>
-                )
-            </Run>
-        </TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Text="RecNForget is a free application that helps you sample audio faster."  />
-        <ScrollViewer Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="7" Margin="0,0,5,0">
-            <TextBlock FontSize="11" TextWrapping="Wrap">
+            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" FontSize="45" TextWrapping="Wrap" Text="RecNForget"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap" Name="VersionLabel" Text="Version X.Y.Z.A" />
+            <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" FontSize="15" TextWrapping="Wrap">
                 <Run>
-                    RecNForget is written in C# using .Net Framework 4.7 and Microsoft WPF
+                    (C) 2019 by DrCopyPaste (
                 </Run>
-                <LineBreak/>
-                <LineBreak/>
-                <Run>
-                    Code by DrCopyPaste (Open Source @
-                </Run>
-                <Hyperlink NavigateUri="https://github.com/DrCopyPaste/RecNForget" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                    github.com/DrCopyPaste/RecNForget
-                </Hyperlink>
-                <LineBreak/>
-                <Run>
-                    Logo by DrCopyPaste (using icons from onlinewebfonts.com - see below)
-                </Run>
-                <LineBreak/>
-                <Run>
-                    Beep sounds by a cheap program from DrCopyPaste with love.
-                </Run>
-                <LineBreak/>
-                <Run>
-                    Click sounds by slutski (
-                </Run>
-                <Hyperlink NavigateUri="mailto:litw@gmx.de" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                    litw@gmx.de
-                </Hyperlink>
-                <Run>
-                    -
-                </Run>
-                <Hyperlink NavigateUri="https://soundcloud.com/slutski" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                    soundcloud.com/slutski
-                </Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">visit github.com/DrCopyPaste</Hyperlink>
                 <Run>
                     )
                 </Run>
-                <LineBreak/>
-                <LineBreak/>
-                <Run>
-                    The following images were used for the logo as well as icons in this application:
-                </Run>
-                <!-- for logo-->
-                <LineBreak/>
-                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                    onlinewebfonts.com/icon/55290 (speaker icon)
-                </Hyperlink>
-                <LineBreak/>
-                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                    onlinewebfonts.com/icon/715 (folder icon)
-                </Hyperlink>
-                <LineBreak/>
-                <!-- for button images -->
-                <!-- help -->
-                <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/1314" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                    onlinewebfonts.com/icon/1314 (question mark icon)
-                </Hyperlink>
-                <LineBreak/>
             </TextBlock>
-        </ScrollViewer>
-        <Button Grid.Row="15" Grid.Column="0" Name="CheckForUpdateButton" Content="Check for Updates" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="CheckForUpdateButton_Click"/>
-        <Button Grid.Row="15" Grid.Column="3" Name="OKButton" Content="OK" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="OKButton_Click"/>
-    </Grid>
+            <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" FontSize="14" TextWrapping="Wrap" Text="RecNForget is a free application that helps you sample audio faster."  />
+
+            <ScrollViewer Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,5,0" Background="{Binding Source={StaticResource HeaderButton_Hover_Color}}">
+                <TextBlock FontSize="12" TextWrapping="Wrap">
+                    <Run>
+                        RecNForget is written in C# using .Net Framework 4.7 and Microsoft WPF
+                    </Run>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run>
+                        Code by DrCopyPaste (Open Source @
+                    </Run>
+                    <Hyperlink NavigateUri="https://github.com/DrCopyPaste/RecNForget" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        github.com/DrCopyPaste/RecNForget
+                    </Hyperlink>
+                    <Run>
+                        )
+                    </Run>
+                    <LineBreak/>
+                    <Run>
+                        Logo by DrCopyPaste (using icons from onlinewebfonts.com - see below)
+                    </Run>
+                    <LineBreak/>
+                    <Run>
+                        Beep sounds by a cheap program from DrCopyPaste with love.
+                    </Run>
+                    <LineBreak/>
+                    <Run>
+                        Click sounds by slutski (
+                    </Run>
+                    <Hyperlink NavigateUri="mailto:litw@gmx.de" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        litw@gmx.de
+                    </Hyperlink>
+                    <Run>
+                        -
+                    </Run>
+                    <Hyperlink NavigateUri="https://soundcloud.com/slutski" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        soundcloud.com/slutski
+                    </Hyperlink>
+                    <Run>
+                        )
+                    </Run>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run>
+                        The following images were used for the logo as well as icons in this application:
+                    </Run>
+                    <!-- for logo-->
+                    <LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/55290 (speaker icon)
+                    </Hyperlink>
+                    <LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/715 (folder icon)
+                    </Hyperlink>
+                    <LineBreak/>
+                    <!-- for button images -->
+                    <!-- help -->
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/1314" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/1314 (question mark icon)
+                    </Hyperlink>
+                    <LineBreak/>
+                </TextBlock>
+            </ScrollViewer>
+            <local:ImageButton Grid.Row="9" Grid.Column="0" Style="{StaticResource DownloadButton}" HorizontalAlignment="Left"  Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>
+            <local:ImageButton Grid.Row="9" Grid.Column="3" Style="{StaticResource AcceptButton}" HorizontalAlignment="Right" IsCancel="True"/>
+        </Grid>
+    </Border>
 </Window>

@@ -579,13 +579,18 @@ namespace RecNForget
 			settingsWindow.ShowDialog();
 		}
 
-        private void AboutButton_Click(object sender, RoutedEventArgs e)
-        {
-            var aboutDialog = new AboutDialog();
-            aboutDialog.ShowDialog();
-        }
+		private void AboutButton_Click(object sender, RoutedEventArgs e)
+		{
+			var aboutDialog = new AboutDialog();
+			aboutDialog.ShowDialog();
+		}
 
-        private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
+		private void CheckUpdates_Click(object sender, RoutedEventArgs e)
+		{
+			UpdateChecker.ShowUpdateDialogIfPossible();
+		}
+
+		private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
 			Button button = sender as Button;
 			ContextMenu contextMenu = button.ContextMenu;

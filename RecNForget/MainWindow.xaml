@@ -99,6 +99,12 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
+                            <MenuItem Header="Check for updates" Click="CheckUpdates_Click" Margin="0" Padding="0" VerticalAlignment="Center">
+                                <MenuItem.Icon>
+                                    <Image Source="ButtonImages\download_icon602.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
                             <MenuItem Header="Close RecNForget" Click="Exit_Click" Margin="0" Padding="0" VerticalAlignment="Center">
                                 <MenuItem.Icon>
                                     <Image Source="ButtonImages\close_icon211720.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>

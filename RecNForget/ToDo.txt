@@ -1,5 +1,7 @@
 update credits for icons
 
+style scrollbar viewer/scrollable textboxes to fit app style (round corners, flat style...)
+
 show splash screen instead of "null-window" (the thing that still needs to be resized and controls put into at the start)
 
 collapsible and scrollable settings menu (as soon as settings get excessive)

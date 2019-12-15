@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="Services\AudioRecordingService.cs" />
     <Compile Include="Services\Types\HotkeyMapping.cs" />
+    <Compile Include="Services\UpdateChecker.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
     <Page Include="Default.StylesDictionary.xaml">
       <SubType>Designer</SubType>

@@ -19,7 +19,9 @@
 
     <Sys:Double x:Key="SeparatorRow_Height">2</Sys:Double>
     <Sys:Double x:Key="SeparatorTitleRow_Height">15</Sys:Double>
-    
+
+    <Sys:Double x:Key="CreditsBox_Height">150</Sys:Double>
+
     <!-- COLORS APPLICATION-->
     <Sys:String x:Key="ApplicationBorder_Color">LightGray</Sys:String>
     <Sys:String x:Key="HeaderRow_Background_Color">LightGray</Sys:String>
@@ -401,6 +403,12 @@
         <Setter Property="DisabledImage" Value="ButtonImages\pencil_icon353603.black.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\pencil_icon353603.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\pencil_icon353603.black.png" />
+    </Style>
+    <Style x:Key="DownloadButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="DefaultImage" Value="ButtonImages\download_icon602.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\download_icon602.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\download_icon602.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\download_icon602.black.png" />
     </Style>
     
     <!-- https://github.com/0xdeafcafe/MetroWPFTemplate/blob/master/Metro%20WPF%20Template/Metro/Controls/MetroCheckBox.xaml-->
