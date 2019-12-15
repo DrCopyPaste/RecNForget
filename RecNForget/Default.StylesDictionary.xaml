@@ -11,9 +11,12 @@
     <Sys:Double x:Key="TitleRow_ColumnWidth">15</Sys:Double>
     
     <Sys:Double x:Key="ButtonRow_Height">31</Sys:Double>
+    <Sys:Double x:Key="ChangeSettingButton_Width">25</Sys:Double>
+    <Sys:Double x:Key="CheckBoxControl_Height">22</Sys:Double>
+    <Sys:Double x:Key="CheckBox_Width">20</Sys:Double>
     <Sys:Double x:Key="HalfButtonCell_Width">57</Sys:Double>
-    <Sys:Double x:Key="FatButtonCell_Width">109</Sys:Double>
-    
+    <Sys:Double x:Key="FatButtonCell_Width">109</Sys:Double>    
+
     <Sys:Double x:Key="SeparatorRow_Height">2</Sys:Double>
     <Sys:Double x:Key="SeparatorTitleRow_Height">15</Sys:Double>
     
@@ -22,7 +25,9 @@
     <Sys:String x:Key="HeaderRow_Background_Color">LightGray</Sys:String>
     <Sys:String x:Key="Application_Background_Color">White</Sys:String>
     <Sys:String x:Key="ActionButtonRow_Background_Color">LightGray</Sys:String>
-    
+    <Sys:String x:Key="Font_Color">Black</Sys:String>
+    <Sys:String x:Key="Font_Color_Disabled">Gray</Sys:String>
+
     <!-- COLORS HEADER BUTTONS-->  
     <Sys:String x:Key="HeaderButton_Enabled_Color">Transparent</Sys:String>
     <Sys:String x:Key="HeaderButton_Disabled_Color">#dddddd</Sys:String>
@@ -54,8 +59,7 @@
         <Setter Property="BorderThickness" Value="1,1,1,1" />
         <Setter Property="CornerRadius" Value="3,3,3,3" />
     </Style>
-
-
+   
     <!--
         Default Button colors for header buttons as well as action buttons
     -->
@@ -220,6 +224,60 @@
         </Setter>
     </Style>
 
+    <Style x:Key="BaseChangeSettingButtonLayout" TargetType="{x:Type local:ImageButton}">
+        <!-- Some setters -->
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImageButton}">
+                    <Border Name="ImageButtonBorder"
+                       BorderThickness="1"
+                       Padding="1,1,1,1"
+                       Margin="0,1,1,0"
+                       BorderBrush="{Binding Source={StaticResource ActionButtonBorder_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Name="ImageButtonGrid">
+                            <Image Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalAlignment="Bottom" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Some triggers ( IsFocused, IsMouseOver, etc.) -->
+                        <Trigger Property="IsPressed" Value="False">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Enabled_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DefaultImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Hover_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Pressed_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding PressedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageButtonGrid" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButton_Disabled_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Disabled_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DisabledImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Header button styles-->
     <Style x:Key="WindowSettingsButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
         <Setter Property="DefaultImage" Value="ButtonImages\windowSettings_icon248857.black.png" />
@@ -255,7 +313,16 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
     </Style>
-    
+
+    <Style x:Key="ChangeSettingButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseChangeSettingButtonLayout}">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="DefaultImage" Value="ButtonImages\editSetting_icon451737.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\editSetting_icon451737.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\editSetting_icon451737.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\editSetting_icon451737.black.png" />
+    </Style>
+
     <Style x:Key="FatActionButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseButtonLayout}">
         <Setter Property="Height" Value="30" />
         <Setter Property="Width" Value="{Binding Source={StaticResource FatButtonCell_Width}}" />
@@ -316,7 +383,170 @@
         <Setter Property="SelectedImage" Value="ButtonImages\stop_icon.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\stop_icon.black.png" />
     </Style>
+
+    <Style x:Key="AcceptButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="DefaultImage" Value="ButtonImages\accept_icon518267.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\accept_icon518267.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\accept_icon518267.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\accept_icon518267.black.png" />
+    </Style>
+    <Style x:Key="ToolChangeSettingButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="DefaultImage" Value="ButtonImages\tools_icon536263.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\tools_icon536263.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\tools_icon536263.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\tools_icon536263.black.png" />
+    </Style>
+    <Style x:Key="PencilChangeSettingButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="DefaultImage" Value="ButtonImages\pencil_icon353603.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\pencil_icon353603.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\pencil_icon353603.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\pencil_icon353603.black.png" />
+    </Style>
     
+    <!-- https://github.com/0xdeafcafe/MetroWPFTemplate/blob/master/Metro%20WPF%20Template/Metro/Controls/MetroCheckBox.xaml-->
+    <Style x:Key="DefaultCheckboxStyle" TargetType="CheckBox">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="1,1,1,1" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource CheckBoxControl_Height}}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
+        <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
+        <Setter Property="Background" Value="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Border
+                       BorderThickness="1"
+                       Padding="0,0,0,0"
+                       Margin="0,0,0,0"
+                       BorderBrush="{Binding Source={StaticResource ActionButtonBorder_Color}}"
+                       CornerRadius="3"
+                       Background="{Binding Source={StaticResource Application_Background_Color}}">
+                        <BulletDecorator x:Name="ContentPart" Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="Border"  
+                              Width="{Binding Source={StaticResource CheckBox_Width}}" 
+                              Height="{Binding Source={StaticResource CheckBox_Width}}"
+                                        Padding="1,1,1,1"
+                              CornerRadius="3" 
+                              Background="{Binding Source={StaticResource Font_Color}}"
+                              BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"
+                              BorderThickness="1">
+                                    <Image x:Name="CheckMark" Source="ButtonImages\accept_icon518267.black.white.png" VerticalAlignment="Bottom" />
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter
+                            Margin="8,0,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="false">
+                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color_Disabled}}"/> 
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ContentPart" Property="Background" Value="{Binding Source={StaticResource ActionButtonBorder_Color}}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Font_Color}}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Gainsboro" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SettingTextBoxLabelStyle" TargetType="Label">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="1,1,0,0" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
+        <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
+        <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Disabled_Color}}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border x:Name="Border"  
+                       BorderThickness="1,1,0,1"
+                       Padding="1,0,0,0"
+                       Margin="0,0,0,0"
+                       BorderBrush="{Binding Source={StaticResource HeaderButton_Disabled_Color}}"
+                       CornerRadius="3,0,0,3"
+                       Background="{TemplateBinding Background}">
+                        <BulletDecorator x:Name="ContentPart" Background="Transparent">
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                            Margin="0,0,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SettingTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="1,1,1,0" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
+        <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
+        <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Disabled_Color}}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Border"  
+                       BorderThickness="0,1,1,0"
+                       Padding="1,0,0,0"
+                       Margin="0,0,0,0"
+                       BorderBrush="{Binding Source={StaticResource HeaderButton_Disabled_Color}}"
+                       CornerRadius="0,0,0,0"
+                       Background="{TemplateBinding Background}">
+                        <BulletDecorator x:Name="ContentPart" Background="Transparent">
+                            <ContentPresenter Content="{TemplateBinding Text}"
+                            Margin="0,0,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="DefaultLabelStyle" TargetType="Label">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
@@ -325,6 +555,25 @@
         <Setter Property="Width" Value="281" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="10" />
+    </Style>
+    <Style x:Key="SettingLabelStyle" TargetType="Label">
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="3,0,0,2" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"/>
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border CornerRadius="2" Padding="2" Background="#19212F" BorderBrush="Red" BorderThickness="1">
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
@@ -340,4 +589,43 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Fill" Value="{Binding Source={StaticResource Application_Background_Color}}" />
     </Style>
+
+    <!--
+        Default title bar
+    -->
+    <Style x:Key="TitleBarLayout" TargetType="{x:Type Label}">
+        <!-- Some setters -->
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border Name="ImageButtonBorder"
+                       BorderThickness="0"
+                       Padding="0,0,0,0"
+                       BorderBrush="{Binding Source={StaticResource HeaderButtonBorder_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Background="{Binding Source={StaticResource HeaderRow_Background_Color}}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                            </Grid.ColumnDefinitions>
+
+                            <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}" IsCancel="True" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

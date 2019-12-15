@@ -215,6 +215,13 @@
     <Resource Include="ButtonImages\stop_icon.black.png" />
     <Resource Include="ButtonImages\close_icon211720.black.png" />
     <Resource Include="ButtonImages\windowSettings_icon248857.black.png" />
+    <Resource Include="ButtonImages\accept_icon518267.black.png" />
+    <Resource Include="ButtonImages\download_icon602.black.png" />
+    <Resource Include="ButtonImages\pencil_icon353603.black.png" />
+    <Resource Include="ButtonImages\tools_icon536263.black.png" />
+    <Resource Include="ButtonImages\accept_icon518267.black.white.png" />
+    <Resource Include="ButtonImages\settings_icon40863.black.white.png" />
+    <Resource Include="ButtonImages\editSetting_icon451737.black.png" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

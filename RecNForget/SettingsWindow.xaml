@@ -18,56 +18,33 @@
                 <!-- row 2 for current title-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 3 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition Height="*" />
                 <!-- row 4 for separator-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 5 for current title-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 6 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition Height="*" />
                 <!-- row 7 for separator-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 8 for current title-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
-                <!-- row 9 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
-                <!-- row 10 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
-                <!-- row 11 for separator-->
+                <!-- row 9 for application settings row-->
+                <RowDefinition Height="*" />
+                <!-- row 10 for separator-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
-                <!-- row 12 for current title-->
+                <!-- row 11 for current title-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <!-- row 12 for messages settings row-->
+                <RowDefinition Height="*" />
                 <!-- row 13 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
-                <!-- row 14 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
-                <!-- row 15 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
-                <!-- row 16 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
-                <!-- row 17 for setting row-->
                 <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding Source={StaticResource MainWindow_Width}}" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" Grid.Column="0" Background="{Binding Source={StaticResource HeaderRow_Background_Color}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                </Grid.ColumnDefinitions>
-
-                <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}" Click="Exit_Click" />
-            </Grid>
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
             <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="General"/>
@@ -76,15 +53,16 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="Output path:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top">
-                    <TextBlock Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" TextTrimming="CharacterEllipsis" />
-                </Label>
-                <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch"  Click="Configure_OutputPath_Click"/>
+                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}" Content="Output to:" />
+                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
+                         Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+
+                <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
+                                   Click="Configure_OutputPath_Click" />
             </Grid>
 
             <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
@@ -94,100 +72,61 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Content="Record start/stop" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-                <Button Grid.Row="0" Grid.Column="2" Content="Change" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Click="ConfigureHotkey_StartStopRecording_Click" />
+                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}" Content="Toggle Record"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}" Text="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}" />
+                <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
+                                   Click="ConfigureHotkey_StartStopRecording_Click" />
             </Grid>
 
             <Rectangle Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Application"/>
             <Grid Grid.Row="9" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="27" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=AutoStartWithWindows}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">auto start</CheckBox>
-            </Grid>
-            <Grid Grid.Row="10" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="27" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=MinimizedToTray}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">run in background</CheckBox>
+                <CheckBox Grid.Row="0" Grid.Column="0"
+                          Style="{StaticResource DefaultCheckboxStyle}"
+                          IsChecked="{Binding Path=AutoStartWithWindows}" >auto start</CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="0"
+                          Style="{StaticResource DefaultCheckboxStyle}"
+                          IsChecked="{Binding Path=MinimizedToTray}" >run in background</CheckBox>
             </Grid>
             
-            <Rectangle Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="12" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="User Messages"/>
-            <Grid Grid.Row="13" Grid.Column="0">
+            <Rectangle Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
+            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Messages"/>
+            <Grid Grid.Row="12" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=AutoReplayAudioAfterRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">replay audio after recording
+                <CheckBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                          IsChecked="{Binding Path=AutoReplayAudioAfterRecording}">auto replay
                 </CheckBox>
+
+                <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                          IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopRecording}">beep on toggle record</CheckBox>
+                <CheckBox Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                          IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopReplaying}">click on toggle play</CheckBox>
+                <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                          IsChecked="{Binding Path=ShowBalloonTipsForRecording}">toast messages</CheckBox>
             </Grid>
-            <Grid Grid.Row="14" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">audio feedback on record start/stop</CheckBox>
-            </Grid>
-            <Grid Grid.Row="15" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopReplaying}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">audio feedback on replay start/stop</CheckBox>
-            </Grid>
-            <Grid Grid.Row="16" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                    <RowDefinition Height="27" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding Path=ShowBalloonTipsForRecording}" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top">show toast messages on status change</CheckBox>
-            </Grid>
-            <Button Grid.Row="17" Grid.Column="0" Name="OkButton" Content="Ok" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="{Binding Source={StaticResource HalfButtonCell_Width}}" Click="OkButton_Click"/>
+
+            <local:ImageButton Grid.Row="13" Grid.Column="0" Style="{StaticResource AcceptButton}"
+                               HorizontalAlignment="Right"
+                               Click="OkButton_Click" />
         </Grid>
     </Border>
 </Window>

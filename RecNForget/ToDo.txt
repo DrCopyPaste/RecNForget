@@ -1,7 +1,18 @@
+update credits for icons
+
+show splash screen instead of "null-window" (the thing that still needs to be resized and controls put into at the start)
+
+collapsible and scrollable settings menu (as soon as settings get excessive)
+
+Context Menu Items are not centered vertically
+
 include real help link in application
+relative help (right-clicking a control for instance)
+- imlement custom help window (with "help items" constructor)
+- centralize help
 
 maybe make settings in settings window temporary (so they have to be ok'd, right now every change takes effect immediately)
- -or simply state explicitly that everything is changed ad-hoc in top of window
+ -pass settings object to settings window to bind to and pass that back to main window as dialog result
 
 error handling for no internet/network connection for update/problems writing file etc
 
