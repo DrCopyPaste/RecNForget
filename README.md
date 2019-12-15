@@ -42,6 +42,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - no more standard title bar
 - all action buttons now are in the same row at the bottom
 - added icons for most buttons
+- added a help link to the menu (calls link in browser going to THIS readme.md, I will replace this with an in-application help later on)
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - clicking the open folder button now selects the last result file in explorer (or just opens folder if there is now result yet)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
