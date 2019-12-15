@@ -224,6 +224,7 @@
     <Resource Include="ButtonImages\settings_icon40863.black.white.png" />
     <Resource Include="ButtonImages\editSetting_icon451737.black.png" />
     <Resource Include="ButtonImages\cancel_icon428740.black.png" />
+    <Resource Include="ButtonImages\shutDown_icon170336.black.png" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -6,24 +6,32 @@
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
         Topmost="True"
-        Title="RecNForget - Close or Background" Height="110" Width="460" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="230" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        Title="RecNForget - Close or Background" Style="{StaticResource DefaultWindowStyle}">
+    <Border Style="{StaticResource DefaultWindowBorderStyle}">
+        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" MouseDown="Window_MouseDown">
+            <Grid.RowDefinitions>
+                <!-- row 0 for title bar-->
+                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}"/>
+                <!-- row 1 for question line 1-->
+                <RowDefinition Height="*"/>
+                <!-- row 2 for question line 2-->
+                <RowDefinition Height="*"/>
+                <!-- row 3 spacing-->
+                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <!-- row 4 for buttons -->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="You selected the 'run as background process' option in settings." />
-        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="Do you want to close the application or run as background process now?" />
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
-        <Button Grid.Row="3" Grid.Column="0" Name="CloseApplicationButton" Content="Close" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="27" Click="Close_Click"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="You selected the 'run as background process' option in settings." />
+            <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Do you want to close the application or run as background process now?" />
 
-        <Button Grid.Row="3" Grid.Column="1" Name="RunInBackgroundButton" Content="Run in background" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Height="27" Click="Background_Click"/>
-    </Grid>
+            <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource AcceptButton}" x:Name="RunInBackgroundButton" Click="Background_Click" HorizontalAlignment="Left" />
+            <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource ShutDownButton}" x:Name="CloseApplicationButton" Click="Close_Click" HorizontalAlignment="Right" />
+        </Grid>
+    </Border>
 </Window>

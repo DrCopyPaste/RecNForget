@@ -419,6 +419,12 @@
         <Setter Property="SelectedImage" Value="ButtonImages\cancel_icon428740.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\cancel_icon428740.black.png" />
     </Style>
+    <Style x:Key="ShutDownButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="DefaultImage" Value="ButtonImages\shutDown_icon170336.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\shutDown_icon170336.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\shutDown_icon170336.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\shutDown_icon170336.black.png" />
+    </Style>
     
     <!-- https://github.com/0xdeafcafe/MetroWPFTemplate/blob/master/Metro%20WPF%20Template/Metro/Controls/MetroCheckBox.xaml-->
     <Style x:Key="DefaultCheckboxStyle" TargetType="CheckBox">
