@@ -84,14 +84,13 @@ namespace RecNForget
                 targetDownloadPath);
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            cancelled = true;
-            client.CancelAsync();
-            this.Close();
-        }
+		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+				this.DragMove();
+		}
 
-        void DownloadProgressChanged(object sender, ProgressChangedEventArgs e)
+		void DownloadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             DownloadProgress = e.ProgressPercentage.ToString();
         }

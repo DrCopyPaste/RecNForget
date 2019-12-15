@@ -52,10 +52,11 @@ namespace RecNForget
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Left)
+				this.DragMove();
+		}
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {

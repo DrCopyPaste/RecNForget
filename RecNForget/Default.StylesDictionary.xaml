@@ -15,7 +15,10 @@
     <Sys:Double x:Key="CheckBoxControl_Height">22</Sys:Double>
     <Sys:Double x:Key="CheckBox_Width">20</Sys:Double>
     <Sys:Double x:Key="HalfButtonCell_Width">57</Sys:Double>
-    <Sys:Double x:Key="FatButtonCell_Width">109</Sys:Double>    
+    <Sys:Double x:Key="FatButtonCell_Width">109</Sys:Double>
+
+    <Sys:Double x:Key="PathNotes_TextBox_Width">600</Sys:Double>
+    <Sys:Double x:Key="PathNotes_TextBox_Height">200</Sys:Double>
 
     <Sys:Double x:Key="SeparatorRow_Height">2</Sys:Double>
     <Sys:Double x:Key="SeparatorTitleRow_Height">15</Sys:Double>
@@ -410,6 +413,12 @@
         <Setter Property="SelectedImage" Value="ButtonImages\download_icon602.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\download_icon602.black.png" />
     </Style>
+    <Style x:Key="CancelButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="DefaultImage" Value="ButtonImages\cancel_icon428740.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\cancel_icon428740.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\cancel_icon428740.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\cancel_icon428740.black.png" />
+    </Style>
     
     <!-- https://github.com/0xdeafcafe/MetroWPFTemplate/blob/master/Metro%20WPF%20Template/Metro/Controls/MetroCheckBox.xaml-->
     <Style x:Key="DefaultCheckboxStyle" TargetType="CheckBox">
@@ -555,6 +564,50 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="PatchNotesTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="IsEnabled" Value="True"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Margin" Value="1,1,1,0" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource PathNotes_TextBox_Height}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource PathNotes_TextBox_Width}}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
+        <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
+        <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Disabled_Color}}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Border"  
+                       BorderThickness="0,1,1,0"
+                       Padding="1,0,0,0"
+                       Margin="0,0,0,0"
+                       BorderBrush="{Binding Source={StaticResource HeaderButton_Disabled_Color}}"
+                       CornerRadius="0,0,0,0"
+                       Background="{TemplateBinding Background}">
+                        <BulletDecorator x:Name="ContentPart" Background="Transparent">
+                            <ContentPresenter Content="{TemplateBinding Text}"
+                            Margin="0,0,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            RecognizesAccessKey="True"/>
+                        </BulletDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--IsReadOnly="True" TextWrapping="Wrap"-->
+    
     <Style x:Key="DefaultLabelStyle" TargetType="Label">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Bottom" />

@@ -1,6 +1,7 @@
 update credits for icons
 
 style scrollbar viewer/scrollable textboxes to fit app style (round corners, flat style...)
+- aboutdialog and releaseinstallationdialog
 
 show splash screen instead of "null-window" (the thing that still needs to be resized and controls put into at the start)
 
