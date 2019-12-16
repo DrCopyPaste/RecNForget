@@ -40,8 +40,8 @@ namespace RecNForget
             InitializeComponent();
 
             this.appBase = new ApplicationBase();
-            VersionLabel.Text = string.Format("Version: {0}", appBase.Info.Version.ToString());
-        }
+            VersionLabel.Text = string.Format("{0} - {1}", appBase.Info.Version.ToString(), appBase.Info.Title);
+		}
 
         private void CheckForUpdateButton_Click(object sender, RoutedEventArgs e)
         {
