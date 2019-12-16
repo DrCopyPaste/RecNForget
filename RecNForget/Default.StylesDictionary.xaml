@@ -297,10 +297,10 @@
         <Setter Property="PressedImage" Value="ButtonImages\settings_icon488154.black.png" />
     </Style>
     <Style x:Key="MinimizeButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="ButtonImages\minimize_icon24566.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\minimize_icon24566.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\minimize_icon24566.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\minimize_icon24566.black.png" />
+        <Setter Property="DefaultImage" Value="ButtonImages\minimize_icon246566.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\minimize_icon246566.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\minimize_icon246566.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\minimize_icon246566.black.png" />
     </Style>
     <Style x:Key="ExitButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
         <Setter Property="DefaultImage" Value="ButtonImages\close_icon349388.black.png" />

@@ -1,6 +1,6 @@
-update credits for icons
-
 have custom message box (for error or warning messages)
+
+dont ask for path/license again when updating?
 
 style scrollbar viewer/scrollable textboxes to fit app style (round corners, flat style...)
 - aboutdialog and releaseinstallationdialog
@@ -22,10 +22,6 @@ maybe make settings in settings window temporary (so they have to be ok'd, right
 error handling for no internet/network connection for update/problems writing file etc
 
 automatic (from msi setup, when upgrading from within recnforget) attempt restart after upgrade fails?
-
-automatically restart RecNForget after updating
-
-automatically start RecNForget after install (optional)
 
 add progress indicator when querying releases (might be a few dozen kB)
 
