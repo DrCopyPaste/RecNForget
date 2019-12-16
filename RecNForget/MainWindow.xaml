@@ -78,40 +78,40 @@
                 <local:ImageButton Grid.Row="0" Grid.Column="0" x:Name="WindowOptionsButton" Style="{StaticResource WindowSettingsButton}" Click="WindowOptionsButton_Click">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Cancel" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18">
+                            <MenuItem Header="Cancel" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\cancel_icon428740.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                    <Image Source="ButtonImages\cancel_icon428740.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Open settings" Margin="0" Padding="0" Click="SettingsButton_Click" VerticalAlignment="Center" FontSize="18">
+                            <MenuItem Header="Open settings" Margin="0" Padding="0" Click="SettingsButton_Click" VerticalAlignment="Center" FontSize="18" Height="25">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\settings_icon40863.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                    <Image Source="ButtonImages\settings_icon40863.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="always on top" Margin="0" Padding="0" IsCheckable="true" IsChecked="{Binding Path=WindowAlwaysOnTop}" VerticalAlignment="Center" FontSize="18"/>
+                            <MenuItem Header="always on top" Margin="0" Padding="0" IsCheckable="true" IsChecked="{Binding Path=WindowAlwaysOnTop}" VerticalAlignment="Center" FontSize="18" Height="25"/>
                             <Separator />
-                            <MenuItem Header="About RecNForget" Click="AboutButton_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18">
+                            <MenuItem Header="About RecNForget" Click="AboutButton_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\information_icon280732.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                    <Image Source="ButtonImages\information_icon280732.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Help" Click="Help_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18">
+                            <MenuItem Header="Help" Click="Help_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\help_icon544157.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <Separator />
-                            <MenuItem Header="Check for updates" Click="CheckUpdates_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18">
-                                <MenuItem.Icon>
-                                    <Image Source="ButtonImages\download_icon602.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                    <Image Source="ButtonImages\help_icon544157.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Close RecNForget" Click="Exit_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18">
+                            <MenuItem Header="Check for updates" Click="CheckUpdates_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\shutDown_icon170336.black.png" Height="25" Width="25" HorizontalAlignment="Center"></Image>
+                                    <Image Source="ButtonImages\download_icon602.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="Close RecNForget" Click="Exit_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
+                                <MenuItem.Icon>
+                                    <Image Source="ButtonImages\shutDown_icon170336.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
