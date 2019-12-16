@@ -28,19 +28,19 @@
                 <!-- row 2 for current file display title-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 3 for current file display-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
                 <!-- row 4 for separator-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 5 for file prefix title-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 6 for file prefix-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
                 <!-- row 7 for separator-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 8 for last result display title-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 9 for last result display-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
                 <!-- row 10 for separator-->
                 <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 11 for action buttons title-->

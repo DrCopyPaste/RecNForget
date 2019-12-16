@@ -631,25 +631,31 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Background" Value="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"/>
     </Style>
-    <Style TargetType="TextBox">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                    <Border CornerRadius="2" Padding="2" Background="#19212F" BorderBrush="Red" BorderThickness="1">
-                        <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
     <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Margin" Value="3,0,3,0" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="IsEnabled" Value="False"/>
         <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border CornerRadius="3" BorderBrush="Black" BorderThickness="1">
+                        <Border CornerRadius="1" Padding="1" x:Name="InnerBorder" Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}" BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}" BorderThickness="1">
+                            <ScrollViewer Margin="0" Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}" x:Name="PART_ContentHost" />
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="InnerBorder" Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
+                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style x:Key="DefaultSeparatorStyle" TargetType="Rectangle">
         <Setter Property="VerticalAlignment" Value="Stretch" />
