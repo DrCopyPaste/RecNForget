@@ -104,19 +104,26 @@
                     </Run>
                     <!-- for logo-->
                     <LineBreak/>
-                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                        onlinewebfonts.com/icon/55290 (speaker icon)
-                    </Hyperlink>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">onlinewebfonts.com/icon/55290</Hyperlink>
                     <LineBreak/>
-                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                        onlinewebfonts.com/icon/715 (folder icon)
-                    </Hyperlink>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">onlinewebfonts.com/icon/715</Hyperlink>
                     <LineBreak/>
                     <!-- for button images -->
-                    <!-- help -->
-                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/1314" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                        onlinewebfonts.com/icon/1314 (question mark icon)
-                    </Hyperlink>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/349388" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/349388</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/544157" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/544157</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/280732" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/280732</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/246566" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/246566</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/192688" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/192688</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/40863" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/40863</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/211720" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/211720</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/248857" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/248857</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/518267" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/518267</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/602" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/602</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/353603" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/353603</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/536263" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/536263</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/451737" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/451737</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/428740" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/428740</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/170336" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">https://www.onlinewebfonts.com/icon/170336</Hyperlink><LineBreak/>
                     <LineBreak/>
                 </TextBlock>
             </ScrollViewer>
