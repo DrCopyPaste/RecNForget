@@ -133,7 +133,7 @@
 
             <Rectangle Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Selected file" />
-            <TextBox Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding Path=LastFileNameDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <Rectangle Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Actions" />
@@ -156,7 +156,8 @@
                 <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
                                    Click="OpenOutputFolder_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
-                                   IsEnabled="False" />
+                                   IsEnabled="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                                   Click="SkipPrevButton_Click"/>
                 <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PlayButton}"
                                    IsEnabled="False"
                                    x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
@@ -164,10 +165,11 @@
                                    IsEnabled="False" Visibility="Collapsed"
                                    x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />                
                 <local:ImageButton Grid.Row="0" Grid.Column="4" Style="{StaticResource StopButton}"
-                                   IsEnabled="False"
+                                   IsEnabled="{Binding Path=CurrentAudioPlayState, Mode=TwoWay}"
                                    x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
                 <local:ImageButton Grid.Row="0" Grid.Column="5" Style="{StaticResource NextTrackButton}"
-                                   IsEnabled="False" />
+                                   IsEnabled="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                                   Click="SkipNextButton_Click"/>
                 <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource RecordButton}"
                                    x:Name="RecordButton" Click="RecordButton_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource StopRecordButton}"

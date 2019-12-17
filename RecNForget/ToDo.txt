@@ -1,3 +1,11 @@
+choose cooler folder icon
+
+disable skipping while recording?
+
+provide option whether or not to autoselect the last recorded file
+
+handle defective files when replaying/skipping (can we parse those when adding to playlist service and get error message then? or we need to queue up individually or sth.)
+
 have custom message box (for error or warning messages)
 
 dont ask for path/license again when updating?

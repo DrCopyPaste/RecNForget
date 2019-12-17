@@ -87,7 +87,10 @@ namespace RecNForget.Services
                 RecordedAudioWriter.Dispose();
                 RecordedAudioWriter = null;
                 captureInstance.Dispose();
-            };
+
+				// Actions passed to HotkeyService as Parameter shall be executed after all stop actions
+				stopRecordingAction();
+			};
 
             // Actions passed to HotkeyService as Parameter shall be executed after all start actions besides recording itself
             startRecordingAction();
@@ -103,9 +106,6 @@ namespace RecNForget.Services
             captureInstance.StopRecording();
             LastFileName = CurrentFileName;
             CurrentFileName = string.Empty;
-
-            // Actions passed to HotkeyService as Parameter shall be executed after all stop actions
-            stopRecordingAction();
         }
 
         public string GetTargetPathTemplateString()

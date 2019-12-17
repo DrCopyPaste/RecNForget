@@ -44,11 +44,21 @@ namespace RecNForget
 		private DispatcherTimer recordingTimer;
 
 		private string recordingTimeimeDisplay = string.Empty;
-		private bool hasLastRecording = false;
 		private string currentFileNameDisplay;
-		private string lastFileName;
-		private string lastFileNameDisplay;
 
+		SelectedFileService selectedFileService;
+		public SelectedFileService SelectedFileService
+		{
+			get
+			{
+				return selectedFileService;
+			}
+			set
+			{
+				selectedFileService = value;
+				OnPropertyChanged();
+			}
+		}
 		public DateTime RecordingStart { get; set; }
 
         #region bound values
@@ -117,43 +127,6 @@ namespace RecNForget
 			set
 			{
 				currentAudioPlayState = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public bool HasLastRecording
-		{
-			get
-			{
-				return hasLastRecording;
-			}
-			set
-			{
-				hasLastRecording = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public string LastFileNameDisplay
-		{
-			get
-			{
-				return lastFileNameDisplay;
-			}
-
-			set
-			{
-				lastFileNameDisplay = value;
-
-				if (!string.IsNullOrWhiteSpace(lastFileNameDisplay))
-				{
-					HasLastRecording = true;
-				}
-				else
-				{
-					HasLastRecording = false;
-				}
-
 				OnPropertyChanged();
 			}
 		}
@@ -256,12 +229,11 @@ namespace RecNForget
             // ensure AppConfig Values exist
             AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 
-            replayAudioService = new AudioPlayListService(
+			replayAudioService = new AudioPlayListService(
 				beforePlayAction: () =>
 				{
                     TaskBar_ProgressState = "Normal";
                     CurrentAudioPlayState = true;
-                    StopReplayLastRecordingButton.IsEnabled = true;
 					PauseReplayLastRecordingButton.IsEnabled = true;
 					ReplayLastRecordingButton.Visibility = Visibility.Collapsed;
 					PauseReplayLastRecordingButton.Visibility = Visibility.Visible;
@@ -270,9 +242,8 @@ namespace RecNForget
                     replayAudioService.KillAudio(reset: true);
                     CurrentAudioPlayState = false;
                     TaskBar_ProgressState = "Paused";
-                    StopReplayLastRecordingButton.IsEnabled = false;
 
-					ReplayLastRecordingButton.IsEnabled = HasLastRecording;
+					ReplayLastRecordingButton.IsEnabled = SelectedFileService.HasSelectedFile && !CurrentlyRecording;
 					ReplayLastRecordingButton.Visibility = Visibility.Visible;
 					PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
 				}, afterPauseAction: () =>
@@ -306,8 +277,6 @@ namespace RecNForget
                     TaskBar_ProgressState = "Error";
                     RecordingStart = DateTime.Now;
                     recordingTimer.Start();
-                    UpdateLastFileName(reset: true);
-                    UpdateLastFileNameDisplay(reset: true);
                     UpdateCurrentFileNameDisplay();
                     if (ShowBalloonTipsForRecording)
                     {
@@ -321,15 +290,13 @@ namespace RecNForget
                 },
                 stopRecordingAction: () =>
                 {
-                    UpdateLastFileName();
-                    UpdateLastFileNameDisplay();
                     UpdateCurrentFileNameDisplay(reset: true);
                     CurrentlyRecording = false;
                     CurrentlyNotRecording = true;
                     TaskBar_ProgressState = "Paused";
                     if (ShowBalloonTipsForRecording)
                     {
-                        taskBarIcon.ShowBalloonTip("Recording saved!", LastFileNameDisplay, taskBarIcon.Icon, true);
+                        taskBarIcon.ShowBalloonTip("Recording saved!", audioRecordingService.LastFileName, taskBarIcon.Icon, true);
                         taskBarIcon.TrayBalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
                     }
                     recordingTimer.Stop();
@@ -337,7 +304,8 @@ namespace RecNForget
                     {
                         PlayRecordingStopAudioFeedback();
                     }
-                    ReplayLastRecordingButton.IsEnabled = true;
+					SelectedFileService.SelectFile(new FileInfo(audioRecordingService.LastFileName));
+					ReplayLastRecordingButton.IsEnabled = true;
                     StopReplayLastRecordingButton.IsEnabled = true;
 					RecordButton.Visibility = Visibility.Visible;
 					StopRecordButton.Visibility = Visibility.Collapsed;
@@ -361,14 +329,20 @@ namespace RecNForget
             DataContext = this;
             InitializeComponent();
 
-            this.Topmost = WindowAlwaysOnTop;
+			SelectedFileService = new SelectedFileService();
+			if (SelectedFileService.SelectLatestFile())
+			{
+				ReplayLastRecordingButton.IsEnabled = true;
+			}
+
+			CurrentAudioPlayState = false;
+
+			this.Topmost = WindowAlwaysOnTop;
             taskBarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
             taskBarIcon.DoubleClickCommand = new SimpleActionCommand(() => { SwitchToForegroundMode(); });
             taskBarIcon.Visibility = Visibility.Visible;
 
 			UpdateCurrentFileNameDisplay(reset: true);
-			UpdateLastFileName(reset: true);
-			UpdateLastFileNameDisplay(reset: true);
 
 			if (MinimizedToTray)
 			{
@@ -382,12 +356,12 @@ namespace RecNForget
 
 		private void TaskBarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
 		{
-			if (!File.Exists(lastFileName))
+			if (audioRecordingService.LastFileName == string.Empty || !File.Exists(audioRecordingService.LastFileName))
 			{
 				return;
 			}
 
-			string argument = "/select, \"" + lastFileName + "\"";
+			string argument = "/select, \"" + audioRecordingService.LastFileName + "\"";
 			System.Diagnostics.Process.Start("explorer.exe", argument);
 		}
 
@@ -460,22 +434,12 @@ namespace RecNForget
                 string.Format("{0} ({1} s)", audioRecordingService.CurrentFileName, RecordingTimeDisplay);
 		}
 
-		private void UpdateLastFileName(bool reset = false)
-		{
-			lastFileName = reset ? string.Empty : hotkeyService == null ? string.Empty : audioRecordingService.LastFileName;
-		}
-
-		private void UpdateLastFileNameDisplay(bool reset = false)
-		{
-			LastFileNameDisplay = reset ? "(no file found or selected)" : string.Format("{0} ({1} s)", audioRecordingService.LastFileName, RecordingTimeDisplay);
-		}
-
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
 		{
-            if (audioRecordingService != null && audioRecordingService.LastFileName != string.Empty)
+            if (SelectedFileService.HasSelectedFile)
             {
                 // if there is a result select it in an explorer window
-                string argument = "/select, \"" + lastFileName + "\"";
+                string argument = "/select, \"" + SelectedFileService.SelectedFile.FullName + "\"";
                 System.Diagnostics.Process.Start("explorer.exe", argument);
             }
             else
@@ -491,7 +455,21 @@ namespace RecNForget
             replayAudioService.KillAudio(reset: true);
         }
 
-        private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
+		private void SkipPrevButton_Click(object sender, RoutedEventArgs e)
+		{
+			replayAudioService.Stop();
+			replayAudioService.KillAudio(reset: true);
+			SelectedFileService.SelectPrevFile();
+		}
+
+		private void SkipNextButton_Click(object sender, RoutedEventArgs e)
+		{
+			replayAudioService.Stop();
+			replayAudioService.KillAudio(reset: true);
+			SelectedFileService.SelectNextFile();
+		}
+
+		private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
 		{
 			ToggleReplayLastRecording();
 		}
@@ -499,7 +477,7 @@ namespace RecNForget
 		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
 		private void ToggleReplayLastRecording()
 		{
-			bool replayFileExists = false;
+			bool replayFileExists = SelectedFileService.SelectedFile.Exists;
 
 			if (replayAudioService.PlaybackState == PlaybackState.Stopped)
 			{
@@ -508,7 +486,7 @@ namespace RecNForget
 					replayAudioService.QueueFile(replayStartAudioFeedbackPath);
 				}
 
-				replayFileExists = replayAudioService.QueueFile(lastFileName);
+				replayAudioService.QueueFile(SelectedFileService.SelectedFile.FullName);
 
 				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
 				{
@@ -521,11 +499,7 @@ namespace RecNForget
 				}
 				else
 				{
-                    UpdateLastFileName(reset: true);
-                    UpdateLastFileNameDisplay(reset: true);
-
-                    HasLastRecording = false;
-
+					SelectedFileService.SelectFile(null);
 					CurrentAudioPlayState = false;
 					ReplayLastRecordingButton.IsEnabled = false;
                     StopReplayLastRecordingButton.IsEnabled = false;

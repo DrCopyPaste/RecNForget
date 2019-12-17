@@ -53,23 +53,34 @@ namespace RecNForget.Services
 			return false;
 		}
 
-		public void Play()
+		public bool Play()
 		{
 			if (audioOutputDevice == null || audioOutputDevice.PlaybackState == PlaybackState.Stopped)
 			{
 				if (filePathList.Count > currentPlayIndex)
 				{
 					beforePlayAction?.Invoke();
-					InitTitle(filePathList[currentPlayIndex]);
+					if (InitTitle(filePathList[currentPlayIndex]))
+					{
+						audioOutputDevice.Play();
 
-					audioOutputDevice.Play();
+						return true;
+					}
+					else
+					{
+						return false;
+					}
 				}
 			}
 			else if (audioOutputDevice.PlaybackState == PlaybackState.Paused)
 			{
 				audioOutputDevice.Play();
                 afterResumeAction?.Invoke();
+
+				return true;
             }
+
+			return false;
 		}
 
 		public void Pause()
@@ -105,16 +116,25 @@ namespace RecNForget.Services
 			}
 		}
 
-		private void InitTitle(string titlePath)
+		private bool InitTitle(string titlePath)
 		{
-			if (audioOutputDevice == null)
+			try
 			{
-				audioOutputDevice = new WaveOutEvent();
-				audioOutputDevice.PlaybackStopped += OnAudioDevicePlaybackStopped;
+				if (audioOutputDevice == null)
+				{
+					audioOutputDevice = new WaveOutEvent();
+					audioOutputDevice.PlaybackStopped += OnAudioDevicePlaybackStopped;
+				}
+
+				audioFileReader = new AudioFileReader(titlePath);
+				audioOutputDevice.Init(audioFileReader);
+			}
+			catch (Exception e)
+			{
+				return false;
 			}
 
-			audioFileReader = new AudioFileReader(titlePath);
-			audioOutputDevice.Init(audioFileReader);
+			return true;
 		}
 
 		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
@@ -124,8 +144,10 @@ namespace RecNForget.Services
 
 			if (filePathList.Count > currentPlayIndex)
 			{
-				InitTitle(filePathList[currentPlayIndex]);
-				Play();
+				if (InitTitle(filePathList[currentPlayIndex]))
+				{
+					Play();
+				}
 			}
 			else
 			{
