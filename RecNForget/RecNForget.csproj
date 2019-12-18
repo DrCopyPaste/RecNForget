@@ -204,7 +204,6 @@
     <Resource Include="ButtonImages\minimize_icon246566.black.png" />
     <Resource Include="ButtonImages\nextTrack_icon.black.disabled.png" />
     <Resource Include="ButtonImages\nextTrack_icon.black.png" />
-    <Resource Include="ButtonImages\openFolder_icon192688.black.png" />
     <Resource Include="ButtonImages\pause_icon.black.disabled.png" />
     <Resource Include="ButtonImages\pause_icon.black.png" />
     <Resource Include="ButtonImages\play_icon.black.disabled.png" />
@@ -226,6 +225,7 @@
     <Resource Include="ButtonImages\editSetting_icon451737.black.png" />
     <Resource Include="ButtonImages\cancel_icon428740.black.png" />
     <Resource Include="ButtonImages\shutDown_icon170336.black.png" />
+    <Resource Include="ButtonImages\openFolder_icon356582.black.png" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

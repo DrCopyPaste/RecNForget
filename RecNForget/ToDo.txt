@@ -1,5 +1,3 @@
-choose cooler folder icon
-
 disable skipping while recording?
 
 provide option whether or not to autoselect the last recorded file

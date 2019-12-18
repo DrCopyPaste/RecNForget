@@ -130,7 +130,7 @@
                 <ControlTemplate TargetType="{x:Type local:ImageButton}">
                     <Border Name="ImageButtonBorder"
                        BorderThickness="1"
-                       Padding="5,5,5,5"
+                       Padding="4,4,4,4"
                        Margin="1,1,1,1"
                        BorderBrush="{Binding Source={StaticResource ActionButtonBorder_Color}}"
                        CornerRadius="3"
@@ -334,10 +334,10 @@
     </Style>
 
     <Style x:Key="OpenFolderButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
-        <Setter Property="DefaultImage" Value="ButtonImages\openFolder_icon192688.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\openFolder_icon192688.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\openFolder_icon192688.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\openFolder_icon192688.black.png" />
+        <Setter Property="DefaultImage" Value="ButtonImages\openFolder_icon356582.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\openFolder_icon356582.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\openFolder_icon356582.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\openFolder_icon356582.black.png" />
     </Style>
 
     <Style x:Key="PrevTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonSmallIconLayout}">
