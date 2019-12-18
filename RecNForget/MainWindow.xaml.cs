@@ -244,7 +244,7 @@ namespace RecNForget
 		{
 			if (CheckForUpdateOnStart)
 			{
-				UpdateChecker.ShowUpdateDialogIfPossible(suppressUpToDateDialog: false);
+				UpdateChecker.ShowUpdateDialogIfPossible(suppressUpToDateDialog: true);
 			}
 
             // ensure AppConfig Values exist
