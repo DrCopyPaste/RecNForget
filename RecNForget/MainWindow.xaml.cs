@@ -242,6 +242,11 @@ namespace RecNForget
 
 		public MainWindow()
 		{
+			if (CheckForUpdateOnStart)
+			{
+				UpdateChecker.ShowUpdateDialogIfPossible(suppressUpToDateDialog: false);
+			}
+
             // ensure AppConfig Values exist
             AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 

@@ -12,7 +12,7 @@ namespace RecNForget.Services
 {
 	public class UpdateChecker
 	{
-		public static void ShowUpdateDialogIfPossible()
+		public static void ShowUpdateDialogIfPossible(bool suppressUpToDateDialog = false)
 		{
 			ApplicationBase appBase = new ApplicationBase();
 
@@ -36,7 +36,7 @@ namespace RecNForget.Services
 
 				installUpdateDialog.ShowDialog();
 			}
-			else
+			else if (!suppressUpToDateDialog)
 			{
 				// show message box there is no newer release available
 				System.Windows.MessageBox.Show("RecNForget is already up to date!", "No newer version found", MessageBoxButton.OK, MessageBoxImage.Information);
