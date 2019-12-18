@@ -222,6 +222,22 @@ namespace RecNForget
 			}
 		}
 
+		public bool AutoSelectLastRecording
+		{
+			get
+			{
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoSelectLastRecording));
+			}
+		}
+
+		public bool CheckForUpdateOnStart
+		{
+			get
+			{
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
+			}
+		}
+
 		#endregion
 
 		public MainWindow()
@@ -304,14 +320,17 @@ namespace RecNForget
                     {
                         PlayRecordingStopAudioFeedback();
                     }
-					SelectedFileService.SelectFile(new FileInfo(audioRecordingService.LastFileName));
+					if (AutoSelectLastRecording)
+					{
+						SelectedFileService.SelectFile(new FileInfo(audioRecordingService.LastFileName));
+					}
 					ReplayLastRecordingButton.IsEnabled = true;
                     StopReplayLastRecordingButton.IsEnabled = true;
 					RecordButton.Visibility = Visibility.Visible;
 					StopRecordButton.Visibility = Visibility.Collapsed;
 					if (AutoReplayAudioAfterRecording)
                     {
-                        ToggleReplayLastRecording();
+                        ToggleReplayLastRecording(audioRecordingService.LastFileName);
                     }
                 },
                 outputPathGetterMethod: () =>
@@ -475,7 +494,7 @@ namespace RecNForget
 		}
 
 		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
-		private void ToggleReplayLastRecording()
+		private void ToggleReplayLastRecording(string fileName = null)
 		{
 			bool replayFileExists = SelectedFileService.SelectedFile.Exists;
 
@@ -486,7 +505,7 @@ namespace RecNForget
 					replayAudioService.QueueFile(replayStartAudioFeedbackPath);
 				}
 
-				replayAudioService.QueueFile(SelectedFileService.SelectedFile.FullName);
+				replayAudioService.QueueFile(fileName != null ? fileName : SelectedFileService.SelectedFile.FullName);
 
 				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
 				{

@@ -86,6 +86,34 @@ namespace RecNForget
 			}
 		}
 
+		public bool AutoSelectLastRecording
+		{
+			get
+			{
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoSelectLastRecording));
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.AutoSelectLastRecording, value.ToString());
+				OnPropertyChanged();
+			}
+		}
+
+		public bool CheckForUpdateOnStart
+		{
+			get
+			{
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart, value.ToString());
+				OnPropertyChanged();
+			}
+		}
+
 		public bool PlayAudioFeedBackMarkingStartAndStopReplaying
 		{
 			get

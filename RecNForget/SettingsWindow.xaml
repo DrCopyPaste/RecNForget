@@ -88,16 +88,24 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <CheckBox Grid.Row="0" Grid.Column="0"
                           Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=AutoStartWithWindows}" >auto start</CheckBox>
+                          IsChecked="{Binding Path=CheckForUpdateOnStart}" >check for updates on start</CheckBox>
                 <CheckBox Grid.Row="1" Grid.Column="0"
                           Style="{StaticResource DefaultCheckboxStyle}"
+                          IsChecked="{Binding Path=AutoStartWithWindows}" >auto start</CheckBox>
+                <CheckBox Grid.Row="2" Grid.Column="0"
+                          Style="{StaticResource DefaultCheckboxStyle}"
                           IsChecked="{Binding Path=MinimizedToTray}" >run in background</CheckBox>
+                <CheckBox Grid.Row="3" Grid.Column="0"
+                          Style="{StaticResource DefaultCheckboxStyle}"
+                          IsChecked="{Binding Path=AutoSelectLastRecording}" >auto select last recording</CheckBox>
             </Grid>
             
             <Rectangle Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>

@@ -13,7 +13,9 @@ namespace RecNForget.Services
         public static string ApplicationName = "RecNForget";
         public static string WindowsAutoStartRegistryPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
 
-        public static string AutoReplayAudioAfterRecording = "AutoReplayAudioAfterRecording";
+		public static string CheckForUpdateOnStart = "CheckForUpdateOnStart";
+		public static string AutoSelectLastRecording = "AutoSelectLastRecording";
+		public static string AutoReplayAudioAfterRecording = "AutoReplayAudioAfterRecording";
 		public static string PlayAudioFeedBackMarkingStartAndStopReplaying = "PlayAudioFeedBackMarkingStartAndStopReplaying";
 		public static string PlayAudioFeedBackMarkingStartAndStopRecording = "PlayAudioFeedBackMarkingStartAndStopRecording";
 		public static string MinimizedToTray = "MinimizedToTray";
@@ -112,6 +114,8 @@ namespace RecNForget.Services
 
             Dictionary<string, string> defaultValues = new Dictionary<string, string>()
 			{
+				{ AppSettingHelper.CheckForUpdateOnStart, "True" },
+				{ AppSettingHelper.AutoSelectLastRecording, "True" },
 				{ AppSettingHelper.AutoReplayAudioAfterRecording, "False" },
 				{ AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying, "False" },
 				{ AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording, "True" },
