@@ -345,6 +345,55 @@
         <Setter Property="DisabledImage" Value="ButtonImages\prevTrack_icon.black.disabled.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\prevTrack_icon.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\prevTrack_icon.black.png" />
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition1" Value="True"/>
+                    <Condition Property="IsEnabledCondition2" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="True"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition1" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="False"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition2" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="False"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="NextTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonSmallIconLayout}">
+        <Setter Property="DefaultImage" Value="ButtonImages\nextTrack_icon.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\nextTrack_icon.black.disabled.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\nextTrack_icon.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\nextTrack_icon.black.png" />
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition1" Value="True"/>
+                    <Condition Property="IsEnabledCondition2" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="True"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition1" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="False"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition2" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="False"/>
+            </MultiTrigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="PlayButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
@@ -366,13 +415,6 @@
         <Setter Property="DisabledImage" Value="ButtonImages\stop_icon.black.disabled.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\stop_icon.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\stop_icon.black.png" />
-    </Style>
-
-    <Style x:Key="NextTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonSmallIconLayout}">
-        <Setter Property="DefaultImage" Value="ButtonImages\nextTrack_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\nextTrack_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\nextTrack_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\nextTrack_icon.black.png" />
     </Style>
 
     <Style x:Key="RecordButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">

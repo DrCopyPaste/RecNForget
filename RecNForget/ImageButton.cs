@@ -13,6 +13,18 @@ namespace RecNForget
 				new FrameworkPropertyMetadata(typeof(ImageButton)));
 		}
 
+		public bool IsEnabledCondition1
+		{
+			get { return (bool)GetValue(IsEnabledCondition1Property); }
+			set { SetValue(IsEnabledCondition1Property, value); }
+		}
+
+		public bool IsEnabledCondition2
+		{
+			get { return (bool)GetValue(IsEnabledCondition1Property); }
+			set { SetValue(IsEnabledCondition1Property, value); }
+		}
+
 		public ImageSource DefaultImage
 		{
 			get { return (ImageSource)GetValue(DefaultImageProperty); }
@@ -36,6 +48,9 @@ namespace RecNForget
 			get { return (ImageSource)GetValue(PressedImageProperty); }
 			set { SetValue(PressedImageProperty, value); }
 		}
+
+		public static readonly DependencyProperty IsEnabledCondition1Property = DependencyProperty.Register("IsEnabledCondition1", typeof(bool), typeof(ImageButton), new PropertyMetadata(true));
+		public static readonly DependencyProperty IsEnabledCondition2Property = DependencyProperty.Register("IsEnabledCondition2", typeof(bool), typeof(ImageButton), new PropertyMetadata(true));
 
 		public static readonly DependencyProperty DefaultImageProperty = DependencyProperty.Register("DefaultImage", typeof(ImageSource), typeof(ImageButton), new PropertyMetadata(default(ImageSource)));
 		public static readonly DependencyProperty DisabledImageProperty = DependencyProperty.Register("DisabledImage", typeof(ImageSource), typeof(ImageButton), new PropertyMetadata(default(ImageSource)));

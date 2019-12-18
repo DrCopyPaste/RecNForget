@@ -156,7 +156,8 @@
                 <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
                                    Click="OpenOutputFolder_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
-                                   IsEnabled="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                                   IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                                   IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
                                    Click="SkipPrevButton_Click"/>
                 <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PlayButton}"
                                    IsEnabled="False"
@@ -168,7 +169,8 @@
                                    IsEnabled="{Binding Path=CurrentAudioPlayState, Mode=TwoWay}"
                                    x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
                 <local:ImageButton Grid.Row="0" Grid.Column="5" Style="{StaticResource NextTrackButton}"
-                                   IsEnabled="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                                   IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                                   IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
                                    Click="SkipNextButton_Click"/>
                 <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource RecordButton}"
                                    x:Name="RecordButton" Click="RecordButton_Click" />
