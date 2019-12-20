@@ -242,13 +242,13 @@ namespace RecNForget
 
 		public MainWindow()
 		{
+			// ensure AppConfig Values exist
+			AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+
 			if (CheckForUpdateOnStart)
 			{
 				UpdateChecker.ShowUpdateDialogIfPossible(suppressUpToDateDialog: true);
 			}
-
-            // ensure AppConfig Values exist
-            AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 
 			replayAudioService = new AudioPlayListService(
 				beforePlayAction: () =>
