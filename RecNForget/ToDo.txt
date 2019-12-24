@@ -1,3 +1,5 @@
+catch (default) output folder does not exist (set to a windows default that MUST exist? but what could that be (not including %-Variables))
+
 make window snap to top/left/bottom/right (multiple screens?)
 fixed settings-window height, but scrollable and collapsible settings (a suddenly bigger getting window might be confusing (or not displayed completely at all))
 
