@@ -29,6 +29,23 @@ namespace RecNForget
 
 			DataContext = this;
 			InitializeComponent();
+
+			DisplayHotkey();
+		}
+
+		private void DisplayHotkey()
+		{
+			if (HotkeyDisplay.Children.Count > 0)
+			{
+				HotkeyDisplay.Children.Clear();
+			}
+
+			var buttonGrid = HotkeyToStringTranslator.GetHotkeyListAsButtonGrid(
+				hotkeys: HotkeyToStringTranslator.GetHotkeySettingAsList(AppSettingHelper.HotKey_StartStopRecording, string.Empty, string.Empty),
+				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
+				spacing: 6);
+
+			HotkeyDisplay.Children.Add(buttonGrid);
 		}
 
 		public bool AutoStartWithWindows
@@ -225,6 +242,7 @@ namespace RecNForget
 			if (dialog.ShowDialog() == true)
 			{
 				HotKey_StartStopRecording = dialog.HotkeysAppSetting;
+				DisplayHotkey();
 			}
 
 			this.hotkeyService.ResumeCapturingHotkeys();

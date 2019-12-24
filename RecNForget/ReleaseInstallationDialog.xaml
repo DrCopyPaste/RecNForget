@@ -6,48 +6,83 @@
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
         Topmost="True"
-        Title="RecNForget - Update Available" Style="{StaticResource DefaultWindowStyle}">
+        Style="{StaticResource DefaultWindowStyle}"
+        Title="RecNForget - Update Available">
+    <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
+	everything that is not defined by style must not be in the opening tags starting line
+	
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+            ...custom style definitions...
+			...
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
+			Content/Text/Value="optional">
+        </NodeName>
+        -->
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" MouseDown="Window_MouseDown">
+        <Grid
+            Background="{Binding Source={StaticResource Application_Background_Color}}"
+            MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}"/>
+                <RowDefinition
+                    Height="{Binding Source={StaticResource TitleRow_Height}}"/>
                 <!-- row 1 for "update available!" -->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 2 for Version Info -->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 3 for spacing -->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 4 for patch notes intro header -->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 5 for patch notes box -->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 6 for spacing -->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 7 for install checkbox -->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 8 for bottom row buttons -->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" FontSize="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="An Update is available!"/>
-            <TextBlock Grid.Row="2" Grid.Column="0" FontSize="18" Margin="5,0,0,0" TextWrapping="Wrap" Text="{Binding Path=VersionInfoString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock Grid.Row="4" Grid.Column="0" FontSize="15" Margin="5,0,0,0" TextWrapping="Wrap" Text="Please read the patch and change notes below:"/>
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                FontSize="30" Margin="5,0,0,0" TextWrapping="Wrap" Text="An Update is available!"/>
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                FontSize="18" Margin="5,0,0,0" TextWrapping="Wrap"
+                Text="{Binding Path=VersionInfoString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Grid.Row="4" Grid.Column="0"
+                FontSize="15" Margin="5,0,0,0" TextWrapping="Wrap"
+                Text="Please read the patch and change notes below:"/>
 
-            <ScrollViewer Grid.Row="5" Grid.Column="0" Margin="1,1,1,1" Height="{Binding Source={StaticResource PathNotes_TextBox_Height}}" Width="{Binding Source={StaticResource PathNotes_TextBox_Width}}" Background="{Binding Source={StaticResource HeaderButton_Hover_Color}}">
-                <TextBlock FontSize="11" TextWrapping="Wrap" Text="{Binding Path=ReleaseNotes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <ScrollViewer Grid.Row="5" Grid.Column="0"
+                Margin="1,1,1,1" Height="{Binding Source={StaticResource PathNotes_TextBox_Height}}" Width="{Binding Source={StaticResource PathNotes_TextBox_Width}}" Background="{Binding Source={StaticResource HeaderButton_Hover_Color}}">
+                <TextBlock
+                    FontSize="11" TextWrapping="Wrap"
+                    Text="{Binding Path=ReleaseNotes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
             </ScrollViewer>
 
-            <CheckBox Grid.Row="7" Grid.Column="0" IsChecked="{Binding Path=InstallAfterDownload}" Style="{StaticResource DefaultCheckboxStyle}">install after download (otherwise show download in explorer)</CheckBox>
+            <CheckBox Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                IsChecked="{Binding Path=InstallAfterDownload}">install after download</CheckBox>
             
-            <local:ImageButton Grid.Row="8" Grid.Column="2" Style="{StaticResource DownloadButton}" HorizontalAlignment="Right" Click="DownloadButton_Click" ToolTip="Download"/>
-
-            <local:ImageButton Grid.Row="8" Grid.Column="0" Style="{StaticResource CancelButton}" HorizontalAlignment="Left" IsCancel="True"/>
+            <local:ImageButton Grid.Row="8" Grid.Column="2" Style="{StaticResource DownloadButton}"
+                HorizontalAlignment="Right"
+                Click="DownloadButton_Click" ToolTip="Download"/>
+            <local:ImageButton Grid.Row="8" Grid.Column="0" Style="{StaticResource CancelButton}"
+                HorizontalAlignment="Left"
+                IsCancel="True"/>
         </Grid>
     </Border>
 </Window>

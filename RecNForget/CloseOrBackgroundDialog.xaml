@@ -6,32 +6,59 @@
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
         Topmost="True"
-        Title="RecNForget - Close or Background" Style="{StaticResource DefaultWindowStyle}">
+        Style="{StaticResource DefaultWindowStyle}"
+        Title="RecNForget - Close or Background" >
+    <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
+	everything that is not defined by style must not be in the opening tags starting line
+	
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+            ...custom style definitions...
+			...
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
+			Content/Text/Value="optional">
+        </NodeName>
+        -->
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" MouseDown="Window_MouseDown">
+        <Grid
+            Background="{Binding Source={StaticResource Application_Background_Color}}"
+            MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}"/>
+                <RowDefinition
+                    Height="{Binding Source={StaticResource TitleRow_Height}}"/>
                 <!-- row 1 for question line 1-->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 2 for question line 2-->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 3 spacing-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 4 for buttons -->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="You selected the 'run as background process' option in settings." />
-            <TextBlock Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" Text="Do you want to close the application or run as background process now?" />
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap"
+                Text="You selected the 'run as background process' option in settings." />
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap"
+                Text="Do you want to close the application or run as background process now?" />
 
-            <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource AcceptButton}" x:Name="RunInBackgroundButton" Click="Background_Click" HorizontalAlignment="Left" />
-            <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource ShutDownButton}" x:Name="CloseApplicationButton" Click="Close_Click" HorizontalAlignment="Right" />
+            <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource AcceptButton}"
+                HorizontalAlignment="Left"
+                x:Name="RunInBackgroundButton" Click="Background_Click"/>
+            <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource ShutDownButton}"
+                HorizontalAlignment="Right"
+                x:Name="CloseApplicationButton" Click="Close_Click"/>
         </Grid>
     </Border>
 </Window>

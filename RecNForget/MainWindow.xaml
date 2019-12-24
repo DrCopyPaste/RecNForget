@@ -7,181 +7,248 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         mc:Ignorable="d"
-        Title="RecNForget" Style="{StaticResource DefaultWindowStyle}" >
-
-    <!-- Try to follow this node convention:
+        Style="{StaticResource DefaultWindowStyle}"
+        Title="RecNForget">
+    <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
+	everything that is not defined by style must not be in the opening tags starting line
+	
         <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
             ...custom style definitions...
-            Content/Text/Value="optional"
-            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...>
-            ...
+			...
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
+			Content/Text/Value="optional">
         </NodeName>
         -->
 
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" Name="MainGrid" MouseDown="Window_MouseDown">
+        <Grid
+            Background="{Binding Source={StaticResource Application_Background_Color}}"
+            MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource TitleRow_Height}}" />
                 <!-- row 1 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 2 for current file display title-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition 
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 3 for current file display-->
-                <RowDefinition Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
                 <!-- row 4 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 5 for file prefix title-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 6 for file prefix-->
-                <RowDefinition Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
                 <!-- row 7 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 8 for last result display title-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 9 for last result display-->
-                <RowDefinition Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
                 <!-- row 10 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 11 for action buttons title-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 12 for action buttons-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource ButtonRow_Height}}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding Source={StaticResource MainWindow_Width}}" />
+                <ColumnDefinition
+                    Width="{Binding Source={StaticResource MainWindow_Width}}" />
             </Grid.ColumnDefinitions>
 
-            <tb:TaskbarIcon Name="taskBarIcon">
+            <tb:TaskbarIcon
+                Name="taskBarIcon">
                 <tb:TaskbarIcon.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Click="Exit_Click" Header="Exit" />
+                        <MenuItem
+                            Click="Exit_Click"
+                            Header="Exit" />
                     </ContextMenu>
                 </tb:TaskbarIcon.ContextMenu>
             </tb:TaskbarIcon>
 
             <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
-            <Grid Grid.Row="0" Grid.Column="0" Background="{Binding Source={StaticResource HeaderRow_Background_Color}}">
+            <Grid Grid.Row="0" Grid.Column="0"
+                  Background="{Binding Source={StaticResource HeaderRow_Background_Color}}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <RowDefinition
+                        Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
                 </Grid.ColumnDefinitions>
 
-                <local:ImageButton Grid.Row="0" Grid.Column="0" x:Name="WindowOptionsButton" Style="{StaticResource WindowSettingsButton}" Click="WindowOptionsButton_Click">
+                <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource WindowSettingsButton}"
+                    x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Cancel" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
+                            <MenuItem
+                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
+                                Header="Cancel">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\cancel_icon428740.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
+                                    <Image
+                                        Source="ButtonImages\cancel_icon428740.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Open settings" Margin="0" Padding="0" Click="SettingsButton_Click" VerticalAlignment="Center" FontSize="18" Height="25">
+                            <MenuItem
+                                Margin="0" Padding="0" Click="SettingsButton_Click" VerticalAlignment="Center" FontSize="18" Height="25"
+                                Header="Open settings">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\settings_icon40863.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
+                                    <Image
+                                        Source="ButtonImages\settings_icon40863.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="always on top" Margin="0" Padding="0" IsCheckable="true" IsChecked="{Binding Path=WindowAlwaysOnTop}" VerticalAlignment="Center" FontSize="18" Height="25"/>
+                            <MenuItem
+                                Margin="0" Padding="0" IsCheckable="true" VerticalAlignment="Center" FontSize="18" Height="25"
+                                Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
                             <Separator />
-                            <MenuItem Header="About RecNForget" Click="AboutButton_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
+                            <MenuItem
+                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
+                                Header="About RecNForget" Click="AboutButton_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\information_icon280732.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
+                                    <Image
+                                        Source="ButtonImages\information_icon280732.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Help" Click="Help_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
+                            <MenuItem
+                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
+                                Header="Help" Click="Help_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\help_icon544157.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
+                                    <Image
+                                        Source="ButtonImages\help_icon544157.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Check for updates" Click="CheckUpdates_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
+                            <MenuItem
+                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
+                                Header="Check for updates" Click="CheckUpdates_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\download_icon602.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
+                                    <Image
+                                        Source="ButtonImages\download_icon602.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Close RecNForget" Click="Exit_Click" Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25">
+                            <MenuItem
+                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
+                                Header="Close RecNForget" Click="Exit_Click">
                                 <MenuItem.Icon>
-                                    <Image Source="ButtonImages\shutDown_icon170336.black.png" Stretch="Uniform" HorizontalAlignment="Center"></Image>
+                                    <Image
+                                        Source="ButtonImages\shutDown_icon170336.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </local:ImageButton>
-                
                 <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}" Click="MinimizeButton_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}" Click="Exit_Click" />
             </Grid>
 
             <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Path"/>
-            <TextBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
+                Content="Path"/>
+            <TextBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
+                Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Use file name" />
-            <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}" IsEnabled="True" Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="FilenamePrefix_Changed"/>
-
+            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
+                Content="Use file name" />
+            <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
+                IsEnabled="True"
+                Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="FilenamePrefix_Changed"/>
 
             <Rectangle Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Selected file" />
-            <TextBox Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}" Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
+                Content="Selected file" />
+            <TextBox Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
+                Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <Rectangle Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Actions" />
+            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
+                Content="Actions" />
 
-            <Grid Grid.Row="12" Grid.Column="0" Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}">
+            <Grid Grid.Row="12" Grid.Column="0"
+                Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                    <RowDefinition
+                        Height="{Binding Source={StaticResource ButtonRow_Height}}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
                 </Grid.ColumnDefinitions>
 
                 <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
-                                   Click="OpenOutputFolder_Click" />
+                     Click="OpenOutputFolder_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
-                                   IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
-                                   IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
-                                   Click="SkipPrevButton_Click"/>
+                    IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                    IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
+                    Click="SkipPrevButton_Click"/>
                 <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PlayButton}"
-                                   IsEnabled="False"
-                                   x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
+                    IsEnabled="False"
+                    x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PauseButton}"
-                                   IsEnabled="False" Visibility="Collapsed"
-                                   x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />                
+                    IsEnabled="False" Visibility="Collapsed"
+                    x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="4" Style="{StaticResource StopButton}"
-                                   IsEnabled="{Binding Path=CurrentAudioPlayState, Mode=TwoWay}"
-                                   x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
+                    IsEnabled="{Binding Path=CurrentAudioPlayState, Mode=TwoWay}"
+                    x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
                 <local:ImageButton Grid.Row="0" Grid.Column="5" Style="{StaticResource NextTrackButton}"
-                                   IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
-                                   IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
-                                   Click="SkipNextButton_Click"/>
+                    IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                    IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
+                    Click="SkipNextButton_Click"/>
                 <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource RecordButton}"
-                                   x:Name="RecordButton" Click="RecordButton_Click" />
+                    x:Name="RecordButton" Click="RecordButton_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource StopRecordButton}"
-                                   Visibility="Collapsed"
-                                   x:Name="StopRecordButton" Click="RecordButton_Click" />
+                    Visibility="Collapsed"
+                    x:Name="StopRecordButton" Click="RecordButton_Click" />
             </Grid>
         </Grid>
     </Border>
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo Description="RecNForget" 
-                     ProgressValue="1" ProgressState="{Binding Path=TaskBar_ProgressState}"/>
+        <TaskbarItemInfo Description="RecNForget"
+            ProgressValue="1" ProgressState="{Binding Path=TaskBar_ProgressState}"/>
     </Window.TaskbarItemInfo>
 </Window>

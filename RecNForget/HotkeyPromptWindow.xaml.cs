@@ -32,15 +32,8 @@ namespace RecNForget
 			InitializeComponent();
 
 			this.Title = title;
-
 			this.keyboardHook = new Hook("Configure Hotkey Hook");
 			this.keyboardHook.KeyDownEvent = this.KeyHookDown;
-		}
-
-		public string HotkeysText
-		{
-			get { return HotkeysTextBox.Text; }
-			set { HotkeysTextBox.Text = value; }
 		}
 
 		public string HotkeysAppSetting
@@ -57,16 +50,26 @@ namespace RecNForget
 
 		private void KeyHookDown(KeyboardHookEventArgs e)
 		{
-			HotkeysText = HotkeyToStringTranslator.GetKeyboardHookEventArgsAsString(e);
+			if (HotkeyDisplay.Children.Count > 0)
+			{
+				HotkeyDisplay.Children.Clear();
+			}
+			
+			var buttonGrid = HotkeyToStringTranslator.GetHotkeyListAsButtonGrid(
+				hotkeys: HotkeyToStringTranslator.GetKeyboardHookEventArgsAsList(e, string.Empty, string.Empty),
+				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
+				spacing: 6);
+
+			HotkeyDisplay.Children.Add(buttonGrid);
 
 			if (e.Key != Keys.None)
 			{
 				HotkeysAppSetting = e.ToString();
-				HotkeysText = HotkeyToStringTranslator.GetKeyboardHookEventArgsAsString(e);
-
 				this.keyboardHook.isPaused = true;
+
 				DialogResult = true;
 			}
 		}
 	}
 }
+;

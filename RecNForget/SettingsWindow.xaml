@@ -7,134 +7,203 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Topmost="True"
-        Title="RecNForget - Settings" Style="{StaticResource DefaultWindowStyle}" >
+        Style="{StaticResource DefaultWindowStyle}"
+        Title="RecNForget - Settings">
+    <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
+	everything that is not defined by style must not be in the opening tags starting line
+	
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+            ...custom style definitions...
+			...
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
+			Content/Text/Value="optional">
+        </NodeName>
+        -->
+
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" MouseDown="Window_MouseDown">
+        <Grid
+            Background="{Binding Source={StaticResource Application_Background_Color}}"
+            MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource TitleRow_Height}}" />
                 <!-- row 1 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 2 for current title-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 3 for setting row-->
-                <RowDefinition Height="*" />
+                <RowDefinition
+                    Height="*" />
                 <!-- row 4 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition 
+                   Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 5 for current title-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 6 for setting row-->
-                <RowDefinition Height="*" />
+                <RowDefinition
+                    Height="*" />
                 <!-- row 7 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 8 for current title-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 9 for application settings row-->
-                <RowDefinition Height="*" />
+                <RowDefinition
+                    Height="*" />
                 <!-- row 10 for separator-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 11 for current title-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
                 <!-- row 12 for messages settings row-->
-                <RowDefinition Height="*" />
+                <RowDefinition
+                    Height="*" />
                 <!-- row 13 for setting row-->
-                <RowDefinition Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource ButtonRow_Height}}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{Binding Source={StaticResource MainWindow_Width}}" />
+                <ColumnDefinition
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
             <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="General"/>
-            <Grid Grid.Row="3" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}" Content="Output to:" />
-                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
-                         Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
+                   Content="Hotkeys"/>
 
-                <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
-                                   Click="Configure_OutputPath_Click" />
-            </Grid>
+            <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource BaseSettingButtonLayout}"
+                    HorizontalAlignment="Stretch"
+                    Click="ConfigureHotkey_StartStopRecording_Click">
+                <Grid
+                    HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition
+                            Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="3*" />
+                        <ColumnDefinition
+                            Width="6*" />
+                        <ColumnDefinition
+                            Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}"
+                        Content="Toggle Record"/>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" Style="{StaticResource HotkeyDisplayStackPanel}"
+                        x:Name="HotkeyDisplay" />
+
+                    <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
+                        HorizontalAlignment="Right"
+                        Click="ConfigureHotkey_StartStopRecording_Click" />
+                </Grid>
+            </Button>
 
             <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Hotkeys"/>
-            <Grid Grid.Row="6" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}" Content="Toggle Record"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}" Text="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}" />
-                <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
-                                   Click="ConfigureHotkey_StartStopRecording_Click" />
-            </Grid>
+            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
+                   Content="General"/>
+
+            <Button Grid.Row="6" Grid.Column="0" Style="{StaticResource BaseSettingButtonLayout}"
+                    HorizontalAlignment="Stretch"
+                    Click="Configure_OutputPath_Click">
+                <Grid
+                    HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition
+                            Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="3*" />
+                        <ColumnDefinition
+                            Width="6*" />
+                        <ColumnDefinition
+                            Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}"
+                        Content="Output Folder:" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
+                        Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+
+                    <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
+                        HorizontalAlignment="Right"
+                        Click="Configure_OutputPath_Click" />
+                </Grid>
+            </Button>
 
             <Rectangle Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Application"/>
+            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
+                Content="Application"/>
             <Grid Grid.Row="9" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition
+                        Height="*" />
+                    <RowDefinition
+                        Height="*" />
+                    <RowDefinition
+                        Height="*" />
+                    <RowDefinition
+                        Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Row="0" Grid.Column="0"
-                          Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=CheckForUpdateOnStart}" >check for updates on start</CheckBox>
-                <CheckBox Grid.Row="1" Grid.Column="0"
-                          Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=AutoStartWithWindows}" >auto start</CheckBox>
-                <CheckBox Grid.Row="2" Grid.Column="0"
-                          Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=MinimizedToTray}" >run in background</CheckBox>
-                <CheckBox Grid.Row="3" Grid.Column="0"
-                          Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=AutoSelectLastRecording}" >auto select last recording</CheckBox>
+                <CheckBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                    IsChecked="{Binding Path=CheckForUpdateOnStart}" >check for updates on start</CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                    IsChecked="{Binding Path=AutoStartWithWindows}" >auto start</CheckBox>
+                <CheckBox Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                    IsChecked="{Binding Path=MinimizedToTray}" >run in background</CheckBox>
+                <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                    IsChecked="{Binding Path=AutoSelectLastRecording}" >auto select last recording</CheckBox>
             </Grid>
             
             <Rectangle Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}" Content="Messages"/>
+            <Label Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
+                Content="Messages"/>
             <Grid Grid.Row="12" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition
+                        Height="*" />
+                    <RowDefinition
+                        Height="*" />
+                    <RowDefinition
+                        Height="*" />
+                    <RowDefinition
+                        Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <CheckBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=AutoReplayAudioAfterRecording}">auto replay
+                    IsChecked="{Binding Path=AutoReplayAudioAfterRecording}">
+                    auto replay last recording
                 </CheckBox>
-
                 <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopRecording}">beep on toggle record</CheckBox>
+                    IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopRecording}">
+                    sound on toggle record
+                </CheckBox>
                 <CheckBox Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopReplaying}">click on toggle play</CheckBox>
+                    IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopReplaying}">
+                    sound on toggle play
+                </CheckBox>
                 <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                          IsChecked="{Binding Path=ShowBalloonTipsForRecording}">toast messages</CheckBox>
+                    IsChecked="{Binding Path=ShowBalloonTipsForRecording}">show toast messages</CheckBox>
             </Grid>
 
             <local:ImageButton Grid.Row="13" Grid.Column="0" Style="{StaticResource AcceptButton}"
-                               HorizontalAlignment="Right"
-                               Click="OkButton_Click" />
+                HorizontalAlignment="Right"
+                Click="OkButton_Click" />
         </Grid>
     </Border>
 </Window>

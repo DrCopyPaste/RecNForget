@@ -7,23 +7,49 @@
         mc:Ignorable="d"
         Topmost="True"
         Title="RecNForget - Configure hotkey" Style="{StaticResource DefaultWindowStyle}">
+    <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
+	everything that is not defined by style must not be in the opening tags starting line
+	
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+            ...custom style definitions...
+			...
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
+			Content/Text/Value="optional">
+        </NodeName>
+        -->
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" MouseDown="Window_MouseDown">
+        <Grid
+            Background="{Binding Source={StaticResource Application_Background_Color}}"
+            MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 1 prompt message-->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 2 spacing-->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}"/>
                 <!-- row 3 hotkey display-->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="{Binding Source={StaticResource MainWindow_Width}}" />
+            </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Hold down all modifier keys you wish to set and add your preferred hotkey." />
-            <TextBox Grid.Row="3" Grid.Column="0" Style="{StaticResource SettingTextBoxStyle}" x:Name="HotkeysTextBox" IsReadOnly="True" />
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap"
+                Text="Hold down all modifier keys you wish to set and add your preferred hotkey." />
+
+            <StackPanel Grid.Row="3" Grid.Column="0"
+                HorizontalAlignment="Center"
+                x:Name="HotkeyDisplay">
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

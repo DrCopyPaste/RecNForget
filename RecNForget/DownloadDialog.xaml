@@ -6,27 +6,54 @@
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
         Topmost="True"
-        Title="RecNForget - Downloading Update" Style="{StaticResource DefaultWindowStyle}">
+        Style="{StaticResource DefaultWindowStyle}"
+        Title="RecNForget - Downloading Update">
+    <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
+	everything that is not defined by style must not be in the opening tags starting line
+	
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+            ...custom style definitions...
+			...
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
+			Content/Text/Value="optional">
+        </NodeName>
+        -->
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Background="{Binding Source={StaticResource Application_Background_Color}}" MouseDown="Window_MouseDown">
+        <Grid
+            Background="{Binding Source={StaticResource Application_Background_Color}}"
+            MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition Height="{Binding Source={StaticResource TitleRow_Height}}"/>
+                <RowDefinition
+                    Height="{Binding Source={StaticResource TitleRow_Height}}"/>
                 <!-- row 1 for progress bar-->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
                 <!-- row 2 for spacing-->
-                <RowDefinition Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
                 <!-- row 3 for cancel button-->
-                <RowDefinition Height="*"/>
+                <RowDefinition
+                    Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition
+                    Width="*" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
-            <ProgressBar Grid.Row="1" Grid.Column="0" Minimum="0" Maximum="100" Width="200" Height="{Binding Source={StaticResource ButtonRow_Height}}" Value="{Binding Path=DownloadProgress}" />
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Path=DownloadProgress, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <local:ImageButton Grid.Row="3" Grid.Column="0" Style="{StaticResource CancelButton}" x:Name="CancelButton" HorizontalAlignment="Right" IsCancel="True"/>
+            
+            <ProgressBar Grid.Row="1" Grid.Column="0"
+                Width="200" Height="{Binding Source={StaticResource ButtonRow_Height}}" Minimum="0" Maximum="100"
+                Value="{Binding Path=DownloadProgress}" />
+            
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                Text="{Binding Path=DownloadProgress, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            
+            <local:ImageButton Grid.Row="3" Grid.Column="0" Style="{StaticResource CancelButton}"
+                HorizontalAlignment="Right"
+                x:Name="CancelButton"
+                IsCancel="True"/>
         </Grid>
     </Border>
 </Window>
