@@ -145,7 +145,9 @@ namespace RecNForget.Services
 		private List<FileInfo> GetOutputFiles()
 		{
 			DirectoryInfo directory = new DirectoryInfo(OutputPath);
-			return directory.GetFiles("*.wav").OrderByDescending(x => x.CreationTime).ToList();
+			return directory.Exists ?
+				directory.GetFiles("*.wav").OrderByDescending(x => x.CreationTime).ToList() :
+				new List<FileInfo>();
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
