@@ -246,6 +246,8 @@ namespace RecNForget
 			}
 
 			this.hotkeyService.ResumeCapturingHotkeys();
+
+			e.Handled = true;
 		}
 
 		private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)

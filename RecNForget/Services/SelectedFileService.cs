@@ -67,7 +67,7 @@ namespace RecNForget.Services
 			{
 				SelectedFile = file;
 				HasSelectedFile = true;
-				SelectedFileDisplay = file.FullName;
+				SelectedFileDisplay = file.Name;
 				return true;
 			}
 		}

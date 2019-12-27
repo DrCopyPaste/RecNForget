@@ -35,6 +35,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 
 # upcoming features in next version (commited, not yet released)
 - FIX: uninstalling RecNForget will now also delete all application data (under %APPDATA% machine configuration and in registry for autostart)
+- FIX: clicking the open folder button does not crash RecNForget anymore, if that folder does not (yet) exist
 - FIX: changing the file prefix changes the displayed file name with output path
 
 - auto selecting the last recording is now optional (enabled by default)

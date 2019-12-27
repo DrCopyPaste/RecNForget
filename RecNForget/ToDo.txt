@@ -1,4 +1,18 @@
-catch (default) output folder does not exist (set to a windows default that MUST exist? but what could that be (not including %-Variables))
+checkbox style cropped at the top on win10 (border style with margin?)
+
+writing help on github AND in-application is tedious
+	provide tool to parse feature list from HelpService into generated md-files
+	link those generated md-files from readme.md in repository root
+	parse other meta information into mds too
+		credits
+		about
+		how to use
+
+include real help link in application
+		could we use md-syntax from githubs readme.md for example to also render within wpf? would be nice to share texts that display nicely "in" github.com AND in RecNForget
+	relative help (right-clicking a control for instance)?
+	- imlement custom help window (with "help items" constructor)
+	- centralize help
 
 make window snap to top/left/bottom/right (multiple screens?)
 fixed settings-window height, but scrollable and collapsible settings (a suddenly bigger getting window might be confusing (or not displayed completely at all))
@@ -10,7 +24,7 @@ maybe make settings in settings window temporary (so they have to be ok'd, right
  - NO! settings immediate effect allows for instant preview (very good!)
  - INSTEAD save current settings when calling settings dialog allow to cancel them via a new cancel button
 
-unifying styles and magic (like margins widths and heights, fonts...)
+unifying styles and magic strings (like margins widths and heights, fonts...)
 UI resizing
 
 restructure readme.md
@@ -53,12 +67,6 @@ style scrollbar viewer/scrollable textboxes to fit app style (round corners, fla
 - aboutdialog and releaseinstallationdialog
 
 show splash screen instead of "null-window" (the thing that still needs to be resized and controls put into at the start)
-
-include real help link in application
-	could we use md-syntax from githubs readme.md for example to also render within wpf? would be nice to share texts that display nicely "in" github.com AND in RecNForget
-relative help (right-clicking a control for instance)?
-- imlement custom help window (with "help items" constructor)
-- centralize help
 
 error handling for no internet/network connection for update/problems writing file etc
 

@@ -460,17 +460,26 @@ namespace RecNForget
 
 		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
 		{
-            if (SelectedFileService.HasSelectedFile)
+			var directory = new DirectoryInfo(OutputPath);
+
+			if (SelectedFileService.HasSelectedFile && SelectedFileService.SelectedFile.Exists)
             {
-                // if there is a result select it in an explorer window
-                string argument = "/select, \"" + SelectedFileService.SelectedFile.FullName + "\"";
+				// if there is a result select it in an explorer window
+				string argument = "/select, \"" + SelectedFileService.SelectedFile.FullName + "\"";
                 System.Diagnostics.Process.Start("explorer.exe", argument);
             }
-            else
-            {
-                // otherwise just open output path in explorer
-                Process.Start(OutputPath);
+            else if (directory.Exists)
+			{
+				// otherwise just open output path in explorer
+				Process.Start(OutputPath);
             }
+			else
+			{
+				// unselect selected file (it does not exist anymore)
+				// disable skip buttons
+				// disable open folder button?
+				// show message box
+			}
         }
 
         private void StopReplayLastRecording_Click(object sender, RoutedEventArgs e)
