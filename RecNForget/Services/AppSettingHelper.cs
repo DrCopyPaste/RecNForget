@@ -120,7 +120,7 @@ namespace RecNForget.Services
 				{ AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying, "False" },
 				{ AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording, "True" },
 				{ AppSettingHelper.MinimizedToTray, "False" },
-				{ AppSettingHelper.HotKey_StartStopRecording, "Key=F12; Win=False; Alt=False; Ctrl=True; Shift=False" },
+				{ AppSettingHelper.HotKey_StartStopRecording, "Key=Pause; Win=False; Alt=False; Ctrl=False; Shift=False" },
 				{ AppSettingHelper.FilenamePrefix, "RecNForget_" },
 				{ AppSettingHelper.OutputPath, @"C:\tmp" },
 				{ AppSettingHelper.WindowAlwaysOnTop, "False" },

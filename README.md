@@ -18,7 +18,7 @@ RecNForget requires .Net Framework 4.7 to run.
 Run msi-file from the [latest release](https://github.com/DrCopyPaste/RecNForget/releases/latest) to install.
 
 # How to Use
-- by default RecNForget sets [Ctrl] + [F12] as the Record hotkey. (changeable in settings)
+- by default RecNForget sets [Pause] as the Record hotkey. (changeable in settings)
 - have RecNForget running
 - press the configured Record hotkey
 - start the audio which you want to capure
@@ -42,6 +42,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - FIX: clicking the open folder button does not crash RecNForget anymore, if that folder does not (yet) exist
 - FIX: changing the file prefix changes the displayed file name with output path
 
+- changed default hotkey for "toggle record" to [Pause]
 - shrinked main window in size and reorganized controls a bit
 - all action buttons now are in the same row at the bottom
 - added skip buttons to navigate through output folder (auto selects the latest file on program start)
