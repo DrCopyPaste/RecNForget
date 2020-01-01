@@ -12,7 +12,7 @@ namespace RecNForget.Services
     public class AudioRecordingService
     {
         public static string OutputFilePathPattern = @"{0}\{1}.wav";
-        public static string OutputFileDateFormat = "yyyyMMdd-HHmmssfff";
+        public static string OutputFileDateFormat = "yyyyMMddHHmmssfff";
 
         private Action startRecordingAction;
         private Action stopRecordingAction;

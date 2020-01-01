@@ -20,8 +20,12 @@ namespace RecNForget.Services
 		private bool hasSelectedFile;
 		private string selectedFileDisplay;
 
-		public SelectedFileService()
+		private Action noSelectableFileFoundAction;
+
+		public SelectedFileService(Action noSelectableFileFoundAction = null)
 		{
+			this.noSelectableFileFoundAction = noSelectableFileFoundAction;
+
 			HasSelectedFile = false;
 			SelectedFileDisplay = "(no file found or selected)";
 		}
@@ -37,6 +41,12 @@ namespace RecNForget.Services
 			set
 			{
 				hasSelectedFile = value;
+
+				if (!value)
+				{
+					noSelectableFileFoundAction?.Invoke();
+				}
+
 				OnPropertyChanged();
 			}
 		}
@@ -90,16 +100,20 @@ namespace RecNForget.Services
 		{
 			var allFiles = GetOutputFiles();
 
-			if (SelectedFile != null && SelectedFile.Exists && allFiles.Any())
+			if (allFiles.Any())
 			{
-				var tempInfo = allFiles.First(f => f.FullName == SelectedFile.FullName);
+				int currentIndex = 0;
+				FileInfo tempInfo = allFiles.Any(f => f.FullName == SelectedFile.FullName) ? allFiles.First(f => f.FullName == SelectedFile.FullName) : null;
 
-				int currentIndex = allFiles.IndexOf(tempInfo);
-				currentIndex++;
-
-				if (currentIndex >= allFiles.Count)
+				if (tempInfo != null)
 				{
-					currentIndex = 0;
+					currentIndex = allFiles.IndexOf(tempInfo);
+					currentIndex++;
+
+					if (currentIndex >= allFiles.Count)
+					{
+						currentIndex = 0;
+					}
 				}
 
 				return SelectFile(allFiles[currentIndex]);
@@ -114,16 +128,20 @@ namespace RecNForget.Services
 		{
 			var allFiles = GetOutputFiles();
 
-			if (SelectedFile != null && SelectedFile.Exists && allFiles.Any())
+			if (allFiles.Any())
 			{
-				var tempInfo = allFiles.First(f => f.FullName == SelectedFile.FullName);
+				int currentIndex = 0;
+				FileInfo tempInfo = allFiles.Any(f => f.FullName == SelectedFile.FullName) ? allFiles.First(f => f.FullName == SelectedFile.FullName) : null;
 
-				int currentIndex = allFiles.IndexOf(tempInfo);
-				currentIndex--;
-
-				if (currentIndex < 0)
+				if (tempInfo != null)
 				{
-					currentIndex = allFiles.Count - 1;
+					currentIndex = allFiles.IndexOf(tempInfo);
+					currentIndex--;
+
+					if (currentIndex < 0)
+					{
+						currentIndex = allFiles.Count - 1;
+					}
 				}
 
 				return SelectFile(allFiles[currentIndex]);
@@ -132,6 +150,52 @@ namespace RecNForget.Services
 			{
 				return false;
 			}
+		}
+
+		public bool DeleteSelectedFile()
+		{
+			if (SelectedFile == null || !SelectedFile.Exists)
+			{
+				return false;
+			}
+
+			try
+			{
+				File.Delete(SelectedFile.FullName);
+				SelectPrevFile();
+
+				return true;
+			}
+			catch (Exception e)
+			{
+			}
+
+			return false;
+		}
+
+		public bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension)
+		{
+			if (SelectedFile == null || !SelectedFile.Exists)
+			{
+				return false;
+			}
+
+			try
+			{
+				string path = SelectedFile.DirectoryName;
+				string extension = Path.GetExtension(SelectedFile.Name);
+				string newFullName = Path.Combine(path, string.Concat(newNameWithoutExtension, extension));
+
+				File.Move(SelectedFile.FullName, newFullName);
+				SelectFile(new FileInfo(newFullName));
+
+				return true;
+			}
+			catch (Exception e)
+			{
+			}
+
+			return false;
 		}
 
 		private string OutputPath

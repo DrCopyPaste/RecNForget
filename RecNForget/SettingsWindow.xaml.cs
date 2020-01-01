@@ -1,6 +1,7 @@
 ﻿using Ookii.Dialogs.Wpf;
 using RecNForget.Services;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.IO;
@@ -46,6 +47,20 @@ namespace RecNForget
 				spacing: 6);
 
 			HotkeyDisplay.Children.Add(buttonGrid);
+		}
+
+		public string FilenamePrefix
+		{
+			get
+			{
+				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.FilenamePrefix, value);
+				OnPropertyChanged();
+			}
 		}
 
 		public bool AutoStartWithWindows
@@ -247,6 +262,7 @@ namespace RecNForget
 
 			this.hotkeyService.ResumeCapturingHotkeys();
 
+			// since there are two buttons on top of each other
 			e.Handled = true;
 		}
 
@@ -258,6 +274,29 @@ namespace RecNForget
 			{
 				OutputPath = dialog.SelectedPath;
 			}
+
+			// since there are two buttons on top of each other
+			e.Handled = true;
+		}
+
+		private void Configure_FileNamePattern_Click(object sender, RoutedEventArgs e)
+		{
+			CustomMessageBox tempDialog = new CustomMessageBox(
+				caption: "Type in a new pattern for file name generation.",
+				icon: CustomMessageBoxIcon.Question,
+				buttons: CustomMessageBoxButtons.OkAndCancel,
+				messageRows: new List<string>() { "Supported placeholders:", "(Date)" },
+				prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
+				controlFocus: CustomMessageBoxFocus.Prompt,
+				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+			{
+				FilenamePrefix = tempDialog.PromptContent;
+			}
+
+			// since there are two buttons on top of each other
+			e.Handled = true;
 		}
 
 		private void Exit_Click(object sender, RoutedEventArgs e)

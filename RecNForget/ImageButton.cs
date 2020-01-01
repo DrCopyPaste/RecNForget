@@ -13,6 +13,18 @@ namespace RecNForget
 				new FrameworkPropertyMetadata(typeof(ImageButton)));
 		}
 
+		public string ImagePadding
+		{
+			get { return (string)GetValue(ImagePaddingProperty); }
+			set { SetValue(ImagePaddingProperty, value); }
+		}
+
+		public string ImageMargin
+		{
+			get { return (string)GetValue(ImageMarginProperty); }
+			set { SetValue(ImageMarginProperty, value); }
+		}
+
 		public bool IsEnabledCondition1
 		{
 			get { return (bool)GetValue(IsEnabledCondition1Property); }
@@ -48,6 +60,9 @@ namespace RecNForget
 			get { return (ImageSource)GetValue(PressedImageProperty); }
 			set { SetValue(PressedImageProperty, value); }
 		}
+
+		public static readonly DependencyProperty ImagePaddingProperty = DependencyProperty.Register("ImagePadding", typeof(string), typeof(ImageButton), new PropertyMetadata("0,0,0,0"));
+		public static readonly DependencyProperty ImageMarginProperty = DependencyProperty.Register("ImageMargin", typeof(string), typeof(ImageButton), new PropertyMetadata("0,0,0,0"));
 
 		public static readonly DependencyProperty IsEnabledCondition1Property = DependencyProperty.Register("IsEnabledCondition1", typeof(bool), typeof(ImageButton), new PropertyMetadata(true));
 		public static readonly DependencyProperty IsEnabledCondition2Property = DependencyProperty.Register("IsEnabledCondition2", typeof(bool), typeof(ImageButton), new PropertyMetadata(true));

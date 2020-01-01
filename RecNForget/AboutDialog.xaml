@@ -182,6 +182,19 @@
                         onlinewebfonts.com/icon/428740</Hyperlink><LineBreak/>
                     <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/170336" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
                         onlinewebfonts.com/icon/170336</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/122592" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/122592</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/77730" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/77730</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/304479" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/304479</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/109120" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/109120</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/277439" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/277439</Hyperlink><LineBreak/>
+                    <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/79516" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        onlinewebfonts.com/icon/79516</Hyperlink><LineBreak/>
+                    
                     <LineBreak/>
                 </TextBlock>
             </ScrollViewer>
@@ -190,7 +203,7 @@
                 Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>
             <local:ImageButton Grid.Row="9" Grid.Column="3" Style="{StaticResource AcceptButton}"
                 HorizontalAlignment="Right"
-                IsCancel="True"/>
+                Click="okButton_Click"/>
         </Grid>
     </Border>
 </Window>

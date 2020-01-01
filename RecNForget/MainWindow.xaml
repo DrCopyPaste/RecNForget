@@ -74,7 +74,7 @@
 
             <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
             <Grid Grid.Row="0" Grid.Column="0"
-                  Background="{Binding Source={StaticResource HeaderRow_Background_Color}}">
+                  Background="{Binding Source={StaticResource Application_Background_Color}}">
                 <Grid.RowDefinitions>
                     <RowDefinition
                         Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
@@ -166,28 +166,40 @@
             <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
                 Content="Recording Path"/>
-            <Grid Grid.Row="3" Grid.Column="0"
-                  Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition
+            <Border Grid.Row="3" Grid.Column="0"
+                BorderThickness="1"
+                Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
+                Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                BorderBrush="{Binding Source={StaticResource Font_Color}}"
+                CornerRadius="3"
+                Background="{Binding Source={StaticResource Application_Background_Color}}">
+                <Grid
+                  Background="{Binding Source={StaticResource ControlBackground_Color}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition
                         Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="13*" />
-                    <ColumnDefinition
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                        Width="13*"/>
+                        <ColumnDefinition
                         Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                    <ColumnDefinition
+                        <ColumnDefinition
                         Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                </Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
 
-                <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
-                    Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
+                        Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <local:ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
+                        ToolTip="change output file name" Margin="0,2,2,0"
+                        Click="ChangeFileNamePatternButton_Clicked"/>
 
-                <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeOutputFolderMiniButtonLayout}" />
-            </Grid>
+                    <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeOutputFolderMiniButtonLayout}"
+                        ToolTip="change output folder" Margin="0,2,2,0"
+                        Click="ChangeOutputFolderButton_Clicked"/>
+                </Grid>
+            </Border>
 
             <!--<Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
@@ -199,15 +211,55 @@
             <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
                 Content="Selected file" />
-            <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
-                Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Border Grid.Row="6" Grid.Column="0"
+                BorderThickness="1"
+                Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
+                Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                BorderBrush="{Binding Source={StaticResource Font_Color}}"
+                CornerRadius="3"
+                Background="{Binding Source={StaticResource Application_Background_Color}}">
+                <Grid
+                  Background="{Binding Source={StaticResource ControlBackground_Color}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition
+                        Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                        Width="13*" />
+                        <ColumnDefinition
+                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                        <ColumnDefinition
+                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
+                    Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <local:ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
+                    ToolTip="rename selected file"
+                    Click="ChangeSelectedFileNameButton_Clicked"/>
+
+                    <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource DeleteSelectedFileMiniButtonLayout}"
+                    ToolTip="delete selected file"
+                    Click="DeleteelectedFileButton_Clicked"/>
+                </Grid>
+            </Border>
 
             <Rectangle Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
                 Content="Actions" />
 
-            <Grid Grid.Row="9" Grid.Column="0"
-                Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}">
+            <Border Grid.Row="9" Grid.Column="0"
+                BorderThickness="1"
+                Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
+                Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                BorderBrush="{Binding Source={StaticResource Font_Color}}"
+                CornerRadius="3"
+                Background="{Binding Source={StaticResource Application_Background_Color}}">
+                <Grid
+                Background="{Binding Source={StaticResource ControlBackground_Color}}">
                 <Grid.RowDefinitions>
                     <RowDefinition
                         Height="{Binding Source={StaticResource ButtonRow_Height}}" />
@@ -255,7 +307,8 @@
                 <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource StopRecordButton}"
                     Visibility="Collapsed"
                     x:Name="StopRecordButton" Click="RecordButton_Click" />
-            </Grid>
+                </Grid>
+            </Border>
         </Grid>
     </Border>
     <Window.TaskbarItemInfo>

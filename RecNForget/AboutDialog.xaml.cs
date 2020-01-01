@@ -59,5 +59,10 @@ namespace RecNForget
 			if (e.ChangedButton == MouseButton.Left)
 				this.DragMove();
 		}
+
+		private void okButton_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
 	}
 }

@@ -39,7 +39,14 @@ namespace RecNForget.Services
 			else if (!suppressUpToDateDialog)
 			{
 				// show message box there is no newer release available
-				System.Windows.MessageBox.Show("RecNForget is already up to date!", "No newer version found", MessageBoxButton.OK, MessageBoxImage.Information);
+				CustomMessageBox tempDialog = new CustomMessageBox(
+					caption: "RecNForget is already up to date!",
+					icon: CustomMessageBoxIcon.Information,
+					buttons: CustomMessageBoxButtons.OK,
+					messageRows: new List<string>() { "No newer version found" },
+					controlFocus: CustomMessageBoxFocus.Ok);
+
+				tempDialog.ShowDialog();
 			}
 		}
 

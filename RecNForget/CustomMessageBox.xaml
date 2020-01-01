@@ -1,0 +1,64 @@
+﻿<Window x:Class="RecNForget.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecNForget"
+        mc:Ignorable="d"
+        Topmost="True"
+        Style="{StaticResource DefaultWindowStyle}">
+    <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
+	everything that is not defined by style must not be in the opening tags starting line
+	
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+            ...custom style definitions...
+			...
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
+			Content/Text/Value="optional">
+        </NodeName>
+        -->
+    <Border Style="{StaticResource DefaultWindowBorderStyle}">
+        <Grid
+            Background="{Binding Source={StaticResource Application_Background_Color}}"
+            Name="DialogGrid"  MouseDown="Window_MouseDown">
+            <Grid.RowDefinitions>
+                <!-- row 0 for title bar-->
+                <RowDefinition
+                    Height="*"/>
+                <!-- row 1 icon on left, caption and message rows and prompt-->
+                <RowDefinition
+                    Height="*"/>
+                <!-- row 2 spacing-->
+                <RowDefinition
+                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}"/>
+                <!-- row 3 buttons-->
+                <RowDefinition
+                    Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" /> 
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"
+                Grid.ColumnSpan="2"/>
+
+            <Image Grid.Row="1" Grid.Column="0" Style="{StaticResource CustomMessageBoxDefaultIconStyle}"
+                Name="DialogImage" />
+
+            <Grid Grid.Row="1" Grid.Column="1"
+                Name="ContentGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition
+                        Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

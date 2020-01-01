@@ -3,6 +3,7 @@ using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Services;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -174,6 +175,22 @@ namespace RecNForget
             }
 		}
 
+		public string OutputPath
+		{
+			get
+			{
+				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPath, value);
+				OnPropertyChanged();
+
+				UpdateCurrentFileNameDisplay();
+			}
+		}
+
 		public bool AutoReplayAudioAfterRecording
 		{
             get
@@ -195,14 +212,6 @@ namespace RecNForget
 			get
 			{
 				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying));
-			}
-		}
-
-		public string OutputPath
-		{
-			get
-			{
-				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
 			}
 		}
 
@@ -290,6 +299,7 @@ namespace RecNForget
                 {
 					RecordButton.Visibility = Visibility.Collapsed;
 					StopRecordButton.Visibility = Visibility.Visible;
+					StopRecordButton.Focus();
 					CurrentAudioPlayState = false;
                     ReplayLastRecordingButton.IsEnabled = false;
                     replayAudioService.KillAudio(reset: true);
@@ -308,10 +318,11 @@ namespace RecNForget
                     {
                         PlayRecordingStartAudioFeedback();
                     }
-                },
+				},
                 stopRecordingAction: () =>
                 {
-                    UpdateCurrentFileNameDisplay(reset: true);
+					this.Focus();
+					UpdateCurrentFileNameDisplay(reset: true);
                     CurrentlyRecording = false;
                     CurrentlyNotRecording = true;
                     TaskBar_ProgressState = "Paused";
@@ -589,6 +600,8 @@ namespace RecNForget
 		{
 			var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); });
 			settingsWindow.ShowDialog();
+
+			UpdateCurrentFileNameDisplay();
 		}
 
 		private void AboutButton_Click(object sender, RoutedEventArgs e)
@@ -612,6 +625,91 @@ namespace RecNForget
 			e.Handled = true;
 		}
 
-        #endregion
-    }
+		private void ChangeFileNamePatternButton_Clicked(object sender, RoutedEventArgs e)
+		{
+			CustomMessageBox tempDialog = new CustomMessageBox(
+				caption: "Type in a new pattern for file name generation.",
+				icon: CustomMessageBoxIcon.Question,
+				buttons: CustomMessageBoxButtons.OkAndCancel,
+				messageRows: new List<string>() { "Supported placeholders:", "(Date)" },
+				prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
+				controlFocus: CustomMessageBoxFocus.Prompt,
+				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+			{
+				FilenamePrefix = tempDialog.PromptContent;
+			}
+		}
+
+		private void ChangeOutputFolderButton_Clicked(object sender, RoutedEventArgs e)
+		{
+			var dialog = new VistaFolderBrowserDialog();
+
+			if (dialog.ShowDialog() == true)
+			{
+				OutputPath = dialog.SelectedPath;
+			}
+		}
+
+		private void ChangeSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
+		{
+			replayAudioService.Stop();
+			replayAudioService.KillAudio();
+
+			CustomMessageBox tempDialog = new CustomMessageBox(
+				caption: "Rename the selected file",
+				icon: CustomMessageBoxIcon.Question,
+				buttons: CustomMessageBoxButtons.OkAndCancel,
+				messageRows: new List<string>(),
+				prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
+				controlFocus: CustomMessageBoxFocus.Prompt,
+				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+			{
+				if (!selectedFileService.RenameSelectedFileWithoutExtension(tempDialog.PromptContent))
+				{
+					CustomMessageBox errorMessageBox = new CustomMessageBox(
+						caption: "Something went wrong",
+						icon: CustomMessageBoxIcon.Error,
+						buttons: CustomMessageBoxButtons.OK,
+						messageRows: new List<string>() { "An error occurred trying to rename the selected file" },
+						controlFocus: CustomMessageBoxFocus.Ok);
+
+					errorMessageBox.ShowDialog();
+				}
+			}
+		}
+
+		private void DeleteelectedFileButton_Clicked(object sender, RoutedEventArgs e)
+		{
+			replayAudioService.Stop();
+			replayAudioService.KillAudio();
+
+			CustomMessageBox tempDialog = new CustomMessageBox(
+				caption: "Are you sure you want to delete this file?",
+				icon: CustomMessageBoxIcon.Question,
+				buttons: CustomMessageBoxButtons.OkAndCancel,
+				messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
+				controlFocus: CustomMessageBoxFocus.Ok);
+
+			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+			{
+				if (!selectedFileService.DeleteSelectedFile())
+				{
+					CustomMessageBox errorMessageBox = new CustomMessageBox(
+						caption: "Something went wrong",
+						icon: CustomMessageBoxIcon.Error,
+						buttons: CustomMessageBoxButtons.OK,
+						messageRows: new List<string>() { "An error occurred trying to delete the selected file" },
+						controlFocus: CustomMessageBoxFocus.Ok);
+
+					errorMessageBox.ShowDialog();
+				}
+			}
+		}
+
+		#endregion
+	}
 }

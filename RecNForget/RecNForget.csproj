@@ -94,8 +94,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomMessageBoxButtons.cs" />
+    <Compile Include="CustomMessageBoxFocus.cs" />
+    <Compile Include="CustomMessageBoxPromptValidation.cs" />
+    <Compile Include="CustomMessageBoxIcon.cs" />
     <Compile Include="DownloadDialog.xaml.cs">
       <DependentUpon>DownloadDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMessageBox.xaml.cs">
+      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageButton.cs" />
     <Compile Include="ReleaseInstallationDialog.xaml.cs">
@@ -115,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DownloadDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -227,6 +238,12 @@
     <Resource Include="ButtonImages\cancel_icon428740.black.png" />
     <Resource Include="ButtonImages\shutDown_icon170336.black.png" />
     <Resource Include="ButtonImages\openFolder_icon356582.black.png" />
+    <Resource Include="ButtonImages\pencil_icon79516.black.png" />
+    <Resource Include="ButtonImages\message_error_icon304479.black.png" />
+    <Resource Include="ButtonImages\message_info_icon277439.black.png" />
+    <Resource Include="ButtonImages\message_question_icon109120.black.png" />
+    <Resource Include="ButtonImages\trash_icon77730.black.png" />
+    <Resource Include="ButtonImages\folder_icon122592.black.png" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

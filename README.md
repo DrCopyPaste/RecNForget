@@ -38,12 +38,16 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - FIX: clicking the open folder button does not crash RecNForget anymore, if that folder does not (yet) exist
 - FIX: changing the file prefix changes the displayed file name with output path
 
-- auto selecting the last recording is now optional (enabled by default)
-- added skip buttons to navigate through output folder (auto selects the latest file on program start)
-- major UI rework of the main window (see below)
 - shrinked main window in size and reorganized controls a bit
-- no more standard title bar
 - all action buttons now are in the same row at the bottom
+- added skip buttons to navigate through output folder (auto selects the latest file on program start)
+- can rename selected file via pencil icon next to "selected file"
+- can delete selected file via trash can icon next to "selected file"
+- file name pattern no longer in main window (is instead configured pencil button next to "recording path" or via settings menu)
+- can configure target path via folder icon next to "recording path"
+- consistently use white background for (almost) all controls
+- auto selecting the last recording is now optional (enabled by default)
+- no more standard title bar
 - added icons for most buttons
 - added a help link to the menu (calls link in browser going to THIS readme.md, I will replace this with an in-application help later on)
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
