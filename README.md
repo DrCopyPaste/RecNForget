@@ -1,10 +1,14 @@
 # RecNForget 0.3
 Set a global Windows hotkey to capture and save default audio output to wave files
 
-With RecNForget running, capturing audio should be as easy as:
-- press "Recording"-hotkey to start recording
+Current Version is 0.3.
+
+Progress towards 0.4-Release can be tracked [here](https://github.com/DrCopyPaste/RecNForget/projects/2).
+
+Recording audio should be as easy as pushing a button:
+- press "Toggle Record"-hotkey to start recording
 - do your audio thing...
-- press "Recording"-hotkey again to finish the recording
+- press "Toggle Record"-hotkey again to finish the recording
 
 Your recorded audio is now saved to an automatically generated file in RecNForget's output folder.
 
@@ -30,7 +34,7 @@ Feel free to download the code and play with it, for now this has mainly prototy
 Currently I use Microsoft's Visual Studio Community 2019 for development.
 To build the setup project you need to have the [WiX Toolset](https://wixtoolset.org/releases/v3.11.2/stable) installed.
 
-Please keep in mind this is my first (and very maybe last) WPF application so this might make it a bit more messy. (Especially binding logic and similar stuff...)
+Please keep in mind this is my first (and very maybe last) WPF application so this might make it a bit more messy.
 For stable and buildable code please refer to the version tagged commits, in between releases there may very well be errors in the code ;)
 
 # upcoming features in next version (commited, not yet released)
@@ -62,15 +66,6 @@ For stable and buildable code please refer to the version tagged commits, in bet
 # Features missing for version 1.0
 - show record (red circle) in bottom right corner when recording (configurable)
 - clean up source code for maintainability
-- rework visual layout of windows (more consistency and maybe smaller nicer windows)
-
-# Nice to haves in future releases
-- allow toggling input device (default audio/mic/mixed/other?)
-- allow different output formats (like wave/mp3/ogg?)
-- allow hotkeys for other actions (like changing output file or replaying last recorded audio)
-- include how-to-build-file (maybe batch with msbuild)
-- "gimmick" mode (allow using application as a sound board, binding hotkeys to different sound outputs, maybe even allow changing the output device they are output to (to insert sounds into a running mic session for example))
-- migrate to .net core (this is more out of curiosity than pure necessity, BUT it might be an interesting step towards trying to make RecNForget cross platform (whilst maybe getting smaller and more performant))
 
 # Credits
 - Code by [DrCopyPaste](https://github.com/DrCopyPaste)
