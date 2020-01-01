@@ -24,6 +24,9 @@
 
     <Sys:Double x:Key="SeparatorRow_Height">2</Sys:Double>
     <Sys:Double x:Key="SeparatorTitleRow_Height">15</Sys:Double>
+    <Sys:Double x:Key="MainWindowControl_InnerWidth">21</Sys:Double>
+    <Sys:Double x:Key="MainWindowControl_Height">21</Sys:Double>
+    <Sys:Double x:Key="MainWindowControl_HeightWithMargin">25</Sys:Double>
 
     <Sys:Double x:Key="CreditsBox_Height">150</Sys:Double>
 
@@ -254,9 +257,63 @@
                 <ControlTemplate TargetType="{x:Type local:ImageButton}">
                     <Border Name="ImageButtonBorder"
                        BorderThickness="1"
-                       Padding="1,1,1,1"
-                       Margin="0,1,1,0"
+                       Padding="2,2,2,2"
+                       Margin="0,0,0,0"
                        BorderBrush="{Binding Source={StaticResource ActionButtonBorder_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Name="ImageButtonGrid">
+                            <Image Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalAlignment="Bottom" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Some triggers ( IsFocused, IsMouseOver, etc.) -->
+                        <Trigger Property="IsPressed" Value="False">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Enabled_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DefaultImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Hover_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Pressed_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding PressedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageButtonGrid" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButton_Disabled_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Disabled_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DisabledImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BaseMiniChangeSettingButtonLayout" TargetType="{x:Type local:ImageButton}">
+        <!-- Some setters -->
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImageButton}">
+                    <Border Name="ImageButtonBorder"
+                       BorderThickness="1"
+                       Padding="2,2,2,2"
+                       Margin="0,0,0,0"
+                       BorderBrush="{Binding Source={StaticResource Application_Background_Color}}"
                        CornerRadius="3"
                        Background="{TemplateBinding Background}">
                         <Grid Name="ImageButtonGrid">
@@ -373,7 +430,6 @@
     </Style>
 
     <Style x:Key="ChangeSettingButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseChangeSettingButtonLayout}">
-        <Setter Property="Background" Value="AliceBlue" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="DefaultImage" Value="ButtonImages\editSetting_icon451737.black.png" />
@@ -381,6 +437,34 @@
         <Setter Property="SelectedImage" Value="ButtonImages\editSetting_icon451737.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\editSetting_icon451737.black.png" />
     </Style>
+    
+    <!-- Mini Buttons for Main Window Sub Controls-->
+
+    <Style x:Key="ChangeFilePatternMiniButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseMiniChangeSettingButtonLayout}">
+        <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
+        <Setter Property="Margin" Value="2,2,2,0" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="DefaultImage" Value="ButtonImages\editSetting_icon451737.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\editSetting_icon451737.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\editSetting_icon451737.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\editSetting_icon451737.black.png" />
+    </Style>
+
+    <Style x:Key="ChangeOutputFolderMiniButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseMiniChangeSettingButtonLayout}">
+        <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
+        <Setter Property="Margin" Value="2,2,2,0" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="DefaultImage" Value="ButtonImages\tools_icon536263.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\tools_icon536263.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\tools_icon536263.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\tools_icon536263.black.png" />
+    </Style>
+
+    <!-- /Mini Buttons for Main Window Sub Controls-->
 
     <Style x:Key="FatActionButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseButtonLayout}">
         <Setter Property="Height" Value="30" />
@@ -741,17 +825,18 @@
     <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Margin" Value="3,0,3,0" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="3,2,3,0" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_Height}}" />
+        <Setter Property="FontSize" Value="11" />
         <Setter Property="IsEnabled" Value="False"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
                     <Border CornerRadius="3" BorderBrush="Black" BorderThickness="1">
-                        <Border CornerRadius="1" Padding="1" x:Name="InnerBorder" Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}" BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}" BorderThickness="1">
-                            <ScrollViewer Margin="0" Background="{Binding Source={StaticResource ActionButtonRow_Background_Color}}" x:Name="PART_ContentHost" />
+                        <Border CornerRadius="1" Padding="1" x:Name="InnerBorder" Background="{Binding Source={StaticResource Application_Background_Color}}" BorderBrush="{Binding Source={StaticResource Application_Background_Color}}" BorderThickness="1">
+                            <ScrollViewer Margin="0" Background="{Binding Source={StaticResource Application_Background_Color}}" x:Name="PART_ContentHost" />
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>

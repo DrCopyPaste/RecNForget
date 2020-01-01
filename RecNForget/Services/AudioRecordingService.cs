@@ -11,7 +11,7 @@ namespace RecNForget.Services
 {
     public class AudioRecordingService
     {
-        public static string OutputFilePathPattern = @"{0}\{1}{2}.wav";
+        public static string OutputFilePathPattern = @"{0}\{1}.wav";
         public static string OutputFileDateFormat = "yyyyMMdd-HHmmssfff";
 
         private Action startRecordingAction;
@@ -59,7 +59,7 @@ namespace RecNForget.Services
             do
             {
                 // datestrings > GUIDS :D
-                file = new FileInfo(string.Format(AudioRecordingService.OutputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod(), DateTime.Now.ToString(AudioRecordingService.OutputFileDateFormat)));
+                file = new FileInfo(GetFileNameWithReplacePlaceholders());
             } while (file.Exists);
 
             DirectoryInfo directory = new DirectoryInfo(file.DirectoryName);
@@ -110,7 +110,22 @@ namespace RecNForget.Services
 
         public string GetTargetPathTemplateString()
         {
-            return string.Format(AudioRecordingService.OutputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod(), AudioRecordingService.OutputFileDateFormat);
+            return string.Format(AudioRecordingService.OutputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod());
         }
+
+		private string GetFileNameWithReplacePlaceholders()
+		{
+			string tempString = string.Format(AudioRecordingService.OutputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod());
+
+			if (tempString.Contains("(Date)"))
+			{
+				tempString = tempString.Replace("(Date)", DateTime.Now.ToString(AudioRecordingService.OutputFileDateFormat));
+			}
+
+			// for suppporting (Number) - sequential number placeholder
+			// we first need to find out if there already exist files with the desired pattern and look for the highest number (or the first free slot, this might be messy if users intentionally create future sequential number files)
+
+			return tempString;
+		}
     }
 }
