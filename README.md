@@ -64,6 +64,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - Installer now starts with elevated privileges (so it can update the files installed in programs folder)
 
 # Features missing for version 1.0
+- allow toggling input source (default output, or maybe mic/something else)?
 - show record (red circle) in bottom right corner when recording (configurable)
 - clean up source code for maintainability
 
