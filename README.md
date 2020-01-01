@@ -47,7 +47,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - added skip buttons to navigate through output folder (auto selects the latest file on program start)
 - can rename selected file via pencil icon next to "selected file"
 - can delete selected file via trash can icon next to "selected file"
-- file name pattern no longer in main window (is instead configured pencil button next to "recording path" or via settings menu)
+- file name pattern no longer in main window (it is instead configured by the pencil button next to "recording path" or via settings menu)
 - can configure target path via folder icon next to "recording path"
 - consistently use white background for (almost) all controls
 - auto selecting the last recording is now optional (enabled by default)
