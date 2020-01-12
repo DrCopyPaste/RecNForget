@@ -94,7 +94,7 @@
                 Text="RecNForget is a free application that helps you sample audio faster."  />
 
             <ScrollViewer Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"
-                Margin="0,0,5,0" Background="{Binding Source={StaticResource HeaderButton_Hover_Color}}">
+                Margin="0,0,5,0" Background="{Binding Source={StaticResource Application_Background_Color}}">
                 <TextBlock
                     FontSize="12" TextWrapping="Wrap">
                     <Run>

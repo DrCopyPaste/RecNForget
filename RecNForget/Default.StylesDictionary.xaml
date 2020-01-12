@@ -329,7 +329,42 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="HelpTopicButtonLayout" TargetType="{x:Type Button}">
+        <!-- Some setters -->
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="ButtonBorder"
+                       BorderThickness="1"
+                       Padding="2,2,2,2"
+                       BorderBrush="{Binding Source={StaticResource Application_Background_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Name="ButtonGrid">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Name="content"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- Header button styles-->
     <Style x:Key="WindowSettingsButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
         <Setter Property="DefaultImage" Value="ButtonImages\windowSettings_icon248857.black.png" />
@@ -793,6 +828,22 @@
         <Setter Property="Width" Value="281" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="10" />
+    </Style>
+    <Style x:Key="HeadlineLabelStyle" TargetType="Label">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="3,0,0,2" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Width" Value="500" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="18" />
+    </Style>
+    <Style x:Key="HelpLineTextBlockStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="3,0,0,2" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="15" />
     </Style>
     <Style x:Key="SettingLabelStyle" TargetType="Label">
         <Setter Property="VerticalAlignment" Value="Bottom" />

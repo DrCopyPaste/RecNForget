@@ -583,7 +583,8 @@ namespace RecNForget
 
 		private void Help_Click(object sender, RoutedEventArgs e)
 		{
-			Process.Start(new ProcessStartInfo(new Uri("https://github.com/DrCopyPaste/RecNForget/blob/master/README.md").AbsoluteUri));
+			var helpmenu = new HelpWindow();
+			helpmenu.Show();
 		}
 
 		private void Exit_Click(object sender, RoutedEventArgs e)
