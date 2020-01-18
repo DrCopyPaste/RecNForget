@@ -53,6 +53,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - can rename slected file using [Return]-key in the main window
 - can delete selected file via trash can icon next to "selected file"
 - can delete selected file using [Delete]-key in the main window
+- window options and settings can be opened via context menu on the main window
 - file name pattern no longer in main window (it is instead configured by the pencil button next to "recording path" or via settings menu)
 - can configure target path via folder icon next to "recording path"
 - consistently use white background for (almost) all controls

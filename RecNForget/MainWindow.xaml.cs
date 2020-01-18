@@ -253,6 +253,7 @@ namespace RecNForget
 		public MainWindow()
 		{
 			this.KeyDown += Window_KeyDown;
+			this.MouseDown += Window_Click;
 
 			// ensure AppConfig Values exist
 			AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
@@ -649,6 +650,15 @@ namespace RecNForget
 		private void CheckUpdates_Click(object sender, RoutedEventArgs e)
 		{
 			UpdateChecker.ShowUpdateDialogIfPossible();
+		}
+
+		private void Window_Click(object sender, MouseButtonEventArgs e)
+		{
+			if (e.ChangedButton == MouseButton.Right)
+			{
+				ContextMenu contextMenu = WindowOptionsButton.ContextMenu;
+				contextMenu.IsOpen = true;
+			}
 		}
 
 		private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
