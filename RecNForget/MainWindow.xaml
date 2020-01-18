@@ -220,30 +220,30 @@
                 CornerRadius="3"
                 Background="{Binding Source={StaticResource Application_Background_Color}}">
                 <Grid
-                  Background="{Binding Source={StaticResource ControlBackground_Color}}">
+                    Background="{Binding Source={StaticResource ControlBackground_Color}}">
                     <Grid.RowDefinitions>
                         <RowDefinition
                         Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                        Width="13*" />
+                            Width="13*" />
                         <ColumnDefinition
-                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                            Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
                         <ColumnDefinition
-                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                            Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
                     </Grid.ColumnDefinitions>
 
                     <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
-                    Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                     <local:ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
-                    ToolTip="rename selected file"
-                    Click="ChangeSelectedFileNameButton_Clicked"/>
+                        ToolTip="rename selected file"
+                        x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
 
                     <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource DeleteSelectedFileMiniButtonLayout}"
-                    ToolTip="delete selected file"
-                    Click="DeleteelectedFileButton_Clicked"/>
+                        ToolTip="delete selected file"
+                        x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
                 </Grid>
             </Border>
 
@@ -259,54 +259,54 @@
                 CornerRadius="3"
                 Background="{Binding Source={StaticResource Application_Background_Color}}">
                 <Grid
-                Background="{Binding Source={StaticResource ControlBackground_Color}}">
-                <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="{Binding Source={StaticResource ButtonRow_Height}}" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                </Grid.ColumnDefinitions>
+                    Background="{Binding Source={StaticResource ControlBackground_Color}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition
+                            Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                        <ColumnDefinition
+                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                        <ColumnDefinition
+                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                        <ColumnDefinition
+                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                    </Grid.ColumnDefinitions>
 
-                <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
-                     Click="OpenOutputFolder_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
-                    IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
-                    IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
-                    Click="SkipPrevButton_Click"/>
-                <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PlayButton}"
-                    IsEnabled="False"
-                    x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PauseButton}"
-                    IsEnabled="False" Visibility="Collapsed"
-                    x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="4" Style="{StaticResource StopButton}"
-                    IsEnabled="{Binding Path=CurrentAudioPlayState, Mode=TwoWay}"
-                    x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
-                <local:ImageButton Grid.Row="0" Grid.Column="5" Style="{StaticResource NextTrackButton}"
-                    IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
-                    IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
-                    Click="SkipNextButton_Click"/>
-                <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource RecordButton}"
-                    x:Name="RecordButton" Click="RecordButton_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource StopRecordButton}"
-                    Visibility="Collapsed"
-                    x:Name="StopRecordButton" Click="RecordButton_Click" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
+                         x:Name="OpenSelectedFileButton" Click="OpenOutputFolder_Click" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
+                        IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                        IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
+                        x:Name="SkipPrevButton" Click="SkipPrevButton_Click"/>
+                    <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PlayButton}"
+                        IsEnabled="False"
+                        x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PauseButton}"
+                        IsEnabled="False" Visibility="Collapsed"
+                        x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="4" Style="{StaticResource StopButton}"
+                        IsEnabled="{Binding Path=CurrentAudioPlayState, Mode=TwoWay}"
+                        x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
+                    <local:ImageButton Grid.Row="0" Grid.Column="5" Style="{StaticResource NextTrackButton}"
+                        IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                        IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
+                        x:Name="SkipNextButton" Click="SkipNextButton_Click"/>
+                    <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource RecordButton}"
+                        x:Name="RecordButton" Click="RecordButton_Click" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource StopRecordButton}"
+                        Visibility="Collapsed"
+                        x:Name="StopRecordButton" Click="RecordButton_Click" />
                 </Grid>
             </Border>
         </Grid>

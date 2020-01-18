@@ -2,6 +2,7 @@
 using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Services;
+using RecNForget.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -251,6 +252,8 @@ namespace RecNForget
 
 		public MainWindow()
 		{
+			this.KeyDown += Window_KeyDown;
+
 			// ensure AppConfig Values exist
 			AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 
@@ -449,6 +452,38 @@ namespace RecNForget
 		{
 			if (e.ChangedButton == MouseButton.Left)
 				this.DragMove();
+		}
+
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Return)
+			{
+				ChangeSelectedFileNameButton.PerformClick();
+			}
+			else if (e.Key == Key.Delete)
+			{
+				DeleteSelectedFileButton.PerformClick();
+			}
+			else if (e.Key == Key.Down)
+			{
+				OpenSelectedFileButton.PerformClick();
+			}
+			else if (e.Key == Key.Left)
+			{
+				SkipPrevButton.PerformClick();
+			}
+			else if (e.Key == Key.Right)
+			{
+				SkipNextButton.PerformClick();
+			}
+			else if (e.Key == Key.Space)
+			{
+				ToggleReplayLastRecording();
+			}
+			else if (e.Key == Key.Escape)
+			{
+				StopReplayLastRecordingButton.PerformClick();
+			}
 		}
 
 		private void RecordingTimer_Tick(object sender, EventArgs e)
@@ -683,7 +718,7 @@ namespace RecNForget
 			}
 		}
 
-		private void DeleteelectedFileButton_Clicked(object sender, RoutedEventArgs e)
+		private void DeleteSelectedFileButton_Clicked(object sender, RoutedEventArgs e)
 		{
 			replayAudioService.Stop();
 			replayAudioService.KillAudio();
