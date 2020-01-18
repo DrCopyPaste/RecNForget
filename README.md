@@ -72,3 +72,4 @@ The curretly released version is 0.3. Progress towards the next 0.4-Release can 
 - Logo by [DrCopyPaste](https://github.com/DrCopyPaste)
 - Logo source svgs from https://www.onlinewebfonts.com/icon/55290 and https://www.onlinewebfonts.com/icon/715
 - Click sounds for replay by [wolfgankh](https://soundcloud.com/wolfgankh) (litw@gmx.de)
+- All Button images use icons taken from [onlinewebfonts.com](https://www.onlinewebfonts.com)
