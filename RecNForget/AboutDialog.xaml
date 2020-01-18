@@ -122,7 +122,7 @@
                     </Run>
                     <LineBreak/>
                     <Run>
-                        Click sounds by slutski (
+                        Click sounds by wolfgankh (
                     </Run>
                     <Hyperlink
                         NavigateUri="mailto:litw@gmx.de" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
@@ -132,8 +132,8 @@
                         -
                     </Run>
                     <Hyperlink
-                        NavigateUri="https://soundcloud.com/slutski" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
-                        soundcloud.com/slutski
+                        NavigateUri="https://soundcloud.com/wolfgankh" RequestNavigate="Hyperlink_RequestNavigate" TextDecorations="None">
+                        soundcloud.com/wolfgankh
                     </Hyperlink>
                     <Run>
                         )

@@ -1,43 +1,33 @@
-# RecNForget 0.3
-Set a global Windows hotkey to capture and save default audio output to wave files
+# RecNForget
+Recording should be as easy as pressing a button.
 
-Current Version is 0.3.
+# How to use
+- RecNForget sets the recording hotkey to [Pause] by default
+- just press this button to start recording
+- and press it again to stop recording and save your file
+- output folder and hotkey can be changed in the settings menu
 
-Progress towards 0.4-Release can be tracked [here](https://github.com/DrCopyPaste/RecNForget/projects/2).
+For more detailed help please refer to the [help pages](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/toc.md).
 
-Recording audio should be as easy as pushing a button:
-- press "Toggle Record"-hotkey to start recording
-- do your audio thing...
-- press "Toggle Record"-hotkey again to finish the recording
-
-Your recorded audio is now saved to an automatically generated file in RecNForget's output folder.
-
-# How to install
-RecNForget requires .Net Framework 4.7 to run.
-
+# Installation
 Run msi-file from the [latest release](https://github.com/DrCopyPaste/RecNForget/releases/latest) to install.
 
-# How to Use
-- by default RecNForget sets [Pause] as the Record hotkey. (changeable in settings)
-- have RecNForget running
-- press the configured Record hotkey
-- start the audio which you want to capure
-- let the audio play
-- to stop capturing press the configured Record hotkey again
-- the file will be saved to the configured output folder (shown to you in main menu, changeable in settings)
-- file names will be generated using a file name prefix that you can specify plus a timestamp of the start time of recording
-- you can replay the last recorded file from the running session
+(RecNForget requires [Microsoft .Net Framework 4.7](https://dotnet.microsoft.com/download/dotnet-framework/net47) to run.)
 
-# Cloning and playing with the code
-Feel free to download the code and play with it, for now this has mainly prototype quality, but I try to clean up the code as I go.
+# The code
+Feel free to download the code and play with it.
 
-Currently I use Microsoft's Visual Studio Community 2019 for development.
-To build the setup project you need to have the [WiX Toolset](https://wixtoolset.org/releases/v3.11.2/stable) installed.
+Please keep in mind this is my very first WPF application. To be completely honest, development so far is primarily feature-driven so do not visit the code looking for best practices :)
 
-Please keep in mind this is my first (and very maybe last) WPF application so this might make it a bit more messy.
-For stable and buildable code please refer to the version tagged commits, in between releases there may very well be errors in the code ;)
+For stable and buildable code please refer to the version tagged commits, in between releases there may very well be errors in the code.
 
-# upcoming features in next version (commited, not yet released)
+- Currently I use [Microsoft's Visual Studio 2019 Community](https://visualstudio.microsoft.com/vs/community/) for development.
+- To build the setup project you need to have the [WiX Toolset](https://wixtoolset.org/releases/v3.11.2/stable) installed.
+
+# This version
+The curretly released version is 0.3. Progress towards the next 0.4-Release can be tracked [here](https://github.com/DrCopyPaste/RecNForget/projects/2).
+
+# upcoming features in next release
 - FIX: uninstalling RecNForget will now also delete all application data (under %APPDATA% machine configuration and in registry for autostart)
 - FIX: clicking the open folder button does not crash RecNForget anymore, if that folder does not (yet) exist
 - FIX: changing the file prefix changes the displayed file name with output path
@@ -73,11 +63,12 @@ For stable and buildable code please refer to the version tagged commits, in bet
 
 # Features missing for version 1.0
 - allow toggling input source (default output, or maybe mic/something else)?
-- show record (red circle) in bottom right corner when recording (configurable)
+- show record icon (red circle) in bottom right corner when recording (configurable)
 - clean up source code for maintainability
+- and probably a bunch of other stuff :D
 
 # Credits
 - Code by [DrCopyPaste](https://github.com/DrCopyPaste)
 - Logo by [DrCopyPaste](https://github.com/DrCopyPaste)
 - Logo source svgs from https://www.onlinewebfonts.com/icon/55290 and https://www.onlinewebfonts.com/icon/715
-- Click sounds for replay by https://soundcloud.com/slutski (litw@gmx.de)
+- Click sounds for replay by [wolfgankh](https://soundcloud.com/wolfgankh) (litw@gmx.de)
