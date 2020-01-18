@@ -22,6 +22,10 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
+					Content = "This hotkey is global, meaning it also works when the main window is not focused."
+				},
+				new HelpFeatureDetailLine()
+				{
 					Content = string.Empty
 				},
 				new HelpFeatureDetailLine()

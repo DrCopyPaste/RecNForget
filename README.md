@@ -44,10 +44,15 @@ For stable and buildable code please refer to the version tagged commits, in bet
 
 - changed default hotkey for "toggle record" to [Pause]
 - shrinked main window in size and reorganized controls a bit
+- can select the slected file in the explorer using [Down-Arrow]-key in the main window
 - all action buttons now are in the same row at the bottom
+- can play/pause slected file using [Space]-key in the main window
 - added skip buttons to navigate through output folder (auto selects the latest file on program start)
+- can skip to previous/next file using [Left-Arrow]/[Right-Arrow]-key in the main window
 - can rename selected file via pencil icon next to "selected file"
+- can rename slected file using [Return]-key in the main window
 - can delete selected file via trash can icon next to "selected file"
+- can delete selected file using [Delete]-key in the main window
 - file name pattern no longer in main window (it is instead configured by the pencil button next to "recording path" or via settings menu)
 - can configure target path via folder icon next to "recording path"
 - consistently use white background for (almost) all controls
@@ -56,6 +61,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - added icons for most buttons
 - added a help link to the menu (calls link in browser going to THIS readme.md, I will replace this with an in-application help later on)
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
+- can stop playing slected file using [Esc]-key in the main window
 - clicking the open folder button now selects the last result file in explorer (or just opens folder if there is now result yet)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
 - RecNForget can now update itself via clicking the about-button (via top left window button) and then "check for updates"

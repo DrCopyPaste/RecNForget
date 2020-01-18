@@ -126,6 +126,13 @@
     <Compile Include="Help\Features\Click_Button_To_Customize_File_Name_Pattern.cs" />
     <Compile Include="Help\Features\Customize_Auto_Select_Last_Recorded_File.cs" />
     <Compile Include="Help\Features\Click_Button_To_Stop_Playing_Selected_File.cs" />
+    <Compile Include="Help\Features\Press_Hotkey_To_Select_Selected_File_In_Explorer.cs" />
+    <Compile Include="Help\Features\Press_Hotkey_To_Delete_Selected_File.cs" />
+    <Compile Include="Help\Features\Press_Hotkey_To_Rename_Selected_File.cs" />
+    <Compile Include="Help\Features\Press_Hotkey_To_Stop_Playing_Selected_File.cs" />
+    <Compile Include="Help\Features\Press_Hotkey_To_PlayPause_Selected_File.cs" />
+    <Compile Include="Help\Features\Press_Hotkey_To_Select_Previous_File_In_Output_Folder.cs" />
+    <Compile Include="Help\Features\Press_Hotkey_To_Select_Next_File_In_Output_Folder.cs" />
     <Compile Include="Help\Features\Task_Bar_Icon_Color_Changes.cs" />
     <Compile Include="Help\Features\Click_Button_To_Open_Output_Folder_In_Explorer.cs" />
     <Compile Include="Help\Features\Click_Button_To_Open_Selected_File_In_Explorer.cs" />
