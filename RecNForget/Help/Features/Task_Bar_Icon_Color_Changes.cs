@@ -18,7 +18,19 @@ namespace RecNForget.Help.Features
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "RecNForget changes the background color of the task bar icon to signal its current state:"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- yellow: ready to record/play (no files are held open)"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- red: currently recording"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- green: currently playing (or paused) audio (selected file is held open)"
 				}
 			};
 		}

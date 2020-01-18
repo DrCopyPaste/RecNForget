@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace RecNForget.Help.Features
 {
-	public class Press_Button_To_Customize_File_Name_Pattern : HelpFeature
+	public class Click_Button_To_Rename_Selected_File : HelpFeature
 	{
-		public Press_Button_To_Customize_File_Name_Pattern()
+		public Click_Button_To_Rename_Selected_File()
 		{
 			MinVersion = HelpFeatureVersion.v0_4_WirsingKopf;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "press button to customize file name pattern";
+			Title = "click button to rename selected file";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can rename the currently selected file by clicking the pencil button next to the selected file in the main window."
 				}
 			};
 		}

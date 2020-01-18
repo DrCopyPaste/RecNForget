@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace RecNForget.Help.Features
 {
-	public class Press_Button_To_Delete_Selected_File : HelpFeature
+	public class Click_Button_To_Delete_Selected_File : HelpFeature
 	{
-		public Press_Button_To_Delete_Selected_File()
+		public Click_Button_To_Delete_Selected_File()
 		{
 			MinVersion = HelpFeatureVersion.v0_4_WirsingKopf;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "press button to delete selected file";
+			Title = "click button to delete selected file";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can delete the currently selected file by clicking on the trash-button next to the selected file in the main window."
 				}
 			};
 		}

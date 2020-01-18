@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace RecNForget.Help.Features
 {
-	public class Press_Button_To_Stop_Playing_Selected_File : HelpFeature
+	public class Click_Button_To_Customize_File_Name_Pattern : HelpFeature
 	{
-		public Press_Button_To_Stop_Playing_Selected_File()
+		public Click_Button_To_Customize_File_Name_Pattern()
 		{
 			MinVersion = HelpFeatureVersion.v0_4_WirsingKopf;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "press button to stop playing selected file";
+			Title = "click button to customize file name pattern";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can customize the file pattern used to generate new file names by clicking on the pencil-button next to the recording path in the main window."
 				}
 			};
 		}

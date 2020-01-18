@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace RecNForget.Help.Features
 {
-	public class Press_Button_To_Stop_Recording_And_Save : HelpFeature
+	public class Click_Button_To_Stop_Recording_And_Save : HelpFeature
 	{
-		public Press_Button_To_Stop_Recording_And_Save()
+		public Click_Button_To_Stop_Recording_And_Save()
 		{
 			MinVersion = HelpFeatureVersion.v0_1_preRelease;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "press button to stop recording and save";
+			Title = "click button to stop recording and save";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can stop recording audio and save as a new file by clicking the record button at the bottom right of the main window."
 				}
 			};
 		}

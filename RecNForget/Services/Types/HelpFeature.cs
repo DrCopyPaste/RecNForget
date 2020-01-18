@@ -80,7 +80,7 @@ namespace RecNForget.Services.Types
 				// ToDo, cant we use nameof somehow? or make this no magic string?
 				var featureClasses = thisAssembly.GetTypes().Where(t => t.Namespace.StartsWith("RecNForget.Help.Features") && t.BaseType == typeof(HelpFeature));
 
-				foreach (var feature in featureClasses)
+				foreach (var feature in featureClasses.OrderBy(f => f.Name))
 				{
 					featureList.Add((HelpFeature)Activator.CreateInstance(feature));
 				}

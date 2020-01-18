@@ -18,7 +18,15 @@ namespace RecNForget.Help.Features
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can stop recording audio and save as a new file by pressing the hotkey you assigned to 'Toggle Record'."
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = string.Empty
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "This hotkey is set to [Pause] by default."
 				}
 			};
 		}

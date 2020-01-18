@@ -80,6 +80,7 @@ namespace RecNForget
 			}
 
 			quickStartButton.PerformClick();
+			quickStartButton.Focus();
 		}
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

@@ -18,7 +18,35 @@ namespace RecNForget.Help.Features
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can have RecNForget automatically start with Windows."
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "(this is disabled by default)"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = string.Empty
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "To enable or disable this setting:"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- open the menu at the top left of the main window"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- click on 'Open Settings'"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- click on 'auto start'"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- exit the settings window by pressing the accept button"
 				}
 			};
 		}

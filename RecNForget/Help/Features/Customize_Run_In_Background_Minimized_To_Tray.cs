@@ -18,7 +18,35 @@ namespace RecNForget.Help.Features
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can configure RecNForget to run (and start) as a background process (minimized to a tray icon in the task bar)."
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "(this is disabled by default)"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = string.Empty
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "To change this setting:"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- open the menu at the top left of the main window"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- click on 'Open Settings'"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- click on 'run in background'"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- exit the settings window by pressing the accept button"
 				}
 			};
 		}

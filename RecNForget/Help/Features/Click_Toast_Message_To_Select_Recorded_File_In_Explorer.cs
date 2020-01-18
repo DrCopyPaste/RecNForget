@@ -18,7 +18,15 @@ namespace RecNForget.Help.Features
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can click on the toast message shown when recording is finished to select that recorded file in the file explorer."
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = string.Empty
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "NOTE: Toast messages will only show if that setting is active."
 				}
 			};
 		}

@@ -18,7 +18,7 @@ namespace RecNForget.Help.Features
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "When RecNForget is running in the background, you can double-click its tray icon to show the main window."
 				}
 			};
 		}

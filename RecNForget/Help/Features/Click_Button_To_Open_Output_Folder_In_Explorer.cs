@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace RecNForget.Help.Features
 {
-	public class Press_Hotkey_To_Record : HelpFeature
+	public class Click_Button_To_Open_Output_Folder_In_Explorer : HelpFeature
 	{
-		public Press_Hotkey_To_Record()
+		public Click_Button_To_Open_Output_Folder_In_Explorer()
 		{
-			MinVersion = HelpFeatureVersion.v0_1_preRelease;
+			MinVersion = HelpFeatureVersion.v0_2_preRelease;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "press hotkey to record";
+			Title = "click button to open output folder in explorer";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "You can start recording audio by pressing the hotkey you assigned to 'Toggle Record'."
+					Content = "You can open output folder by clicking the folder-button at the bottom left of the main window."
 				},
 				new HelpFeatureDetailLine()
 				{
@@ -26,7 +26,7 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "This hotkey is set to [Pause] by default."
+					Content = "NOTE: This will automatically select the currently selected file in the explorer if threre is any."
 				}
 			};
 		}

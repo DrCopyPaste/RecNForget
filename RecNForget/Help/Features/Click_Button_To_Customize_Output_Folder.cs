@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace RecNForget.Help.Features
 {
-	public class Select_Previous_File_In_Output_Folder : HelpFeature
+	public class Click_Button_To_Customize_Output_Folder : HelpFeature
 	{
-		public Select_Previous_File_In_Output_Folder()
+		public Click_Button_To_Customize_Output_Folder()
 		{
 			MinVersion = HelpFeatureVersion.v0_4_WirsingKopf;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "select previous file in output folder";
+			Title = "click button to customize output folder";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "HelpText"
+					Content = "You can change output folder for new recordings by clicking on the folder-button next to the recording path in the main window."
 				}
 			};
 		}
