@@ -55,10 +55,11 @@ The curretly released version is 0.3. Progress towards the next 0.4-Release can 
 - can stop playing slected file using [Esc]-key in the main window
 - clicking the open folder button now selects the last result file in explorer (or just opens folder if there is now result yet)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
+- tray icon menu now shows the same menu as the windows options menu at the top left of the main window
 - RecNForget can now update itself via clicking the about-button (via top left window button) and then "check for updates"
 - Installation is cancelled if .Net framework is not found
 - Installer lets user choose target installation folder
-- Intaller now shows a minimal UI with license agreement and logo during installation
+- Installer now shows a minimal UI with license agreement and logo during installation
 - Installer now starts with elevated privileges (so it can update the files installed in programs folder)
 
 # Features missing for version 1.0
