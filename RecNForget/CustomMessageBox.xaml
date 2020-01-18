@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
         Topmost="True"
+        WindowStartupLocation="CenterOwner"
         Style="{StaticResource DefaultWindowStyle}">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line

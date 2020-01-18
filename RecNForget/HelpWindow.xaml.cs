@@ -23,6 +23,8 @@ namespace RecNForget
 		{
             InitializeComponent();
 
+			this.KeyDown += Window_KeyDown;
+
 			quickStart = new Help.General.QuickStart();
 			this.allFeatures = Services.Types.HelpFeature.All;
 			int topicRowCount = 0;
@@ -97,7 +99,15 @@ namespace RecNForget
 
 		private void Exit_Click(object sender, RoutedEventArgs e)
 		{
-			Close();
+			this.Close();
+		}
+
+		private void Window_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Escape)
+			{
+				this.Close();
+			}
 		}
 
 		private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -143,8 +153,6 @@ namespace RecNForget
 				HelpLinesGrid.Children.Add(textBlock);
 				helpLineCount++;
 			}
-
-			//this.Close();
 		}
 	}
 }

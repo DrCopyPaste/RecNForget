@@ -60,7 +60,11 @@ namespace RecNForget
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            var downloadDialog = new DownloadDialog(asset, InstallAfterDownload);
+            var downloadDialog = new DownloadDialog(asset, InstallAfterDownload)
+            {
+                Owner = System.Windows.Application.Current.MainWindow
+            };
+
             this.Close();
             downloadDialog.ShowDialog();
         }

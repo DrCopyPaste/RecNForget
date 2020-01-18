@@ -421,7 +421,11 @@ namespace RecNForget
 		{
 			if (MinimizedToTray)
 			{
-				var closeOrBackgroundDialog = new CloseOrBackgroundDialog();
+				var closeOrBackgroundDialog = new CloseOrBackgroundDialog()
+				{
+					Owner = this
+				};
+
 				var dialogResult = closeOrBackgroundDialog.ShowDialog();
 
 				if (dialogResult.HasValue && dialogResult.Value)
@@ -619,7 +623,11 @@ namespace RecNForget
 
 		private void Help_Click(object sender, RoutedEventArgs e)
 		{
-			var helpmenu = new HelpWindow();
+			var helpmenu = new HelpWindow()
+			{
+				Owner = this
+			};
+
 			helpmenu.Show();
 		}
 
@@ -635,7 +643,11 @@ namespace RecNForget
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
-			var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); });
+			var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); })
+			{
+				Owner = this
+			};
+
 			settingsWindow.ShowDialog();
 
 			UpdateCurrentFileNameDisplay();
@@ -643,7 +655,11 @@ namespace RecNForget
 
 		private void AboutButton_Click(object sender, RoutedEventArgs e)
 		{
-			var aboutDialog = new AboutDialog();
+			var aboutDialog = new AboutDialog()
+			{
+				Owner = this
+			};
+
 			aboutDialog.ShowDialog();
 		}
 
@@ -680,7 +696,10 @@ namespace RecNForget
 				messageRows: new List<string>() { "Supported placeholders:", "(Date)" },
 				prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
 				controlFocus: CustomMessageBoxFocus.Prompt,
-				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters)
+			{
+				Owner = this
+			};
 
 			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
 			{
@@ -692,7 +711,7 @@ namespace RecNForget
 		{
 			var dialog = new VistaFolderBrowserDialog();
 
-			if (dialog.ShowDialog() == true)
+			if (dialog.ShowDialog(this) == true)
 			{
 				OutputPath = dialog.SelectedPath;
 			}
@@ -710,7 +729,10 @@ namespace RecNForget
 				messageRows: new List<string>(),
 				prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
 				controlFocus: CustomMessageBoxFocus.Prompt,
-				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters)
+			{
+				Owner = this
+			};
 
 			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
 			{
@@ -738,7 +760,10 @@ namespace RecNForget
 				icon: CustomMessageBoxIcon.Question,
 				buttons: CustomMessageBoxButtons.OkAndCancel,
 				messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
-				controlFocus: CustomMessageBoxFocus.Ok);
+				controlFocus: CustomMessageBoxFocus.Ok)
+			{
+				Owner = this
+			};
 
 			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
 			{
