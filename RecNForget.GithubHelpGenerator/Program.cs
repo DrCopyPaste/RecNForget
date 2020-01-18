@@ -73,7 +73,7 @@ namespace RecNForget.GithubHelpGenerator
 
         private static string FeatureHyperLinkLine(string linkText, string linkedFeature)
         {
-            return string.Format("[{0}]({1}{2})", linkText, baseUrl, linkedFeature);
+            return string.Format("- [{0}]({1}{2}.md)", linkText, baseUrl, linkedFeature);
         }
 
         private static void EnsureEmptyFolder(DirectoryInfo folder)
