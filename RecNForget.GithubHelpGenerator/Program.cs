@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecNForget.Services.Types;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -47,7 +48,8 @@ namespace RecNForget.GithubHelpGenerator
                 quickStartContents.AppendLine(helpLine.Content);
             }
 
-            tocPageContents.AppendLine(FeatureHyperLinkLine(quickStart.Title, quickStart.Id));            
+            tocPageContents.AppendLine(FeatureHyperLinkLine(quickStart.Title, quickStart.Id));
+            File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", quickStart.Id)), quickStart.ToString());
 
             foreach (var feature in allFeatures)
             {
