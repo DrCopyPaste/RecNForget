@@ -49,7 +49,7 @@ namespace RecNForget.GithubHelpGenerator
             }
 
             tocPageContents.AppendLine(FeatureHyperLinkLine(quickStart.Title, quickStart.Id));
-            File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", quickStart.Id)), quickStart.ToString());
+            File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", quickStart.Id)), quickStartContents.ToString());
 
             foreach (var feature in allFeatures)
             {
