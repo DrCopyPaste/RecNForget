@@ -1,0 +1,7 @@
+classes in the namespace RecNForget.Help.Features are used to populate help:
+
+both in-application and online-github help files
+to change help contents update or add features as needed
+(this will only update the in-application help)
+
+to update online help on github execute RecNForget.GithubHelpGenerator
