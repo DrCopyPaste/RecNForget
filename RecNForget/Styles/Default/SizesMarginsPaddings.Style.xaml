@@ -1,0 +1,29 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:RecNForget">
+    <Sys:Double x:Key="MainWindow_Width">355</Sys:Double>
+
+    <Sys:Double x:Key="TitleRow_Height">15</Sys:Double>
+    <Sys:Double x:Key="TitleRow_ColumnWidth">15</Sys:Double>
+
+    <Sys:Double x:Key="ButtonRow_Height">31</Sys:Double>
+    <Sys:Double x:Key="ChangeSettingButton_Width">25</Sys:Double>
+    <Sys:Double x:Key="CheckBoxControl_Height">22</Sys:Double>
+    <Sys:Double x:Key="CheckBox_Width">20</Sys:Double>
+    <Sys:Double x:Key="HalfButtonCell_Width">50</Sys:Double>
+    <Sys:Double x:Key="FatButtonCell_Width">109</Sys:Double>
+
+    <Sys:Double x:Key="SettingTextBox_Width">250</Sys:Double>
+
+    <Sys:Double x:Key="PathNotes_TextBox_Width">600</Sys:Double>
+    <Sys:Double x:Key="PathNotes_TextBox_Height">200</Sys:Double>
+
+    <Sys:Double x:Key="SeparatorRow_Height">2</Sys:Double>
+    <Sys:Double x:Key="SeparatorTitleRow_Height">15</Sys:Double>
+    <Sys:Double x:Key="MainWindowControl_InnerWidth">21</Sys:Double>
+    <Sys:Double x:Key="MainWindowControl_Height">21</Sys:Double>
+    <Sys:Double x:Key="MainWindowControl_HeightWithMargin">25</Sys:Double>
+
+    <Sys:Double x:Key="CreditsBox_Height">150</Sys:Double>
+</ResourceDictionary>

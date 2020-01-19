@@ -1,0 +1,74 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:RecNForget">
+
+    <Style x:Key="Base_ContextMenu_MenuItem_Style" TargetType="MenuItem">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="Height" Value="25" />
+        <Style.Resources>
+            <Style TargetType="Image">
+                <Setter Property="Stretch" Value="Uniform" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="ContextMenu_Cancel_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\cancel_icon428740.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_Settings_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\settings_icon40863.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_About_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\information_icon280732.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_Help_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\help_icon544157.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_CheckUpdates_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\download_icon602.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_ShutDown_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\shutDown_icon170336.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,258 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:RecNForget">
+    
+    <!-- Header button styles SHOULD be different than any other in app buttons-->
+    <Style x:Key="BaseHeaderButtonLayout" TargetType="{x:Type local:ImageButton}">
+        <!-- Some setters -->
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ImagePadding" Value="2,2,2,2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImageButton}">
+                    <Border Name="ImageButtonBorder"
+                       BorderThickness="1"
+                       Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
+                       Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                       BorderBrush="{Binding Source={StaticResource HeaderButtonBorder_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Name="ImageButtonGrid">
+                            <Image Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalAlignment="Bottom" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Some triggers ( IsFocused, IsMouseOver, etc.) -->
+                        <Trigger Property="IsPressed" Value="False">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Enabled_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DefaultImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Hover_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Pressed_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding PressedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageButtonGrid" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Pressed_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DisabledImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Default style for minibuttons on main window controls
+    these are also still special (TODO template binding for used colors, border styles)
+    -->
+
+    <Style x:Key="BaseMiniChangeSettingButtonLayout" TargetType="{x:Type local:ImageButton}">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ImagePadding" Value="2,2,2,2" />
+        <Setter Property="ImageMargin" Value="0,0,0,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImageButton}">
+                    <Border Name="ImageButtonBorder"
+                       BorderThickness="1"
+                       Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
+                       Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                       BorderBrush="{Binding Source={StaticResource Application_Background_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Name="ImageButtonGrid">
+                            <Image Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalAlignment="Bottom" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Some triggers ( IsFocused, IsMouseOver, etc.) -->
+                        <Trigger Property="IsPressed" Value="False">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ControlBackground_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DefaultImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Hover_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding PressedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageButtonGrid" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButton_Disabled_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButton_Disabled_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DisabledImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--
+        Default Button style
+    -->
+    <Style x:Key="BaseButtonLayout" TargetType="{x:Type local:ImageButton}">
+        <!-- Some setters -->
+        <Setter Property="ImagePadding" Value="4,4,4,4" />
+        <Setter Property="ImageMargin" Value="1,1,1,1" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource ControlBackground_Color}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ImageButton}">
+                    <Border Name="ImageButtonBorder"
+                       BorderThickness="1"
+                       Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
+                       Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                       BorderBrush="{Binding Source={StaticResource ControlBackground_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Name="ImageButtonGrid">
+                            <Image Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalAlignment="Bottom" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Some triggers ( IsFocused, IsMouseOver, etc.) -->
+                        <Trigger Property="IsPressed" Value="False">
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DefaultImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding PressedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageButtonGrid" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DisabledImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BaseButtonSmallerIconLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseButtonLayout}">
+        <Setter Property="ImagePadding" Value="8,8,8,8" />
+        <Setter Property="ImageMargin" Value="1,1,1,1" />
+    </Style>
+
+    <Style x:Key="BaseChangeSettingButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseButtonLayout}">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ImagePadding" Value="2,2,2,2" />
+        <Setter Property="ImageMargin" Value="1,1,1,1" />
+    </Style>
+
+    <Style x:Key="BaseSettingButtonLayout" TargetType="{x:Type Button}">
+        <!-- Some setters -->
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="ButtonBorder"
+                       BorderThickness="1"
+                       Padding="2,2,2,2"
+                       BorderBrush="{Binding Source={StaticResource Application_Background_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Name="ButtonGrid">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="HelpTopicButtonLayout" TargetType="{x:Type Button}">
+        <!-- Some setters -->
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="ButtonBorder"
+                       BorderThickness="1"
+                       Padding="2,2,2,2"
+                       BorderBrush="{Binding Source={StaticResource Application_Background_Color}}"
+                       CornerRadius="3"
+                       Background="{TemplateBinding Background}">
+                        <Grid Name="ButtonGrid">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Name="content"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

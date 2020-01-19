@@ -4,6 +4,30 @@
              xmlns:local="clr-namespace:RecNForget"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="Default.StylesDictionary.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- sizes margins paddings heights and widths -->
+                <!-- colors -->
+                <!-- base controls that are inherited later on -->
+                <!-- concrete styles -->
+                <ResourceDictionary Source="Styles\Default\SizesMarginsPaddings.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\Color.Style.xaml" />
+                
+                <ResourceDictionary Source="Styles\Default\BaseButton.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\Button.Style.xaml" />
+                
+                <ResourceDictionary Source="Styles\Default\Window.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\TitleBar.Style.xaml" />
+                
+                <ResourceDictionary Source="Styles\Default\CheckBox.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\HotkeyDisplay.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\Label.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\Separator.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\TextBlock.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\TextBox.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\CustomMessageBox.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\ContextMenu.Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:RecNForget">
+    
+    <Style x:Key="CustomMessageBoxDefaultIconStyle" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="..\..\Images\logo_big.png" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Margin" Value="4,4,4,4" />
+    </Style>
+
+    <Style x:Key="CustomMessageBoxInformationIconStyle" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="ButtonImages\message_info_icon277439.black.png" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Margin" Value="4,4,4,4" />
+    </Style>
+
+    <Style x:Key="CustomMessageBoxQuestionIconStyle" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="ButtonImages\message_question_icon109120.black.png" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Margin" Value="4,4,4,4" />
+    </Style>
+
+    <Style x:Key="CustomMessageBoxErrorIconStyle" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="ButtonImages\message_error_icon304479.black.png" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Margin" Value="4,4,4,4" />
+    </Style>
+    
+</ResourceDictionary>

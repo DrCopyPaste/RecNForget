@@ -166,7 +166,59 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Default.StylesDictionary.xaml">
+    <Page Include="Styles\Default\HotkeyDisplay.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\CustomMessageBox.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\CheckBox.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\Separator.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\BaseButton.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\TextBlock.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\TitleBar.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\TextBox.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\Label.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\Window.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\Color.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\SizesMarginsPaddings.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\ContextMenu.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Default\Button.Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,40 +311,40 @@
   <ItemGroup>
     <Resource Include="logo.ico" />
     <Resource Include="Images\logo_big.png" />
-    <Resource Include="ButtonImages\close_icon349388.black.png" />
-    <Resource Include="ButtonImages\help_icon544157.black.png" />
-    <Resource Include="ButtonImages\information_icon280732.black.png" />
-    <Resource Include="ButtonImages\minimize_icon246566.black.png" />
-    <Resource Include="ButtonImages\nextTrack_icon.black.disabled.png" />
-    <Resource Include="ButtonImages\nextTrack_icon.black.png" />
-    <Resource Include="ButtonImages\pause_icon.black.disabled.png" />
-    <Resource Include="ButtonImages\pause_icon.black.png" />
-    <Resource Include="ButtonImages\play_icon.black.disabled.png" />
-    <Resource Include="ButtonImages\play_icon.black.png" />
-    <Resource Include="ButtonImages\prevTrack_icon.black.disabled.png" />
-    <Resource Include="ButtonImages\prevTrack_icon.black.png" />
-    <Resource Include="ButtonImages\record_icon.black.png" />
-    <Resource Include="ButtonImages\settings_icon40863.black.png" />
-    <Resource Include="ButtonImages\stop_icon.black.disabled.png" />
-    <Resource Include="ButtonImages\stop_icon.black.png" />
-    <Resource Include="ButtonImages\close_icon211720.black.png" />
-    <Resource Include="ButtonImages\windowSettings_icon248857.black.png" />
-    <Resource Include="ButtonImages\accept_icon518267.black.png" />
-    <Resource Include="ButtonImages\download_icon602.black.png" />
-    <Resource Include="ButtonImages\pencil_icon353603.black.png" />
-    <Resource Include="ButtonImages\tools_icon536263.black.png" />
-    <Resource Include="ButtonImages\accept_icon518267.black.white.png" />
-    <Resource Include="ButtonImages\settings_icon40863.black.white.png" />
-    <Resource Include="ButtonImages\editSetting_icon451737.black.png" />
-    <Resource Include="ButtonImages\cancel_icon428740.black.png" />
-    <Resource Include="ButtonImages\shutDown_icon170336.black.png" />
-    <Resource Include="ButtonImages\openFolder_icon356582.black.png" />
-    <Resource Include="ButtonImages\pencil_icon79516.black.png" />
-    <Resource Include="ButtonImages\message_error_icon304479.black.png" />
-    <Resource Include="ButtonImages\message_info_icon277439.black.png" />
-    <Resource Include="ButtonImages\message_question_icon109120.black.png" />
-    <Resource Include="ButtonImages\trash_icon77730.black.png" />
-    <Resource Include="ButtonImages\folder_icon122592.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\close_icon349388.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\help_icon544157.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\information_icon280732.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\minimize_icon246566.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\nextTrack_icon.black.disabled.png" />
+    <Resource Include="Styles\Default\ButtonImages\nextTrack_icon.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\pause_icon.black.disabled.png" />
+    <Resource Include="Styles\Default\ButtonImages\pause_icon.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\play_icon.black.disabled.png" />
+    <Resource Include="Styles\Default\ButtonImages\play_icon.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\prevTrack_icon.black.disabled.png" />
+    <Resource Include="Styles\Default\ButtonImages\prevTrack_icon.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\record_icon.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\settings_icon40863.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\stop_icon.black.disabled.png" />
+    <Resource Include="Styles\Default\ButtonImages\stop_icon.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\close_icon211720.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\windowSettings_icon248857.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\accept_icon518267.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\download_icon602.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\pencil_icon353603.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\tools_icon536263.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\accept_icon518267.black.white.png" />
+    <Resource Include="Styles\Default\ButtonImages\settings_icon40863.black.white.png" />
+    <Resource Include="Styles\Default\ButtonImages\editSetting_icon451737.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\cancel_icon428740.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\shutDown_icon170336.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\openFolder_icon356582.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\pencil_icon79516.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\message_error_icon304479.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\message_info_icon277439.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\message_question_icon109120.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\trash_icon77730.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\folder_icon122592.black.png" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

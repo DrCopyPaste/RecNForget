@@ -65,53 +65,25 @@
                 Name="taskBarIcon">
                 <tb:TaskbarIcon.ContextMenu>
                     <ContextMenu>
-                        <MenuItem
-                                Margin="0" Padding="0" Click="SettingsButton_Click" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Open settings">
-                            <MenuItem.Icon>
-                                <Image
-                                        Source="ButtonImages\settings_icon40863.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
+                        <MenuItem Style="{StaticResource ContextMenu_Cancel_Style}"
+                            Header="Cancel" />
                         <Separator />
-                        <MenuItem
-                                Margin="0" Padding="0" IsCheckable="true" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
+                        <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
+                            Header="Open settings" Click="SettingsButton_Click" />
                         <Separator />
-                        <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="About RecNForget" Click="AboutButton_Click">
-                            <MenuItem.Icon>
-                                <Image
-                                        Source="ButtonImages\information_icon280732.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Help" Click="Help_Click">
-                            <MenuItem.Icon>
-                                <Image
-                                        Source="ButtonImages\help_icon544157.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
+                        <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
+                            Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
                         <Separator />
-                        <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Check for updates" Click="CheckUpdates_Click">
-                            <MenuItem.Icon>
-                                <Image
-                                        Source="ButtonImages\download_icon602.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
+                        <MenuItem Style="{StaticResource ContextMenu_About_Style}"
+                            Header="About RecNForget" Click="AboutButton_Click" />
+                        <MenuItem Style="{StaticResource ContextMenu_Help_Style}"
+                            Header="Help" Click="Help_Click" />
                         <Separator />
-                        <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Close RecNForget" Click="Exit_Click">
-                            <MenuItem.Icon>
-                                <Image
-                                        Source="ButtonImages\shutDown_icon170336.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                            </MenuItem.Icon>
-                        </MenuItem>
+                        <MenuItem Style="{StaticResource ContextMenu_CheckUpdates_Style}"
+                            Header="Check for updates" Click="CheckUpdates_Click" />
+                        <Separator />
+                        <MenuItem Style="{StaticResource ContextMenu_ShutDown_Style}"
+                            Header="Close RecNForget" Click="Exit_Click" />
                     </ContextMenu>
                 </tb:TaskbarIcon.ContextMenu>
             </tb:TaskbarIcon>
@@ -144,62 +116,25 @@
                     x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Cancel">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Source="ButtonImages\cancel_icon428740.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            <MenuItem Style="{StaticResource ContextMenu_Cancel_Style}"
+                                Header="Cancel" />
                             <Separator />
-                            <MenuItem
-                                Margin="0" Padding="0" Click="SettingsButton_Click" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Open settings">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Source="ButtonImages\settings_icon40863.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
+                                Header="Open settings" Click="SettingsButton_Click" />
                             <Separator />
-                            <MenuItem
-                                Margin="0" Padding="0" IsCheckable="true" VerticalAlignment="Center" FontSize="18" Height="25"
+                            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
                                 Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
                             <Separator />
-                            <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="About RecNForget" Click="AboutButton_Click">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Source="ButtonImages\information_icon280732.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Help" Click="Help_Click">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Source="ButtonImages\help_icon544157.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            <MenuItem Style="{StaticResource ContextMenu_About_Style}"
+                                Header="About RecNForget" Click="AboutButton_Click" />
+                            <MenuItem Style="{StaticResource ContextMenu_Help_Style}"
+                                Header="Help" Click="Help_Click" />
                             <Separator />
-                            <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Check for updates" Click="CheckUpdates_Click">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Source="ButtonImages\download_icon602.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            <MenuItem Style="{StaticResource ContextMenu_CheckUpdates_Style}"
+                                Header="Check for updates" Click="CheckUpdates_Click" />
                             <Separator />
-                            <MenuItem
-                                Margin="0" Padding="0" VerticalAlignment="Center" FontSize="18" Height="25"
-                                Header="Close RecNForget" Click="Exit_Click">
-                                <MenuItem.Icon>
-                                    <Image
-                                        Source="ButtonImages\shutDown_icon170336.black.png" Stretch="Uniform" HorizontalAlignment="Center"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
+                            <MenuItem Style="{StaticResource ContextMenu_ShutDown_Style}"
+                                Header="Close RecNForget" Click="Exit_Click" />
                         </ContextMenu>
                     </Button.ContextMenu>
                 </local:ImageButton>

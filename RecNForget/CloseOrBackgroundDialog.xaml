@@ -56,9 +56,11 @@
 
             <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource AcceptButton}"
                 HorizontalAlignment="Left"
+                ToolTip="Continue in background"
                 x:Name="RunInBackgroundButton" Click="Background_Click"/>
             <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource ShutDownButton}"
                 HorizontalAlignment="Right"
+                ToolTip="Close application"
                 x:Name="CloseApplicationButton" Click="Close_Click"/>
         </Grid>
     </Border>
