@@ -24,6 +24,7 @@
 - [customize output file pattern](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/Customize_Output_File_Pattern.md)
 - [customize output folder](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/Customize_Output_Folder.md)
 - [customize run in background (minimized to tray)](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/Customize_Run_In_Background_Minimized_To_Tray.md)
+- [customize show tips on start](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/Customize_Show_Tips_On_Start.md)
 - [customize toast messages for application actions](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/Customize_Toast_Messages_For_Application_Actions.md)
 - [customize 'toggle record' hotkey](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/Customize_Toggle_Record_Hotkey.md)
 - [press hotkey to delete the currently selected file](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/Press_Hotkey_To_Delete_Selected_File.md)
