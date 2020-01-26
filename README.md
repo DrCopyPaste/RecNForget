@@ -57,6 +57,7 @@ The curretly released version is 0.3. Progress towards the next 0.4-Release can 
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
 - tray icon menu now shows the same menu as the windows options menu at the top left of the main window
 - RecNForget can now update itself via clicking the about-button (via top left window button) and then "check for updates"
+- RecNForget can now show random tips on program start (did you know?) (enabled by default)
 - Installation is cancelled if .Net framework is not found
 - Installer lets user choose target installation folder
 - Installer now shows a minimal UI with license agreement and logo during installation
@@ -72,5 +73,5 @@ The curretly released version is 0.3. Progress towards the next 0.4-Release can 
 - Code by [DrCopyPaste](https://github.com/DrCopyPaste)
 - Logo by [DrCopyPaste](https://github.com/DrCopyPaste)
 - Logo source svgs from https://www.onlinewebfonts.com/icon/55290 and https://www.onlinewebfonts.com/icon/715
-- Click sounds for replay by [wolfgankh](https://soundcloud.com/wolfgankh) (litw@gmx.de)
+- Click sounds for replay by [wolfgankh](https://soundcloud.com/wolfgankh) (lit-audio@gmx.de)
 - All Button images use icons taken from [onlinewebfonts.com](https://www.onlinewebfonts.com)

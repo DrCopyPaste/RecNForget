@@ -7,30 +7,22 @@ using System.Threading.Tasks;
 
 namespace RecNForget.Help.Features
 {
-	public class Customize_Check_For_Updates : HelpFeature
+	public class Customize_Show_Tips_On_Start : HelpFeature
 	{
-		public Customize_Check_For_Updates()
+		public Customize_Show_Tips_On_Start()
 		{
 			MinVersion = HelpFeatureVersion.v0_4_WirsingKopf;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "customize check for updates";
+			Title = "customize show tips on start";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "You can have RecNForget automatically check for updates when it starts."
+					Content = "You can have RecNForget show you a random feature you may or may not know yet."
 				},
 				new HelpFeatureDetailLine()
 				{
 					Content = "(this is enabled by default)"
-				},
-				new HelpFeatureDetailLine()
-				{
-					Content = string.Empty
-				},
-				new HelpFeatureDetailLine()
-				{
-					Content = "NOTE: This will NOT automatically install any update - you will still be prompted to install and can cancel this if you do not want to."
 				},
 				new HelpFeatureDetailLine()
 				{
@@ -50,7 +42,7 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- click on 'check for updates on start'"
+					Content = "- click on 'show tips on start'"
 				},
 				new HelpFeatureDetailLine()
 				{

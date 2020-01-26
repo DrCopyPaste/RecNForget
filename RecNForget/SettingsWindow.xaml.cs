@@ -202,6 +202,20 @@ namespace RecNForget
 			}
 		}
 
+		public bool ShowTipsOnApplicationStart
+		{
+			get
+			{
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart));
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart, value.ToString());
+				OnPropertyChanged();
+			}
+		}
+
 		public string HotKey_StartStopRecording
 		{
 			get

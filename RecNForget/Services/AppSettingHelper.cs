@@ -24,6 +24,7 @@ namespace RecNForget.Services
 		public static string OutputPath = "OutputPath";
 		public static string WindowAlwaysOnTop = "WindowAlwaysOnTop";
 		public static string ShowBalloonTipsForRecording = "ShowBalloonTipsForRecording";
+        public static string ShowTipsAtApplicationStart = "ShowTipsAtApplicationStart";
 
         private static string UserConfigFileFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppSettingHelper.ApplicationName, "user.config");
 
@@ -124,8 +125,9 @@ namespace RecNForget.Services
 				{ AppSettingHelper.FilenamePrefix, "RecNForget_" },
 				{ AppSettingHelper.OutputPath, @"C:\tmp" },
 				{ AppSettingHelper.WindowAlwaysOnTop, "False" },
-				{ AppSettingHelper.ShowBalloonTipsForRecording, "True" }
-			};
+                { AppSettingHelper.ShowBalloonTipsForRecording, "True" },
+                { AppSettingHelper.ShowTipsAtApplicationStart, "True" }
+            };
 
 			if (settingKey == null)
 			{

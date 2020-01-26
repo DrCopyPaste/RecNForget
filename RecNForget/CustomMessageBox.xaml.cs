@@ -55,10 +55,17 @@ namespace RecNForget
 			rowCaption.Height = GridLength.Auto;
 			ContentGrid.RowDefinitions.Add(rowCaption);
 
-			var captionTextBox = new System.Windows.Controls.Label();
+			var captionTextBox = new System.Windows.Controls.TextBlock();
+
+			var captionStyle = (Style)FindResource("VersionName_TextBox_Style");
+			if (captionStyle != null)
+			{
+				captionTextBox.Style = captionStyle;
+			}
+
 			Grid.SetRow(captionTextBox, currentIndex);
 			Grid.SetColumn(captionTextBox, 0);
-			captionTextBox.Content = caption;
+			captionTextBox.Text = caption;
 			ContentGrid.Children.Add(captionTextBox);
 			currentIndex++;
 
@@ -102,6 +109,8 @@ namespace RecNForget
 				}
 			}
 
+			var textblockStyle = (Style)FindResource("CustomMessageBox_TextBlock_Style");
+
 			if (messageRows != null && messageRows.Any())
 			{
 				foreach (var messgeRow in messageRows)
@@ -110,14 +119,18 @@ namespace RecNForget
 					rowDefinition.Height = GridLength.Auto;
 					ContentGrid.RowDefinitions.Add(rowDefinition);
 
-					var tempTextBox = new System.Windows.Controls.Label();
+					var tempTextBox = new System.Windows.Controls.TextBlock();
+					if (textblockStyle != null)
+					{
+						tempTextBox.Style = textblockStyle;
+					}
+
 					Grid.SetRow(tempTextBox, currentIndex);
 					Grid.SetColumn(tempTextBox, 0);
-					tempTextBox.Content = messgeRow;
+					tempTextBox.Text = messgeRow;
 					ContentGrid.Children.Add(tempTextBox);
 					currentIndex++;
 				}
-				// set contents
 			}
 
 			if (prompt != null)

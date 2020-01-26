@@ -107,6 +107,7 @@
     <Compile Include="CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Help\Features\Customize_Show_Tips_On_Start.cs" />
     <Compile Include="Help\Features\Customize_Output_File_Pattern.cs" />
     <Compile Include="Help\Features\Customize_Auto_Replay_After_Recording.cs" />
     <Compile Include="Help\Features\Customize_Audio_Signal_On_Record_Start_Stop.cs" />

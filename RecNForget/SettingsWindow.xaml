@@ -169,13 +169,21 @@
                     <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
                 </Grid.ColumnDefinitions>
                 <CheckBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=CheckForUpdateOnStart}" >check for updates on start</CheckBox>
+                    IsChecked="{Binding Path=CheckForUpdateOnStart}" >
+                    check for updates on start
+                </CheckBox>
                 <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=AutoStartWithWindows}" >auto start</CheckBox>
+                    IsChecked="{Binding Path=AutoStartWithWindows}" >
+                    auto start
+                </CheckBox>
                 <CheckBox Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=MinimizedToTray}" >run in background</CheckBox>
+                    IsChecked="{Binding Path=MinimizedToTray}" >
+                    run in background
+                </CheckBox>
                 <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=AutoSelectLastRecording}" >auto select last recording</CheckBox>
+                    IsChecked="{Binding Path=AutoSelectLastRecording}" >
+                    auto select last recording
+                </CheckBox>
             </Grid>
             
             <Rectangle Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
@@ -183,6 +191,7 @@
                 Content="Messages"/>
             <Grid Grid.Row="13" Grid.Column="0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                     <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                     <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                     <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
@@ -204,7 +213,13 @@
                     sound on toggle play
                 </CheckBox>
                 <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=ShowBalloonTipsForRecording}">show toast messages</CheckBox>
+                    IsChecked="{Binding Path=ShowBalloonTipsForRecording}">
+                    show toast messages
+                </CheckBox>
+                <CheckBox Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                    IsChecked="{Binding Path=ShowTipsOnApplicationStart}">
+                    show tips on start
+                </CheckBox>
             </Grid>
 
             <local:ImageButton Grid.Row="14" Grid.Column="0" Style="{StaticResource AcceptButton}"

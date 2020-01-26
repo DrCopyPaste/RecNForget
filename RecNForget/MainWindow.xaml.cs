@@ -248,7 +248,42 @@ namespace RecNForget
 			}
 		}
 
+		public bool ShowTipsOnStart
+		{
+			get
+			{
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart));
+			}
+		}
+
 		#endregion
+
+		private void ShowRandomApplicationTip()
+		{
+			var allFeatures = Services.Types.HelpFeature.All;
+
+			int randomNumber = (new Random()).Next(0, allFeatures.Count - 1);
+			var randomFeature = allFeatures[randomNumber];
+			List<string> displayLines = new List<string>();
+			foreach (var line in randomFeature.HelpLines)
+			{
+				displayLines.Add(line.Content);
+			}
+
+			CustomMessageBox tempDialog = new CustomMessageBox(
+				caption: "Did you know?",
+				icon: CustomMessageBoxIcon.Information,
+				buttons: CustomMessageBoxButtons.OK,
+				messageRows: displayLines,
+				controlFocus: CustomMessageBoxFocus.Ok);
+
+			if (!MinimizedToTray)
+			{
+				tempDialog.Owner = this;
+			}
+
+			tempDialog.ShowDialog();
+		}
 
 		public MainWindow()
 		{
@@ -390,6 +425,11 @@ namespace RecNForget
 			else
 			{
 				SwitchToForegroundMode();
+			}
+
+			if (ShowTipsOnStart)
+			{
+				ShowRandomApplicationTip();
 			}
 		}
 
@@ -623,10 +663,12 @@ namespace RecNForget
 
 		private void Help_Click(object sender, RoutedEventArgs e)
 		{
-			var helpmenu = new HelpWindow()
+			var helpmenu = new HelpWindow();
+
+			if (!MinimizedToTray)
 			{
-				Owner = this
-			};
+				helpmenu.Owner = this;
+			}
 
 			helpmenu.Show();
 		}
@@ -643,10 +685,12 @@ namespace RecNForget
 
 		private void SettingsButton_Click(object sender, RoutedEventArgs e)
 		{
-			var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); })
+			var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); });
+
+			if (!MinimizedToTray)
 			{
-				Owner = this
-			};
+				settingsWindow.Owner = this;
+			}
 
 			settingsWindow.ShowDialog();
 
@@ -655,10 +699,12 @@ namespace RecNForget
 
 		private void AboutButton_Click(object sender, RoutedEventArgs e)
 		{
-			var aboutDialog = new AboutDialog()
+			var aboutDialog = new AboutDialog();
+
+			if (!MinimizedToTray)
 			{
-				Owner = this
-			};
+				aboutDialog.Owner = this;
+			}
 
 			aboutDialog.ShowDialog();
 		}
@@ -696,10 +742,12 @@ namespace RecNForget
 				messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
 				prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
 				controlFocus: CustomMessageBoxFocus.Prompt,
-				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters)
+				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+			if (!MinimizedToTray)
 			{
-				Owner = this
-			};
+				tempDialog.Owner = this;
+			}
 
 			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
 			{
@@ -729,10 +777,12 @@ namespace RecNForget
 				messageRows: new List<string>(),
 				prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
 				controlFocus: CustomMessageBoxFocus.Prompt,
-				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters)
+				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+			if (!MinimizedToTray)
 			{
-				Owner = this
-			};
+				tempDialog.Owner = this;
+			}
 
 			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
 			{
@@ -760,10 +810,12 @@ namespace RecNForget
 				icon: CustomMessageBoxIcon.Question,
 				buttons: CustomMessageBoxButtons.OkAndCancel,
 				messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
-				controlFocus: CustomMessageBoxFocus.Ok)
+				controlFocus: CustomMessageBoxFocus.Ok);
+
+			if (!MinimizedToTray)
 			{
-				Owner = this
-			};
+				tempDialog.Owner = this;
+			}
 
 			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
 			{
