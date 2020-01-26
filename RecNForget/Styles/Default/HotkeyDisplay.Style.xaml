@@ -22,4 +22,10 @@
         <Setter Property="Width" Value="{Binding Source={StaticResource SettingTextBox_Width}}" />
     </Style>
 
+    <Style x:Key="HotkeyPrompt_DisplayStackPanel" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Width" Value="{StaticResource HotkeyPromptWindow_Width}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+    </Style>
+
 </ResourceDictionary>

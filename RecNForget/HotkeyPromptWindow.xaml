@@ -18,36 +18,28 @@
         </NodeName>
         -->
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid
-            Background="{Binding Source={StaticResource Application_Background_Color}}"
+        <Grid Style="{StaticResource DefaultGridStyle}"
             MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 1 prompt message-->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 2 spacing-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 3 hotkey display-->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="{Binding Source={StaticResource MainWindow_Width}}" />
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap"
+            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="Hold down all modifier keys you wish to set and add your preferred hotkey." />
 
-            <StackPanel Grid.Row="3" Grid.Column="0"
-                HorizontalAlignment="Center"
+            <StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource HotkeyPrompt_DisplayStackPanel}"
                 x:Name="HotkeyDisplay">
             </StackPanel>
         </Grid>

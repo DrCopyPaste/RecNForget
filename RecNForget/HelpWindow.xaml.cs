@@ -140,7 +140,7 @@ namespace RecNForget
 
 				var textBlock = new TextBlock();
 				textBlock.HorizontalAlignment = HorizontalAlignment.Left;
-				Style textBlockStyle = (Style)FindResource("HelpLineTextBlockStyle");
+				Style textBlockStyle = (Style)FindResource("DefaultTextBlockStyle");
 				if (textBlockStyle != null)
 				{
 					textBlock.Style = textBlockStyle;

@@ -55,10 +55,8 @@ namespace RecNForget.Services
             CurrentlyRecording = true;
 
             FileInfo file;
-
             do
             {
-                // datestrings > GUIDS :D
                 file = new FileInfo(GetFileNameWithReplacePlaceholders());
             } while (file.Exists);
 
@@ -115,17 +113,36 @@ namespace RecNForget.Services
 
 		private string GetFileNameWithReplacePlaceholders()
 		{
+            bool nameUniquePlaceholderFound = false;
 			string tempString = string.Format(AudioRecordingService.OutputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod());
 
 			if (tempString.Contains("(Date)"))
 			{
-				tempString = tempString.Replace("(Date)", DateTime.Now.ToString(AudioRecordingService.OutputFileDateFormat));
+                nameUniquePlaceholderFound = true;
+                tempString = tempString.Replace("(Date)", DateTime.Now.ToString(AudioRecordingService.OutputFileDateFormat));
 			}
+            else if (tempString.Contains("(Guid)"))
+            {
+                nameUniquePlaceholderFound = true;
+                tempString = tempString.Replace("(Guid)", Guid.NewGuid().ToString());
+            }
 
-			// for suppporting (Number) - sequential number placeholder
-			// we first need to find out if there already exist files with the desired pattern and look for the highest number (or the first free slot, this might be messy if users intentionally create future sequential number files)
+            // if there is no placeholder in prefix that makes the file name somewhat unique, we just append a BEAUTIFUL timestamp
+            // this is not an else, because there will be other placeholders that are NOT intended to make file names unique but, just add further information
+            if (!nameUniquePlaceholderFound)
+            {
+                var fileInfo = new FileInfo(tempString);
+                string directory = fileInfo.DirectoryName;
+                string filename = Path.GetFileNameWithoutExtension(fileInfo.Name) + DateTime.Now.ToString(AudioRecordingService.OutputFileDateFormat);
+                string extension = fileInfo.Extension;
 
-			return tempString;
+                tempString = Path.Combine(directory, filename + extension);
+            }
+
+            // for suppporting (Number) - sequential number placeholder
+            // we first need to find out if there already exist files with the desired pattern and look for the highest number (or the first free slot, this might be messy if users intentionally create future sequential number files)
+
+            return tempString;
 		}
     }
 }

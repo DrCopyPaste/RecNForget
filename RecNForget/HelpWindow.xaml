@@ -20,61 +20,46 @@
         </NodeName>
         -->
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid
-            Background="{Binding Source={StaticResource Application_Background_Color}}"
+        <Grid Style="{StaticResource DefaultGridStyle}"
             MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource TitleRow_Height}}"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 1 for help topic title -->
-                <RowDefinition
-                    Height="40" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 2 for help lines -->
-                <RowDefinition
-                    Height="500"/>
+                <RowDefinition Style="{StaticResource GrowForRemainingSpaceRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="500" />
+                <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                  Background="{Binding Source={StaticResource Application_Background_Color}}">
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultGridStyle}">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                 </Grid.ColumnDefinitions>
 
-                <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}" Click="MinimizeButton_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}" Click="Exit_Click" />
+                <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}"
+                    Click="MinimizeButton_Click" />
+                <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}"
+                    Click="Exit_Click" />
             </Grid>
 
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="2"
-                Margin="0,0,5,0" Background="{Binding Source={StaticResource Application_Background_Color}}">
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource HelpTopicList_ScrollViewer_Style}">
                 <Grid
                     Name="TopicListGrid">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*" />
+                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
                     </Grid.ColumnDefinitions>
                     <!-- Row Definitions dynamic (depending on how many topics are found) -->
                 </Grid>
@@ -84,13 +69,11 @@
                 Name="TopicTitle"
                 Content="Help - Topic"/>
 
-            <ScrollViewer Grid.Row="2" Grid.Column="1"
-                Margin="0,0,5,0" Background="{Binding Source={StaticResource Application_Background_Color}}">
+            <ScrollViewer Grid.Row="2" Grid.Column="1" Style="{StaticResource HelpTopic_ScrollViewer_Style}">
                 <Grid
                     Name="HelpLinesGrid">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*" />
+                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
                     </Grid.ColumnDefinitions>
                     <!-- Row Definitions dynamic (depending on how many help lines are found) -->
                 </Grid>

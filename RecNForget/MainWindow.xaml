@@ -21,44 +21,32 @@
         -->
 
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid
-            Background="{Binding Source={StaticResource Application_Background_Color}}"
+        <Grid Style="{StaticResource DefaultGridStyle}"
             MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource TitleRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 1 for separator-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 2 for current file display title-->
-                <RowDefinition 
-                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 3 for current file display-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 4 for separator-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 5 for file prefix title-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 6 for file prefix-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 7 for separator-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 8 for action buttons title-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 9 for action buttons-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="{Binding Source={StaticResource MainWindow_Width}}" />
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
             </Grid.ColumnDefinitions>
 
             <tb:TaskbarIcon
@@ -89,27 +77,18 @@
             </tb:TaskbarIcon>
 
             <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
-            <Grid Grid.Row="0" Grid.Column="0"
-                  Background="{Binding Source={StaticResource Application_Background_Color}}">
+            <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultGridStyle}">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                 </Grid.ColumnDefinitions>
 
                 <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource WindowSettingsButton}"
@@ -138,44 +117,38 @@
                         </ContextMenu>
                     </Button.ContextMenu>
                 </local:ImageButton>
-                <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}" Click="MinimizeButton_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}" Click="Exit_Click" />
+                <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}"
+                    Click="MinimizeButton_Click" />
+                <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}"
+                    Click="Exit_Click" />
             </Grid>
 
             <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
                 Content="Recording Path"/>
-            <Border Grid.Row="3" Grid.Column="0"
-                BorderThickness="1"
-                Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
-                Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
-                BorderBrush="{Binding Source={StaticResource Font_Color}}"
-                CornerRadius="3"
-                Background="{Binding Source={StaticResource Application_Background_Color}}">
-                <Grid
-                  Background="{Binding Source={StaticResource ControlBackground_Color}}">
+            <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultWindowBorderStyle}">
+                <Grid Style="{StaticResource DefaultGridStyle}" >
                     <Grid.RowDefinitions>
-                        <RowDefinition
-                        Height="*" />
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
-                        Width="13*"/>
+                            Width="13*"/>
                         <ColumnDefinition
-                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                            Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
                         <ColumnDefinition
-                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                            Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
+                    <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
                         Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
                     <local:ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
-                        ToolTip="change output file name" Margin="0,2,2,0"
+                        ToolTip="change output file name"
                         Click="ChangeFileNamePatternButton_Clicked"/>
 
                     <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeOutputFolderMiniButtonLayout}"
-                        ToolTip="change output folder" Margin="0,2,2,0"
+                        ToolTip="change output folder"
                         Click="ChangeOutputFolderButton_Clicked"/>
                 </Grid>
             </Border>
@@ -183,7 +156,7 @@
             <!--<Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
                 Content="Use file name" />
-            <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
+            <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
                 IsEnabled="True"
                 Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="FilenamePrefix_Changed"/>-->
 
@@ -198,11 +171,9 @@
                 BorderBrush="{Binding Source={StaticResource Font_Color}}"
                 CornerRadius="3"
                 Background="{Binding Source={StaticResource Application_Background_Color}}">
-                <Grid
-                    Background="{Binding Source={StaticResource ControlBackground_Color}}">
+                <Grid Style="{StaticResource DefaultGridStyle}">
                     <Grid.RowDefinitions>
-                        <RowDefinition
-                        Height="*" />
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -213,7 +184,7 @@
                             Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultTextBoxStyle}"
+                    <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
                         Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                     <local:ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
@@ -230,36 +201,20 @@
             <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
                 Content="Actions" />
 
-            <Border Grid.Row="9" Grid.Column="0"
-                BorderThickness="1"
-                Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
-                Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
-                BorderBrush="{Binding Source={StaticResource Font_Color}}"
-                CornerRadius="3"
-                Background="{Binding Source={StaticResource Application_Background_Color}}">
-                <Grid
-                    Background="{Binding Source={StaticResource ControlBackground_Color}}">
+            <Border Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultWindowBorderStyle}">
+                <Grid Style="{StaticResource DefaultGridStyle}">
                     <Grid.RowDefinitions>
-                        <RowDefinition
-                            Height="{Binding Source={StaticResource ButtonRow_Height}}" />
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                     </Grid.ColumnDefinitions>
 
                     <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource OpenFolderButton}"

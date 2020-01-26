@@ -3,8 +3,9 @@
                     xmlns:Sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:RecNForget">
 
-    <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Style x:Key="MainWindowTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Width" Value="{StaticResource MainWindow_TextBox_Width}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Margin" Value="3,1,3,0" />
         <Setter Property="Padding" Value="0,0,0,0" />
@@ -79,8 +80,8 @@
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Margin" Value="1,1,1,0" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource PathNotes_TextBox_Height}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource PathNotes_TextBox_Width}}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource PatchNotes_TextBox_Height}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource PatchNotes_TextBox_Width}}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>

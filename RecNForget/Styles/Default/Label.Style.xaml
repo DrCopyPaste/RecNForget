@@ -31,7 +31,7 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
     </Style>
-    
+
     <Style x:Key="SettingTextBoxLabelStyle" TargetType="Label">
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />

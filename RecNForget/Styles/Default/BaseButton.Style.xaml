@@ -6,6 +6,10 @@
     <!-- Header button styles SHOULD be different than any other in app buttons-->
     <Style x:Key="BaseHeaderButtonLayout" TargetType="{x:Type local:ImageButton}">
         <!-- Some setters -->
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="ImagePadding" Value="2,2,2,2" />
@@ -124,7 +128,7 @@
     <Style x:Key="BaseButtonLayout" TargetType="{x:Type local:ImageButton}">
         <!-- Some setters -->
         <Setter Property="ImagePadding" Value="4,4,4,4" />
-        <Setter Property="ImageMargin" Value="1,1,1,1" />
+        <Setter Property="ImageMargin" Value="7,1,7,1" />
         <Setter Property="Background" Value="{Binding Source={StaticResource ControlBackground_Color}}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -183,7 +187,7 @@
         <Setter Property="ImageMargin" Value="1,1,1,1" />
     </Style>
 
-    <Style x:Key="BaseSettingButtonLayout" TargetType="{x:Type Button}">
+    <Style x:Key="BaseSettingButtonLayout" TargetType="{x:Type local:ImageButton}">
         <!-- Some setters -->
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -254,5 +258,18 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+    <Style x:Key="HalfActionButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseButtonLayout}">
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+    </Style>
+
+    <Style x:Key="HalfActionButtonSmallIconLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseButtonSmallerIconLayout}">
+        <Setter Property="ImageMargin" Value="4,1,4,1" />
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+    </Style>
+
 </ResourceDictionary>

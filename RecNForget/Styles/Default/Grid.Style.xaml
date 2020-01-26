@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:RecNForget">
+
+    <Style x:Key="DefaultGridStyle" TargetType="Grid">
+        <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+    </Style>
+
+    <Style x:Key="GrowForContainedControlsRowStyle" TargetType="RowDefinition">
+        <Setter Property="Height" Value="Auto" />
+    </Style>
+
+    <Style x:Key="GrowForRemainingSpaceRowStyle" TargetType="RowDefinition">
+        <Setter Property="Height" Value="*" />
+    </Style>
+
+    <Style x:Key="GrowForContainedControlsColumnStyle" TargetType="ColumnDefinition">
+        <Setter Property="Width" Value="Auto" />
+    </Style>
+
+    <Style x:Key="GrowForRemainingSpaceColumnStyle" TargetType="ColumnDefinition">
+        <Setter Property="Width" Value="*" />
+    </Style>
+
+</ResourceDictionary>

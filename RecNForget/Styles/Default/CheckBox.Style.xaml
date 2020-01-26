@@ -10,12 +10,10 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="1,1,1,1" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource CheckBoxControl_Height}}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
         <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
         <Setter Property="Background" Value="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"/>
         <Setter Property="FontSize" Value="12"/>
@@ -33,21 +31,21 @@
                         <BulletDecorator x:Name="ContentPart" Background="Transparent">
                             <BulletDecorator.Bullet>
                                 <Border x:Name="Border"  
-                              Width="{Binding Source={StaticResource CheckBox_Width}}" 
-                              Height="{Binding Source={StaticResource CheckBox_Width}}"
-                                        Padding="1,1,1,1"
-                              CornerRadius="3" 
-                              Background="{Binding Source={StaticResource Font_Color}}"
-                              BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"
-                              BorderThickness="1">
+                                    Width="{Binding Source={StaticResource CheckBox_Width}}" 
+                                    Height="{Binding Source={StaticResource CheckBox_Width}}"
+                                    Padding="1,1,1,1"
+                                    CornerRadius="3" 
+                                    Background="{Binding Source={StaticResource Font_Color}}"
+                                    BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"
+                                    BorderThickness="1">
                                     <Image x:Name="CheckMark" Source="ButtonImages\accept_icon518267.black.white.png" VerticalAlignment="Bottom" />
                                 </Border>
                             </BulletDecorator.Bullet>
                             <ContentPresenter
-                            Margin="8,0,0,0"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            RecognizesAccessKey="True"/>
+                                Margin="8,0,0,0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                RecognizesAccessKey="True"/>
                         </BulletDecorator>
                     </Border>
                     <ControlTemplate.Triggers>

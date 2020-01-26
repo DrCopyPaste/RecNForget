@@ -17,4 +17,5 @@
         <Setter Property="CornerRadius" Value="3,3,3,3" />
         <Setter Property="Padding" Value="2,2,2,2" />
     </Style>
+    
 </ResourceDictionary>

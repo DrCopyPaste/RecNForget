@@ -29,18 +29,6 @@
         <Setter Property="PressedImage" Value="ButtonImages\close_icon349388.black.png" />
     </Style>
 
-    <Style x:Key="HalfActionButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseButtonLayout}">
-        <Setter Property="Height" Value="30" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-    </Style>
-
-    <Style x:Key="HalfActionButtonSmallIconLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseButtonSmallerIconLayout}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Height" Value="30" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-    </Style>
-
     <Style x:Key="ChangeSettingButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseChangeSettingButtonLayout}">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />

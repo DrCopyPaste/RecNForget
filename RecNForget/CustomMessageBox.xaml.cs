@@ -127,7 +127,7 @@ namespace RecNForget
 				ContentGrid.RowDefinitions.Add(promptRow);
 
 				promptTextBox = new System.Windows.Controls.TextBox();
-				var promptStyle = (Style)FindResource("DefaultTextBoxStyle");
+				var promptStyle = (Style)FindResource("MainWindowTextBoxStyle");
 				if (promptStyle != null)
 				{
 					promptTextBox.Style = promptStyle;

@@ -19,28 +19,21 @@
         </NodeName>
         -->
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid
-            Background="{Binding Source={StaticResource Application_Background_Color}}"
-            Name="DialogGrid"  MouseDown="Window_MouseDown">
+        <Grid Style="{StaticResource DefaultGridStyle}"
+            Name="DialogGrid" MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 1 icon on left, caption and message rows and prompt-->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 2 spacing-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource SeparatorTitleRow_Height}}"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 3 buttons-->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="*" /> 
-                <ColumnDefinition
-                    Width="*" />
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"
@@ -52,12 +45,10 @@
             <Grid Grid.Row="1" Grid.Column="1"
                 Name="ContentGrid">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="*"/>
+                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="*"/>
+                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                 </Grid.ColumnDefinitions>
             </Grid>
         </Grid>

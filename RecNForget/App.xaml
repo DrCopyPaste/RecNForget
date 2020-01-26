@@ -10,6 +10,7 @@
                 <!-- colors -->
                 <!-- base controls that are inherited later on -->
                 <!-- concrete styles -->
+                <!-- complex (multiple controls combined) styles -->
                 <ResourceDictionary Source="Styles\Default\SizesMarginsPaddings.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\Color.Style.xaml" />
                 
@@ -18,7 +19,8 @@
                 
                 <ResourceDictionary Source="Styles\Default\Window.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\TitleBar.Style.xaml" />
-                
+
+                <ResourceDictionary Source="Styles\Default\Grid.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\CheckBox.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\HotkeyDisplay.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\Label.Style.xaml" />
@@ -27,6 +29,10 @@
                 <ResourceDictionary Source="Styles\Default\TextBox.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\CustomMessageBox.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\ContextMenu.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\ProgressBar.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\Hyperlink.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\ScrollViewer.Style.xaml" />
+                <ResourceDictionary Source="Styles\Default\LogoImage.Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

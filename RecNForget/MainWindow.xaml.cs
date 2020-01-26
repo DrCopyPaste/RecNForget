@@ -693,7 +693,7 @@ namespace RecNForget
 				caption: "Type in a new pattern for file name generation.",
 				icon: CustomMessageBoxIcon.Question,
 				buttons: CustomMessageBoxButtons.OkAndCancel,
-				messageRows: new List<string>() { "Supported placeholders:", "(Date)" },
+				messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
 				prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
 				controlFocus: CustomMessageBoxFocus.Prompt,
 				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters)

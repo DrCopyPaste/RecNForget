@@ -20,38 +20,29 @@
         </NodeName>
         -->
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid
-            Background="{Binding Source={StaticResource Application_Background_Color}}"
+        <Grid Style="{StaticResource DefaultGridStyle}"
             MouseDown="Window_MouseDown">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource TitleRow_Height}}"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 1 for question line 1-->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 2 for question line 2-->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 3 spacing-->
-                <RowDefinition
-                    Height="{Binding Source={StaticResource SeparatorRow_Height}}" />
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 4 for buttons -->
-                <RowDefinition
-                    Height="*"/>
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="*" />
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap"
+            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="You selected the 'run as background process' option in settings." />
-            <TextBlock Grid.Row="2" Grid.Column="0"
-                FontSize="14" Margin="5,0,0,0" TextWrapping="Wrap"
+            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="Do you want to close the application or run as background process now?" />
 
             <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource AcceptButton}"
