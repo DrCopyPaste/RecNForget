@@ -292,7 +292,7 @@ namespace RecNForget.Windows
 			this.MouseDown += Window_Click;
 
 			// ensure AppConfig Values exist
-			AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+			bool firstTimeUser = AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 
 			if (CheckForUpdateOnStart)
 			{
@@ -428,7 +428,16 @@ namespace RecNForget.Windows
 				SwitchToForegroundMode();
 			}
 
-			if (ShowTipsOnStart)
+			if (firstTimeUser)
+			{
+				var dia = new NewToApplicationWindow(this.hotkeyService)
+				{
+					Owner = this
+				};
+
+				dia.Show();
+			}
+			else if(ShowTipsOnStart)
 			{
 				ShowRandomApplicationTip();
 			}

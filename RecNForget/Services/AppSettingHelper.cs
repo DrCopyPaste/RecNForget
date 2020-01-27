@@ -95,13 +95,17 @@ namespace RecNForget.Services
         }
 
 
-        public static void RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false)
+        public static bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false)
 		{
+            bool configDidNotYetExist = false;
+
             // check if user config file exists
             FileInfo fileInfo = new FileInfo(UserConfigFileFullPath);
 
             if (!fileInfo.Exists)
             {
+                configDidNotYetExist = true;
+
                 DirectoryInfo directoryInfo = new DirectoryInfo(fileInfo.DirectoryName);
                 if (!directoryInfo.Exists)
                 {
@@ -146,6 +150,8 @@ namespace RecNForget.Services
 					SetAppConfigSetting(settingKey, defaultValues[settingKey]);
 				}
 			}
-		}
+
+            return configDidNotYetExist;
+        }
 	}
 }

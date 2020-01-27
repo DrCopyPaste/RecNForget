@@ -58,6 +58,7 @@ Progress towards the next 0.4-Release can be tracked [here](https://github.com/D
 - clicking the open folder button now selects the last result file in explorer (or just opens folder if there is now result yet)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
 - tray icon menu now shows the same menu as the windows options menu at the top left of the main window
+- when started for the first time, RecNForget will show the toggle record and output folder setting and allow to change them
 - RecNForget can now update itself via clicking the about-button (via top left window button) and then "check for updates"
 - RecNForget can now show random tips on program start (did you know?) (enabled by default)
 - Installation is cancelled if .Net framework is not found

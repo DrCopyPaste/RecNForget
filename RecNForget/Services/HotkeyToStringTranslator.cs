@@ -96,6 +96,8 @@ namespace RecNForget.Services
 			int currentIndex = 0;
 			var buttonGrid = new Grid();
 
+			buttonGrid.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+
 			var rowDefinition = new RowDefinition();
 			rowDefinition.Height = GridLength.Auto;
 			buttonGrid.RowDefinitions.Add(rowDefinition);
@@ -118,7 +120,7 @@ namespace RecNForget.Services
 			// before spacing: 0 1 2 3 4 (button indices)
 			// after spacing: 0 s 1 s 2 s 3 s 4
 			// after spacing: 0 s 2 s 4 s 6 s 8
-			foreach (var hortkeyName in hotkeys)
+			foreach (var hotkeyName in hotkeys)
 			{
 				var tempButton = new System.Windows.Controls.Button();
 				if (buttonStyle != null)
@@ -130,7 +132,7 @@ namespace RecNForget.Services
 				Grid.SetColumn(
 					tempButton,
 					spacing.HasValue ? currentIndex * 2 : currentIndex);
-				tempButton.Content = hortkeyName;
+				tempButton.Content = hotkeyName;
 				buttonGrid.Children.Add(tempButton);
 				currentIndex++;
 			}
