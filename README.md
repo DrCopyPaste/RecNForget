@@ -3,11 +3,11 @@ Recording should be as easy as pressing a button.
 
 # How to use
 - RecNForget sets the recording hotkey to [Pause] by default
-- just press this button to start recording
-- and press it again to stop recording and save your file
+- press this button to start recording
+- press it again to stop recording and save your file
 - output folder and hotkey can be changed in the settings menu
 
-For more detailed help please refer to the [help pages](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/toc.md).
+For more detailed help refer to the [online help pages](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/toc.md).
 
 # Installation
 Run msi-file from the [latest release](https://github.com/DrCopyPaste/RecNForget/releases/latest) to install.
@@ -25,17 +25,21 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - To build the setup project you need to have the [WiX Toolset](https://wixtoolset.org/releases/v3.11.2/stable) installed.
 
 # This version
-The curretly released version is 0.3. Progress towards the next 0.4-Release can be tracked [here](https://github.com/DrCopyPaste/RecNForget/projects/2).
+The currently released version is 0.3.
+
+Progress towards the next 0.4-Release can be tracked [here](https://github.com/DrCopyPaste/RecNForget/projects/2).
 
 # upcoming features in next release
 - FIX: uninstalling RecNForget will now also delete all application data (under %APPDATA% machine configuration and in registry for autostart)
 - FIX: clicking the open folder button does not crash RecNForget anymore, if that folder does not (yet) exist
 - FIX: changing the file prefix changes the displayed file name with output path
 
-- changed default hotkey for "toggle record" to [Pause]
+- default hotkey for "toggle record" is now [Pause]
 - shrinked main window in size and reorganized controls a bit
-- can select the slected file in the explorer using [Down-Arrow]-key in the main window
 - all action buttons now are in the same row at the bottom
+- no more standard title bar
+- added icons for most buttons
+- can select the slected file in the explorer using [Down-Arrow]-key in the main window
 - can play/pause slected file using [Space]-key in the main window
 - added skip buttons to navigate through output folder (auto selects the latest file on program start)
 - can skip to previous/next file using [Left-Arrow]/[Right-Arrow]-key in the main window
@@ -44,12 +48,10 @@ The curretly released version is 0.3. Progress towards the next 0.4-Release can 
 - can delete selected file via trash can icon next to "selected file"
 - can delete selected file using [Delete]-key in the main window
 - window options and settings can be opened via context menu on the main window
-- file name pattern no longer in main window (it is instead configured by the pencil button next to "recording path" or via settings menu)
+- file name pattern textbox no longer in main window (it is instead configured by the pencil button next to "recording path" or via settings menu)
 - can configure target path via folder icon next to "recording path"
 - consistently use white background for (almost) all controls
 - auto selecting the last recording is now optional (enabled by default)
-- no more standard title bar
-- added icons for most buttons
 - added a help link to the menu (calls link in browser going to THIS readme.md, I will replace this with an in-application help later on)
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - can stop playing slected file using [Esc]-key in the main window
