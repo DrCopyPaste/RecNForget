@@ -1,6 +1,7 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
 using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
+using RecNForget.Controls;
 using RecNForget.Services;
 using RecNForget.Services.Extensions;
 using System;
@@ -20,7 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
 
-namespace RecNForget
+namespace RecNForget.Windows
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml

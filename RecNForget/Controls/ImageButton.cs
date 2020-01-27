@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace RecNForget
+namespace RecNForget.Controls
 {
 	// https://stackoverflow.com/a/18482034
 	public class ImageButton : Button

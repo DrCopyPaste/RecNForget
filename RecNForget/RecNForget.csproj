@@ -94,17 +94,17 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HelpWindow.xaml.cs">
+    <Compile Include="Windows\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMessageBoxButtons.cs" />
-    <Compile Include="CustomMessageBoxFocus.cs" />
-    <Compile Include="CustomMessageBoxPromptValidation.cs" />
-    <Compile Include="CustomMessageBoxIcon.cs" />
-    <Compile Include="DownloadDialog.xaml.cs">
+    <Compile Include="Controls\CustomMessageBoxButtons.cs" />
+    <Compile Include="Controls\CustomMessageBoxFocus.cs" />
+    <Compile Include="Controls\CustomMessageBoxPromptValidation.cs" />
+    <Compile Include="Controls\CustomMessageBoxIcon.cs" />
+    <Compile Include="Windows\DownloadDialog.xaml.cs">
       <DependentUpon>DownloadDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomMessageBox.xaml.cs">
+    <Compile Include="Controls\CustomMessageBox.xaml.cs">
       <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Help\Features\Customize_Show_Tips_On_Start.cs" />
@@ -145,11 +145,11 @@
     <Compile Include="Help\Features\Click_Button_To_Play_Pause_Selected_File.cs" />
     <Compile Include="Help\Features\Press_Hotkey_To_Record.cs" />
     <Compile Include="Help\General\QuickStart.cs" />
-    <Compile Include="ImageButton.cs" />
-    <Compile Include="ReleaseInstallationDialog.xaml.cs">
+    <Compile Include="Controls\ImageButton.cs" />
+    <Compile Include="Windows\ReleaseInstallationDialog.xaml.cs">
       <DependentUpon>ReleaseInstallationDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AboutDialog.xaml.cs">
+    <Compile Include="Windows\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\AudioRecordingService.cs" />
@@ -163,7 +163,7 @@
     <Compile Include="Services\Types\HotkeyMapping.cs" />
     <Compile Include="Services\UpdateChecker.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
-    <Page Include="HelpWindow.xaml">
+    <Page Include="Windows\HelpWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -243,15 +243,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DownloadDialog.xaml">
+    <Page Include="Windows\DownloadDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CustomMessageBox.xaml">
+    <Page Include="Controls\CustomMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReleaseInstallationDialog.xaml">
+    <Page Include="Windows\ReleaseInstallationDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -259,33 +259,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="CloseOrBackgroundDialog.xaml.cs">
+    <Compile Include="Windows\CloseOrBackgroundDialog.xaml.cs">
       <DependentUpon>CloseOrBackgroundDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="RestoreMainWindowFromTrayCommand.cs" />
     <Compile Include="Services\AppSettingHelper.cs" />
     <Compile Include="Services\AudioPlayListService.cs" />
-    <Compile Include="SettingsWindow.xaml.cs">
+    <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\HotkeyService.cs" />
-    <Page Include="AboutDialog.xaml">
+    <Page Include="Windows\AboutDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CloseOrBackgroundDialog.xaml">
+    <Page Include="Windows\CloseOrBackgroundDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="HotkeyPromptWindow.xaml">
+    <Page Include="Windows\HotkeyPromptWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsWindow.xaml">
+    <Page Include="Windows\SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -293,11 +293,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HotkeyPromptWindow.xaml.cs">
+    <Compile Include="Windows\HotkeyPromptWindow.xaml.cs">
       <DependentUpon>HotkeyPromptWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\HotkeyToStringTranslator.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

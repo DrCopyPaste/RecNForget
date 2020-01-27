@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
-namespace RecNForget
+namespace RecNForget.Windows
 {
 	/// <summary>
 	/// Interaction logic for HelpWindow.xaml

@@ -1,4 +1,4 @@
-﻿namespace RecNForget
+﻿namespace RecNForget.Controls
 {
 	public enum CustomMessageBoxPromptValidation
 	{

@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
 using Octokit;
+using RecNForget.Controls;
+using RecNForget.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;

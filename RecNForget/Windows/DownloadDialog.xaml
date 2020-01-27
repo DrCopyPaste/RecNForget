@@ -1,14 +1,14 @@
-﻿<Window x:Class="RecNForget.CloseOrBackgroundDialog"
+﻿<Window x:Class="RecNForget.Windows.DownloadDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RecNForget"
+        xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
         Topmost="True"
         Style="{StaticResource DefaultWindowStyle}"
         WindowStartupLocation="CenterOwner"
-        Title="RecNForget - Close or Background" >
+        Title="RecNForget - Downloading Update">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
@@ -25,13 +25,11 @@
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 for question line 1-->
+                <!-- row 1 for progress bar-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 2 for question line 2-->
+                <!-- row 2 for spacing-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 3 spacing-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 4 for buttons -->
+                <!-- row 3 for cancel button-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -40,19 +38,16 @@
 
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
-                Text="You selected the 'run as background process' option in settings." />
-            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
-                Text="Do you want to close the application or run as background process now?" />
-
-            <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource AcceptButton}"
-                HorizontalAlignment="Left"
-                ToolTip="Continue in background"
-                x:Name="RunInBackgroundButton" Click="Background_Click"/>
-            <local:ImageButton Grid.Row="4" Grid.Column="0" Style="{StaticResource ShutDownButton}"
+            <ProgressBar Grid.Row="1" Grid.Column="0" Style="{StaticResource Default_ProgressBar_Style}"
+                Value="{Binding Path=DownloadProgress}" />
+            
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                Text="{Binding Path=DownloadProgress, StringFormat={}{0:0}%}" />
+            
+            <local:ImageButton Grid.Row="3" Grid.Column="0" Style="{StaticResource CancelButton}"
                 HorizontalAlignment="Right"
-                ToolTip="Close application"
-                x:Name="CloseApplicationButton" Click="Close_Click"/>
+                x:Name="CancelButton"
+                IsCancel="True"/>
         </Grid>
     </Border>
 </Window>

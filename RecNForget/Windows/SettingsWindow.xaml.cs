@@ -1,4 +1,5 @@
 ﻿using Ookii.Dialogs.Wpf;
+using RecNForget.Controls;
 using RecNForget.Services;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace RecNForget
+namespace RecNForget.Windows
 {
 	/// <summary>
 	/// Interaction logic for SettingsWindow.xaml

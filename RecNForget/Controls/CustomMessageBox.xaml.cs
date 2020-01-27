@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace RecNForget
+namespace RecNForget.Controls
 {
 	/// <summary>
 	/// Interaction logic for CustomMessageBox.xaml
