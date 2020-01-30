@@ -27,5 +27,7 @@
     <Sys:Double x:Key="MainWindowControl_Height">21</Sys:Double>
     <Sys:Double x:Key="MainWindowControl_HeightWithMargin">25</Sys:Double>
 
+    <Sys:Double x:Key="Paragraph_Separator_Height">15</Sys:Double>
+
     <Sys:Double x:Key="CreditsBox_Height">150</Sys:Double>
 </ResourceDictionary>

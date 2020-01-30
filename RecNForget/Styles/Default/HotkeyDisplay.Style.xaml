@@ -28,4 +28,10 @@
         <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
     </Style>
 
+    <Style x:Key="AutoSizeHotkeyDisplayStackPanel" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="1,1,1,0" />
+    </Style>
+
 </ResourceDictionary>

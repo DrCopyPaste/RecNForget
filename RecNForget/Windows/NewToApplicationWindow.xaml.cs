@@ -63,6 +63,20 @@ namespace RecNForget.Windows
 			HotkeyDisplay.Children.Add(buttonGrid);
 		}
 
+		public bool CheckForUpdateOnStart
+		{
+			get
+			{
+				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
+			}
+
+			set
+			{
+				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart, value.ToString());
+				OnPropertyChanged();
+			}
+		}
+
 		public string HotKey_StartStopRecording
 		{
 			get

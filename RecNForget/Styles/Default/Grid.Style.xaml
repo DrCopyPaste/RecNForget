@@ -15,6 +15,10 @@
         <Setter Property="Height" Value="*" />
     </Style>
 
+    <Style x:Key="ParagaphSeparatorRowStyle" TargetType="RowDefinition">
+        <Setter Property="Height" Value="{Binding Source={StaticResource Paragraph_Separator_Height}}" />
+    </Style>
+
     <Style x:Key="GrowForContainedControlsColumnStyle" TargetType="ColumnDefinition">
         <Setter Property="Width" Value="Auto" />
     </Style>
