@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.ImageConverter",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.GithubHelpGenerator", "RecNForget.GithubHelpGenerator\RecNForget.GithubHelpGenerator.csproj", "{59BBC21E-1BD8-4E84-BA89-90478B51BE3A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContentHelpers", "ContentHelpers", "{90DB9D90-5299-4402-81E8-E448A34C5F89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.CopyRightHelper", "RecNForget.CopyRightHelper\RecNForget.CopyRightHelper.csproj", "{44817E72-941D-4785-A7D6-FAE211815482}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,14 @@ Global
 		{59BBC21E-1BD8-4E84-BA89-90478B51BE3A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{59BBC21E-1BD8-4E84-BA89-90478B51BE3A}.Release|x86.ActiveCfg = Release|Any CPU
 		{59BBC21E-1BD8-4E84-BA89-90478B51BE3A}.Release|x86.Build.0 = Release|Any CPU
+		{44817E72-941D-4785-A7D6-FAE211815482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44817E72-941D-4785-A7D6-FAE211815482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44817E72-941D-4785-A7D6-FAE211815482}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{44817E72-941D-4785-A7D6-FAE211815482}.Debug|x86.Build.0 = Debug|Any CPU
+		{44817E72-941D-4785-A7D6-FAE211815482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44817E72-941D-4785-A7D6-FAE211815482}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44817E72-941D-4785-A7D6-FAE211815482}.Release|x86.ActiveCfg = Release|Any CPU
+		{44817E72-941D-4785-A7D6-FAE211815482}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +80,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0DE40921-5E11-499F-81AB-C28D267CF4A6} = {9FA98D49-321F-46E0-A6CC-B8E270208DAF}
 		{8E19B8D5-7241-4336-A08E-9E34ACECC230} = {9FA98D49-321F-46E0-A6CC-B8E270208DAF}
+		{F5FD2787-5458-4DA1-99B2-ECB92A783EF1} = {90DB9D90-5299-4402-81E8-E448A34C5F89}
+		{59BBC21E-1BD8-4E84-BA89-90478B51BE3A} = {90DB9D90-5299-4402-81E8-E448A34C5F89}
+		{44817E72-941D-4785-A7D6-FAE211815482} = {90DB9D90-5299-4402-81E8-E448A34C5F89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {472E6DF2-8342-4601-B0FA-61D1071AD01D}
