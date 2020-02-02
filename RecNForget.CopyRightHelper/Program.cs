@@ -25,6 +25,7 @@ namespace RecNForget.CopyRightHelper
         {
             var mdBaseInfoTemplateBuilder = new StringBuilder();
             mdBaseInfoTemplateBuilder.AppendLine("The picture {0} was generated from " + MdFileLinkString("onlinewebfonts.com/icon/{1}", "https://www.onlinewebfonts.com/icon/{1}"));
+            mdBaseInfoTemplateBuilder.AppendLine();
             mdBaseInfoTemplateBuilder.AppendLine(string.Format(@"Icon made from {0} is licensed by CC BY 3.0", MdFileLinkString("Icon Fonts", "http://www.onlinewebfonts.com/icon")));
             mdBaseInfoTemplateBuilder.AppendLine();
 
