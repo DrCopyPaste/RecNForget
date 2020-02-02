@@ -35,13 +35,15 @@
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 5 for claim-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 6 for spacing?-->
+                <!-- row 6 for spacing-->
+                <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
+                <!-- row 7 for spacing?-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 7 for credits box-->
+                <!-- row 8 for credits box-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 8 for spacing-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 9 for bottom buttons row-->
+                <!-- row 9 for spacing-->
+                <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
+                <!-- row 10 for bottom buttons row-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -53,7 +55,7 @@
 
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource TitleBarLayout}" />
 
-            <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="13" Style="{StaticResource About_Logo_Style}" />
+            <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource About_Logo_Style}" />
 
             <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource ApplicationName_TextBox_Style}"
                 Text="RecNForget"/>
@@ -62,7 +64,7 @@
                 Text="Version X.Y.Z.A" />
             <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}">
                 <Run>
-                    (C) 2019 by DrCopyPaste (
+                    (C) 2019-2020 by DrCopyPaste (
                 </Run>
                 <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">visit github.com/DrCopyPaste</Hyperlink>
                 <Run>
@@ -72,8 +74,8 @@
             <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="RecNForget is a free application that helps you sample audio faster."  />
 
-            <Border Grid.Row="7" Grid.Column="1" Style="{StaticResource DefaultWindowBorderStyle}">
-                <ScrollViewer Grid.ColumnSpan="3" Style="{StaticResource Default_ScrollViewer_Style}">
+            <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource DefaultWindowBorderStyle}">
+                <ScrollViewer Style="{StaticResource Default_ScrollViewer_Style}">
                     <TextBlock Style="{StaticResource DefaultTextBlockStyle}">
                         <Run>
                             RecNForget is written in C# using .Net Framework 4.7 and Microsoft WPF
@@ -172,10 +174,10 @@
                     </TextBlock>
                 </ScrollViewer>
             </Border>
-            <local:ImageButton Grid.Row="9" Grid.Column="0" Style="{StaticResource DownloadButton}"
+            <local:ImageButton Grid.Row="10" Grid.Column="0" Style="{StaticResource DownloadButton}"
                 HorizontalAlignment="Left" 
                 Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>
-            <local:ImageButton Grid.Row="9" Grid.Column="3" Style="{StaticResource AcceptButton}"
+            <local:ImageButton Grid.Row="10" Grid.Column="3" Style="{StaticResource AcceptButton}"
                 HorizontalAlignment="Right"
                 Click="okButton_Click"/>
         </Grid>
