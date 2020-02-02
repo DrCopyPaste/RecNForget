@@ -31,38 +31,24 @@ namespace RecNForget.GithubHelpGenerator
             EnsureEmptyFolder(featuresFolder);
 
             var quickStart = new Help.General.QuickStart();
-            var allFeatures = Services.Types.HelpFeature.All;
+
+            // only cover actual features here (not bugfixes or feature changes or verbose information)
+            // ToDo filter out obsolete features like in for NewToVersionDialog (MinVersion/MaxVersion)
+            var allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature);
 
             // create a master help page that contains a table of contents with links to all features
             // create an md file for each feature
 
             StringBuilder tocPageContents = new StringBuilder();
-
             tocPageContents.AppendLine(HeadingLine("RecNForget - Help Topics"));
 
-            StringBuilder quickStartContents = new StringBuilder();
-            quickStartContents.AppendLine(HeadingLine(quickStart.Title));
-
-            foreach (var helpLine in quickStart.HelpLines)
-            {
-                quickStartContents.AppendLine(helpLine.Content);
-            }
-
             tocPageContents.AppendLine(FeatureHyperLinkLine(quickStart.Title, quickStart.Id));
-            File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", quickStart.Id)), quickStartContents.ToString());
+            File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", quickStart.Id)), quickStart.HelpLinesAsString());
 
             foreach (var feature in allFeatures)
             {
                 tocPageContents.AppendLine(FeatureHyperLinkLine(feature.Title, feature.Id));
-                StringBuilder thisFeaturesContents = new StringBuilder();
-                thisFeaturesContents.AppendLine(HeadingLine(feature.Title));
-
-                foreach (var helpLine in feature.HelpLines)
-                {
-                    thisFeaturesContents.AppendLine(helpLine.Content);
-                }
-
-                File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", feature.Id)), thisFeaturesContents.ToString());
+                File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", feature.Id)), feature.HelpLinesAsString());
             }
 
             File.WriteAllText(Path.Combine(tocPath, "toc.md"), tocPageContents.ToString());

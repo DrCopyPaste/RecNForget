@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:RecNForget">
+
+    <Style x:Key="About_Logo_Style" TargetType="Image">
+        <Setter Property="Width" Value="170" />
+        <Setter Property="Margin" Value="1,0,5,0" />
+        <Setter Property="Source" Value="..\..\Images\logo_big.png" />
+    </Style>
+
+    <Style x:Key="FeatureClass_Image_Style" TargetType="Image">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="3,3,5,3" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Width" Value="15" />
+    </Style>
+
+    <Style x:Key="AddedFeature_Image_Style" TargetType="Image" BasedOn="{StaticResource FeatureClass_Image_Style}">
+        <Setter Property="Source" Value="ButtonImages\plus_icon171498.black.png" />
+    </Style>
+
+    <Style x:Key="BugFix_Image_Style" TargetType="Image" BasedOn="{StaticResource FeatureClass_Image_Style}">
+        <Setter Property="Source" Value="ButtonImages\bugfix_icon140609.black.png" />
+    </Style>
+
+    <Style x:Key="VerboseInformationFeature_Image_Style" TargetType="Image" BasedOn="{StaticResource FeatureClass_Image_Style}">
+        <Setter Property="Source" Value="ButtonImages\information_icon2132.black.png" />
+    </Style>
+
+</ResourceDictionary>

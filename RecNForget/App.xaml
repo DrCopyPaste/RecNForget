@@ -13,7 +13,8 @@
                 <!-- complex (multiple controls combined) styles -->
                 <ResourceDictionary Source="Styles\Default\SizesMarginsPaddings.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\Color.Style.xaml" />
-                
+                <ResourceDictionary Source="Styles\Default\Image.Style.xaml" />
+
                 <ResourceDictionary Source="Styles\Default\BaseButton.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\Button.Style.xaml" />
                 
@@ -32,7 +33,6 @@
                 <ResourceDictionary Source="Styles\Default\ProgressBar.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\Hyperlink.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\ScrollViewer.Style.xaml" />
-                <ResourceDictionary Source="Styles\Default\LogoImage.Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

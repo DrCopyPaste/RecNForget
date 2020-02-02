@@ -45,9 +45,11 @@ namespace RecNForget.Services.Types
 		public string Title { get; set; } = "FeatureTitle";
 
 		/// <summary>
+		/// USE WITH CAUTION
+		/// (these should stay rather "unique" throughout all versions)
 		/// for sorting purposes the lower the priority number the lower the index in target collection
 		/// </summary>
-		public int Priority { get; set; } = 1;
+		public int Priority { get; set; } = int.MaxValue;
 
 		/// <summary>
 		/// each element represents a (EXISTING) help feature id (inside the same list) to refereence similar articles or topics
@@ -88,6 +90,25 @@ namespace RecNForget.Services.Types
 				return featureList;
 			}
 
+		}
+
+		public string HelpLinesAsString()
+		{
+			StringBuilder detailsHelpBuilder = new StringBuilder();
+			for (int i = 0; i < this.HelpLines.Count; i++)
+			{
+
+				if (i == (this.HelpLines.Count - 1))
+				{
+					detailsHelpBuilder.Append(this.HelpLines[i].Content);
+				}
+				else
+				{
+					detailsHelpBuilder.AppendLine(this.HelpLines[i].Content);
+				}
+			}
+
+			return detailsHelpBuilder.ToString();
 		}
 	}
 }

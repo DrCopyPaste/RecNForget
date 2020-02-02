@@ -25,6 +25,7 @@ namespace RecNForget.Services
 		public static string WindowAlwaysOnTop = "WindowAlwaysOnTop";
 		public static string ShowBalloonTipsForRecording = "ShowBalloonTipsForRecording";
         public static string ShowTipsAtApplicationStart = "ShowTipsAtApplicationStart";
+        public static string LastInstalledVersion = "LastInstalledVersion";
 
         private static string UserConfigFileFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppSettingHelper.ApplicationName, "user.config");
 
@@ -38,6 +39,27 @@ namespace RecNForget.Services
   <appSettings>
   </appSettings>
  </configuration>";
+        }
+
+        public static Version GetLastInstalledVersion()
+        {
+            var lastInstalledVersion = new Version("0.3.0.0");
+
+            try
+            {
+                lastInstalledVersion = new Version(AppSettingHelper.GetAppConfigSetting(LastInstalledVersion));
+            }
+            catch(Exception)
+            {
+                // not installed before, or config was broken, default to 0.3.0.0, see above
+            }
+
+            return lastInstalledVersion;
+        }
+
+        public static void UpdateLastInstalledVersion(Version version)
+        {
+            AppSettingHelper.SetAppConfigSetting(LastInstalledVersion, version.ToString());
         }
 
         public static string GetAppConfigSetting(string settingKey)
@@ -130,7 +152,10 @@ namespace RecNForget.Services
 				{ AppSettingHelper.OutputPath, @"C:\tmp" },
 				{ AppSettingHelper.WindowAlwaysOnTop, "False" },
                 { AppSettingHelper.ShowBalloonTipsForRecording, "True" },
-                { AppSettingHelper.ShowTipsAtApplicationStart, "True" }
+                { AppSettingHelper.ShowTipsAtApplicationStart, "True" },
+
+                // dont show feature updates for versions below 0.3
+                { AppSettingHelper.LastInstalledVersion, "0.3.0.0" }
             };
 
 			if (settingKey == null)

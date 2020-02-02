@@ -29,4 +29,10 @@
         <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
     </Style>
 
+    <Style x:Key="NewToVersion_FeatureList_ScrollViewer_Style" TargetType="ScrollViewer">
+        <Setter Property="MaxHeight" Value="200" />
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+    </Style>
+
 </ResourceDictionary>

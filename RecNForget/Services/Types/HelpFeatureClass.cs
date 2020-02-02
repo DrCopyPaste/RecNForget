@@ -15,7 +15,8 @@ namespace RecNForget.Services.Types
 		NewFeature,
 
 		// anytime some existing look and feel / behavior / default settings change
-		FeatureChange,
+		// actually this should not be needed, this is already covered by MinVersion/MaxVersion mechanic or via Information to communicate other verbose info
+		// FeatureChange,
 
 		// rare should almost never be used, maybe for some major reworks that you want to communicate but dont get really noticed by the user?
 		Information

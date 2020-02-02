@@ -60,6 +60,7 @@
                             Header="Open settings" Click="SettingsButton_Click" />
                         <Separator />
                         <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
+                            IsCheckable="true"
                             Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
                         <Separator />
                         <MenuItem Style="{StaticResource ContextMenu_About_Style}"
@@ -102,6 +103,7 @@
                                 Header="Open settings" Click="SettingsButton_Click" />
                             <Separator />
                             <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
+                                IsCheckable="true"
                                 Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
                             <Separator />
                             <MenuItem Style="{StaticResource ContextMenu_About_Style}"

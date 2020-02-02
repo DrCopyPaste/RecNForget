@@ -94,6 +94,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Help\Features\Info_MajorUIRework04.cs" />
+    <Compile Include="Help\Features\Fix_FilePrefixDidntAffectDisplayedFileNames.cs" />
+    <Compile Include="Help\Features\Fix_ClickingOpenfolderCrashes.cs" />
+    <Compile Include="Help\Features\Fix_UninstallDidNotDeleteAppData.cs" />
+    <Compile Include="Services\Extensions\GridExtensions.cs" />
+    <Compile Include="Services\Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Windows\NewToVersionDialog.xaml.cs">
+      <DependentUpon>NewToVersionDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NewToApplicationWindow.xaml.cs">
       <DependentUpon>NewToApplicationWindow.xaml</DependentUpon>
     </Compile>
@@ -166,6 +175,14 @@
     <Compile Include="Services\Types\HotkeyMapping.cs" />
     <Compile Include="Services\UpdateChecker.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
+    <Page Include="Styles\Default\Image.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\NewToVersionDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\NewToApplicationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -199,10 +216,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Default\ScrollViewer.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\LogoImage.Style.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -337,6 +350,10 @@
     <Resource Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Styles\Default\ButtonImages\bugfix_icon140609.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\information_icon2132.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\lightbulb_icon372420.black.png" />
+    <Resource Include="Styles\Default\ButtonImages\plus_icon171498.black.png" />
     <Resource Include="logo.ico" />
     <Resource Include="Images\logo_big.png" />
     <Resource Include="Styles\Default\ButtonImages\close_icon349388.black.png" />

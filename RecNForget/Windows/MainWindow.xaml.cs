@@ -1,4 +1,5 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using Hardcodet.Wpf.TaskbarNotification;
 using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
@@ -20,6 +21,8 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 using System.Windows.Threading;
+using RecNForget.Services.Types;
+using System.Linq;
 
 namespace RecNForget.Windows
 {
@@ -288,11 +291,15 @@ namespace RecNForget.Windows
 
 		public MainWindow()
 		{
+			var currentVersion = new ApplicationBase();
+
 			this.KeyDown += Window_KeyDown;
 			this.MouseDown += Window_Click;
 
 			// ensure AppConfig Values exist
 			bool firstTimeUser = AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+			Version lastInstalledVersion = AppSettingHelper.GetLastInstalledVersion();
+			AppSettingHelper.UpdateLastInstalledVersion(currentVersion.Info.Version);
 
 			if (CheckForUpdateOnStart)
 			{
@@ -428,7 +435,8 @@ namespace RecNForget.Windows
 				SwitchToForegroundMode();
 			}
 
-			if (firstTimeUser)
+			
+			 if (firstTimeUser)
 			{
 				var dia = new NewToApplicationWindow(this.hotkeyService)
 				{
@@ -436,6 +444,15 @@ namespace RecNForget.Windows
 				};
 
 				dia.Show();
+			}
+			else if (currentVersion.Info.Version.CompareTo(lastInstalledVersion) > 0)
+			{
+				var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version)
+				{
+					Owner = this
+				};
+
+				newToVersionDialog.Show();
 			}
 			else if(ShowTipsOnStart)
 			{
