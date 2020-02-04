@@ -17,7 +17,7 @@ jobs:
     - name: Restore NuGet Packages
       run: nuget restore RecNForget.sln
     - name: Build and Publish
-      run: msbuild RecNForget.sln /p:Configuration=Release /p:DeployOnBuild=true
+      run: msbuild RecNForget.Setup\RecNForget.Setup.wixproj /p:Configuration=Release /p:DeployOnBuild=true
     - name: create publish folder
       run: mkdir -p bin\Release\Publish
     - name: Upload Artifact
