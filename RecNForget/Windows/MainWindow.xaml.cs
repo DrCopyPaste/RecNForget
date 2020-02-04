@@ -26,328 +26,313 @@ using System.Linq;
 
 namespace RecNForget.Windows
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : INotifyPropertyChanged
-	{
-		private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
-		private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : INotifyPropertyChanged
+    {
+        private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
+        private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
 
         private string replayStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStart.wav");
         private string replayStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStop.wav");
 
-		private AudioPlayListService replayAudioService = null;
-		private AudioPlayListService recordingFeedbackAudioService = null;
+        private AudioPlayListService replayAudioService = null;
+        private AudioPlayListService recordingFeedbackAudioService = null;
 
         private AudioRecordingService audioRecordingService;
         private HotkeyService hotkeyService;
-		private bool currentlyRecording = false;
-		private bool currentlyNotRecording = true;
-		private bool currentAudioPlayState = true;
-		private string taskBar_ProgressState = "Paused";
+        private bool currentlyRecording = false;
+        private bool currentlyNotRecording = true;
+        private bool currentAudioPlayState = true;
+        private string taskBar_ProgressState = "Paused";
 
-		private DispatcherTimer recordingTimer;
+        private DispatcherTimer recordingTimer;
 
-		private string recordingTimeimeDisplay = string.Empty;
-		private string currentFileNameDisplay;
+        private string recordingTimeimeDisplay = string.Empty;
+        private string currentFileNameDisplay;
 
-		SelectedFileService selectedFileService;
-		public SelectedFileService SelectedFileService
-		{
-			get
-			{
-				return selectedFileService;
-			}
-			set
-			{
-				selectedFileService = value;
-				OnPropertyChanged();
-			}
-		}
-		public DateTime RecordingStart { get; set; }
+        SelectedFileService selectedFileService;
+        public SelectedFileService SelectedFileService
+        {
+            get
+            {
+                return selectedFileService;
+            }
+            set
+            {
+                selectedFileService = value;
+                OnPropertyChanged();
+            }
+        }
+        public DateTime RecordingStart { get; set; }
 
         #region bound values
 
         public string RecordingTimeDisplay
-		{
-			get
-			{
-				return CurrentlyRecording ? recordingTimeimeDisplay : string.Empty;
-			}
-			set
-			{
+        {
+            get
+            {
+                return CurrentlyRecording ? recordingTimeimeDisplay : string.Empty;
+            }
+            set
+            {
                 recordingTimeimeDisplay = value;
-				OnPropertyChanged();
-			}
-		}
+                OnPropertyChanged();
+            }
+        }
 
-		public string TaskBar_ProgressState
-		{
-			get
-			{
-				return taskBar_ProgressState;
-			}
-			set
-			{
-				taskBar_ProgressState = value;
-				OnPropertyChanged();
-			}
-		}
+        public string TaskBar_ProgressState
+        {
+            get
+            {
+                return taskBar_ProgressState;
+            }
+            set
+            {
+                taskBar_ProgressState = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public bool WindowAlwaysOnTop
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop));
-			}
+        public bool WindowAlwaysOnTop
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop));
+            }
 
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop, value.ToString());
-				this.Topmost = value;
-				OnPropertyChanged();
-			}
-		}
+            set
+            {
+                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop, value.ToString());
+                this.Topmost = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string CurrentFileNameDisplay
-		{
-			get
-			{
-				return currentFileNameDisplay;
-			}
+        public string CurrentFileNameDisplay
+        {
+            get
+            {
+                return currentFileNameDisplay;
+            }
 
-			set
-			{
-				currentFileNameDisplay = value;
-				OnPropertyChanged();
-			}
-		}
+            set
+            {
+                currentFileNameDisplay = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public bool CurrentAudioPlayState
-		{
-			get
-			{
-				return currentAudioPlayState;
-			}
-			set
-			{
-				currentAudioPlayState = value;
-				OnPropertyChanged();
-			}
-		}
+        public bool CurrentAudioPlayState
+        {
+            get
+            {
+                return currentAudioPlayState;
+            }
+            set
+            {
+                currentAudioPlayState = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public bool CurrentlyRecording
-		{
-			get
-			{
-				return currentlyRecording;
-			}
+        public bool CurrentlyRecording
+        {
+            get
+            {
+                return currentlyRecording;
+            }
 
-			set
-			{
-				currentlyRecording = value;
-				OnPropertyChanged();
-			}
-		}
+            set
+            {
+                currentlyRecording = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public bool CurrentlyNotRecording
-		{
-			get
-			{
-				return currentlyNotRecording;
-			}
-			set
-			{
-				currentlyNotRecording = value;
-				OnPropertyChanged();
-			}
-		}
+        public bool CurrentlyNotRecording
+        {
+            get
+            {
+                return currentlyNotRecording;
+            }
+            set
+            {
+                currentlyNotRecording = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string FilenamePrefix
-		{
-			get
-			{
-				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
-			}
+        public string FilenamePrefix
+        {
+            get
+            {
+                return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
+            }
 
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.FilenamePrefix, value);
-				OnPropertyChanged();
+            set
+            {
+                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.FilenamePrefix, value);
+                OnPropertyChanged();
 
                 UpdateCurrentFileNameDisplay();
             }
-		}
+        }
 
-		public string OutputPath
-		{
-			get
-			{
-				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPath, value);
-				OnPropertyChanged();
-
-				UpdateCurrentFileNameDisplay();
-			}
-		}
-
-		public bool AutoReplayAudioAfterRecording
-		{
+        public string OutputPath
+        {
             get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoReplayAudioAfterRecording));
-			}
-		}
+            {
+                return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
+            }
 
-		public bool PlayAudioFeedBackMarkingStartAndStopRecording
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording));
-			}
-		}
+            set
+            {
+                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPath, value);
+                OnPropertyChanged();
 
-		public bool PlayAudioFeedBackMarkingStartAndStopReplaying
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying));
-			}
-		}
+                UpdateCurrentFileNameDisplay();
+            }
+        }
 
-		public bool ShowBalloonTipsForRecording
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowBalloonTipsForRecording));
-			}
-		}
+        public bool AutoReplayAudioAfterRecording
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoReplayAudioAfterRecording));
+            }
+        }
 
-		public bool MinimizedToTray
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MinimizedToTray));
-			}
-		}
+        public bool PlayAudioFeedBackMarkingStartAndStopRecording
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording));
+            }
+        }
 
-		public bool AutoSelectLastRecording
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoSelectLastRecording));
-			}
-		}
+        public bool PlayAudioFeedBackMarkingStartAndStopReplaying
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying));
+            }
+        }
 
-		public bool CheckForUpdateOnStart
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
-			}
-		}
+        public bool ShowBalloonTipsForRecording
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowBalloonTipsForRecording));
+            }
+        }
 
-		public bool ShowTipsOnStart
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart));
-			}
-		}
+        public bool MinimizedToTray
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MinimizedToTray));
+            }
+        }
 
-		#endregion
+        public bool AutoSelectLastRecording
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoSelectLastRecording));
+            }
+        }
 
-		private void ShowRandomApplicationTip()
-		{
-			var allFeatures = Services.Types.HelpFeature.All;
+        public bool CheckForUpdateOnStart
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
+            }
+        }
 
-			int randomNumber = (new Random()).Next(0, allFeatures.Count - 1);
-			var randomFeature = allFeatures[randomNumber];
-			List<string> displayLines = new List<string>();
-			foreach (var line in randomFeature.HelpLines)
-			{
-				displayLines.Add(line.Content);
-			}
+        public bool ShowTipsOnStart
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart));
+            }
+        }
 
-			CustomMessageBox tempDialog = new CustomMessageBox(
-				caption: "Did you know?",
-				icon: CustomMessageBoxIcon.LightBulb,
-				buttons: CustomMessageBoxButtons.OK,
-				messageRows: displayLines,
-				controlFocus: CustomMessageBoxFocus.Ok);
+        #endregion
 
-			if (!MinimizedToTray)
-			{
-				tempDialog.Owner = this;
-			}
+        private void ShowRandomApplicationTip()
+        {
+            var quickTip = new QuickTipDialog();
 
-			tempDialog.ShowDialog();
-		}
+            if (!MinimizedToTray)
+            {
+                quickTip.Owner = this;
+            }
 
-		public MainWindow()
-		{
-			var currentVersion = new ApplicationBase();
+            quickTip.Show();
+        }
 
-			this.KeyDown += Window_KeyDown;
-			this.MouseDown += Window_Click;
+        public MainWindow()
+        {
+            var currentVersion = new ApplicationBase();
 
-			// ensure AppConfig Values exist
-			bool firstTimeUser = AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
-			Version lastInstalledVersion = AppSettingHelper.GetLastInstalledVersion();
-			AppSettingHelper.UpdateLastInstalledVersion(currentVersion.Info.Version);
+            this.KeyDown += Window_KeyDown;
+            this.MouseDown += Window_Click;
 
-			if (CheckForUpdateOnStart)
-			{
-				UpdateChecker.ShowUpdateDialogIfPossible(suppressUpToDateDialog: true);
-			}
+            // ensure AppConfig Values exist
+            bool firstTimeUser = AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+            Version lastInstalledVersion = AppSettingHelper.GetLastInstalledVersion();
+            AppSettingHelper.UpdateLastInstalledVersion(currentVersion.Info.Version);
 
-			replayAudioService = new AudioPlayListService(
-				beforePlayAction: () =>
-				{
+            if (CheckForUpdateOnStart)
+            {
+                UpdateChecker.ShowUpdateDialogIfPossible(suppressUpToDateDialog: true);
+            }
+
+            replayAudioService = new AudioPlayListService(
+                beforePlayAction: () =>
+                {
                     TaskBar_ProgressState = "Normal";
                     CurrentAudioPlayState = true;
-					PauseReplayLastRecordingButton.IsEnabled = true;
-					ReplayLastRecordingButton.Visibility = Visibility.Collapsed;
-					PauseReplayLastRecordingButton.Visibility = Visibility.Visible;
-				}, afterStopAction: () =>
-				{
+                    PauseReplayLastRecordingButton.IsEnabled = true;
+                    ReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+                    PauseReplayLastRecordingButton.Visibility = Visibility.Visible;
+                }, afterStopAction: () =>
+                {
                     replayAudioService.KillAudio(reset: true);
                     CurrentAudioPlayState = false;
                     TaskBar_ProgressState = "Paused";
 
-					ReplayLastRecordingButton.IsEnabled = SelectedFileService.HasSelectedFile && !CurrentlyRecording;
-					ReplayLastRecordingButton.Visibility = Visibility.Visible;
-					PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
-				}, afterPauseAction: () =>
+                    ReplayLastRecordingButton.IsEnabled = SelectedFileService.HasSelectedFile && !CurrentlyRecording;
+                    ReplayLastRecordingButton.Visibility = Visibility.Visible;
+                    PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+                }, afterPauseAction: () =>
                 {
-					ReplayLastRecordingButton.IsEnabled = true;
-					ReplayLastRecordingButton.Visibility = Visibility.Visible;
-					PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
-				}, afterResumeAction: () =>
+                    ReplayLastRecordingButton.IsEnabled = true;
+                    ReplayLastRecordingButton.Visibility = Visibility.Visible;
+                    PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+                }, afterResumeAction: () =>
                 {
-					PauseReplayLastRecordingButton.IsEnabled = true;
-					ReplayLastRecordingButton.Visibility = Visibility.Collapsed;
-					PauseReplayLastRecordingButton.Visibility = Visibility.Visible;
-				});
+                    PauseReplayLastRecordingButton.IsEnabled = true;
+                    ReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+                    PauseReplayLastRecordingButton.Visibility = Visibility.Visible;
+                });
 
-			recordingFeedbackAudioService = new AudioPlayListService();
+            recordingFeedbackAudioService = new AudioPlayListService();
 
-			recordingTimer = new DispatcherTimer();
-			recordingTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
-			recordingTimer.Tick += new EventHandler(RecordingTimer_Tick);
+            recordingTimer = new DispatcherTimer();
+            recordingTimer.Interval = new TimeSpan(0, 0, 0, 0, 30);
+            recordingTimer.Tick += new EventHandler(RecordingTimer_Tick);
 
             this.audioRecordingService = new AudioRecordingService(
                 startRecordingAction: () =>
                 {
-					RecordButton.Visibility = Visibility.Collapsed;
-					StopRecordButton.Visibility = Visibility.Visible;
-					StopRecordButton.Focus();
-					CurrentAudioPlayState = false;
+                    RecordButton.Visibility = Visibility.Collapsed;
+                    StopRecordButton.Visibility = Visibility.Visible;
+                    StopRecordButton.Focus();
+                    CurrentAudioPlayState = false;
                     ReplayLastRecordingButton.IsEnabled = false;
                     replayAudioService.KillAudio(reset: true);
                     CurrentlyRecording = true;
@@ -365,11 +350,11 @@ namespace RecNForget.Windows
                     {
                         PlayRecordingStartAudioFeedback();
                     }
-				},
+                },
                 stopRecordingAction: () =>
                 {
-					this.Focus();
-					UpdateCurrentFileNameDisplay(reset: true);
+                    this.Focus();
+                    UpdateCurrentFileNameDisplay(reset: true);
                     CurrentlyRecording = false;
                     CurrentlyNotRecording = true;
                     TaskBar_ProgressState = "Paused";
@@ -383,15 +368,15 @@ namespace RecNForget.Windows
                     {
                         PlayRecordingStopAudioFeedback();
                     }
-					if (AutoSelectLastRecording)
-					{
-						SelectedFileService.SelectFile(new FileInfo(audioRecordingService.LastFileName));
-					}
-					ReplayLastRecordingButton.IsEnabled = true;
+                    if (AutoSelectLastRecording)
+                    {
+                        SelectedFileService.SelectFile(new FileInfo(audioRecordingService.LastFileName));
+                    }
+                    ReplayLastRecordingButton.IsEnabled = true;
                     StopReplayLastRecordingButton.IsEnabled = true;
-					RecordButton.Visibility = Visibility.Visible;
-					StopRecordButton.Visibility = Visibility.Collapsed;
-					if (AutoReplayAudioAfterRecording)
+                    RecordButton.Visibility = Visibility.Visible;
+                    StopRecordButton.Visibility = Visibility.Collapsed;
+                    if (AutoReplayAudioAfterRecording)
                     {
                         ToggleReplayLastRecording(audioRecordingService.LastFileName);
                     }
@@ -411,193 +396,192 @@ namespace RecNForget.Windows
             DataContext = this;
             InitializeComponent();
 
-			SelectedFileService = new SelectedFileService();
-			if (SelectedFileService.SelectLatestFile())
-			{
-				ReplayLastRecordingButton.IsEnabled = true;
-			}
+            SelectedFileService = new SelectedFileService();
+            if (SelectedFileService.SelectLatestFile())
+            {
+                ReplayLastRecordingButton.IsEnabled = true;
+            }
 
-			CurrentAudioPlayState = false;
+            CurrentAudioPlayState = false;
 
-			this.Topmost = WindowAlwaysOnTop;
+            this.Topmost = WindowAlwaysOnTop;
             taskBarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
             taskBarIcon.DoubleClickCommand = new SimpleActionCommand(() => { SwitchToForegroundMode(); });
             taskBarIcon.Visibility = Visibility.Visible;
 
-			UpdateCurrentFileNameDisplay(reset: true);
+            UpdateCurrentFileNameDisplay(reset: true);
 
-			if (MinimizedToTray)
-			{
-				SwitchToBackgroundMode();
-			}
-			else
-			{
-				SwitchToForegroundMode();
-			}
+            if (MinimizedToTray)
+            {
+                SwitchToBackgroundMode();
+            }
+            else
+            {
+                SwitchToForegroundMode();
+            }
 
-			
-			 if (firstTimeUser)
-			{
-				var dia = new NewToApplicationWindow(this.hotkeyService)
-				{
-					Owner = this
-				};
+            if (firstTimeUser)
+            {
+                var dia = new NewToApplicationWindow(this.hotkeyService)
+                {
+                    Owner = this
+                };
 
-				dia.Show();
-			}
-			else if (currentVersion.Info.Version.CompareTo(lastInstalledVersion) > 0)
-			{
-				var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version)
-				{
-					Owner = this
-				};
+                dia.Show();
+            }
+            else if (currentVersion.Info.Version.CompareTo(lastInstalledVersion) > 0)
+            {
+                var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version)
+                {
+                    Owner = this
+                };
 
-				newToVersionDialog.Show();
-			}
-			else if(ShowTipsOnStart)
-			{
-				ShowRandomApplicationTip();
-			}
-		}
+                newToVersionDialog.Show();
+            }
+            else if (ShowTipsOnStart)
+            {
+                ShowRandomApplicationTip();
+            }
+        }
 
-		private void TaskBarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
-		{
-			if (audioRecordingService.LastFileName == string.Empty || !File.Exists(audioRecordingService.LastFileName))
-			{
-				return;
-			}
+        private void TaskBarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
+        {
+            if (audioRecordingService.LastFileName == string.Empty || !File.Exists(audioRecordingService.LastFileName))
+            {
+                return;
+            }
 
-			string argument = "/select, \"" + audioRecordingService.LastFileName + "\"";
-			System.Diagnostics.Process.Start("explorer.exe", argument);
-		}
+            string argument = "/select, \"" + audioRecordingService.LastFileName + "\"";
+            System.Diagnostics.Process.Start("explorer.exe", argument);
+        }
 
-		private void SwitchToBackgroundMode()
-		{
-			this.Hide();
-			taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", taskBarIcon.Icon, true);
-		}
+        private void SwitchToBackgroundMode()
+        {
+            this.Hide();
+            taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", taskBarIcon.Icon, true);
+        }
 
-		private void SwitchToForegroundMode()
-		{
-			this.Show();
-		}
+        private void SwitchToForegroundMode()
+        {
+            this.Show();
+        }
 
-		#region configuration event handlers
+        #region configuration event handlers
 
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			if (MinimizedToTray)
-			{
-				var closeOrBackgroundDialog = new CloseOrBackgroundDialog()
-				{
-					Owner = this
-				};
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (MinimizedToTray)
+            {
+                var closeOrBackgroundDialog = new CloseOrBackgroundDialog()
+                {
+                    Owner = this
+                };
 
-				var dialogResult = closeOrBackgroundDialog.ShowDialog();
+                var dialogResult = closeOrBackgroundDialog.ShowDialog();
 
-				if (dialogResult.HasValue && dialogResult.Value)
-				{
-					e.Cancel = true;
-					SwitchToBackgroundMode();
-				}
-			}
-		}
+                if (dialogResult.HasValue && dialogResult.Value)
+                {
+                    e.Cancel = true;
+                    SwitchToBackgroundMode();
+                }
+            }
+        }
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-		private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
-		{
-			// https://stackoverflow.com/a/23182807
-			FilenamePrefix = string.Concat(FilenamePrefix.Split(Path.GetInvalidFileNameChars()));
+        private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
+        {
+            // https://stackoverflow.com/a/23182807
+            FilenamePrefix = string.Concat(FilenamePrefix.Split(Path.GetInvalidFileNameChars()));
             AppSettingHelper.SetAppConfigSetting("FilenamePrefix", FilenamePrefix);
         }
 
-		#endregion
+        #endregion
 
-		#region runtime event handlers
+        #region runtime event handlers
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-				this.DragMove();
-		}
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
 
-		private void Window_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.Key == Key.Return)
-			{
-				ChangeSelectedFileNameButton.PerformClick();
-			}
-			else if (e.Key == Key.Delete)
-			{
-				DeleteSelectedFileButton.PerformClick();
-			}
-			else if (e.Key == Key.Down)
-			{
-				OpenSelectedFileButton.PerformClick();
-			}
-			else if (e.Key == Key.Left)
-			{
-				SkipPrevButton.PerformClick();
-			}
-			else if (e.Key == Key.Right)
-			{
-				SkipNextButton.PerformClick();
-			}
-			else if (e.Key == Key.Space)
-			{
-				ToggleReplayLastRecording();
-			}
-			else if (e.Key == Key.Escape)
-			{
-				StopReplayLastRecordingButton.PerformClick();
-			}
-		}
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                ChangeSelectedFileNameButton.PerformClick();
+            }
+            else if (e.Key == Key.Delete)
+            {
+                DeleteSelectedFileButton.PerformClick();
+            }
+            else if (e.Key == Key.Down)
+            {
+                OpenSelectedFileButton.PerformClick();
+            }
+            else if (e.Key == Key.Left)
+            {
+                SkipPrevButton.PerformClick();
+            }
+            else if (e.Key == Key.Right)
+            {
+                SkipNextButton.PerformClick();
+            }
+            else if (e.Key == Key.Space)
+            {
+                ToggleReplayLastRecording();
+            }
+            else if (e.Key == Key.Escape)
+            {
+                StopReplayLastRecordingButton.PerformClick();
+            }
+        }
 
-		private void RecordingTimer_Tick(object sender, EventArgs e)
-		{
-			RecordingTimeDisplay = TimeSpan.FromMilliseconds(DateTime.Now.Subtract(RecordingStart).TotalMilliseconds).TotalSeconds.ToString(@"0.##");
-			UpdateCurrentFileNameDisplay();
-		}
+        private void RecordingTimer_Tick(object sender, EventArgs e)
+        {
+            RecordingTimeDisplay = TimeSpan.FromMilliseconds(DateTime.Now.Subtract(RecordingStart).TotalMilliseconds).TotalSeconds.ToString(@"0.##");
+            UpdateCurrentFileNameDisplay();
+        }
 
-		private void RecordButton_Click(object sender, RoutedEventArgs e)
-		{
+        private void RecordButton_Click(object sender, RoutedEventArgs e)
+        {
             audioRecordingService.ToggleRecording();
         }
 
-		private void UpdateCurrentFileNameDisplay(bool reset = false)
-		{
-			CurrentFileNameDisplay = !CurrentlyRecording || reset || hotkeyService == null ?
+        private void UpdateCurrentFileNameDisplay(bool reset = false)
+        {
+            CurrentFileNameDisplay = !CurrentlyRecording || reset || hotkeyService == null ?
                 audioRecordingService.GetTargetPathTemplateString() :
                 string.Format("{0} ({1} s)", audioRecordingService.CurrentFileName, RecordingTimeDisplay);
-		}
+        }
 
-		private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
-		{
-			var directory = new DirectoryInfo(OutputPath);
+        private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
+        {
+            var directory = new DirectoryInfo(OutputPath);
 
-			if (SelectedFileService.HasSelectedFile && SelectedFileService.SelectedFile.Exists)
+            if (SelectedFileService.HasSelectedFile && SelectedFileService.SelectedFile.Exists)
             {
-				// if there is a result select it in an explorer window
-				string argument = "/select, \"" + SelectedFileService.SelectedFile.FullName + "\"";
+                // if there is a result select it in an explorer window
+                string argument = "/select, \"" + SelectedFileService.SelectedFile.FullName + "\"";
                 System.Diagnostics.Process.Start("explorer.exe", argument);
             }
             else if (directory.Exists)
-			{
-				// otherwise just open output path in explorer
-				Process.Start(OutputPath);
+            {
+                // otherwise just open output path in explorer
+                Process.Start(OutputPath);
             }
-			else
-			{
-				// unselect selected file (it does not exist anymore)
-				// disable skip buttons
-				// disable open folder button?
-				// show message box
-			}
+            else
+            {
+                // unselect selected file (it does not exist anymore)
+                // disable skip buttons
+                // disable open folder button?
+                // show message box
+            }
         }
 
         private void StopReplayLastRecording_Click(object sender, RoutedEventArgs e)
@@ -606,260 +590,260 @@ namespace RecNForget.Windows
             replayAudioService.KillAudio(reset: true);
         }
 
-		private void SkipPrevButton_Click(object sender, RoutedEventArgs e)
-		{
-			replayAudioService.Stop();
-			replayAudioService.KillAudio(reset: true);
-			SelectedFileService.SelectPrevFile();
-		}
+        private void SkipPrevButton_Click(object sender, RoutedEventArgs e)
+        {
+            replayAudioService.Stop();
+            replayAudioService.KillAudio(reset: true);
+            SelectedFileService.SelectPrevFile();
+        }
 
-		private void SkipNextButton_Click(object sender, RoutedEventArgs e)
-		{
-			replayAudioService.Stop();
-			replayAudioService.KillAudio(reset: true);
-			SelectedFileService.SelectNextFile();
-		}
+        private void SkipNextButton_Click(object sender, RoutedEventArgs e)
+        {
+            replayAudioService.Stop();
+            replayAudioService.KillAudio(reset: true);
+            SelectedFileService.SelectNextFile();
+        }
 
-		private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
-		{
-			ToggleReplayLastRecording();
-		}
+        private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleReplayLastRecording();
+        }
 
-		// https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
-		private void ToggleReplayLastRecording(string fileName = null)
-		{
-			bool replayFileExists = SelectedFileService.SelectedFile.Exists;
+        // https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
+        private void ToggleReplayLastRecording(string fileName = null)
+        {
+            bool replayFileExists = SelectedFileService.SelectedFile.Exists;
 
-			if (replayAudioService.PlaybackState == PlaybackState.Stopped)
-			{
-				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
-				{
-					replayAudioService.QueueFile(replayStartAudioFeedbackPath);
-				}
+            if (replayAudioService.PlaybackState == PlaybackState.Stopped)
+            {
+                if (PlayAudioFeedBackMarkingStartAndStopReplaying)
+                {
+                    replayAudioService.QueueFile(replayStartAudioFeedbackPath);
+                }
 
-				replayAudioService.QueueFile(fileName != null ? fileName : SelectedFileService.SelectedFile.FullName);
+                replayAudioService.QueueFile(fileName != null ? fileName : SelectedFileService.SelectedFile.FullName);
 
-				if (PlayAudioFeedBackMarkingStartAndStopReplaying)
-				{
-					replayAudioService.QueueFile(replayStopAudioFeedbackPath);
-				}
+                if (PlayAudioFeedBackMarkingStartAndStopReplaying)
+                {
+                    replayAudioService.QueueFile(replayStopAudioFeedbackPath);
+                }
 
-				if (replayFileExists)
-				{
-					replayAudioService.Play();
-				}
-				else
-				{
-					SelectedFileService.SelectFile(null);
-					CurrentAudioPlayState = false;
-					ReplayLastRecordingButton.IsEnabled = false;
+                if (replayFileExists)
+                {
+                    replayAudioService.Play();
+                }
+                else
+                {
+                    SelectedFileService.SelectFile(null);
+                    CurrentAudioPlayState = false;
+                    ReplayLastRecordingButton.IsEnabled = false;
                     StopReplayLastRecordingButton.IsEnabled = false;
 
                     System.Windows.MessageBox.Show("The last recorded audio file has been moved or deleted.", "File not found", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-			}
-			else if (replayAudioService.PlaybackState == PlaybackState.Playing)
-			{
-				replayAudioService.Pause();
-			}
-			else if (replayAudioService.PlaybackState == PlaybackState.Paused)
-			{
-				replayAudioService.Play();
-			}
-		}
+            }
+            else if (replayAudioService.PlaybackState == PlaybackState.Playing)
+            {
+                replayAudioService.Pause();
+            }
+            else if (replayAudioService.PlaybackState == PlaybackState.Paused)
+            {
+                replayAudioService.Play();
+            }
+        }
 
-		private void PlayRecordingStartAudioFeedback()
-		{
-			recordingFeedbackAudioService.QueueFile(recordStartAudioFeedbackPath);
-			recordingFeedbackAudioService.Play();
-
-			while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
-
-			recordingFeedbackAudioService.KillAudio(reset: true);
-		}
-
-		private void PlayRecordingStopAudioFeedback()
-		{
-			recordingFeedbackAudioService.QueueFile(recordStopAudioFeedbackPath);
-			recordingFeedbackAudioService.Play();
-
-			while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
-
-			recordingFeedbackAudioService.KillAudio(reset: true);
-		}
-
-		private void Help_Click(object sender, RoutedEventArgs e)
-		{
-			var helpmenu = new HelpWindow();
-
-			if (!MinimizedToTray)
-			{
-				helpmenu.Owner = this;
-			}
-
-			helpmenu.Show();
-		}
-
-		private void Exit_Click(object sender, RoutedEventArgs e)
-		{
-			Close();
-		}
-
-		private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-		{
-			this.WindowState = WindowState.Minimized;
-		}
-
-		private void SettingsButton_Click(object sender, RoutedEventArgs e)
-		{
-			var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); });
-
-			if (!MinimizedToTray)
-			{
-				settingsWindow.Owner = this;
-			}
-
-			settingsWindow.ShowDialog();
-
-			UpdateCurrentFileNameDisplay();
-		}
-
-		private void AboutButton_Click(object sender, RoutedEventArgs e)
-		{
-			var aboutDialog = new AboutDialog();
-
-			if (!MinimizedToTray)
-			{
-				aboutDialog.Owner = this;
-			}
-
-			aboutDialog.ShowDialog();
-		}
-
-		private void CheckUpdates_Click(object sender, RoutedEventArgs e)
-		{
-			UpdateChecker.ShowUpdateDialogIfPossible();
-		}
-
-		private void Window_Click(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Right)
-			{
-				ContextMenu contextMenu = WindowOptionsButton.ContextMenu;
-				contextMenu.IsOpen = true;
-			}
-		}
-
-		private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
+        private void PlayRecordingStartAudioFeedback()
         {
-			Button button = sender as Button;
-			ContextMenu contextMenu = button.ContextMenu;
-			contextMenu.PlacementTarget = button;
-			contextMenu.IsOpen = true;
+            recordingFeedbackAudioService.QueueFile(recordStartAudioFeedbackPath);
+            recordingFeedbackAudioService.Play();
 
-			e.Handled = true;
-		}
+            while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
 
-		private void ChangeFileNamePatternButton_Clicked(object sender, RoutedEventArgs e)
-		{
-			CustomMessageBox tempDialog = new CustomMessageBox(
-				caption: "Type in a new pattern for file name generation.",
-				icon: CustomMessageBoxIcon.Question,
-				buttons: CustomMessageBoxButtons.OkAndCancel,
-				messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
-				prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
-				controlFocus: CustomMessageBoxFocus.Prompt,
-				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+            recordingFeedbackAudioService.KillAudio(reset: true);
+        }
 
-			if (!MinimizedToTray)
-			{
-				tempDialog.Owner = this;
-			}
+        private void PlayRecordingStopAudioFeedback()
+        {
+            recordingFeedbackAudioService.QueueFile(recordStopAudioFeedbackPath);
+            recordingFeedbackAudioService.Play();
 
-			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-			{
-				FilenamePrefix = tempDialog.PromptContent;
-			}
-		}
+            while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
 
-		private void ChangeOutputFolderButton_Clicked(object sender, RoutedEventArgs e)
-		{
-			var dialog = new VistaFolderBrowserDialog();
+            recordingFeedbackAudioService.KillAudio(reset: true);
+        }
 
-			if (dialog.ShowDialog(this) == true)
-			{
-				OutputPath = dialog.SelectedPath;
-			}
-		}
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            var helpmenu = new HelpWindow();
 
-		private void ChangeSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
-		{
-			replayAudioService.Stop();
-			replayAudioService.KillAudio();
+            if (!MinimizedToTray)
+            {
+                helpmenu.Owner = this;
+            }
 
-			CustomMessageBox tempDialog = new CustomMessageBox(
-				caption: "Rename the selected file",
-				icon: CustomMessageBoxIcon.Question,
-				buttons: CustomMessageBoxButtons.OkAndCancel,
-				messageRows: new List<string>(),
-				prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
-				controlFocus: CustomMessageBoxFocus.Prompt,
-				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+            helpmenu.Show();
+        }
 
-			if (!MinimizedToTray)
-			{
-				tempDialog.Owner = this;
-			}
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
-			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-			{
-				if (!selectedFileService.RenameSelectedFileWithoutExtension(tempDialog.PromptContent))
-				{
-					CustomMessageBox errorMessageBox = new CustomMessageBox(
-						caption: "Something went wrong",
-						icon: CustomMessageBoxIcon.Error,
-						buttons: CustomMessageBoxButtons.OK,
-						messageRows: new List<string>() { "An error occurred trying to rename the selected file" },
-						controlFocus: CustomMessageBoxFocus.Ok);
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
 
-					errorMessageBox.ShowDialog();
-				}
-			}
-		}
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); });
 
-		private void DeleteSelectedFileButton_Clicked(object sender, RoutedEventArgs e)
-		{
-			replayAudioService.Stop();
-			replayAudioService.KillAudio();
+            if (!MinimizedToTray)
+            {
+                settingsWindow.Owner = this;
+            }
 
-			CustomMessageBox tempDialog = new CustomMessageBox(
-				caption: "Are you sure you want to delete this file?",
-				icon: CustomMessageBoxIcon.Question,
-				buttons: CustomMessageBoxButtons.OkAndCancel,
-				messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
-				controlFocus: CustomMessageBoxFocus.Ok);
+            settingsWindow.ShowDialog();
 
-			if (!MinimizedToTray)
-			{
-				tempDialog.Owner = this;
-			}
+            UpdateCurrentFileNameDisplay();
+        }
 
-			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-			{
-				if (!selectedFileService.DeleteSelectedFile())
-				{
-					CustomMessageBox errorMessageBox = new CustomMessageBox(
-						caption: "Something went wrong",
-						icon: CustomMessageBoxIcon.Error,
-						buttons: CustomMessageBoxButtons.OK,
-						messageRows: new List<string>() { "An error occurred trying to delete the selected file" },
-						controlFocus: CustomMessageBoxFocus.Ok);
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            var aboutDialog = new AboutDialog();
 
-					errorMessageBox.ShowDialog();
-				}
-			}
-		}
+            if (!MinimizedToTray)
+            {
+                aboutDialog.Owner = this;
+            }
 
-		#endregion
-	}
+            aboutDialog.ShowDialog();
+        }
+
+        private void CheckUpdates_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateChecker.ShowUpdateDialogIfPossible();
+        }
+
+        private void Window_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Right)
+            {
+                ContextMenu contextMenu = WindowOptionsButton.ContextMenu;
+                contextMenu.IsOpen = true;
+            }
+        }
+
+        private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            ContextMenu contextMenu = button.ContextMenu;
+            contextMenu.PlacementTarget = button;
+            contextMenu.IsOpen = true;
+
+            e.Handled = true;
+        }
+
+        private void ChangeFileNamePatternButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            CustomMessageBox tempDialog = new CustomMessageBox(
+                caption: "Type in a new pattern for file name generation.",
+                icon: CustomMessageBoxIcon.Question,
+                buttons: CustomMessageBoxButtons.OkAndCancel,
+                messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
+                prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
+                controlFocus: CustomMessageBoxFocus.Prompt,
+                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+            if (!MinimizedToTray)
+            {
+                tempDialog.Owner = this;
+            }
+
+            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+            {
+                FilenamePrefix = tempDialog.PromptContent;
+            }
+        }
+
+        private void ChangeOutputFolderButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            var dialog = new VistaFolderBrowserDialog();
+
+            if (dialog.ShowDialog(this) == true)
+            {
+                OutputPath = dialog.SelectedPath;
+            }
+        }
+
+        private void ChangeSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            replayAudioService.Stop();
+            replayAudioService.KillAudio();
+
+            CustomMessageBox tempDialog = new CustomMessageBox(
+                caption: "Rename the selected file",
+                icon: CustomMessageBoxIcon.Question,
+                buttons: CustomMessageBoxButtons.OkAndCancel,
+                messageRows: new List<string>(),
+                prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
+                controlFocus: CustomMessageBoxFocus.Prompt,
+                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+            if (!MinimizedToTray)
+            {
+                tempDialog.Owner = this;
+            }
+
+            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+            {
+                if (!selectedFileService.RenameSelectedFileWithoutExtension(tempDialog.PromptContent))
+                {
+                    CustomMessageBox errorMessageBox = new CustomMessageBox(
+                        caption: "Something went wrong",
+                        icon: CustomMessageBoxIcon.Error,
+                        buttons: CustomMessageBoxButtons.OK,
+                        messageRows: new List<string>() { "An error occurred trying to rename the selected file" },
+                        controlFocus: CustomMessageBoxFocus.Ok);
+
+                    errorMessageBox.ShowDialog();
+                }
+            }
+        }
+
+        private void DeleteSelectedFileButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            replayAudioService.Stop();
+            replayAudioService.KillAudio();
+
+            CustomMessageBox tempDialog = new CustomMessageBox(
+                caption: "Are you sure you want to delete this file?",
+                icon: CustomMessageBoxIcon.Question,
+                buttons: CustomMessageBoxButtons.OkAndCancel,
+                messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
+                controlFocus: CustomMessageBoxFocus.Ok);
+
+            if (!MinimizedToTray)
+            {
+                tempDialog.Owner = this;
+            }
+
+            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+            {
+                if (!selectedFileService.DeleteSelectedFile())
+                {
+                    CustomMessageBox errorMessageBox = new CustomMessageBox(
+                        caption: "Something went wrong",
+                        icon: CustomMessageBoxIcon.Error,
+                        buttons: CustomMessageBoxButtons.OK,
+                        messageRows: new List<string>() { "An error occurred trying to delete the selected file" },
+                        controlFocus: CustomMessageBoxFocus.Ok);
+
+                    errorMessageBox.ShowDialog();
+                }
+            }
+        }
+
+        #endregion
+    }
 }

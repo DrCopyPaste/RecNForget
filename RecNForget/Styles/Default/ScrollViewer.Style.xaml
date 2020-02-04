@@ -35,4 +35,11 @@
         <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
     </Style>
 
+    <Style x:Key="QuickTip_ScrollViewer_Style" TargetType="ScrollViewer">
+        <Setter Property="Height" Value="150" />
+        <Setter Property="Width" Value="600" />
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+    </Style>
+
 </ResourceDictionary>

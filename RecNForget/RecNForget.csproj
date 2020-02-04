@@ -103,6 +103,9 @@
     <Compile Include="Help\Features\Fix_UninstallDidNotDeleteAppData.cs" />
     <Compile Include="Services\Extensions\GridExtensions.cs" />
     <Compile Include="Services\Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Windows\QuickTipDialog.xaml.cs">
+      <DependentUpon>QuickTipDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\NewToVersionDialog.xaml.cs">
       <DependentUpon>NewToVersionDialog.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\QuickTipDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\NewToVersionDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -203,10 +210,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Default\HotkeyDisplay.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\CustomMessageBox.Style.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

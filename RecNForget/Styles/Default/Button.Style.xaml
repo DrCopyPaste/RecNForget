@@ -198,6 +198,14 @@
         <Setter Property="SelectedImage" Value="ButtonImages\accept_icon518267.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\accept_icon518267.black.png" />
     </Style>
+    <Style x:Key="LightBulbButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="DefaultImage" Value="ButtonImages\lightbulb_icon372420.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\lightbulb_icon372420.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\lightbulb_icon372420.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\lightbulb_icon372420.black.png" />
+    </Style>
     <Style x:Key="ToolChangeSettingButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />

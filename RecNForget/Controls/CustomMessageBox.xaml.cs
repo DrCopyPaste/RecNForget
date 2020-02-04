@@ -98,15 +98,6 @@ namespace RecNForget.Controls
 					}
 					break;
 				}
-				case CustomMessageBoxIcon.LightBulb:
-				{
-					var errorStyle = (Style)FindResource("CustomMessageBoxLightBulbIconStyle");
-					if (errorStyle != null)
-					{
-						DialogImage.Style = errorStyle;
-					}
-					break;
-				}
 				case CustomMessageBoxIcon.Default:
 				{
 					var defaultStyle = (Style)FindResource("CustomMessageBoxDefaultIconStyle");

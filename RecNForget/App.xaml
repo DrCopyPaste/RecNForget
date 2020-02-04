@@ -28,7 +28,6 @@
                 <ResourceDictionary Source="Styles\Default\Separator.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\TextBlock.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\TextBox.Style.xaml" />
-                <ResourceDictionary Source="Styles\Default\CustomMessageBox.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\ContextMenu.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\ProgressBar.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\Hyperlink.Style.xaml" />
