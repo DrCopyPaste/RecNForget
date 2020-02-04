@@ -26,5 +26,11 @@
         <Setter Property="Width" Value="80" />
         <Setter Property="Margin" Value="4,4,4,4" />
     </Style>
-    
+
+    <Style x:Key="CustomMessageBoxLightBulbIconStyle" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="ButtonImages\lightbulb_icon372420.black.png" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Margin" Value="4,4,4,4" />
+    </Style>
+
 </ResourceDictionary>

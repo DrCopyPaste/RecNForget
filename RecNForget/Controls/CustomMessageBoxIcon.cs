@@ -5,6 +5,7 @@
 		Default,
 		Information,
 		Question,
-		Error
+		Error,
+		LightBulb
 	}
 }

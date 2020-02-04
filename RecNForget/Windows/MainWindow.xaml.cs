@@ -276,7 +276,7 @@ namespace RecNForget.Windows
 
 			CustomMessageBox tempDialog = new CustomMessageBox(
 				caption: "Did you know?",
-				icon: CustomMessageBoxIcon.Information,
+				icon: CustomMessageBoxIcon.LightBulb,
 				buttons: CustomMessageBoxButtons.OK,
 				messageRows: displayLines,
 				controlFocus: CustomMessageBoxFocus.Ok);

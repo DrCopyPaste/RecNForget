@@ -64,114 +64,16 @@
                 Text="Version X.Y.Z.A" />
             <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}">
                 <Run>
-                    (C) 2019-2020 by DrCopyPaste (
+                    (C) 2019-2020 by 
                 </Run>
-                <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">visit github.com/DrCopyPaste</Hyperlink>
-                <Run>
-                    )
-                </Run>
+                <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">DrCopyPaste</Hyperlink>
             </TextBlock>
             <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="RecNForget is a free application that helps you sample audio faster."  />
 
             <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource DefaultWindowBorderStyle}">
                 <ScrollViewer Style="{StaticResource Default_ScrollViewer_Style}">
-                    <TextBlock Style="{StaticResource DefaultTextBlockStyle}">
-                        <Run>
-                            RecNForget is written in C# using .Net Framework 4.7 and Microsoft WPF
-                        </Run>
-                        <LineBreak/>
-                        <LineBreak/>
-                        <Run>
-                            Code by DrCopyPaste (Open Source @
-                        </Run>
-                        <Hyperlink
-                            NavigateUri="https://github.com/DrCopyPaste/RecNForget" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            github.com/DrCopyPaste/RecNForget
-                        </Hyperlink>
-                        <Run>
-                            )
-                        </Run>
-                        <LineBreak/>
-                        <Run>
-                            Logo by DrCopyPaste (using icons from onlinewebfonts.com - see below)
-                        </Run>
-                        <LineBreak/>
-                        <Run>
-                            Beep sounds by a cheap program from DrCopyPaste with love.
-                        </Run>
-                        <LineBreak/>
-                        <Run>
-                            Click sounds by wolfgankh (
-                        </Run>
-                        <Hyperlink NavigateUri="mailto:lit-audio@gmx.de" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            lit-audio@gmx.de
-                        </Hyperlink>
-                        <Run>
-                            -
-                        </Run>
-                        <Hyperlink NavigateUri="https://soundcloud.com/wolfgankh" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            soundcloud.com/wolfgankh
-                        </Hyperlink>
-                        <Run>
-                            )
-                        </Run>
-                        <LineBreak/>
-                        <LineBreak/>
-                        <Run>
-                            The following images were used for the logo as well as icons in this application:
-                        </Run>
-                        <!-- for logo-->
-                        <LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">onlinewebfonts.com/icon/55290</Hyperlink>
-                        <LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">onlinewebfonts.com/icon/715</Hyperlink>
-                        <LineBreak/>
-                        <!-- for button images -->
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/349388" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/349388</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/544157" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/544157</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/280732" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/280732</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/246566" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/246566</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/192688" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/356582</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/40863" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/40863</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/211720" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/211720</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/248857" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/248857</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/518267" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/518267</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/602" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/602</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/353603" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/353603</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/536263" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/536263</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/451737" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/451737</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/428740" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/428740</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/170336" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/170336</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/122592" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/122592</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/77730" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/77730</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/304479" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/304479</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/109120" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/109120</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/277439" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/277439</Hyperlink><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/79516" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">
-                            onlinewebfonts.com/icon/79516</Hyperlink><LineBreak/>                    
-                        <LineBreak/>
-                    </TextBlock>
+                    <local:CopyrightControl />
                 </ScrollViewer>
             </Border>
             <local:ImageButton Grid.Row="10" Grid.Column="0" Style="{StaticResource DownloadButton}"

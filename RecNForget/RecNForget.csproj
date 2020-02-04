@@ -94,6 +94,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\CopyrightControl.xaml.cs">
+      <DependentUpon>CopyrightControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Help\Features\Info_MajorUIRework04.cs" />
     <Compile Include="Help\Features\Fix_FilePrefixDidntAffectDisplayedFileNames.cs" />
     <Compile Include="Help\Features\Fix_ClickingOpenfolderCrashes.cs" />
@@ -175,6 +178,10 @@
     <Compile Include="Services\Types\HotkeyMapping.cs" />
     <Compile Include="Services\UpdateChecker.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
+    <Page Include="Controls\CopyrightControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Default\Image.Style.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -13,6 +13,7 @@ namespace RecNForget.CopyRightHelper
     /// execute this program to override copyright info for the about section from RecNForget client
     /// also updates COPYRIGHT.md (whose contents should also be used (i.e. manually copied (and/ or referenced?) - there are no md includes ;/) in README.md)
     /// </summary>
+
     // from onlinewebfonts.com:
     // You must credit the author Copy this link on your web
     // <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
@@ -20,22 +21,139 @@ namespace RecNForget.CopyRightHelper
     {
         private static string iconBasePath = @"..\..\..\icon_generation";
         private static string copyRightFilePath = @"..\..\..\COPYRIGHT.md";
+        private static string copyRightControlPath = @"..\..\..\RecNForget\Controls\CopyrightControl.xaml";
+
+        private static StringBuilder textBlockResultBuilder;
+        private static StringBuilder mdFileResultBuilder;
 
         static void Main(string[] args)
         {
+            var xamlHeader = new StringBuilder();
+            xamlHeader.AppendLine("<!-- THIS FILE IS AUTO GENERATED -->");
+            xamlHeader.AppendLine("<!-- don't change manually - INSTEAD run RecNForget.CopyRightHelper to replace -->");
+            xamlHeader.AppendLine();
+            xamlHeader.AppendLine(@"<UserControl x:Class=""RecNForget.Controls.CopyrightControl""");
+            xamlHeader.AppendLine("\t\t" + @"xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""");
+            xamlHeader.AppendLine("\t\t" + @"xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""");
+            xamlHeader.AppendLine("\t\t" + @"xmlns:mc=""http://schemas.openxmlformats.org/markup-compatibility/2006""");
+            xamlHeader.AppendLine("\t\t" + @"xmlns:d=""http://schemas.microsoft.com/expression/blend/2008""");
+            xamlHeader.AppendLine("\t\t" + @"xmlns:local=""clr-namespace:RecNForget.Controls""");
+            xamlHeader.AppendLine("\t\t" + @"mc:Ignorable=""d"">");
+            xamlHeader.AppendLine("\t" + @"<Grid>");
+            xamlHeader.AppendLine("\t\t" + @"<TextBlock Style = ""{StaticResource DefaultTextBlockStyle}"" >");
+
+            var xamlFooter = new StringBuilder();
+            xamlFooter.AppendLine("\t\t" + "</TextBlock>");
+            xamlFooter.AppendLine("\t" + "</Grid>");
+            xamlFooter.AppendLine("</UserControl>");
+
+            textBlockResultBuilder = new StringBuilder();
+            textBlockResultBuilder.Append(xamlHeader.ToString());
+
+            mdFileResultBuilder = new StringBuilder();
+
+            /*START EDITING COPYRIGHT HERE*/
+            /*START EDITING COPYRIGHT HERE*/
+            /*START EDITING COPYRIGHT HERE*/
+
+            AddText("RecNForget is written in C# using .NET Framework 4.7 and Microsoft WPF");
+            AddLineBreak();
+            AddText("Code by DrCopyPaste ");
+            AddLink("github.com/DrCopyPaste/RecNForget", "https://github.com/DrCopyPaste/RecNForget");
+            AddLineBreak();
+            AddText("Logo by DrCopyPaste (using icons from onlinewebfonts.com - see below)");
+            AddLineBreak();
+            AddText("Beep sounds by a cheap program from DrCopyPaste with love.");
+            AddLineBreak();
+            AddText("Click sounds by ");
+            AddLink("lit-audio@gmx.de", "mailto:lit-audio@gmx.de");
+            AddText("/");
+            AddLink("soundcloud.com/wolfgankh", "https://soundcloud.com/wolfgankh");
+            AddLineBreak();
+            AddLineBreak();
+            AddText("The following libaries are used by RecNForget:");
+            AddLineBreak();
+
+            // there seems no way around it, included dlls must me added and maintained manually
+            // one COULD of course maybe parse nuget feed of included packages and just blindly paste the license that it could query from there
+            // but then again licenses DO differ quite a lot
+            // best to handle this on a case by case basis and keep includes to a minimum
+            // ToDo persist licenses instead of just linking to online content
+
+            // ------------------ LIBRARIES LIST ----------------------------------
+
+            AddLibraryLink(
+                libaryName: "FMUtils.KeyboardHook.1.0.140.2145",
+                libraryUrl: "https://github.com/factormystic/FMUtils.KeyboardHook#readme",
+                manufacturerName: "Factor Mystic",
+                licenseCaption: "License",
+                licenseUrl: "https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt");
+
+            AddLibraryLink(
+                libaryName: "Hardcodet.NotifyIcon.Wpf.1.0.8",
+                libraryUrl: "http://www.hardcodet.net/wpf-notifyicon",
+                manufacturerName: "Philipp Sumi",
+                licenseCaption: "CPOL 1.02",
+                licenseUrl: "https://www.codeproject.com/info/cpol10.aspx");
+
+            AddLibraryLink(
+                libaryName: "NAudio.1.8.5",
+                libraryUrl: "https://github.com/naudio/NAudio",
+                manufacturerName: "Mark Heath & Contributors",
+                licenseCaption: "Ms-PL",
+                licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
+
+            AddLibraryLink(
+                libaryName: "Newtonsoft.Json.12.0.3",
+                libraryUrl: "https://www.newtonsoft.com/json",
+                manufacturerName: "James Newton-King",
+                licenseCaption: "MIT",
+                licenseUrl: "https://licenses.nuget.org/MIT");
+
+            AddLibraryLink(
+                libaryName: "Octokit.0.36.0",
+                libraryUrl: "https://github.com/octokit/octokit.net",
+                manufacturerName: "GitHub",
+                licenseCaption: "MIT",
+                licenseUrl: "https://licenses.nuget.org/MIT");
+
+            AddLibraryLink(
+                libaryName: "Ookii.Dialogs.Wpf.1.0.0",
+                libraryUrl: "https://github.com/caioproiete/ookii-dialogs-wpf",
+                manufacturerName: "Sven Groot,Caio Proiete",
+                licenseCaption: "MIT",
+                licenseUrl: "https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE");
+
+            AddLibraryLink(
+                libaryName: "WiX Toolset build tools v3.11.2.4516",
+                libraryUrl: "https://wixtoolset.org/",
+                manufacturerName: ".NET Foundation",
+                licenseCaption: "MS-RL",
+                licenseUrl: "https://wixtoolset.org/about/license/");
+
+            // ------------------ END LIBRARIES LIST ----------------------------------
+
+            AddLineBreak();
+            AddText("The following images were used to create RecNForget:");
+            AddLineBreak();
+
+            /*END EDITING COPYRIGHT HERE*/
+            /*END EDITING COPYRIGHT HERE*/
+            /*END EDITING COPYRIGHT HERE*/
+
             var mdBaseInfoTemplateBuilder = new StringBuilder();
-            mdBaseInfoTemplateBuilder.AppendLine("The picture {0} was generated from " + MdFileLinkString("onlinewebfonts.com/icon/{1}", "https://www.onlinewebfonts.com/icon/{1}"));
+            mdBaseInfoTemplateBuilder.AppendLine("{0} was generated from " + MdLink("onlinewebfonts.com/icon/{1}", "https://www.onlinewebfonts.com/icon/{1}"));
             mdBaseInfoTemplateBuilder.AppendLine();
-            mdBaseInfoTemplateBuilder.AppendLine(string.Format(@"Icon made from {0} is licensed by CC BY 3.0", MdFileLinkString("Icon Fonts", "http://www.onlinewebfonts.com/icon")));
+            mdBaseInfoTemplateBuilder.AppendLine(string.Format(@"Icon made from {0} is licensed by CC BY 3.0", MdLink("Icon Fonts", "http://www.onlinewebfonts.com/icon")));
             mdBaseInfoTemplateBuilder.AppendLine();
 
             var textBlockInfoTemplateBuilder = new StringBuilder();
-            textBlockInfoTemplateBuilder.Append(XamText("The picture {0} was generated from "));
-            textBlockInfoTemplateBuilder.AppendLine(XamlFileLinkString("onlinewebfonts.com/icon/{1}", "https://www.onlinewebfonts.com/icon/{1}"));
+            textBlockInfoTemplateBuilder.Append(XamlText("{0} was generated from "));
+            textBlockInfoTemplateBuilder.AppendLine(XamlLink("onlinewebfonts.com/icon/{1}", "https://www.onlinewebfonts.com/icon/{1}"));
             textBlockInfoTemplateBuilder.AppendLine(XamlLineBreak());
-            textBlockInfoTemplateBuilder.Append(XamText("Icon made from "));
-            textBlockInfoTemplateBuilder.AppendLine(XamlFileLinkString("Icon Fonts", "http://www.onlinewebfonts.com/icon"));
-            textBlockInfoTemplateBuilder.Append(XamText(" is licensed by CC BY 3.0"));
+            textBlockInfoTemplateBuilder.Append(XamlText("Icon made from "));
+            textBlockInfoTemplateBuilder.AppendLine(XamlLink("Icon Fonts", "http://www.onlinewebfonts.com/icon"));
+            textBlockInfoTemplateBuilder.Append(XamlText(" is licensed by CC BY 3.0"));
             textBlockInfoTemplateBuilder.AppendLine(XamlLineBreak());
 
             // must be formatted with {0} = filename and {1} = onlinewbefonts icon url id (number)
@@ -81,18 +199,29 @@ namespace RecNForget.CopyRightHelper
                 }
             }
 
-            string[] rawMd = mdFileCopyrightInfos.Values.ToArray();
-            string[] rawXaml = xamlFileCopyrightInfos.Values.ToArray();
+            foreach (var line in xamlFileCopyrightInfos.Values.OrderBy(v => v))
+            {
+                textBlockResultBuilder.Append(line);
+            }
+
+            textBlockResultBuilder.Append(xamlFooter);
+
+            foreach (var line in mdFileCopyrightInfos.Values.OrderBy(v => v))
+            {
+                mdFileResultBuilder.Append(line);
+            }
+
+            //string[] rawXaml = xamlFileCopyrightInfos.Values.ToArray();
 
             var mdOutFile = new FileInfo(copyRightFilePath);
-            if (mdOutFile.Exists) File.Delete(mdOutFile.FullName);
-            File.WriteAllLines(mdOutFile.FullName, rawMd);
+            //if (mdOutFile.Exists) File.Delete(mdOutFile.FullName);
+            File.WriteAllText(mdOutFile.FullName, mdFileResultBuilder.ToString());
 
-            var xamlOutFile = new FileInfo("xaml-out-test.txt");
-            if (xamlOutFile.Exists) File.Delete(xamlOutFile.FullName);
-            File.WriteAllLines(xamlOutFile.Name, rawXaml);
+            var xamlOutFile = new FileInfo(copyRightControlPath);
+            //if (xamlOutFile.Exists) File.Delete(xamlOutFile.FullName);
+            File.WriteAllText(xamlOutFile.FullName, textBlockResultBuilder.ToString());
 
-            // ToDo include condents for unmatched files also!
+            // ToDo include contents for unmatched files also!
 
             // unmatched files should only contain the self created "audio player" style buttons (skip/pause/play/record/stop)
             // as well as logo files and installer files (which also contain the logo)
@@ -104,7 +233,37 @@ namespace RecNForget.CopyRightHelper
 
         }
 
-        private static string MdFileLinkString(string caption, string url)
+        private static void AddText(string text)
+        {
+            textBlockResultBuilder.Append(XamlText(text));
+
+            mdFileResultBuilder.Append(text);
+        }
+
+        private static void AddLink(string caption, string url)
+        {
+            textBlockResultBuilder.Append(XamlLink(caption, url));
+
+            mdFileResultBuilder.Append(MdLink(caption, url));
+        }
+
+        private static void AddLineBreak()
+        {
+            textBlockResultBuilder.AppendLine(XamlLineBreak());
+
+            mdFileResultBuilder.AppendLine();
+            mdFileResultBuilder.AppendLine();
+        }
+
+        private static void AddLibraryLink(string libaryName, string libraryUrl, string manufacturerName, string licenseCaption, string licenseUrl)
+        {
+            AddLink(libaryName, libraryUrl);
+            AddText(" Copyright (c) " + manufacturerName + " - ");
+            AddLink(licenseCaption, licenseUrl);
+            AddLineBreak();
+        }
+
+        private static string MdLink(string caption, string url)
         {
             // md links: [link text](link url)
             string mdUrlPattern = "[{0}]({1})";
@@ -113,26 +272,26 @@ namespace RecNForget.CopyRightHelper
 
         private static string XamlLineBreak()
         {
-            return "\t\t\t\t\t\t<LineBreak />";
+            return "\t\t\t<LineBreak />";
         }
 
-        private static string XamText(string content)
+        private static string XamlText(string content)
         {
             var contentBuilder = new StringBuilder();
-            contentBuilder.AppendLine("\t\t\t\t\t\t<Run>");
-            contentBuilder.AppendLine("\t\t\t\t\t\t\t" + content);
-            contentBuilder.AppendLine("\t\t\t\t\t\t</Run>");
+            contentBuilder.AppendLine("\t\t\t<Run>");
+            contentBuilder.AppendLine("\t\t\t\t" + content.Replace("&", "&amp;"));
+            contentBuilder.AppendLine("\t\t\t</Run>");
 
             return contentBuilder.ToString();
         }
 
-        private static string XamlFileLinkString(string caption, string url)
+        private static string XamlLink(string caption, string url)
         {
             // xaml links: <Hyperlink NavigateUri="link url" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">link text</ Hyperlink>
             var xamlUrlPatternBuilder = new StringBuilder();
-            xamlUrlPatternBuilder.AppendLine("\t\t\t\t\t\t<Hyperlink NavigateUri=\"{0}\" RequestNavigate=\"Hyperlink_RequestNavigate\">{1}</Hyperlink>");
+            xamlUrlPatternBuilder.AppendLine("\t\t\t<Hyperlink NavigateUri=\"{0}\" RequestNavigate=\"Hyperlink_RequestNavigate\">{1}</Hyperlink>");
 
-            return string.Format(xamlUrlPatternBuilder.ToString(), url, caption);
+            return string.Format(xamlUrlPatternBuilder.ToString(), url, caption.Replace("&", "&amp;"));
         }
 
 
