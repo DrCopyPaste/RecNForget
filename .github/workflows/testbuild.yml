@@ -17,7 +17,7 @@ jobs:
     - name: Restore NuGet Packages
       run: nuget restore RecNForget.sln
     - name: Build and Publish
-      run: msbuild SimpleFrameworkApp.sln /p:Configuration=Release /p:DeployOnBuild=true
+      run: msbuild RecNForget.sln /p:Configuration=Release /p:DeployOnBuild=true
     - name: Upload Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
