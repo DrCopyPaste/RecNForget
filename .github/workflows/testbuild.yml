@@ -1,0 +1,23 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v2
+    - name: Setup MSBuild Path
+      uses: warrenbuckley/Setup-MSBuild@v1
+    - name: Restore NuGet Packages
+      run: nuget restore RecNForget.sln
+    - name: Build and Publish Web App
+      run: msbuild SimpleFrameworkApp.sln /p:Configuration=Release /p:DeployOnBuild=true
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: RecNForget_TestBuild
+        path: bin\Release\Publish
