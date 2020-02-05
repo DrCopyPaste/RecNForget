@@ -422,18 +422,22 @@ namespace RecNForget.Windows
 
             if (firstTimeUser)
             {
-                var dia = new NewToApplicationWindow(this.hotkeyService)
+                var dia = new NewToApplicationWindow(this.hotkeyService);
+
+                if (!MinimizedToTray)
                 {
-                    Owner = this
+                    dia.Owner = this;
                 };
 
                 dia.Show();
             }
             else if (currentVersion.Info.Version.CompareTo(lastInstalledVersion) > 0)
             {
-                var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version)
+                var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version);
+
+                if (!MinimizedToTray)
                 {
-                    Owner = this
+                    newToVersionDialog.Owner = this;
                 };
 
                 newToVersionDialog.Show();
