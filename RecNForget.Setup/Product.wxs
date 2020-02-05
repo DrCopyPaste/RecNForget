@@ -2,7 +2,13 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
     <?define iconPath="..\..\..\icon_generation\logo\logo.ico"?>
-    <Product Id="{1797362C-C758-4F22-9878-2AF96B9C9524}" Name="RecNForget" Language="1033" Version="0.4.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
+  <!-- Set Product Id to * so we get a new guid on EVERY build (with CI now via github it makes sense not to prevent people from updating, just because you did not update the product id often enough
+  
+  Still ToDo: generate minor version numbers "automagically" (so we do not have to manually insert them HERE AND in the application itself)
+  
+  maybe even have very minor version changes depending on commit number or sth. to indicate that in the built artifact on github
+  -->
+    <Product Id="*" Name="RecNForget" Language="1033" Version="0.4.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
         <UI>
           <UIRef Id="WixUI_InstallDir"/>

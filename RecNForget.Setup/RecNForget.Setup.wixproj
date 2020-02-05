@@ -76,7 +76,7 @@ for /f %25%25V in (%27findstr /C:AssemblyVersion %25ASMINFO%25%27) do set TEMPVE
 SET TEMPVERSIONSTRING=%25TEMPVERSIONSTRING:[assembly:AssemblyVersion("=%25
 SET TEMPVERSIONSTRING=%25TEMPVERSIONSTRING:")]=%25
 
-move /Y $(TargetDir)$(TargetFileName) $(TargetDir)$(TargetName).v%25TEMPVERSIONSTRING%25$(TargetExt)</PostBuildEvent>
+move /Y $(TargetDir)$(TargetFileName) $(TargetDir)$(TargetName).pre.v%25TEMPVERSIONSTRING%25$(TargetExt)</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
