@@ -17,9 +17,9 @@ jobs:
     - name: Restore NuGet Packages
       run: nuget restore RecNForget.sln
     - name: Build and Publish
-      run: msbuild RecNForget.Setup\RecNForget.Setup.wixproj /p:Configuration=Release /p:OutputPath="..\outputFolder\"
+      run: msbuild RecNForget.Setup\RecNForget.Setup.wixproj /p:Configuration=Release
     - name: Upload Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         name: RecNForget_TestBuild
-        path: outputFolder
+        path: RecNForget.Setup\bin\Release
