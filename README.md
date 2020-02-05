@@ -25,9 +25,21 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - To build the setup project you need to have the [WiX Toolset](https://wixtoolset.org/releases/v3.11.2/stable) installed.
 
 # This version
-The currently released version is 0.3.
+Stable released version is 0.3.
+
+# work in progress
+Current Build status: ![CI](https://github.com/DrCopyPaste/RecNForget/workflows/CI/badge.svg)
 
 Progress towards the next 0.4-Release can be tracked [here](https://github.com/DrCopyPaste/RecNForget/projects/2).
+
+There is an automated build event for each push to the repository.
+If you feel extra lucky or keen to try out the latest build, you can
+- go [here](https://github.com/DrCopyPaste/RecNForget/actions?query=workflow%3ACI+is%3Asuccess++)
+- click on the latest build
+- download the artifact "RecNForget_TestBuild" that contains most current generated setup
+(downloading is currently only allowed for github users it seems)
+
+KEEP IN MIND WORK IN PROGRESS MAY BE UNSTABLE! FOR STABLE RELEASES ONLY EVER REFER TO THE [LATEST RELEASE](https://github.com/DrCopyPaste/RecNForget/releases/latest).
 
 # upcoming features in next release
 - FIX: uninstalling RecNForget will now also delete all application data (under %APPDATA% machine configuration and in registry for autostart)
