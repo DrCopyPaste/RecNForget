@@ -67,7 +67,7 @@
     <PreBuildEvent />
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>SET ASMINFO=$(SolutionDir)RecNForget\Properties\AssemblyInfo.cs
+    <PostBuildEvent>SET ASMINFO=$(ProjectDir)..\RecNForget\Properties\AssemblyInfo.cs
 
 REM Feel free to improve the following lines to not fail if assemblyinfo line contains spaces :-P
 for /f %25%25V in (%27findstr /C:AssemblyVersion %25ASMINFO%25%27) do set TEMPVERSIONSTRING=%25%25V
