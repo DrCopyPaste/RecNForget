@@ -23,6 +23,8 @@ using System.Windows.Shell;
 using System.Windows.Threading;
 using RecNForget.Services.Types;
 using System.Linq;
+using System.Threading.Tasks;
+using Octokit;
 
 namespace RecNForget.Windows
 {
@@ -31,6 +33,8 @@ namespace RecNForget.Windows
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
+        private ApplicationBase currentVersion;
+
         private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
         private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
 
@@ -65,6 +69,7 @@ namespace RecNForget.Windows
                 OnPropertyChanged();
             }
         }
+
         public DateTime RecordingStart { get; set; }
 
         #region bound values
@@ -276,8 +281,11 @@ namespace RecNForget.Windows
 
         public MainWindow()
         {
-            var currentVersion = new ApplicationBase();
 
+            DataContext = this;
+            InitializeComponent();
+
+            currentVersion = new ApplicationBase();
             this.KeyDown += Window_KeyDown;
             this.MouseDown += Window_Click;
 
@@ -288,7 +296,7 @@ namespace RecNForget.Windows
 
             if (CheckForUpdateOnStart)
             {
-                UpdateChecker.ShowUpdateDialogIfPossible(suppressUpToDateDialog: true);
+                Task.Run(() => { CheckForUpdates(); });
             }
 
             replayAudioService = new AudioPlayListService(
@@ -392,9 +400,6 @@ namespace RecNForget.Windows
 
             this.hotkeyService = new HotkeyService();
             this.hotkeyService.AddHotkey(() => { return HotkeyToStringTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
-
-            DataContext = this;
-            InitializeComponent();
 
             SelectedFileService = new SelectedFileService();
             if (SelectedFileService.SelectLatestFile())
@@ -608,6 +613,59 @@ namespace RecNForget.Windows
             SelectedFileService.SelectNextFile();
         }
 
+        private async void CheckForUpdates(bool showMessages = false)
+        {
+            try
+            {
+                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: currentVersion.Info.Version.ToString());
+
+                if (newerReleases.Any())
+                {
+                    string changeLog = UpdateChecker.GetAllChangeLogs(newerReleases);
+
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        var installUpdateDialog = new ReleaseInstallationDialog(newerReleases.First(), UpdateChecker.GetValidVersionStringMsiAsset(newerReleases.First()), changeLog);
+                        installUpdateDialog.ShowDialog();
+                    });
+                }
+                else
+                {
+                    if (showMessages)
+                    {
+                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            CustomMessageBox tempDialog = new CustomMessageBox(
+                                caption: "RecNForget is already up to date!",
+                                icon: CustomMessageBoxIcon.Information,
+                                buttons: CustomMessageBoxButtons.OK,
+                                messageRows: new List<string>() { "No newer version found" },
+                                controlFocus: CustomMessageBoxFocus.Ok);
+
+                            tempDialog.ShowDialog();
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (showMessages)
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        var errorDialog = new CustomMessageBox(
+                            caption: "Error during update",
+                            icon: CustomMessageBoxIcon.Error,
+                            buttons: CustomMessageBoxButtons.OK,
+                            messageRows: new List<string>() { "An error occurred trying to get updates:", ex.InnerException.Message },
+                            controlFocus: CustomMessageBoxFocus.Ok);
+
+                        errorDialog.ShowDialog();
+                    });
+                }
+            }
+        }
+
         private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
         {
             ToggleReplayLastRecording();
@@ -726,7 +784,7 @@ namespace RecNForget.Windows
 
         private void CheckUpdates_Click(object sender, RoutedEventArgs e)
         {
-            UpdateChecker.ShowUpdateDialogIfPossible();
+            Task.Run(() => { CheckForUpdates(showMessages: true); });
         }
 
         private void Window_Click(object sender, MouseButtonEventArgs e)

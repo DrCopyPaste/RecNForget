@@ -12,12 +12,10 @@ For more detailed help refer to the [online help pages](https://github.com/DrCop
 # Installation
 Run msi-file from the [latest release](https://github.com/DrCopyPaste/RecNForget/releases/latest) to install.
 
-(RecNForget requires [Microsoft .Net Framework 4.7](https://dotnet.microsoft.com/download/dotnet-framework/net47) to run.)
+(RecNForget requires [Microsoft .Net Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48) to run.)
 
 # The code
 Feel free to download the code and play with it.
-
-Please keep in mind this is my very first WPF application. To be completely honest, development so far is primarily feature-driven so do not visit the code looking for best practices :)
 
 For stable and buildable code please refer to the version tagged commits, in between releases there may very well be errors in the code.
 
@@ -28,19 +26,20 @@ For stable and buildable code please refer to the version tagged commits, in bet
 Stable released version is 0.3.
 
 # work in progress
-- Current Build status: ![CI](https://github.com/DrCopyPaste/RecNForget/workflows/CI/badge.svg)
+- ![CI](https://github.com/DrCopyPaste/RecNForget/workflows/CI/badge.svg)
 - Currently developing: [0.4](https://github.com/DrCopyPaste/RecNForget/projects/2).
 
-There is an automated build event for each push to the repository.
-If you feel extra lucky or keen to try out the latest, you can
+KEEP IN MIND: WORK IN PROGRESS MAY BE UNSTABLE! :D
+
+But, if you feel extra keen to try out the latest, you can
 - go [here](https://github.com/DrCopyPaste/RecNForget/actions?query=workflow%3ACI+is%3Asuccess++)
 - click on the latest build
-- download the artifact "RecNForget_TestBuild" that contains most current generated setup
+- download the artifact "RecNForget_TestBuild" that contains generated setup file
 (downloading is currently only allowed for github users it seems)
 
-KEEP IN MIND: WORK IN PROGRESS MAY BE UNSTABLE! FOR STABLE RELEASES ONLY REFER TO THE [LATEST RELEASE](https://github.com/DrCopyPaste/RecNForget/releases/latest).
-
 # upcoming features in next release
+- migrated to .NET Framework 4.8
+
 - FIX: uninstalling RecNForget will now also delete all application data (under %APPDATA% machine configuration and in registry for autostart)
 - FIX: clicking the open folder button does not crash RecNForget anymore, if that folder does not (yet) exist
 - FIX: changing the file prefix changes the displayed file name with output path
@@ -63,7 +62,7 @@ KEEP IN MIND: WORK IN PROGRESS MAY BE UNSTABLE! FOR STABLE RELEASES ONLY REFER T
 - can configure target path via folder icon next to "recording path"
 - consistently use white background for (almost) all controls
 - auto selecting the last recording is now optional (enabled by default)
-- added a help link to the menu (calls link in browser going to THIS readme.md, I will replace this with an in-application help later on)
+- added a help link to the menu (opens help window)
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - can stop playing slected file using [Esc]-key in the main window
 - clicking the open folder button now selects the last result file in explorer (or just opens folder if there is now result yet)
@@ -102,11 +101,11 @@ The following libaries are used by RecNForget:
 
 [Hardcodet.NotifyIcon.Wpf.1.0.8](http://www.hardcodet.net/wpf-notifyicon) Copyright (c) Philipp Sumi - [CPOL 1.02](https://www.codeproject.com/info/cpol10.aspx)
 
-[NAudio.1.8.5](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
+[NAudio.1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
 
 [Newtonsoft.Json.12.0.3](https://www.newtonsoft.com/json) Copyright (c) James Newton-King - [MIT](https://licenses.nuget.org/MIT)
 
-[Octokit.0.36.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
+[Octokit.0.37.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
 [Ookii.Dialogs.Wpf.1.0.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot,Caio Proiete - [MIT](https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE)
 
@@ -383,5 +382,4 @@ Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by C
 windowSettings_icon248857.svg was generated from [onlinewebfonts.com/icon/248857](https://www.onlinewebfonts.com/icon/248857)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
-
 

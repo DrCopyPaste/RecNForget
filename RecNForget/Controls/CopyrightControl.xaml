@@ -53,7 +53,7 @@
 			</Run>
 			<Hyperlink NavigateUri="https://www.codeproject.com/info/cpol10.aspx" RequestNavigate="Hyperlink_RequestNavigate">CPOL 1.02</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio.1.8.5</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio.1.10.0</Hyperlink>
 			<Run>
 				 Copyright (c) Mark Heath &amp; Contributors - 
 			</Run>
@@ -65,7 +65,7 @@
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit.0.36.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit.0.37.0</Hyperlink>
 			<Run>
 				 Copyright (c) GitHub - 
 			</Run>

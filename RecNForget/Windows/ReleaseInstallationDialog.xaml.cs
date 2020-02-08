@@ -60,13 +60,28 @@ namespace RecNForget.Windows
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
-            var downloadDialog = new DownloadDialog(asset, InstallAfterDownload)
+            var targetPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), asset.Name);
+
+            var downloadDialog = new DownloadDialog(asset, targetPath)
             {
                 Owner = System.Windows.Application.Current.MainWindow
             };
 
-            this.Close();
             downloadDialog.ShowDialog();
+
+            if (downloadDialog.Succeeded)
+            {
+                if (InstallAfterDownload)
+                {
+                    Process.Start(targetPath);
+                }
+                else
+                {
+                    Process.Start("explorer.exe", "/select, \"" + targetPath + "\"");
+                }
+            }
+
+            this.Close();
         }
 
         private string releaseNotes;

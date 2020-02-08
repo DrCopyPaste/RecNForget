@@ -2,7 +2,9 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using Newtonsoft.Json;
 using Octokit;
+using RecNForget.Controls;
 using RecNForget.Services;
+using RecNForget.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,9 +13,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,28 +38,25 @@ namespace RecNForget.Windows
     public partial class DownloadDialog : Window, INotifyPropertyChanged
     {
         private bool cancelled;
-        private bool succeeded;
-        private bool installAfterDownload;
         private string targetDownloadPath;
         private ReleaseAsset asset;
-        private WebClient client;
+        private HttpClient httpClient;
 
-        public DownloadDialog(ReleaseAsset asset, bool installAfterDownload)
-		{
+        public DownloadDialog(ReleaseAsset asset, string targetDownloadPath)
+        {
             InitializeComponent();
             DataContext = this;
 
             this.cancelled = false;
             this.succeeded = false;
-            this.installAfterDownload = installAfterDownload;
-            this.targetDownloadPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), asset.Name);
-
+            this.targetDownloadPath = targetDownloadPath;
             this.asset = asset;
-            this.client = new WebClient();
-            this.client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
-            this.client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadProgressCompleted);
+            this.httpClient = new HttpClient()
+            {
+                Timeout = TimeSpan.FromMilliseconds(60000)
+            };
 
-            DownloadProgress = "0";
+            DownloadProgress = 0;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -69,7 +70,6 @@ namespace RecNForget.Windows
             if (!succeeded)
             {
                 cancelled = true;
-                client.CancelAsync();
             }
 
             base.OnClosing(e);
@@ -79,45 +79,69 @@ namespace RecNForget.Windows
         {
             base.OnContentRendered(e);
 
-            client.DownloadFileAsync(
-                new Uri(asset.BrowserDownloadUrl), 
-                targetDownloadPath);
+
+            var task = Task.Run(() => { DownloadAsset(asset); });
         }
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-				this.DragMove();
-		}
-
-		void DownloadProgressChanged(object sender, ProgressChangedEventArgs e)
+        private async void DownloadAsset(ReleaseAsset asset)
         {
-            DownloadProgress = e.ProgressPercentage.ToString();
-        }
-
-        void DownloadProgressCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            DownloadProgress = "Completed";
-            CancelButton.IsEnabled = false;
-
-            if (!cancelled)
+            try
             {
-                succeeded = true;
-                if (installAfterDownload)
+                Progress<float> downloadProgress = new Progress<float>();
+                downloadProgress.ProgressChanged += (s, e) =>
                 {
-                    Process.Start(targetDownloadPath);
-                }
-                else
-                {
-                    Process.Start("explorer.exe", "/select, \"" + targetDownloadPath + "\"");
-                }
-            }
+                    DownloadProgress = e * 100;
+                };
 
-            this.Close();
+                using (var fileStream = new FileStream(targetDownloadPath, System.IO.FileMode.Create, FileAccess.Write))
+                {
+                    await httpClient.DownloadAsync(asset.BrowserDownloadUrl, fileStream, downloadProgress);
+                }
+
+                succeeded = true;
+            }
+            catch (Exception e)
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(() => {
+                    var errorMessageBox = new CustomMessageBox(
+                    caption: "An error occurred",
+                    buttons: CustomMessageBoxButtons.OK,
+                    icon: CustomMessageBoxIcon.Error,
+                    messageRows: new List<string>()
+                    {
+                        string.Format("An error occurred trying to download {0} to {1}", asset.BrowserDownloadUrl, targetDownloadPath),
+                        e.Message
+                    },
+                    controlFocus: CustomMessageBoxFocus.Ok);
+
+                    errorMessageBox.ShowDialog();
+                });
+            }
+            finally
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(() => {
+                    this.Close();
+                });
+            }
         }
 
-        private string downloadProgress;
-        public string DownloadProgress
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private bool succeeded;
+        public bool Succeeded
+        {
+            get
+            {
+                return succeeded;
+            }
+        }
+
+        private float downloadProgress;
+        public float DownloadProgress
         {
             get
             {

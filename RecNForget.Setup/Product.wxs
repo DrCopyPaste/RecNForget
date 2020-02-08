@@ -32,8 +32,9 @@
         <!--<Property Id="MsiLogging" Value="v" />-->
 
         <PropertyRef Id="NETFRAMEWORK45" />
-        <Condition Message="This application requires .NET Framework 4.7 or higher.">
-          <![CDATA[Installed OR (NETFRAMEWORK45 >= "#460798")]]>
+        <Condition Message="This application requires .NET Framework 4.8 or higher.">
+          <!-- dotnet version infos: https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed -->
+          <![CDATA[Installed OR (NETFRAMEWORK45 >= "#528040")]]>
         </Condition>
       
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />

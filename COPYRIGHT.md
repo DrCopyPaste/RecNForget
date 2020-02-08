@@ -16,11 +16,11 @@ The following libaries are used by RecNForget:
 
 [Hardcodet.NotifyIcon.Wpf.1.0.8](http://www.hardcodet.net/wpf-notifyicon) Copyright (c) Philipp Sumi - [CPOL 1.02](https://www.codeproject.com/info/cpol10.aspx)
 
-[NAudio.1.8.5](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
+[NAudio.1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
 
 [Newtonsoft.Json.12.0.3](https://www.newtonsoft.com/json) Copyright (c) James Newton-King - [MIT](https://licenses.nuget.org/MIT)
 
-[Octokit.0.36.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
+[Octokit.0.37.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
 [Ookii.Dialogs.Wpf.1.0.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot,Caio Proiete - [MIT](https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE)
 

@@ -97,7 +97,7 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://www.codeproject.com/info/cpol10.aspx");
 
             AddLibraryLink(
-                libaryName: "NAudio.1.8.5",
+                libaryName: "NAudio.1.10.0",
                 libraryUrl: "https://github.com/naudio/NAudio",
                 manufacturerName: "Mark Heath & Contributors",
                 licenseCaption: "Ms-PL",
@@ -111,7 +111,7 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Octokit.0.36.0",
+                libaryName: "Octokit.0.37.0",
                 libraryUrl: "https://github.com/octokit/octokit.net",
                 manufacturerName: "GitHub",
                 licenseCaption: "MIT",

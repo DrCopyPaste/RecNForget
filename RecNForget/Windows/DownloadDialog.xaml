@@ -39,10 +39,11 @@
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
 
             <ProgressBar Grid.Row="1" Grid.Column="0" Style="{StaticResource Default_ProgressBar_Style}"
+                Name="DownloadProgressBar"
                 Value="{Binding Path=DownloadProgress}" />
             
             <TextBlock Grid.Row="1" Grid.Column="0"
-                Text="{Binding Path=DownloadProgress, StringFormat={}{0:0}%}" />
+                Text="{Binding Path=DownloadProgress, StringFormat={}{0:0.00}%}" />
             
             <local:ImageButton Grid.Row="3" Grid.Column="0" Style="{StaticResource CancelButton}"
                 HorizontalAlignment="Right"
