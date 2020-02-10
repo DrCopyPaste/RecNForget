@@ -56,7 +56,7 @@ namespace RecNForget.CopyRightHelper
             /*START EDITING COPYRIGHT HERE*/
             /*START EDITING COPYRIGHT HERE*/
 
-            AddText("RecNForget is written in C# using .NET Framework 4.7 and Microsoft WPF");
+            AddText("RecNForget is written in C# using .NET Framework 4.8 and Microsoft WPF");
             AddLineBreak();
             AddText("Code by DrCopyPaste ");
             AddLink("github.com/DrCopyPaste/RecNForget", "https://github.com/DrCopyPaste/RecNForget");
@@ -104,6 +104,13 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
 
             AddLibraryLink(
+                libaryName: "Nerdbank.GitVersioning.3.0.50",
+                libraryUrl: "https://github.com/aarnott/Nerdbank.GitVersioning",
+                manufacturerName: "Andrew Arnott",
+                licenseCaption: "MIT",
+                licenseUrl: "https://licenses.nuget.org/MIT");
+
+            AddLibraryLink(
                 libaryName: "Newtonsoft.Json.12.0.3",
                 libraryUrl: "https://www.newtonsoft.com/json",
                 manufacturerName: "James Newton-King",
@@ -111,17 +118,17 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Octokit.0.37.0",
+                libaryName: "Octokit.0.40.0",
                 libraryUrl: "https://github.com/octokit/octokit.net",
                 manufacturerName: "GitHub",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Ookii.Dialogs.Wpf.1.0.0",
+                libaryName: "Ookii.Dialogs.Wpf.1.1.0",
                 libraryUrl: "https://github.com/caioproiete/ookii-dialogs-wpf",
                 manufacturerName: "Sven Groot,Caio Proiete",
-                licenseCaption: "MIT",
+                licenseCaption: "License",
                 licenseUrl: "https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE");
 
             AddLibraryLink(
@@ -204,12 +211,32 @@ namespace RecNForget.CopyRightHelper
                 textBlockResultBuilder.Append(line);
             }
 
-            textBlockResultBuilder.Append(xamlFooter);
-
             foreach (var line in mdFileCopyrightInfos.Values.OrderBy(v => v))
             {
                 mdFileResultBuilder.Append(line);
             }
+
+            var expectedUnmatched = unmatchedFiles.Where(
+                f =>
+                    f.EndsWith("WixUI-logo.svg")
+                    || f.EndsWith("WixUIBannerBmp.bmp")
+                    || f.EndsWith("WixUIBannerBmp.png")
+                    || f.EndsWith("WixUIDialogBmp.bmp")
+                    || f.EndsWith("WixUIDialogBmp.png")
+                    || f.EndsWith("logo.ico")
+                    || f.EndsWith("logo.svg")
+                    || f.EndsWith("logo_big.png")
+                    || f.EndsWith("logo_small.png"));
+
+            foreach (var expectedUnmatchedFile in expectedUnmatched)
+            {
+                AddLogoFileLines(expectedUnmatchedFile);
+            }
+
+            textBlockResultBuilder.Append(xamlFooter);
+
+            var leftUnmatched = unmatchedFiles.Except(expectedUnmatched);
+
 
             //string[] rawXaml = xamlFileCopyrightInfos.Values.ToArray();
 
@@ -230,7 +257,6 @@ namespace RecNForget.CopyRightHelper
 
             // ToDo: make actual comparison icon_generation path and used images in ressources and installer
             // right now this has to be done manually, following the nameing convention
-
         }
 
         private static void AddText(string text)
@@ -253,6 +279,19 @@ namespace RecNForget.CopyRightHelper
 
             mdFileResultBuilder.AppendLine();
             mdFileResultBuilder.AppendLine();
+        }
+
+        private static void AddLogoFileLines(string logoFileName)
+        {
+            AddText(logoFileName + " was generated from ");
+            AddLink("onlinewebfonts.com/icon/55290", "https://www.onlinewebfonts.com/icon/55290");
+            AddText(" and ");
+            AddLink("onlinewebfonts.com/icon/715", "https://www.onlinewebfonts.com/icon/715");
+            AddLineBreak();
+            AddText("Icon made from ");
+            AddLink("Icon Fonts", "http://www.onlinewebfonts.com/icon");
+            AddText(" is licensed by CC BY 3.0");
+            AddLineBreak();
         }
 
         private static void AddLibraryLink(string libaryName, string libraryUrl, string manufacturerName, string licenseCaption, string licenseUrl)

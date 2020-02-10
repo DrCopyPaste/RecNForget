@@ -47,10 +47,7 @@ namespace RecNForget.Windows
 			quickStartButton.HorizontalAlignment = HorizontalAlignment.Stretch;
 			quickStartButton.IsEnabled = true;
 
-			Grid.SetRow(quickStartButton, topicRowCount);
-			Grid.SetColumn(quickStartButton, 0);
-
-			TopicListGrid.Children.Add(quickStartButton);
+			TopicListGrid.InsertAt(quickStartButton, 0, topicRowCount);
 			topicRowCount++;
 
 			foreach (var feature in allFeatures)
@@ -73,11 +70,8 @@ namespace RecNForget.Windows
 				button.HorizontalAlignment = HorizontalAlignment.Stretch;
 
 				button.IsEnabled = true;
-				
-				Grid.SetRow(button, topicRowCount);
-				Grid.SetColumn(button, 0);
 
-				TopicListGrid.Children.Add(button);
+				TopicListGrid.InsertAt(button, 0, topicRowCount);
 				topicRowCount++;
 			}
 
@@ -147,10 +141,8 @@ namespace RecNForget.Windows
 				}
 
 				textBlock.Text = helpLine.Content;
-				Grid.SetRow(textBlock, helpLineCount);
-				Grid.SetColumn(textBlock, 0);
 
-				HelpLinesGrid.Children.Add(textBlock);
+				HelpLinesGrid.InsertAt(textBlock, 0, helpLineCount);
 				helpLineCount++;
 			}
 		}

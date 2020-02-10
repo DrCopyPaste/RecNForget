@@ -1,4 +1,5 @@
 ﻿using FMUtils.KeyboardHook;
+using RecNForget.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,12 +129,8 @@ namespace RecNForget.Services
 					tempButton.Style = buttonStyle;
 				}
 
-				Grid.SetRow(tempButton, 0);
-				Grid.SetColumn(
-					tempButton,
-					spacing.HasValue ? currentIndex * 2 : currentIndex);
 				tempButton.Content = hotkeyName;
-				buttonGrid.Children.Add(tempButton);
+				buttonGrid.InsertAt(tempButton, spacing.HasValue ? currentIndex * 2 : currentIndex, 0);
 				currentIndex++;
 			}
 

@@ -5,10 +5,10 @@ namespace RecNForget.Services.Extensions
 {
     public static class GridExtensions
     {
-        public static void InsertAt(this Grid grid, UIElement element, int column, int row)
+        public static void InsertAt(this Grid grid, UIElement element, int columnX, int rowY)
         {
-            Grid.SetRow(element, row);
-            Grid.SetColumn(element, column);
+            Grid.SetRow(element, rowY);
+            Grid.SetColumn(element, columnX);
             grid.Children.Add(element);
         }
     }

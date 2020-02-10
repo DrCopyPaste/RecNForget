@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RecNForget.Services.Extensions;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -63,10 +64,9 @@ namespace RecNForget.Controls
 				captionTextBox.Style = captionStyle;
 			}
 
-			Grid.SetRow(captionTextBox, currentIndex);
-			Grid.SetColumn(captionTextBox, 0);
 			captionTextBox.Text = caption;
-			ContentGrid.Children.Add(captionTextBox);
+			ContentGrid.InsertAt(captionTextBox, 0, currentIndex);
+
 			currentIndex++;
 
 			switch (icon)
@@ -125,10 +125,9 @@ namespace RecNForget.Controls
 						tempTextBox.Style = textblockStyle;
 					}
 
-					Grid.SetRow(tempTextBox, currentIndex);
-					Grid.SetColumn(tempTextBox, 0);
 					tempTextBox.Text = messgeRow;
-					ContentGrid.Children.Add(tempTextBox);
+					ContentGrid.InsertAt(tempTextBox, 0, currentIndex);
+
 					currentIndex++;
 				}
 			}
@@ -148,11 +147,9 @@ namespace RecNForget.Controls
 				promptTextBox.Name = "DialogPromptTextBox";
 				promptTextBox.IsEnabled = true;
 				promptTextBox.IsReadOnly = false;
-				Grid.SetRow(promptTextBox, currentIndex);
-				Grid.SetColumn(promptTextBox, 0);
 				promptTextBox.TextChanged += promptTextBox_TextChanged;
 				promptTextBox.Text = prompt;
-				ContentGrid.Children.Add(promptTextBox);
+				ContentGrid.InsertAt(promptTextBox, 0, currentIndex);
 
 				if (controlFocus == CustomMessageBoxFocus.Prompt)
 				{
@@ -174,9 +171,7 @@ namespace RecNForget.Controls
 				tempButton.HorizontalAlignment = HorizontalAlignment.Right;
 				tempButton.Click += okButton_Click;
 				tempButton.IsDefault = true;
-				Grid.SetRow(tempButton, 3);
-				Grid.SetColumn(tempButton, 1);
-				DialogGrid.Children.Add(tempButton);
+				DialogGrid.InsertAt(tempButton, 1, 3);
 
 				if (controlFocus == CustomMessageBoxFocus.Ok)
 				{
@@ -193,9 +188,7 @@ namespace RecNForget.Controls
 					}
 					cancelButton.HorizontalAlignment = HorizontalAlignment.Left;
 					cancelButton.Click += cancelButton_Click;
-					Grid.SetRow(cancelButton, 3);
-					Grid.SetColumn(cancelButton, 0);
-					DialogGrid.Children.Add(cancelButton);
+					DialogGrid.InsertAt(cancelButton, 0, 3);
 
 					if (controlFocus == CustomMessageBoxFocus.Cancel)
 					{

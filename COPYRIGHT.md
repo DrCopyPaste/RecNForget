@@ -1,4 +1,4 @@
-RecNForget is written in C# using .NET Framework 4.7 and Microsoft WPF
+RecNForget is written in C# using .NET Framework 4.8 and Microsoft WPF
 
 Code by DrCopyPaste [github.com/DrCopyPaste/RecNForget](https://github.com/DrCopyPaste/RecNForget)
 
@@ -18,11 +18,13 @@ The following libaries are used by RecNForget:
 
 [NAudio.1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
 
+[Nerdbank.GitVersioning.3.0.50](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
+
 [Newtonsoft.Json.12.0.3](https://www.newtonsoft.com/json) Copyright (c) James Newton-King - [MIT](https://licenses.nuget.org/MIT)
 
-[Octokit.0.37.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
+[Octokit.0.40.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
-[Ookii.Dialogs.Wpf.1.0.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot,Caio Proiete - [MIT](https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE)
+[Ookii.Dialogs.Wpf.1.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot,Caio Proiete - [License](https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE)
 
 [WiX Toolset build tools v3.11.2.4516](https://wixtoolset.org/) Copyright (c) .NET Foundation - [MS-RL](https://wixtoolset.org/about/license/)
 
@@ -295,6 +297,42 @@ windowSettings_icon248857.black.png was generated from [onlinewebfonts.com/icon/
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
 windowSettings_icon248857.svg was generated from [onlinewebfonts.com/icon/248857](https://www.onlinewebfonts.com/icon/248857)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+WixUI-logo.svg was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+WixUIBannerBmp.bmp was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+WixUIBannerBmp.png was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+WixUIDialogBmp.bmp was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+WixUIDialogBmp.png was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+logo.ico was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+logo.svg was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+logo_big.png was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+logo_small.png was generated from [onlinewebfonts.com/icon/55290](https://www.onlinewebfonts.com/icon/55290) and [onlinewebfonts.com/icon/715](https://www.onlinewebfonts.com/icon/715)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 

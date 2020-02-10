@@ -11,7 +11,7 @@
 	<Grid>
 		<TextBlock Style = "{StaticResource DefaultTextBlockStyle}" >
 			<Run>
-				RecNForget is written in C# using .NET Framework 4.7 and Microsoft WPF
+				RecNForget is written in C# using .NET Framework 4.8 and Microsoft WPF
 			</Run>
 			<LineBreak />
 			<Run>
@@ -59,23 +59,29 @@
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
 			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning.3.0.50</Hyperlink>
+			<Run>
+				 Copyright (c) Andrew Arnott - 
+			</Run>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<LineBreak />
 			<Hyperlink NavigateUri="https://www.newtonsoft.com/json" RequestNavigate="Hyperlink_RequestNavigate">Newtonsoft.Json.12.0.3</Hyperlink>
 			<Run>
 				 Copyright (c) James Newton-King - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit.0.37.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit.0.40.0</Hyperlink>
 			<Run>
 				 Copyright (c) GitHub - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf.1.0.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf.1.1.0</Hyperlink>
 			<Run>
 				 Copyright (c) Sven Groot,Caio Proiete - 
 			</Run>
-			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
 			<LineBreak />
 			<Hyperlink NavigateUri="https://wixtoolset.org/" RequestNavigate="Hyperlink_RequestNavigate">WiX Toolset build tools v3.11.2.4516</Hyperlink>
 			<Run>
@@ -1089,6 +1095,159 @@
 			</Run>
 			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
 
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUI-logo.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUIBannerBmp.bmp was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUIBannerBmp.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUIDialogBmp.bmp was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUIDialogBmp.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				logo.ico was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				logo.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				logo_big.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				logo_small.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
 			<Run>
 				 is licensed by CC BY 3.0
 			</Run>

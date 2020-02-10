@@ -616,7 +616,7 @@ namespace RecNForget.Windows
         {
             try
             {
-                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: currentVersion.Info.Version.ToString());
+                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: ThisAssembly.AssemblyFileVersion);
 
                 if (newerReleases.Any())
                 {
