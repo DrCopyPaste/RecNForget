@@ -19,7 +19,11 @@ jobs:
     - name: Restore NuGet Packages
       run: nuget restore RecNForget.sln
     - name: Nerdbank.GitVersioning
+      with:
+        setAllVars: true
       uses: AArnott/nbgv@v0.3
+    - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
+    - run: echo "NBGV_AssemblyFileVersion $NBGV_AssemblyFileVersion"
       # with:
         # The path to the directory for which the version should be determined. This should be at or below the directory containing the version.json file. Default is repo root directory.
         # path: # optional, default is .
