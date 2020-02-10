@@ -80,7 +80,7 @@ namespace RecNForget.Services.Types
 
 				// very cheap shot to include everything under RecNForget.Help.Features namespace, but not precise
 				// ToDo, cant we use nameof somehow? or make this no magic string?
-				var featureClasses = thisAssembly.GetTypes().Where(t => t.Namespace.StartsWith("RecNForget.Help.Features") && t.BaseType == typeof(HelpFeature));
+				var featureClasses = thisAssembly.GetTypes().Where(t => !string.IsNullOrEmpty(t.Namespace) && t.Namespace.StartsWith("RecNForget.Help.Features") && t.BaseType == typeof(HelpFeature));
 
 				foreach (var feature in featureClasses.OrderBy(f => f.Name))
 				{

@@ -281,7 +281,6 @@ namespace RecNForget.Windows
 
         public MainWindow()
         {
-
             DataContext = this;
             InitializeComponent();
 
@@ -292,7 +291,7 @@ namespace RecNForget.Windows
             // ensure AppConfig Values exist
             bool firstTimeUser = AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
             Version lastInstalledVersion = AppSettingHelper.GetLastInstalledVersion();
-            AppSettingHelper.UpdateLastInstalledVersion(currentVersion.Info.Version);
+            AppSettingHelper.UpdateLastInstalledVersion(new Version(ThisAssembly.AssemblyFileVersion));
 
             if (CheckForUpdateOnStart)
             {

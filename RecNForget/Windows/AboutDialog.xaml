@@ -58,7 +58,8 @@
             <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource About_Logo_Style}" />
 
             <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource ApplicationName_TextBox_Style}"
-                Text="RecNForget"/>
+                Text="RecNForget"
+                Name="AppNameAndVersion" />
             <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource VersionName_TextBox_Style}"
                 Name="VersionLabel"
                 Text="Version X.Y.Z.A" />

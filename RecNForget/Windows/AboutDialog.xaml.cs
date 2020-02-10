@@ -40,8 +40,13 @@ namespace RecNForget.Windows
         {
             InitializeComponent();
 
+            var assemblyVersion = ThisAssembly.AssemblyVersion;
+            var assemblyInformationalVersion = ThisAssembly.AssemblyInformationalVersion;
+            var assemblyFileVersion = new Version(ThisAssembly.AssemblyFileVersion);
             this.appBase = new ApplicationBase();
-            VersionLabel.Text = string.Format("{0} - {1}", appBase.Info.Version.ToString(), appBase.Info.Title);
+
+            AppNameAndVersion.Text = string.Format("RecNForget {0}", string.Format("{0}.{1}.{2}", assemblyFileVersion.Major, assemblyFileVersion.Minor, assemblyFileVersion.Build));
+            VersionLabel.Text = string.Format("{0} - v{1}", appBase.Info.Title, assemblyInformationalVersion);
         }
 
         private void CheckForUpdateButton_Click(object sender, RoutedEventArgs e)
@@ -53,7 +58,7 @@ namespace RecNForget.Windows
         {
             try
             {
-                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: appBase.Info.Version.ToString());
+                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: ThisAssembly.AssemblyInformationalVersion.ToString());
 
                 if (newerReleases.Any())
                 {
@@ -70,11 +75,11 @@ namespace RecNForget.Windows
                     System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
                         CustomMessageBox tempDialog = new CustomMessageBox(
-                        caption: "RecNForget is already up to date!",
-                        icon: CustomMessageBoxIcon.Information,
-                        buttons: CustomMessageBoxButtons.OK,
-                        messageRows: new List<string>() { "No newer version found" },
-                        controlFocus: CustomMessageBoxFocus.Ok);
+                            caption: "RecNForget is already up to date!",
+                            icon: CustomMessageBoxIcon.Information,
+                            buttons: CustomMessageBoxButtons.OK,
+                            messageRows: new List<string>() { "No newer version found" },
+                            controlFocus: CustomMessageBoxFocus.Ok);
 
                         tempDialog.ShowDialog();
                     });
