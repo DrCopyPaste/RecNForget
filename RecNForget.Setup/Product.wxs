@@ -8,7 +8,7 @@
   
   maybe even have very minor version changes depending on commit number or sth. to indicate that in the built artifact on github
   -->
-    <Product Id="*" Name="RecNForget" Language="1033" Version="0.4.0.0" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
+    <Product Id="*" Name="RecNForget" Language="1033" Version="!(bind.FileVersion.$(var.RecNForget.TargetFileName))" Manufacturer="DrCopyPaste" UpgradeCode="{6314EF38-B5B0-4344-92DB-C1F2B418DF70}">
         <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
         <UI>
           <UIRef Id="WixUI_InstallDir"/>
