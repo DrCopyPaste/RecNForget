@@ -30,7 +30,7 @@ jobs:
         # The version of the nbgv dotnet CLI tool to install and use. If not specified, the default is the latest stable version.
         # toolVersion: # optional
     - name: Build and Publish
-      run: msbuild RecNForget.Setup\RecNForget.Setup.wixproj /p:Configuration=Release
+      run: msbuild RecNForget.Setup\RecNForget.Setup.wixproj /p:Configuration=Release /p:PublicRelease=true
     - name: Upload Artifact
       uses: actions/upload-artifact@v1.0.0
       with:
