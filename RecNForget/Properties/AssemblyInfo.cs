@@ -52,5 +52,5 @@ using System.Windows;
 // by using the '*' as shown below:
 
 //IMPORTANT: dont add spaces here, this is used to determine version for setup msi file also, right now, parsing fails if this contains space
-[assembly:AssemblyVersion("0.4.0.0")]
-[assembly:AssemblyFileVersion("0.4.0.0")]
+//[assembly:AssemblyVersion("0.4.0.0")]
+//[assembly:AssemblyFileVersion("0.4.0.0")]
