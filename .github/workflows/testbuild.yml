@@ -19,9 +19,12 @@ jobs:
     - name: Restore NuGet Packages
       run: nuget restore RecNForget.sln
     - name: Nerdbank.GitVersioning
+      uses: AArnott/nbgv@v0.3
+      id: nbgv
       with:
         setAllVars: true
-      uses: AArnott/nbgv@v0.3
+    - run: echo 'SemVer2:${{ steps.nbgv.outputs.SemVer2 }}'
+    - run: echo 'AssemblyFileVersion:${{ steps.nbgv.outputs.AssemblyFileVersion }}'
     - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
     - run: echo "NBGV_AssemblyFileVersion $NBGV_AssemblyFileVersion"
       # with:
