@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>3.10</ProductVersion>
+	<ProductVersion>0.0.0.0</ProductVersion>
     <ProjectGuid>0de40921-5e11-499f-81ab-c28d267cf4a6</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>RecNForget.Setup</OutputName>
+    <OutputName>RecNForget.Setup.$(ProductVersion)</OutputName>
     <OutputType>Package</OutputType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -15,11 +15,13 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
+	<WixVariables>ProductVersion=$(ProductVersion)</WixVariables>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <SuppressPdbOutput>true</SuppressPdbOutput>
+	<WixVariables>ProductVersion=$(ProductVersion)</WixVariables>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Product.wxs" />
