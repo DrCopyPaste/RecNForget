@@ -417,6 +417,7 @@ namespace RecNForget.Windows
             trayIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
             trayIcon.Click += new EventHandler(TrayIcon_Click);
             trayIcon.DoubleClick += new EventHandler(TrayIconMenu_DoubleClick);
+            trayIcon.Visible = true;
 
             UpdateCurrentFileNameDisplay(reset: true);
 
@@ -478,13 +479,13 @@ namespace RecNForget.Windows
         private void SwitchToBackgroundMode()
         {
             this.Hide();
-            trayIcon.Visible = true;
+            //trayIcon.Visible = true;
             trayIcon.ShowBalloonTip(balloonTipTimeout, "Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", ToolTipIcon.Info);
         }
 
         private void SwitchToForegroundMode()
         {
-            trayIcon.Visible = false;
+            //trayIcon.Visible = false;
             this.Show();
         }
 
