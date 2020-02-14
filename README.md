@@ -64,7 +64,7 @@ But, if you feel extra keen to try out the latest, you can
 - added a help link to the menu (opens help window)
 - Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - can stop playing slected file using [Esc]-key in the main window
-- clicking the open folder button now selects the last result file in explorer (or just opens folder if there is now result yet)
+- clicking the open folder button now selects the last result file in explorer (or just opens folder if there is no result yet)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
 - tray icon menu now shows the same menu as the windows options menu at the top left of the main window
 - when started for the first time, RecNForget will show the toggle record and output folder setting and allow to change them
