@@ -79,10 +79,6 @@
                 <File Id="FMUtils.KeyboardHook.dll" Source="$(var.RecNForget.TargetDir)FMUtils.KeyboardHook.dll" KeyPath="yes" Checksum="yes">
                 </File>
             </Component>
-            <Component Id="Hardcodet.Wpf.TaskbarNotification.dll" Guid="{2EC12371-54C3-4E18-9E8E-47ACC3DB429C}" Directory="INSTALLFOLDER">
-                <File Id="Hardcodet.Wpf.TaskbarNotification.dll" Source="$(var.RecNForget.TargetDir)Hardcodet.Wpf.TaskbarNotification.dll" KeyPath="yes" Checksum="yes">
-                </File>
-            </Component>
             <Component Id="NAudio.dll" Guid="{26188527-54B5-43F6-A0FB-346FF378B5D3}" Directory="INSTALLFOLDER">
                 <File Id="NAudio.dll" Source="$(var.RecNForget.TargetDir)NAudio.dll" KeyPath="yes" Checksum="yes">
                 </File>
