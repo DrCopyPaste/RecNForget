@@ -45,7 +45,7 @@
         <Binary Id="CustomActionDll" SourceFile="$(var.RecNForget.Setup.Extensions.TargetDir)RecNForget.Setup.Extensions.CA.dll" />
 
         <InstallExecuteSequence>
-          <Custom Action="RemoveApplicationSettingsCA" Before="InstallFinalize">REMOVE="ALL"</Custom>
+          <Custom Action="RemoveApplicationSettingsCA" After="InstallFinalize">Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
         </InstallExecuteSequence>
 
         <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
