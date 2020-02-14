@@ -23,10 +23,10 @@ jobs:
       id: nbgv
       with:
         setAllVars: true
-    - run: echo 'SemVer2:${{ steps.nbgv.outputs.SemVer2 }}'
-    - run: echo 'AssemblyFileVersion:${{ steps.nbgv.outputs.AssemblyFileVersion }}'
-    - run: echo "NBGV_SemVer2 $NBGV_SemVer2"
-    - run: echo "NBGV_AssemblyFileVersion $NBGV_AssemblyFileVersion"
+    - name: Building semver2 version
+      run: echo 'SemVer2:${{ steps.nbgv.outputs.SemVer2 }}'
+    - name: Building assembly file version
+      run: echo 'AssemblyFileVersion:${{ steps.nbgv.outputs.AssemblyFileVersion }}'
       # with:
         # The path to the directory for which the version should be determined. This should be at or below the directory containing the version.json file. Default is repo root directory.
         # path: # optional, default is .
