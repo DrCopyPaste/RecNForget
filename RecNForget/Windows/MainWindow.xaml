@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecNForget.Controls"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         mc:Ignorable="d"
         Style="{StaticResource DefaultWindowStyle}"
         Title="RecNForget">
@@ -49,34 +47,6 @@
                 <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
             </Grid.ColumnDefinitions>
 
-            <tb:TaskbarIcon
-                Name="taskBarIcon">
-                <tb:TaskbarIcon.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Style="{StaticResource ContextMenu_Cancel_Style}"
-                            Header="Cancel" />
-                        <Separator />
-                        <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
-                            Header="Open settings" Click="SettingsButton_Click" />
-                        <Separator />
-                        <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
-                            IsCheckable="true"
-                            Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
-                        <Separator />
-                        <MenuItem Style="{StaticResource ContextMenu_About_Style}"
-                            Header="About RecNForget" Click="AboutButton_Click" />
-                        <MenuItem Style="{StaticResource ContextMenu_Help_Style}"
-                            Header="Help" Click="Help_Click" />
-                        <Separator />
-                        <MenuItem Style="{StaticResource ContextMenu_CheckUpdates_Style}"
-                            Header="Check for updates" Click="CheckUpdates_Click" />
-                        <Separator />
-                        <MenuItem Style="{StaticResource ContextMenu_ShutDown_Style}"
-                            Header="Close RecNForget" Click="Exit_Click" />
-                    </ContextMenu>
-                </tb:TaskbarIcon.ContextMenu>
-            </tb:TaskbarIcon>
-
             <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
             <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultGridStyle}">
                 <Grid.RowDefinitions>
@@ -95,25 +65,26 @@
                 <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource WindowSettingsButton}"
                     x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click">
                     <Button.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu Style="{StaticResource ContextMenu_Default_Style}"
+                            Name="WindowOptionsMenu">
                             <MenuItem Style="{StaticResource ContextMenu_Cancel_Style}"
                                 Header="Cancel" />
-                            <Separator />
+                            <Separator Style="{StaticResource MenuSeparator_Style}" />
                             <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
                                 Header="Open settings" Click="SettingsButton_Click" />
-                            <Separator />
+                            <Separator Style="{StaticResource MenuSeparator_Style}" />
                             <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
                                 IsCheckable="true"
                                 Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
-                            <Separator />
+                            <Separator Style="{StaticResource MenuSeparator_Style}" />
                             <MenuItem Style="{StaticResource ContextMenu_About_Style}"
                                 Header="About RecNForget" Click="AboutButton_Click" />
                             <MenuItem Style="{StaticResource ContextMenu_Help_Style}"
                                 Header="Help" Click="Help_Click" />
-                            <Separator />
+                            <Separator Style="{StaticResource MenuSeparator_Style}" />
                             <MenuItem Style="{StaticResource ContextMenu_CheckUpdates_Style}"
                                 Header="Check for updates" Click="CheckUpdates_Click" />
-                            <Separator />
+                            <Separator Style="{StaticResource MenuSeparator_Style}" />
                             <MenuItem Style="{StaticResource ContextMenu_ShutDown_Style}"
                                 Header="Close RecNForget" Click="Exit_Click" />
                         </ContextMenu>

@@ -89,12 +89,12 @@ namespace RecNForget.CopyRightHelper
                 licenseCaption: "License",
                 licenseUrl: "https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt");
 
-            AddLibraryLink(
-                libaryName: "Hardcodet.NotifyIcon.Wpf.1.0.8",
-                libraryUrl: "http://www.hardcodet.net/wpf-notifyicon",
-                manufacturerName: "Philipp Sumi",
-                licenseCaption: "CPOL 1.02",
-                licenseUrl: "https://www.codeproject.com/info/cpol10.aspx");
+            //AddLibraryLink(
+            //    libaryName: "Hardcodet.NotifyIcon.Wpf.1.0.8",
+            //    libraryUrl: "http://www.hardcodet.net/wpf-notifyicon",
+            //    manufacturerName: "Philipp Sumi",
+            //    licenseCaption: "CPOL 1.02",
+            //    licenseUrl: "https://www.codeproject.com/info/cpol10.aspx");
 
             AddLibraryLink(
                 libaryName: "NAudio.1.10.0",

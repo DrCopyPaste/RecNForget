@@ -1,21 +1,13 @@
-﻿using Hardcodet.Wpf.TaskbarNotification;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 
 namespace RecNForget
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application
-	{
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
         [STAThread]
         public static void Main()
         {
@@ -23,13 +15,8 @@ namespace RecNForget
             {
                 if (!appLock.TryAcquireExclusiveLock())
                 {
-                    TaskbarIcon taskbarIcon = new TaskbarIcon();
-                    taskbarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
-
-                    // show a balloon tip indicating that RecNForget is already running
-                    taskbarIcon.ShowBalloonTip("RecNForget is already running.", "Another instance of RecNForget is already running, closing this one...", taskbarIcon.Icon, true);
-                    Thread.Sleep(1000);
-
+                    // we dont have styles loaded at this point so we just show custom windwows messagebox
+                    MessageBox.Show("Another instance of RecNForget is already running, closing this one...", "RecNForget is already running.", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 

@@ -47,12 +47,6 @@
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="http://www.hardcodet.net/wpf-notifyicon" RequestNavigate="Hyperlink_RequestNavigate">Hardcodet.NotifyIcon.Wpf.1.0.8</Hyperlink>
-			<Run>
-				 Copyright (c) Philipp Sumi - 
-			</Run>
-			<Hyperlink NavigateUri="https://www.codeproject.com/info/cpol10.aspx" RequestNavigate="Hyperlink_RequestNavigate">CPOL 1.02</Hyperlink>
-			<LineBreak />
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio.1.10.0</Hyperlink>
 			<Run>
 				 Copyright (c) Mark Heath &amp; Contributors - 

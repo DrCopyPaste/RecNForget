@@ -3,25 +3,116 @@
                     xmlns:Sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:RecNForget">
 
+    <Style x:Key="ContextMenu_Default_Style" TargetType="ContextMenu">
+        <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Grid.IsSharedSizeScope" Value="true" />
+        <Setter Property="HasDropShadow" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border x:Name="Border"
+                        Background="{Binding Source={StaticResource Application_Background_Color}}"
+                        CornerRadius="3"
+                        BorderThickness="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#FF888888" />
+                        </Border.BorderBrush>
+                        <StackPanel IsItemsHost="True"
+                            KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="Base_ContextMenu_MenuItem_Style" TargetType="MenuItem">
-        <Setter Property="Margin" Value="0" />
+        <!--<Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />-->
+        <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="18" />
-        <Setter Property="Height" Value="25" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <Border x:Name="MenuItemBorder" Padding="5,0,5,0" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition Width="4" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <ContentPresenter x:Name="Icon" ContentSource="Icon" Grid.Column="0" Grid.Row="0" />
+                                <BulletDecorator x:Name="CheckMarkPicture" Grid.Column="0" Grid.Row="0"
+                                    Background="Transparent"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                    <BulletDecorator.Bullet>
+                                        <Border x:Name="Border"  
+                                            Width="{Binding Source={StaticResource CheckBox_Width}}" 
+                                            Height="{Binding Source={StaticResource CheckBox_Width}}"
+                                            Padding="1,1,1,1"
+                                            CornerRadius="3" 
+                                            Background="{Binding Source={StaticResource Font_Color}}"
+                                            BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"
+                                            BorderThickness="1">
+                                            <Image x:Name="CheckMark" Source="ButtonImages\accept_icon518267.black.white.png" VerticalAlignment="Bottom" />
+                                        </Border>
+                                        </BulletDecorator.Bullet>
+                                </BulletDecorator>
+                                <!-- Content for the menu text etc -->
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" Grid.Column="2" Grid.Row="0" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter Property="Background" TargetName="MenuItemBorder" Value="{Binding Source={StaticResource HeaderButton_Hover_Color}}"/>
+                            <Setter Property="BorderBrush" TargetName="MenuItemBorder" Value="{Binding Source={StaticResource HeaderButton_Hover_Color}}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Visibility" TargetName="CheckMarkPicture" Value="Collapsed"/>
+                            <Setter Property="Visibility" TargetName="Icon" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Visibility" TargetName="CheckMarkPicture" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Resources>
             <Style TargetType="Image">
-                <Setter Property="Stretch" Value="Uniform" />
+                <Setter Property="Width" Value="25" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
         </Style.Resources>
     </Style>
+    
+    <Style x:Key="MenuSeparator_Style" TargetType="Separator">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Border HorizontalAlignment="Stretch" Height="1" Margin="4" BorderThickness="1" BorderBrush="#FF888888"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
+    <!-- context menu image styles-->
     <Style x:Key="ContextMenu_Cancel_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
                 <Image
-                    Source="ButtonImages\cancel_icon428740.black.png" />
+                    Source="ButtonImages\cancel_icon428740.black.png"/>
             </Setter.Value>
         </Setter>
     </Style>
@@ -63,6 +154,66 @@
     </Style>
 
     <Style x:Key="ContextMenu_ShutDown_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\shutDown_icon170336.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Duplicates for trayIconContextMenu this fixes icons disappearing when two context menus used the same styles to include icons
+    
+    ToDO: find another way around this:    
+    strangely the icons of the context menu disappear (if the other menu using the same styles is opened)
+    -->
+
+    <Style x:Key="ContextMenu_Cancel_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\cancel_icon428740.black.png"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_Settings_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\settings_icon40863.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_About_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\information_icon280732.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_Help_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\help_icon544157.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_CheckUpdates_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+        <Setter Property="Icon">
+            <Setter.Value>
+                <Image
+                    Source="ButtonImages\download_icon602.black.png" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ContextMenu_ShutDown_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
                 <Image

@@ -26,7 +26,7 @@ namespace RecNForget.Windows
 			this.KeyDown += Window_KeyDown;
 
 			quickStart = new Help.General.QuickStart();
-			this.allFeatures = Services.Types.HelpFeature.All;
+			this.allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature).ToList();
 			int topicRowCount = 0;
 
 			var quickStartrowDefinition = new RowDefinition();

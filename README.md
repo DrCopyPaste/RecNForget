@@ -98,8 +98,6 @@ The following libaries are used by RecNForget:
 
 [FMUtils.KeyboardHook.1.0.140.2145](https://github.com/factormystic/FMUtils.KeyboardHook#readme) Copyright (c) Factor Mystic - [License](https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt)
 
-[Hardcodet.NotifyIcon.Wpf.1.0.8](http://www.hardcodet.net/wpf-notifyicon) Copyright (c) Philipp Sumi - [CPOL 1.02](https://www.codeproject.com/info/cpol10.aspx)
-
 [NAudio.1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
 
 [Nerdbank.GitVersioning.3.0.50](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)

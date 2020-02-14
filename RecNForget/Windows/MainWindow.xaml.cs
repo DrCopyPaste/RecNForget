@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
-using Hardcodet.Wpf.TaskbarNotification;
 using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
@@ -25,6 +24,7 @@ using RecNForget.Services.Types;
 using System.Linq;
 using System.Threading.Tasks;
 using Octokit;
+using System.Windows.Forms;
 
 namespace RecNForget.Windows
 {
@@ -33,6 +33,9 @@ namespace RecNForget.Windows
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
+        private NotifyIcon trayIcon;
+        private int balloonTipTimeout = 3000;
+
         private ApplicationBase currentVersion;
 
         private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
@@ -350,8 +353,8 @@ namespace RecNForget.Windows
                     UpdateCurrentFileNameDisplay();
                     if (ShowBalloonTipsForRecording)
                     {
-                        taskBarIcon.ShowBalloonTip("Recording started!", "RecNForget now recording...", taskBarIcon.Icon, true);
-                        taskBarIcon.TrayBalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
+                        trayIcon.ShowBalloonTip(balloonTipTimeout, "Recording started!", "RecNForget now recording...", ToolTipIcon.Info);
+                        trayIcon.BalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
                     }
                     if (PlayAudioFeedBackMarkingStartAndStopRecording)
                     {
@@ -367,8 +370,8 @@ namespace RecNForget.Windows
                     TaskBar_ProgressState = "Paused";
                     if (ShowBalloonTipsForRecording)
                     {
-                        taskBarIcon.ShowBalloonTip("Recording saved!", audioRecordingService.LastFileName, taskBarIcon.Icon, true);
-                        taskBarIcon.TrayBalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
+                        trayIcon.ShowBalloonTip(balloonTipTimeout, "Recording saved!", audioRecordingService.LastFileName, ToolTipIcon.Info);
+                        trayIcon.BalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
                     }
                     recordingTimer.Stop();
                     if (PlayAudioFeedBackMarkingStartAndStopRecording)
@@ -409,9 +412,11 @@ namespace RecNForget.Windows
             CurrentAudioPlayState = false;
 
             this.Topmost = WindowAlwaysOnTop;
-            taskBarIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
-            taskBarIcon.DoubleClickCommand = new SimpleActionCommand(() => { SwitchToForegroundMode(); });
-            taskBarIcon.Visibility = Visibility.Visible;
+
+            trayIcon = new System.Windows.Forms.NotifyIcon();
+            trayIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
+            trayIcon.Click += new EventHandler(TrayIcon_Click);
+            trayIcon.DoubleClick += new EventHandler(TrayIconMenu_DoubleClick);
 
             UpdateCurrentFileNameDisplay(reset: true);
 
@@ -451,8 +456,15 @@ namespace RecNForget.Windows
                 ShowRandomApplicationTip();
             }
         }
+               
+        private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenSettingsMenu();
 
-        private void TaskBarIcon_TrayBalloonTipClicked(object sender, RoutedEventArgs e)
+            e.Handled = true;
+        }
+
+        private void TaskBarIcon_TrayBalloonTipClicked(object sender, EventArgs e)
         {
             if (audioRecordingService.LastFileName == string.Empty || !File.Exists(audioRecordingService.LastFileName))
             {
@@ -466,11 +478,13 @@ namespace RecNForget.Windows
         private void SwitchToBackgroundMode()
         {
             this.Hide();
-            taskBarIcon.ShowBalloonTip("Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", taskBarIcon.Icon, true);
+            trayIcon.Visible = true;
+            trayIcon.ShowBalloonTip(balloonTipTimeout, "Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", ToolTipIcon.Info);
         }
 
         private void SwitchToForegroundMode()
         {
+            trayIcon.Visible = false;
             this.Show();
         }
 
@@ -478,7 +492,7 @@ namespace RecNForget.Windows
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            if (MinimizedToTray)
+            if (MinimizedToTray && this.IsVisible)
             {
                 var closeOrBackgroundDialog = new CloseOrBackgroundDialog()
                 {
@@ -518,7 +532,20 @@ namespace RecNForget.Windows
                 this.DragMove();
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void TrayIcon_Click(object sender, EventArgs e)
+        {
+            if ((e as System.Windows.Forms.MouseEventArgs).Button == MouseButtons.Right)
+            {
+                OpenSettingsMenu();
+            }
+        }
+
+        private void TrayIconMenu_DoubleClick(object sender, EventArgs e)
+        {
+            SwitchToForegroundMode();
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
@@ -733,6 +760,11 @@ namespace RecNForget.Windows
             recordingFeedbackAudioService.KillAudio(reset: true);
         }
 
+        private void OpenSettingsMenu(UIElement owner = null)
+        {
+            WindowOptionsMenu.IsOpen = true;
+        }
+
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             var helpmenu = new HelpWindow();
@@ -790,19 +822,8 @@ namespace RecNForget.Windows
         {
             if (e.ChangedButton == MouseButton.Right)
             {
-                ContextMenu contextMenu = WindowOptionsButton.ContextMenu;
-                contextMenu.IsOpen = true;
+                OpenSettingsMenu();
             }
-        }
-
-        private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
-        {
-            Button button = sender as Button;
-            ContextMenu contextMenu = button.ContextMenu;
-            contextMenu.PlacementTarget = button;
-            contextMenu.IsOpen = true;
-
-            e.Handled = true;
         }
 
         private void ChangeFileNamePatternButton_Clicked(object sender, RoutedEventArgs e)
