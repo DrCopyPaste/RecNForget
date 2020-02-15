@@ -18,6 +18,35 @@
         </NodeName>
         -->
 
+    <Window.ContextMenu>
+        <ContextMenu Style="{StaticResource ContextMenu_Default_Style}"
+            Name="WindowOptionsMenu">
+            <MenuItem Style="{StaticResource ContextMenu_Cancel_Style}"
+                Header="Cancel" />
+            <Separator Style="{StaticResource MenuSeparator_Style}" />
+            <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
+                Header="Open settings" Click="SettingsButton_Click" />
+            <Separator Style="{StaticResource MenuSeparator_Style}" />
+            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
+                IsCheckable="true"
+                Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
+            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
+                IsCheckable="true"
+                Header="run in background" IsChecked="{Binding Path=MinimizedToTray}"/>
+            <Separator Style="{StaticResource MenuSeparator_Style}" />
+            <MenuItem Style="{StaticResource ContextMenu_About_Style}"
+                Header="About RecNForget" Click="AboutButton_Click" />
+            <MenuItem Style="{StaticResource ContextMenu_Help_Style}"
+                Header="Help" Click="Help_Click" />
+            <Separator Style="{StaticResource MenuSeparator_Style}" />
+            <MenuItem Style="{StaticResource ContextMenu_CheckUpdates_Style}"
+                Header="Check for updates" Click="CheckUpdates_Click" />
+            <Separator Style="{StaticResource MenuSeparator_Style}" />
+            <MenuItem Style="{StaticResource ContextMenu_ShutDown_Style}"
+                Header="Close RecNForget" Click="Exit_Click" />
+        </ContextMenu>
+    </Window.ContextMenu>
+
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
         <Grid Style="{StaticResource DefaultGridStyle}"
             MouseDown="Window_MouseDown">
@@ -63,33 +92,7 @@
                 </Grid.ColumnDefinitions>
 
                 <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource WindowSettingsButton}"
-                    x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click">
-                    <Button.ContextMenu>
-                        <ContextMenu Style="{StaticResource ContextMenu_Default_Style}"
-                            Name="WindowOptionsMenu">
-                            <MenuItem Style="{StaticResource ContextMenu_Cancel_Style}"
-                                Header="Cancel" />
-                            <Separator Style="{StaticResource MenuSeparator_Style}" />
-                            <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
-                                Header="Open settings" Click="SettingsButton_Click" />
-                            <Separator Style="{StaticResource MenuSeparator_Style}" />
-                            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
-                                IsCheckable="true"
-                                Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
-                            <Separator Style="{StaticResource MenuSeparator_Style}" />
-                            <MenuItem Style="{StaticResource ContextMenu_About_Style}"
-                                Header="About RecNForget" Click="AboutButton_Click" />
-                            <MenuItem Style="{StaticResource ContextMenu_Help_Style}"
-                                Header="Help" Click="Help_Click" />
-                            <Separator Style="{StaticResource MenuSeparator_Style}" />
-                            <MenuItem Style="{StaticResource ContextMenu_CheckUpdates_Style}"
-                                Header="Check for updates" Click="CheckUpdates_Click" />
-                            <Separator Style="{StaticResource MenuSeparator_Style}" />
-                            <MenuItem Style="{StaticResource ContextMenu_ShutDown_Style}"
-                                Header="Close RecNForget" Click="Exit_Click" />
-                        </ContextMenu>
-                    </Button.ContextMenu>
-                </local:ImageButton>
+                    x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}"
                     Click="MinimizeButton_Click" />
                 <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}"
@@ -125,13 +128,6 @@
                         Click="ChangeOutputFolderButton_Clicked"/>
                 </Grid>
             </Border>
-
-            <!--<Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
-                Content="Use file name" />
-            <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
-                IsEnabled="True"
-                Text="{Binding Path=FilenamePrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="FilenamePrefix_Changed"/>-->
 
             <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
             <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"

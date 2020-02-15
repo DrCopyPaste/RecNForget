@@ -37,8 +37,10 @@ But, if you feel extra keen to try out the latest, you can
 (downloading is currently only allowed for github users it seems)
 
 # upcoming features in next release
+- due to breaking changes user settings will be reset when installing this upgrade
 - migrated to .NET Framework 4.8
 
+- FIX: upgrading deletes existing user data
 - FIX: uninstalling RecNForget will now also delete all application data (under %APPDATA% machine configuration and in registry for autostart)
 - FIX: clicking the open folder button does not crash RecNForget anymore, if that folder does not (yet) exist
 - FIX: changing the file prefix changes the displayed file name with output path
@@ -46,9 +48,9 @@ But, if you feel extra keen to try out the latest, you can
 - default hotkey for "toggle record" is now [Pause]
 - shrinked main window in size and reorganized controls a bit
 - all action buttons now are in the same row at the bottom
-- no more standard title bar
+- moved always on top option to context menu
 - added icons for most buttons
-- can select the slected file in the explorer using [Down-Arrow]-key in the main window
+- can select the selected file in the explorer using [Down-Arrow]-key in the main window
 - can play/pause slected file using [Space]-key in the main window
 - added skip buttons to navigate through output folder (auto selects the latest file on program start)
 - can skip to previous/next file using [Left-Arrow]/[Right-Arrow]-key in the main window

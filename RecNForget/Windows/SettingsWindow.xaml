@@ -177,10 +177,6 @@
                     auto start
                 </CheckBox>
                 <CheckBox Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=MinimizedToTray}" >
-                    run in background
-                </CheckBox>
-                <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
                     IsChecked="{Binding Path=AutoSelectLastRecording}" >
                     auto select last recording
                 </CheckBox>

@@ -7,24 +7,16 @@ using RecNForget.Services.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using System.Windows.Shell;
-using System.Windows.Threading;
-using RecNForget.Services.Types;
-using System.Linq;
 using System.Threading.Tasks;
-using Octokit;
+using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace RecNForget.Windows
 {
@@ -114,6 +106,12 @@ namespace RecNForget.Windows
             {
                 AppSettingHelper.SetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop, value.ToString());
                 this.Topmost = value;
+
+                if (value == true)
+                {
+                    MinimizedToTray = false;
+                }
+
                 OnPropertyChanged();
             }
         }
@@ -242,6 +240,22 @@ namespace RecNForget.Windows
             {
                 return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MinimizedToTray));
             }
+
+            set
+            {
+                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.MinimizedToTray, value.ToString());
+                OnPropertyChanged();
+
+                if (value == true)
+                {
+                    WindowAlwaysOnTop = false;
+                    SwitchToBackgroundMode();
+                }
+                else
+                {
+                    SwitchToForegroundMode();
+                }
+            }
         }
 
         public bool AutoSelectLastRecording
@@ -289,7 +303,6 @@ namespace RecNForget.Windows
 
             currentVersion = new ApplicationBase();
             this.KeyDown += Window_KeyDown;
-            this.MouseDown += Window_Click;
 
             // ensure AppConfig Values exist
             bool firstTimeUser = AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
@@ -817,14 +830,6 @@ namespace RecNForget.Windows
         private void CheckUpdates_Click(object sender, RoutedEventArgs e)
         {
             Task.Run(() => { CheckForUpdates(showMessages: true); });
-        }
-
-        private void Window_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Right)
-            {
-                OpenSettingsMenu();
-            }
         }
 
         private void ChangeFileNamePatternButton_Clicked(object sender, RoutedEventArgs e)
