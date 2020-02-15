@@ -27,12 +27,19 @@
             <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
                 Header="Open settings" Click="SettingsButton_Click" />
             <Separator Style="{StaticResource MenuSeparator_Style}" />
+            
+            <!-- using click events here instead of bindings, because binding does not work, when displaying this context menu from a session that started "minimized to tray" -->
             <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
                 IsCheckable="true"
-                Header="always on top" IsChecked="{Binding Path=WindowAlwaysOnTop}"/>
+                Header="always on top" Click="ToggleAlwaysOnTop"
+                Name="AlwaysOnTopMenuEntry" />
+
+            <!-- using click events here instead of bindings, because binding does not work, when displaying this context menu from a session that started "minimized to tray" -->
             <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
                 IsCheckable="true"
-                Header="run in background" IsChecked="{Binding Path=MinimizedToTray}"/>
+                Header="run in background" Click="ToggleMinimizedToTray"
+                Name="MinimizedToTrayMenuEntry" />
+            
             <Separator Style="{StaticResource MenuSeparator_Style}" />
             <MenuItem Style="{StaticResource ContextMenu_About_Style}"
                 Header="About RecNForget" Click="AboutButton_Click" />

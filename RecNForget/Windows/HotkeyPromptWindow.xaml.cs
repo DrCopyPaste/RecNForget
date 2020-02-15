@@ -55,8 +55,8 @@ namespace RecNForget.Windows
 				HotkeyDisplay.Children.Clear();
 			}
 			
-			var buttonGrid = HotkeyToStringTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeyToStringTranslator.GetKeyboardHookEventArgsAsList(e, string.Empty, string.Empty),
+			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+				hotkeys: HotkeySettingTranslator.GetKeyboardHookEventArgsAsList(e, string.Empty, string.Empty),
 				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
 				spacing: 6);
 

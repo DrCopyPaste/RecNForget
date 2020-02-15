@@ -309,6 +309,21 @@ namespace RecNForget.Windows
             Version lastInstalledVersion = AppSettingHelper.GetLastInstalledVersion();
             AppSettingHelper.UpdateLastInstalledVersion(new Version(ThisAssembly.AssemblyFileVersion));
 
+            // Workaround: binding to main window properties when session started "minimized to tray" does not work
+            AlwaysOnTopMenuEntry.IsChecked = WindowAlwaysOnTop;
+            MinimizedToTrayMenuEntry.IsChecked = MinimizedToTray;
+
+            // try restore last window positon
+            try
+            {
+                this.Left = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowLeftX));
+                this.Top = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowTopY));
+            }
+            catch (Exception)
+            {
+                // do nothing, if there is an exception, this means the x/y settings just dont exist yet, window will be positioned due to Windows likings
+            }
+
             if (CheckForUpdateOnStart)
             {
                 Task.Run(() => { CheckForUpdates(); });
@@ -414,7 +429,7 @@ namespace RecNForget.Windows
                 });
 
             this.hotkeyService = new HotkeyService();
-            this.hotkeyService.AddHotkey(() => { return HotkeyToStringTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
+            this.hotkeyService.AddHotkey(() => { return HotkeySettingTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
 
             SelectedFileService = new SelectedFileService();
             if (SelectedFileService.SelectLatestFile())
@@ -489,6 +504,22 @@ namespace RecNForget.Windows
             System.Diagnostics.Process.Start("explorer.exe", argument);
         }
 
+        private void ToggleAlwaysOnTop(object sender, EventArgs e)
+        {
+            WindowAlwaysOnTop = !WindowAlwaysOnTop;
+
+            AlwaysOnTopMenuEntry.IsChecked = WindowAlwaysOnTop;
+            MinimizedToTrayMenuEntry.IsChecked = MinimizedToTray;
+        }
+
+        private void ToggleMinimizedToTray(object sender, EventArgs e)
+        {
+            MinimizedToTray = !MinimizedToTray;
+
+            MinimizedToTrayMenuEntry.IsChecked = MinimizedToTray;
+            AlwaysOnTopMenuEntry.IsChecked = WindowAlwaysOnTop;
+        }
+
         private void SwitchToBackgroundMode()
         {
             this.Hide();
@@ -506,6 +537,8 @@ namespace RecNForget.Windows
 
         protected override void OnClosing(CancelEventArgs e)
         {
+            bool continueRunning = false;
+
             if (MinimizedToTray && this.IsVisible)
             {
                 var closeOrBackgroundDialog = new CloseOrBackgroundDialog()
@@ -517,9 +550,16 @@ namespace RecNForget.Windows
 
                 if (dialogResult.HasValue && dialogResult.Value)
                 {
+                    continueRunning = true;
                     e.Cancel = true;
                     SwitchToBackgroundMode();
                 }
+            }
+
+            if (!continueRunning)
+            {
+                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.MainWindowLeftX, this.Left.ToString());
+                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.MainWindowTopY, this.Top.ToString());
             }
         }
 

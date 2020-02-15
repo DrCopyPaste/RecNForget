@@ -40,8 +40,8 @@ namespace RecNForget.Windows
 
 			this.Title = "New to RecNForget?";
 
-			var buttonGrid = HotkeyToStringTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeyToStringTranslator.GetHotkeySettingAsList(AppSettingHelper.HotKey_StartStopRecording, string.Empty, string.Empty),
+			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(AppSettingHelper.HotKey_StartStopRecording, string.Empty, string.Empty),
 				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
 				spacing: 6);
 
@@ -55,8 +55,8 @@ namespace RecNForget.Windows
 				HotkeyDisplay.Children.Clear();
 			}
 
-			var buttonGrid = HotkeyToStringTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeyToStringTranslator.GetHotkeySettingAsList(AppSettingHelper.HotKey_StartStopRecording, string.Empty, string.Empty),
+			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(AppSettingHelper.HotKey_StartStopRecording, string.Empty, string.Empty),
 				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
 				spacing: 6);
 
@@ -81,7 +81,7 @@ namespace RecNForget.Windows
 		{
 			get
 			{
-				return HotkeyToStringTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording);
+				return HotkeySettingTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording);
 			}
 
 			set

@@ -49,6 +49,7 @@ But, if you feel extra keen to try out the latest, you can
 - shrinked main window in size and reorganized controls a bit
 - all action buttons now are in the same row at the bottom
 - moved always on top option to context menu
+- window position is now remembered after closing the application
 - added icons for most buttons
 - can select the selected file in the explorer using [Down-Arrow]-key in the main window
 - can play/pause slected file using [Space]-key in the main window

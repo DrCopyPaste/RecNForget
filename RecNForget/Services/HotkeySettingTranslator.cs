@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace RecNForget.Services
 {
-	public class HotkeyToStringTranslator
+	public class HotkeySettingTranslator
 	{
 		public static string GetHotkeySettingAsString(string settingKey, string keySeparator = " + ", string keyStart = "[", string keyEnd = "]")
 		{
@@ -92,12 +92,12 @@ namespace RecNForget.Services
 			return keys;
 		}
 
-		public static Grid GetHotkeyListAsButtonGrid(List<string> hotkeys, Style buttonStyle = null, double? spacing = null)
+		public static Grid GetHotkeyListAsButtonGrid(List<string> hotkeys, Style buttonStyle = null, double? spacing = null, System.Windows.HorizontalAlignment horizontalAlignment = System.Windows.HorizontalAlignment.Center)
 		{
 			int currentIndex = 0;
 			var buttonGrid = new Grid();
 
-			buttonGrid.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+			buttonGrid.HorizontalAlignment = horizontalAlignment;
 
 			var rowDefinition = new RowDefinition();
 			rowDefinition.Height = GridLength.Auto;

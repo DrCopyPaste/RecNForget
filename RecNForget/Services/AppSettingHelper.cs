@@ -27,6 +27,9 @@ namespace RecNForget.Services
         public static string ShowTipsAtApplicationStart = "ShowTipsAtApplicationStart";
         public static string LastInstalledVersion = "LastInstalledVersion";
 
+        public static string MainWindowLeftX = "MainWindowLeftX";
+        public static string MainWindowTopY = "MainWindowTopY";
+
         private static string UserConfigFileFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppSettingHelper.ApplicationName, "user.config");
 
         public static string GetEmptyUserConfigFile()

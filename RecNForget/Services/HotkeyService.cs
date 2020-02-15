@@ -41,7 +41,7 @@ namespace RecNForget.Services
 		{
 			if (!this.paused)
 			{
-				string keyAsString = HotkeyToStringTranslator.GetKeyboardHookEventArgsAsString(e);
+				string keyAsString = HotkeySettingTranslator.GetKeyboardHookEventArgsAsString(e);
 
                 for (int i = 0; i < hotkeyMappings.Count; i++)
                 {
