@@ -1,4 +1,3 @@
-# customize check for updates
 You can have RecNForget automatically check for updates when it starts.
 (this is enabled by default)
 

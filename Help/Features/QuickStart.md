@@ -1,4 +1,3 @@
-# Quick Start
 The [Pause] key is the default hotkey to toggle recording:
 - just press once to start recording
 - press again to save the audio file

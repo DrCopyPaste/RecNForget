@@ -1,4 +1,3 @@
-# customize audio signal on record start/stop
 You can have RecNForget signal the start and end of its recording with a short audio feedback.
 (this is enabled by default)
 

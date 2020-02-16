@@ -1,4 +1,3 @@
-# customize 'toggle record' hotkey
 You can change the global hotkey to start or stop recording.
 (By default this hotkey is set to [Pause])
 

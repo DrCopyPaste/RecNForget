@@ -45,32 +45,31 @@ But, if you feel extra keen to try out the latest, you can
 - FIX: clicking the open folder button does not crash RecNForget anymore, if that folder does not (yet) exist
 - FIX: changing the file prefix changes the displayed file name with output path
 
-- default hotkey for "toggle record" is now [Pause]
-- shrinked main window in size and reorganized controls a bit
-- all action buttons now are in the same row at the bottom
+- reworked controls of the main window to use a simple white and black "theme"
+- window options and settings can be opened via context menu on the main window
 - moved always on top option to context menu
-- window position is now remembered after closing the application
-- added icons for most buttons
-- can select the selected file in the explorer using [Down-Arrow]-key in the main window
-- can play/pause slected file using [Space]-key in the main window
+- file name pattern textbox no longer in main window (it is instead configured by the pencil button next to "recording path" or via settings menu)
+- Selected File Control is now hidden by default (can be changed in the context menu)
+- Output Path Control is now hidden by default (can be changed in the context menu)
+- default hotkey for "toggle record" is now [Pause]
 - added skip buttons to navigate through output folder (auto selects the latest file on program start)
+- added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
+- can select the selected file in the explorer using [Down-Arrow]-key in the main window
+- can play/pause selected file using [Space]-key in the main window
 - can skip to previous/next file using [Left-Arrow]/[Right-Arrow]-key in the main window
 - can rename selected file via pencil icon next to "selected file"
 - can rename slected file using [Return]-key in the main window
 - can delete selected file via trash can icon next to "selected file"
 - can delete selected file using [Delete]-key in the main window
-- window options and settings can be opened via context menu on the main window
-- file name pattern textbox no longer in main window (it is instead configured by the pencil button next to "recording path" or via settings menu)
 - can configure target path via folder icon next to "recording path"
-- consistently use white background for (almost) all controls
 - auto selecting the last recording is now optional (enabled by default)
 - added a help link to the menu (opens help window)
-- Added a stop-replay button (this also closes the file in RecNForget enabling you to move or rename it...)
 - can stop playing slected file using [Esc]-key in the main window
 - clicking the open folder button now selects the last result file in explorer (or just opens folder if there is no result yet)
 - Taskbar Icon background turns green when replaying the last audio (stays green also when paused to remind you that the file is still open)
 - tray icon menu now shows the same menu as the windows options menu at the top left of the main window
 - when started for the first time, RecNForget will show the toggle record and output folder setting and allow to change them
+- window position is now remembered after closing the application
 - RecNForget can now update itself via clicking the about-button (via top left window button) and then "check for updates"
 - RecNForget can now show random tips on program start (did you know?) (enabled by default)
 - Installation is cancelled if .Net framework is not found

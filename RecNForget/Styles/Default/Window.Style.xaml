@@ -13,13 +13,5 @@
     <Style x:Key="Info_WindowStyle" TargetType="{x:Type Window}" BasedOn="{StaticResource DefaultWindowStyle}">
         <Setter Property="MaxWidth" Value="600" />
     </Style>
-
-    <Style x:Key="DefaultWindowBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource ApplicationBorder_Color}}" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
-        <Setter Property="BorderThickness" Value="1,1,1,1" />
-        <Setter Property="CornerRadius" Value="3,3,3,3" />
-        <Setter Property="Padding" Value="2,2,2,2" />
-    </Style>
     
 </ResourceDictionary>

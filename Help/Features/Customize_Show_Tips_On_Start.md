@@ -1,4 +1,3 @@
-# customize show tips on start
 You can have RecNForget show you a random feature you may or may not know yet.
 (this is enabled by default)
 

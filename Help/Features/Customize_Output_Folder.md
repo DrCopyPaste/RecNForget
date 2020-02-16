@@ -1,4 +1,3 @@
-# customize output folder
 You can change the output folder RecNForget puts recorded files into.
 
 To change this setting:

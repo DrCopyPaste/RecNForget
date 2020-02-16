@@ -1,4 +1,3 @@
-# customize always on top
 You can set the main window to be always on top.
 (this is disabled by default)
 

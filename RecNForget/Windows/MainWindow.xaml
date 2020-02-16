@@ -27,7 +27,19 @@
             <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
                 Header="Open settings" Click="SettingsButton_Click" />
             <Separator Style="{StaticResource MenuSeparator_Style}" />
-            
+
+            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
+                IsCheckable="true"
+                Header="Output Path Control" Click="ToggleOutputPathControlVisibility"
+                Name="OutputPathControlVisibilityMenuEntry" />
+
+            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
+                IsCheckable="true"
+                Header="Selected File Control" Click="ToggleSelectedFileControlVisibility"
+                Name="SelectedFileControlVisibilityMenuEntry" />
+
+            <Separator Style="{StaticResource MenuSeparator_Style}" />
+
             <!-- using click events here instead of bindings, because binding does not work, when displaying this context menu from a session that started "minimized to tray" -->
             <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
                 IsCheckable="true"
@@ -39,7 +51,7 @@
                 IsCheckable="true"
                 Header="run in background" Click="ToggleMinimizedToTray"
                 Name="MinimizedToTrayMenuEntry" />
-            
+
             <Separator Style="{StaticResource MenuSeparator_Style}" />
             <MenuItem Style="{StaticResource ContextMenu_About_Style}"
                 Header="About RecNForget" Click="AboutButton_Click" />
@@ -54,131 +66,21 @@
         </ContextMenu>
     </Window.ContextMenu>
 
-    <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Style="{StaticResource DefaultGridStyle}"
-            MouseDown="Window_MouseDown">
+    <Border Style="{StaticResource OuterHitBoxindowBorderStyle}"
+        MouseLeave="MainWindow_MouseLeave" MouseEnter="MainWindow_MouseEnter" MouseDown="Window_MouseDown">
+        <Grid>
             <Grid.RowDefinitions>
-                <!-- row 0 for title bar-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 for separator-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 2 for current file display title-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 3 for current file display-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 4 for separator-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 5 for file prefix title-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 6 for file prefix-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 7 for separator-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 8 for action buttons title-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 9 for action buttons-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
             </Grid.ColumnDefinitions>
 
-            <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
-            <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultGridStyle}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                </Grid.ColumnDefinitions>
-
-                <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource WindowSettingsButton}"
-                    x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}"
-                    Click="MinimizeButton_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}"
-                    Click="Exit_Click" />
-            </Grid>
-
-            <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
-                Content="Recording Path"/>
-            <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultWindowBorderStyle}">
-                <Grid Style="{StaticResource DefaultGridStyle}" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="13*"/>
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Row="0" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
-                        Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <local:ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
-                        ToolTip="change output file name"
-                        Click="ChangeFileNamePatternButton_Clicked"/>
-
-                    <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeOutputFolderMiniButtonLayout}"
-                        ToolTip="change output folder"
-                        Click="ChangeOutputFolderButton_Clicked"/>
-                </Grid>
-            </Border>
-
-            <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
-                Content="Selected file" />
-
-            <Border Grid.Row="6" Grid.Column="0"
-                BorderThickness="1"
-                Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
-                Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
-                BorderBrush="{Binding Source={StaticResource Font_Color}}"
-                CornerRadius="3"
-                Background="{Binding Source={StaticResource Application_Background_Color}}">
-                <Grid Style="{StaticResource DefaultGridStyle}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="13*" />
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                        <ColumnDefinition
-                            Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Row="6" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
-                        Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                    <local:ImageButton Grid.Row="0" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
-                        ToolTip="rename selected file (Hotkey: [Return])"
-                        x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
-
-                    <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource DeleteSelectedFileMiniButtonLayout}"
-                        ToolTip="delete selected file (Hotkey: [Delete])"
-                        x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
-                </Grid>
-            </Border>
-
-            <Rectangle Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-            <Label Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultLabelStyle}"
-                Content="Actions" />
-
-            <Border Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultWindowBorderStyle}">
-                <Grid Style="{StaticResource DefaultGridStyle}">
+            <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="0"
+                Name="TitleBar" Visibility="Hidden">
+                <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
+                <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultGridStyle}">
                     <Grid.RowDefinitions>
                         <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                     </Grid.RowDefinitions>
@@ -189,40 +91,159 @@
                         <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                         <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                         <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
                         <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                     </Grid.ColumnDefinitions>
 
-                    <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
-                        ToolTip="select selected file in explorer (Hotkey: [Down-Arrow])"
-                        x:Name="OpenSelectedFileButton" Click="OpenOutputFolder_Click" />
-                    <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
-                        IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
-                        IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
-                        ToolTip="skip to previous file (Hotkey: [Left-Arrow])"
-                        x:Name="SkipPrevButton" Click="SkipPrevButton_Click"/>
-                    <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PlayButton}"
-                        IsEnabled="False"
-                        ToolTip="play selected file (Hotkey: [Space])"
-                        x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
-                    <local:ImageButton Grid.Row="0" Grid.Column="3" Style="{StaticResource PauseButton}"
-                        IsEnabled="False" Visibility="Collapsed"
-                        ToolTip="pause playing selected file (Hotkey: [Space])"
-                        x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
-                    <local:ImageButton Grid.Row="0" Grid.Column="4" Style="{StaticResource StopButton}"
-                        IsEnabled="{Binding Path=CurrentAudioPlayState, Mode=TwoWay}"
-                        ToolTip="stop playing audio (Hotkey: [Esc])"
-                        x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
-                    <local:ImageButton Grid.Row="0" Grid.Column="5" Style="{StaticResource NextTrackButton}"
-                        IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
-                        IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
-                        ToolTip="skip to next file (Hotkey: [Right-Arrow])"
-                        x:Name="SkipNextButton" Click="SkipNextButton_Click"/>
-                    <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource RecordButton}"
-                        x:Name="RecordButton" Click="RecordButton_Click" />
-                    <local:ImageButton Grid.Row="0" Grid.Column="7" Style="{StaticResource StopRecordButton}"
-                        Visibility="Collapsed"
-                        x:Name="StopRecordButton" Click="RecordButton_Click" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource WindowSettingsButton}"
+                            x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}"
+                            Click="MinimizeButton_Click" />
+                    <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}"
+                            Click="Exit_Click" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
+                <Grid Style="{StaticResource DefaultGridStyle}">
+                    <Grid.RowDefinitions>
+                        <!-- row 0 for title bar-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 1 for separator-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 2 for current file display title-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 3 for current file display-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 4 for separator-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 5 for file prefix title-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 6 for file prefix-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 7 for separator-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 8 for action buttons title-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                        <!-- row 9 for action buttons-->
+                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultControlBorderStyle}"
+                        x:Name="OutputPathControl">
+                        <Grid Style="{StaticResource DefaultGridStyle}" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="13*"/>
+                                <ColumnDefinition
+                                    Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                                <ColumnDefinition
+                                    Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource ControlLabelStyle}"
+                                Content="Output Path"/>
+
+                            <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
+                                Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
+                                ToolTip="change output file name"
+                                Click="ChangeFileNamePatternButton_Clicked"/>
+
+                            <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ChangeOutputFolderMiniButtonLayout}"
+                                ToolTip="change output folder"
+                                Click="ChangeOutputFolderButton_Clicked"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultControlBorderStyle}"
+                        x:Name="SelectedFileControl">
+                        <Grid Style="{StaticResource DefaultGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="13*" />
+                                <ColumnDefinition
+                                    Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                                <ColumnDefinition
+                                    Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource ControlLabelStyle}"
+                                Content="Selected file" />
+
+                            <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
+                                Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
+                                ToolTip="rename selected file (Hotkey: [Return])"
+                                x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
+
+                            <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource DeleteSelectedFileMiniButtonLayout}"
+                                ToolTip="delete selected file (Hotkey: [Delete])"
+                                x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultWindowBorderStyle}">
+                        <Grid Style="{StaticResource DefaultGridStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                                <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                                <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                            </Grid.ColumnDefinitions>
+
+                            <local:ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
+                                ToolTip="select selected file in explorer (Hotkey: [Down-Arrow])"
+                                x:Name="OpenSelectedFileButton" Click="OpenOutputFolder_Click" />
+                            <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
+                                IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                                IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
+                                ToolTip="skip to previous file (Hotkey: [Left-Arrow])"
+                                x:Name="SkipPrevButton" Click="SkipPrevButton_Click"/>
+                            <local:ImageButton Grid.Row="1" Grid.Column="3" Style="{StaticResource PlayButton}"
+                                IsEnabled="False"
+                                ToolTip="play selected file (Hotkey: [Space])"
+                                x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
+                            <local:ImageButton Grid.Row="1" Grid.Column="3" Style="{StaticResource PauseButton}"
+                                IsEnabled="False" Visibility="Collapsed"
+                                ToolTip="pause playing selected file (Hotkey: [Space])"
+                                x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
+                            <local:ImageButton Grid.Row="1" Grid.Column="4" Style="{StaticResource StopButton}"
+                                IsEnabled="{Binding Path=CurrentAudioPlayState, Mode=TwoWay}"
+                                ToolTip="stop playing audio (Hotkey: [Esc])"
+                                x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
+                            <local:ImageButton Grid.Row="1" Grid.Column="5" Style="{StaticResource NextTrackButton}"
+                                IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile, Mode=TwoWay}"
+                                IsEnabledCondition2="{Binding Path=CurrentlyNotRecording, Mode=TwoWay}"
+                                ToolTip="skip to next file (Hotkey: [Right-Arrow])"
+                                x:Name="SkipNextButton" Click="SkipNextButton_Click"/>
+                            <local:ImageButton Grid.Row="1" Grid.Column="7" Style="{StaticResource RecordButton}"
+                                x:Name="RecordButton" Click="RecordButton_Click" />
+                            <local:ImageButton Grid.Row="1" Grid.Column="7" Style="{StaticResource StopRecordButton}"
+                                Visibility="Collapsed"
+                                x:Name="StopRecordButton" Click="RecordButton_Click" />
+                        </Grid>
+                    </Border>
                 </Grid>
             </Border>
         </Grid>

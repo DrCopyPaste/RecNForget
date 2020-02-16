@@ -1,4 +1,3 @@
-# customize output file pattern
 You can change the file pattern RecNForget uses to create new files.
 
 To change this setting:

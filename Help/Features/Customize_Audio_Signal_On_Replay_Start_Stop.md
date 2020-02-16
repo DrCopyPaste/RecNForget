@@ -1,4 +1,3 @@
-# customize audio signal on replay start/stop
 You can have RecNForget signal the start and end of it replaying a file with a short audio feedback.
 (this is disabled by default)
 

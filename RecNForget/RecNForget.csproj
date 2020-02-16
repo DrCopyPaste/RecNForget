@@ -97,6 +97,8 @@
     <Compile Include="Controls\CopyrightControl.xaml.cs">
       <DependentUpon>CopyrightControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Help\Features\Customize_SelectedFileControlVisibility.cs" />
+    <Compile Include="Help\Features\Customize_OutputPathControlVisibility.cs" />
     <Compile Include="Help\Features\Info_MajorUIRework04.cs" />
     <Compile Include="Help\Features\Fix_FilePrefixDidntAffectDisplayedFileNames.cs" />
     <Compile Include="Help\Features\Fix_ClickingOpenfolderCrashes.cs" />
@@ -185,6 +187,10 @@
     <Page Include="Controls\CopyrightControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Default\Border.Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Default\Image.Style.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,4 +1,3 @@
-# task bar icon color changes
 RecNForget changes the background color of the task bar icon to signal its current state:
 - yellow: ready to record/play (no files are held open)
 - red: currently recording

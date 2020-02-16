@@ -1,4 +1,3 @@
-# customize toast messages for application actions
 You can configure RecNForget to show toast messages above the task bar for all the actions it does.
 (this is enabled by default)
 

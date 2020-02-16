@@ -1,4 +1,3 @@
-# customize run in background (minimized to tray)
 You can configure RecNForget to run (and start) as a background process (minimized to a tray icon in the task bar).
 (this is disabled by default)
 

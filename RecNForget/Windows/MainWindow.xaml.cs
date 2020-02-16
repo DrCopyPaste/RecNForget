@@ -258,6 +258,33 @@ namespace RecNForget.Windows
             }
         }
 
+        public bool OutputPathControlVisible
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPathControlVisible));
+            }
+            set
+            {
+                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPathControlVisible, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
+        public bool SelectedFileControlVisible
+        {
+            get
+            {
+                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.SelectedFileControlVisible));
+            }
+            set
+            {
+                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.SelectedFileControlVisible, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
+
         public bool AutoSelectLastRecording
         {
             get
@@ -312,12 +339,17 @@ namespace RecNForget.Windows
             // Workaround: binding to main window properties when session started "minimized to tray" does not work
             AlwaysOnTopMenuEntry.IsChecked = WindowAlwaysOnTop;
             MinimizedToTrayMenuEntry.IsChecked = MinimizedToTray;
+            OutputPathControlVisibilityMenuEntry.IsChecked = OutputPathControlVisible;
+            SelectedFileControlVisibilityMenuEntry.IsChecked = SelectedFileControlVisible;
+
+            OutputPathControl.Visibility = OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+            SelectedFileControl.Visibility = SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
 
             // try restore last window positon
             try
             {
                 this.Left = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowLeftX));
-                this.Top = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowTopY));
+                this.Top = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowTopY)) + (TitleBar.Visibility == Visibility.Visible ? TitleBar.ActualHeight : 0);
             }
             catch (Exception)
             {
@@ -504,6 +536,29 @@ namespace RecNForget.Windows
             System.Diagnostics.Process.Start("explorer.exe", argument);
         }
 
+        private void MainWindow_MouseEnter(object sender, EventArgs e)
+        {
+            TitleBar.Visibility = Visibility.Visible;
+        }
+
+        // ToDo: why does this trigger after drag move? Is there a way around it?
+        private void MainWindow_MouseLeave(object sender, EventArgs e)
+        {
+            TitleBar.Visibility = Visibility.Hidden;
+        }
+
+        private void ToggleOutputPathControlVisibility(object sender, EventArgs e)
+        {
+            OutputPathControlVisible = !OutputPathControlVisible;
+            OutputPathControl.Visibility = OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void ToggleSelectedFileControlVisibility(object sender, EventArgs e)
+        {
+            SelectedFileControlVisible = !SelectedFileControlVisible;
+            SelectedFileControl.Visibility = SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
         private void ToggleAlwaysOnTop(object sender, EventArgs e)
         {
             WindowAlwaysOnTop = !WindowAlwaysOnTop;
@@ -583,7 +638,9 @@ namespace RecNForget.Windows
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
+            {
                 this.DragMove();
+            }
         }
 
         private void TrayIcon_Click(object sender, EventArgs e)

@@ -15,6 +15,8 @@
                 <ResourceDictionary Source="Styles\Default\Color.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\Image.Style.xaml" />
 
+                <ResourceDictionary Source="Styles\Default\Border.Style.xaml" />
+
                 <ResourceDictionary Source="Styles\Default\BaseButton.Style.xaml" />
                 <ResourceDictionary Source="Styles\Default\Button.Style.xaml" />
                 

@@ -30,6 +30,9 @@ namespace RecNForget.Services
         public static string MainWindowLeftX = "MainWindowLeftX";
         public static string MainWindowTopY = "MainWindowTopY";
 
+        public static string OutputPathControlVisible = "OutputPathControlVisible";
+        public static string SelectedFileControlVisible = "SelectedFileControlVisible";
+
         private static string UserConfigFileFullPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), AppSettingHelper.ApplicationName, "user.config");
 
         public static string GetEmptyUserConfigFile()
@@ -156,6 +159,8 @@ namespace RecNForget.Services
 				{ AppSettingHelper.WindowAlwaysOnTop, "False" },
                 { AppSettingHelper.ShowBalloonTipsForRecording, "True" },
                 { AppSettingHelper.ShowTipsAtApplicationStart, "True" },
+                { AppSettingHelper.OutputPathControlVisible, "False" },
+                { AppSettingHelper.SelectedFileControlVisible, "False" },
 
                 // dont show feature updates for versions below 0.3
                 { AppSettingHelper.LastInstalledVersion, "0.3.0.0" }

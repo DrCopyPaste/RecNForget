@@ -1,4 +1,3 @@
-# customize auto start with windows
 You can have RecNForget automatically start with Windows.
 (this is disabled by default)
 

@@ -1,4 +1,3 @@
-# customize auto select last recorded file
 You can have RecNForget automatically select a file after recording it (changing the selected file control you can navigate via the skip buttons)
 (this is enabled by default)
 
