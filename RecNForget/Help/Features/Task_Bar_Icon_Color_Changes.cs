@@ -22,7 +22,7 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- yellow: ready to record/play (no files are held open)"
+					Content = "- transparent: ready to record/play (no files are held open)"
 				},
 				new HelpFeatureDetailLine()
 				{

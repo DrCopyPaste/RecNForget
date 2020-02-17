@@ -44,7 +44,7 @@ namespace RecNForget.Windows
         private bool currentlyRecording = false;
         private bool currentlyNotRecording = true;
         private bool currentAudioPlayState = true;
-        private string taskBar_ProgressState = "Paused";
+        private string taskBar_ProgressState = "None";
 
         private DispatcherTimer recordingTimer;
 
@@ -373,7 +373,7 @@ namespace RecNForget.Windows
                 {
                     replayAudioService.KillAudio(reset: true);
                     CurrentAudioPlayState = false;
-                    TaskBar_ProgressState = "Paused";
+                    TaskBar_ProgressState = "None";
 
                     ReplayLastRecordingButton.IsEnabled = SelectedFileService.HasSelectedFile && !CurrentlyRecording;
                     ReplayLastRecordingButton.Visibility = Visibility.Visible;
@@ -427,7 +427,7 @@ namespace RecNForget.Windows
                     UpdateCurrentFileNameDisplay(reset: true);
                     CurrentlyRecording = false;
                     CurrentlyNotRecording = true;
-                    TaskBar_ProgressState = "Paused";
+                    TaskBar_ProgressState = "None";
                     if (ShowBalloonTipsForRecording)
                     {
                         trayIcon.ShowBalloonTip(balloonTipTimeout, "Recording saved!", audioRecordingService.LastFileName, ToolTipIcon.Info);

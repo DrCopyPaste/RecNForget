@@ -155,7 +155,7 @@ namespace RecNForget.Services
 				{ AppSettingHelper.MinimizedToTray, "False" },
 				{ AppSettingHelper.HotKey_StartStopRecording, "Key=Pause; Win=False; Alt=False; Ctrl=False; Shift=False" },
 				{ AppSettingHelper.FilenamePrefix, "RecNForget_" },
-				{ AppSettingHelper.OutputPath, @"C:\tmp" },
+				{ AppSettingHelper.OutputPath, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RecNForget") },
 				{ AppSettingHelper.WindowAlwaysOnTop, "False" },
                 { AppSettingHelper.ShowBalloonTipsForRecording, "True" },
                 { AppSettingHelper.ShowTipsAtApplicationStart, "True" },
