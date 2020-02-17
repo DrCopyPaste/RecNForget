@@ -40,6 +40,8 @@ namespace RecNForget.Windows
             InitializeComponent();
             DataContext = this;
 
+            this.KeyDown += Window_KeyDown;
+
             this.asset = asset;
             ReleaseNotes = releaseNotes;
             VersionInfoString = string.Format("{0} - {1} ({2} MB)", VersionStringFromMsiAsset(asset), release.Name, string.Format("{0:0.000}", asset.Size / 1024d / 1024d));
@@ -52,7 +54,15 @@ namespace RecNForget.Windows
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
 				this.DragMove();

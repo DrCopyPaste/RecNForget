@@ -349,7 +349,7 @@ namespace RecNForget.Windows
             try
             {
                 this.Left = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowLeftX));
-                this.Top = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowTopY)) + (TitleBar.Visibility == Visibility.Visible ? TitleBar.ActualHeight : 0);
+                this.Top = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowTopY));
             }
             catch (Exception)
             {
@@ -443,7 +443,6 @@ namespace RecNForget.Windows
                         SelectedFileService.SelectFile(new FileInfo(audioRecordingService.LastFileName));
                     }
                     ReplayLastRecordingButton.IsEnabled = true;
-                    StopReplayLastRecordingButton.IsEnabled = true;
                     RecordButton.Visibility = Visibility.Visible;
                     StopRecordButton.Visibility = Visibility.Collapsed;
                     if (AutoReplayAudioAfterRecording)
@@ -463,7 +462,14 @@ namespace RecNForget.Windows
             this.hotkeyService = new HotkeyService();
             this.hotkeyService.AddHotkey(() => { return HotkeySettingTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
 
-            SelectedFileService = new SelectedFileService();
+            SelectedFileService = new SelectedFileService(
+                noSelectableFileFoundAction: () =>
+                {
+                    PauseReplayLastRecordingButton.IsEnabled = false;
+                    ReplayLastRecordingButton.IsEnabled = false;
+                    ReplayLastRecordingButton.Visibility = Visibility.Visible;
+                    PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
+                });
             if (SelectedFileService.SelectLatestFile())
             {
                 ReplayLastRecordingButton.IsEnabled = true;
@@ -1015,7 +1021,7 @@ namespace RecNForget.Windows
 
             if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
             {
-                if (!selectedFileService.DeleteSelectedFile())
+                if (!SelectedFileService.DeleteSelectedFile())
                 {
                     CustomMessageBox errorMessageBox = new CustomMessageBox(
                         caption: "Something went wrong",

@@ -26,8 +26,7 @@ namespace RecNForget.Services
 		{
 			this.noSelectableFileFoundAction = noSelectableFileFoundAction;
 
-			HasSelectedFile = false;
-			SelectedFileDisplay = "(no file found or selected)";
+			ResetSelectedFile();
 		}
 
 		public FileInfo SelectedFile { get; set; }
@@ -68,9 +67,7 @@ namespace RecNForget.Services
 		{
 			if (file == null || !file.Exists)
 			{
-				SelectedFile = null;
-				HasSelectedFile = false;
-				SelectedFileDisplay = "(no file found or selected)";
+				ResetSelectedFile();
 				return false;
 			}
 			else
@@ -78,6 +75,7 @@ namespace RecNForget.Services
 				SelectedFile = file;
 				HasSelectedFile = true;
 				SelectedFileDisplay = file.Name;
+
 				return true;
 			}
 		}
@@ -152,6 +150,10 @@ namespace RecNForget.Services
 			}
 		}
 
+		/// <summary>
+		/// tries to delete the current one and select previous file
+		/// </summary>
+		/// <returns></returns>
 		public bool DeleteSelectedFile()
 		{
 			if (SelectedFile == null || !SelectedFile.Exists)
@@ -159,10 +161,18 @@ namespace RecNForget.Services
 				return false;
 			}
 
+			var fileNameToDelete = SelectedFile.FullName;
+			SelectPrevFile();
+
 			try
 			{
-				File.Delete(SelectedFile.FullName);
-				SelectPrevFile();
+				File.Delete(fileNameToDelete);
+
+				// selected the exact file we just deleted, because it was the only one in the folder
+				if (fileNameToDelete == SelectedFile.FullName)
+				{
+					ResetSelectedFile();
+				}
 
 				return true;
 			}
@@ -204,6 +214,13 @@ namespace RecNForget.Services
 			{
 				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
 			}
+		}
+
+		private void ResetSelectedFile()
+		{
+			SelectedFile = null;
+			HasSelectedFile = false;
+			SelectedFileDisplay = "(no file found or selected)";
 		}
 
 		private List<FileInfo> GetOutputFiles()

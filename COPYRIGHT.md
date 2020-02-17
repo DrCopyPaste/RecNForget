@@ -210,6 +210,10 @@ pencil_icon421491.svg was generated from [onlinewebfonts.com/icon/421491](https:
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
+pencil_icon79516.black.disabled.png was generated from [onlinewebfonts.com/icon/79516](https://www.onlinewebfonts.com/icon/79516)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
 pencil_icon79516.black.png was generated from [onlinewebfonts.com/icon/79516](https://www.onlinewebfonts.com/icon/79516)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
@@ -263,6 +267,10 @@ tools_icon536263.black.png was generated from [onlinewebfonts.com/icon/536263](h
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
 tools_icon536263.svg was generated from [onlinewebfonts.com/icon/536263](https://www.onlinewebfonts.com/icon/536263)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+trash_icon77730.black.disabled.png was generated from [onlinewebfonts.com/icon/77730](https://www.onlinewebfonts.com/icon/77730)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 

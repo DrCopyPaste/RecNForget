@@ -47,7 +47,7 @@
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="DefaultImage" Value="ButtonImages\pencil_icon79516.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\pencil_icon79516.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\pencil_icon79516.black.disabled.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\pencil_icon79516.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\pencil_icon79516.black.png" />
     </Style>
@@ -72,7 +72,7 @@
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="DefaultImage" Value="ButtonImages\trash_icon77730.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\trash_icon77730.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\trash_icon77730.black.disabled.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\trash_icon77730.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\trash_icon77730.black.png" />
     </Style>    
@@ -88,13 +88,7 @@
         <Setter Property="PressedImage" Value="ButtonImages\openFolder_icon356582.black.png" />
     </Style>
 
-    <Style x:Key="PrevTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonSmallIconLayout}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="DefaultImage" Value="ButtonImages\prevTrack_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\prevTrack_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\prevTrack_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\prevTrack_icon.black.png" />
+    <Style x:Key="ComplexConditionButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonSmallIconLayout}">
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -118,34 +112,22 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="NextTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonSmallIconLayout}">
+    <Style x:Key="PrevTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource ComplexConditionButton}">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="DefaultImage" Value="ButtonImages\prevTrack_icon.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\prevTrack_icon.black.disabled.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\prevTrack_icon.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\prevTrack_icon.black.png" />        
+    </Style>
+
+    <Style x:Key="NextTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource ComplexConditionButton}">
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="DefaultImage" Value="ButtonImages\nextTrack_icon.black.png" />
         <Setter Property="DisabledImage" Value="ButtonImages\nextTrack_icon.black.disabled.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\nextTrack_icon.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\nextTrack_icon.black.png" />
-        <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsEnabledCondition1" Value="True"/>
-                    <Condition Property="IsEnabledCondition2" Value="True"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="IsEnabled" Value="True"/>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsEnabledCondition1" Value="False"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="IsEnabled" Value="False"/>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsEnabledCondition2" Value="False"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="IsEnabled" Value="False"/>
-            </MultiTrigger>
-        </Style.Triggers>
     </Style>
 
     <Style x:Key="PlayButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">

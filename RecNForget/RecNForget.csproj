@@ -368,6 +368,8 @@
     <Resource Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Styles\Default\ButtonImages\pencil_icon79516.black.disabled.png" />
+    <Resource Include="Styles\Default\ButtonImages\trash_icon77730.black.disabled.png" />
     <Resource Include="Styles\Default\ButtonImages\bugfix_icon140609.black.png" />
     <Resource Include="Styles\Default\ButtonImages\information_icon2132.black.png" />
     <Resource Include="Styles\Default\ButtonImages\lightbulb_icon372420.black.png" />

@@ -187,10 +187,12 @@
 
                             <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
                                 ToolTip="rename selected file (Hotkey: [Return])"
+                                IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
                                 x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
 
                             <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource DeleteSelectedFileMiniButtonLayout}"
                                 ToolTip="delete selected file (Hotkey: [Delete])"
+                                IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
                                 x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
                         </Grid>
                     </Border>
@@ -225,7 +227,8 @@
                                 ToolTip="play selected file (Hotkey: [Space])"
                                 x:Name="ReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
                             <local:ImageButton Grid.Row="1" Grid.Column="3" Style="{StaticResource PauseButton}"
-                                IsEnabled="False" Visibility="Collapsed"
+                                IsEnabled="False"
+                                Visibility="Collapsed"
                                 ToolTip="pause playing selected file (Hotkey: [Space])"
                                 x:Name="PauseReplayLastRecordingButton" Click="ReplayLastRecording_Click" />
                             <local:ImageButton Grid.Row="1" Grid.Column="4" Style="{StaticResource StopButton}"
