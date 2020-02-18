@@ -159,7 +159,7 @@
 
     <Style x:Key="Default_ScrollViewer_Style" TargetType="ScrollViewer">
         <Setter Property="MaxHeight" Value="300" />
-        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Margin" Value="5,0,5,0" />
         <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
     </Style>
     

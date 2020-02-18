@@ -32,7 +32,7 @@
         <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
@@ -43,8 +43,8 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25" />
-                                    <ColumnDefinition Width="4" />
+                                    <ColumnDefinition Width="23" />
+                                    <ColumnDefinition Width="7" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 
@@ -62,12 +62,12 @@
                                             Background="{Binding Source={StaticResource Font_Color}}"
                                             BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"
                                             BorderThickness="1">
-                                            <Image x:Name="CheckMark" Source="ButtonImages\accept_icon518267.black.white.png" VerticalAlignment="Bottom" />
+                                            <Image x:Name="CheckMark" Width="23" Source="ButtonImages\accept_icon518267.black.white.png" VerticalAlignment="Bottom" />
                                         </Border>
                                         </BulletDecorator.Bullet>
                                 </BulletDecorator>
                                 <!-- Content for the menu text etc -->
-                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" Grid.Column="2" Grid.Row="0" />
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             </Grid>
                         </StackPanel>
                     </Border>
@@ -108,11 +108,12 @@
     </Style>
 
     <!-- context menu image styles-->
+    
     <Style x:Key="ContextMenu_Cancel_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <Image
-                    Source="ButtonImages\cancel_icon428740.black.png"/>
+                <Image Width="23"
+                    Source="ButtonImages\cancel_icon428740.black.png" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -120,7 +121,7 @@
     <Style x:Key="ContextMenu_Settings_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <Image
+                <Image Width="23"
                     Source="ButtonImages\settings_icon40863.black.png" />
             </Setter.Value>
         </Setter>
@@ -129,7 +130,7 @@
     <Style x:Key="ContextMenu_About_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <Image
+                <Image Width="23"
                     Source="ButtonImages\information_icon280732.black.png" />
             </Setter.Value>
         </Setter>
@@ -138,7 +139,7 @@
     <Style x:Key="ContextMenu_Help_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <Image
+                <Image Width="23"
                     Source="ButtonImages\help_icon544157.black.png" />
             </Setter.Value>
         </Setter>
@@ -147,7 +148,7 @@
     <Style x:Key="ContextMenu_CheckUpdates_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <Image
+                <Image Width="23"
                     Source="ButtonImages\download_icon602.black.png" />
             </Setter.Value>
         </Setter>
@@ -156,67 +157,7 @@
     <Style x:Key="ContextMenu_ShutDown_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <Image
-                    Source="ButtonImages\shutDown_icon170336.black.png" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-    <!-- Duplicates for trayIconContextMenu this fixes icons disappearing when two context menus used the same styles to include icons
-    
-    ToDO: find another way around this:    
-    strangely the icons of the context menu disappear (if the other menu using the same styles is opened)
-    -->
-
-    <Style x:Key="ContextMenu_Cancel_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <Image
-                    Source="ButtonImages\cancel_icon428740.black.png"/>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ContextMenu_Settings_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <Image
-                    Source="ButtonImages\settings_icon40863.black.png" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ContextMenu_About_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <Image
-                    Source="ButtonImages\information_icon280732.black.png" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ContextMenu_Help_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <Image
-                    Source="ButtonImages\help_icon544157.black.png" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ContextMenu_CheckUpdates_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <Image
-                    Source="ButtonImages\download_icon602.black.png" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ContextMenu_ShutDown_Style1" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <Image
+                <Image Width="23"
                     Source="ButtonImages\shutDown_icon170336.black.png" />
             </Setter.Value>
         </Setter>

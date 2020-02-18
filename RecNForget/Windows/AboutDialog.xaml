@@ -72,11 +72,9 @@
             <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="RecNForget is a free application that helps you sample audio faster."  />
 
-            <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource DefaultWindowBorderStyle}">
-                <ScrollViewer Style="{StaticResource Default_ScrollViewer_Style}">
-                    <local:CopyrightControl />
-                </ScrollViewer>
-            </Border>
+            <ScrollViewer Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource Default_ScrollViewer_Style}">
+                <local:CopyrightControl />
+            </ScrollViewer>
             <local:ImageButton Grid.Row="10" Grid.Column="0" Style="{StaticResource DownloadButton}"
                 HorizontalAlignment="Left" 
                 Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>

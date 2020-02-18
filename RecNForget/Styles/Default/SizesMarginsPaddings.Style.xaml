@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:Sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:RecNForget">
+
+    <!-- Control Heights/Widths -->
     <Sys:Double x:Key="MainWindow_TextBox_Width">300</Sys:Double>
     
     <Sys:Double x:Key="HotkeyPromptWindow_Width">355</Sys:Double>
@@ -31,4 +33,14 @@
     <Sys:Double x:Key="Control_Separator_Height">5</Sys:Double>
 
     <Sys:Double x:Key="CreditsBox_Height">150</Sys:Double>
+    
+    <!-- Font Sizes -->
+    <Sys:Double x:Key="Default_FontSize">12</Sys:Double>
+    <Sys:Double x:Key="SmallCaption_FontSize">10</Sys:Double>
+
+    <Sys:Double x:Key="Heading_1_FontSize">45</Sys:Double>
+    <Sys:Double x:Key="Heading_2_FontSize">20</Sys:Double>
+    <Sys:Double x:Key="Heading_3_FontSize">18</Sys:Double>
+
+
 </ResourceDictionary>

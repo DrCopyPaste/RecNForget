@@ -10,7 +10,7 @@
         <Setter Property="Margin" Value="3,1,3,0" />
         <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_Height}}" />
-        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="IsEnabled" Value="False"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">
@@ -41,13 +41,13 @@
         <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
         <Setter Property="Width" Value="{Binding Source={StaticResource SettingTextBox_Width}}" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
         <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
         <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -83,13 +83,13 @@
         <Setter Property="Height" Value="{Binding Source={StaticResource PatchNotes_TextBox_Height}}" />
         <Setter Property="Width" Value="{Binding Source={StaticResource PatchNotes_TextBox_Width}}" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
         <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
         <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Disabled_Color}}"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Template">

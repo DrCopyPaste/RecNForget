@@ -8,7 +8,7 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Margin" Value="3,0,0,2" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
     </Style>
 
     <Style x:Key="CustomMessageBox_TextBlock_Style" TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}">
@@ -17,12 +17,12 @@
 
     <Style x:Key="ApplicationName_TextBox_Style" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="FontSize" Value="45" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Heading_1_FontSize}}" />
     </Style>
 
     <Style x:Key="VersionName_TextBox_Style" TargetType="TextBlock">
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Heading_2_FontSize}}" />
     </Style>
 
 </ResourceDictionary>

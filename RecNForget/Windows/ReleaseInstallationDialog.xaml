@@ -35,7 +35,7 @@
                 <!-- row 5 for patch notes box -->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 6 for spacing -->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
                 <!-- row 7 for install checkbox -->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 8 for bottom row buttons -->

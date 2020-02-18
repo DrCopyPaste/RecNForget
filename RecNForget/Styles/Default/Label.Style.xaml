@@ -10,7 +10,7 @@
         <Setter Property="Height" Value="13" />
         <Setter Property="Width" Value="281" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource SmallCaption_FontSize}}" />
     </Style>
 
     <Style x:Key="ControlLabelStyle" TargetType="Label">
@@ -20,7 +20,7 @@
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Width" Value="281" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="8" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource SmallCaption_FontSize}}" />
     </Style>
 
     <Style x:Key="HeadlineLabelStyle" TargetType="Label">
@@ -30,7 +30,7 @@
         <Setter Property="Height" Value="35" />
         <Setter Property="Width" Value="500" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Heading_3_FontSize}}" />
     </Style>
 
     <Style x:Key="SettingLabelStyle" TargetType="Label">
@@ -38,7 +38,7 @@
         <Setter Property="Margin" Value="3,0,0,2" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
     </Style>
 
@@ -51,13 +51,13 @@
         <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
         <Setter Property="Width" Value="130" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
         <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
         <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>

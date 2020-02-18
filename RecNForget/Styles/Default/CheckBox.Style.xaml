@@ -11,12 +11,11 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="1,1,1,1" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
         <Setter Property="Background" Value="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"/>
-        <Setter Property="FontSize" Value="12"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
