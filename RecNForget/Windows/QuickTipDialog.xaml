@@ -82,10 +82,9 @@
             </Border>
 
             <CheckBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=ShowTipsOnApplicationStart}">
+                    IsChecked="{Binding Path=SettingService.ShowTipsAtApplicationStart}">
                 show tips on start
             </CheckBox>
-
 
             <local:ImageButton Grid.Row="7" Grid.Column="0" Style="{StaticResource LightBulbButton}"
                 HorizontalAlignment="Left"

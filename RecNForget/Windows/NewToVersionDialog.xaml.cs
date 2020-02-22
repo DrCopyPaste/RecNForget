@@ -34,8 +34,23 @@ namespace RecNForget.Windows
 		private IEnumerable<HelpFeature> addedFeatures;
 		private IEnumerable<HelpFeature> bugFixes;
 
+		private AppSettingService settingService;
+		public AppSettingService SettingService
+		{
+			get
+			{
+				return settingService;
+			}
+			set
+			{
+				settingService = value;
+				OnPropertyChanged();
+			}
+		}
+
 		public NewToVersionDialog(Version lastInstalledVersion, Version currentVersion)
 		{
+			this.SettingService = new AppSettingService();
 			this.KeyDown += Window_KeyDown;
 
 			InitializeComponent();
@@ -141,20 +156,6 @@ namespace RecNForget.Windows
 			if (e.Key == Key.Escape)
 			{
 				this.Close();
-			}
-		}
-
-		public bool CheckForUpdateOnStart
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart, value.ToString());
-				OnPropertyChanged();
 			}
 		}
 

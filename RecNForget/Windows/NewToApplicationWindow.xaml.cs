@@ -29,10 +29,24 @@ namespace RecNForget.Windows
 	public partial class NewToApplicationWindow : INotifyPropertyChanged
 	{
 		private HotkeyService hotkeyService;
+		private AppSettingService settingService;
+		public AppSettingService SettingService
+		{
+			get
+			{
+				return settingService;
+			}
+			set
+			{
+				settingService = value;
+				OnPropertyChanged();
+			}
+		}
 
 		public NewToApplicationWindow(HotkeyService hotkeyService)
 		{
 			this.hotkeyService = hotkeyService;
+			this.SettingService = new AppSettingService();
 			this.KeyDown += Window_KeyDown;
 
 			InitializeComponent();
@@ -41,7 +55,7 @@ namespace RecNForget.Windows
 			this.Title = "New to RecNForget?";
 
 			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(AppSettingHelper.HotKey_StartStopRecording, string.Empty, string.Empty),
+				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
 				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
 				spacing: 6);
 
@@ -56,53 +70,11 @@ namespace RecNForget.Windows
 			}
 
 			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(AppSettingHelper.HotKey_StartStopRecording, string.Empty, string.Empty),
+				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
 				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
 				spacing: 6);
 
 			HotkeyDisplay.Children.Add(buttonGrid);
-		}
-
-		public bool CheckForUpdateOnStart
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart, value.ToString());
-				OnPropertyChanged();
-			}
-		}
-
-		public string HotKey_StartStopRecording
-		{
-			get
-			{
-				return HotkeySettingTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording);
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.HotKey_StartStopRecording, value);
-				OnPropertyChanged();
-			}
-		}
-
-		public string OutputPath
-		{
-			get
-			{
-				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPath, value);
-				OnPropertyChanged();
-			}
 		}
 
 		private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -124,7 +96,7 @@ namespace RecNForget.Windows
 
 			if (dialog.ShowDialog() == true)
 			{
-				HotKey_StartStopRecording = dialog.HotkeysAppSetting;
+				SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
 				DisplayHotkey();
 			}
 
@@ -140,7 +112,7 @@ namespace RecNForget.Windows
 
 			if (dialog.ShowDialog() == true)
 			{
-				OutputPath = dialog.SelectedPath;
+				SettingService.OutputPath = dialog.SelectedPath;
 			}
 
 			// since there are two buttons on top of each other

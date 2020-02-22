@@ -19,13 +19,28 @@ namespace RecNForget.Windows
 	/// </summary>
 	public partial class SettingsWindow : INotifyPropertyChanged
 	{
-		private HotkeyService hotkeyService;
 		private Action hideToTrayAction;
 		private Action restoreFromTrayAction;
+
+		private HotkeyService hotkeyService;
+		private AppSettingService settingService;
+		public AppSettingService SettingService
+		{
+			get
+			{
+				return settingService;
+			}
+			set
+			{
+				settingService = value;
+				OnPropertyChanged();
+			}
+		}
 
 		public SettingsWindow(HotkeyService hotkeyService, Action hideToTrayAction, Action restoreFromTrayAction)
 		{
 			this.hotkeyService = hotkeyService;
+			this.SettingService = new AppSettingService();
 			this.hideToTrayAction = hideToTrayAction;
 			this.restoreFromTrayAction = restoreFromTrayAction;
 
@@ -43,207 +58,12 @@ namespace RecNForget.Windows
 			}
 
 			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(AppSettingHelper.HotKey_StartStopRecording, string.Empty, string.Empty),
+				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
 				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
 				spacing: 6,
 				horizontalAlignment: HorizontalAlignment.Left);
 
 			HotkeyDisplay.Children.Add(buttonGrid);
-		}
-
-		public string FilenamePrefix
-		{
-			get
-			{
-				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.FilenamePrefix, value);
-				OnPropertyChanged();
-			}
-		}
-
-		public bool AutoStartWithWindows
-		{
-			get
-			{
-				Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(AppSettingHelper.WindowsAutoStartRegistryPath, true);
-				var recNForgetAutoStartRegistry = regKey.GetValue(AppSettingHelper.ApplicationName);
-					
-				if (recNForgetAutoStartRegistry != null)
-				{
-					return true;
-				}
-
-				return false;
-			}
-
-			set
-			{
-				Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(AppSettingHelper.WindowsAutoStartRegistryPath, true);
-
-				if (value == true)
-				{
-					regKey.SetValue(AppSettingHelper.ApplicationName, System.Reflection.Assembly.GetExecutingAssembly().Location);
-				}
-				else
-				{
-					regKey.DeleteValue(AppSettingHelper.ApplicationName);
-				}
-
-				OnPropertyChanged();
-			}
-		}
-
-		public bool MinimizedToTray
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MinimizedToTray));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.MinimizedToTray, value.ToString());
-				OnPropertyChanged();
-
-				if (value == true)
-				{
-					hideToTrayAction();
-				}
-				else
-				{
-					restoreFromTrayAction();
-				}
-			}
-		}
-
-		public bool AutoSelectLastRecording
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoSelectLastRecording));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.AutoSelectLastRecording, value.ToString());
-				OnPropertyChanged();
-			}
-		}
-
-		public bool CheckForUpdateOnStart
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart, value.ToString());
-				OnPropertyChanged();
-			}
-		}
-
-		public bool PlayAudioFeedBackMarkingStartAndStopReplaying
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying, value.ToString());
-				OnPropertyChanged();
-			}
-		}
-
-		public bool AutoReplayAudioAfterRecording
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoReplayAudioAfterRecording));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.AutoReplayAudioAfterRecording, value.ToString());
-				OnPropertyChanged();
-			}
-		}
-
-		public bool PlayAudioFeedBackMarkingStartAndStopRecording
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording, value.ToString());
-				OnPropertyChanged();
-			}
-		}
-
-		public bool ShowBalloonTipsForRecording
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowBalloonTipsForRecording));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.ShowBalloonTipsForRecording, value.ToString());
-				OnPropertyChanged();
-			}
-		}
-
-		public bool ShowTipsOnApplicationStart
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart, value.ToString());
-				OnPropertyChanged();
-			}
-		}
-
-		public string HotKey_StartStopRecording
-		{
-			get
-			{
-				return HotkeySettingTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording);
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.HotKey_StartStopRecording, value);
-				OnPropertyChanged();
-			}
-		}
-
-		public string OutputPath
-		{
-			get
-			{
-				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPath, value);
-				OnPropertyChanged();
-			}
 		}
 
 		#region configuration event handlers
@@ -272,7 +92,7 @@ namespace RecNForget.Windows
 
 			if (dialog.ShowDialog() == true)
 			{
-				HotKey_StartStopRecording = dialog.HotkeysAppSetting;
+				SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
 				DisplayHotkey();
 			}
 
@@ -288,7 +108,7 @@ namespace RecNForget.Windows
 
 			if (dialog.ShowDialog() == true)
 			{
-				OutputPath = dialog.SelectedPath;
+				SettingService.OutputPath = dialog.SelectedPath;
 			}
 
 			// since there are two buttons on top of each other
@@ -302,13 +122,13 @@ namespace RecNForget.Windows
 				icon: CustomMessageBoxIcon.Question,
 				buttons: CustomMessageBoxButtons.OkAndCancel,
 				messageRows: new List<string>() { "Supported placeholders:", "(Date)" },
-				prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
+				prompt: SettingService.FilenamePrefix,
 				controlFocus: CustomMessageBoxFocus.Prompt,
 				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
 
 			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
 			{
-				FilenamePrefix = tempDialog.PromptContent;
+				SettingService.FilenamePrefix = tempDialog.PromptContent;
 			}
 
 			// since there are two buttons on top of each other

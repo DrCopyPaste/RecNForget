@@ -107,12 +107,12 @@
                         <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
-                        Text="{Binding Path=OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+                        Text="{Binding Path=SettingService.OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
                 </Grid>
             </local:ImageButton>
 
             <CheckBox Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=CheckForUpdateOnStart}" >
+                    IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
                 check for updates on start
             </CheckBox>
 

@@ -15,20 +15,15 @@ namespace RecNForget.Setup.Extensions
         // and dont have to duplicate so much in setup project and the application itself
         private static void RemoveAutoStartWithWindowsFromRegistry()
         {
-            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(AppSettingHelper.WindowsAutoStartRegistryPath, true);
-            var recNForgetAutoStartRegistry = regKey.GetValue(AppSettingHelper.ApplicationName);
-
-            if (recNForgetAutoStartRegistry != null)
-            {
-                regKey.DeleteValue(AppSettingHelper.ApplicationName);
-            }
+            var settingService = new AppSettingService();
+            settingService.AutoStartWithWindows = false;
         }
 
         // yes there are custom actions that could do this task directly WITHIN wix like RemoveFiles
         // BUT see reasoning above...
         private static void RemoveApplicationConfigurationFiles()
         {
-            AppSettingHelper.RemoveAppConfigSettingFile();
+            AppSettingService.RemoveAppConfigSettingFile();
         }
 
         [CustomAction]

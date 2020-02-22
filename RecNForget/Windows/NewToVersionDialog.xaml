@@ -91,10 +91,9 @@
             </Border>
 
             <CheckBox Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=CheckForUpdateOnStart}" >
+                    IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
                 check for updates on start
             </CheckBox>
-
 
             <local:ImageButton Grid.Row="11" Style="{StaticResource AcceptButton}"
                 HorizontalAlignment="Right"

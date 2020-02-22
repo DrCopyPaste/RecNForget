@@ -41,6 +41,20 @@ namespace RecNForget.Windows
 
         private AudioRecordingService audioRecordingService;
         private HotkeyService hotkeyService;
+        private AppSettingService settingService;
+        public AppSettingService SettingService
+        {
+            get
+            {
+                return settingService;
+            }
+            set
+            {
+                settingService = value;
+                OnPropertyChanged();
+            }
+        }
+
         private bool currentlyRecording = false;
         private bool currentlyNotRecording = true;
         private bool currentAudioPlayState = true;
@@ -91,27 +105,6 @@ namespace RecNForget.Windows
             set
             {
                 taskBar_ProgressState = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public bool WindowAlwaysOnTop
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop));
-            }
-
-            set
-            {
-                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.WindowAlwaysOnTop, value.ToString());
-                this.Topmost = value;
-
-                if (value == true)
-                {
-                    MinimizedToTray = false;
-                }
-
                 OnPropertyChanged();
             }
         }
@@ -170,152 +163,13 @@ namespace RecNForget.Windows
             }
         }
 
-        public string FilenamePrefix
-        {
-            get
-            {
-                return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
-            }
-
-            set
-            {
-                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.FilenamePrefix, value);
-                OnPropertyChanged();
-
-                UpdateCurrentFileNameDisplay();
-            }
-        }
-
-        public string OutputPath
-        {
-            get
-            {
-                return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
-            }
-
-            set
-            {
-                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPath, value);
-                OnPropertyChanged();
-
-                UpdateCurrentFileNameDisplay();
-            }
-        }
-
-        public bool AutoReplayAudioAfterRecording
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoReplayAudioAfterRecording));
-            }
-        }
-
-        public bool PlayAudioFeedBackMarkingStartAndStopRecording
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopRecording));
-            }
-        }
-
-        public bool PlayAudioFeedBackMarkingStartAndStopReplaying
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.PlayAudioFeedBackMarkingStartAndStopReplaying));
-            }
-        }
-
-        public bool ShowBalloonTipsForRecording
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowBalloonTipsForRecording));
-            }
-        }
-
-        public bool MinimizedToTray
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MinimizedToTray));
-            }
-
-            set
-            {
-                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.MinimizedToTray, value.ToString());
-                OnPropertyChanged();
-
-                if (value == true)
-                {
-                    WindowAlwaysOnTop = false;
-                    SwitchToBackgroundMode();
-                }
-                else
-                {
-                    SwitchToForegroundMode();
-                }
-            }
-        }
-
-        public bool OutputPathControlVisible
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPathControlVisible));
-            }
-            set
-            {
-                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.OutputPathControlVisible, value.ToString());
-                OnPropertyChanged();
-            }
-        }
-
-        public bool SelectedFileControlVisible
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.SelectedFileControlVisible));
-            }
-            set
-            {
-                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.SelectedFileControlVisible, value.ToString());
-                OnPropertyChanged();
-            }
-        }
-
-
-        public bool AutoSelectLastRecording
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.AutoSelectLastRecording));
-            }
-        }
-
-        public bool CheckForUpdateOnStart
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.CheckForUpdateOnStart));
-            }
-        }
-
-        public bool ShowTipsOnStart
-        {
-            get
-            {
-                return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart));
-            }
-        }
-
         #endregion
 
         private void ShowRandomApplicationTip()
         {
             var quickTip = new QuickTipDialog();
 
-            if (!MinimizedToTray)
+            if (!SettingService.MinimizedToTray)
             {
                 quickTip.Owner = this;
             }
@@ -328,35 +182,30 @@ namespace RecNForget.Windows
             DataContext = this;
             InitializeComponent();
 
+            this.SettingService = new AppSettingService();
+
             currentVersion = new ApplicationBase();
             this.KeyDown += Window_KeyDown;
 
             // ensure AppConfig Values exist
-            bool firstTimeUser = AppSettingHelper.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
-            Version lastInstalledVersion = AppSettingHelper.GetLastInstalledVersion();
-            AppSettingHelper.UpdateLastInstalledVersion(new Version(ThisAssembly.AssemblyFileVersion));
+            bool firstTimeUser = SettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+            Version lastInstalledVersion = SettingService.LastInstalledVersion;
+            SettingService.LastInstalledVersion = new Version(ThisAssembly.AssemblyFileVersion);
 
             // Workaround: binding to main window properties when session started "minimized to tray" does not work
-            AlwaysOnTopMenuEntry.IsChecked = WindowAlwaysOnTop;
-            MinimizedToTrayMenuEntry.IsChecked = MinimizedToTray;
-            OutputPathControlVisibilityMenuEntry.IsChecked = OutputPathControlVisible;
-            SelectedFileControlVisibilityMenuEntry.IsChecked = SelectedFileControlVisible;
+            AlwaysOnTopMenuEntry.IsChecked = SettingService.WindowAlwaysOnTop;
+            MinimizedToTrayMenuEntry.IsChecked = SettingService.MinimizedToTray;
+            OutputPathControlVisibilityMenuEntry.IsChecked = SettingService.OutputPathControlVisible;
+            SelectedFileControlVisibilityMenuEntry.IsChecked = SettingService.SelectedFileControlVisible;
 
-            OutputPathControl.Visibility = OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
-            SelectedFileControl.Visibility = SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+            OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+            SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
 
             // try restore last window positon
-            try
-            {
-                this.Left = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowLeftX));
-                this.Top = double.Parse(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.MainWindowTopY));
-            }
-            catch (Exception)
-            {
-                // do nothing, if there is an exception, this means the x/y settings just dont exist yet, window will be positioned due to Windows likings
-            }
+            this.Left = SettingService.MainWindowLeftX.HasValue ? SettingService.MainWindowLeftX.Value : this.Left;
+            this.Top = SettingService.MainWindowTopY.HasValue ? SettingService.MainWindowTopY.Value : this.Top;
 
-            if (CheckForUpdateOnStart)
+            if (SettingService.CheckForUpdateOnStart)
             {
                 Task.Run(() => { CheckForUpdates(); });
             }
@@ -411,12 +260,12 @@ namespace RecNForget.Windows
                     RecordingStart = DateTime.Now;
                     recordingTimer.Start();
                     UpdateCurrentFileNameDisplay();
-                    if (ShowBalloonTipsForRecording)
+                    if (SettingService.ShowBalloonTipsForRecording)
                     {
                         trayIcon.ShowBalloonTip(balloonTipTimeout, "Recording started!", "RecNForget now recording...", ToolTipIcon.Info);
                         trayIcon.BalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
                     }
-                    if (PlayAudioFeedBackMarkingStartAndStopRecording)
+                    if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
                     {
                         PlayRecordingStartAudioFeedback();
                     }
@@ -428,39 +277,39 @@ namespace RecNForget.Windows
                     CurrentlyRecording = false;
                     CurrentlyNotRecording = true;
                     TaskBar_ProgressState = "None";
-                    if (ShowBalloonTipsForRecording)
+                    if (SettingService.ShowBalloonTipsForRecording)
                     {
                         trayIcon.ShowBalloonTip(balloonTipTimeout, "Recording saved!", audioRecordingService.LastFileName, ToolTipIcon.Info);
                         trayIcon.BalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
                     }
                     recordingTimer.Stop();
-                    if (PlayAudioFeedBackMarkingStartAndStopRecording)
+                    if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
                     {
                         PlayRecordingStopAudioFeedback();
                     }
-                    if (AutoSelectLastRecording)
+                    if (SettingService.AutoSelectLastRecording)
                     {
                         SelectedFileService.SelectFile(new FileInfo(audioRecordingService.LastFileName));
                     }
                     ReplayLastRecordingButton.IsEnabled = true;
                     RecordButton.Visibility = Visibility.Visible;
                     StopRecordButton.Visibility = Visibility.Collapsed;
-                    if (AutoReplayAudioAfterRecording)
+                    if (SettingService.AutoReplayAudioAfterRecording)
                     {
                         ToggleReplayLastRecording(audioRecordingService.LastFileName);
                     }
                 },
                 outputPathGetterMethod: () =>
                 {
-                    return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
+                    return SettingService.OutputPath;
                 },
                 filenamePrefixGetterMethod: () =>
                 {
-                    return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix);
+                    return SettingService.FilenamePrefix;
                 });
 
             this.hotkeyService = new HotkeyService();
-            this.hotkeyService.AddHotkey(() => { return HotkeySettingTranslator.GetHotkeySettingAsString(AppSettingHelper.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
+            this.hotkeyService.AddHotkey(() => { return HotkeySettingTranslator.GetHotkeySettingAsString(SettingService.HotKey_StartStopRecording); }, audioRecordingService.ToggleRecording);
 
             SelectedFileService = new SelectedFileService(
                 noSelectableFileFoundAction: () =>
@@ -470,6 +319,7 @@ namespace RecNForget.Windows
                     ReplayLastRecordingButton.Visibility = Visibility.Visible;
                     PauseReplayLastRecordingButton.Visibility = Visibility.Collapsed;
                 });
+
             if (SelectedFileService.SelectLatestFile())
             {
                 ReplayLastRecordingButton.IsEnabled = true;
@@ -477,7 +327,7 @@ namespace RecNForget.Windows
 
             CurrentAudioPlayState = false;
 
-            this.Topmost = WindowAlwaysOnTop;
+            this.Topmost = SettingService.WindowAlwaysOnTop;
 
             trayIcon = new System.Windows.Forms.NotifyIcon();
             trayIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location);
@@ -487,7 +337,7 @@ namespace RecNForget.Windows
 
             UpdateCurrentFileNameDisplay(reset: true);
 
-            if (MinimizedToTray)
+            if (SettingService.MinimizedToTray)
             {
                 SwitchToBackgroundMode();
             }
@@ -500,7 +350,7 @@ namespace RecNForget.Windows
             {
                 var dia = new NewToApplicationWindow(this.hotkeyService);
 
-                if (!MinimizedToTray)
+                if (!SettingService.MinimizedToTray)
                 {
                     dia.Owner = this;
                 };
@@ -511,14 +361,14 @@ namespace RecNForget.Windows
             {
                 var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version);
 
-                if (!MinimizedToTray)
+                if (!SettingService.MinimizedToTray)
                 {
                     newToVersionDialog.Owner = this;
                 };
 
                 newToVersionDialog.Show();
             }
-            else if (ShowTipsOnStart)
+            else if (SettingService.ShowTipsAtApplicationStart)
             {
                 ShowRandomApplicationTip();
             }
@@ -555,30 +405,30 @@ namespace RecNForget.Windows
 
         private void ToggleOutputPathControlVisibility(object sender, EventArgs e)
         {
-            OutputPathControlVisible = !OutputPathControlVisible;
-            OutputPathControl.Visibility = OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+            SettingService.OutputPathControlVisible = !SettingService.OutputPathControlVisible;
+            OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void ToggleSelectedFileControlVisibility(object sender, EventArgs e)
         {
-            SelectedFileControlVisible = !SelectedFileControlVisible;
-            SelectedFileControl.Visibility = SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+            SettingService.SelectedFileControlVisible = !SettingService.SelectedFileControlVisible;
+            SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void ToggleAlwaysOnTop(object sender, EventArgs e)
         {
-            WindowAlwaysOnTop = !WindowAlwaysOnTop;
+            SettingService.WindowAlwaysOnTop = !SettingService.WindowAlwaysOnTop;
 
-            AlwaysOnTopMenuEntry.IsChecked = WindowAlwaysOnTop;
-            MinimizedToTrayMenuEntry.IsChecked = MinimizedToTray;
+            AlwaysOnTopMenuEntry.IsChecked = SettingService.WindowAlwaysOnTop;
+            MinimizedToTrayMenuEntry.IsChecked = SettingService.MinimizedToTray;
         }
 
         private void ToggleMinimizedToTray(object sender, EventArgs e)
         {
-            MinimizedToTray = !MinimizedToTray;
+            SettingService.MinimizedToTray = !SettingService.MinimizedToTray;
 
-            MinimizedToTrayMenuEntry.IsChecked = MinimizedToTray;
-            AlwaysOnTopMenuEntry.IsChecked = WindowAlwaysOnTop;
+            MinimizedToTrayMenuEntry.IsChecked = SettingService.MinimizedToTray;
+            AlwaysOnTopMenuEntry.IsChecked = SettingService.WindowAlwaysOnTop;
         }
 
         private void SwitchToBackgroundMode()
@@ -600,7 +450,7 @@ namespace RecNForget.Windows
         {
             bool continueRunning = false;
 
-            if (MinimizedToTray && this.IsVisible)
+            if (SettingService.MinimizedToTray && this.IsVisible)
             {
                 var closeOrBackgroundDialog = new CloseOrBackgroundDialog()
                 {
@@ -619,8 +469,8 @@ namespace RecNForget.Windows
 
             if (!continueRunning)
             {
-                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.MainWindowLeftX, this.Left.ToString());
-                AppSettingHelper.SetAppConfigSetting(AppSettingHelper.MainWindowTopY, this.Top.ToString());
+                SettingService.MainWindowLeftX = this.Left;
+                SettingService.MainWindowTopY = this.Top;
             }
         }
 
@@ -633,8 +483,7 @@ namespace RecNForget.Windows
         private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
         {
             // https://stackoverflow.com/a/23182807
-            FilenamePrefix = string.Concat(FilenamePrefix.Split(Path.GetInvalidFileNameChars()));
-            AppSettingHelper.SetAppConfigSetting("FilenamePrefix", FilenamePrefix);
+            SettingService.FilenamePrefix = string.Concat(SettingService.FilenamePrefix.Split(Path.GetInvalidFileNameChars()));
         }
 
         #endregion
@@ -714,7 +563,7 @@ namespace RecNForget.Windows
 
         private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
         {
-            var directory = new DirectoryInfo(OutputPath);
+            var directory = new DirectoryInfo(SettingService.OutputPath);
 
             if (SelectedFileService.HasSelectedFile && SelectedFileService.SelectedFile.Exists)
             {
@@ -725,7 +574,7 @@ namespace RecNForget.Windows
             else if (directory.Exists)
             {
                 // otherwise just open output path in explorer
-                Process.Start(OutputPath);
+                Process.Start(SettingService.OutputPath);
             }
             else
             {
@@ -821,14 +670,14 @@ namespace RecNForget.Windows
 
             if (replayAudioService.PlaybackState == PlaybackState.Stopped)
             {
-                if (PlayAudioFeedBackMarkingStartAndStopReplaying)
+                if (SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying)
                 {
                     replayAudioService.QueueFile(replayStartAudioFeedbackPath);
                 }
 
                 replayAudioService.QueueFile(fileName != null ? fileName : SelectedFileService.SelectedFile.FullName);
 
-                if (PlayAudioFeedBackMarkingStartAndStopReplaying)
+                if (SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying)
                 {
                     replayAudioService.QueueFile(replayStopAudioFeedbackPath);
                 }
@@ -886,7 +735,7 @@ namespace RecNForget.Windows
         {
             var helpmenu = new HelpWindow();
 
-            if (!MinimizedToTray)
+            if (!SettingService.MinimizedToTray)
             {
                 helpmenu.Owner = this;
             }
@@ -908,7 +757,7 @@ namespace RecNForget.Windows
         {
             var settingsWindow = new SettingsWindow(hotkeyService, () => { SwitchToBackgroundMode(); }, () => { SwitchToForegroundMode(); });
 
-            if (!MinimizedToTray)
+            if (!SettingService.MinimizedToTray)
             {
                 settingsWindow.Owner = this;
             }
@@ -922,7 +771,7 @@ namespace RecNForget.Windows
         {
             var aboutDialog = new AboutDialog();
 
-            if (!MinimizedToTray)
+            if (!SettingService.MinimizedToTray)
             {
                 aboutDialog.Owner = this;
             }
@@ -942,18 +791,18 @@ namespace RecNForget.Windows
                 icon: CustomMessageBoxIcon.Question,
                 buttons: CustomMessageBoxButtons.OkAndCancel,
                 messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
-                prompt: AppSettingHelper.GetAppConfigSetting(AppSettingHelper.FilenamePrefix),
+                prompt: SettingService.FilenamePrefix,
                 controlFocus: CustomMessageBoxFocus.Prompt,
                 promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
 
-            if (!MinimizedToTray)
+            if (!SettingService.MinimizedToTray)
             {
                 tempDialog.Owner = this;
             }
 
             if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
             {
-                FilenamePrefix = tempDialog.PromptContent;
+                SettingService.FilenamePrefix = tempDialog.PromptContent;
             }
         }
 
@@ -963,7 +812,7 @@ namespace RecNForget.Windows
 
             if (dialog.ShowDialog(this) == true)
             {
-                OutputPath = dialog.SelectedPath;
+                SettingService.OutputPath = dialog.SelectedPath;
             }
         }
 
@@ -981,7 +830,7 @@ namespace RecNForget.Windows
                 controlFocus: CustomMessageBoxFocus.Prompt,
                 promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
 
-            if (!MinimizedToTray)
+            if (!SettingService.MinimizedToTray)
             {
                 tempDialog.Owner = this;
             }
@@ -1014,7 +863,7 @@ namespace RecNForget.Windows
                 messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
                 controlFocus: CustomMessageBoxFocus.Ok);
 
-            if (!MinimizedToTray)
+            if (!SettingService.MinimizedToTray)
             {
                 tempDialog.Owner = this;
             }

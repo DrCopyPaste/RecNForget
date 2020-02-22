@@ -30,8 +30,23 @@ namespace RecNForget.Windows
 	/// </summary>
 	public partial class QuickTipDialog : INotifyPropertyChanged
 	{
+		private AppSettingService settingService;
+		public AppSettingService SettingService
+		{
+			get
+			{
+				return settingService;
+			}
+			set
+			{
+				settingService = value;
+				OnPropertyChanged();
+			}
+		}
+
 		public QuickTipDialog()
 		{
+			SettingService = new AppSettingService();
 			this.KeyDown += Window_KeyDown;
 
 			InitializeComponent();
@@ -87,20 +102,6 @@ namespace RecNForget.Windows
 			set
 			{
 				featureContents = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public bool ShowTipsOnApplicationStart
-		{
-			get
-			{
-				return Convert.ToBoolean(AppSettingHelper.GetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart));
-			}
-
-			set
-			{
-				AppSettingHelper.SetAppConfigSetting(AppSettingHelper.ShowTipsAtApplicationStart, value.ToString());
 				OnPropertyChanged();
 			}
 		}

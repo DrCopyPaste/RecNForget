@@ -17,6 +17,20 @@ namespace RecNForget.Services
 	// use SelectPrevFile to move from SelectedFile to the prev one
 	public class SelectedFileService : INotifyPropertyChanged
 	{
+		private AppSettingService settingService;
+		public AppSettingService SettingService
+		{
+			get
+			{
+				return settingService;
+			}
+			set
+			{
+				settingService = value;
+				OnPropertyChanged();
+			}
+		}
+
 		private bool hasSelectedFile;
 		private string selectedFileDisplay;
 
@@ -24,6 +38,7 @@ namespace RecNForget.Services
 
 		public SelectedFileService(Action noSelectableFileFoundAction = null)
 		{
+			SettingService = new AppSettingService();
 			this.noSelectableFileFoundAction = noSelectableFileFoundAction;
 
 			ResetSelectedFile();
@@ -208,14 +223,6 @@ namespace RecNForget.Services
 			return false;
 		}
 
-		private string OutputPath
-		{
-			get
-			{
-				return AppSettingHelper.GetAppConfigSetting(AppSettingHelper.OutputPath);
-			}
-		}
-
 		private void ResetSelectedFile()
 		{
 			SelectedFile = null;
@@ -225,7 +232,7 @@ namespace RecNForget.Services
 
 		private List<FileInfo> GetOutputFiles()
 		{
-			DirectoryInfo directory = new DirectoryInfo(OutputPath);
+			DirectoryInfo directory = new DirectoryInfo(SettingService.OutputPath);
 			return directory.Exists ?
 				directory.GetFiles("*.wav").OrderByDescending(x => x.CreationTime).ToList() :
 				new List<FileInfo>();

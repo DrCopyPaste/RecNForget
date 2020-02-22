@@ -23,9 +23,8 @@ namespace RecNForget.Services
 			return string.Join(keySeparator, GetKeyboardHookEventArgsAsList(keyboardHookEventArgs, keyStart, keyEnd));
 		}
 
-		public static List<string> GetHotkeySettingAsList(string settingKey, string keyStart = "[", string keyEnd = "]")
+		public static List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]")
 		{
-			var setting = AppSettingHelper.GetAppConfigSetting(settingKey);
 			List<string> keys = new List<string>();
 
 			// modifier keys

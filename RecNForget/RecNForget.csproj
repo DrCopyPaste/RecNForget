@@ -300,7 +300,7 @@
       <DependentUpon>CloseOrBackgroundDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="RestoreMainWindowFromTrayCommand.cs" />
-    <Compile Include="Services\AppSettingHelper.cs" />
+    <Compile Include="Services\AppSettingService.cs" />
     <Compile Include="Services\AudioPlayListService.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
