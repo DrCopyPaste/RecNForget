@@ -83,6 +83,12 @@
 			</Run>
 			<Hyperlink NavigateUri="https://wixtoolset.org/about/license/" RequestNavigate="Hyperlink_RequestNavigate">MS-RL</Hyperlink>
 			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop" RequestNavigate="Hyperlink_RequestNavigate">StyleCop.MSBuild v6.1.0</Hyperlink>
+			<Run>
+				 Copyright (c) StyleCop contributors, Chris Dahlberg - 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop/blob/master/License.html" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
+			<LineBreak />
 			<LineBreak />
 			<Run>
 				The following images were used to create RecNForget:

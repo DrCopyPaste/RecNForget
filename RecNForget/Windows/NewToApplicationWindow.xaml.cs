@@ -1,148 +1,133 @@
-﻿using FMUtils.KeyboardHook;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Input;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace RecNForget.Windows
 {
-	/// <summary>
-	/// Interaction logic for NewToApplicationWindow.xaml
-	/// </summary>
-	public partial class NewToApplicationWindow : INotifyPropertyChanged
-	{
-		private HotkeyService hotkeyService;
-		private AppSettingService settingService;
-		public AppSettingService SettingService
-		{
-			get
-			{
-				return settingService;
-			}
-			set
-			{
-				settingService = value;
-				OnPropertyChanged();
-			}
-		}
+    /// <summary>
+    /// Interaction logic for NewToApplicationWindow.xaml
+    /// </summary>
+    public partial class NewToApplicationWindow : INotifyPropertyChanged
+    {
+        private HotkeyService hotkeyService;
+        private AppSettingService settingService;
 
-		public NewToApplicationWindow(HotkeyService hotkeyService)
-		{
-			this.hotkeyService = hotkeyService;
-			this.SettingService = new AppSettingService();
-			this.KeyDown += Window_KeyDown;
+        public NewToApplicationWindow(HotkeyService hotkeyService)
+        {
+            this.hotkeyService = hotkeyService;
+            this.SettingService = new AppSettingService();
+            this.KeyDown += Window_KeyDown;
 
-			InitializeComponent();
-			DataContext = this;
+            InitializeComponent();
+            DataContext = this;
 
-			this.Title = "New to RecNForget?";
+            this.Title = "New to RecNForget?";
 
-			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
-				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
-				spacing: 6);
+            var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+                hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
+                buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
+                spacing: 6);
 
-			HotkeyDisplay.Children.Add(buttonGrid);
-		}
+            HotkeyDisplay.Children.Add(buttonGrid);
+        }
 
-		private void DisplayHotkey()
-		{
-			if (HotkeyDisplay.Children.Count > 0)
-			{
-				HotkeyDisplay.Children.Clear();
-			}
+        public event PropertyChangedEventHandler PropertyChanged;
 
-			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
-				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
-				spacing: 6);
+        public AppSettingService SettingService
+        {
+            get
+            {
+                return settingService;
+            }
 
-			HotkeyDisplay.Children.Add(buttonGrid);
-		}
+            set
+            {
+                settingService = value;
+                OnPropertyChanged();
+            }
+        }
 
-		private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-		{
-			if (e.Key == Key.Escape)
-			{
-				this.Close();
-			}
-		}
+        private void DisplayHotkey()
+        {
+            if (HotkeyDisplay.Children.Count > 0)
+            {
+                HotkeyDisplay.Children.Clear();
+            }
 
-		private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
-		{
-			this.hotkeyService.PauseCapturingHotkeys();
+            var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+                hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
+                buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
+                spacing: 6);
 
-			var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey")
-			{
-				Owner = this
-			};
+            HotkeyDisplay.Children.Add(buttonGrid);
+        }
 
-			if (dialog.ShowDialog() == true)
-			{
-				SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
-				DisplayHotkey();
-			}
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
+        }
 
-			this.hotkeyService.ResumeCapturingHotkeys();
+        private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
+        {
+            this.hotkeyService.PauseCapturingHotkeys();
 
-			// since there are two buttons on top of each other
-			e.Handled = true;
-		}
+            var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey")
+            {
+                Owner = this
+            };
 
-		private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
-		{
-			var dialog = new VistaFolderBrowserDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
+                DisplayHotkey();
+            }
 
-			if (dialog.ShowDialog() == true)
-			{
-				SettingService.OutputPath = dialog.SelectedPath;
-			}
+            this.hotkeyService.ResumeCapturingHotkeys();
 
-			// since there are two buttons on top of each other
-			e.Handled = true;
-		}
+            // since there are two buttons on top of each other
+            e.Handled = true;
+        }
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-				this.DragMove();
-		}
+        private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new VistaFolderBrowserDialog();
 
-		private void Exit_Click(object sender, RoutedEventArgs e)
-		{
-			this.Close();
-		}
+            if (dialog.ShowDialog() == true)
+            {
+                SettingService.OutputPath = dialog.SelectedPath;
+            }
 
-		private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-		{
-			this.WindowState = WindowState.Minimized;
-		}
+            // since there are two buttons on top of each other
+            e.Handled = true;
+        }
 
-		#region configuration event handlers
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
-		#endregion
-	}
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

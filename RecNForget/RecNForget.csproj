@@ -368,6 +368,7 @@
     <Resource Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Styles\Default\ButtonImages\record_icon.black.disabled.png" />
     <Resource Include="Styles\Default\ButtonImages\pencil_icon79516.black.disabled.png" />
     <Resource Include="Styles\Default\ButtonImages\trash_icon77730.black.disabled.png" />
     <Resource Include="Styles\Default\ButtonImages\bugfix_icon140609.black.png" />
@@ -443,5 +444,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Nerdbank.GitVersioning.3.0.50\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Nerdbank.GitVersioning.3.0.50\build\Nerdbank.GitVersioning.targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets'))" />
   </Target>
+  <Import Project="..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets" Condition="Exists('..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets')" />
 </Project>

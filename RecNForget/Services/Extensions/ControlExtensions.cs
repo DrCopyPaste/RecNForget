@@ -6,9 +6,12 @@ namespace RecNForget.Services.Extensions
     public static class ControlExtensions
     {
         // https://stackoverflow.com/a/7075718
-        public static void PerformClick(this Button btn)
+        public static void PerformClick(this Button btn, bool ignoreIsEnabled = false)
         {
-            btn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            if (ignoreIsEnabled || btn.IsEnabled)
+            {
+                btn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            }
         }
     }
 }

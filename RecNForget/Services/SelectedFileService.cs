@@ -4,244 +4,238 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecNForget.Services
 {
-	// all SelectFile methods return false if that file does not exist (or if there is no file selected)
+    // all SelectFile methods return false if that file does not exist (or if there is no file selected)
 
-	// use SelectFile method to select a known file
-	// use SelectLatestFile method to select the newest file
-	// use SelectNextFile to move from SelectedFile to the next one
-	// use SelectPrevFile to move from SelectedFile to the prev one
-	public class SelectedFileService : INotifyPropertyChanged
-	{
-		private AppSettingService settingService;
-		public AppSettingService SettingService
-		{
-			get
-			{
-				return settingService;
-			}
-			set
-			{
-				settingService = value;
-				OnPropertyChanged();
-			}
-		}
+    // use SelectFile method to select a known file
+    // use SelectLatestFile method to select the newest file
+    // use SelectNextFile to move from SelectedFile to the next one
+    // use SelectPrevFile to move from SelectedFile to the prev one
+    public class SelectedFileService : INotifyPropertyChanged
+    {
+        private readonly Action noSelectableFileFoundAction;
 
-		private bool hasSelectedFile;
-		private string selectedFileDisplay;
+        private AppSettingService settingService = null;
 
-		private Action noSelectableFileFoundAction;
+        private bool hasSelectedFile;
+        private string selectedFileDisplay;
 
-		public SelectedFileService(Action noSelectableFileFoundAction = null)
-		{
-			SettingService = new AppSettingService();
-			this.noSelectableFileFoundAction = noSelectableFileFoundAction;
+        public SelectedFileService(Action noSelectableFileFoundAction = null)
+        {
+            SettingService = new AppSettingService();
+            this.noSelectableFileFoundAction = noSelectableFileFoundAction;
 
-			ResetSelectedFile();
-		}
+            ResetSelectedFile();
+        }
 
-		public FileInfo SelectedFile { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		public bool HasSelectedFile
-		{
-			get
-			{
-				return hasSelectedFile;
-			}
-			set
-			{
-				hasSelectedFile = value;
+        public FileInfo SelectedFile { get; private set; }
 
-				if (!value)
-				{
-					noSelectableFileFoundAction?.Invoke();
-				}
+        public AppSettingService SettingService
+        {
+            get
+            {
+                return settingService;
+            }
 
-				OnPropertyChanged();
-			}
-		}
+            set
+            {
+                settingService = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string SelectedFileDisplay
-		{
-			get
-			{
-				return selectedFileDisplay;
-			}
-			set
-			{
-				selectedFileDisplay = value;
-				OnPropertyChanged();
-			}
-		}
+        public bool HasSelectedFile
+        {
+            get
+            {
+                return hasSelectedFile;
+            }
 
-		public bool SelectFile(FileInfo file)
-		{
-			if (file == null || !file.Exists)
-			{
-				ResetSelectedFile();
-				return false;
-			}
-			else
-			{
-				SelectedFile = file;
-				HasSelectedFile = true;
-				SelectedFileDisplay = file.Name;
+            private set
+            {
+                hasSelectedFile = value;
 
-				return true;
-			}
-		}
+                if (!value)
+                {
+                    noSelectableFileFoundAction?.Invoke();
+                }
 
-		public bool SelectLatestFile()
-		{
-			var allFiles = GetOutputFiles();
+                OnPropertyChanged();
+            }
+        }
 
-			if (allFiles.Any())
-			{
-				return SelectFile(allFiles.First());
-			}
-			else
-			{
-				return false;
-			}
-		}
+        public string SelectedFileDisplay
+        {
+            get
+            {
+                return selectedFileDisplay;
+            }
 
-		public bool SelectNextFile()
-		{
-			var allFiles = GetOutputFiles();
+            set
+            {
+                selectedFileDisplay = value;
+                OnPropertyChanged();
+            }
+        }
 
-			if (allFiles.Any())
-			{
-				int currentIndex = 0;
-				FileInfo tempInfo = allFiles.Any(f => f.FullName == SelectedFile.FullName) ? allFiles.First(f => f.FullName == SelectedFile.FullName) : null;
+        public bool SelectFile(FileInfo file)
+        {
+            if (file == null || !file.Exists)
+            {
+                ResetSelectedFile();
+                return false;
+            }
+            else
+            {
+                SelectedFile = file;
+                HasSelectedFile = true;
+                SelectedFileDisplay = file.Name;
 
-				if (tempInfo != null)
-				{
-					currentIndex = allFiles.IndexOf(tempInfo);
-					currentIndex++;
+                return true;
+            }
+        }
 
-					if (currentIndex >= allFiles.Count)
-					{
-						currentIndex = 0;
-					}
-				}
+        public bool SelectLatestFile()
+        {
+            return SelectFile(GetOutputFiles().FirstOrDefault());
+        }
 
-				return SelectFile(allFiles[currentIndex]);
-			}
-			else
-			{
-				return false;
-			}
-		}
+        public bool SelectNextFile()
+        {
+            var allFiles = GetOutputFiles();
 
-		public bool SelectPrevFile()
-		{
-			var allFiles = GetOutputFiles();
+            if (allFiles.Any())
+            {
+                int currentIndex = 0;
+                FileInfo tempInfo = allFiles.Any(f => f.FullName == SelectedFile.FullName) ? allFiles.First(f => f.FullName == SelectedFile.FullName) : null;
 
-			if (allFiles.Any())
-			{
-				int currentIndex = 0;
-				FileInfo tempInfo = allFiles.Any(f => f.FullName == SelectedFile.FullName) ? allFiles.First(f => f.FullName == SelectedFile.FullName) : null;
+                if (tempInfo != null)
+                {
+                    currentIndex = allFiles.IndexOf(tempInfo);
+                    currentIndex++;
 
-				if (tempInfo != null)
-				{
-					currentIndex = allFiles.IndexOf(tempInfo);
-					currentIndex--;
+                    if (currentIndex >= allFiles.Count)
+                    {
+                        currentIndex = 0;
+                    }
+                }
 
-					if (currentIndex < 0)
-					{
-						currentIndex = allFiles.Count - 1;
-					}
-				}
+                return SelectFile(allFiles[currentIndex]);
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-				return SelectFile(allFiles[currentIndex]);
-			}
-			else
-			{
-				return false;
-			}
-		}
+        public bool SelectPrevFile()
+        {
+            var allFiles = GetOutputFiles();
 
-		/// <summary>
-		/// tries to delete the current one and select previous file
-		/// </summary>
-		/// <returns></returns>
-		public bool DeleteSelectedFile()
-		{
-			if (SelectedFile == null || !SelectedFile.Exists)
-			{
-				return false;
-			}
+            if (allFiles.Any())
+            {
+                int currentIndex = 0;
+                FileInfo tempInfo = allFiles.Any(f => f.FullName == SelectedFile.FullName) ? allFiles.First(f => f.FullName == SelectedFile.FullName) : null;
 
-			var fileNameToDelete = SelectedFile.FullName;
-			SelectPrevFile();
+                if (tempInfo != null)
+                {
+                    currentIndex = allFiles.IndexOf(tempInfo);
+                    currentIndex--;
 
-			try
-			{
-				File.Delete(fileNameToDelete);
+                    if (currentIndex < 0)
+                    {
+                        currentIndex = allFiles.Count - 1;
+                    }
+                }
 
-				// selected the exact file we just deleted, because it was the only one in the folder
-				if (fileNameToDelete == SelectedFile.FullName)
-				{
-					ResetSelectedFile();
-				}
+                return SelectFile(allFiles[currentIndex]);
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-				return true;
-			}
-			catch (Exception e)
-			{
-			}
+        /// <summary>
+        /// tries to delete the current one and select previous file
+        /// </summary>
+        /// <returns></returns>
+        public bool DeleteSelectedFile()
+        {
+            if (SelectedFile == null || !SelectedFile.Exists)
+            {
+                return false;
+            }
 
-			return false;
-		}
+            var fileNameToDelete = SelectedFile.FullName;
+            SelectPrevFile();
 
-		public bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension)
-		{
-			if (SelectedFile == null || !SelectedFile.Exists)
-			{
-				return false;
-			}
+            try
+            {
+                File.Delete(fileNameToDelete);
 
-			try
-			{
-				string path = SelectedFile.DirectoryName;
-				string extension = Path.GetExtension(SelectedFile.Name);
-				string newFullName = Path.Combine(path, string.Concat(newNameWithoutExtension, extension));
+                // selected the exact file we just deleted, because it was the only one in the folder
+                if (fileNameToDelete == SelectedFile.FullName)
+                {
+                    ResetSelectedFile();
+                }
 
-				File.Move(SelectedFile.FullName, newFullName);
-				SelectFile(new FileInfo(newFullName));
+                return true;
+            }
+            catch (Exception)
+            {
+            }
 
-				return true;
-			}
-			catch (Exception e)
-			{
-			}
+            return false;
+        }
 
-			return false;
-		}
+        public bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension)
+        {
+            if (SelectedFile == null || !SelectedFile.Exists)
+            {
+                return false;
+            }
 
-		private void ResetSelectedFile()
-		{
-			SelectedFile = null;
-			HasSelectedFile = false;
-			SelectedFileDisplay = "(no file found or selected)";
-		}
+            try
+            {
+                string path = SelectedFile.DirectoryName;
+                string extension = Path.GetExtension(SelectedFile.Name);
+                string newFullName = Path.Combine(path, string.Concat(newNameWithoutExtension, extension));
 
-		private List<FileInfo> GetOutputFiles()
-		{
-			DirectoryInfo directory = new DirectoryInfo(SettingService.OutputPath);
-			return directory.Exists ?
-				directory.GetFiles("*.wav").OrderByDescending(x => x.CreationTime).ToList() :
-				new List<FileInfo>();
-		}
+                File.Move(SelectedFile.FullName, newFullName);
+                SelectFile(new FileInfo(newFullName));
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
+                return true;
+            }
+            catch (Exception)
+            {
+            }
+
+            return false;
+        }
+
+        private void ResetSelectedFile()
+        {
+            SelectedFile = null;
+            HasSelectedFile = false;
+            SelectedFileDisplay = "(no file found or selected)";
+        }
+
+        private List<FileInfo> GetOutputFiles()
+        {
+            DirectoryInfo directory = new DirectoryInfo(SettingService.OutputPath);
+            return directory.Exists ?
+                directory.GetFiles("*.wav").OrderByDescending(x => x.CreationTime).ToList() :
+                new List<FileInfo>();
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

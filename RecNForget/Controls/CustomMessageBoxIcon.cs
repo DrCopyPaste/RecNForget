@@ -1,10 +1,10 @@
 ﻿namespace RecNForget.Controls
 {
-	public enum CustomMessageBoxIcon
-	{
-		Default,
-		Information,
-		Question,
-		Error
-	}
+    public enum CustomMessageBoxIcon
+    {
+        Default,
+        Information,
+        Question,
+        Error
+    }
 }

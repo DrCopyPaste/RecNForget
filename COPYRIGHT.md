@@ -26,6 +26,8 @@ The following libaries are used by RecNForget:
 
 [WiX Toolset build tools v3.11.2.4516](https://wixtoolset.org/) Copyright (c) .NET Foundation - [MS-RL](https://wixtoolset.org/about/license/)
 
+[StyleCop.MSBuild v6.1.0](https://github.com/StyleCop/StyleCop) Copyright (c) StyleCop contributors, Chris Dahlberg - [Ms-PL](https://github.com/StyleCop/StyleCop/blob/master/License.html)
+
 
 
 The following images were used to create RecNForget:

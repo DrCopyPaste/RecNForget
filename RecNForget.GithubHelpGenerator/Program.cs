@@ -1,10 +1,7 @@
-﻿using RecNForget.Services.Types;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using RecNForget.Services.Types;
 
 namespace RecNForget.GithubHelpGenerator
 {
@@ -16,13 +13,13 @@ namespace RecNForget.GithubHelpGenerator
     /// /Help/Features/ includes all features found under the RecNForget.Help.Features namespace
     /// quickstart "behaves" like a feature, but is added seperately
     /// </summary>
-    class Program
+    public class Program
     {
         private static string baseUrl = "https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/";
         private static string tocPath = @"..\..\..\Help";
         private static string featuresPath = @"..\..\..\Help\Features";
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             DirectoryInfo tocFolder = new DirectoryInfo(tocPath);
             EnsureEmptyFolder(tocFolder);
@@ -38,7 +35,6 @@ namespace RecNForget.GithubHelpGenerator
 
             // create a master help page that contains a table of contents with links to all features
             // create an md file for each feature
-
             StringBuilder tocPageContents = new StringBuilder();
             tocPageContents.AppendLine(HeadingLine("RecNForget - Help Topics"));
 

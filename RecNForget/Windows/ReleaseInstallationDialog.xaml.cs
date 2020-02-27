@@ -1,30 +1,11 @@
-﻿using FMUtils.KeyboardHook;
-using Microsoft.VisualBasic.ApplicationServices;
-using Newtonsoft.Json;
-using Octokit;
-using RecNForget.Services;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Octokit;
 
 namespace RecNForget.Windows
 {
@@ -34,9 +15,12 @@ namespace RecNForget.Windows
     public partial class ReleaseInstallationDialog : Window, INotifyPropertyChanged
     {
         private ReleaseAsset asset;
+        private string releaseNotes;
+        private string versionString;
+        private bool installAfterDownload;
 
         public ReleaseInstallationDialog(Release release, ReleaseAsset asset, string releaseNotes)
-		{
+        {
             InitializeComponent();
             DataContext = this;
 
@@ -48,7 +32,50 @@ namespace RecNForget.Windows
             InstallAfterDownload = true;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;    
+
+        public string ReleaseNotes
+        {
+            get
+            {
+                return releaseNotes;
+            }
+
+            set
+            {
+                releaseNotes = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string VersionInfoString
+        {
+            get
+            {
+                return versionString;
+            }
+
+            set
+            {
+                versionString = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool InstallAfterDownload
+        {
+            get
+            {
+                return installAfterDownload;
+            }
+
+            set
+            {
+                installAfterDownload = value;
+                OnPropertyChanged();
+            }
+        }
+
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -63,10 +90,12 @@ namespace RecNForget.Windows
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-				this.DragMove();
-		}
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
 
         private void DownloadButton_Click(object sender, RoutedEventArgs e)
         {
@@ -92,48 +121,6 @@ namespace RecNForget.Windows
             }
 
             this.Close();
-        }
-
-        private string releaseNotes;
-        public string ReleaseNotes
-        {
-            get
-            {
-                return releaseNotes;
-            }
-            set
-            {
-                releaseNotes = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string versionString;
-        public string VersionInfoString
-        {
-            get
-            {
-                return versionString;
-            }
-            set
-            {
-                versionString = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool installAfterDownload;
-        public bool InstallAfterDownload
-        {
-            get
-            {
-                return installAfterDownload;
-            }
-            set
-            {
-                installAfterDownload = value;
-                OnPropertyChanged();
-            }
         }
 
         private string VersionStringFromMsiAsset(ReleaseAsset asset)

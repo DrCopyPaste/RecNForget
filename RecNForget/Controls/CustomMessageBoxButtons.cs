@@ -1,9 +1,9 @@
 ﻿namespace RecNForget.Controls
 {
-	public enum CustomMessageBoxButtons
-	{
-		None,
-		OK,
-		OkAndCancel
-	}
+    public enum CustomMessageBoxButtons
+    {
+        None,
+        OK,
+        OkAndCancel
+    }
 }

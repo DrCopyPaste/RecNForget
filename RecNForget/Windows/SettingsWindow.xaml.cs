@@ -1,150 +1,138 @@
-﻿using Ookii.Dialogs.Wpf;
-using RecNForget.Controls;
-using RecNForget.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.IO;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
+using Ookii.Dialogs.Wpf;
+using RecNForget.Controls;
+using RecNForget.Services;
 
 namespace RecNForget.Windows
 {
-	/// <summary>
-	/// Interaction logic for SettingsWindow.xaml
-	/// </summary>
-	public partial class SettingsWindow : INotifyPropertyChanged
-	{
-		private Action hideToTrayAction;
-		private Action restoreFromTrayAction;
+    /// <summary>
+    /// Interaction logic for SettingsWindow.xaml
+    /// </summary>
+    public partial class SettingsWindow : INotifyPropertyChanged
+    {
+        private HotkeyService hotkeyService;
+        private AppSettingService settingService;
 
-		private HotkeyService hotkeyService;
-		private AppSettingService settingService;
-		public AppSettingService SettingService
-		{
-			get
-			{
-				return settingService;
-			}
-			set
-			{
-				settingService = value;
-				OnPropertyChanged();
-			}
-		}
+        public SettingsWindow(HotkeyService hotkeyService)
+        {
+            this.hotkeyService = hotkeyService;
+            this.SettingService = new AppSettingService();
 
-		public SettingsWindow(HotkeyService hotkeyService, Action hideToTrayAction, Action restoreFromTrayAction)
-		{
-			this.hotkeyService = hotkeyService;
-			this.SettingService = new AppSettingService();
-			this.hideToTrayAction = hideToTrayAction;
-			this.restoreFromTrayAction = restoreFromTrayAction;
+            DataContext = this;
+            InitializeComponent();
 
-			DataContext = this;
-			InitializeComponent();
+            DisplayHotkey();
+        }
 
-			DisplayHotkey();
-		}
+        public event PropertyChangedEventHandler PropertyChanged;
 
-		private void DisplayHotkey()
-		{
-			if (HotkeyDisplay.Children.Count > 0)
-			{
-				HotkeyDisplay.Children.Clear();
-			}
+        public AppSettingService SettingService
+        {
+            get
+            {
+                return settingService;
+            }
 
-			var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
-				hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
-				buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
-				spacing: 6,
-				horizontalAlignment: HorizontalAlignment.Left);
+            set
+            {
+                settingService = value;
+                OnPropertyChanged();
+            }
+        }
 
-			HotkeyDisplay.Children.Add(buttonGrid);
-		}
+        private void DisplayHotkey()
+        {
+            if (HotkeyDisplay.Children.Count > 0)
+            {
+                HotkeyDisplay.Children.Clear();
+            }
 
-		#region configuration event handlers
+            var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+                hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
+                buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
+                spacing: 6,
+                horizontalAlignment: HorizontalAlignment.Left);
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
+            HotkeyDisplay.Children.Add(buttonGrid);
+        }
 
-		#endregion
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-		#region runtime event handlers
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-				this.DragMove();
-		}
+        private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
+        {
+            this.hotkeyService.PauseCapturingHotkeys();
 
-		private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
-		{
-			this.hotkeyService.PauseCapturingHotkeys();
+            var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey");
 
-			var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey");
+            if (dialog.ShowDialog() == true)
+            {
+                SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
+                DisplayHotkey();
+            }
 
-			if (dialog.ShowDialog() == true)
-			{
-				SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
-				DisplayHotkey();
-			}
+            this.hotkeyService.ResumeCapturingHotkeys();
 
-			this.hotkeyService.ResumeCapturingHotkeys();
+            // since there are two buttons on top of each other
+            e.Handled = true;
+        }
 
-			// since there are two buttons on top of each other
-			e.Handled = true;
-		}
+        private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new VistaFolderBrowserDialog();
 
-		private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
-		{
-			var dialog = new VistaFolderBrowserDialog();
+            if (dialog.ShowDialog() == true)
+            {
+                SettingService.OutputPath = dialog.SelectedPath;
+            }
 
-			if (dialog.ShowDialog() == true)
-			{
-				SettingService.OutputPath = dialog.SelectedPath;
-			}
+            // since there are two buttons on top of each other
+            e.Handled = true;
+        }
 
-			// since there are two buttons on top of each other
-			e.Handled = true;
-		}
+        private void Configure_FileNamePattern_Click(object sender, RoutedEventArgs e)
+        {
+            CustomMessageBox tempDialog = new CustomMessageBox(
+                caption: "Type in a new pattern for file name generation.",
+                icon: CustomMessageBoxIcon.Question,
+                buttons: CustomMessageBoxButtons.OkAndCancel,
+                messageRows: new List<string>() { "Supported placeholders:", "(Date)" },
+                prompt: SettingService.FilenamePrefix,
+                controlFocus: CustomMessageBoxFocus.Prompt,
+                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
 
-		private void Configure_FileNamePattern_Click(object sender, RoutedEventArgs e)
-		{
-			CustomMessageBox tempDialog = new CustomMessageBox(
-				caption: "Type in a new pattern for file name generation.",
-				icon: CustomMessageBoxIcon.Question,
-				buttons: CustomMessageBoxButtons.OkAndCancel,
-				messageRows: new List<string>() { "Supported placeholders:", "(Date)" },
-				prompt: SettingService.FilenamePrefix,
-				controlFocus: CustomMessageBoxFocus.Prompt,
-				promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+            {
+                SettingService.FilenamePrefix = tempDialog.PromptContent;
+            }
 
-			if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-			{
-				SettingService.FilenamePrefix = tempDialog.PromptContent;
-			}
+            // since there are two buttons on top of each other
+            e.Handled = true;
+        }
 
-			// since there are two buttons on top of each other
-			e.Handled = true;
-		}
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
 
-		private void Exit_Click(object sender, RoutedEventArgs e)
-		{
-			DialogResult = true;
-		}
-
-		private void OkButton_Click(object sender, RoutedEventArgs e)
-		{
-			DialogResult = true;
-		}
-
-		#endregion
-	}
+        private void OkButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
+    }
 }

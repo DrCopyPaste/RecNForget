@@ -26,7 +26,7 @@
     <Sys:Double x:Key="SeparatorRow_Height">2</Sys:Double>
     <Sys:Double x:Key="SeparatorTitleRow_Height">15</Sys:Double>
     <Sys:Double x:Key="MainWindowControl_InnerWidth">21</Sys:Double>
-    <Sys:Double x:Key="MainWindowControl_Height">21</Sys:Double>
+    <Sys:Double x:Key="MainWindowControl_Height">23</Sys:Double>
     <Sys:Double x:Key="MainWindowControl_HeightWithMargin">25</Sys:Double>
 
     <Sys:Double x:Key="Paragraph_Separator_Height">9</Sys:Double>

@@ -80,7 +80,7 @@
                 Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>
             <local:ImageButton Grid.Row="10" Grid.Column="3" Style="{StaticResource AcceptButton}"
                 HorizontalAlignment="Right"
-                Click="okButton_Click"/>
+                Click="OkButton_Click"/>
         </Grid>
     </Border>
 </Window>

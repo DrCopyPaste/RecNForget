@@ -1,135 +1,120 @@
-﻿using FMUtils.KeyboardHook;
-using Ookii.Dialogs.Wpf;
-using RecNForget.Services;
-using RecNForget.Services.Extensions;
-using RecNForget.Services.Types;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Configuration;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using RecNForget.Services;
+using RecNForget.Services.Types;
 
 namespace RecNForget.Windows
 {
-	/// <summary>
-	/// Interaction logic for QuickTipDialog.xaml
-	/// </summary>
-	public partial class QuickTipDialog : INotifyPropertyChanged
-	{
-		private AppSettingService settingService;
-		public AppSettingService SettingService
-		{
-			get
-			{
-				return settingService;
-			}
-			set
-			{
-				settingService = value;
-				OnPropertyChanged();
-			}
-		}
+    /// <summary>
+    /// Interaction logic for QuickTipDialog.xaml
+    /// </summary>
+    public partial class QuickTipDialog : INotifyPropertyChanged
+    {
+        private AppSettingService settingService;
+        private string featureCaption;
+        private string featureContents;
 
-		public QuickTipDialog()
-		{
-			SettingService = new AppSettingService();
-			this.KeyDown += Window_KeyDown;
+        public QuickTipDialog()
+        {
+            SettingService = new AppSettingService();
+            this.KeyDown += Window_KeyDown;
 
-			InitializeComponent();
-			DataContext = this;
+            InitializeComponent();
+            DataContext = this;
 
-			this.Title = "Did you know?";
+            this.Title = "Did you know?";
 
-			GenerateRandomTip();
-		}
+            GenerateRandomTip();
+        }
 
-		private void GenerateRandomTip()
-		{
-			var allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature).ToList();
+        public event PropertyChangedEventHandler PropertyChanged;
 
-			int randomNumber = (new Random()).Next(0, allFeatures.Count - 1);
-			var randomFeature = allFeatures[randomNumber];
+        public AppSettingService SettingService
+        {
+            get
+            {
+                return settingService;
+            }
 
-			FeatureCaption = randomFeature.Title;
-			FeatureContents = randomFeature.HelpLinesAsString();
-		}
+            set
+            {
+                settingService = value;
+                OnPropertyChanged();
+            }
+        }
 
-		private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-		{
-			if (e.Key == Key.Escape)
-			{
-				this.Close();
-			}
-		}
-		private string featureCaption;
-		private string featureContents;
+        public string FeatureCaption
+        {
+            get
+            {
+                return featureCaption;
+            }
 
-		public string FeatureCaption
-		{
-			get
-			{
-				return featureCaption;
-			}
+            set
+            {
+                featureCaption = value;
+                OnPropertyChanged();
+            }
+        }
 
-			set
-			{
-				featureCaption = value;
-				OnPropertyChanged();
-			}
-		}
+        public string FeatureContents
+        {
+            get
+            {
+                return featureContents;
+            }
 
-		public string FeatureContents
-		{
-			get
-			{
-				return featureContents;
-			}
+            set
+            {
+                featureContents = value;
+                OnPropertyChanged();
+            }
+        }
 
-			set
-			{
-				featureContents = value;
-				OnPropertyChanged();
-			}
-		}
+        private void GenerateRandomTip()
+        {
+            var allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature).ToList();
 
-		private void GenerateAnotherTip_Click(object sender, RoutedEventArgs e)
-		{
-			GenerateRandomTip();
-		}
+            int randomNumber = (new Random()).Next(0, allFeatures.Count - 1);
+            var randomFeature = allFeatures[randomNumber];
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-				this.DragMove();
-		}
+            FeatureCaption = randomFeature.Title;
+            FeatureContents = randomFeature.HelpLinesAsString();
+        }
 
-		private void Exit_Click(object sender, RoutedEventArgs e)
-		{
-			this.Close();
-		}
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
+        }
 
-		#region configuration event handlers
+        private void GenerateAnotherTip_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateRandomTip();
+        }
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
 
-		#endregion
-	}
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

@@ -130,18 +130,20 @@
         <Setter Property="PressedImage" Value="ButtonImages\nextTrack_icon.black.png" />
     </Style>
 
-    <Style x:Key="PlayButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+    <Style x:Key="PlayButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource ComplexConditionButton}">
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ImagePadding" Value="4,4,4,4" />
         <Setter Property="DefaultImage" Value="ButtonImages\play_icon.black.png" />
         <Setter Property="DisabledImage" Value="ButtonImages\play_icon.black.disabled.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\play_icon.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\play_icon.black.png" />
     </Style>
 
-    <Style x:Key="PauseButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+    <Style x:Key="PauseButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource ComplexConditionButton}">
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ImagePadding" Value="4,4,4,4" />
         <Setter Property="DefaultImage" Value="ButtonImages\pause_icon.black.png" />
         <Setter Property="DisabledImage" Value="ButtonImages\pause_icon.black.disabled.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\pause_icon.black.png" />
@@ -158,13 +160,17 @@
     </Style>
 
     <Style x:Key="RecordButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="DefaultImage" Value="ButtonImages\record_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\record_icon.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\record_icon.black.disabled.png" />
         <Setter Property="SelectedImage" Value="ButtonImages\record_icon.black.png" />
         <Setter Property="PressedImage" Value="ButtonImages\record_icon.black.png" />
     </Style>
 
     <Style x:Key="StopRecordButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="ImagePadding" Value="5,5,5,5" />
         <Setter Property="DefaultImage" Value="ButtonImages\stop_icon.black.png" />
         <Setter Property="DisabledImage" Value="ButtonImages\stop_icon.black.disabled.png" />

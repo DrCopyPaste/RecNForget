@@ -9,14 +9,13 @@ namespace RecNForget.Setup.Extensions
 {
     public class CustomActions
     {
-        // yes there are custom actions that could do this task directly WITHIN wix like RemoveRegistryKey
-        // BUT this way there is a good template to augment the (un)installation sequence in general with whatever
-        // AND also this way we can move the magic strings that describe, what is to be deleted into a shared segment
-        // and dont have to duplicate so much in setup project and the application itself
-        private static void RemoveAutoStartWithWindowsFromRegistry()
+        [CustomAction]
+        public static ActionResult RemoveApplicationSettings(Session session)
         {
-            var settingService = new AppSettingService();
-            settingService.AutoStartWithWindows = false;
+            RemoveAutoStartWithWindowsFromRegistry();
+            RemoveApplicationConfigurationFiles();
+
+            return ActionResult.Success;
         }
 
         // yes there are custom actions that could do this task directly WITHIN wix like RemoveFiles
@@ -26,13 +25,14 @@ namespace RecNForget.Setup.Extensions
             AppSettingService.RemoveAppConfigSettingFile();
         }
 
-        [CustomAction]
-        public static ActionResult RemoveApplicationSettings(Session session)
+        // yes there are custom actions that could do this task directly WITHIN wix like RemoveRegistryKey
+        // BUT this way there is a good template to augment the (un)installation sequence in general with whatever
+        // AND also this way we can move the magic strings that describe, what is to be deleted into a shared segment
+        // and dont have to duplicate so much in setup project and the application itself
+        private static void RemoveAutoStartWithWindowsFromRegistry()
         {
-            RemoveAutoStartWithWindowsFromRegistry();
-            RemoveApplicationConfigurationFiles();
-
-            return ActionResult.Success;
+            var settingService = new AppSettingService();
+            settingService.AutoStartWithWindows = false;
         }
     }
 }

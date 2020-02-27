@@ -1,83 +1,84 @@
-﻿using RecNForget.Services;
-using RecNForget.Services.Extensions;
-using RecNForget.Services.Types;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using RecNForget.Services.Extensions;
+using RecNForget.Services.Types;
 
 namespace RecNForget.Windows
 {
-	/// <summary>
-	/// Interaction logic for HelpWindow.xaml
-	/// </summary>
-	public partial class HelpWindow : Window
-	{
-		private List<HelpFeature> allFeatures;
-		private HelpFeature quickStart;
+    /// <summary>
+    /// Interaction logic for HelpWindow.xaml
+    /// </summary>
+    public partial class HelpWindow : Window
+    {
+        private List<HelpFeature> allFeatures;
+        private HelpFeature quickStart;
 
-		public HelpWindow()
-		{
+        public HelpWindow()
+        {
             InitializeComponent();
 
-			this.KeyDown += Window_KeyDown;
+            this.KeyDown += Window_KeyDown;
 
-			quickStart = new Help.General.QuickStart();
-			this.allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature).ToList();
-			int topicRowCount = 0;
+            quickStart = new Help.General.QuickStart();
+            this.allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature).ToList();
+            int topicRowCount = 0;
 
-			var quickStartrowDefinition = new RowDefinition();
-			quickStartrowDefinition.Height = GridLength.Auto;
-			TopicListGrid.RowDefinitions.Add(quickStartrowDefinition);
+            var quickStartrowDefinition = new RowDefinition();
+            quickStartrowDefinition.Height = GridLength.Auto;
+            TopicListGrid.RowDefinitions.Add(quickStartrowDefinition);
 
-			var quickStartButton = new Button();
-			quickStartButton.Name = quickStart.Id;
-			quickStartButton.Content = quickStart.Title;
-			quickStartButton.HorizontalAlignment = HorizontalAlignment.Stretch;
+            var quickStartButton = new Button();
+            quickStartButton.Name = quickStart.Id;
+            quickStartButton.Content = quickStart.Title;
+            quickStartButton.HorizontalAlignment = HorizontalAlignment.Stretch;
 
-			quickStartButton.Click += HelpButton_Click;
-			Style quickStartButtonStyle = (Style)FindResource("HelpTopicButtonLayout");
-			if (quickStartButtonStyle != null)
-			{
-				quickStartButton.Style = quickStartButtonStyle;
-			}
-			quickStartButton.HorizontalAlignment = HorizontalAlignment.Stretch;
-			quickStartButton.IsEnabled = true;
+            quickStartButton.Click += HelpButton_Click;
+            Style quickStartButtonStyle = (Style)FindResource("HelpTopicButtonLayout");
+            if (quickStartButtonStyle != null)
+            {
+                quickStartButton.Style = quickStartButtonStyle;
+            }
 
-			TopicListGrid.InsertAt(quickStartButton, 0, topicRowCount);
-			topicRowCount++;
+            quickStartButton.HorizontalAlignment = HorizontalAlignment.Stretch;
+            quickStartButton.IsEnabled = true;
 
-			foreach (var feature in allFeatures)
-			{
-				var rowDefinition = new RowDefinition();
-				rowDefinition.Height = GridLength.Auto;
-				TopicListGrid.RowDefinitions.Add(rowDefinition);
+            TopicListGrid.InsertAt(quickStartButton, 0, topicRowCount);
+            topicRowCount++;
 
-				var button = new Button();
-				button.Name = feature.Id;
-				button.Content = feature.Title;
-				button.HorizontalAlignment = HorizontalAlignment.Stretch;
+            foreach (var feature in allFeatures)
+            {
+                var rowDefinition = new RowDefinition();
+                rowDefinition.Height = GridLength.Auto;
+                TopicListGrid.RowDefinitions.Add(rowDefinition);
 
-				button.Click += HelpButton_Click;
-				Style buttonStyle = (Style)FindResource("HelpTopicButtonLayout");
-				if (buttonStyle != null)
-				{
-					button.Style = buttonStyle;
-				}
-				button.HorizontalAlignment = HorizontalAlignment.Stretch;
+                var button = new Button();
+                button.Name = feature.Id;
+                button.Content = feature.Title;
+                button.HorizontalAlignment = HorizontalAlignment.Stretch;
 
-				button.IsEnabled = true;
+                button.Click += HelpButton_Click;
+                Style buttonStyle = (Style)FindResource("HelpTopicButtonLayout");
+                if (buttonStyle != null)
+                {
+                    button.Style = buttonStyle;
+                }
 
-				TopicListGrid.InsertAt(button, 0, topicRowCount);
-				topicRowCount++;
-			}
+                button.HorizontalAlignment = HorizontalAlignment.Stretch;
 
-			quickStartButton.PerformClick();
-			quickStartButton.Focus();
-		}
+                button.IsEnabled = true;
+
+                TopicListGrid.InsertAt(button, 0, topicRowCount);
+                topicRowCount++;
+            }
+
+            quickStartButton.PerformClick();
+            quickStartButton.Focus();
+        }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
@@ -85,66 +86,68 @@ namespace RecNForget.Windows
             e.Handled = true;
         }
 
-		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-		{
-			if (e.ChangedButton == MouseButton.Left)
-				this.DragMove();
-		}
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
 
-		private void Exit_Click(object sender, RoutedEventArgs e)
-		{
-			this.Close();
-		}
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
-		private void Window_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.Key == Key.Escape)
-			{
-				this.Close();
-			}
-		}
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
+        }
 
-		private void MinimizeButton_Click(object sender, RoutedEventArgs e)
-		{
-			this.WindowState = WindowState.Minimized;
-		}
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
 
-		private void HelpButton_Click(object sender, RoutedEventArgs e)
-		{
-			var clickedControlName = ((Button)e.Source).Name;
-			var clickedFeature = clickedControlName == quickStart.Id ? quickStart : this.allFeatures.First(f => f.Id == clickedControlName);
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            var clickedControlName = ((Button)e.Source).Name;
+            var clickedFeature = clickedControlName == quickStart.Id ? quickStart : this.allFeatures.First(f => f.Id == clickedControlName);
 
-			TopicTitle.Content = clickedFeature.Title;
-			Style topicLabelStyle = (Style)FindResource("HeadlineLabelStyle");
-			if (topicLabelStyle != null)
-			{
-				TopicTitle.Style = topicLabelStyle;
-			}
+            TopicTitle.Content = clickedFeature.Title;
+            Style topicLabelStyle = (Style)FindResource("HeadlineLabelStyle");
+            if (topicLabelStyle != null)
+            {
+                TopicTitle.Style = topicLabelStyle;
+            }
 
-			HelpLinesGrid.RowDefinitions.Clear();
-			HelpLinesGrid.Children.Clear();
+            HelpLinesGrid.RowDefinitions.Clear();
+            HelpLinesGrid.Children.Clear();
 
-			int helpLineCount = 0;
+            int helpLineCount = 0;
 
-			foreach (var helpLine in clickedFeature.HelpLines)
-			{
-				var rowDefinition = new RowDefinition();
-				rowDefinition.Height = GridLength.Auto;
-				HelpLinesGrid.RowDefinitions.Add(rowDefinition);
+            foreach (var helpLine in clickedFeature.HelpLines)
+            {
+                var rowDefinition = new RowDefinition();
+                rowDefinition.Height = GridLength.Auto;
+                HelpLinesGrid.RowDefinitions.Add(rowDefinition);
 
-				var textBlock = new TextBlock();
-				textBlock.HorizontalAlignment = HorizontalAlignment.Left;
-				Style textBlockStyle = (Style)FindResource("DefaultTextBlockStyle");
-				if (textBlockStyle != null)
-				{
-					textBlock.Style = textBlockStyle;
-				}
+                var textBlock = new TextBlock();
+                textBlock.HorizontalAlignment = HorizontalAlignment.Left;
+                Style textBlockStyle = (Style)FindResource("DefaultTextBlockStyle");
+                if (textBlockStyle != null)
+                {
+                    textBlock.Style = textBlockStyle;
+                }
 
-				textBlock.Text = helpLine.Content;
+                textBlock.Text = helpLine.Content;
 
-				HelpLinesGrid.InsertAt(textBlock, 0, helpLineCount);
-				helpLineCount++;
-			}
-		}
-	}
+                HelpLinesGrid.InsertAt(textBlock, 0, helpLineCount);
+                helpLineCount++;
+            }
+        }
+    }
 }

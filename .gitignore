@@ -33,3 +33,9 @@
 /RecNForget.ImageConverter/obj/Release
 /RecNForget.Setup.Extensions/obj/Release
 /.vs/RecNForget/config/applicationhost.config
+/RecNForget.Setup/StyleCop.Cache
+/RecNForget/StyleCop.Cache
+/RecNForget.CopyRightHelper/StyleCop.Cache
+/RecNForget.GithubHelpGenerator/StyleCop.Cache
+/RecNForget.ImageConverter/StyleCop.Cache
+/RecNForget.Setup.Extensions/StyleCop.Cache

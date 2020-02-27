@@ -1,33 +1,29 @@
-﻿using FMUtils.KeyboardHook;
-using NAudio.Wave;
-using RecNForget.Services.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FMUtils.KeyboardHook;
+using RecNForget.Services.Types;
 
 namespace RecNForget.Services
 {
-	public class HotkeyService
-	{
-		private bool paused;
+    public class HotkeyService
+    {
+        private bool paused;
 
         // List for mapped hotkeys: <Func to get current hotkey mapping, action to perform on hotkey, waiting for release?>
         private List<HotkeyMapping> hotkeyMappings;
-		private Hook keyboardHook;
+        private Hook keyboardHook;
 
-		public HotkeyService()
-		{
+        public HotkeyService()
+        {
             hotkeyMappings = new List<HotkeyMapping>();
 
             keyboardHook = new Hook("Global Action Hook");
-			keyboardHook.KeyDownEvent = KeyDown;
-			keyboardHook.KeyUpEvent = KeyUp;
+            keyboardHook.KeyDownEvent = KeyDown;
+            keyboardHook.KeyUpEvent = KeyUp;
 
-			paused = false;
-		}
+            paused = false;
+        }
 
         public void AddHotkey(Func<string> hotkeyStringGetterMethod, Action hotkeyAction)
         {
@@ -37,11 +33,21 @@ namespace RecNForget.Services
             }
         }
 
-		private void KeyDown(KeyboardHookEventArgs e)
-		{
-			if (!this.paused)
-			{
-				string keyAsString = HotkeySettingTranslator.GetKeyboardHookEventArgsAsString(e);
+        public void PauseCapturingHotkeys(bool pause = true)
+        {
+            this.paused = pause;
+        }
+
+        public void ResumeCapturingHotkeys()
+        {
+            PauseCapturingHotkeys(false);
+        }
+
+        private void KeyDown(KeyboardHookEventArgs e)
+        {
+            if (!this.paused)
+            {
+                string keyAsString = HotkeySettingTranslator.GetKeyboardHookEventArgsAsString(e);
 
                 for (int i = 0; i < hotkeyMappings.Count; i++)
                 {
@@ -50,13 +56,13 @@ namespace RecNForget.Services
                         hotkeyMappings[i].WaitingForRelease = true;
                     }
                 }
-			}
-		}
+            }
+        }
 
-		private void KeyUp(KeyboardHookEventArgs e)
-		{
-			if (!this.paused)
-			{
+        private void KeyUp(KeyboardHookEventArgs e)
+        {
+            if (!this.paused)
+            {
                 // would be nice to check here that hotkey was indeed released (what keys where lifted)
                 // unfortunately this is not supported by the library atm (also no support for more than one hotkey excluding modifier keys)
                 // so this means in effect, if multiple hotkeys were at any point held, all of them are released if this triggers
@@ -68,17 +74,7 @@ namespace RecNForget.Services
                         hotkeyMappings[i].HotkeyAction();
                     }
                 }
-			}
-		}
-
-		public void PauseCapturingHotkeys(bool pause = true)
-		{
-			this.paused = pause;
-		}
-
-		public void ResumeCapturingHotkeys()
-		{
-			PauseCapturingHotkeys(false);
-		}
-	}
+            }
+        }
+    }
 }
