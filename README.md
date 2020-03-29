@@ -23,7 +23,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - To build the setup project you need to have the [WiX Toolset](https://wixtoolset.org/releases/v3.11.2/stable) installed.
 
 # Version
-latest stable release: [0.3](https://github.com/DrCopyPaste/RecNForget/releases/latest).
+latest stable release: [0.4](https://github.com/DrCopyPaste/RecNForget/releases/latest).
 
 - Currently developing: [0.5](https://github.com/DrCopyPaste/RecNForget/projects/3).
 - ![CI](https://github.com/DrCopyPaste/RecNForget/workflows/CI/badge.svg)
