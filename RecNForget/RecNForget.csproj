@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Help\Features\Customize_SelectedFileControlVisibility.cs" />
     <Compile Include="Help\Features\Customize_OutputPathControlVisibility.cs" />
+    <Compile Include="Help\Features\FunFact_Wirsingkopf.cs" />
     <Compile Include="Help\Features\Info_MajorUIRework04.cs" />
     <Compile Include="Help\Features\Fix_FilePrefixDidntAffectDisplayedFileNames.cs" />
     <Compile Include="Help\Features\Fix_ClickingOpenfolderCrashes.cs" />

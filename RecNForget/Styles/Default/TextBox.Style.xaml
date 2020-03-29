@@ -4,6 +4,7 @@
                     xmlns:local="clr-namespace:RecNForget">
 
     <Style x:Key="MainWindowTextBoxStyle" TargetType="TextBox">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Width" Value="{StaticResource MainWindow_TextBox_Width}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
@@ -12,14 +13,11 @@
         <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_Height}}" />
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="IsEnabled" Value="False"/>
-        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                    <Border CornerRadius="3" BorderBrush="Black" BorderThickness="1">
-                        <Border CornerRadius="1" Padding="1" x:Name="InnerBorder" Background="{Binding Source={StaticResource Application_Background_Color}}" BorderBrush="{Binding Source={StaticResource Application_Background_Color}}" BorderThickness="1">
-                            <ScrollViewer Margin="0" Background="{Binding Source={StaticResource Application_Background_Color}}" x:Name="PART_ContentHost" />
-                        </Border>
+                    <Border CornerRadius="3" Padding="1" x:Name="InnerBorder" Background="{Binding Source={StaticResource Application_Background_Color}}" BorderBrush="{Binding Source={StaticResource ApplicationBorder_Color}}" BorderThickness="1">
+                        <ScrollViewer Margin="0" Background="{Binding Source={StaticResource Application_Background_Color}}" x:Name="PART_ContentHost" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="True">

@@ -77,7 +77,7 @@ namespace RecNForget.Windows
 
         private void GenerateRandomTip()
         {
-            var allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature).ToList();
+            var allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature || f.FeatureClass == HelpFeatureClass.FunFact).ToList();
 
             int randomNumber = (new Random()).Next(0, allFeatures.Count - 1);
             var randomFeature = allFeatures[randomNumber];

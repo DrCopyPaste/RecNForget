@@ -19,6 +19,8 @@ namespace RecNForget.Services.Types
         // FeatureChange,
 
         // rare should almost never be used, maybe for some major reworks that you want to communicate but dont get really noticed by the user?
-        Information
+        Information,
+
+        FunFact
     }
 }

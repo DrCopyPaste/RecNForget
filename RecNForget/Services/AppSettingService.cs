@@ -31,6 +31,8 @@ namespace RecNForget.Services
         private static string mainWindowTopY_Key = "MainWindowTopY";
         private static string outputPathControlVisible_Key = "OutputPathControlVisible";
         private static string selectedFileControlVisible_Key = "SelectedFileControlVisible";
+        private static string windowTheme_Key = "WindowTheme";
+        private static string uiScalingPercent_Key = "UiScalingPercent";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -339,6 +341,34 @@ namespace RecNForget.Services
             }
         }
 
+        public string WindowTheme
+        {
+            get
+            {
+                return GetAppConfigSetting(AppSettingService.windowTheme_Key);
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.selectedFileControlVisible_Key, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public double UiScalingPercent
+        {
+            get
+            {
+                return double.Parse(GetAppConfigSetting(AppSettingService.uiScalingPercent_Key));
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.selectedFileControlVisible_Key, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
         public static void RemoveAppConfigSettingFile()
         {
             // check if user config file exists
@@ -400,6 +430,8 @@ namespace RecNForget.Services
                 { AppSettingService.showTipsAtApplicationStart_Key, "True" },
                 { AppSettingService.outputPathControlVisible_Key, "False" },
                 { AppSettingService.selectedFileControlVisible_Key, "False" },
+                { AppSettingService.windowTheme_Key, "Simple_White" },
+                { AppSettingService.uiScalingPercent_Key, (100.0).ToString() },
 
                 // dont show feature updates for versions below 0.3
                 { AppSettingService.lastInstalledVersion_Key, "0.3.0.0" }

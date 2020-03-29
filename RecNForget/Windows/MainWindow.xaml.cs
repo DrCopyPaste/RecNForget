@@ -53,6 +53,17 @@ namespace RecNForget.Windows
 
         public MainWindow()
         {
+            DataContext = this;
+            InitializeComponent();
+
+            this.SettingService = new AppSettingService();
+            currentVersion = new ApplicationBase();
+
+            // ensure AppConfig Values exist
+            bool firstTimeUser = SettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+            Version lastInstalledVersion = SettingService.LastInstalledVersion;
+            SettingService.LastInstalledVersion = new Version(ThisAssembly.AssemblyFileVersion);
+
             SelectedFileService = new SelectedFileService();
             SelectedFileService.SelectLatestFile();
 
@@ -146,20 +157,9 @@ namespace RecNForget.Windows
             this.hotkeyService = new HotkeyService();
             this.hotkeyService.AddHotkey(
                 () => { return HotkeySettingTranslator.GetHotkeySettingAsString(SettingService.HotKey_StartStopRecording); },
-                () => { if (ReplayAudioService.Stopped) { AudioRecordingService.ToggleRecording(); } });
-
-            DataContext = this;
-            InitializeComponent();
-
-            this.SettingService = new AppSettingService();
-
-            currentVersion = new ApplicationBase();
+                () => { if (ReplayAudioService.Stopped) { AudioRecordingService.ToggleRecording(); } });        
+            
             this.KeyDown += Window_KeyDown;
-
-            // ensure AppConfig Values exist
-            bool firstTimeUser = SettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
-            Version lastInstalledVersion = SettingService.LastInstalledVersion;
-            SettingService.LastInstalledVersion = new Version(ThisAssembly.AssemblyFileVersion);
 
             // Workaround: binding to main window properties when session started "minimized to tray" does not work
             AlwaysOnTopMenuEntry.IsChecked = SettingService.WindowAlwaysOnTop;
@@ -169,10 +169,6 @@ namespace RecNForget.Windows
 
             OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
             SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
-
-            // try restore last window positon
-            this.Left = SettingService.MainWindowLeftX ?? this.Left;
-            this.Top = SettingService.MainWindowTopY ?? this.Top;
 
             if (SettingService.CheckForUpdateOnStart)
             {
@@ -435,6 +431,18 @@ namespace RecNForget.Windows
         private void SwitchToForegroundMode()
         {
             this.Show();
+
+            // try restore last window positon
+            if (!SettingService.MainWindowLeftX.HasValue || !SettingService.MainWindowTopY.HasValue)
+            {
+                this.Left = (SystemParameters.PrimaryScreenWidth / 2) - (this.Width / 2);
+                this.Top = (SystemParameters.PrimaryScreenHeight / 2) - (this.Height / 2);
+            }
+            else
+            {
+                this.Left = SettingService.MainWindowLeftX.Value;
+                this.Top = SettingService.MainWindowTopY.Value;
+            }
         }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
