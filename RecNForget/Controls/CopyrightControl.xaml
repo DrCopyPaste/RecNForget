@@ -89,6 +89,18 @@
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop/blob/master/License.html" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
 			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity" RequestNavigate="Hyperlink_RequestNavigate">Unity v5.11.5</Hyperlink>
+			<Run>
+				 Copyright (c) Unity Container Project - 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity/blob/v5.x/LICENSE" RequestNavigate="Hyperlink_RequestNavigate">Apache 2.0</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://dot.net/" RequestNavigate="Hyperlink_RequestNavigate">System.Runtime.CompilerServices.Unsafe v4.5.2</Hyperlink>
+			<Run>
+				 Copyright (c) Microsoft - 
+			</Run>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<LineBreak />
 			<LineBreak />
 			<Run>
 				The following images were used to create RecNForget:

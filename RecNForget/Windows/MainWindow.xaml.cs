@@ -16,6 +16,7 @@ using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
 using RecNForget.Services;
+using RecNForget.Services.Contracts;
 using RecNForget.Services.Extensions;
 
 namespace RecNForget.Windows
@@ -39,7 +40,7 @@ namespace RecNForget.Windows
         private AudioPlayListService recordingFeedbackAudioService = null;
         private AudioRecordingService audioRecordingService = null;
         private HotkeyService hotkeyService = null;
-        private AppSettingService settingService = null;
+        private IAppSettingService settingService = null;
         private AudioPlayListService replayAudioService = null;
 
         private string taskBar_ProgressState = "None";
@@ -51,12 +52,12 @@ namespace RecNForget.Windows
 
         private SelectedFileService selectedFileService;
 
-        public MainWindow()
+        public MainWindow(IAppSettingService appSettingService)
         {
             DataContext = this;
             InitializeComponent();
 
-            this.SettingService = new AppSettingService();
+            SettingService = appSettingService;
             currentVersion = new ApplicationBase();
 
             // ensure AppConfig Values exist
@@ -64,7 +65,7 @@ namespace RecNForget.Windows
             Version lastInstalledVersion = SettingService.LastInstalledVersion;
             SettingService.LastInstalledVersion = new Version(ThisAssembly.AssemblyFileVersion);
 
-            SelectedFileService = new SelectedFileService();
+            SelectedFileService = new SelectedFileService(appSettingService);
             SelectedFileService.SelectLatestFile();
 
             ReplayAudioService = new AudioPlayListService(
@@ -199,7 +200,7 @@ namespace RecNForget.Windows
 
             if (firstTimeUser)
             {
-                var dia = new NewToApplicationWindow(this.hotkeyService);
+                var dia = new NewToApplicationWindow(this.hotkeyService, SettingService);
 
                 if (!SettingService.MinimizedToTray)
                 {
@@ -210,7 +211,7 @@ namespace RecNForget.Windows
             }
             else if (currentVersion.Info.Version.CompareTo(lastInstalledVersion) > 0)
             {
-                var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version);
+                var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version, SettingService);
 
                 if (!SettingService.MinimizedToTray)
                 {
@@ -241,7 +242,7 @@ namespace RecNForget.Windows
             }
         }
 
-        public AppSettingService SettingService
+        public IAppSettingService SettingService
         {
             get
             {
@@ -351,7 +352,7 @@ namespace RecNForget.Windows
 
         private void ShowRandomApplicationTip()
         {
-            var quickTip = new QuickTipDialog();
+            var quickTip = new QuickTipDialog(SettingService);
 
             if (!SettingService.MinimizedToTray)
             {
@@ -719,7 +720,7 @@ namespace RecNForget.Windows
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingsWindow(hotkeyService);
+            var settingsWindow = new SettingsWindow(hotkeyService, SettingService);
 
             if (!SettingService.MinimizedToTray)
             {

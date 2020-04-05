@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using Microsoft.Deployment.WindowsInstaller;
+using RecNForget.Services.Contracts;
 using RecNForget.Services;
 
 namespace RecNForget.Setup.Extensions
@@ -22,7 +23,8 @@ namespace RecNForget.Setup.Extensions
         // BUT see reasoning above...
         private static void RemoveApplicationConfigurationFiles()
         {
-            AppSettingService.RemoveAppConfigSettingFile();
+            var settingService = new AppSettingService();
+            settingService.RemoveAppConfigSettingFile();
         }
 
         // yes there are custom actions that could do this task directly WITHIN wix like RemoveRegistryKey

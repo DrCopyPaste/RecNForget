@@ -28,6 +28,10 @@ The following libaries are used by RecNForget:
 
 [StyleCop.MSBuild v6.1.0](https://github.com/StyleCop/StyleCop) Copyright (c) StyleCop contributors, Chris Dahlberg - [Ms-PL](https://github.com/StyleCop/StyleCop/blob/master/License.html)
 
+[Unity v5.11.5](https://github.com/unitycontainer/unity) Copyright (c) Unity Container Project - [Apache 2.0](https://github.com/unitycontainer/unity/blob/v5.x/LICENSE)
+
+[System.Runtime.CompilerServices.Unsafe v4.5.2](https://dot.net/) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
+
 
 
 The following images were used to create RecNForget:

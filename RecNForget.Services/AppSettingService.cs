@@ -5,10 +5,11 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services
 {
-    public class AppSettingService : INotifyPropertyChanged
+    public class AppSettingService : IAppSettingService, INotifyPropertyChanged
     {
         private static string applicationName_Key = "RecNForget";
         private static string windowsAutoStartRegistryPath_Key = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -369,7 +370,7 @@ namespace RecNForget.Services
             }
         }
 
-        public static void RemoveAppConfigSettingFile()
+        public void RemoveAppConfigSettingFile()
         {
             // check if user config file exists
             FileInfo fileInfo = new FileInfo(userConfigFileFullPath);

@@ -39,3 +39,7 @@
 /RecNForget.GithubHelpGenerator/StyleCop.Cache
 /RecNForget.ImageConverter/StyleCop.Cache
 /RecNForget.Setup.Extensions/StyleCop.Cache
+/RecNForget.Services/bin/Debug
+/RecNForget.Services/obj/Debug
+/RecNForget.Services.Contracts/obj/Debug
+/RecNForget.Services.Contracts/bin/Debug

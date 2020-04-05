@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using RecNForget.Services;
+using RecNForget.Services.Contracts;
 using RecNForget.Services.Types;
 
 namespace RecNForget.Windows
@@ -14,13 +14,13 @@ namespace RecNForget.Windows
     /// </summary>
     public partial class QuickTipDialog : INotifyPropertyChanged
     {
-        private AppSettingService settingService;
+        private IAppSettingService settingService;
         private string featureCaption;
         private string featureContents;
 
-        public QuickTipDialog()
+        public QuickTipDialog(IAppSettingService settingService)
         {
-            SettingService = new AppSettingService();
+            SettingService = settingService;
             this.KeyDown += Window_KeyDown;
 
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace RecNForget.Windows
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public AppSettingService SettingService
+        public IAppSettingService SettingService
         {
             get
             {

@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Windows;
+using RecNForget.Services;
+using RecNForget.Services.Contracts;
+using RecNForget.Windows;
+using Unity;
+using Unity.Lifetime;
 
 namespace RecNForget
 {
@@ -24,6 +29,19 @@ namespace RecNForget
                 app.InitializeComponent();
                 app.Run();
             }
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            UnityContainer unityContainer = new UnityContainer();
+
+            unityContainer.RegisterType<IAppSettingService, AppSettingService>(lifetimeManager: new SingletonLifetimeManager());
+            //unityContainer.RegisterType<IMainWindow, MainWindow>();
+
+            // ToDo MainWindow constructor code should not be necessary to start hotkey and recording services...
+            MainWindow mainWindow = unityContainer.Resolve<MainWindow>();           
         }
     }
 }

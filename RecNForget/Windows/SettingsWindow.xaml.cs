@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
 using RecNForget.Services;
+using RecNForget.Services.Contracts;
 
 namespace RecNForget.Windows
 {
@@ -16,12 +17,12 @@ namespace RecNForget.Windows
     public partial class SettingsWindow : INotifyPropertyChanged
     {
         private HotkeyService hotkeyService;
-        private AppSettingService settingService;
+        private IAppSettingService settingService;
 
-        public SettingsWindow(HotkeyService hotkeyService)
+        public SettingsWindow(HotkeyService hotkeyService, IAppSettingService settingService)
         {
             this.hotkeyService = hotkeyService;
-            this.SettingService = new AppSettingService();
+            SettingService = settingService;
 
             DataContext = this;
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace RecNForget.Windows
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public AppSettingService SettingService
+        public IAppSettingService SettingService
         {
             get
             {

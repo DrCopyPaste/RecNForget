@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services
 {
@@ -15,18 +16,14 @@ namespace RecNForget.Services
     // use SelectPrevFile to move from SelectedFile to the prev one
     public class SelectedFileService : INotifyPropertyChanged
     {
-        private readonly Action noSelectableFileFoundAction;
-
-        private AppSettingService settingService = null;
+        private IAppSettingService settingService = null;
 
         private bool hasSelectedFile;
         private string selectedFileDisplay;
 
-        public SelectedFileService(Action noSelectableFileFoundAction = null)
+        public SelectedFileService(IAppSettingService settingService)
         {
-            SettingService = new AppSettingService();
-            this.noSelectableFileFoundAction = noSelectableFileFoundAction;
-
+            SettingService = settingService;
             ResetSelectedFile();
         }
 
@@ -34,7 +31,7 @@ namespace RecNForget.Services
 
         public FileInfo SelectedFile { get; private set; }
 
-        public AppSettingService SettingService
+        public IAppSettingService SettingService
         {
             get
             {
@@ -58,12 +55,6 @@ namespace RecNForget.Services
             private set
             {
                 hasSelectedFile = value;
-
-                if (!value)
-                {
-                    noSelectableFileFoundAction?.Invoke();
-                }
-
                 OnPropertyChanged();
             }
         }

@@ -145,6 +145,20 @@ namespace RecNForget.CopyRightHelper
                 licenseCaption: "Ms-PL",
                 licenseUrl: "https://github.com/StyleCop/StyleCop/blob/master/License.html");
 
+            AddLibraryLink(
+                libaryName: "Unity v5.11.5",
+                libraryUrl: "https://github.com/unitycontainer/unity",
+                manufacturerName: "Unity Container Project",
+                licenseCaption: "Apache 2.0",
+                licenseUrl: "https://github.com/unitycontainer/unity/blob/v5.x/LICENSE");
+
+            AddLibraryLink(
+                libaryName: "System.Runtime.CompilerServices.Unsafe v4.5.2",
+                libraryUrl: "https://dot.net/",
+                manufacturerName: "Microsoft",
+                licenseCaption: "MIT",
+                licenseUrl: "https://licenses.nuget.org/MIT");
+
             // ------------------ END LIBRARIES LIST ----------------------------------
 
             AddLineBreak();

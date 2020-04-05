@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using RecNForget.Services;
+using RecNForget.Services.Contracts;
 using RecNForget.Services.Extensions;
 using RecNForget.Services.Types;
 
@@ -21,11 +21,11 @@ namespace RecNForget.Windows
         private IEnumerable<HelpFeature> addedFeatures;
         private IEnumerable<HelpFeature> bugFixes;
 
-        private AppSettingService settingService;
+        private IAppSettingService settingService;
 
-        public NewToVersionDialog(Version lastInstalledVersion, Version currentVersion)
+        public NewToVersionDialog(Version lastInstalledVersion, Version currentVersion, IAppSettingService settingService)
         {
-            this.SettingService = new AppSettingService();
+            this.SettingService = settingService;
             this.KeyDown += Window_KeyDown;
 
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace RecNForget.Windows
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public AppSettingService SettingService
+        public IAppSettingService SettingService
         {
             get
             {

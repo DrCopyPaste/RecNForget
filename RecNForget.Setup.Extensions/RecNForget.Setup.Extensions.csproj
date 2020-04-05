@@ -58,13 +58,17 @@
     <Content Include="CustomAction.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RecNForget\RecNForget.csproj">
-      <Project>{4038f35f-1022-42f1-83c2-70999de802df}</Project>
-      <Name>RecNForget</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj">
+      <Project>{295D9059-A3AD-4273-9779-64C181ABE364}</Project>
+      <Name>RecNForget.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecNForget.Services\RecNForget.Services.csproj">
+      <Project>{9b5541c8-fb08-496c-b142-f7f424247d7c}</Project>
+      <Name>RecNForget.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(WixCATargetsPath)" />
