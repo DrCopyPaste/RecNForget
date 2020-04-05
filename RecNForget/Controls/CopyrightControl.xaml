@@ -53,7 +53,7 @@
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning.3.0.50</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning.3.1.74</Hyperlink>
 			<Run>
 				 Copyright (c) Andrew Arnott - 
 			</Run>

@@ -104,7 +104,7 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
 
             AddLibraryLink(
-                libaryName: "Nerdbank.GitVersioning.3.0.50",
+                libaryName: "Nerdbank.GitVersioning.3.1.74",
                 libraryUrl: "https://github.com/aarnott/Nerdbank.GitVersioning",
                 manufacturerName: "Andrew Arnott",
                 licenseCaption: "MIT",
