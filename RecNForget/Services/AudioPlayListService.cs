@@ -9,10 +9,6 @@ namespace RecNForget.Services
 {
     public class AudioPlayListService : INotifyPropertyChanged
     {
-        private readonly Action beforePlayAction = null;
-        private readonly Action afterPauseAction = null;
-        private readonly Action afterResumeAction = null;
-        private readonly Action afterStopAction = null;
         private readonly Action queueErrorAction = null;
         private readonly List<string> filePathList = null;
 
@@ -20,14 +16,8 @@ namespace RecNForget.Services
         private AudioFileReader audioFileReader = null;
         private int currentPlayIndex = 0;
 
-        public AudioPlayListService(Action beforePlayAction = null, Action afterStopAction = null, Action afterPauseAction = null, Action afterResumeAction = null, Action queueErrorAction = null)
+        public AudioPlayListService()
         {
-            this.beforePlayAction = beforePlayAction;
-            this.afterStopAction = afterStopAction;
-            this.afterPauseAction = afterPauseAction;
-            this.afterResumeAction = afterResumeAction;
-            this.queueErrorAction = queueErrorAction;
-
             filePathList = new List<string>();
         }
 
@@ -93,11 +83,9 @@ namespace RecNForget.Services
             {
                 if (filePathList.Count > currentPlayIndex)
                 {
-                    beforePlayAction?.Invoke();
                     if (InitTitle(filePathList[currentPlayIndex]))
                     {
                         audioOutputDevice.Play();
-
                         UpdateProperties();
 
                         return true;
@@ -111,10 +99,12 @@ namespace RecNForget.Services
             else if (audioOutputDevice.PlaybackState == PlaybackState.Paused)
             {
                 audioOutputDevice.Play();
-                afterResumeAction?.Invoke();
+                UpdateProperties();
 
                 return true;
             }
+
+            UpdateProperties();
 
             return false;
         }
@@ -123,14 +113,13 @@ namespace RecNForget.Services
         {
             audioOutputDevice.Pause();
             UpdateProperties();
-
-            afterPauseAction?.Invoke();
         }
 
         public void Stop()
         {
             audioOutputDevice?.Stop();
-            afterStopAction?.Invoke();
+            KillAudio(reset: true);
+            UpdateProperties();
         }
 
         public void KillAudio(bool reset = false)
@@ -152,8 +141,6 @@ namespace RecNForget.Services
                 currentPlayIndex = 0;
                 filePathList.Clear();
             }
-
-            UpdateProperties();
         }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -205,10 +192,7 @@ namespace RecNForget.Services
             else
             {
                 Stop();
-                KillAudio(reset: true);
             }
-
-            UpdateProperties();
         }
     }
 }

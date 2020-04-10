@@ -3,28 +3,23 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using NAudio.Wave;
+using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services
 {
     public class AudioRecordingService : INotifyPropertyChanged
     {
+        private readonly IAppSettingService appSettingService;
+
         private static string outputFilePathPattern = @"{0}\{1}.wav";
         private static string outputFileDateFormat = "yyyyMMddHHmmssfff";
 
         // will be newly instantiated every time record starting is triggered
         private static WasapiLoopbackCapture captureInstance;
 
-        private Action startRecordingAction;
-        private Action stopRecordingAction;
-        private Func<string> outputPathGetterMethod;
-        private Func<string> filenamePrefixGetterMethod;
-
-        public AudioRecordingService(Action startRecordingAction, Action stopRecordingAction, Func<string> outputPathGetterMethod, Func<string> filenamePrefixGetterMethod)
+        public AudioRecordingService(IAppSettingService appSettingService)
         {
-            this.startRecordingAction = startRecordingAction;
-            this.stopRecordingAction = stopRecordingAction;
-            this.outputPathGetterMethod = outputPathGetterMethod;
-            this.filenamePrefixGetterMethod = filenamePrefixGetterMethod;
+            this.appSettingService = appSettingService;
 
             CurrentlyRecording = false;
             CurrentlyNotRecording = true;
@@ -92,13 +87,7 @@ namespace RecNForget.Services
                 recordedAudioWriter.Dispose();
                 recordedAudioWriter = null;
                 captureInstance.Dispose();
-
-                // Actions passed to HotkeyService as Parameter shall be executed after all stop actions
-                stopRecordingAction();
             };
-
-            // Actions passed to HotkeyService as Parameter shall be executed after all start actions besides recording itself
-            startRecordingAction();
 
             // Start audio recording !
             captureInstance.StartRecording();
@@ -108,22 +97,22 @@ namespace RecNForget.Services
         {
             CurrentlyRecording = false;
             CurrentlyNotRecording = true;
-            UpdateProperties();
-
             captureInstance.StopRecording();
             LastFileName = CurrentFileName;
             CurrentFileName = string.Empty;
+
+            UpdateProperties();
         }
 
         public string GetTargetPathTemplateString()
         {
-            return string.Format(AudioRecordingService.outputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod());
+            return string.Format(AudioRecordingService.outputFilePathPattern, appSettingService.OutputPath, appSettingService.FilenamePrefix);
         }
 
         private string GetFileNameWithReplacePlaceholders()
         {
             bool nameUniquePlaceholderFound = false;
-            string tempString = string.Format(AudioRecordingService.outputFilePathPattern, outputPathGetterMethod(), filenamePrefixGetterMethod());
+            string tempString = string.Format(AudioRecordingService.outputFilePathPattern, appSettingService.OutputPath, appSettingService.FilenamePrefix);
 
             if (tempString.Contains("(Date)"))
             {
