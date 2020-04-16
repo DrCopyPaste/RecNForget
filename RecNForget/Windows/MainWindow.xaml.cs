@@ -65,6 +65,7 @@ namespace RecNForget.Windows
 
             this.actionService = new ActionService();
             SelectedFileService = selectedFileService;
+            SelectedFileService.SelectLatestFile();
 
             AudioPlaybackService = audioPlaybackService;
             AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;

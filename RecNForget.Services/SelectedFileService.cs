@@ -26,7 +26,6 @@ namespace RecNForget.Services
             this.appSettingService = appSettingService;
 
             ResetSelectedFile();
-            SelectLatestFile();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

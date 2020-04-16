@@ -88,7 +88,6 @@ namespace RecNForget.Services
 
         public bool Play()
         {
-            File.AppendAllLines("RecNForget.log", new List<string>() { string.Format("playing {0} index {1}/{2} filesize {3} - {4} - {5}", filePathList[currentPlayIndex], currentPlayIndex, filePathList.Count - 1, (new FileInfo(filePathList[currentPlayIndex])).Length, audioOutputDevice == null, audioOutputDevice != null && audioOutputDevice.PlaybackState == PlaybackState.Stopped) });
             if (audioOutputDevice == null || audioOutputDevice.PlaybackState == PlaybackState.Stopped)
             {
                 if (filePathList.Count > currentPlayIndex)
@@ -170,7 +169,6 @@ namespace RecNForget.Services
         {
             try
             {
-                File.AppendAllLines("RecNForget.log", new List<string>() { string.Format("now initializing title {0}", titlePath) });
                 if (audioOutputDevice == null)
                 {
                     audioOutputDevice = new WaveOutEvent();
@@ -179,11 +177,9 @@ namespace RecNForget.Services
 
                 audioFileReader = new AudioFileReader(titlePath);
                 audioOutputDevice.Init(audioFileReader);
-                File.AppendAllLines("RecNForget.log", new List<string>() { string.Format("{0} initialized", titlePath) });
             }
             catch (Exception ex)
             {
-                File.AppendAllLines("RecNForget.log", new List<string>() { string.Format("error in initialization of {0}: {1}", titlePath, ex.Message) });
                 return false;
             }
 
@@ -193,7 +189,6 @@ namespace RecNForget.Services
         // https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
         private void OnAudioDevicePlaybackStopped(object sender, StoppedEventArgs args)
         {
-            File.AppendAllLines("RecNForget.log", new List<string>() { string.Format("index {0} finished skipping ahead ", currentPlayIndex) });
             currentPlayIndex++;
 
             if (filePathList.Count > currentPlayIndex)
