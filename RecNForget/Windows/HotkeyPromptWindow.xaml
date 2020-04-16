@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecNForget"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
         Topmost="True"
         Title="RecNForget - Configure hotkey" Style="{StaticResource DefaultWindowStyle}">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,

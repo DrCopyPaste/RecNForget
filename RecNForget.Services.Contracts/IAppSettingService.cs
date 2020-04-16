@@ -3,12 +3,8 @@ using System.ComponentModel;
 
 namespace RecNForget.Services.Contracts
 {
-    public interface IAppSettingService
+    public interface IAppSettingService : INotifyPropertyChanged
     {
-        void RemoveAppConfigSettingFile();
-
-        event PropertyChangedEventHandler PropertyChanged;
-
         bool AutoStartWithWindows { get; set; }
 
         bool CheckForUpdateOnStart { get; set; }
@@ -48,6 +44,8 @@ namespace RecNForget.Services.Contracts
         string WindowTheme { get; set; }
 
         double UiScalingPercent { get; set; }
+
+        void RemoveAppConfigSettingFile();
 
         bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false);
     }

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RecNForget.Controls"
+        xmlns:local="clr-namespace:RecNForget.Controls;assembly=RecNForget.Controls"
         mc:Ignorable="d"
         Style="{StaticResource DefaultWindowStyle}"
         Title="RecNForget">
@@ -163,39 +163,8 @@
                         </Grid>
                     </Border>
 
-                    <Border Grid.Row="6" Grid.Column="0" Style="{StaticResource DefaultControlBorderStyle}"
-                        x:Name="SelectedFileControl">
-                        <Grid Style="{StaticResource DefaultGridStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition
-                                    Width="13*" />
-                                <ColumnDefinition
-                                    Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                                <ColumnDefinition
-                                    Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource ControlLabelStyle}"
-                                Content="Selected file" />
-
-                            <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
-                                Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                            <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
-                                ToolTip="rename selected file (Hotkey: [Return])"
-                                IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                                x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
-
-                            <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource DeleteSelectedFileMiniButtonLayout}"
-                                ToolTip="delete selected file (Hotkey: [Delete])"
-                                IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                                x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
-                        </Grid>
-                    </Border>
+                    <local:SelectedFileControl Grid.Row="6" Grid.Column="0"
+                        x:Name="SelectedFileControl"/>
 
                     <Border Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultWindowBorderStyle}">
                         <Grid Style="{StaticResource DefaultGridStyle}">
@@ -228,7 +197,7 @@
                                 ToolTip="play selected file (Hotkey: [Space])"
                                 x:Name="TogglePlaySelectedFileButton" Click="ReplayLastRecording_Click" />
                             <local:ImageButton Grid.Row="1" Grid.Column="4" Style="{StaticResource StopButton}"
-                                IsEnabled="{Binding Path=ReplayAudioService.PlayingOrPaused}"
+                                IsEnabled="{Binding Path=AudioPlaybackService.PlayingOrPaused}"
                                 ToolTip="stop playing audio (Hotkey: [Esc])"
                                 x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
                             <local:ImageButton Grid.Row="1" Grid.Column="5" Style="{StaticResource NextTrackButton}"
@@ -237,7 +206,7 @@
                                 ToolTip="skip to next file (Hotkey: [Right-Arrow])"
                                 x:Name="SkipNextButton" Click="SkipNextButton_Click"/>
                             <local:ImageButton Grid.Row="1" Grid.Column="7" Style="{StaticResource RecordButton}"
-                                IsEnabled="{Binding Path=ReplayAudioService.Stopped}"
+                                IsEnabled="{Binding Path=AudioPlaybackService.Stopped}"
                                 x:Name="RecordButton" Click="RecordButton_Click" />
                         </Grid>
                     </Border>

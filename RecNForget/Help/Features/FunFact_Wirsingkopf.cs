@@ -119,7 +119,7 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "2. chop up savoy cabbage into small bits and put it in a large saucepan (min 5 l) together with oil and braise on a low-medium flame."
+					Content = "2. chop up savoy cabbage into small bits and put it in a large saucepan (min 5 L) together with oil and braise on a low-medium flame."
 				},
 				new HelpFeatureDetailLine()
 				{

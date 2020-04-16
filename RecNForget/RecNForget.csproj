@@ -102,9 +102,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\CopyrightControl.xaml.cs">
-      <DependentUpon>CopyrightControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Help\Features\Customize_SelectedFileControlVisibility.cs" />
     <Compile Include="Help\Features\Customize_OutputPathControlVisibility.cs" />
     <Compile Include="Help\Features\FunFact_Wirsingkopf.cs" />
@@ -112,10 +109,6 @@
     <Compile Include="Help\Features\Fix_FilePrefixDidntAffectDisplayedFileNames.cs" />
     <Compile Include="Help\Features\Fix_ClickingOpenfolderCrashes.cs" />
     <Compile Include="Help\Features\Fix_UninstallDidNotDeleteAppData.cs" />
-    <Compile Include="Services\Extensions\StreamExtensions.cs" />
-    <Compile Include="Services\Extensions\HttpClientExtensions.cs" />
-    <Compile Include="Services\Extensions\GridExtensions.cs" />
-    <Compile Include="Services\Extensions\FrameworkElementExtensions.cs" />
     <Compile Include="Windows\QuickTipDialog.xaml.cs">
       <DependentUpon>QuickTipDialog.xaml</DependentUpon>
     </Compile>
@@ -128,15 +121,8 @@
     <Compile Include="Windows\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CustomMessageBoxButtons.cs" />
-    <Compile Include="Controls\CustomMessageBoxFocus.cs" />
-    <Compile Include="Controls\CustomMessageBoxPromptValidation.cs" />
-    <Compile Include="Controls\CustomMessageBoxIcon.cs" />
     <Compile Include="Windows\DownloadDialog.xaml.cs">
       <DependentUpon>DownloadDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\CustomMessageBox.xaml.cs">
-      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Help\Features\Customize_Show_Tips_On_Start.cs" />
     <Compile Include="Help\Features\Customize_Output_File_Pattern.cs" />
@@ -176,7 +162,6 @@
     <Compile Include="Help\Features\Click_Button_To_Play_Pause_Selected_File.cs" />
     <Compile Include="Help\Features\Press_Hotkey_To_Record.cs" />
     <Compile Include="Help\General\QuickStart.cs" />
-    <Compile Include="Controls\ImageButton.cs" />
     <Compile Include="Windows\ReleaseInstallationDialog.xaml.cs">
       <DependentUpon>ReleaseInstallationDialog.xaml</DependentUpon>
     </Compile>
@@ -184,8 +169,6 @@
       <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\AudioRecordingService.cs" />
-    <Compile Include="Services\Extensions\ControlExtensions.cs" />
-    <Compile Include="Services\SelectedFileService.cs" />
     <Compile Include="Services\Types\HelpFeature.cs" />
     <Compile Include="Services\Types\HelpFeatureClass.cs" />
     <Compile Include="Services\Types\HelpFeatureDetailLine.cs" />
@@ -193,18 +176,6 @@
     <Compile Include="Services\Types\HotkeyMapping.cs" />
     <Compile Include="Services\UpdateChecker.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
-    <Page Include="Controls\CopyrightControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Styles\Default\Border.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\Image.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Windows\QuickTipDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -221,79 +192,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Styles\Default\Grid.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\HotkeyDisplay.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\CheckBox.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\Separator.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\BaseButton.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\ScrollViewer.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\TextBlock.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\ProgressBar.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\Hyperlink.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\TitleBar.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\TextBox.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\Label.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\Window.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\Color.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\SizesMarginsPaddings.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\ContextMenu.Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Default\Button.Style.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\DownloadDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\CustomMessageBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -309,7 +208,6 @@
       <DependentUpon>CloseOrBackgroundDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="RestoreMainWindowFromTrayCommand.cs" />
-    <Compile Include="Services\AudioPlayListService.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -376,49 +274,8 @@
     <Resource Include="ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Styles\Default\ButtonImages\record_icon.black.disabled.png" />
-    <Resource Include="Styles\Default\ButtonImages\pencil_icon79516.black.disabled.png" />
-    <Resource Include="Styles\Default\ButtonImages\trash_icon77730.black.disabled.png" />
-    <Resource Include="Styles\Default\ButtonImages\bugfix_icon140609.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\information_icon2132.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\lightbulb_icon372420.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\plus_icon171498.black.png" />
     <Resource Include="logo.ico" />
     <Resource Include="Images\logo_big.png" />
-    <Resource Include="Styles\Default\ButtonImages\close_icon349388.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\help_icon544157.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\information_icon280732.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\minimize_icon246566.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\nextTrack_icon.black.disabled.png" />
-    <Resource Include="Styles\Default\ButtonImages\nextTrack_icon.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\pause_icon.black.disabled.png" />
-    <Resource Include="Styles\Default\ButtonImages\pause_icon.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\play_icon.black.disabled.png" />
-    <Resource Include="Styles\Default\ButtonImages\play_icon.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\prevTrack_icon.black.disabled.png" />
-    <Resource Include="Styles\Default\ButtonImages\prevTrack_icon.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\record_icon.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\settings_icon40863.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\stop_icon.black.disabled.png" />
-    <Resource Include="Styles\Default\ButtonImages\stop_icon.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\close_icon211720.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\windowSettings_icon248857.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\accept_icon518267.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\download_icon602.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\pencil_icon353603.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\tools_icon536263.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\accept_icon518267.black.white.png" />
-    <Resource Include="Styles\Default\ButtonImages\settings_icon40863.black.white.png" />
-    <Resource Include="Styles\Default\ButtonImages\editSetting_icon451737.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\cancel_icon428740.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\shutDown_icon170336.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\openFolder_icon356582.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\pencil_icon79516.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\message_error_icon304479.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\message_info_icon277439.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\message_question_icon109120.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\trash_icon77730.black.png" />
-    <Resource Include="Styles\Default\ButtonImages\folder_icon122592.black.png" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -445,6 +302,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RecNForget.Controls\RecNForget.Controls.csproj">
+      <Project>{19d9a9c2-3471-4512-ac5f-de1277374a77}</Project>
+      <Name>RecNForget.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj">
+      <Project>{5655259b-8432-46cd-a7cd-f24a15f97a87}</Project>
+      <Name>RecNForget.IoC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj">
       <Project>{295d9059-a3ad-4273-9779-64c181abe364}</Project>
       <Name>RecNForget.Services.Contracts</Name>
@@ -453,6 +318,9 @@
       <Project>{9b5541c8-fb08-496c-b142-f7f424247d7c}</Project>
       <Name>RecNForget.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

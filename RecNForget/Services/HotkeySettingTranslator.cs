@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using FMUtils.KeyboardHook;
-using RecNForget.Services.Extensions;
+using RecNForget.Controls.Extensions;
 
 namespace RecNForget.Services
 {

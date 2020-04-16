@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{19D9A9C2-3471-4512-AC5F-DE1277374A77}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>RecNForget.Controls</RootNamespace>
+    <AssemblyName>RecNForget.Controls</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.5\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.5\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\ActionService.cs" />
+    <Compile Include="CustomMessageBox\CustomMessageBox.xaml.cs">
+      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMessageBox\CustomMessageBoxButtons.cs" />
+    <Compile Include="CustomMessageBox\CustomMessageBoxFocus.cs" />
+    <Compile Include="CustomMessageBox\CustomMessageBoxIcon.cs" />
+    <Compile Include="CustomMessageBox\CustomMessageBoxPromptValidation.cs" />
+    <Compile Include="ImageButton.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CopyrightControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomMessageBox\CustomMessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectedFileControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Simple_White.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CopyrightControl.xaml.cs">
+      <DependentUpon>CopyrightControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Extensions\GridExtensions.cs" />
+    <Compile Include="Extensions\HttpClientExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SelectedFileControl.xaml.cs">
+      <DependentUpon>SelectedFileControl.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj">
+      <Project>{5655259B-8432-46CD-A7CD-F24A15F97A87}</Project>
+      <Name>RecNForget.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj">
+      <Project>{295D9059-A3AD-4273-9779-64C181ABE364}</Project>
+      <Name>RecNForget.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecNForget.Services.Designer\RecNForget.Services.Designer.csproj">
+      <Project>{28409155-01ca-4f0b-8a8d-54e8e76ea7fd}</Project>
+      <Name>RecNForget.Services.Designer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\accept_icon518267.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\accept_icon518267.black.white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\bugfix_icon140609.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\cancel_icon428740.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\close_icon211720.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\close_icon349388.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\download_icon602.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\editSetting_icon451737.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\folder_icon122592.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\help_icon544157.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\information_icon2132.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\information_icon280732.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\lightbulb_icon372420.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\message_error_icon304479.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\message_info_icon277439.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\message_question_icon109120.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\minimize_icon246566.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\nextTrack_icon.black.disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\nextTrack_icon.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\openFolder_icon356582.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\pause_icon.black.disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\pause_icon.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\pencil_icon353603.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\pencil_icon79516.black.disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\pencil_icon79516.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\play_icon.black.disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\play_icon.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\plus_icon171498.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\prevTrack_icon.black.disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\prevTrack_icon.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\record_icon.black.disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\record_icon.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\settings_icon40863.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\settings_icon40863.black.white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\shutDown_icon170336.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\stop_icon.black.disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\stop_icon.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\tools_icon536263.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\trash_icon77730.black.disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\trash_icon77730.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\ButtonImages\windowSettings_icon248857.black.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets" Condition="Exists('..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets')" />
+</Project>

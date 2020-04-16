@@ -9,6 +9,7 @@ using System.Windows.Navigation;
 using Microsoft.VisualBasic.ApplicationServices;
 using RecNForget.Controls;
 using RecNForget.Services;
+using RecNForget.Services.Contracts;
 
 namespace RecNForget.Windows
 {
@@ -18,9 +19,12 @@ namespace RecNForget.Windows
     public partial class AboutDialog : Window
     {
         private ApplicationBase appBase;
+        private readonly IAppSettingService appSettingService;
 
-        public AboutDialog()
+        public AboutDialog(IAppSettingService appSettingService)
         {
+            this.appSettingService = appSettingService;
+
             InitializeComponent();
 
             var assemblyInformationalVersion = ThisAssembly.AssemblyInformationalVersion;
@@ -62,6 +66,8 @@ namespace RecNForget.Windows
                             buttons: CustomMessageBoxButtons.OK,
                             messageRows: new List<string>() { "No newer version found" },
                             controlFocus: CustomMessageBoxFocus.Ok);
+
+                        tempDialog.Owner = Window.GetWindow(this);
 
                         tempDialog.ShowDialog();
                     });

@@ -14,10 +14,11 @@ using System.Windows.Threading;
 using Microsoft.VisualBasic.ApplicationServices;
 using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
+using RecNForget.Control.Services;
 using RecNForget.Controls;
+using RecNForget.Controls.Extensions;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
-using RecNForget.Services.Extensions;
 
 namespace RecNForget.Windows
 {
@@ -36,10 +37,11 @@ namespace RecNForget.Windows
         private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
         private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
         private AudioRecordingService audioRecordingService = null;
+        private IActionService actionService = null;
         private HotkeyService hotkeyService = null;
         private IAppSettingService settingService = null;
-        private AudioPlayListService replayAudioService = null;
-        private readonly AudioPlayListService recordingFeedbackAudioService = null;
+        private IAudioPlaybackService audioPlaybackService = null;
+        private ISelectedFileService selectedFileService = null;
 
         private string taskBar_ProgressState = "None";
 
@@ -48,9 +50,7 @@ namespace RecNForget.Windows
         private string recordingTimeimeDisplay = string.Empty;
         private string currentFileNameDisplay;
 
-        private SelectedFileService selectedFileService;
-
-        public MainWindow(IAppSettingService appSettingService)
+        public MainWindow(IAppSettingService appSettingService, ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService)
         {
             DataContext = this;
             InitializeComponent();
@@ -63,12 +63,11 @@ namespace RecNForget.Windows
             Version lastInstalledVersion = SettingService.LastInstalledVersion;
             SettingService.LastInstalledVersion = new Version(ThisAssembly.AssemblyFileVersion);
 
-            SelectedFileService = new SelectedFileService(appSettingService);
-            SelectedFileService.SelectLatestFile();
+            this.actionService = new ActionService();
+            SelectedFileService = selectedFileService;
 
-            ReplayAudioService = new AudioPlayListService();
-            ReplayAudioService.PropertyChanged += ReplayAudioService_PropertyChanged;
-            recordingFeedbackAudioService = new AudioPlayListService();
+            AudioPlaybackService = audioPlaybackService;
+            AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
 
             recordingTimer = new DispatcherTimer
             {
@@ -83,7 +82,7 @@ namespace RecNForget.Windows
             this.hotkeyService = new HotkeyService();
             this.hotkeyService.AddHotkey(
                 () => { return HotkeySettingTranslator.GetHotkeySettingAsString(SettingService.HotKey_StartStopRecording); },
-                () => { if (ReplayAudioService.Stopped) { AudioRecordingService.ToggleRecording(); } });        
+                () => { if (AudioPlaybackService.Stopped) { AudioRecordingService.ToggleRecording(); } });        
             
             this.KeyDown += Window_KeyDown;
 
@@ -153,7 +152,7 @@ namespace RecNForget.Windows
 
         ~MainWindow()
         {
-            ReplayAudioService.PropertyChanged -= ReplayAudioService_PropertyChanged;
+            AudioPlaybackService.PropertyChanged -= AudioPlaybackService_PropertyChanged;
             AudioRecordingService.PropertyChanged -= AudioRecordingService_PropertyChanged;
         }
 
@@ -187,21 +186,21 @@ namespace RecNForget.Windows
             }
         }
 
-        public AudioPlayListService ReplayAudioService
+        public IAudioPlaybackService AudioPlaybackService
         {
             get
             {
-                return replayAudioService;
+                return audioPlaybackService;
             }
 
             set
             {
-                replayAudioService = value;
+                audioPlaybackService = value;
                 OnPropertyChanged();
             }
         }
 
-        public SelectedFileService SelectedFileService
+        public ISelectedFileService SelectedFileService
         {
             get
             {
@@ -291,7 +290,14 @@ namespace RecNForget.Windows
                     {
                         if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
                         {
-                            PlayRecordingStartAudioFeedback();
+                            audioPlaybackService.KillAudio(reset: true);
+
+                            audioPlaybackService.QueueFile(recordStartAudioFeedbackPath);
+                            audioPlaybackService.Play();
+
+                            while (audioPlaybackService.PlaybackState != PlaybackState.Stopped) { }
+
+                            audioPlaybackService.KillAudio(reset: true);
                         }
 
                         if (SettingService.ShowBalloonTipsForRecording)
@@ -301,7 +307,7 @@ namespace RecNForget.Windows
                         }
 
                         RecordButton.Style = (Style)FindResource("StopRecordButton");
-                        ReplayAudioService.KillAudio(reset: true);
+                        AudioPlaybackService.KillAudio(reset: true);
                         TaskBar_ProgressState = "Error";
                         RecordingStart = DateTime.Now;
                         recordingTimer.Start();
@@ -309,25 +315,33 @@ namespace RecNForget.Windows
                     }
                     else
                     {
+                        if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording || SettingService.AutoReplayAudioAfterRecording)
+                        {
+                            if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
+                            {
+                                QueueAudioPlayback(fileName: recordStopAudioFeedbackPath);
+                            }
+
+                            if (SettingService.AutoReplayAudioAfterRecording)
+                            {
+                                QueueAudioPlayback(
+                                    fileName: AudioRecordingService.LastFileName,
+                                    startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStartAudioFeedbackPath : null,
+                                    endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStopAudioFeedbackPath : null);
+                            }
+
+                            ToggleReplayLastRecording();
+                        }
+
                         RecordButton.Style = (Style)FindResource("RecordButton");
                         UpdateCurrentFileNameDisplay(reset: true);
                         TaskBar_ProgressState = "None";
                         recordingTimer.Stop();
 
-                        if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
-                        {
-                            PlayRecordingStopAudioFeedback();
-                        }
-
                         if (SettingService.ShowBalloonTipsForRecording)
                         {
                             trayIcon.ShowBalloonTip(balloonTipTimeout, "Recording saved!", AudioRecordingService.LastFileName, ToolTipIcon.Info);
                             trayIcon.BalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
-                        }
-
-                        if (SettingService.AutoReplayAudioAfterRecording)
-                        {
-                            ToggleReplayLastRecording(AudioRecordingService.LastFileName);
                         }
 
                         if (SettingService.AutoSelectLastRecording)
@@ -341,18 +355,20 @@ namespace RecNForget.Windows
             }
         }
 
-        private void ReplayAudioService_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void AudioPlaybackService_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(ReplayAudioService.Paused):
+                case nameof(AudioPlaybackService.Paused):
                 {
-                    TogglePlaySelectedFileButton.Style = ReplayAudioService.Playing ? (Style)FindResource("PauseButton") : (Style)FindResource("PlayButton");
+                    // ToDo better way to distinguish, whether AudioPlaybackService is currently playing a "file" or "just" giving feedback from recording start/stop
+                    TogglePlaySelectedFileButton.Style = AudioPlaybackService.Playing && !recordingTimer.IsEnabled ? (Style)FindResource("PauseButton") : (Style)FindResource("PlayButton");
                     break;
                 }
-                case nameof(ReplayAudioService.Stopped):
+
+                case nameof(AudioPlaybackService.Stopped):
                 {
-                    TaskBar_ProgressState = ReplayAudioService.Stopped ? "None" : "Normal";
+                    TaskBar_ProgressState = AudioPlaybackService.Stopped || AudioRecordingService.CurrentlyRecording ? "None" : "Normal";
                     break;
                 }
             }
@@ -488,36 +504,52 @@ namespace RecNForget.Windows
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
+            // ToDo these keys should be configurable
+            // ensure not triggering any of these if hotkey to record is the same
+
+            var recHotkey = HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty);
+
+            if (!recHotkey.Contains(e.Key.ToString()))
             {
-                ChangeSelectedFileNameButton.PerformClick();
-            }
-            else if (e.Key == Key.Delete)
-            {
-                DeleteSelectedFileButton.PerformClick();
-            }
-            else if (e.Key == Key.Down)
-            {
-                OpenSelectedFileButton.PerformClick();
-            }
-            else if (e.Key == Key.Left)
-            {
-                SkipPrevButton.PerformClick();
-            }
-            else if (e.Key == Key.Right)
-            {
-                SkipNextButton.PerformClick();
-            }
-            else if (e.Key == Key.Space)
-            {
-                if (SelectedFileService.HasSelectedFile && AudioRecordingService.CurrentlyNotRecording)
+                if (e.Key == Key.Return)
                 {
-                    ToggleReplayLastRecording();
+                    actionService.ChangeSelectedFileName(this);
                 }
-            }
-            else if (e.Key == Key.Escape)
-            {
-                StopReplayLastRecordingButton.PerformClick();
+                else if (e.Key == Key.Delete)
+                {
+                    actionService.DeleteSelectedFile(this);
+                }
+                else if (e.Key == Key.Down)
+                {
+                    OpenSelectedFileButton.PerformClick();
+                }
+                else if (e.Key == Key.Left)
+                {
+                    SkipPrevButton.PerformClick();
+                }
+                else if (e.Key == Key.Right)
+                {
+                    SkipNextButton.PerformClick();
+                }
+                else if (e.Key == Key.Space)
+                {
+                    if (SelectedFileService.HasSelectedFile && AudioRecordingService.CurrentlyNotRecording)
+                    {
+                        if (AudioPlaybackService.ItemsCount == 0)
+                        {
+                            QueueAudioPlayback(
+                                fileName: SelectedFileService.SelectedFile.FullName,
+                                startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStartAudioFeedbackPath : null,
+                                endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStopAudioFeedbackPath : null);
+                        }
+
+                        ToggleReplayLastRecording();
+                    }
+                }
+                else if (e.Key == Key.Escape)
+                {
+                    StopReplayLastRecordingButton.PerformClick();
+                }
             }
         }
 
@@ -563,18 +595,18 @@ namespace RecNForget.Windows
 
         private void StopReplayLastRecording_Click(object sender, RoutedEventArgs e)
         {
-            ReplayAudioService.Stop();
+            AudioPlaybackService.Stop();
         }
 
         private void SkipPrevButton_Click(object sender, RoutedEventArgs e)
         {
-            ReplayAudioService.Stop();
+            AudioPlaybackService.Stop();
             SelectedFileService.SelectPrevFile();
         }
 
         private void SkipNextButton_Click(object sender, RoutedEventArgs e)
         {
-            ReplayAudioService.Stop();
+            AudioPlaybackService.Stop();
             SelectedFileService.SelectNextFile();
         }
 
@@ -591,6 +623,12 @@ namespace RecNForget.Windows
                     System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
                         var installUpdateDialog = new ReleaseInstallationDialog(newerReleases.First(), UpdateChecker.GetValidVersionStringMsiAsset(newerReleases.First()), changeLog);
+
+                        if (!SettingService.MinimizedToTray)
+                        {
+                            installUpdateDialog.Owner = Window.GetWindow(this);
+                        }
+
                         installUpdateDialog.ShowDialog();
                     });
                 }
@@ -606,6 +644,11 @@ namespace RecNForget.Windows
                                 buttons: CustomMessageBoxButtons.OK,
                                 messageRows: new List<string>() { "No newer version found" },
                                 controlFocus: CustomMessageBoxFocus.Ok);
+
+                            if (!SettingService.MinimizedToTray)
+                            {
+                                tempDialog.Owner = Window.GetWindow(this);
+                            }
 
                             tempDialog.ShowDialog();
                         });
@@ -625,6 +668,11 @@ namespace RecNForget.Windows
                             messageRows: new List<string>() { "An error occurred trying to get updates:", ex.InnerException.Message },
                             controlFocus: CustomMessageBoxFocus.Ok);
 
+                        if (!SettingService.MinimizedToTray)
+                        {
+                            errorDialog.Owner = Window.GetWindow(this);
+                        }
+
                         errorDialog.ShowDialog();
                     });
                 }
@@ -633,67 +681,68 @@ namespace RecNForget.Windows
 
         private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
         {
+            if (AudioPlaybackService.ItemsCount == 0)
+            {
+                QueueAudioPlayback(
+                    fileName: SelectedFileService.SelectedFile.FullName,
+                    startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStartAudioFeedbackPath : null,
+                    endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStopAudioFeedbackPath : null);
+            }
+
             ToggleReplayLastRecording();
         }
 
-        // https://github.com/naudio/NAudio/blob/master/Docs/PlayAudioFileWinForms.md
-        private void ToggleReplayLastRecording(string fileName = null)
+        private bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
         {
-            bool replayFileExists = SelectedFileService.SelectedFile.Exists;
+            bool replayFileExists = false;
+            string fileNameToPlay;
 
-            if (ReplayAudioService.PlaybackState == PlaybackState.Stopped)
+            if (fileName == null)
             {
-                if (SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying)
-                {
-                    ReplayAudioService.QueueFile(replayStartAudioFeedbackPath);
-                }
-
-                ReplayAudioService.QueueFile(fileName ?? SelectedFileService.SelectedFile.FullName);
-
-                if (SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying)
-                {
-                    ReplayAudioService.QueueFile(replayStopAudioFeedbackPath);
-                }
-
-                if (replayFileExists)
-                {
-                    ReplayAudioService.Play();
-                }
-                else
-                {
-                    SelectedFileService.SelectFile(null);
-
-                    System.Windows.MessageBox.Show("The last recorded audio file has been moved or deleted.", "File not found", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                replayFileExists = SelectedFileService.SelectedFile.Exists;
+                fileNameToPlay = SelectedFileService.SelectedFile.FullName;
             }
-            else if (ReplayAudioService.PlaybackState == PlaybackState.Playing)
+            else
             {
-                ReplayAudioService.Pause();
+                var fileInfo = new FileInfo(fileName);
+                replayFileExists = fileInfo.Exists;
+                fileNameToPlay = fileName;
             }
-            else if (ReplayAudioService.PlaybackState == PlaybackState.Paused)
+
+            if (!replayFileExists)
             {
-                ReplayAudioService.Play();
+                return false;
             }
+
+            if (!string.IsNullOrEmpty(startIndicatorFileName))
+            {
+                AudioPlaybackService.QueueFile(startIndicatorFileName);
+            }
+
+            AudioPlaybackService.QueueFile(fileNameToPlay);
+
+            if (!string.IsNullOrEmpty(endIndicatorFileName))
+            {
+                AudioPlaybackService.QueueFile(endIndicatorFileName);
+            }
+
+            return true;
         }
 
-        private void PlayRecordingStartAudioFeedback()
+        private void ToggleReplayLastRecording()
         {
-            recordingFeedbackAudioService.QueueFile(recordStartAudioFeedbackPath);
-            recordingFeedbackAudioService.Play();
-
-            while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
-
-            recordingFeedbackAudioService.KillAudio(reset: true);
-        }
-
-        private void PlayRecordingStopAudioFeedback()
-        {
-            recordingFeedbackAudioService.QueueFile(recordStopAudioFeedbackPath);
-            recordingFeedbackAudioService.Play();
-
-            while (recordingFeedbackAudioService.PlaybackState == PlaybackState.Playing) { }
-
-            recordingFeedbackAudioService.KillAudio(reset: true);
+            if (AudioPlaybackService.PlaybackState == PlaybackState.Stopped)
+            {
+                AudioPlaybackService.Play();
+            }
+            else if (AudioPlaybackService.PlaybackState == PlaybackState.Playing)
+            {
+                AudioPlaybackService.Pause();
+            }
+            else if (AudioPlaybackService.PlaybackState == PlaybackState.Paused)
+            {
+                AudioPlaybackService.Play();
+            }
         }
 
         private void OpenSettingsMenu()
@@ -739,7 +788,7 @@ namespace RecNForget.Windows
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
-            var aboutDialog = new AboutDialog();
+            var aboutDialog = new AboutDialog(SettingService);
 
             if (!SettingService.MinimizedToTray)
             {
@@ -786,74 +835,6 @@ namespace RecNForget.Windows
                 SettingService.OutputPath = dialog.SelectedPath;
                 UpdateCurrentFileNameDisplay();
                 SelectedFileService.SelectLatestFile();
-            }
-        }
-
-        private void ChangeSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
-        {
-            ReplayAudioService.Stop();
-            ReplayAudioService.KillAudio();
-
-            CustomMessageBox tempDialog = new CustomMessageBox(
-                caption: "Rename the selected file",
-                icon: CustomMessageBoxIcon.Question,
-                buttons: CustomMessageBoxButtons.OkAndCancel,
-                messageRows: new List<string>(),
-                prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
-                controlFocus: CustomMessageBoxFocus.Prompt,
-                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
-
-            if (!SettingService.MinimizedToTray)
-            {
-                tempDialog.Owner = this;
-            }
-
-            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-            {
-                if (!selectedFileService.RenameSelectedFileWithoutExtension(tempDialog.PromptContent))
-                {
-                    CustomMessageBox errorMessageBox = new CustomMessageBox(
-                        caption: "Something went wrong",
-                        icon: CustomMessageBoxIcon.Error,
-                        buttons: CustomMessageBoxButtons.OK,
-                        messageRows: new List<string>() { "An error occurred trying to rename the selected file" },
-                        controlFocus: CustomMessageBoxFocus.Ok);
-
-                    errorMessageBox.ShowDialog();
-                }
-            }
-        }
-
-        private void DeleteSelectedFileButton_Clicked(object sender, RoutedEventArgs e)
-        {
-            ReplayAudioService.Stop();
-            ReplayAudioService.KillAudio();
-
-            CustomMessageBox tempDialog = new CustomMessageBox(
-                caption: "Are you sure you want to delete this file?",
-                icon: CustomMessageBoxIcon.Question,
-                buttons: CustomMessageBoxButtons.OkAndCancel,
-                messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
-                controlFocus: CustomMessageBoxFocus.Ok);
-
-            if (!SettingService.MinimizedToTray)
-            {
-                tempDialog.Owner = this;
-            }
-
-            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-            {
-                if (!SelectedFileService.DeleteSelectedFile())
-                {
-                    CustomMessageBox errorMessageBox = new CustomMessageBox(
-                        caption: "Something went wrong",
-                        icon: CustomMessageBoxIcon.Error,
-                        buttons: CustomMessageBoxButtons.OK,
-                        messageRows: new List<string>() { "An error occurred trying to delete the selected file" },
-                        controlFocus: CustomMessageBoxFocus.Ok);
-
-                    errorMessageBox.ShowDialog();
-                }
             }
         }
     }

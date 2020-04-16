@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using Octokit;
 using RecNForget.Controls;
-using RecNForget.Services.Extensions;
+using RecNForget.Controls.Extensions;
 
 namespace RecNForget.Windows
 {

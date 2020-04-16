@@ -81,6 +81,8 @@ namespace RecNForget.Windows
 
             var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey");
 
+            dialog.Owner = this;
+
             if (dialog.ShowDialog() == true)
             {
                 SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;

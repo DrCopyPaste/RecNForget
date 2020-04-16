@@ -9,13 +9,13 @@ namespace RecNForget.Services
 {
     public class AudioRecordingService : INotifyPropertyChanged
     {
-        private readonly IAppSettingService appSettingService;
-
         private static string outputFilePathPattern = @"{0}\{1}.wav";
         private static string outputFileDateFormat = "yyyyMMddHHmmssfff";
 
         // will be newly instantiated every time record starting is triggered
         private static WasapiLoopbackCapture captureInstance;
+
+        private readonly IAppSettingService appSettingService;
 
         public AudioRecordingService(IAppSettingService appSettingService)
         {

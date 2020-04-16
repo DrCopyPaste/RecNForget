@@ -1,0 +1,1308 @@
+<!-- THIS FILE IS AUTO GENERATED -->
+<!-- don't change manually - INSTEAD run RecNForget.CopyRightHelper to replace -->
+
+<UserControl x:Class="RecNForget.Controls.CopyrightControl"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:local="clr-namespace:RecNForget.Controls"
+		mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+		<TextBlock Style = "{StaticResource DefaultTextBlockStyle}" >
+			<Run>
+				RecNForget is written in C# using .NET Framework 4.8 and Microsoft WPF
+			</Run>
+			<LineBreak />
+			<Run>
+				Code by DrCopyPaste 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/DrCopyPaste/RecNForget" RequestNavigate="Hyperlink_RequestNavigate">github.com/DrCopyPaste/RecNForget</Hyperlink>
+			<LineBreak />
+			<Run>
+				Logo by DrCopyPaste (using icons from onlinewebfonts.com - see below)
+			</Run>
+			<LineBreak />
+			<Run>
+				Beep sounds by a cheap program from DrCopyPaste with love.
+			</Run>
+			<LineBreak />
+			<Run>
+				Click sounds by 
+			</Run>
+			<Hyperlink NavigateUri="mailto:lit-audio@gmx.de" RequestNavigate="Hyperlink_RequestNavigate">lit-audio@gmx.de</Hyperlink>
+			<Run>
+				/
+			</Run>
+			<Hyperlink NavigateUri="https://soundcloud.com/wolfgankh" RequestNavigate="Hyperlink_RequestNavigate">soundcloud.com/wolfgankh</Hyperlink>
+			<LineBreak />
+			<LineBreak />
+			<Run>
+				The following libaries are used by RecNForget:
+			</Run>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/factormystic/FMUtils.KeyboardHook#readme" RequestNavigate="Hyperlink_RequestNavigate">FMUtils.KeyboardHook.1.0.140.2145</Hyperlink>
+			<Run>
+				 Copyright (c) Factor Mystic - 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio.1.10.0</Hyperlink>
+			<Run>
+				 Copyright (c) Mark Heath &amp; Contributors - 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning.3.1.74</Hyperlink>
+			<Run>
+				 Copyright (c) Andrew Arnott - 
+			</Run>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://www.newtonsoft.com/json" RequestNavigate="Hyperlink_RequestNavigate">Newtonsoft.Json.12.0.3</Hyperlink>
+			<Run>
+				 Copyright (c) James Newton-King - 
+			</Run>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit.0.40.0</Hyperlink>
+			<Run>
+				 Copyright (c) GitHub - 
+			</Run>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf.1.1.0</Hyperlink>
+			<Run>
+				 Copyright (c) Sven Groot,Caio Proiete - 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://wixtoolset.org/" RequestNavigate="Hyperlink_RequestNavigate">WiX Toolset build tools v3.11.2.4516</Hyperlink>
+			<Run>
+				 Copyright (c) .NET Foundation - 
+			</Run>
+			<Hyperlink NavigateUri="https://wixtoolset.org/about/license/" RequestNavigate="Hyperlink_RequestNavigate">MS-RL</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop" RequestNavigate="Hyperlink_RequestNavigate">StyleCop.MSBuild v6.1.0</Hyperlink>
+			<Run>
+				 Copyright (c) StyleCop contributors, Chris Dahlberg - 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop/blob/master/License.html" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity" RequestNavigate="Hyperlink_RequestNavigate">Unity v5.11.5</Hyperlink>
+			<Run>
+				 Copyright (c) Unity Container Project - 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity/blob/v5.x/LICENSE" RequestNavigate="Hyperlink_RequestNavigate">Apache 2.0</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://dot.net/" RequestNavigate="Hyperlink_RequestNavigate">System.Runtime.CompilerServices.Unsafe v4.5.2</Hyperlink>
+			<Run>
+				 Copyright (c) Microsoft - 
+			</Run>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<LineBreak />
+			<LineBreak />
+			<Run>
+				The following images were used to create RecNForget:
+			</Run>
+			<LineBreak />
+			<Run>
+				accept_icon518267.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/518267" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/518267</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				accept_icon518267.black.white.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/518267" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/518267</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				accept_icon518267.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/518267" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/518267</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				bugfix_icon140609.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/140609" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/140609</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				bugfix_icon140609.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/140609" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/140609</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				cancel_icon428740.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/428740" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/428740</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				cancel_icon428740.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/428740" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/428740</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				close_icon211720.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/211720" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/211720</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				close_icon211720.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/211720" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/211720</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				close_icon349388.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/349388" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/349388</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				close_icon349388.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/349388" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/349388</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				download_icon602.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/602" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/602</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				download_icon602.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/602" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/602</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				editSetting_icon451737.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/451737" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/451737</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				editSetting_icon451737.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/451737" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/451737</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				folder_icon122592.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/122592" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/122592</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				folder_icon122592.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/122592" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/122592</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				folder_icon17782.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/17782" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/17782</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				folder_icon17782.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/17782" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/17782</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				folder_icon17783.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/17783" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/17783</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				folder_icon17783.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/17783" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/17783</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				help_icon544157.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/544157" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/544157</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				help_icon544157.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/544157" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/544157</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				information_icon2132.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/2132" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/2132</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				information_icon2132.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/2132" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/2132</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				information_icon280732.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/280732" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/280732</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				information_icon280732.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/280732" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/280732</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				lightbulb_icon372420.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/372420" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/372420</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				lightbulb_icon372420.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/372420" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/372420</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				message_error_icon304479.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/304479" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/304479</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				message_error_icon304479.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/304479" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/304479</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				message_info_icon277439.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/277439" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/277439</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				message_info_icon277439.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/277439" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/277439</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				message_question_icon109120.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/109120" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/109120</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				message_question_icon109120.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/109120" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/109120</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				minimize_icon246566.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/246566" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/246566</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				minimize_icon246566.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/246566" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/246566</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				openFolder_icon192688.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/192688" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/192688</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				openFolder_icon192688.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/192688" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/192688</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				openFolder_icon356582.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/356582" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/356582</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				openFolder_icon356582.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/356582" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/356582</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				pencil_icon353603.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/353603" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/353603</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				pencil_icon353603.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/353603" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/353603</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				pencil_icon421491.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/421491" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/421491</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				pencil_icon421491.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/421491" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/421491</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				pencil_icon79516.black.disabled.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/79516" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/79516</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				pencil_icon79516.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/79516" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/79516</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				pencil_icon79516.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/79516" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/79516</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				plus_icon171498.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/171498" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/171498</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				plus_icon171498.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/171498" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/171498</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				settings_icon40863.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/40863" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/40863</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				settings_icon40863.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/40863" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/40863</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				settings_icon488154.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/488154" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/488154</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				settings_icon488154.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/488154" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/488154</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				settings_icon522890.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/522890" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/522890</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				settings_icon522890.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/522890" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/522890</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				shutDown_icon170336.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/170336" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/170336</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				shutDown_icon170336.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/170336" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/170336</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				tools_icon536263.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/536263" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/536263</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				tools_icon536263.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/536263" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/536263</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				trash_icon77730.black.disabled.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/77730" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/77730</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				trash_icon77730.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/77730" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/77730</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				trash_icon77730.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/77730" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/77730</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				windowOptions_icon345920.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/345920" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/345920</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				windowOptions_icon345920.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/345920" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/345920</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				windowOptions_icon510828.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/510828" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/510828</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				windowOptions_icon510828.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/510828" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/510828</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				windowSettings_icon248857.black.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/248857" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/248857</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				windowSettings_icon248857.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/248857" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/248857</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUI-logo.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUIBannerBmp.bmp was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUIBannerBmp.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUIDialogBmp.bmp was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				WixUIDialogBmp.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				logo.ico was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				logo.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				logo_big.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				logo_small.png was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/55290" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/55290</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/715" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/715</Hyperlink>
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+		</TextBlock>
+	</Grid>
+</UserControl>

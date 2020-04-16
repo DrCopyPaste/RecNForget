@@ -9,7 +9,7 @@ using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services
 {
-    public class AppSettingService : IAppSettingService, INotifyPropertyChanged
+    public class AppSettingService : IAppSettingService
     {
         private static string applicationName_Key = "RecNForget";
         private static string windowsAutoStartRegistryPath_Key = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";

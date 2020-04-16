@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using RecNForget.Services.Extensions;
+using RecNForget.Controls.Extensions;
 using RecNForget.Services.Types;
 
 namespace RecNForget.Windows

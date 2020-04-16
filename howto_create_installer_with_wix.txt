@@ -1,9 +1,6 @@
-create an upgrade:
-- alter version in RecNForget project's AssemblyInfo (AssemblyVersion and AssemblyFileVersion)
+how to create an upgrade:
+- change first 2 digits via version.json if needed, 
 - DO NOT CHANGE the naming pattern of the msi files (RecNForget.Setup.A.B.C.D.msi)
-(this is needed so the auto updater can find the correct asset with a matching Version string)
-- alter the Product Id in WIX' Product.wxs AND increase version number in RecNForget's AssemblyInfo and in Setup-Project's wxs-File!
-
 
 great video tutorials:
 https://www.youtube.com/watch?v=usOh3NQO9Ms
