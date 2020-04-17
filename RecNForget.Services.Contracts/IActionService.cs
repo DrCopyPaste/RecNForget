@@ -34,5 +34,9 @@ namespace RecNForget.Services.Contracts
 
         // delete selected file (with dialog)
         void DeleteSelectedFile(DependencyObject ownerControl);
+
+        bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null);
+
+        void TogglePlayPauseAudio();
     }
 }

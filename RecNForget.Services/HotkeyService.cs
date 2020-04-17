@@ -2,21 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using FMUtils.KeyboardHook;
+using RecNForget.Services.Contracts;
 using RecNForget.Services.Types;
 
 namespace RecNForget.Services
 {
-    public class HotkeyService
+    public class HotkeyService : IHotkeyService
     {
+        private readonly IAppSettingService appSettingService;
+        private readonly IAudioRecordingService audioRecordingService;
+        private readonly IAudioPlaybackService audioPlaybackService;
+
         private bool paused;
 
         // List for mapped hotkeys: <Func to get current hotkey mapping, action to perform on hotkey, waiting for release?>
         private List<HotkeyMapping> hotkeyMappings;
         private Hook keyboardHook;
 
-        public HotkeyService()
+        public HotkeyService(IAppSettingService appSettingService, IAudioRecordingService audioRecordingService, IAudioPlaybackService audioPlaybackService)
         {
+            this.appSettingService = appSettingService;
+            this.audioRecordingService = audioRecordingService;
+            this.audioPlaybackService = audioPlaybackService;
+
             hotkeyMappings = new List<HotkeyMapping>();
+            ResetAndReadHotkeysFromConfig();
 
             keyboardHook = new Hook("Global Action Hook");
             keyboardHook.KeyDownEvent = KeyDown;
@@ -25,12 +35,13 @@ namespace RecNForget.Services
             paused = false;
         }
 
-        public void AddHotkey(Func<string> hotkeyStringGetterMethod, Action hotkeyAction)
+        public void ResetAndReadHotkeysFromConfig()
         {
-            if (!hotkeyMappings.Any(m => m.HotkeyStringGetterMethod == hotkeyStringGetterMethod))
-            {
-                hotkeyMappings.Add(new HotkeyMapping(hotkeyStringGetterMethod, hotkeyAction, false));
-            }
+            hotkeyMappings.Clear();
+
+            AddHotkey(
+                () => { return HotkeySettingTranslator.GetHotkeySettingAsString(appSettingService.HotKey_StartStopRecording); },
+                () => { if (audioPlaybackService.Stopped) { audioRecordingService.ToggleRecording(); } });
         }
 
         public void PauseCapturingHotkeys(bool pause = true)
@@ -41,6 +52,14 @@ namespace RecNForget.Services
         public void ResumeCapturingHotkeys()
         {
             PauseCapturingHotkeys(false);
+        }
+
+        private void AddHotkey(Func<string> hotkeyStringGetterMethod, Action hotkeyAction)
+        {
+            if (!hotkeyMappings.Any(m => m.HotkeyStringGetterMethod == hotkeyStringGetterMethod))
+            {
+                hotkeyMappings.Add(new HotkeyMapping(hotkeyStringGetterMethod, hotkeyAction, false));
+            }
         }
 
         private void KeyDown(KeyboardHookEventArgs e)

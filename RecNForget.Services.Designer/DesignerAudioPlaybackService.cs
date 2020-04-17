@@ -21,6 +21,14 @@ namespace RecNForget.Services.Designer
 
         public int ItemsCount => 42;
 
+        public string ReplayStartAudioFeedbackPath => throw new NotImplementedException();
+
+        public string ReplayStopAudioFeedbackPath => throw new NotImplementedException();
+
+        public string RecordStartAudioFeedbackPath => throw new NotImplementedException();
+
+        public string RecordStopAudioFeedbackPath => throw new NotImplementedException();
+
         public bool QueueFile(string filePath)
         {
             throw new NotImplementedException();

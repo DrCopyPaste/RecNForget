@@ -33,6 +33,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void SelectNextFile()
         {
             throw new System.NotImplementedException();
@@ -44,6 +49,11 @@ namespace RecNForget.Services.Designer
         }
 
         public void StopPlayingSelectedFile()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void TogglePlayPauseAudio()
         {
             throw new System.NotImplementedException();
         }

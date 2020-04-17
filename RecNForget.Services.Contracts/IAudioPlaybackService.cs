@@ -6,6 +6,14 @@ namespace RecNForget.Services.Contracts
 {
     public interface IAudioPlaybackService : INotifyPropertyChanged
     {
+        string ReplayStartAudioFeedbackPath { get; }
+
+        string ReplayStopAudioFeedbackPath { get; }
+
+        string RecordStartAudioFeedbackPath { get; }
+
+        string RecordStopAudioFeedbackPath { get; }
+
         int ItemsCount { get; }
 
         bool Paused { get; }

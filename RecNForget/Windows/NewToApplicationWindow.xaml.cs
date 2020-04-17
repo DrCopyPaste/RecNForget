@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Ookii.Dialogs.Wpf;
+using RecNForget.Controls.Helper;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
 
@@ -13,10 +14,10 @@ namespace RecNForget.Windows
     /// </summary>
     public partial class NewToApplicationWindow : INotifyPropertyChanged
     {
-        private HotkeyService hotkeyService;
+        private IHotkeyService hotkeyService;
         private IAppSettingService settingService;
 
-        public NewToApplicationWindow(HotkeyService hotkeyService, IAppSettingService settingService)
+        public NewToApplicationWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
         {
             this.hotkeyService = hotkeyService;
             SettingService = settingService;
@@ -27,7 +28,7 @@ namespace RecNForget.Windows
 
             this.Title = "New to RecNForget?";
 
-            var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
                 hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
                 buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                 spacing: 6);
@@ -58,7 +59,7 @@ namespace RecNForget.Windows
                 HotkeyDisplay.Children.Clear();
             }
 
-            var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
                 hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
                 buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                 spacing: 6);

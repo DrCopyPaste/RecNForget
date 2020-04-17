@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Windows.Input;
 using FMUtils.KeyboardHook;
+using RecNForget.Controls.Helper;
 using RecNForget.Services;
 
 namespace RecNForget.Windows
@@ -43,7 +44,7 @@ namespace RecNForget.Windows
                 HotkeyDisplay.Children.Clear();
             }
 
-            var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
                 hotkeys: HotkeySettingTranslator.GetKeyboardHookEventArgsAsList(e, string.Empty, string.Empty),
                 buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                 spacing: 6);

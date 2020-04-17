@@ -32,13 +32,9 @@ namespace RecNForget.Windows
 
         private ApplicationBase currentVersion;
 
-        private string replayStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStart.wav");
-        private string replayStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStop.wav");
-        private string recordStartAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
-        private string recordStopAudioFeedbackPath = Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
-        private AudioRecordingService audioRecordingService = null;
+        private IAudioRecordingService audioRecordingService = null;
         private IActionService actionService = null;
-        private HotkeyService hotkeyService = null;
+        private IHotkeyService hotkeyService = null;
         private IAppSettingService settingService = null;
         private IAudioPlaybackService audioPlaybackService = null;
         private ISelectedFileService selectedFileService = null;
@@ -50,7 +46,7 @@ namespace RecNForget.Windows
         private string recordingTimeimeDisplay = string.Empty;
         private string currentFileNameDisplay;
 
-        public MainWindow(IAppSettingService appSettingService, ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService)
+        public MainWindow(IAppSettingService appSettingService, IHotkeyService hotkeyService, IAudioRecordingService audioRecordingService, ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService)
         {
             DataContext = this;
             InitializeComponent();
@@ -77,13 +73,10 @@ namespace RecNForget.Windows
 
             recordingTimer.Tick += new EventHandler(RecordingTimer_Tick);
 
-            AudioRecordingService = new AudioRecordingService(appSettingService: settingService);
+            AudioRecordingService = audioRecordingService;
             AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
 
-            this.hotkeyService = new HotkeyService();
-            this.hotkeyService.AddHotkey(
-                () => { return HotkeySettingTranslator.GetHotkeySettingAsString(SettingService.HotKey_StartStopRecording); },
-                () => { if (AudioPlaybackService.Stopped) { AudioRecordingService.ToggleRecording(); } });        
+            this.hotkeyService = hotkeyService;      
             
             this.KeyDown += Window_KeyDown;
 
@@ -159,7 +152,7 @@ namespace RecNForget.Windows
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public AudioRecordingService AudioRecordingService
+        public IAudioRecordingService AudioRecordingService
         {
             get
             {
@@ -293,7 +286,7 @@ namespace RecNForget.Windows
                         {
                             audioPlaybackService.KillAudio(reset: true);
 
-                            audioPlaybackService.QueueFile(recordStartAudioFeedbackPath);
+                            audioPlaybackService.QueueFile(audioPlaybackService.RecordStartAudioFeedbackPath);
                             audioPlaybackService.Play();
 
                             while (audioPlaybackService.PlaybackState != PlaybackState.Stopped) { }
@@ -307,7 +300,6 @@ namespace RecNForget.Windows
                             trayIcon.BalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
                         }
 
-                        RecordButton.Style = (Style)FindResource("StopRecordButton");
                         AudioPlaybackService.KillAudio(reset: true);
                         TaskBar_ProgressState = "Error";
                         RecordingStart = DateTime.Now;
@@ -320,21 +312,20 @@ namespace RecNForget.Windows
                         {
                             if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
                             {
-                                QueueAudioPlayback(fileName: recordStopAudioFeedbackPath);
+                                actionService.QueueAudioPlayback(fileName: audioPlaybackService.RecordStopAudioFeedbackPath);
                             }
 
                             if (SettingService.AutoReplayAudioAfterRecording)
                             {
-                                QueueAudioPlayback(
+                                actionService.QueueAudioPlayback(
                                     fileName: AudioRecordingService.LastFileName,
-                                    startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStartAudioFeedbackPath : null,
-                                    endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStopAudioFeedbackPath : null);
+                                    startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
+                                    endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
                             }
 
-                            ToggleReplayLastRecording();
+                            actionService.TogglePlayPauseAudio();
                         }
 
-                        RecordButton.Style = (Style)FindResource("RecordButton");
                         UpdateCurrentFileNameDisplay(reset: true);
                         TaskBar_ProgressState = "None";
                         recordingTimer.Stop();
@@ -360,13 +351,6 @@ namespace RecNForget.Windows
         {
             switch (e.PropertyName)
             {
-                case nameof(AudioPlaybackService.Paused):
-                {
-                    // ToDo better way to distinguish, whether AudioPlaybackService is currently playing a "file" or "just" giving feedback from recording start/stop
-                    TogglePlaySelectedFileButton.Style = AudioPlaybackService.Playing && !recordingTimer.IsEnabled ? (Style)FindResource("PauseButton") : (Style)FindResource("PlayButton");
-                    break;
-                }
-
                 case nameof(AudioPlaybackService.Stopped):
                 {
                     TaskBar_ProgressState = AudioPlaybackService.Stopped || AudioRecordingService.CurrentlyRecording ? "None" : "Normal";
@@ -522,34 +506,23 @@ namespace RecNForget.Windows
                 }
                 else if (e.Key == Key.Down)
                 {
-                    OpenSelectedFileButton.PerformClick();
+                    actionService.OpenOutputFolderInExplorer();
                 }
                 else if (e.Key == Key.Left)
                 {
-                    SkipPrevButton.PerformClick();
+                    actionService.SelectPreviousFile();
                 }
                 else if (e.Key == Key.Right)
                 {
-                    SkipNextButton.PerformClick();
+                    actionService.SelectNextFile();
                 }
                 else if (e.Key == Key.Space)
                 {
-                    if (SelectedFileService.HasSelectedFile && AudioRecordingService.CurrentlyNotRecording)
-                    {
-                        if (AudioPlaybackService.ItemsCount == 0)
-                        {
-                            QueueAudioPlayback(
-                                fileName: SelectedFileService.SelectedFile.FullName,
-                                startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStartAudioFeedbackPath : null,
-                                endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStopAudioFeedbackPath : null);
-                        }
-
-                        ToggleReplayLastRecording();
-                    }
+                    actionService.TogglePlayPauseSelectedFile();
                 }
                 else if (e.Key == Key.Escape)
                 {
-                    StopReplayLastRecordingButton.PerformClick();
+                    actionService.StopPlayingSelectedFile();
                 }
             }
         }
@@ -560,55 +533,11 @@ namespace RecNForget.Windows
             UpdateCurrentFileNameDisplay();
         }
 
-        private void RecordButton_Click(object sender, RoutedEventArgs e)
-        {
-            AudioRecordingService.ToggleRecording();
-        }
-
         private void UpdateCurrentFileNameDisplay(bool reset = false)
         {
             CurrentFileNameDisplay = !AudioRecordingService.CurrentlyRecording || reset || hotkeyService == null ?
                 AudioRecordingService.GetTargetPathTemplateString() :
                 string.Format("{0} ({1} s)", AudioRecordingService.CurrentFileName, RecordingTimeDisplay);
-        }
-
-        private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
-        {
-            var directory = new DirectoryInfo(SettingService.OutputPath);
-
-            if (SelectedFileService.HasSelectedFile && SelectedFileService.SelectedFile.Exists)
-            {
-                // if there is a result select it in an explorer window
-                string argument = "/select, \"" + SelectedFileService.SelectedFile.FullName + "\"";
-                System.Diagnostics.Process.Start("explorer.exe", argument);
-            }
-            else
-            {
-                if (!directory.Exists)
-                {
-                    directory.Create();
-                }
-
-                // otherwise just open output path in explorer
-                Process.Start(SettingService.OutputPath);
-            }
-        }
-
-        private void StopReplayLastRecording_Click(object sender, RoutedEventArgs e)
-        {
-            AudioPlaybackService.Stop();
-        }
-
-        private void SkipPrevButton_Click(object sender, RoutedEventArgs e)
-        {
-            AudioPlaybackService.Stop();
-            SelectedFileService.SelectPrevFile();
-        }
-
-        private void SkipNextButton_Click(object sender, RoutedEventArgs e)
-        {
-            AudioPlaybackService.Stop();
-            SelectedFileService.SelectNextFile();
         }
 
         private async void CheckForUpdates(bool showMessages = false)
@@ -677,72 +606,6 @@ namespace RecNForget.Windows
                         errorDialog.ShowDialog();
                     });
                 }
-            }
-        }
-
-        private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
-        {
-            if (AudioPlaybackService.ItemsCount == 0)
-            {
-                QueueAudioPlayback(
-                    fileName: SelectedFileService.SelectedFile.FullName,
-                    startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStartAudioFeedbackPath : null,
-                    endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? replayStopAudioFeedbackPath : null);
-            }
-
-            ToggleReplayLastRecording();
-        }
-
-        private bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
-        {
-            bool replayFileExists = false;
-            string fileNameToPlay;
-
-            if (fileName == null)
-            {
-                replayFileExists = SelectedFileService.SelectedFile.Exists;
-                fileNameToPlay = SelectedFileService.SelectedFile.FullName;
-            }
-            else
-            {
-                var fileInfo = new FileInfo(fileName);
-                replayFileExists = fileInfo.Exists;
-                fileNameToPlay = fileName;
-            }
-
-            if (!replayFileExists)
-            {
-                return false;
-            }
-
-            if (!string.IsNullOrEmpty(startIndicatorFileName))
-            {
-                AudioPlaybackService.QueueFile(startIndicatorFileName);
-            }
-
-            AudioPlaybackService.QueueFile(fileNameToPlay);
-
-            if (!string.IsNullOrEmpty(endIndicatorFileName))
-            {
-                AudioPlaybackService.QueueFile(endIndicatorFileName);
-            }
-
-            return true;
-        }
-
-        private void ToggleReplayLastRecording()
-        {
-            if (AudioPlaybackService.PlaybackState == PlaybackState.Stopped)
-            {
-                AudioPlaybackService.Play();
-            }
-            else if (AudioPlaybackService.PlaybackState == PlaybackState.Playing)
-            {
-                AudioPlaybackService.Pause();
-            }
-            else if (AudioPlaybackService.PlaybackState == PlaybackState.Paused)
-            {
-                AudioPlaybackService.Play();
             }
         }
 

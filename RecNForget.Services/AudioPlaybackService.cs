@@ -24,53 +24,25 @@ namespace RecNForget.Services
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public bool Paused
-        {
-            get
-            {
-                return PlaybackState == PlaybackState.Paused;
-            }
-        }
+        public string ReplayStartAudioFeedbackPath => Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStart.wav");
 
-        public bool Playing
-        {
-            get
-            {
-                return PlaybackState == PlaybackState.Playing;
-            }
-        }
+        public string ReplayStopAudioFeedbackPath => Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStop.wav");
 
-        public bool PlayingOrPaused
-        {
-            get
-            {
-                return Paused || Playing;
-            }
-        }
+        public string RecordStartAudioFeedbackPath => Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
 
-        public bool Stopped
-        {
-            get
-            {
-                return PlaybackState == PlaybackState.Stopped;
-            }
-        }
+        public string RecordStopAudioFeedbackPath => Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
 
-        public PlaybackState PlaybackState
-        {
-            get
-            {
-                return audioOutputDevice == null ? PlaybackState.Stopped : audioOutputDevice.PlaybackState;
-            }
-        }
+        public bool Paused => PlaybackState == PlaybackState.Paused;
 
-        public int ItemsCount
-        {
-            get
-            {
-                return filePathList.Count;
-            }
-        }
+        public bool Playing => PlaybackState == PlaybackState.Playing;
+
+        public bool PlayingOrPaused => Paused || Playing;
+
+        public bool Stopped => PlaybackState == PlaybackState.Stopped;
+
+        public PlaybackState PlaybackState => audioOutputDevice == null ? PlaybackState.Stopped : audioOutputDevice.PlaybackState;
+
+        public int ItemsCount => filePathList.Count;
 
         public bool QueueFile(string filePath)
         {

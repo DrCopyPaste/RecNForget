@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
+using RecNForget.Controls.Helper;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
 
@@ -16,10 +17,10 @@ namespace RecNForget.Windows
     /// </summary>
     public partial class SettingsWindow : INotifyPropertyChanged
     {
-        private HotkeyService hotkeyService;
+        private IHotkeyService hotkeyService;
         private IAppSettingService settingService;
 
-        public SettingsWindow(HotkeyService hotkeyService, IAppSettingService settingService)
+        public SettingsWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
         {
             this.hotkeyService = hotkeyService;
             SettingService = settingService;
@@ -53,7 +54,7 @@ namespace RecNForget.Windows
                 HotkeyDisplay.Children.Clear();
             }
 
-            var buttonGrid = HotkeySettingTranslator.GetHotkeyListAsButtonGrid(
+            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
                 hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
                 buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                 spacing: 6,

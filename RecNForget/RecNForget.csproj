@@ -168,12 +168,10 @@
     <Compile Include="Windows\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\AudioRecordingService.cs" />
     <Compile Include="Services\Types\HelpFeature.cs" />
     <Compile Include="Services\Types\HelpFeatureClass.cs" />
     <Compile Include="Services\Types\HelpFeatureDetailLine.cs" />
     <Compile Include="Services\Types\HelpFeatureVersion.cs" />
-    <Compile Include="Services\Types\HotkeyMapping.cs" />
     <Compile Include="Services\UpdateChecker.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
     <Page Include="Windows\QuickTipDialog.xaml">
@@ -211,7 +209,6 @@
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\HotkeyService.cs" />
     <Page Include="Windows\AboutDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -239,7 +236,6 @@
     <Compile Include="Windows\HotkeyPromptWindow.xaml.cs">
       <DependentUpon>HotkeyPromptWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\HotkeySettingTranslator.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -319,9 +315,7 @@
       <Name>RecNForget.Services</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

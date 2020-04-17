@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using NAudio.Wave;
 using RecNForget.Controls;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
@@ -15,6 +17,7 @@ namespace RecNForget.Control.Services
     {
         private readonly ISelectedFileService selectedFileService = null;
         private readonly IAudioPlaybackService audioPlaybackService = null;
+        private readonly IAudioRecordingService audioRecordingService = null;
         private readonly IAppSettingService appSettingService = null;
 
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
@@ -23,6 +26,7 @@ namespace RecNForget.Control.Services
             this.selectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
             this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
             this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
+            this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -107,32 +111,115 @@ namespace RecNForget.Control.Services
 
         public void OpenOutputFolderInExplorer()
         {
-            throw new System.NotImplementedException();
+            var directory = new DirectoryInfo(appSettingService.OutputPath);
+
+            if (selectedFileService.HasSelectedFile && selectedFileService.SelectedFile.Exists)
+            {
+                // if there is a result select it in an explorer window
+                string argument = "/select, \"" + selectedFileService.SelectedFile.FullName + "\"";
+                System.Diagnostics.Process.Start("explorer.exe", argument);
+            }
+            else
+            {
+                if (!directory.Exists)
+                {
+                    directory.Create();
+                }
+
+                // otherwise just open output path in explorer
+                Process.Start(appSettingService.OutputPath);
+            }
         }
 
         public void SelectNextFile()
         {
-            throw new System.NotImplementedException();
+            audioPlaybackService.Stop();
+            selectedFileService.SelectNextFile();
         }
 
         public void SelectPreviousFile()
         {
-            throw new System.NotImplementedException();
+            audioPlaybackService.Stop();
+            selectedFileService.SelectPrevFile();
         }
 
         public void StopPlayingSelectedFile()
         {
-            throw new System.NotImplementedException();
+            audioPlaybackService.Stop();
         }
 
         public void TogglePlayPauseSelectedFile()
         {
-            throw new System.NotImplementedException();
+            if (selectedFileService.HasSelectedFile && audioRecordingService.CurrentlyNotRecording)
+            {
+                if (audioPlaybackService.ItemsCount == 0)
+                {
+                    QueueAudioPlayback(
+                        fileName: selectedFileService.SelectedFile.FullName,
+                        startIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
+                        endIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
+                }
+
+                TogglePlayPauseAudio();
+            }
         }
 
         public void ToggleStartStopRecording()
         {
-            throw new System.NotImplementedException();
+            audioRecordingService.ToggleRecording();
+        }
+
+        public bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
+        {
+            bool replayFileExists = false;
+            string fileNameToPlay;
+
+            if (fileName == null)
+            {
+                replayFileExists = selectedFileService.SelectedFile.Exists;
+                fileNameToPlay = selectedFileService.SelectedFile.FullName;
+            }
+            else
+            {
+                var fileInfo = new FileInfo(fileName);
+                replayFileExists = fileInfo.Exists;
+                fileNameToPlay = fileName;
+            }
+
+            if (!replayFileExists)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(startIndicatorFileName))
+            {
+                audioPlaybackService.QueueFile(startIndicatorFileName);
+            }
+
+            audioPlaybackService.QueueFile(fileNameToPlay);
+
+            if (!string.IsNullOrEmpty(endIndicatorFileName))
+            {
+                audioPlaybackService.QueueFile(endIndicatorFileName);
+            }
+
+            return true;
+        }
+
+        public void TogglePlayPauseAudio()
+        {
+            if (audioPlaybackService.PlaybackState == PlaybackState.Stopped)
+            {
+                audioPlaybackService.Play();
+            }
+            else if (audioPlaybackService.PlaybackState == PlaybackState.Playing)
+            {
+                audioPlaybackService.Pause();
+            }
+            else if (audioPlaybackService.PlaybackState == PlaybackState.Paused)
+            {
+                audioPlaybackService.Play();
+            }
         }
     }
 }

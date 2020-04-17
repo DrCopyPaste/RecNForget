@@ -7,7 +7,7 @@ using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services
 {
-    public class AudioRecordingService : INotifyPropertyChanged
+    public class AudioRecordingService : IAudioRecordingService
     {
         private static string outputFilePathPattern = @"{0}\{1}.wav";
         private static string outputFileDateFormat = "yyyyMMddHHmmssfff";
