@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="RecNForget.Controls.OutputPathControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RecNForget.Controls"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Border Style="{StaticResource DefaultControlBorderStyle}">
+            <Grid Style="{StaticResource DefaultGridStyle}" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition
+                        Width="13*"/>
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                    <ColumnDefinition
+                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource ControlLabelStyle}"
+                    Content="Output Path"/>
+
+                <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
+                    Text="{Binding Path=OutputPathWithFilePattern, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                    ToolTip="{Binding Path=OutputPathWithFilePattern, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ToolTipService.ShowOnDisabled="True" />
+
+                <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
+                    ToolTip="change output file name pattern"
+                    Click="ChangeFileNamePatternButton_Clicked"/>
+
+                <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ChangeOutputFolderMiniButtonLayout}"
+                    ToolTip="change output folder"
+                    Click="ChangeOutputFolderButton_Clicked"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

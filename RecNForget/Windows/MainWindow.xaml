@@ -70,7 +70,9 @@
         MouseLeave="MainWindow_MouseLeave" MouseEnter="MainWindow_MouseEnter" MouseDown="Window_MouseDown">
         <Grid>
             <Grid.RowDefinitions>
+                <!-- row 0 for title bar-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 1 for all other controls-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -106,67 +108,22 @@
             <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
                 <Grid Style="{StaticResource DefaultGridStyle}">
                     <Grid.RowDefinitions>
-                        <!-- row 0 for title bar-->
+                        <!-- row 0 for output path control-->
                         <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 1 for separator-->
+                        <!-- row 1 for selected file control-->
                         <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 2 for current file display title-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 3 for current file display-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 4 for separator-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 5 for file prefix title-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 6 for file prefix-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 7 for separator-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 8 for action buttons title-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 9 for action buttons-->
+                        <!-- row 2 for recording and playback control-->
                         <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                     </Grid.ColumnDefinitions>
 
-                    <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultControlBorderStyle}"
-                        x:Name="OutputPathControl">
-                        <Grid Style="{StaticResource DefaultGridStyle}" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition
-                                    Width="13*"/>
-                                <ColumnDefinition
-                                    Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                                <ColumnDefinition
-                                    Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource ControlLabelStyle}"
-                                Content="Output Path"/>
-
-                            <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
-                                Text="{Binding Path=CurrentFileNameDisplay, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                            <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
-                                ToolTip="change output file name pattern"
-                                Click="ChangeFileNamePatternButton_Clicked"/>
-
-                            <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ChangeOutputFolderMiniButtonLayout}"
-                                ToolTip="change output folder"
-                                Click="ChangeOutputFolderButton_Clicked"/>
-                        </Grid>
-                    </Border>
-
-                    <local:SelectedFileControl Grid.Row="6" Grid.Column="0"
+                    <local:OutputPathControl Grid.Row="0" Grid.Column="0"
+                        x:Name="OutputPathControl" />
+                    <local:SelectedFileControl Grid.Row="1" Grid.Column="0"
                         x:Name="SelectedFileControl"/>
-
-                    <local:RecordingAndPlaybackControl Grid.Row="9" Grid.Column="0"
+                    <local:RecordingAndPlaybackControl Grid.Row="2" Grid.Column="0"
                         x:Name="RecordingAndPlaybackControl"/>
                 </Grid>
             </Border>

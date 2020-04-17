@@ -10,7 +10,7 @@ namespace RecNForget.Services
     public class AudioRecordingService : IAudioRecordingService
     {
         private static string outputFilePathPattern = @"{0}\{1}.wav";
-        private static string outputFileDateFormat = "yyyyMMddHHmmssfff";
+        private static string outputFileDateFormat = "yyyy_MM_dd_HH_mm_ss_fff";
 
         // will be newly instantiated every time record starting is triggered
         private static WasapiLoopbackCapture captureInstance;
@@ -133,7 +133,7 @@ namespace RecNForget.Services
             {
                 var fileInfo = new FileInfo(tempString);
                 string directory = fileInfo.DirectoryName;
-                string filename = Path.GetFileNameWithoutExtension(fileInfo.Name) + DateTime.Now.ToString(AudioRecordingService.outputFileDateFormat);
+                string filename = Path.GetFileNameWithoutExtension(fileInfo.Name) + "_" + DateTime.Now.ToString(AudioRecordingService.outputFileDateFormat);
                 string extension = fileInfo.Extension;
 
                 tempString = Path.Combine(directory, filename + extension);

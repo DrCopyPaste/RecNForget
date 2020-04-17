@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,10 +12,8 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Microsoft.VisualBasic.ApplicationServices;
 using NAudio.Wave;
-using Ookii.Dialogs.Wpf;
-using RecNForget.Control.Services;
 using RecNForget.Controls;
-using RecNForget.Controls.Extensions;
+using RecNForget.Controls.Services;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
 
@@ -460,12 +457,6 @@ namespace RecNForget.Windows
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
-        {
-            // https://stackoverflow.com/a/23182807
-            SettingService.FilenamePrefix = string.Concat(SettingService.FilenamePrefix.Split(Path.GetInvalidFileNameChars()));
-        }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -665,41 +656,6 @@ namespace RecNForget.Windows
         private void CheckUpdates_Click(object sender, RoutedEventArgs e)
         {
             Task.Run(() => { CheckForUpdates(showMessages: true); });
-        }
-
-        private void ChangeFileNamePatternButton_Clicked(object sender, RoutedEventArgs e)
-        {
-            CustomMessageBox tempDialog = new CustomMessageBox(
-                caption: "Type in a new pattern for file name generation.",
-                icon: CustomMessageBoxIcon.Question,
-                buttons: CustomMessageBoxButtons.OkAndCancel,
-                messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
-                prompt: SettingService.FilenamePrefix,
-                controlFocus: CustomMessageBoxFocus.Prompt,
-                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
-
-            if (!SettingService.MinimizedToTray)
-            {
-                tempDialog.Owner = this;
-            }
-
-            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-            {
-                SettingService.FilenamePrefix = tempDialog.PromptContent;
-                UpdateCurrentFileNameDisplay();
-            }
-        }
-
-        private void ChangeOutputFolderButton_Clicked(object sender, RoutedEventArgs e)
-        {
-            var dialog = new VistaFolderBrowserDialog();
-
-            if (dialog.ShowDialog(this) == true)
-            {
-                SettingService.OutputPath = dialog.SelectedPath;
-                UpdateCurrentFileNameDisplay();
-                SelectedFileService.SelectLatestFile();
-            }
         }
     }
 }

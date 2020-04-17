@@ -11,7 +11,7 @@ using RecNForget.Services.Contracts;
 using Unity;
 
 // ToDo remove coupling with controls from this service, so this service can be moved to RecNForget.Services (it is really only the custom message box so far)
-namespace RecNForget.Control.Services
+namespace RecNForget.Controls.Services
 {
     public class ActionService : IActionService
     {
