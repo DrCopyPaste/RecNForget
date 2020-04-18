@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Octokit;
 
-namespace RecNForget.Services
+namespace RecNForget.Controls.Services
 {
     public class UpdateChecker
     {

@@ -27,8 +27,6 @@ namespace RecNForget.Windows
         private NotifyIcon trayIcon;
         private int balloonTipTimeout = 3000;
 
-        private ApplicationBase currentVersion;
-
         private IAudioRecordingService audioRecordingService = null;
         private IActionService actionService = null;
         private IHotkeyService hotkeyService = null;
@@ -38,23 +36,12 @@ namespace RecNForget.Windows
 
         private string taskBar_ProgressState = "None";
 
-        private DispatcherTimer recordingTimer;
-
-        private string recordingTimeimeDisplay = string.Empty;
-        private string currentFileNameDisplay;
-
         public MainWindow(IAppSettingService appSettingService, IHotkeyService hotkeyService, IAudioRecordingService audioRecordingService, ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService)
         {
             DataContext = this;
             InitializeComponent();
 
             SettingService = appSettingService;
-            currentVersion = new ApplicationBase();
-
-            // ensure AppConfig Values exist
-            bool firstTimeUser = SettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
-            Version lastInstalledVersion = SettingService.LastInstalledVersion;
-            SettingService.LastInstalledVersion = new Version(ThisAssembly.AssemblyFileVersion);
 
             this.actionService = new ActionService();
             SelectedFileService = selectedFileService;
@@ -62,13 +49,6 @@ namespace RecNForget.Windows
 
             AudioPlaybackService = audioPlaybackService;
             AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
-
-            recordingTimer = new DispatcherTimer
-            {
-                Interval = new TimeSpan(0, 0, 0, 0, 30)
-            };
-
-            recordingTimer.Tick += new EventHandler(RecordingTimer_Tick);
 
             AudioRecordingService = audioRecordingService;
             AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
@@ -86,11 +66,6 @@ namespace RecNForget.Windows
             OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
             SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
 
-            if (SettingService.CheckForUpdateOnStart)
-            {
-                Task.Run(() => { CheckForUpdates(); });
-            }
-
             this.Topmost = SettingService.WindowAlwaysOnTop;
 
             trayIcon = new System.Windows.Forms.NotifyIcon
@@ -102,8 +77,6 @@ namespace RecNForget.Windows
             trayIcon.Click += new EventHandler(TrayIcon_Click);
             trayIcon.DoubleClick += new EventHandler(TrayIconMenu_DoubleClick);
 
-            UpdateCurrentFileNameDisplay(reset: true);
-
             if (SettingService.MinimizedToTray)
             {
                 SwitchToBackgroundMode();
@@ -111,33 +84,6 @@ namespace RecNForget.Windows
             else
             {
                 SwitchToForegroundMode();
-            }
-
-            if (firstTimeUser)
-            {
-                var dia = new NewToApplicationWindow(this.hotkeyService, SettingService);
-
-                if (!SettingService.MinimizedToTray)
-                {
-                    dia.Owner = this;
-                }
-
-                dia.Show();
-            }
-            else if (currentVersion.Info.Version.CompareTo(lastInstalledVersion) > 0)
-            {
-                var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentVersion.Info.Version, SettingService);
-
-                if (!SettingService.MinimizedToTray)
-                {
-                    newToVersionDialog.Owner = this;
-                }
-
-                newToVersionDialog.Show();
-            }
-            else if (SettingService.ShowTipsAtApplicationStart)
-            {
-                ShowRandomApplicationTip();
             }
         }
 
@@ -205,22 +151,6 @@ namespace RecNForget.Windows
             }
         }
 
-        public DateTime RecordingStart { get; set; }
-
-        public string RecordingTimeDisplay
-        {
-            get
-            {
-                return AudioRecordingService.CurrentlyRecording ? recordingTimeimeDisplay : string.Empty;
-            }
-
-            set
-            {
-                recordingTimeimeDisplay = value;
-                OnPropertyChanged();
-            }
-        }
-
         public string TaskBar_ProgressState
         {
             get
@@ -231,20 +161,6 @@ namespace RecNForget.Windows
             set
             {
                 taskBar_ProgressState = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string CurrentFileNameDisplay
-        {
-            get
-            {
-                return currentFileNameDisplay;
-            }
-
-            set
-            {
-                currentFileNameDisplay = value;
                 OnPropertyChanged();
             }
         }
@@ -299,9 +215,6 @@ namespace RecNForget.Windows
 
                         AudioPlaybackService.KillAudio(reset: true);
                         TaskBar_ProgressState = "Error";
-                        RecordingStart = DateTime.Now;
-                        recordingTimer.Start();
-                        UpdateCurrentFileNameDisplay();
                     }
                     else
                     {
@@ -323,9 +236,7 @@ namespace RecNForget.Windows
                             actionService.TogglePlayPauseAudio();
                         }
 
-                        UpdateCurrentFileNameDisplay(reset: true);
                         TaskBar_ProgressState = "None";
-                        recordingTimer.Stop();
 
                         if (SettingService.ShowBalloonTipsForRecording)
                         {
@@ -354,18 +265,6 @@ namespace RecNForget.Windows
                     break;
                 }
             }
-        }
-
-        private void ShowRandomApplicationTip()
-        {
-            var quickTip = new QuickTipDialog(SettingService);
-
-            if (!SettingService.MinimizedToTray)
-            {
-                quickTip.Owner = this;
-            }
-
-            quickTip.Show();
         }
                
         private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
@@ -518,88 +417,6 @@ namespace RecNForget.Windows
             }
         }
 
-        private void RecordingTimer_Tick(object sender, EventArgs e)
-        {
-            RecordingTimeDisplay = TimeSpan.FromMilliseconds(DateTime.Now.Subtract(RecordingStart).TotalMilliseconds).TotalSeconds.ToString(@"0.##");
-            UpdateCurrentFileNameDisplay();
-        }
-
-        private void UpdateCurrentFileNameDisplay(bool reset = false)
-        {
-            CurrentFileNameDisplay = !AudioRecordingService.CurrentlyRecording || reset || hotkeyService == null ?
-                AudioRecordingService.GetTargetPathTemplateString() :
-                string.Format("{0} ({1} s)", AudioRecordingService.CurrentFileName, RecordingTimeDisplay);
-        }
-
-        private async void CheckForUpdates(bool showMessages = false)
-        {
-            try
-            {
-                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: ThisAssembly.AssemblyFileVersion);
-
-                if (newerReleases.Any())
-                {
-                    string changeLog = UpdateChecker.GetAllChangeLogs(newerReleases);
-
-                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        var installUpdateDialog = new ReleaseInstallationDialog(newerReleases.First(), UpdateChecker.GetValidVersionStringMsiAsset(newerReleases.First()), changeLog);
-
-                        if (!SettingService.MinimizedToTray)
-                        {
-                            installUpdateDialog.Owner = Window.GetWindow(this);
-                        }
-
-                        installUpdateDialog.ShowDialog();
-                    });
-                }
-                else
-                {
-                    if (showMessages)
-                    {
-                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            CustomMessageBox tempDialog = new CustomMessageBox(
-                                caption: "RecNForget is already up to date!",
-                                icon: CustomMessageBoxIcon.Information,
-                                buttons: CustomMessageBoxButtons.OK,
-                                messageRows: new List<string>() { "No newer version found" },
-                                controlFocus: CustomMessageBoxFocus.Ok);
-
-                            if (!SettingService.MinimizedToTray)
-                            {
-                                tempDialog.Owner = Window.GetWindow(this);
-                            }
-
-                            tempDialog.ShowDialog();
-                        });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (showMessages)
-                {
-                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        var errorDialog = new CustomMessageBox(
-                            caption: "Error during update",
-                            icon: CustomMessageBoxIcon.Error,
-                            buttons: CustomMessageBoxButtons.OK,
-                            messageRows: new List<string>() { "An error occurred trying to get updates:", ex.InnerException.Message },
-                            controlFocus: CustomMessageBoxFocus.Ok);
-
-                        if (!SettingService.MinimizedToTray)
-                        {
-                            errorDialog.Owner = Window.GetWindow(this);
-                        }
-
-                        errorDialog.ShowDialog();
-                    });
-                }
-            }
-        }
-
         private void OpenSettingsMenu()
         {
             WindowOptionsMenu.IsOpen = true;
@@ -637,8 +454,6 @@ namespace RecNForget.Windows
             }
 
             settingsWindow.ShowDialog();
-
-            UpdateCurrentFileNameDisplay();
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
@@ -655,7 +470,7 @@ namespace RecNForget.Windows
 
         private void CheckUpdates_Click(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => { CheckForUpdates(showMessages: true); });
+            Task.Run(() => { actionService.CheckForUpdates(ownerControl: this, showMessages: true); });
         }
     }
 }

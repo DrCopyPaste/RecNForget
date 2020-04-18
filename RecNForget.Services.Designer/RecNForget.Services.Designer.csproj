@@ -52,6 +52,7 @@
     <Compile Include="DesignerAppSettingService.cs" />
     <Compile Include="DesignerAudioRecordingService.cs" />
     <Compile Include="DesignerAudioPlaybackService.cs" />
+    <Compile Include="DesignerHotkeyService.cs" />
     <Compile Include="DesignerSelectedFileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

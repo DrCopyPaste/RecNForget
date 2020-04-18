@@ -11,7 +11,7 @@ using Octokit;
 using RecNForget.Controls;
 using RecNForget.Controls.Extensions;
 
-namespace RecNForget.Windows
+namespace RecNForget.Controls
 {
     /// <summary>
     /// Interaction logic for DownloadDialog.xaml

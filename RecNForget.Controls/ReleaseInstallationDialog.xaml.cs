@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using Octokit;
 
-namespace RecNForget.Windows
+namespace RecNForget.Controls
 {
     /// <summary>
     /// Interaction logic for ReleaseInstallationDialog.xaml

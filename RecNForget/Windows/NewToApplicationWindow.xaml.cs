@@ -6,6 +6,7 @@ using Ookii.Dialogs.Wpf;
 using RecNForget.Controls.Helper;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
 
 namespace RecNForget.Windows
 {
@@ -19,8 +20,17 @@ namespace RecNForget.Windows
 
         public NewToApplicationWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
         {
-            this.hotkeyService = hotkeyService;
-            SettingService = settingService;
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.hotkeyService = new DesignerHotkeyService();
+                SettingService = new DesignerAppSettingService();
+            }
+            else
+            {
+                this.hotkeyService = hotkeyService;
+                SettingService = settingService;
+            }
+
             this.KeyDown += Window_KeyDown;
 
             InitializeComponent();

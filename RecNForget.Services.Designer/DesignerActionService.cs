@@ -23,6 +23,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void CheckForUpdates(DependencyObject ownerControl = null, bool showMessages = false)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void DeleteSelectedFile(DependencyObject ownerControl)
         {
             throw new System.NotImplementedException();

@@ -8,6 +8,7 @@ using RecNForget.Controls;
 using RecNForget.Controls.Helper;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
 
 namespace RecNForget.Windows
 {
@@ -21,8 +22,16 @@ namespace RecNForget.Windows
 
         public SettingsWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
         {
-            this.hotkeyService = hotkeyService;
-            SettingService = settingService;
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.hotkeyService = new DesignerHotkeyService();
+                SettingService = new DesignerAppSettingService();
+            }
+            else
+            {
+                this.hotkeyService = hotkeyService;
+                SettingService = settingService;
+            }
 
             DataContext = this;
             InitializeComponent();

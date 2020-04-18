@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,8 +9,10 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using Microsoft.VisualBasic.ApplicationServices;
 using RecNForget.Controls;
+using RecNForget.Controls.Services;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
 
 namespace RecNForget.Windows
 {
@@ -20,10 +23,20 @@ namespace RecNForget.Windows
     {
         private ApplicationBase appBase;
         private readonly IAppSettingService appSettingService;
+        private readonly IActionService actionService;
 
         public AboutDialog(IAppSettingService appSettingService)
         {
-            this.appSettingService = appSettingService;
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.appSettingService = new DesignerAppSettingService();
+                this.actionService = new DesignerActionService();
+            }
+            else
+            {
+                this.appSettingService = appSettingService;
+                this.actionService = new ActionService();
+            }
 
             InitializeComponent();
 
@@ -37,56 +50,7 @@ namespace RecNForget.Windows
 
         private void CheckForUpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => { CheckForUpdates(); });
-        }
-
-        private async void CheckForUpdates()
-        {
-            try
-            {
-                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: ThisAssembly.AssemblyFileVersion);
-
-                if (newerReleases.Any())
-                {
-                    string changeLog = UpdateChecker.GetAllChangeLogs(newerReleases);
-
-                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        var installUpdateDialog = new ReleaseInstallationDialog(newerReleases.First(), UpdateChecker.GetValidVersionStringMsiAsset(newerReleases.First()), changeLog);
-                        installUpdateDialog.ShowDialog();
-                    });
-                }
-                else
-                {
-                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        CustomMessageBox tempDialog = new CustomMessageBox(
-                            caption: "RecNForget is already up to date!",
-                            icon: CustomMessageBoxIcon.Information,
-                            buttons: CustomMessageBoxButtons.OK,
-                            messageRows: new List<string>() { "No newer version found" },
-                            controlFocus: CustomMessageBoxFocus.Ok);
-
-                        tempDialog.Owner = Window.GetWindow(this);
-
-                        tempDialog.ShowDialog();
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                {
-                    var errorDialog = new CustomMessageBox(
-                        caption: "Error during update",
-                        icon: CustomMessageBoxIcon.Error,
-                        buttons: CustomMessageBoxButtons.OK,
-                        messageRows: new List<string>() { "An error occurred trying to get updates:", ex.InnerException.Message },
-                        controlFocus: CustomMessageBoxFocus.Ok);
-
-                    errorDialog.ShowDialog();
-                });
-            }
+            Task.Run(() => { actionService.CheckForUpdates(this, true); });
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

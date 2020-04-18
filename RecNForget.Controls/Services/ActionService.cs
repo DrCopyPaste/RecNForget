@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using NAudio.Wave;
 using RecNForget.Controls;
@@ -72,6 +73,75 @@ namespace RecNForget.Controls.Services
                         controlFocus: CustomMessageBoxFocus.Ok);
 
                     errorMessageBox.ShowDialog();
+                }
+            }
+        }
+
+        public async void CheckForUpdates(DependencyObject ownerControl = null, bool showMessages = false)
+        {
+            try
+            {
+                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: ThisAssembly.AssemblyFileVersion);
+
+                if (newerReleases.Any())
+                {
+                    string changeLog = UpdateChecker.GetAllChangeLogs(newerReleases);
+
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        var installUpdateDialog = new ReleaseInstallationDialog(newerReleases.First(), UpdateChecker.GetValidVersionStringMsiAsset(newerReleases.First()), changeLog);
+
+                        if (ownerControl != null)
+                        {
+                            installUpdateDialog.Owner = Window.GetWindow(ownerControl);
+                        }
+
+                        installUpdateDialog.ShowDialog();
+                    });
+                }
+                else
+                {
+                    if (showMessages)
+                    {
+                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            CustomMessageBox tempDialog = new CustomMessageBox(
+                                caption: "RecNForget is already up to date!",
+                                icon: CustomMessageBoxIcon.Information,
+                                buttons: CustomMessageBoxButtons.OK,
+                                messageRows: new List<string>() { "No newer version found" },
+                                controlFocus: CustomMessageBoxFocus.Ok);
+
+                            if (ownerControl != null)
+                            {
+                                tempDialog.Owner = Window.GetWindow(ownerControl);
+                            }
+
+                            tempDialog.ShowDialog();
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (showMessages)
+                {
+                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        var errorDialog = new CustomMessageBox(
+                            caption: "Error during update",
+                            icon: CustomMessageBoxIcon.Error,
+                            buttons: CustomMessageBoxButtons.OK,
+                            messageRows: new List<string>() { "An error occurred trying to get updates:", ex.InnerException.Message },
+                            controlFocus: CustomMessageBoxFocus.Ok);
+
+                        if (!appSettingService.MinimizedToTray)
+                        {
+                            errorDialog.Owner = Window.GetWindow(ownerControl);
+                        }
+
+                        errorDialog.ShowDialog();
+                    });
                 }
             }
         }

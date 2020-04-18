@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
 using RecNForget.Services.Types;
 
 namespace RecNForget.Windows
@@ -20,7 +21,15 @@ namespace RecNForget.Windows
 
         public QuickTipDialog(IAppSettingService settingService)
         {
-            SettingService = settingService;
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                SettingService = new DesignerAppSettingService();
+            }
+            else
+            {
+                SettingService = settingService;
+            }
+
             this.KeyDown += Window_KeyDown;
 
             InitializeComponent();

@@ -11,6 +11,8 @@ namespace RecNForget.Services.Contracts
         // change file name pattern (with dialog)
         void ChangeFileNamePattern();
 
+        void CheckForUpdates(DependencyObject ownerControl = null, bool showMessages = false);
+
         // open explorer for output folder (select file if there is any)
         void OpenOutputFolderInExplorer();
 

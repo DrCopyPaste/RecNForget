@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
+using RecNForget.Controls.Services;
 using RecNForget.IoC;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
@@ -38,8 +40,69 @@ namespace RecNForget
 
             UnityHandler.CreateContainer();
 
+            var appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
+            var hotkeyService = UnityHandler.UnityContainer.Resolve<IHotkeyService>();
+
+            var actionService = new ActionService();
+
+            // ensure AppConfig Values exist
+            bool firstTimeUser = appSettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+            HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);
+
             // ToDo MainWindow constructor code should not be necessary to start hotkey and recording services...
-            MainWindow mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();           
+            MainWindow mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
+        }
+
+        private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IHotkeyService hotkeyService, bool firstTimeUser)
+        {
+            if (appSettingService.CheckForUpdateOnStart)
+            {
+                Task.Run(() => { actionService.CheckForUpdates(ownerControl: null, showMessages: true); });
+            }
+
+            var currentFileVersion = new Version(ThisAssembly.AssemblyFileVersion);
+            Version lastInstalledVersion = appSettingService.LastInstalledVersion;
+
+            appSettingService.LastInstalledVersion = currentFileVersion;
+
+            if (firstTimeUser)
+            {
+                var dia = new NewToApplicationWindow(hotkeyService, appSettingService);
+
+                if (!appSettingService.MinimizedToTray)
+                {
+                    // dia.Owner = this;
+                }
+
+                dia.Show();
+            }
+            else if (currentFileVersion.CompareTo(lastInstalledVersion) > 0)
+            {
+                var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentFileVersion, appSettingService);
+
+                if (!appSettingService.MinimizedToTray)
+                {
+                    // newToVersionDialog.Owner = this;
+                }
+
+                newToVersionDialog.Show();
+            }
+            else if (appSettingService.ShowTipsAtApplicationStart)
+            {
+                ShowRandomApplicationTip(appSettingService);
+            }
+        }
+
+        private void ShowRandomApplicationTip(IAppSettingService appSettingService)
+        {
+            var quickTip = new QuickTipDialog(appSettingService);
+
+            if (!appSettingService.MinimizedToTray)
+            {
+                // quickTip.Owner = this;
+            }
+
+            quickTip.Show();
         }
     }
 }

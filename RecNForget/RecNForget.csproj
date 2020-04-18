@@ -66,9 +66,6 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Octokit, Version=0.40.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Octokit.0.40.0\lib\net46\Octokit.dll</HintPath>
-    </Reference>
     <Reference Include="Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=66aa232afad40158, processorArchitecture=MSIL">
       <HintPath>..\packages\Ookii.Dialogs.Wpf.1.1.0\lib\net45\Ookii.Dialogs.Wpf.dll</HintPath>
     </Reference>
@@ -121,9 +118,6 @@
     <Compile Include="Windows\HelpWindow.xaml.cs">
       <DependentUpon>HelpWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DownloadDialog.xaml.cs">
-      <DependentUpon>DownloadDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Help\Features\Customize_Show_Tips_On_Start.cs" />
     <Compile Include="Help\Features\Customize_Output_File_Pattern.cs" />
     <Compile Include="Help\Features\Customize_Auto_Replay_After_Recording.cs" />
@@ -162,9 +156,6 @@
     <Compile Include="Help\Features\Click_Button_To_Play_Pause_Selected_File.cs" />
     <Compile Include="Help\Features\Press_Hotkey_To_Record.cs" />
     <Compile Include="Help\General\QuickStart.cs" />
-    <Compile Include="Windows\ReleaseInstallationDialog.xaml.cs">
-      <DependentUpon>ReleaseInstallationDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\AboutDialog.xaml.cs">
       <DependentUpon>AboutDialog.xaml</DependentUpon>
     </Compile>
@@ -172,7 +163,6 @@
     <Compile Include="Services\Types\HelpFeatureClass.cs" />
     <Compile Include="Services\Types\HelpFeatureDetailLine.cs" />
     <Compile Include="Services\Types\HelpFeatureVersion.cs" />
-    <Compile Include="Services\UpdateChecker.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
     <Page Include="Windows\QuickTipDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -187,14 +177,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\HelpWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\DownloadDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\ReleaseInstallationDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -309,6 +291,10 @@
     <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj">
       <Project>{295d9059-a3ad-4273-9779-64c181abe364}</Project>
       <Name>RecNForget.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecNForget.Services.Designer\RecNForget.Services.Designer.csproj">
+      <Project>{28409155-01CA-4F0B-8A8D-54E8E76EA7FD}</Project>
+      <Name>RecNForget.Services.Designer</Name>
     </ProjectReference>
     <ProjectReference Include="..\RecNForget.Services\RecNForget.Services.csproj">
       <Project>{9b5541c8-fb08-496c-b142-f7f424247d7c}</Project>

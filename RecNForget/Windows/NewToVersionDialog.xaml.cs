@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using RecNForget.Controls.Extensions;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
 using RecNForget.Services.Types;
 
 namespace RecNForget.Windows
@@ -25,7 +26,15 @@ namespace RecNForget.Windows
 
         public NewToVersionDialog(Version lastInstalledVersion, Version currentVersion, IAppSettingService settingService)
         {
-            this.SettingService = settingService;
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                SettingService = new DesignerAppSettingService();
+            }
+            else
+            {
+                SettingService = settingService;
+            }
+
             this.KeyDown += Window_KeyDown;
 
             InitializeComponent();
