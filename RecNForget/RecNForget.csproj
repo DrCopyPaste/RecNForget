@@ -99,13 +99,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Help\Features\Customize_SelectedFileControlVisibility.cs" />
-    <Compile Include="Help\Features\Customize_OutputPathControlVisibility.cs" />
-    <Compile Include="Help\Features\FunFact_Wirsingkopf.cs" />
-    <Compile Include="Help\Features\Info_MajorUIRework04.cs" />
-    <Compile Include="Help\Features\Fix_FilePrefixDidntAffectDisplayedFileNames.cs" />
-    <Compile Include="Help\Features\Fix_ClickingOpenfolderCrashes.cs" />
-    <Compile Include="Help\Features\Fix_UninstallDidNotDeleteAppData.cs" />
     <Compile Include="Windows\QuickTipDialog.xaml.cs">
       <DependentUpon>QuickTipDialog.xaml</DependentUpon>
     </Compile>
@@ -115,54 +108,6 @@
     <Compile Include="Windows\NewToApplicationWindow.xaml.cs">
       <DependentUpon>NewToApplicationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\HelpWindow.xaml.cs">
-      <DependentUpon>HelpWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Help\Features\Customize_Show_Tips_On_Start.cs" />
-    <Compile Include="Help\Features\Customize_Output_File_Pattern.cs" />
-    <Compile Include="Help\Features\Customize_Auto_Replay_After_Recording.cs" />
-    <Compile Include="Help\Features\Customize_Audio_Signal_On_Record_Start_Stop.cs" />
-    <Compile Include="Help\Features\Customize_Audio_Signal_On_Replay_Start_Stop.cs" />
-    <Compile Include="Help\Features\Click_Tray_Icon_To_Restore_Main_Window_From_Tray.cs" />
-    <Compile Include="Help\Features\Customize_Toast_Messages_For_Application_Actions.cs" />
-    <Compile Include="Help\Features\Customize_Run_In_Background_Minimized_To_Tray.cs" />
-    <Compile Include="Help\Features\Customize_Always_On_Top.cs" />
-    <Compile Include="Help\Features\Customize_Auto_Start_With_Windows.cs" />
-    <Compile Include="Help\Features\Click_Toast_Message_To_Select_Recorded_File_In_Explorer.cs" />
-    <Compile Include="Help\Features\Customize_Check_For_Updates.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Select_Next_File_In_Output_Folder.cs" />
-    <Compile Include="Help\Features\Click_Button_Select_Previous_File_In_Output_Folder.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Rename_Selected_File.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Delete_Selected_File.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Customize_Output_Folder.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Customize_File_Name_Pattern.cs" />
-    <Compile Include="Help\Features\Customize_Auto_Select_Last_Recorded_File.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Stop_Playing_Selected_File.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_Select_Selected_File_In_Explorer.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_Delete_Selected_File.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_Rename_Selected_File.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_Stop_Playing_Selected_File.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_PlayPause_Selected_File.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_Select_Previous_File_In_Output_Folder.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_Select_Next_File_In_Output_Folder.cs" />
-    <Compile Include="Help\Features\Task_Bar_Icon_Color_Changes.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Open_Output_Folder_In_Explorer.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Open_Selected_File_In_Explorer.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_StopRecording_And_Save.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Record.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Stop_Recording_And_Save.cs" />
-    <Compile Include="Help\Features\Customize_Toggle_Record_Hotkey.cs" />
-    <Compile Include="Help\Features\Customize_Output_Folder.cs" />
-    <Compile Include="Help\Features\Click_Button_To_Play_Pause_Selected_File.cs" />
-    <Compile Include="Help\Features\Press_Hotkey_To_Record.cs" />
-    <Compile Include="Help\General\QuickStart.cs" />
-    <Compile Include="Windows\AboutDialog.xaml.cs">
-      <DependentUpon>AboutDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Services\Types\HelpFeature.cs" />
-    <Compile Include="Services\Types\HelpFeatureClass.cs" />
-    <Compile Include="Services\Types\HelpFeatureDetailLine.cs" />
-    <Compile Include="Services\Types\HelpFeatureVersion.cs" />
     <Compile Include="SingleInstanceApplicationLock.cs" />
     <Page Include="Windows\QuickTipDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -176,10 +121,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\HelpWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -188,22 +129,7 @@
       <DependentUpon>CloseOrBackgroundDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="RestoreMainWindowFromTrayCommand.cs" />
-    <Compile Include="Windows\SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Windows\AboutDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Windows\CloseOrBackgroundDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\HotkeyPromptWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -214,9 +140,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Windows\HotkeyPromptWindow.xaml.cs">
-      <DependentUpon>HotkeyPromptWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -253,7 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />
-    <Resource Include="Images\logo_big.png" />
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -284,6 +206,10 @@
       <Project>{19d9a9c2-3471-4512-ac5f-de1277374a77}</Project>
       <Name>RecNForget.Controls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj">
+      <Project>{432066BE-8089-4DBC-8D67-755351A57003}</Project>
+      <Name>RecNForget.Help</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj">
       <Project>{5655259b-8432-46cd-a7cd-f24a15f97a87}</Project>
       <Name>RecNForget.IoC</Name>
@@ -296,12 +222,18 @@
       <Project>{28409155-01CA-4F0B-8A8D-54E8E76EA7FD}</Project>
       <Name>RecNForget.Services.Designer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RecNForget.Services.Helpers\RecNForget.Services.Helpers.csproj">
+      <Project>{90691580-47FE-44E5-9659-47A23D5CEAC6}</Project>
+      <Name>RecNForget.Services.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecNForget.Services\RecNForget.Services.csproj">
       <Project>{9b5541c8-fb08-496c-b142-f7f424247d7c}</Project>
       <Name>RecNForget.Services</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Help\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

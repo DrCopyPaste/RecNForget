@@ -47,17 +47,18 @@ namespace RecNForget
 
             // ensure AppConfig Values exist
             bool firstTimeUser = appSettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
-            HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);
 
-            // ToDo MainWindow constructor code should not be necessary to start hotkey and recording services...
+            // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
             MainWindow mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
+
+            HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);
         }
 
         private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IHotkeyService hotkeyService, bool firstTimeUser)
         {
             if (appSettingService.CheckForUpdateOnStart)
             {
-                Task.Run(() => { actionService.CheckForUpdates(ownerControl: null, showMessages: true); });
+                Task.Run(() => { actionService.CheckForUpdates(ownerControl: null, showMessages: false); });
             }
 
             var currentFileVersion = new Version(ThisAssembly.AssemblyFileVersion);

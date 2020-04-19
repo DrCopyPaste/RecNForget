@@ -3,10 +3,12 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using Ookii.Dialogs.Wpf;
+using RecNForget.Controls;
 using RecNForget.Controls.Helper;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
+using RecNForget.Services.Helpers;
 
 namespace RecNForget.Windows
 {

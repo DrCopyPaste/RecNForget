@@ -39,6 +39,8 @@ namespace RecNForget.Services.Contracts
 
         bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null);
 
+        void ShowApplicationMenu();
+
         void TogglePlayPauseAudio();
     }
 }

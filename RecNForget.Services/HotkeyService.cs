@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FMUtils.KeyboardHook;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Helpers;
 using RecNForget.Services.Types;
 
 namespace RecNForget.Services

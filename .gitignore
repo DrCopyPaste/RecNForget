@@ -58,3 +58,7 @@
 /RecNForget.Services.Contracts/obj/Release
 /RecNForget.Services.Designer/obj
 /RecNForget.Services.Designer/bin/Debug
+/RecNForget.Services.Helpers/bin/Debug
+/RecNForget.Services.Helpers/obj/Debug
+/RecNForget.Help/obj/Debug
+/RecNForget.Help/bin/Debug

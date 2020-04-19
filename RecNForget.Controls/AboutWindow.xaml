@@ -1,0 +1,94 @@
+﻿<Window x:Class="RecNForget.Controls.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecNForget.Controls"
+        mc:Ignorable="d"
+        Topmost="True"
+        Style="{DynamicResource DefaultWindowStyle}"        
+        WindowStartupLocation="CenterOwner"
+        Title="RecNForget - About">
+    <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
+	everything that is not defined by style must not be in the opening tags starting line
+	
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+            ...custom style definitions...
+			...
+            Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
+			Content/Text/Value="optional">
+        </NodeName>
+        -->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Border Style="{StaticResource DefaultWindowBorderStyle}">
+        <Grid Style="{StaticResource DefaultGridStyle}"
+            MouseDown="Window_MouseDown">
+            <Grid.RowDefinitions>
+                <!-- row 0 for title bar-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 1 for spacing?-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 2 for Application Title-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 3 for Version Info-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 4 for copy right-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 5 for claim-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 6 for spacing-->
+                <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
+                <!-- row 7 for spacing?-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 8 for credits box-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 9 for spacing-->
+                <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
+                <!-- row 10 for bottom buttons row-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource TitleBarLayout}" />
+
+            <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource About_Logo_Style}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource ApplicationName_TextBox_Style}"
+                Text="RecNForget"
+                Name="AppNameAndVersion" />
+            <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource VersionName_TextBox_Style}"
+                Name="VersionLabel"
+                Text="Version X.Y.Z.A" />
+            <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}">
+                <Run>
+                    (C) 2019-2020 by 
+                </Run>
+                <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">DrCopyPaste</Hyperlink>
+            </TextBlock>
+            <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}"
+                Text="RecNForget is a free application that helps you sample audio faster."  />
+
+            <ScrollViewer Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource Default_ScrollViewer_Style}">
+                <local:CopyrightControl />
+            </ScrollViewer>
+            <local:ImageButton Grid.Row="10" Grid.Column="0" Style="{StaticResource DownloadButton}"
+                HorizontalAlignment="Left" 
+                Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>
+            <local:ImageButton Grid.Row="10" Grid.Column="3" Style="{StaticResource AcceptButton}"
+                HorizontalAlignment="Right"
+                Click="OkButton_Click"/>
+        </Grid>
+    </Border>
+</Window>

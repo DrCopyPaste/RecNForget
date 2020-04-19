@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using RecNForget.Help;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.Services.Types;
@@ -86,7 +87,7 @@ namespace RecNForget.Windows
 
         private void GenerateRandomTip()
         {
-            var allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature || f.FeatureClass == HelpFeatureClass.FunFact).ToList();
+            var allFeatures = HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature || f.FeatureClass == HelpFeatureClass.FunFact).ToList();
 
             int randomNumber = (new Random()).Next(0, allFeatures.Count - 1);
             var randomFeature = allFeatures[randomNumber];

@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -16,6 +17,7 @@ using RecNForget.Controls;
 using RecNForget.Controls.Services;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Helpers;
 
 namespace RecNForget.Windows
 {
@@ -42,6 +44,7 @@ namespace RecNForget.Windows
             InitializeComponent();
 
             SettingService = appSettingService;
+            SettingService.PropertyChanged += SettingService_PropertyChanged;
 
             this.actionService = new ActionService();
             SelectedFileService = selectedFileService;
@@ -53,20 +56,11 @@ namespace RecNForget.Windows
             AudioRecordingService = audioRecordingService;
             AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
 
-            this.hotkeyService = hotkeyService;      
-            
+
+            this.hotkeyService = hotkeyService;
+
             this.KeyDown += Window_KeyDown;
-
-            // Workaround: binding to main window properties when session started "minimized to tray" does not work
-            AlwaysOnTopMenuEntry.IsChecked = SettingService.WindowAlwaysOnTop;
-            MinimizedToTrayMenuEntry.IsChecked = SettingService.MinimizedToTray;
-            OutputPathControlVisibilityMenuEntry.IsChecked = SettingService.OutputPathControlVisible;
-            SelectedFileControlVisibilityMenuEntry.IsChecked = SettingService.SelectedFileControlVisible;
-
-            OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
-            SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
-
-            this.Topmost = SettingService.WindowAlwaysOnTop;
+            this.MouseRightButtonUp += MainWindow_MouseRightButtonUp;
 
             trayIcon = new System.Windows.Forms.NotifyIcon
             {
@@ -76,6 +70,13 @@ namespace RecNForget.Windows
 
             trayIcon.Click += new EventHandler(TrayIcon_Click);
             trayIcon.DoubleClick += new EventHandler(TrayIconMenu_DoubleClick);
+
+
+            // initialize control visibility (is being toggled via SettingService_PropertyChanged - binding with bool to visibility converter did not update)
+            OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+            SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+
+            this.Topmost = SettingService.WindowAlwaysOnTop;            
 
             if (SettingService.MinimizedToTray)
             {
@@ -89,6 +90,7 @@ namespace RecNForget.Windows
 
         ~MainWindow()
         {
+            SettingService.PropertyChanged -= SettingService_PropertyChanged;
             AudioPlaybackService.PropertyChanged -= AudioPlaybackService_PropertyChanged;
             AudioRecordingService.PropertyChanged -= AudioRecordingService_PropertyChanged;
         }
@@ -266,12 +268,48 @@ namespace RecNForget.Windows
                 }
             }
         }
-               
+
+        private void SettingService_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(SettingService.MinimizedToTray):
+                {
+                    if (SettingService.MinimizedToTray)
+                    {
+                        SwitchToBackgroundMode();
+                    }
+                    else
+                    {
+                        SwitchToForegroundMode();
+                    }
+
+                    break;
+                }
+
+                case nameof(SettingService.WindowAlwaysOnTop):
+                {
+                    this.Topmost = SettingService.WindowAlwaysOnTop;
+                    break;
+                }
+
+                case nameof(SettingService.OutputPathControlVisible):
+                {
+                    OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                    break;
+                }
+
+                case nameof(SettingService.SelectedFileControlVisible):
+                {
+                    SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                    break;
+                }
+            }
+        }
+
         private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenSettingsMenu();
-
-            e.Handled = true;
+            actionService.ShowApplicationMenu();
         }
 
         private void TaskBarIcon_TrayBalloonTipClicked(object sender, EventArgs e)
@@ -294,38 +332,6 @@ namespace RecNForget.Windows
         private void MainWindow_MouseLeave(object sender, EventArgs e)
         {
             TitleBar.Visibility = Visibility.Hidden;
-        }
-
-        private void ToggleOutputPathControlVisibility(object sender, EventArgs e)
-        {
-            SettingService.OutputPathControlVisible = !SettingService.OutputPathControlVisible;
-            OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void ToggleSelectedFileControlVisibility(object sender, EventArgs e)
-        {
-            SettingService.SelectedFileControlVisible = !SettingService.SelectedFileControlVisible;
-            SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void ToggleAlwaysOnTop(object sender, EventArgs e)
-        {
-            SettingService.WindowAlwaysOnTop = !SettingService.WindowAlwaysOnTop;
-            this.Topmost = SettingService.WindowAlwaysOnTop;
-        }
-
-        private void ToggleMinimizedToTray(object sender, EventArgs e)
-        {
-            SettingService.MinimizedToTray = !SettingService.MinimizedToTray;
-
-            if (SettingService.MinimizedToTray)
-            {
-                SwitchToBackgroundMode();
-            }
-            else
-            {
-                SwitchToForegroundMode();
-            }
         }
 
         private void SwitchToBackgroundMode()
@@ -364,11 +370,16 @@ namespace RecNForget.Windows
             }
         }
 
+        private void MainWindow_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            actionService.ShowApplicationMenu();
+        }
+
         private void TrayIcon_Click(object sender, EventArgs e)
         {
             if ((e as System.Windows.Forms.MouseEventArgs).Button == MouseButtons.Right)
             {
-                OpenSettingsMenu();
+                actionService.ShowApplicationMenu();
             }
         }
 
@@ -417,23 +428,6 @@ namespace RecNForget.Windows
             }
         }
 
-        private void OpenSettingsMenu()
-        {
-            WindowOptionsMenu.IsOpen = true;
-        }
-
-        private void Help_Click(object sender, RoutedEventArgs e)
-        {
-            var helpmenu = new HelpWindow();
-
-            if (!SettingService.MinimizedToTray)
-            {
-                helpmenu.Owner = this;
-            }
-
-            helpmenu.Show();
-        }
-
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -442,35 +436,6 @@ namespace RecNForget.Windows
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
-        }
-
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            var settingsWindow = new SettingsWindow(hotkeyService, SettingService);
-
-            if (!SettingService.MinimizedToTray)
-            {
-                settingsWindow.Owner = this;
-            }
-
-            settingsWindow.ShowDialog();
-        }
-
-        private void AboutButton_Click(object sender, RoutedEventArgs e)
-        {
-            var aboutDialog = new AboutDialog(SettingService);
-
-            if (!SettingService.MinimizedToTray)
-            {
-                aboutDialog.Owner = this;
-            }
-
-            aboutDialog.ShowDialog();
-        }
-
-        private void CheckUpdates_Click(object sender, RoutedEventArgs e)
-        {
-            Task.Run(() => { actionService.CheckForUpdates(ownerControl: this, showMessages: true); });
         }
     }
 }

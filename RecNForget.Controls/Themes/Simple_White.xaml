@@ -82,7 +82,7 @@
     <Style x:Key="About_Logo_Style" TargetType="Image">
         <Setter Property="Width" Value="100" />
         <Setter Property="Margin" Value="1,0,15,0" />
-        <Setter Property="Source" Value="..\..\Images\logo_big.png" />
+        <Setter Property="Source" Value="..\Images\logo_big.png" />
     </Style>
 
     <Style x:Key="FeatureClass_Image_Style" TargetType="Image">
@@ -106,7 +106,7 @@
     </Style>
 
     <Style x:Key="CustomMessageBoxDefaultIconStyle" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="..\..\Images\logo_big.png" />
+        <Setter Property="Source" Value="..\Images\logo_big.png" />
         <Setter Property="Width" Value="80" />
         <Setter Property="Margin" Value="4,4,4,4" />
     </Style>

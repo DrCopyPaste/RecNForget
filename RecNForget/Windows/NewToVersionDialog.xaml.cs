@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using RecNForget.Controls.Extensions;
+using RecNForget.Help;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.Services.Types;

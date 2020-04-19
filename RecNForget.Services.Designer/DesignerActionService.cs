@@ -53,6 +53,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void ShowApplicationMenu()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void StopPlayingSelectedFile()
         {
             throw new System.NotImplementedException();

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{432066BE-8089-4DBC-8D67-755351A57003}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RecNForget.Help</RootNamespace>
+    <AssemblyName>RecNForget.Help</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\Click_Button_Select_Previous_File_In_Output_Folder.cs" />
+    <Compile Include="Features\Click_Button_To_Customize_File_Name_Pattern.cs" />
+    <Compile Include="Features\Click_Button_To_Customize_Output_Folder.cs" />
+    <Compile Include="Features\Click_Button_To_Delete_Selected_File.cs" />
+    <Compile Include="Features\Click_Button_To_Open_Output_Folder_In_Explorer.cs" />
+    <Compile Include="Features\Click_Button_To_Open_Selected_File_In_Explorer.cs" />
+    <Compile Include="Features\Click_Button_To_Play_Pause_Selected_File.cs" />
+    <Compile Include="Features\Click_Button_To_Record.cs" />
+    <Compile Include="Features\Click_Button_To_Rename_Selected_File.cs" />
+    <Compile Include="Features\Click_Button_To_Select_Next_File_In_Output_Folder.cs" />
+    <Compile Include="Features\Click_Button_To_Stop_Playing_Selected_File.cs" />
+    <Compile Include="Features\Click_Button_To_Stop_Recording_And_Save.cs" />
+    <Compile Include="Features\Click_Toast_Message_To_Select_Recorded_File_In_Explorer.cs" />
+    <Compile Include="Features\Click_Tray_Icon_To_Restore_Main_Window_From_Tray.cs" />
+    <Compile Include="Features\Customize_Always_On_Top.cs" />
+    <Compile Include="Features\Customize_Audio_Signal_On_Record_Start_Stop.cs" />
+    <Compile Include="Features\Customize_Audio_Signal_On_Replay_Start_Stop.cs" />
+    <Compile Include="Features\Customize_Auto_Replay_After_Recording.cs" />
+    <Compile Include="Features\Customize_Auto_Select_Last_Recorded_File.cs" />
+    <Compile Include="Features\Customize_Auto_Start_With_Windows.cs" />
+    <Compile Include="Features\Customize_Check_For_Updates.cs" />
+    <Compile Include="Features\Customize_OutputPathControlVisibility.cs" />
+    <Compile Include="Features\Customize_Output_File_Pattern.cs" />
+    <Compile Include="Features\Customize_Output_Folder.cs" />
+    <Compile Include="Features\Customize_Run_In_Background_Minimized_To_Tray.cs" />
+    <Compile Include="Features\Customize_SelectedFileControlVisibility.cs" />
+    <Compile Include="Features\Customize_Show_Tips_On_Start.cs" />
+    <Compile Include="Features\Customize_Toast_Messages_For_Application_Actions.cs" />
+    <Compile Include="Features\Customize_Toggle_Record_Hotkey.cs" />
+    <Compile Include="Features\Fix_ClickingOpenfolderCrashes.cs" />
+    <Compile Include="Features\Fix_FilePrefixDidntAffectDisplayedFileNames.cs" />
+    <Compile Include="Features\Fix_UninstallDidNotDeleteAppData.cs" />
+    <Compile Include="Features\FunFact_Wirsingkopf.cs" />
+    <Compile Include="Features\Info_MajorUIRework04.cs" />
+    <Compile Include="Features\Press_Hotkey_To_Delete_Selected_File.cs" />
+    <Compile Include="Features\Press_Hotkey_To_PlayPause_Selected_File.cs" />
+    <Compile Include="Features\Press_Hotkey_To_Record.cs" />
+    <Compile Include="Features\Press_Hotkey_To_Rename_Selected_File.cs" />
+    <Compile Include="Features\Press_Hotkey_To_Select_Next_File_In_Output_Folder.cs" />
+    <Compile Include="Features\Press_Hotkey_To_Select_Previous_File_In_Output_Folder.cs" />
+    <Compile Include="Features\Press_Hotkey_To_Select_Selected_File_In_Explorer.cs" />
+    <Compile Include="Features\Press_Hotkey_To_StopRecording_And_Save.cs" />
+    <Compile Include="Features\Press_Hotkey_To_Stop_Playing_Selected_File.cs" />
+    <Compile Include="Features\Task_Bar_Icon_Color_Changes.cs" />
+    <Compile Include="General\QuickStart.cs" />
+    <Compile Include="HelpFeature.cs" />
+    <Compile Include="HelpFeatureClass.cs" />
+    <Compile Include="HelpFeatureDetailLine.cs" />
+    <Compile Include="HelpFeatureVersion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets" Condition="Exists('..\packages\StyleCop.MSBuild.6.1.0\build\StyleCop.MSBuild.targets')" />
+</Project>

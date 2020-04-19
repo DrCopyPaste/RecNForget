@@ -34,6 +34,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.Controls", "RecN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.Services.Designer", "RecNForget.Services.Designer\RecNForget.Services.Designer.csproj", "{28409155-01CA-4F0B-8A8D-54E8E76EA7FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.Services.Helpers", "RecNForget.Services.Helpers\RecNForget.Services.Helpers.csproj", "{90691580-47FE-44E5-9659-47A23D5CEAC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.Help", "RecNForget.Help\RecNForget.Help.csproj", "{432066BE-8089-4DBC-8D67-755351A57003}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +124,22 @@ Global
 		{28409155-01CA-4F0B-8A8D-54E8E76EA7FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28409155-01CA-4F0B-8A8D-54E8E76EA7FD}.Release|x86.ActiveCfg = Release|Any CPU
 		{28409155-01CA-4F0B-8A8D-54E8E76EA7FD}.Release|x86.Build.0 = Release|Any CPU
+		{90691580-47FE-44E5-9659-47A23D5CEAC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90691580-47FE-44E5-9659-47A23D5CEAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90691580-47FE-44E5-9659-47A23D5CEAC6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{90691580-47FE-44E5-9659-47A23D5CEAC6}.Debug|x86.Build.0 = Debug|Any CPU
+		{90691580-47FE-44E5-9659-47A23D5CEAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90691580-47FE-44E5-9659-47A23D5CEAC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90691580-47FE-44E5-9659-47A23D5CEAC6}.Release|x86.ActiveCfg = Release|Any CPU
+		{90691580-47FE-44E5-9659-47A23D5CEAC6}.Release|x86.Build.0 = Release|Any CPU
+		{432066BE-8089-4DBC-8D67-755351A57003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{432066BE-8089-4DBC-8D67-755351A57003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{432066BE-8089-4DBC-8D67-755351A57003}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{432066BE-8089-4DBC-8D67-755351A57003}.Debug|x86.Build.0 = Debug|Any CPU
+		{432066BE-8089-4DBC-8D67-755351A57003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{432066BE-8089-4DBC-8D67-755351A57003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{432066BE-8089-4DBC-8D67-755351A57003}.Release|x86.ActiveCfg = Release|Any CPU
+		{432066BE-8089-4DBC-8D67-755351A57003}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

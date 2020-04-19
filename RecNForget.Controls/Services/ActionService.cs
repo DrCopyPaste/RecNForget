@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using NAudio.Wave;
 using RecNForget.Controls;
@@ -20,6 +21,7 @@ namespace RecNForget.Controls.Services
         private readonly IAudioPlaybackService audioPlaybackService = null;
         private readonly IAudioRecordingService audioRecordingService = null;
         private readonly IAppSettingService appSettingService = null;
+        private readonly IHotkeyService hotkeyService = null;
 
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
         public ActionService()
@@ -28,6 +30,7 @@ namespace RecNForget.Controls.Services
             this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
             this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
             this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
+            this.hotkeyService = UnityHandler.UnityContainer.Resolve<IHotkeyService>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -274,6 +277,180 @@ namespace RecNForget.Controls.Services
             }
 
             return true;
+        }
+
+        public void ShowApplicationMenu()
+        {
+            var menu = new System.Windows.Controls.ContextMenu();
+            menu.Style = (Style)menu.FindResource("ContextMenu_Default_Style");
+
+            var item = new System.Windows.Controls.MenuItem()
+            {
+                Header = "Cancel",
+                Style = (Style)menu.FindResource("ContextMenu_Cancel_Style")
+            };
+            menu.Items.Add(item);
+
+            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                Header = "Open settings",
+                Style = (Style)menu.FindResource("ContextMenu_Settings_Style"),
+            };
+            item.Click += SettingsButton_Click;
+            menu.Items.Add(item);
+
+            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                IsCheckable = true,
+                IsChecked = appSettingService.OutputPathControlVisible,
+                Header = "Output Path Control",
+                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+            };
+            item.Click += ToggleOutputPathControlVisibility;
+            menu.Items.Add(item);
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                IsCheckable = true,
+                IsChecked = appSettingService.SelectedFileControlVisible,
+                Header = "Selected File Control",
+                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+            };
+            item.Click += ToggleSelectedFileControlVisibility;
+            menu.Items.Add(item);
+
+            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                IsCheckable = true,
+                IsChecked = appSettingService.WindowAlwaysOnTop,
+                Header = "always on top",
+                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+            };
+            item.Click += ToggleAlwaysOnTop;
+            menu.Items.Add(item);
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                IsCheckable = true,
+                IsChecked = appSettingService.MinimizedToTray,
+                Header = "run in background",
+                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+            };
+            item.Click += ToggleMinimizedToTray;
+            menu.Items.Add(item);
+
+            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                Header = "About RecNForget",
+                Style = (Style)menu.FindResource("ContextMenu_About_Style"),
+            };
+            item.Click += AboutButton_Click;
+            menu.Items.Add(item);
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                Header = "Help",
+                Style = (Style)menu.FindResource("ContextMenu_Help_Style"),
+            };
+            item.Click += Help_Click;
+            menu.Items.Add(item);
+
+            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                Header = "Check for updates",
+                Style = (Style)menu.FindResource("ContextMenu_CheckUpdates_Style"),
+            };
+            item.Click += CheckUpdates_Click;
+            menu.Items.Add(item);
+
+            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                Header = "Close RecNForget",
+                Style = (Style)menu.FindResource("ContextMenu_ShutDown_Style"),
+            };
+            item.Click += Exit_Click;
+            menu.Items.Add(item);
+
+            menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
+            menu.IsOpen = true;
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void CheckUpdates_Click(object sender, RoutedEventArgs e)
+        {
+            Task.Run(() => { CheckForUpdates(ownerControl: null, showMessages: true); });
+        }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            var helpmenu = new HelpWindow();
+
+            if (!appSettingService.MinimizedToTray)
+            {
+                //helpmenu.Owner = this;
+            }
+
+            helpmenu.Show();
+        }
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            var aboutDialog = new AboutWindow(appSettingService);
+
+            if (!appSettingService.MinimizedToTray)
+            {
+                // aboutDialog.Owner = this;
+            }
+
+            aboutDialog.ShowDialog();
+        }
+
+        private void ToggleMinimizedToTray(object sender, RoutedEventArgs e)
+        {
+            appSettingService.MinimizedToTray = !appSettingService.MinimizedToTray;
+        }
+
+        private void ToggleAlwaysOnTop(object sender, RoutedEventArgs e)
+        {
+            appSettingService.WindowAlwaysOnTop = !appSettingService.WindowAlwaysOnTop;
+        }
+
+        private void ToggleSelectedFileControlVisibility(object sender, RoutedEventArgs e)
+        {
+            appSettingService.SelectedFileControlVisible = !appSettingService.SelectedFileControlVisible;
+        }
+
+        private void ToggleOutputPathControlVisibility(object sender, RoutedEventArgs e)
+        {
+            appSettingService.OutputPathControlVisible = !appSettingService.OutputPathControlVisible;
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            var settingsWindow = new SettingsWindow(hotkeyService, appSettingService);
+
+            if (!appSettingService.MinimizedToTray)
+            {
+                //settingsWindow.Owner = this;
+            }
+
+            settingsWindow.ShowDialog();
         }
 
         public void TogglePlayPauseAudio()

@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FMUtils.KeyboardHook, Version=1.0.140.2145, Culture=neutral, PublicKeyToken=1acd76c568cde84e, processorArchitecture=MSIL">
+      <HintPath>..\packages\FMUtils.KeyboardHook.1.0.140.2145\lib\net40-Client\FMUtils.KeyboardHook.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
@@ -72,10 +75,19 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DownloadDialog.xaml.cs">
       <DependentUpon>DownloadDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper\HotkeyRenderer.cs" />
+    <Compile Include="HelpWindow.xaml.cs">
+      <DependentUpon>HelpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HotkeyPromptWindow.xaml.cs">
+      <DependentUpon>HotkeyPromptWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RecordingAndPlaybackControl.xaml.cs">
       <DependentUpon>RecordingAndPlaybackControl.xaml</DependentUpon>
     </Compile>
@@ -95,8 +107,15 @@
     <Compile Include="CustomMessageBox\CustomMessageBoxPromptValidation.cs" />
     <Compile Include="ImageButton.cs" />
     <Compile Include="Services\UpdateChecker.cs" />
+    <Compile Include="SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AboutWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CopyrightControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,6 +125,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="DownloadDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HelpWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HotkeyPromptWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -122,6 +149,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SelectedFileControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -170,6 +201,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj">
+      <Project>{432066be-8089-4dbc-8d67-755351a57003}</Project>
+      <Name>RecNForget.Help</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj">
       <Project>{5655259B-8432-46CD-A7CD-F24A15F97A87}</Project>
       <Name>RecNForget.IoC</Name>
@@ -181,6 +216,10 @@
     <ProjectReference Include="..\RecNForget.Services.Designer\RecNForget.Services.Designer.csproj">
       <Project>{28409155-01ca-4f0b-8a8d-54e8e76ea7fd}</Project>
       <Name>RecNForget.Services.Designer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RecNForget.Services.Helpers\RecNForget.Services.Helpers.csproj">
+      <Project>{90691580-47FE-44E5-9659-47A23D5CEAC6}</Project>
+      <Name>RecNForget.Services.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +344,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\ButtonImages\windowSettings_icon248857.black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo_big.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\packages\Nerdbank.GitVersioning.3.1.74\build\Nerdbank.GitVersioning.targets')" />

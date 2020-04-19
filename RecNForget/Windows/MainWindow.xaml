@@ -17,54 +17,6 @@
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    
-    <Window.ContextMenu>
-        <ContextMenu Style="{StaticResource ContextMenu_Default_Style}"
-            Name="WindowOptionsMenu">
-            <MenuItem Style="{StaticResource ContextMenu_Cancel_Style}"
-                Header="Cancel" />
-            <Separator Style="{StaticResource MenuSeparator_Style}" />
-            <MenuItem Style="{StaticResource ContextMenu_Settings_Style}"
-                Header="Open settings" Click="SettingsButton_Click" />
-            <Separator Style="{StaticResource MenuSeparator_Style}" />
-
-            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
-                IsCheckable="true"
-                Header="Output Path Control" Click="ToggleOutputPathControlVisibility"
-                Name="OutputPathControlVisibilityMenuEntry" />
-
-            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
-                IsCheckable="true"
-                Header="Selected File Control" Click="ToggleSelectedFileControlVisibility"
-                Name="SelectedFileControlVisibilityMenuEntry" />
-
-            <Separator Style="{StaticResource MenuSeparator_Style}" />
-
-            <!-- using click events here instead of bindings, because binding does not work, when displaying this context menu from a session that started "minimized to tray" -->
-            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
-                IsCheckable="true"
-                Header="always on top" Click="ToggleAlwaysOnTop"
-                Name="AlwaysOnTopMenuEntry" />
-
-            <!-- using click events here instead of bindings, because binding does not work, when displaying this context menu from a session that started "minimized to tray" -->
-            <MenuItem Style="{StaticResource Base_ContextMenu_MenuItem_Style}"
-                IsCheckable="true"
-                Header="run in background" Click="ToggleMinimizedToTray"
-                Name="MinimizedToTrayMenuEntry" />
-
-            <Separator Style="{StaticResource MenuSeparator_Style}" />
-            <MenuItem Style="{StaticResource ContextMenu_About_Style}"
-                Header="About RecNForget" Click="AboutButton_Click" />
-            <MenuItem Style="{StaticResource ContextMenu_Help_Style}"
-                Header="Help" Click="Help_Click" />
-            <Separator Style="{StaticResource MenuSeparator_Style}" />
-            <MenuItem Style="{StaticResource ContextMenu_CheckUpdates_Style}"
-                Header="Check for updates" Click="CheckUpdates_Click" />
-            <Separator Style="{StaticResource MenuSeparator_Style}" />
-            <MenuItem Style="{StaticResource ContextMenu_ShutDown_Style}"
-                Header="Close RecNForget" Click="Exit_Click" />
-        </ContextMenu>
-    </Window.ContextMenu>
 
     <Border Style="{StaticResource OuterHitBoxindowBorderStyle}"
         MouseLeave="MainWindow_MouseLeave" MouseEnter="MainWindow_MouseEnter" MouseDown="Window_MouseDown">

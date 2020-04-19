@@ -99,6 +99,10 @@
 				<File Id="RecNForget.Controls.dll" Source="$(var.RecNForget.TargetDir)RecNForget.Controls.dll" KeyPath="yes" Checksum="yes">
 				</File>
 			</Component>
+			<Component Id="RecNForget.Help.dll" Guid="{F1E4FBA9-E3F0-47BC-B23B-9F4AE666E538}" Directory="INSTALLFOLDER">
+				<File Id="RecNForget.Help.dll" Source="$(var.RecNForget.TargetDir)RecNForget.Help.dll" KeyPath="yes" Checksum="yes">
+				</File>
+			</Component>
 			<Component Id="RecNForget.IoC.dll" Guid="{2E11E940-E850-4A98-90F3-66026963356C}" Directory="INSTALLFOLDER">
 				<File Id="RecNForget.IoC.dll" Source="$(var.RecNForget.TargetDir)RecNForget.IoC.dll" KeyPath="yes" Checksum="yes">
 				</File>
@@ -113,6 +117,10 @@
 			</Component>
 			<Component Id="RecNForget.Services.dll" Guid="{B5460FEA-F566-4FAD-B516-0EE3EFF7CA10}" Directory="INSTALLFOLDER">
 				<File Id="RecNForget.Services.dll" Source="$(var.RecNForget.TargetDir)RecNForget.Services.dll" KeyPath="yes" Checksum="yes">
+				</File>
+			</Component>
+			<Component Id="RecNForget.Services.Helpers.dll" Guid="{B1C752E0-4A3C-4164-8775-03FB93A549F0}" Directory="INSTALLFOLDER">
+				<File Id="RecNForget.Services.Helpers.dll" Source="$(var.RecNForget.TargetDir)RecNForget.Services.Helpers.dll" KeyPath="yes" Checksum="yes">
 				</File>
 			</Component>
 			<Component Id="System.Runtime.CompilerServices.Unsafe.dll" Guid="{5F4909CC-96E6-4CAE-8CD9-AFCE1E51DD6A}" Directory="INSTALLFOLDER">
