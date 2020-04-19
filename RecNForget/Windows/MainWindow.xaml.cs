@@ -171,22 +171,6 @@ namespace RecNForget.Windows
         {
             SettingService.MainWindowLeftX = this.Left;
             SettingService.MainWindowTopY = this.Top;
-
-            if (SettingService.MinimizedToTray && this.IsVisible)
-            {
-                var closeOrBackgroundDialog = new CloseOrBackgroundDialog()
-                {
-                    Owner = this
-                };
-
-                var dialogResult = closeOrBackgroundDialog.ShowDialog();
-
-                if (dialogResult.HasValue && dialogResult.Value)
-                {
-                    e.Cancel = true;
-                    SwitchToBackgroundMode();
-                }
-            }
         }
 
         private void AudioRecordingService_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -385,6 +369,7 @@ namespace RecNForget.Windows
 
         private void TrayIconMenu_DoubleClick(object sender, EventArgs e)
         {
+            SettingService.MinimizedToTray = false;
             SwitchToForegroundMode();
         }
 
