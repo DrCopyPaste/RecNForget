@@ -20,6 +20,7 @@ namespace RecNForget.Controls
 
         public HelpWindow()
         {
+            DataContext = this;
             InitializeComponent();
 
             this.KeyDown += Window_KeyDown;

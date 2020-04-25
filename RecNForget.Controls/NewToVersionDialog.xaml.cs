@@ -10,9 +10,8 @@ using RecNForget.Controls.Extensions;
 using RecNForget.Help;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
-using RecNForget.Services.Types;
 
-namespace RecNForget.Windows
+namespace RecNForget.Controls
 {
     /// <summary>
     /// Interaction logic for NewToVersionDialog.xaml
@@ -27,6 +26,11 @@ namespace RecNForget.Windows
 
         public NewToVersionDialog(Version lastInstalledVersion, Version currentVersion, IAppSettingService settingService)
         {
+            InitializeComponent();
+            DataContext = this;
+
+            this.Title = "Things changed since we last met";
+
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 SettingService = new DesignerAppSettingService();
@@ -34,39 +38,36 @@ namespace RecNForget.Windows
             else
             {
                 SettingService = settingService;
+
+                this.KeyDown += Window_KeyDown;
+
+                var featuresSinceLastVersion = HelpFeature.All.Where(f => f.MinVersion != null && f.MinVersion.CompareTo(lastInstalledVersion) > 0).OrderBy(f => f.Priority);
+                var disabledFeaturesSinceLastVersion = featuresSinceLastVersion.Where(f => f.MaxVersion != null && f.MaxVersion.CompareTo(currentVersion) < 0);
+                var addedFeaturesSinceLastVersion = featuresSinceLastVersion.Except(disabledFeaturesSinceLastVersion);
+
+                // we dont show disabled features in this dialog
+                // major feature changes are communicated by Information feature class
+                this.verboseInformationFeatures = addedFeaturesSinceLastVersion.Where(f => f.FeatureClass == HelpFeatureClass.Information);
+                this.addedFeatures = addedFeaturesSinceLastVersion.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature);
+                this.bugFixes = addedFeaturesSinceLastVersion.Where(f => f.FeatureClass == HelpFeatureClass.BugFix);
+
+                foreach (var feature in verboseInformationFeatures)
+                {
+                    AddFeatureToDisplayList(feature, VersionInfoFeatureList);
+                }
+
+                foreach (var feature in bugFixes)
+                {
+                    AddFeatureToDisplayList(feature, VersionInfoFeatureList);
+                }
+
+                foreach (var feature in addedFeatures)
+                {
+                    AddFeatureToDisplayList(feature, VersionInfoFeatureList);
+                }
             }
 
-            this.KeyDown += Window_KeyDown;
-
-            InitializeComponent();
-            DataContext = this;
-
-            this.Title = "Things changed since we last met";
-
-            var featuresSinceLastVersion = HelpFeature.All.Where(f => f.MinVersion != null && f.MinVersion.CompareTo(lastInstalledVersion) > 0).OrderBy(f => f.Priority);
-            var disabledFeaturesSinceLastVersion = featuresSinceLastVersion.Where(f => f.MaxVersion != null && f.MaxVersion.CompareTo(currentVersion) < 0);
-            var addedFeaturesSinceLastVersion = featuresSinceLastVersion.Except(disabledFeaturesSinceLastVersion);
-
-            // we dont show disabled features in this dialog
-            // major feature changes are communicated by Information feature class
-            this.verboseInformationFeatures = addedFeaturesSinceLastVersion.Where(f => f.FeatureClass == HelpFeatureClass.Information);
-            this.addedFeatures = addedFeaturesSinceLastVersion.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature);
-            this.bugFixes = addedFeaturesSinceLastVersion.Where(f => f.FeatureClass == HelpFeatureClass.BugFix);
-
-            foreach (var feature in verboseInformationFeatures)
-            {
-                AddFeatureToDisplayList(feature, VersionInfoFeatureList);
-            }
-
-            foreach (var feature in bugFixes)
-            {
-                AddFeatureToDisplayList(feature, VersionInfoFeatureList);
-            }
-
-            foreach (var feature in addedFeatures)
-            {
-                AddFeatureToDisplayList(feature, VersionInfoFeatureList);
-            }
+           
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

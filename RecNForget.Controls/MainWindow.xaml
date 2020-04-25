@@ -1,11 +1,11 @@
-﻿<Window x:Class="RecNForget.Windows.MainWindow"
+﻿<Window x:Class="RecNForget.Controls.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RecNForget.Controls;assembly=RecNForget.Controls"
+        xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
-        Style="{StaticResource DefaultWindowStyle}"
+        Style="{DynamicResource DefaultWindowStyle}"
         Title="RecNForget">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
@@ -17,6 +17,14 @@
 			Content/Text/Value="optional">
         </NodeName>
         -->
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Border Style="{StaticResource OuterHitBoxindowBorderStyle}"
         MouseLeave="MainWindow_MouseLeave" MouseEnter="MainWindow_MouseEnter" MouseDown="Window_MouseDown">
@@ -74,7 +82,7 @@
                     <local:OutputPathControl Grid.Row="0" Grid.Column="0"
                         x:Name="OutputPathControl" />
                     <local:SelectedFileControl Grid.Row="1" Grid.Column="0"
-                        x:Name="SelectedFileControl"/>
+                        x:Name="SelectedFileControl" />
                     <local:RecordingAndPlaybackControl Grid.Row="2" Grid.Column="0"
                         x:Name="RecordingAndPlaybackControl"/>
                 </Grid>

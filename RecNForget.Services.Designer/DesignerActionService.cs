@@ -18,17 +18,17 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
-        public void ChangeSelectedFileName(DependencyObject ownerControl)
+        public void ChangeSelectedFileName()
         {
             throw new System.NotImplementedException();
         }
 
-        public void CheckForUpdates(DependencyObject ownerControl = null, bool showMessages = false)
+        public void CheckForUpdates(bool showMessages = false)
         {
             throw new System.NotImplementedException();
         }
 
-        public void DeleteSelectedFile(DependencyObject ownerControl)
+        public void DeleteSelectedFile()
         {
             throw new System.NotImplementedException();
         }

@@ -25,17 +25,7 @@ namespace RecNForget.Controls
 
         public AboutWindow(IAppSettingService appSettingService)
         {
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                this.appSettingService = new DesignerAppSettingService();
-                this.actionService = new DesignerActionService();
-            }
-            else
-            {
-                this.appSettingService = appSettingService;
-                this.actionService = new ActionService();
-            }
-
+            DataContext = this;
             InitializeComponent();
 
             var assemblyInformationalVersion = ThisAssembly.AssemblyInformationalVersion;
@@ -43,11 +33,23 @@ namespace RecNForget.Controls
 
             AppNameAndVersion.Text = string.Format("RecNForget {0}", string.Format("{0}.{1}.{2}", assemblyFileVersion.Major, assemblyFileVersion.Minor, assemblyFileVersion.Build));
             VersionLabel.Text = string.Format("{0} - v{1}", "VersionTitle?", assemblyInformationalVersion);
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.appSettingService = new DesignerAppSettingService();
+                this.actionService = new DesignerActionService();
+                return;
+            }
+            else
+            {
+                this.appSettingService = appSettingService;
+                this.actionService = new ActionService(this);
+            }
         }
 
         private void CheckForUpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => { actionService.CheckForUpdates(this, true); });
+            Task.Run(() => { actionService.CheckForUpdates(true); });
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

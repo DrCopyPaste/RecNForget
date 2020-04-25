@@ -6,8 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using NAudio.Wave;
+using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
+using RecNForget.Controls.Extensions;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
 using Unity;
@@ -23,9 +26,13 @@ namespace RecNForget.Controls.Services
         private readonly IAppSettingService appSettingService = null;
         private readonly IHotkeyService hotkeyService = null;
 
+        private readonly Control ownerControl = null;
+
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
-        public ActionService()
+        public ActionService(Control ownerControl = null)
         {
+            this.ownerControl = ownerControl;
+
             this.selectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
             this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
             this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
@@ -37,15 +44,40 @@ namespace RecNForget.Controls.Services
 
         public void ChangeFileNamePattern()
         {
-            throw new System.NotImplementedException();
+            CustomMessageBox tempDialog = new CustomMessageBox(
+                caption: "Type in a new pattern for file name generation.",
+                icon: CustomMessageBoxIcon.Question,
+                buttons: CustomMessageBoxButtons.OkAndCancel,
+                messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
+                prompt: appSettingService.FilenamePrefix,
+                controlFocus: CustomMessageBoxFocus.Prompt,
+                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+            tempDialog.SetViewablePositionFromOwner(ownerControl);
+
+            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+            {
+                appSettingService.FilenamePrefix = tempDialog.PromptContent;
+            }
         }
 
         public void ChangeOutputFolder()
         {
-            throw new System.NotImplementedException();
+            var dialog = new VistaFolderBrowserDialog();
+
+            bool result =
+                ownerControl != null ?
+                dialog.ShowDialog(Window.GetWindow(ownerControl)) == true :
+                dialog.ShowDialog() == true;
+
+            if (result)
+            {
+                appSettingService.OutputPath = dialog.SelectedPath;
+                selectedFileService.SelectLatestFile();
+            }
         }
 
-        public void ChangeSelectedFileName(DependencyObject ownerControl)
+        public void ChangeSelectedFileName()
         {
             audioPlaybackService.Stop();
             audioPlaybackService.KillAudio();
@@ -59,10 +91,7 @@ namespace RecNForget.Controls.Services
                 controlFocus: CustomMessageBoxFocus.Prompt,
                 promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
 
-            if (!appSettingService.MinimizedToTray)
-            {
-                tempDialog.Owner = Window.GetWindow(ownerControl);
-            }
+            tempDialog.SetViewablePositionFromOwner(ownerControl);
 
             if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
             {
@@ -80,7 +109,7 @@ namespace RecNForget.Controls.Services
             }
         }
 
-        public async void CheckForUpdates(DependencyObject ownerControl = null, bool showMessages = false)
+        public async void CheckForUpdates(bool showMessages = false)
         {
             try
             {
@@ -94,10 +123,7 @@ namespace RecNForget.Controls.Services
                     {
                         var installUpdateDialog = new ReleaseInstallationDialog(newerReleases.First(), UpdateChecker.GetValidVersionStringMsiAsset(newerReleases.First()), changeLog);
 
-                        if (ownerControl != null)
-                        {
-                            installUpdateDialog.Owner = Window.GetWindow(ownerControl);
-                        }
+                        installUpdateDialog.SetViewablePositionFromOwner(ownerControl);
 
                         installUpdateDialog.ShowDialog();
                     });
@@ -115,10 +141,7 @@ namespace RecNForget.Controls.Services
                                 messageRows: new List<string>() { "No newer version found" },
                                 controlFocus: CustomMessageBoxFocus.Ok);
 
-                            if (ownerControl != null)
-                            {
-                                tempDialog.Owner = Window.GetWindow(ownerControl);
-                            }
+                            tempDialog.SetViewablePositionFromOwner(ownerControl);
 
                             tempDialog.ShowDialog();
                         });
@@ -138,10 +161,7 @@ namespace RecNForget.Controls.Services
                             messageRows: new List<string>() { "An error occurred trying to get updates:", ex.InnerException.Message },
                             controlFocus: CustomMessageBoxFocus.Ok);
 
-                        if (!appSettingService.MinimizedToTray)
-                        {
-                            errorDialog.Owner = Window.GetWindow(ownerControl);
-                        }
+                        errorDialog.SetViewablePositionFromOwner(ownerControl);
 
                         errorDialog.ShowDialog();
                     });
@@ -149,7 +169,7 @@ namespace RecNForget.Controls.Services
             }
         }
 
-        public void DeleteSelectedFile(DependencyObject ownerControl)
+        public void DeleteSelectedFile()
         {
             audioPlaybackService.Stop();
             audioPlaybackService.KillAudio();
@@ -161,10 +181,7 @@ namespace RecNForget.Controls.Services
                 messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
                 controlFocus: CustomMessageBoxFocus.Ok);
 
-            if (!appSettingService.MinimizedToTray)
-            {
-                tempDialog.Owner = Window.GetWindow(ownerControl);
-            }
+            tempDialog.SetViewablePositionFromOwner(ownerControl);
 
             if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
             {
@@ -176,6 +193,8 @@ namespace RecNForget.Controls.Services
                         buttons: CustomMessageBoxButtons.OK,
                         messageRows: new List<string>() { "An error occurred trying to delete the selected file" },
                         controlFocus: CustomMessageBoxFocus.Ok);
+
+                    errorMessageBox.SetViewablePositionFromOwner(ownerControl);
 
                     errorMessageBox.ShowDialog();
                 }
@@ -394,17 +413,13 @@ namespace RecNForget.Controls.Services
 
         private void CheckUpdates_Click(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => { CheckForUpdates(ownerControl: null, showMessages: true); });
+            Task.Run(() => { CheckForUpdates(showMessages: true); });
         }
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             var helpmenu = new HelpWindow();
-
-            if (!appSettingService.MinimizedToTray)
-            {
-                //helpmenu.Owner = this;
-            }
+            helpmenu.SetViewablePositionFromOwner(ownerControl);
 
             helpmenu.Show();
         }
@@ -412,11 +427,7 @@ namespace RecNForget.Controls.Services
         private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
             var aboutDialog = new AboutWindow(appSettingService);
-
-            if (!appSettingService.MinimizedToTray)
-            {
-                // aboutDialog.Owner = this;
-            }
+            aboutDialog.SetViewablePositionFromOwner(ownerControl);
 
             aboutDialog.ShowDialog();
         }
@@ -444,11 +455,7 @@ namespace RecNForget.Controls.Services
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             var settingsWindow = new SettingsWindow(hotkeyService, appSettingService);
-
-            if (!appSettingService.MinimizedToTray)
-            {
-                //settingsWindow.Owner = this;
-            }
+            settingsWindow.SetViewablePositionFromOwner(ownerControl);
 
             settingsWindow.ShowDialog();
         }

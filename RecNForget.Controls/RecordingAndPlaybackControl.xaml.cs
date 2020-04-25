@@ -26,6 +26,7 @@ namespace RecNForget.Controls
         public RecordingAndPlaybackControl()
         {
             DataContext = this;
+            InitializeComponent();
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -38,7 +39,7 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = new ActionService();
+                this.actionService = new ActionService(this);
                 this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
                 AudioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
                 AudioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
@@ -47,8 +48,6 @@ namespace RecNForget.Controls
                 AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
                 AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
             }
-
-            InitializeComponent();
         }
 
         ~RecordingAndPlaybackControl()

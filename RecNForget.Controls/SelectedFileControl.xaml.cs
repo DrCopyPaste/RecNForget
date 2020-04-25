@@ -26,6 +26,7 @@ namespace RecNForget.Controls
         public SelectedFileControl()
         {
             DataContext = this;
+            InitializeComponent();
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -37,14 +38,12 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = new ActionService();
+                this.actionService = new ActionService(this);
                 this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
                 this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
 
                 this.SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
             }
-
-            InitializeComponent();
         }
 
         public ISelectedFileService SelectedFileService
@@ -70,12 +69,12 @@ namespace RecNForget.Controls
 
         private void ChangeSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
         {
-            actionService.ChangeSelectedFileName(this);
+            actionService.ChangeSelectedFileName();
         }
 
         private void DeleteSelectedFileButton_Clicked(object sender, RoutedEventArgs e)
         {
-            actionService.DeleteSelectedFile(this);
+            actionService.DeleteSelectedFile();
         }
     }
 }

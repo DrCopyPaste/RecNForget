@@ -21,6 +21,9 @@ namespace RecNForget.Controls
 
         public SettingsWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
         {
+            DataContext = this;
+            InitializeComponent();
+
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 this.hotkeyService = new DesignerHotkeyService();
@@ -30,12 +33,9 @@ namespace RecNForget.Controls
             {
                 this.hotkeyService = hotkeyService;
                 SettingService = settingService;
+
+                DisplayHotkey();
             }
-
-            DataContext = this;
-            InitializeComponent();
-
-            DisplayHotkey();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

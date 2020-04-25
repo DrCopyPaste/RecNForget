@@ -11,15 +11,17 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Microsoft.VisualBasic.ApplicationServices;
 using NAudio.Wave;
 using RecNForget.Controls;
 using RecNForget.Controls.Services;
+using RecNForget.IoC;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
 using RecNForget.Services.Helpers;
+using Unity;
 
-namespace RecNForget.Windows
+namespace RecNForget.Controls
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -38,53 +40,76 @@ namespace RecNForget.Windows
 
         private string taskBar_ProgressState = "None";
 
-        public MainWindow(IAppSettingService appSettingService, IHotkeyService hotkeyService, IAudioRecordingService audioRecordingService, ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService)
+        public MainWindow()
         {
             DataContext = this;
             InitializeComponent();
 
-            SettingService = appSettingService;
-            SettingService.PropertyChanged += SettingService_PropertyChanged;
-
-            this.actionService = new ActionService();
-            SelectedFileService = selectedFileService;
-            SelectedFileService.SelectLatestFile();
-
-            AudioPlaybackService = audioPlaybackService;
-            AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
-
-            AudioRecordingService = audioRecordingService;
-            AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
-
-
-            this.hotkeyService = hotkeyService;
-
-            this.KeyDown += Window_KeyDown;
-            this.MouseRightButtonUp += MainWindow_MouseRightButtonUp;
-
-            trayIcon = new System.Windows.Forms.NotifyIcon
+            if (DesignerProperties.GetIsInDesignMode(this))
             {
-                Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location),
-                Visible = true
-            };
-
-            trayIcon.Click += new EventHandler(TrayIcon_Click);
-            trayIcon.DoubleClick += new EventHandler(TrayIconMenu_DoubleClick);
-
-
-            // initialize control visibility (is being toggled via SettingService_PropertyChanged - binding with bool to visibility converter did not update)
-            OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
-            SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
-
-            this.Topmost = SettingService.WindowAlwaysOnTop;            
-
-            if (SettingService.MinimizedToTray)
-            {
-                SwitchToBackgroundMode();
+                this.actionService = new DesignerActionService();
+                this.hotkeyService = new DesignerHotkeyService();
+                SelectedFileService = new DesignerSelectedFileService();
+                SettingService = new DesignerAppSettingService();
+                AudioRecordingService = new DesignerAudioRecordingService();
+                AudioPlaybackService = new DesignerAudioPlaybackService();
+                return;
             }
             else
             {
-                SwitchToForegroundMode();
+                this.actionService = new ActionService(this);
+                this.hotkeyService = UnityHandler.UnityContainer.Resolve<IHotkeyService>();
+
+                SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
+                SelectedFileService.SelectLatestFile();
+
+                SettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
+                SettingService.PropertyChanged += SettingService_PropertyChanged;
+
+                AudioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
+                AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
+
+                AudioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
+                AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
+
+                // try restore last window positon
+                if (!SettingService.MainWindowLeftX.HasValue || !SettingService.MainWindowTopY.HasValue)
+                {
+                    this.Left = (SystemParameters.PrimaryScreenWidth / 2) - (this.Width / 2);
+                    this.Top = (SystemParameters.PrimaryScreenHeight / 2) - (this.Height / 2);
+                }
+                else
+                {
+                    this.Left = SettingService.MainWindowLeftX.Value;
+                    this.Top = SettingService.MainWindowTopY.Value;
+                }
+
+                this.KeyDown += Window_KeyDown;
+                this.MouseRightButtonUp += MainWindow_MouseRightButtonUp;
+
+                trayIcon = new System.Windows.Forms.NotifyIcon
+                {
+                    Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location),
+                    Visible = true
+                };
+
+                trayIcon.Click += new EventHandler(TrayIcon_Click);
+                trayIcon.DoubleClick += new EventHandler(TrayIconMenu_DoubleClick);
+
+                // initialize control visibility (is being toggled via SettingService_PropertyChanged - binding with bool to visibility converter did not update)
+                OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+
+                this.Topmost = SettingService.WindowAlwaysOnTop;
+
+                if (SettingService.MinimizedToTray)
+                {
+                    SwitchToBackgroundMode();
+                }
+                else
+                {
+                    SwitchToForegroundMode();
+                }
             }
         }
 
@@ -327,18 +352,6 @@ namespace RecNForget.Windows
         private void SwitchToForegroundMode()
         {
             this.Show();
-
-            // try restore last window positon
-            if (!SettingService.MainWindowLeftX.HasValue || !SettingService.MainWindowTopY.HasValue)
-            {
-                this.Left = (SystemParameters.PrimaryScreenWidth / 2) - (this.Width / 2);
-                this.Top = (SystemParameters.PrimaryScreenHeight / 2) - (this.Height / 2);
-            }
-            else
-            {
-                this.Left = SettingService.MainWindowLeftX.Value;
-                this.Top = SettingService.MainWindowTopY.Value;
-            }
         }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -384,11 +397,11 @@ namespace RecNForget.Windows
             {
                 if (e.Key == Key.Return)
                 {
-                    actionService.ChangeSelectedFileName(this);
+                    actionService.ChangeSelectedFileName();
                 }
                 else if (e.Key == Key.Delete)
                 {
-                    actionService.DeleteSelectedFile(this);
+                    actionService.DeleteSelectedFile();
                 }
                 else if (e.Key == Key.Down)
                 {

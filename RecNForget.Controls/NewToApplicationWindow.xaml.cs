@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
@@ -10,7 +11,7 @@ using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.Services.Helpers;
 
-namespace RecNForget.Windows
+namespace RecNForget.Controls
 {
     /// <summary>
     /// Interaction logic for NewToApplicationWindow.xaml
@@ -22,30 +23,31 @@ namespace RecNForget.Windows
 
         public NewToApplicationWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
         {
+            DataContext = this;
+            InitializeComponent();
+
+            this.Title = "New to RecNForget?";
+
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 this.hotkeyService = new DesignerHotkeyService();
                 SettingService = new DesignerAppSettingService();
+                return;
             }
             else
             {
                 this.hotkeyService = hotkeyService;
                 SettingService = settingService;
-            }
 
-            this.KeyDown += Window_KeyDown;
-
-            InitializeComponent();
-            DataContext = this;
-
-            this.Title = "New to RecNForget?";
-
-            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
+                var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
                 hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
                 buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                 spacing: 6);
 
-            HotkeyDisplay.Children.Add(buttonGrid);
+                HotkeyDisplay.Children.Add(buttonGrid);
+
+                this.KeyDown += Window_KeyDown;
+            }            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

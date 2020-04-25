@@ -21,15 +21,25 @@ namespace RecNForget.Controls
 
         public ReleaseInstallationDialog(Release release, ReleaseAsset asset, string releaseNotes)
         {
-            InitializeComponent();
             DataContext = this;
+            InitializeComponent();
 
-            this.KeyDown += Window_KeyDown;
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                ReleaseNotes = "new Feature 1";
+                VersionInfoString = string.Format("{0} - {1} ({2} MB)", "42.42.42.42", "DemoRelease", string.Format("{0:0.000}", 42 / 1024d / 1024d));
+                InstallAfterDownload = true;
+            }
+            else
+            {
+                this.asset = asset;
 
-            this.asset = asset;
-            ReleaseNotes = releaseNotes;
-            VersionInfoString = string.Format("{0} - {1} ({2} MB)", VersionStringFromMsiAsset(asset), release.Name, string.Format("{0:0.000}", asset.Size / 1024d / 1024d));
-            InstallAfterDownload = true;
+                this.KeyDown += Window_KeyDown;
+
+                ReleaseNotes = releaseNotes;
+                VersionInfoString = string.Format("{0} - {1} ({2} MB)", VersionStringFromMsiAsset(asset), release.Name, string.Format("{0:0.000}", asset.Size / 1024d / 1024d));
+                InstallAfterDownload = true;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;    

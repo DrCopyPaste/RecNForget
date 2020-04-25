@@ -28,6 +28,7 @@ namespace RecNForget.Controls
         public OutputPathControl()
         {
             DataContext = this;
+            InitializeComponent();
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -36,20 +37,21 @@ namespace RecNForget.Controls
                 this.audioRecordingService = new DesignerAudioRecordingService();
                 this.selectedFileService = new DesignerSelectedFileService();
 
+                OutputPathWithFilePattern = audioRecordingService.GetTargetPathTemplateString();
+                return;
             }
             else
             {
-                this.actionService = new ActionService();
+                this.actionService = new ActionService(this);
                 this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
                 this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
 
                 SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
+
+                appSettingService.PropertyChanged += AppSettingService_PropertyChanged;
+
+                UpdateOutputPathWithFileNamePattern();
             }
-
-            appSettingService.PropertyChanged += AppSettingService_PropertyChanged;
-            UpdateOutputPathWithFileNamePattern();
-
-            InitializeComponent();
         }
 
         ~OutputPathControl()
@@ -105,43 +107,14 @@ namespace RecNForget.Controls
             OutputPathWithFilePattern = audioRecordingService.GetTargetPathTemplateString();
         }
 
-        private void FilenamePrefix_Changed(object sender, RoutedEventArgs e)
-        {
-            // https://stackoverflow.com/a/23182807
-            //appSettingService.FilenamePrefix = string.Concat(appSettingService.FilenamePrefix.Split(Path.GetInvalidFileNameChars()));
-        }
-
         private void ChangeFileNamePatternButton_Clicked(object sender, RoutedEventArgs e)
         {
-            CustomMessageBox tempDialog = new CustomMessageBox(
-                caption: "Type in a new pattern for file name generation.",
-                icon: CustomMessageBoxIcon.Question,
-                buttons: CustomMessageBoxButtons.OkAndCancel,
-                messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
-                prompt: appSettingService.FilenamePrefix,
-                controlFocus: CustomMessageBoxFocus.Prompt,
-                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
-
-            if (!appSettingService.MinimizedToTray)
-            {
-                tempDialog.Owner = Window.GetWindow(this);
-            }
-
-            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-            {
-                appSettingService.FilenamePrefix = tempDialog.PromptContent;
-            }
+            actionService.ChangeFileNamePattern();
         }
 
         private void ChangeOutputFolderButton_Clicked(object sender, RoutedEventArgs e)
         {
-            var dialog = new VistaFolderBrowserDialog();
-
-            if (dialog.ShowDialog(Window.GetWindow(this)) == true)
-            {
-                appSettingService.OutputPath = dialog.SelectedPath;
-                SelectedFileService.SelectLatestFile();
-            }
+            actionService.ChangeOutputFolder();
         }
     }
 }

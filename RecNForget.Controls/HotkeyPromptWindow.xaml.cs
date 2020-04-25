@@ -17,6 +17,7 @@ namespace RecNForget.Controls
 
         public HotkeyPromptWindow(string title)
         {
+            DataContext = this;
             InitializeComponent();
 
             this.Title = title;

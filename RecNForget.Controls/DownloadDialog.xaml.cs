@@ -25,8 +25,8 @@ namespace RecNForget.Controls
 
         public DownloadDialog(ReleaseAsset asset, string targetDownloadPath)
         {
-            InitializeComponent();
             DataContext = this;
+            InitializeComponent();
 
             this.Succeeded = false;
             this.targetDownloadPath = targetDownloadPath;

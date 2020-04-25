@@ -23,6 +23,7 @@ namespace RecNForget.Controls
     {
         public CopyrightControl()
         {
+            DataContext = this;
             InitializeComponent();
         }
 

@@ -1,12 +1,12 @@
-﻿<Window x:Class="RecNForget.Windows.QuickTipDialog"
+﻿<Window x:Class="RecNForget.Controls.NewToVersionDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RecNForget.Controls;assembly=RecNForget.Controls"
+        xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
         Topmost="True"
-        Style="{StaticResource DefaultWindowStyle}"
+        Style="{DynamicResource DefaultWindowStyle}"
         WindowStartupLocation="CenterOwner"
         Title="RecNForget - Things changed" >
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
@@ -19,6 +19,14 @@
 			Content/Text/Value="optional">
         </NodeName>
         -->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
         <Grid Style="{StaticResource DefaultGridStyle}"
             MouseDown="Window_MouseDown">
@@ -29,19 +37,26 @@
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
                 <!-- row 2 for separator -->
                 <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
-                <!-- row 3 for feature caption-->
+                <!-- row 3 for verbose version info feature caption-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 4 for verbose list of contents for feature -->
+                <!-- row 4 for verbose version info features list-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 5 for spacing -->
+                <!-- row 5 for new features caption-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 6 for new features features list-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 7 for bug fixes caption-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 8 for bug fixes features list-->
+                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                <!-- row 9 for spacing -->
                 <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
-                <!-- row 6 for updates checkbox -->
+                <!-- row 10 for updates checkbox -->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 7 for buttons -->
+                <!-- row 11 for buttons -->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                 <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
             </Grid.ColumnDefinitions>
 
@@ -63,35 +78,32 @@
                     Click="Exit_Click" />
             </Grid>
 
-            <Image Grid.Row="1" Grid.Column="0" Style="{StaticResource QuickTip_LightBulbIconStyle}"
-                Name="DialogImage" />
-            
-            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource ApplicationName_TextBox_Style}"
-                VerticalAlignment="Center"
-                Text="Did you know?" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource ApplicationName_TextBox_Style}"
+                Text="Things changed since we last met" />
 
-            <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource VersionName_TextBox_Style}"
-                HorizontalAlignment="Center"
-                Text="{Binding Path=FeatureCaption}" />
+            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
+                Name="VersionInfoCaption"
+                Text="Have a look at what's new!" />
 
-            <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultWindowBorderStyle}">
-                <ScrollViewer Style="{StaticResource QuickTip_ScrollViewer_Style}">
-                    <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                        Text="{Binding Path=FeatureContents}" />
+            <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultWindowBorderStyle}">
+                <ScrollViewer Style="{StaticResource NewToVersion_FeatureList_ScrollViewer_Style}">
+                    <Grid
+                        Name="VersionInfoFeatureList">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
+                            <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                        </Grid.ColumnDefinitions>
+                        <!-- Row Definitions dynamic (depending on how many features are found) -->
+                    </Grid>
                 </ScrollViewer>
             </Border>
 
-            <CheckBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=SettingService.ShowTipsAtApplicationStart}">
-                show tips on start
+            <CheckBox Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                    IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
+                check for updates on start
             </CheckBox>
 
-            <local:ImageButton Grid.Row="7" Grid.Column="0" Style="{StaticResource LightBulbButton}"
-                HorizontalAlignment="Left"
-                ToolTip="Another useful tip please"
-                Click="GenerateAnotherTip_Click"/>
-            
-            <local:ImageButton Grid.Row="7" Grid.Column="1" Style="{StaticResource AcceptButton}"
+            <local:ImageButton Grid.Row="11" Style="{StaticResource AcceptButton}"
                 HorizontalAlignment="Right"
                 ToolTip="good to know"
                 Click="Exit_Click"/>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using RecNForget.Controls;
 using RecNForget.Controls.Services;
 using RecNForget.IoC;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
-using RecNForget.Windows;
 using Unity;
 using Unity.Lifetime;
 
@@ -58,7 +58,7 @@ namespace RecNForget
         {
             if (appSettingService.CheckForUpdateOnStart)
             {
-                Task.Run(() => { actionService.CheckForUpdates(ownerControl: null, showMessages: false); });
+                Task.Run(() => { actionService.CheckForUpdates(showMessages: false); });
             }
 
             var currentFileVersion = new Version(ThisAssembly.AssemblyFileVersion);

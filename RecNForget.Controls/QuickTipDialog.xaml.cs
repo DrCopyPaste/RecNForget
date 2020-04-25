@@ -7,9 +7,8 @@ using System.Windows.Input;
 using RecNForget.Help;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
-using RecNForget.Services.Types;
 
-namespace RecNForget.Windows
+namespace RecNForget.Controls
 {
     /// <summary>
     /// Interaction logic for QuickTipDialog.xaml
@@ -22,6 +21,11 @@ namespace RecNForget.Windows
 
         public QuickTipDialog(IAppSettingService settingService)
         {
+            DataContext = this;
+            InitializeComponent();
+
+            this.Title = "Did you know?";
+
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 SettingService = new DesignerAppSettingService();
@@ -29,16 +33,11 @@ namespace RecNForget.Windows
             else
             {
                 SettingService = settingService;
+
+                this.KeyDown += Window_KeyDown;
+
+                GenerateRandomTip();
             }
-
-            this.KeyDown += Window_KeyDown;
-
-            InitializeComponent();
-            DataContext = this;
-
-            this.Title = "Did you know?";
-
-            GenerateRandomTip();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

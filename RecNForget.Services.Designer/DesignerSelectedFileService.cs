@@ -19,38 +19,20 @@ namespace RecNForget.Services.Designer
             set => throw new NotImplementedException();
         }
 
-        public bool SelectFile(FileInfo file)
-        {
-            throw new NotImplementedException();
-        }
+        public bool SelectFile(FileInfo file) => throw new NotImplementedException();
 
-        public bool SelectLatestFile()
-        {
-            throw new NotImplementedException();
-        }
+        public bool SelectLatestFile() => throw new NotImplementedException();
 
-        public bool SelectNextFile()
-        {
-            throw new NotImplementedException();
-        }
+        public bool SelectNextFile() => throw new NotImplementedException();
 
-        public bool SelectPrevFile()
-        {
-            throw new NotImplementedException();
-        }
+        public bool SelectPrevFile() => throw new NotImplementedException();
 
         /// <summary>
         /// tries to delete the current one and select previous file
         /// </summary>
         /// <returns></returns>
-        public bool DeleteSelectedFile()
-        {
-            throw new NotImplementedException();
-        }
+        public bool DeleteSelectedFile() => throw new NotImplementedException();
 
-        public bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension)
-        {
-            throw new NotImplementedException();
-        }
+        public bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension) => throw new NotImplementedException();
     }
 }
