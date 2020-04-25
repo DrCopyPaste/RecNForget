@@ -1002,8 +1002,8 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Width" Value="{StaticResource MainWindow_TextBox_Width}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Margin" Value="3,1,3,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="Padding" Value="0,0,0,0" />
         <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_Height}}" />
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
@@ -1011,12 +1011,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                    <Border CornerRadius="3" Padding="1" x:Name="InnerBorder" Background="{Binding Source={StaticResource Application_Background_Color}}" BorderBrush="{Binding Source={StaticResource ApplicationBorder_Color}}" BorderThickness="1">
-                        <ScrollViewer Margin="0" Background="{Binding Source={StaticResource Application_Background_Color}}" x:Name="PART_ContentHost" />
+                    <Border CornerRadius="3" Padding="1" x:Name="InnerBorder" Background="{Binding Source={StaticResource Application_Background_Color}}" BorderBrush="{Binding Source={StaticResource ApplicationBorder_Color}}" BorderThickness="0,0,0,0">
+                        <ScrollViewer Padding="0" Margin="0" Background="{Binding Source={StaticResource Application_Background_Color}}" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" x:Name="PART_ContentHost" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="True">
                             <Setter TargetName="InnerBorder" Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
+                            <Setter TargetName="InnerBorder" Property="BorderThickness" Value="0,0,0,1"/>
                             <Setter TargetName="PART_ContentHost" Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

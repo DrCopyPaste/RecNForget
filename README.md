@@ -37,6 +37,8 @@ But, if you feel extra keen to try out the latest, you can
 (downloading is currently only allowed for github users it seems)
 
 # upcoming features in next release
+- selected file control now also shows file size and play length
+- removed borders from textboxes
 
 # Features missing for version 1.0
 - allow toggling input source (default output, or maybe mic/something else)?

@@ -7,26 +7,30 @@ namespace RecNForget.Help.Features
 	{
 		public Customize_SelectedFileControlVisibility()
 		{
-			MinVersion = HelpFeatureVersion.v0_4_WirsingKopf;
+			MinVersion = HelpFeatureVersion.v0_5_____;
 			FeatureClass = HelpFeatureClass.NewFeature;
 			Title = "customize selected file control visibility";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "The Selected File Control can be shown in the main window - this allows"
+					Content = "The Selected File Control provides quick access to file manipulation and information:"
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- viewing the currently selected file name"
+					Content = "- show selected file name"
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- quick access to rename the selected file"
+					Content = "- show selected file size and play length"
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- quick access to delete the selected file"
+					Content = "- rename the selected file"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "- delete the selected file"
 				},
 				new HelpFeatureDetailLine()
 				{

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using NAudio.Wave;
 using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services

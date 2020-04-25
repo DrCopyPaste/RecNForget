@@ -28,8 +28,14 @@
                         Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource ControlLabelStyle}"
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ControlLabelStyle}"
                     Content="Selected file" />
+
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ControlLabelStyle}"
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right"
+                    Content="00:12.235s (237.98 kB)"
+                    Name="FileInfoLabel" />
 
                 <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
                     Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using NAudio.Wave;
+using RecNForget.Controls.Extensions;
 using RecNForget.Controls.Services;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
@@ -43,7 +46,14 @@ namespace RecNForget.Controls
                 this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
 
                 this.SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
+
+                SelectedFileService.PropertyChanged += SelectedFileService_PropertyChanged;
             }
+        }
+
+        ~SelectedFileControl()
+        {
+            SelectedFileService.PropertyChanged -= SelectedFileService_PropertyChanged;
         }
 
         public ISelectedFileService SelectedFileService
@@ -65,6 +75,28 @@ namespace RecNForget.Controls
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void SelectedFileService_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SelectedFileService.HasSelectedFile))
+            {
+                try
+                {
+                    var audioFileLengthString = (new AudioFileReader(SelectedFileService.SelectedFile.FullName)).TotalTime.ToString("g") + " s";
+                    var fileSizeString = (SelectedFileService.SelectedFile.Length / (double)1024).ToString("N2") + " kB";
+
+                    FileInfoLabel.Content = audioFileLengthString + " (" + fileSizeString + ")";
+                }
+                catch (Exception ex)
+                {
+                    FileInfoLabel.Content = "error trying to read file size";
+
+                    var errorDialog = new CustomMessageBox("error trying to read file size", CustomMessageBoxIcon.Error, CustomMessageBoxButtons.OK, new List<string>() { "an error occurred while trying to parse audio file: " + ex.Message });
+                    errorDialog.SetViewablePositionFromOwner();
+                    errorDialog.ShowDialog();
+                }
+            }
         }
 
         private void ChangeSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
