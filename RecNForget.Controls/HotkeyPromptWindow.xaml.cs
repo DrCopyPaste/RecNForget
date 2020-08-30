@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using FMUtils.KeyboardHook;
@@ -13,16 +15,13 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class HotkeyPromptWindow : Window
     {
-        private Hook keyboardHook;
-
         public HotkeyPromptWindow(string title)
         {
             DataContext = this;
             InitializeComponent();
 
             this.Title = title;
-            this.keyboardHook = new Hook("Configure Hotkey Hook");
-            this.keyboardHook.KeyDownEvent = this.KeyHookDown;
+            this.KeyDown += HotkeyPromptWindow_KeyDown;
         }
 
         public string HotkeysAppSetting
@@ -39,26 +38,36 @@ namespace RecNForget.Controls
             }
         }
 
-        private void KeyHookDown(KeyboardHookEventArgs e)
+        private void HotkeyPromptWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            var currentModifiers = Keyboard.Modifiers;
+
             if (HotkeyDisplay.Children.Count > 0)
             {
                 HotkeyDisplay.Children.Clear();
             }
 
             var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                hotkeys: HotkeySettingTranslator.GetKeyboardHookEventArgsAsList(e, string.Empty, string.Empty),
+                hotkeys: HotkeySettingTranslator.GetKeyEventArgsAsList(e, currentModifiers, string.Empty, string.Empty),
                 buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                 spacing: 6);
 
             HotkeyDisplay.Children.Add(buttonGrid);
 
-            if (e.Key != Keys.None)
+            if (e.Key != Key.None && !HotkeySettingTranslator.ModifierKeys.Contains(e.Key))
             {
-                HotkeysAppSetting = e.ToString();
-                this.keyboardHook.isPaused = true;
+                try
+                {
+                    KeyGesture gesture = new KeyGesture(e.Key, currentModifiers);
+                    HotkeysAppSetting = HotkeySettingTranslator.GetSettingStringFromKeyGesture(gesture);
 
-                DialogResult = true;
+                    DialogResult = true;
+                }
+                catch (NotSupportedException ex)
+                {
+                    // silently ignore this
+                    // this means we cannot assign this hotkey without modifiers (this is true for most keys like A-Z, but not for others like F1-F12 or Pause, etc.)
+                }
             }
         }
     }
