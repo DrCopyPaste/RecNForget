@@ -87,6 +87,10 @@ namespace RecNForget.Services
                 recordedAudioWriter.Dispose();
                 recordedAudioWriter = null;
                 captureInstance.Dispose();
+
+                LastFileName = CurrentFileName;
+                CurrentFileName = string.Empty;
+                UpdateProperties();
             };
 
             // Start audio recording !
@@ -98,10 +102,6 @@ namespace RecNForget.Services
             CurrentlyRecording = false;
             CurrentlyNotRecording = true;
             captureInstance.StopRecording();
-            LastFileName = CurrentFileName;
-            CurrentFileName = string.Empty;
-
-            UpdateProperties();
         }
 
         public string GetTargetPathTemplateString()
