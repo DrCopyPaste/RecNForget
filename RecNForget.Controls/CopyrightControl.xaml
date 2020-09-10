@@ -8,16 +8,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:local="clr-namespace:RecNForget.Controls"
 		mc:Ignorable="d">
-
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-
-    <Grid>
+	<Grid>
 		<TextBlock Style = "{StaticResource DefaultTextBlockStyle}" >
 			<Run>
 				RecNForget is written in C# using .NET Framework 4.8 and Microsoft WPF
@@ -62,7 +53,7 @@
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning.3.1.74</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning.3.2.31</Hyperlink>
 			<Run>
 				 Copyright (c) Andrew Arnott - 
 			</Run>
@@ -92,13 +83,13 @@
 			</Run>
 			<Hyperlink NavigateUri="https://wixtoolset.org/about/license/" RequestNavigate="Hyperlink_RequestNavigate">MS-RL</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop" RequestNavigate="Hyperlink_RequestNavigate">StyleCop.MSBuild v6.1.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop" RequestNavigate="Hyperlink_RequestNavigate">StyleCop.MSBuild v6.2.0</Hyperlink>
 			<Run>
 				 Copyright (c) StyleCop contributors, Chris Dahlberg - 
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop/blob/master/License.html" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity" RequestNavigate="Hyperlink_RequestNavigate">Unity v5.11.5</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity" RequestNavigate="Hyperlink_RequestNavigate">Unity v5.11.7</Hyperlink>
 			<Run>
 				 Copyright (c) Unity Container Project - 
 			</Run>

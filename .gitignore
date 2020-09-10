@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
@@ -75,3 +75,4 @@
 /RecNForget.Services.Contracts/obj
 /RecNForget.Services.Helpers/obj
 /RecNForget.Setup.Extensions/obj
+/RecNForget.Controls/obj

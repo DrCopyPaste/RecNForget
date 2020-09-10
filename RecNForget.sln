@@ -21,7 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.CopyRightHelper"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{222D10CD-A1EF-4E1A-A203-B898FFD75DB3}"
 	ProjectSection(SolutionItems) = preProject
+		COPYRIGHT.md = COPYRIGHT.md
+		LICENSE = LICENSE
+		README.md = README.md
 		Settings.StyleCop = Settings.StyleCop
+		version.json = version.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.Services.Contracts", "RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj", "{295D9059-A3AD-4273-9779-64C181ABE364}"
