@@ -21,7 +21,7 @@ namespace RecNForget.CopyRightHelper
     {
         private static string iconBasePath = @"..\..\..\icon_generation";
         private static string copyRightFilePath = @"..\..\..\COPYRIGHT.md";
-        private static string copyRightControlPath = @"..\..\..\RecNForget\Controls\CopyrightControl.xaml";
+        private static string copyRightControlPath = @"..\..\..\RecNForget.Controls\CopyrightControl.xaml";
 
         private static StringBuilder textBlockResultBuilder;
         private static StringBuilder mdFileResultBuilder;
@@ -104,7 +104,7 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
 
             AddLibraryLink(
-                libaryName: "Nerdbank.GitVersioning.3.1.74",
+                libaryName: "Nerdbank.GitVersioning.3.2.31",
                 libraryUrl: "https://github.com/aarnott/Nerdbank.GitVersioning",
                 manufacturerName: "Andrew Arnott",
                 licenseCaption: "MIT",
@@ -139,14 +139,14 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://wixtoolset.org/about/license/");
 
             AddLibraryLink(
-                libaryName: "StyleCop.MSBuild v6.1.0",
+                libaryName: "StyleCop.MSBuild v6.2.0",
                 libraryUrl: "https://github.com/StyleCop/StyleCop",
                 manufacturerName: "StyleCop contributors, Chris Dahlberg",
                 licenseCaption: "Ms-PL",
                 licenseUrl: "https://github.com/StyleCop/StyleCop/blob/master/License.html");
 
             AddLibraryLink(
-                libaryName: "Unity v5.11.5",
+                libaryName: "Unity v5.11.7",
                 libraryUrl: "https://github.com/unitycontainer/unity",
                 manufacturerName: "Unity Container Project",
                 licenseCaption: "Apache 2.0",

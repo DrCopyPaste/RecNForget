@@ -16,7 +16,7 @@ The following libaries are used by RecNForget:
 
 [NAudio.1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
 
-[Nerdbank.GitVersioning.3.1.74](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
+[Nerdbank.GitVersioning.3.2.31](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
 
 [Newtonsoft.Json.12.0.3](https://www.newtonsoft.com/json) Copyright (c) James Newton-King - [MIT](https://licenses.nuget.org/MIT)
 
@@ -26,9 +26,9 @@ The following libaries are used by RecNForget:
 
 [WiX Toolset build tools v3.11.2.4516](https://wixtoolset.org/) Copyright (c) .NET Foundation - [MS-RL](https://wixtoolset.org/about/license/)
 
-[StyleCop.MSBuild v6.1.0](https://github.com/StyleCop/StyleCop) Copyright (c) StyleCop contributors, Chris Dahlberg - [Ms-PL](https://github.com/StyleCop/StyleCop/blob/master/License.html)
+[StyleCop.MSBuild v6.2.0](https://github.com/StyleCop/StyleCop) Copyright (c) StyleCop contributors, Chris Dahlberg - [Ms-PL](https://github.com/StyleCop/StyleCop/blob/master/License.html)
 
-[Unity v5.11.5](https://github.com/unitycontainer/unity) Copyright (c) Unity Container Project - [Apache 2.0](https://github.com/unitycontainer/unity/blob/v5.x/LICENSE)
+[Unity v5.11.7](https://github.com/unitycontainer/unity) Copyright (c) Unity Container Project - [Apache 2.0](https://github.com/unitycontainer/unity/blob/v5.x/LICENSE)
 
 [System.Runtime.CompilerServices.Unsafe v4.5.2](https://dot.net/) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
 
