@@ -63,3 +63,15 @@
 /RecNForget.Help/obj/Debug
 /RecNForget.Help/bin/Debug
 /.vs
+/MigrationBackup
+/RecNForget/obj
+/RecNForget.Controls/obj
+/RecNForget.CopyRightHelper/obj
+/RecNForget.GithubHelpGenerator/obj
+/RecNForget.Help/obj
+/RecNForget.ImageConverter/obj
+/RecNForget.IoC/obj
+/RecNForget.Services/obj
+/RecNForget.Services.Contracts/obj
+/RecNForget.Services.Helpers/obj
+/RecNForget.Setup.Extensions/obj

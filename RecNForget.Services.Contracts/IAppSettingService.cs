@@ -5,6 +5,9 @@ namespace RecNForget.Services.Contracts
 {
     public interface IAppSettingService : INotifyPropertyChanged
     {
+        string RuntimeVersionString { get; }
+        string RuntimeInformalVersionString { get; }
+
         bool AutoStartWithWindows { get; set; }
 
         bool CheckForUpdateOnStart { get; set; }

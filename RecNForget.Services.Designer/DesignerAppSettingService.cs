@@ -147,6 +147,8 @@ namespace RecNForget.Services.Designer
 
             set => throw new NotImplementedException();
         }
+        public string RuntimeVersionString => "0.0.0.0";
+        public string RuntimeInformalVersionString => "0.0.0.0";
 
         public void RemoveAppConfigSettingFile() => throw new NotImplementedException();
 
