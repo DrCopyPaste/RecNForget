@@ -24,7 +24,7 @@ namespace RecNForget.Controls.Services
         private readonly IAudioPlaybackService audioPlaybackService = null;
         private readonly IAudioRecordingService audioRecordingService = null;
         private readonly IAppSettingService appSettingService = null;
-        private readonly IHotkeyService hotkeyService = null;
+        private readonly IApplicationHotkeyService hotkeyService = null;
 
         private readonly Control ownerControl = null;
 
@@ -37,7 +37,7 @@ namespace RecNForget.Controls.Services
             this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
             this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
             this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
-            this.hotkeyService = UnityHandler.UnityContainer.Resolve<IHotkeyService>();
+            this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

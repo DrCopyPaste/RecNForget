@@ -33,7 +33,7 @@ namespace RecNForget.Controls
 
         private IAudioRecordingService audioRecordingService = null;
         private IActionService actionService = null;
-        private IHotkeyService hotkeyService = null;
+        private IApplicationHotkeyService hotkeyService = null;
         private IAppSettingService settingService = null;
         private IAudioPlaybackService audioPlaybackService = null;
         private ISelectedFileService selectedFileService = null;
@@ -48,7 +48,7 @@ namespace RecNForget.Controls
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 this.actionService = new DesignerActionService();
-                this.hotkeyService = new DesignerHotkeyService();
+                this.hotkeyService = new DesignerApplicationHotkeyService();
                 SelectedFileService = new DesignerSelectedFileService();
                 SettingService = new DesignerAppSettingService();
                 AudioRecordingService = new DesignerAudioRecordingService();
@@ -58,7 +58,7 @@ namespace RecNForget.Controls
             else
             {
                 this.actionService = new ActionService(this);
-                this.hotkeyService = UnityHandler.UnityContainer.Resolve<IHotkeyService>();
+                this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
                 SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
                 SelectedFileService.SelectLatestFile();

@@ -18,10 +18,10 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class NewToApplicationWindow : INotifyPropertyChanged
     {
-        private IHotkeyService hotkeyService;
+        private IApplicationHotkeyService hotkeyService;
         private IAppSettingService settingService;
 
-        public NewToApplicationWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
+        public NewToApplicationWindow(IApplicationHotkeyService hotkeyService, IAppSettingService settingService)
         {
             DataContext = this;
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace RecNForget.Controls
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.hotkeyService = new DesignerHotkeyService();
+                this.hotkeyService = new DesignerApplicationHotkeyService();
                 SettingService = new DesignerAppSettingService();
                 return;
             }

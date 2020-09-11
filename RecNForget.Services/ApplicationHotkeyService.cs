@@ -7,7 +7,7 @@ using RecNForget.Services.Types;
 
 namespace RecNForget.Services
 {
-    public class HotkeyService : IHotkeyService
+    public class ApplicationHotkeyService : IApplicationHotkeyService
     {
         public void PauseCapturingHotkeys(bool pause = true)
         {

@@ -16,17 +16,17 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class SettingsWindow : INotifyPropertyChanged
     {
-        private IHotkeyService hotkeyService;
+        private IApplicationHotkeyService hotkeyService;
         private IAppSettingService settingService;
 
-        public SettingsWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
+        public SettingsWindow(IApplicationHotkeyService hotkeyService, IAppSettingService settingService)
         {
             DataContext = this;
             InitializeComponent();
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.hotkeyService = new DesignerHotkeyService();
+                this.hotkeyService = new DesignerApplicationHotkeyService();
                 SettingService = new DesignerAppSettingService();
             }
             else

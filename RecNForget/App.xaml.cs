@@ -41,7 +41,7 @@ namespace RecNForget
             UnityHandler.CreateContainer();
 
             var appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-            var hotkeyService = UnityHandler.UnityContainer.Resolve<IHotkeyService>();
+            var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
             var actionService = new ActionService();
 
@@ -54,7 +54,7 @@ namespace RecNForget
             HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);
         }
 
-        private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IHotkeyService hotkeyService, bool firstTimeUser)
+        private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService, bool firstTimeUser)
         {
             if (appSettingService.CheckForUpdateOnStart)
             {

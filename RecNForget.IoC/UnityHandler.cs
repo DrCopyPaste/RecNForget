@@ -29,7 +29,7 @@ namespace RecNForget.IoC
             UnityContainer.RegisterType<IAppSettingService, AppSettingService>(lifetimeManager: new SingletonLifetimeManager());
             UnityContainer.RegisterType<ISelectedFileService, SelectedFileService>(lifetimeManager: new SingletonLifetimeManager());
             UnityContainer.RegisterType<IAudioPlaybackService, AudioPlaybackService>(lifetimeManager: new SingletonLifetimeManager());
-            UnityContainer.RegisterType<IHotkeyService, HotkeyService>(lifetimeManager: new SingletonLifetimeManager());
+            UnityContainer.RegisterType<IApplicationHotkeyService, ApplicationHotkeyService>(lifetimeManager: new SingletonLifetimeManager());
             UnityContainer.RegisterType<IAudioRecordingService, AudioRecordingService>(lifetimeManager: new SingletonLifetimeManager());
             // UnityContainer.RegisterType<IActionService, ActionService>(lifetimeManager: new SingletonLifetimeManager());
             // UnityContainer.RegisterType<IMainWindow, MainWindow>();
