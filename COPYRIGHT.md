@@ -12,8 +12,6 @@ Click sounds by [lit-audio@gmx.de](mailto:lit-audio@gmx.de)/[soundcloud.com/wolf
 
 The following libaries are used by RecNForget:
 
-[FMUtils.KeyboardHook.1.0.140.2145](https://github.com/factormystic/FMUtils.KeyboardHook#readme) Copyright (c) Factor Mystic - [License](https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt)
-
 [NAudio.1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
 
 [Nerdbank.GitVersioning.3.2.31](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)

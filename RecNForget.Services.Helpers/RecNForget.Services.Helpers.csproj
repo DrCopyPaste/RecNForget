@@ -50,9 +50,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FMUtils.KeyboardHook">
-      <Version>1.0.140.2145</Version>
-    </PackageReference>
     <PackageReference Include="Nerdbank.GitVersioning">
       <Version>3.2.31</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

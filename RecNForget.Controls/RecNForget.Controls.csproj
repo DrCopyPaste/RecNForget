@@ -363,9 +363,6 @@
     <Resource Include="Images\logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FMUtils.KeyboardHook">
-      <Version>1.0.140.2145</Version>
-    </PackageReference>
     <PackageReference Include="NAudio">
       <Version>1.10.0</Version>
     </PackageReference>

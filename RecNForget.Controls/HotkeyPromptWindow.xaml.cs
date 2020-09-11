@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using FMUtils.KeyboardHook;
 using RecNForget.Controls.Helper;
 using RecNForget.Services;
 using RecNForget.Services.Helpers;

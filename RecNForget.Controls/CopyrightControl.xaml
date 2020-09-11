@@ -41,12 +41,6 @@
 				The following libaries are used by RecNForget:
 			</Run>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/factormystic/FMUtils.KeyboardHook#readme" RequestNavigate="Hyperlink_RequestNavigate">FMUtils.KeyboardHook.1.0.140.2145</Hyperlink>
-			<Run>
-				 Copyright (c) Factor Mystic - 
-			</Run>
-			<Hyperlink NavigateUri="https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
-			<LineBreak />
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio.1.10.0</Hyperlink>
 			<Run>
 				 Copyright (c) Mark Heath &amp; Contributors - 

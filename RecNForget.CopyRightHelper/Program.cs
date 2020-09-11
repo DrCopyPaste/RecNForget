@@ -82,12 +82,12 @@ namespace RecNForget.CopyRightHelper
 
             // ------------------ LIBRARIES LIST ----------------------------------
 
-            AddLibraryLink(
-                libaryName: "FMUtils.KeyboardHook.1.0.140.2145",
-                libraryUrl: "https://github.com/factormystic/FMUtils.KeyboardHook#readme",
-                manufacturerName: "Factor Mystic",
-                licenseCaption: "License",
-                licenseUrl: "https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt");
+            //AddLibraryLink(
+            //    libaryName: "FMUtils.KeyboardHook.1.0.140.2145",
+            //    libraryUrl: "https://github.com/factormystic/FMUtils.KeyboardHook#readme",
+            //    manufacturerName: "Factor Mystic",
+            //    licenseCaption: "License",
+            //    licenseUrl: "https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt");
 
             //AddLibraryLink(
             //    libaryName: "Hardcodet.NotifyIcon.Wpf.1.0.8",
