@@ -2,21 +2,16 @@
 // https://efundies.com/replace-a-color-in-an-image-with-csharp/
 
 using Efundies;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecNForget.ImageConverter
 {
-	public class Program
+    public class Program
 	{
 		public static void Main(string[] args)
 		{
-			string basePath = @"..\..\..\icon_generation\icons";
+			string basePath = @"..\..\..\..\icon_generation\icons";
 			DirectoryInfo baseDirectory = new DirectoryInfo(basePath);
 
 			DirectoryInfo blackImagesFolder = new DirectoryInfo(Path.Combine(basePath, "black"));

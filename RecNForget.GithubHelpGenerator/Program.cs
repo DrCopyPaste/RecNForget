@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Text;
-using RecNForget.Services.Types;
+using RecNForget.Help;
 
 namespace RecNForget.GithubHelpGenerator
 {
@@ -16,8 +16,8 @@ namespace RecNForget.GithubHelpGenerator
     public class Program
     {
         private static string baseUrl = "https://github.com/DrCopyPaste/RecNForget/blob/master/Help/Features/";
-        private static string tocPath = @"..\..\..\Help";
-        private static string featuresPath = @"..\..\..\Help\Features";
+        private static string tocPath = @"..\..\..\..\Help";
+        private static string featuresPath = @"..\..\..\..\Help\Features";
 
         public static void Main(string[] args)
         {
@@ -31,7 +31,7 @@ namespace RecNForget.GithubHelpGenerator
 
             // only cover actual features here (not bugfixes or feature changes or verbose information)
             // ToDo filter out obsolete features like in for NewToVersionDialog (MinVersion/MaxVersion)
-            var allFeatures = Services.Types.HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature);
+            var allFeatures = HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature);
 
             // create a master help page that contains a table of contents with links to all features
             // create an md file for each feature

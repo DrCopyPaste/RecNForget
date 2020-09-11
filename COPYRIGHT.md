@@ -20,7 +20,7 @@ The following libaries are used by RecNForget:
 
 [Octokit.0.40.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
-[Ookii.Dialogs.Wpf.1.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot,Caio Proiete - [License](https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE)
+[Ookii.Dialogs.Wpf.NETCore.2.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot, Caio Proiete, AceOfAces - [License](https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license)
 
 [WiX Toolset build tools v3.11.2.4516](https://wixtoolset.org/) Copyright (c) .NET Foundation - [MS-RL](https://wixtoolset.org/about/license/)
 

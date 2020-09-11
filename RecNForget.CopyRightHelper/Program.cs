@@ -19,9 +19,9 @@ namespace RecNForget.CopyRightHelper
     // <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
     public class Program
     {
-        private static string iconBasePath = @"..\..\..\icon_generation";
-        private static string copyRightFilePath = @"..\..\..\COPYRIGHT.md";
-        private static string copyRightControlPath = @"..\..\..\RecNForget.Controls\CopyrightControl.xaml";
+        private static string iconBasePath = @"..\..\..\..\icon_generation";
+        private static string copyRightFilePath = @"..\..\..\..\COPYRIGHT.md";
+        private static string copyRightControlPath = @"..\..\..\..\RecNForget.Controls\CopyrightControl.xaml";
 
         private static StringBuilder textBlockResultBuilder;
         private static StringBuilder mdFileResultBuilder;
@@ -125,11 +125,11 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Ookii.Dialogs.Wpf.1.1.0",
+                libaryName: "Ookii.Dialogs.Wpf.NETCore.2.1.0",
                 libraryUrl: "https://github.com/caioproiete/ookii-dialogs-wpf",
-                manufacturerName: "Sven Groot,Caio Proiete",
+                manufacturerName: "Sven Groot, Caio Proiete, AceOfAces",
                 licenseCaption: "License",
-                licenseUrl: "https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE");
+                licenseUrl: "https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license");
 
             AddLibraryLink(
                 libaryName: "WiX Toolset build tools v3.11.2.4516",

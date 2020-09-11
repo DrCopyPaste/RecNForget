@@ -65,11 +65,11 @@
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf.1.1.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf.NETCore.2.1.0</Hyperlink>
 			<Run>
-				 Copyright (c) Sven Groot,Caio Proiete - 
+				 Copyright (c) Sven Groot, Caio Proiete, AceOfAces - 
 			</Run>
-			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
+			<Hyperlink NavigateUri="https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
 			<LineBreak />
 			<Hyperlink NavigateUri="https://wixtoolset.org/" RequestNavigate="Hyperlink_RequestNavigate">WiX Toolset build tools v3.11.2.4516</Hyperlink>
 			<Run>
