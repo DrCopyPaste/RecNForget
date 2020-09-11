@@ -47,6 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj">
       <Project>{295D9059-A3AD-4273-9779-64C181ABE364}</Project>
       <Name>RecNForget.Services.Contracts</Name>
@@ -66,6 +69,9 @@
       <Version>6.2.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
+      <Version>4.7.1</Version>
     </PackageReference>
     <PackageReference Include="Unity">
       <Version>5.11.7</Version>

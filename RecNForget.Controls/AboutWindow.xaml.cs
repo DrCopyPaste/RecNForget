@@ -28,8 +28,8 @@ namespace RecNForget.Controls
             DataContext = this;
             InitializeComponent();
 
-            var assemblyInformationalVersion = ThisAssembly.AssemblyInformationalVersion;
-            var assemblyFileVersion = new Version(ThisAssembly.AssemblyFileVersion);
+            var assemblyInformationalVersion = appSettingService.RuntimeInformalVersionString;
+            var assemblyFileVersion = new Version(appSettingService.RuntimeVersionString);
 
             AppNameAndVersion.Text = string.Format("RecNForget {0}", string.Format("{0}.{1}.{2}", assemblyFileVersion.Major, assemblyFileVersion.Minor, assemblyFileVersion.Build));
             VersionLabel.Text = string.Format("{0} - v{1}", "VersionTitle?", assemblyInformationalVersion);

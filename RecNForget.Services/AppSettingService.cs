@@ -370,6 +370,9 @@ namespace RecNForget.Services
             }
         }
 
+        public string RuntimeVersionString => ThisAssembly.AssemblyFileVersion;
+        public string RuntimeInformalVersionString => ThisAssembly.AssemblyInformationalVersion;
+
         public void RemoveAppConfigSettingFile()
         {
             // check if user config file exists

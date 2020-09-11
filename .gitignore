@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # Diese .gitignore-Datei wurde von Microsoft(R) Visual Studio automatisch erstellt.
 ################################################################################
 
@@ -65,6 +65,7 @@
 /.vs
 /MigrationBackup
 /RecNForget/obj
+/RecNForget.Controls/obj
 /RecNForget.CopyRightHelper/obj
 /RecNForget.GithubHelpGenerator/obj
 /RecNForget.Help/obj

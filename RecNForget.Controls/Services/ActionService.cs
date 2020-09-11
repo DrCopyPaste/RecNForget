@@ -113,7 +113,7 @@ namespace RecNForget.Controls.Services
         {
             try
             {
-                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: ThisAssembly.AssemblyFileVersion);
+                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: appSettingService.RuntimeVersionString);
 
                 if (newerReleases.Any())
                 {
