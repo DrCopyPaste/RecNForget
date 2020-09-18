@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
+using PressingIssue.Services.Contracts;
+using PressingIssue.Services.Contracts.Events;
 using RecNForget.Controls.Helper;
-using RecNForget.Services;
+using RecNForget.IoC;
+using RecNForget.Services.Designer;
 using RecNForget.Services.Helpers;
+using Unity;
 
 namespace RecNForget.Controls
 {
@@ -14,13 +16,27 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class HotkeyPromptWindow : Window
     {
+        private readonly ISimpleGlobalHotkeyService simpleGlobalHotkeyService = null;
+
         public HotkeyPromptWindow(string title)
         {
             DataContext = this;
             InitializeComponent();
 
-            this.Title = title;
-            this.KeyDown += HotkeyPromptWindow_KeyDown;
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                this.simpleGlobalHotkeyService = new DesignerSimpleGlobalHotkeyService();
+            }
+            else
+            {
+                this.Title = title;
+                this.simpleGlobalHotkeyService = UnityHandler.UnityContainer.Resolve<ISimpleGlobalHotkeyService>();
+
+                this.simpleGlobalHotkeyService.ProcessingHotkeys = false;
+                this.simpleGlobalHotkeyService.KeyEvent += SimpleGlobalHotkeyService_KeyEvent;
+
+                this.Closing += HotkeyPromptWindow_Closing;
+            }
         }
 
         public string HotkeysAppSetting
@@ -37,37 +53,36 @@ namespace RecNForget.Controls
             }
         }
 
-        private void HotkeyPromptWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void SimpleGlobalHotkeyService_KeyEvent(object sender, SimpleGlobalHotkeyServiceEventArgs e)
         {
-            var currentModifiers = Keyboard.Modifiers;
-
-            if (HotkeyDisplay.Children.Count > 0)
+            if (e.KeyDown)
             {
-                HotkeyDisplay.Children.Clear();
-            }
+                var currentModifiers = Keyboard.Modifiers;
 
-            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                hotkeys: HotkeySettingTranslator.GetKeyEventArgsAsList(e, currentModifiers, string.Empty, string.Empty),
-                buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
-                spacing: 6);
-
-            HotkeyDisplay.Children.Add(buttonGrid);
-
-            if (e.Key != Key.None && !HotkeySettingTranslator.ModifierKeys.Contains(e.Key))
-            {
-                try
+                if (HotkeyDisplay.Children.Count > 0)
                 {
-                    KeyGesture gesture = new KeyGesture(e.Key, currentModifiers);
-                    HotkeysAppSetting = HotkeySettingTranslator.GetSettingStringFromKeyGesture(gesture);
+                    HotkeyDisplay.Children.Clear();
+                }
 
+                var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
+                    hotkeys: HotkeySettingTranslator.GetKeyEventArgsAsList(e, currentModifiers, string.Empty, string.Empty),
+                    buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
+                    spacing: 6);
+
+                HotkeyDisplay.Children.Add(buttonGrid);
+
+                if (e.Key != "None")
+                {
+                    HotkeysAppSetting = e.AsSettingString;
                     DialogResult = true;
                 }
-                catch (NotSupportedException ex)
-                {
-                    // silently ignore this
-                    // this means we cannot assign this hotkey without modifiers (this is true for most keys like A-Z, but not for others like F1-F12 or Pause, etc.)
-                }
             }
+        }
+
+        private void HotkeyPromptWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.simpleGlobalHotkeyService.KeyEvent -= SimpleGlobalHotkeyService_KeyEvent;
+            this.simpleGlobalHotkeyService.ProcessingHotkeys = true;
         }
     }
 }

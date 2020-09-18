@@ -18,6 +18,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj" />
+  </ItemGroup>
   
 
 </Project>

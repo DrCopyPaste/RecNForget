@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PressingIssue.Services.Contracts.Events;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace RecNForget.Services.Helpers
@@ -102,12 +103,12 @@ namespace RecNForget.Services.Helpers
         //    return keys;
         //}
 
-        public static string GetKeyEventArgsAsString(System.Windows.Input.KeyEventArgs keyEventArgs, ModifierKeys modifiers, string keySeparator = " + ", string keyStart = "[", string keyEnd = "]")
+        public static string GetKeyEventArgsAsString(SimpleGlobalHotkeyServiceEventArgs keyEventArgs, ModifierKeys modifiers, string keySeparator = " + ", string keyStart = "[", string keyEnd = "]")
         {
             return string.Join(keySeparator, GetKeyEventArgsAsList(keyEventArgs, modifiers, keyStart, keyEnd));
         }
 
-        public static List<string> GetKeyEventArgsAsList(System.Windows.Input.KeyEventArgs keyEventArgs, ModifierKeys modifiers, string keyStart = "[", string keyEnd = "]")
+        public static List<string> GetKeyEventArgsAsList(SimpleGlobalHotkeyServiceEventArgs keyEventArgs, ModifierKeys modifiers, string keyStart = "[", string keyEnd = "]")
         {
             List<string> keys = new List<string>();
 
@@ -133,7 +134,7 @@ namespace RecNForget.Services.Helpers
             }
 
             // actual hotkey
-            if (keyEventArgs.Key != Key.None && !ModifierKeys.Contains(keyEventArgs.Key))
+            if (keyEventArgs.Key != "None")
             {
                 keys.Add(keyStart + keyEventArgs.Key.ToString() + keyEnd);
             }

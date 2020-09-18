@@ -41,12 +41,13 @@ namespace RecNForget
             UnityHandler.CreateContainer();
 
             var appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-            var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
-
-            var actionService = new ActionService();
 
             // ensure AppConfig Values exist
             bool firstTimeUser = appSettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+
+            var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
+
+            var actionService = new ActionService();
 
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
             MainWindow mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
