@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>0.0.0.0</ProductVersion>
+    <ProjectGuid>0de40921-5e11-499f-81ab-c28d267cf4a6</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>RecNForget.Setup.$(ProductVersion)</OutputName>
+    <OutputType>Package</OutputType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+    <WixVariables>ProductVersion=$(ProductVersion)</WixVariables>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <SuppressPdbOutput>true</SuppressPdbOutput>
+    <WixVariables>ProductVersion=$(ProductVersion)</WixVariables>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ComponentsGenerated.wxs" />
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="apache2.license.rtf" />
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RecNForget\RecNForget.csproj">
+      <Name>RecNForget</Name>
+      <Project>{82ac7d19-6718-4294-a099-db75b5d5c277}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+    <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent />
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent />
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Nerdbank.GitVersioning.3.2.31\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Nerdbank.GitVersioning.3.2.31\build\Nerdbank.GitVersioning.targets'))" />
+  </Target>
+  <Import Project="..\packages\Nerdbank.GitVersioning.3.2.31\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\packages\Nerdbank.GitVersioning.3.2.31\build\Nerdbank.GitVersioning.targets')" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets. -->
+  <Target Name="BeforeBuild">
+    <RemoveDir Directories="bin\publish" />
+    <Exec Command="dotnet publish ..\RecNForget\RecNForget.csproj -c $(Configuration) -r win-$(Platform) -o bin\publish" />
+
+    <GetAssemblyIdentity AssemblyFiles="bin\publish\RecNForget.dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
+    </GetAssemblyIdentity>
+    
+    <PropertyGroup>
+      <DefineConstants>BuildVersion=%(AssemblyVersion.Version)</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <DefineConstants>BasePath=bin\publish</DefineConstants>
+    </PropertyGroup>
+
+    <HeatDirectory
+      OutputFile="ComponentsGenerated.wxs"
+      DirectoryRefId="INSTALLFOLDER"
+      ComponentGroupName="PublishedComponents"
+      SuppressCom="true"
+      Directory="bin\publish"
+      SuppressFragments="true"
+      SuppressRegistry="true"
+      SuppressRootDirectory="true"
+      AutoGenerateGuids="false"
+      GenerateGuidsNow="true"
+      ToolPath="$(WixToolPath)"
+      PreprocessorVariable="var.BasePath"/>
+  </Target>
+  <!--
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

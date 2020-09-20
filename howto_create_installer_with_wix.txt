@@ -3,8 +3,11 @@ how to create an upgrade:
 - DO NOT CHANGE the naming pattern of the msi files (RecNForget.Setup.A.B.C.D.msi)
 
 great video tutorials:
+https://www.youtube.com/watch?v=6Yf-eDsRrnM
 https://www.youtube.com/watch?v=usOh3NQO9Ms
 https://www.youtube.com/watch?v=VEaNe9ZVmeU
+
+https://stackoverflow.com/questions/471424/wix-tricks-and-tips
 
 getting started:
 - get toolset from wixtoolset.org (appropriate to your vs installation)
