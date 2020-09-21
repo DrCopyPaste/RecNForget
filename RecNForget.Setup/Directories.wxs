@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="InstallProgramMenuFolder" Name="!(loc.Product_FolderName)" />
+      </Directory>
+    
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="MANUFACTURERFOLDER" Name="!(loc.Product_Manufacturer)">
+          <Directory Id="INSTALLFOLDER" Name="!(loc.Product_FolderName)" />
+        </Directory>
+      </Directory>
+      
+    </Directory>
+  </Fragment>
+</Wix>
