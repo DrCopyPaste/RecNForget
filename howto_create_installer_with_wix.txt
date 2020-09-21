@@ -1,9 +1,6 @@
 how to create an upgrade:
 - change first 2 digits via version.json if needed, 
 - DO NOT CHANGE the naming pattern of the msi files (RecNForget.Setup.A.B.C.D.msi)
-- if application files were added/removed activate HeatDirectory-Section manually for local build once (see wixproj file) and build setup to regenerate components
--- update WixShellExecTarget Value= with newly generated file id
--- update BuildVersion="!(bind.FileVersion. with newly generated file id
 
 if you messed up a wix installation that cannot be uninstalled via "add/remove programs":
 - installation creates a subfolder under C:\Windows\Installer\{Product-Code} // so it is useful to have that hardcoded as long as you are making changes
