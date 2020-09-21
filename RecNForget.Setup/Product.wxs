@@ -63,23 +63,37 @@
 
     <!-- REINSTATE this to remove app settings/autostart when uninstalling (BUT NOT when upgrading!!!)
     <InstallExecuteSequence>
-      <Custom Action="RemoveUserAppData" Before="InstallFinalize">Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+      <Custom Action="QtExecDeferredExampleWithProperty" Before="InstallFinalize">Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
     </InstallExecuteSequence>    
--->
+    
+    -->
+    
     <CustomAction
       Id="LaunchApplication"
       BinaryKey="WixCA"
       DllEntry="WixShellExec"
       Impersonate="yes" />
 
-    <!--
+<!--
+    <SetProperty
+      Id="QtExecDeferredExampleWithProperty"
+      Value='del %appdata%\RecNForget\*.* /Q /F'
+      Before="QtExecDeferredExampleWithProperty"
+      Sequence="execute"/>
+    
+    <CustomAction Id="QtExecDeferredExampleWithProperty" BinaryKey="WixCA" DllEntry="WixQuietExec"
+                Execute="deferred" Return="ignore" Impersonate="yes"/>
+                
+                -->
+<!--
     <CustomAction
       Id='RemoveUserAppData'
-      Directory="INSTALLFOLDER"
+      Directory="TempFolder"
       Execute='deferred'
       ExeCommand='del %appdata%\RecNForget\*.* /Q /F'
       Return='ignore'/>
--->
+    -->
+    
     <!-- REINSTATE this to remove app settings/autostart when uninstalling (BUT NOT when upgrading!!!)
     <CustomAction Id="RemoveApplicationSettingsCA" Return="check" Execute="immediate" BinaryKey="CustomActionDll" DllEntry="RemoveApplicationSettings" />
     -->
