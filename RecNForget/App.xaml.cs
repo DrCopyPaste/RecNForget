@@ -36,11 +36,25 @@ namespace RecNForget
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-
             UnityHandler.CreateContainer();
-
             var appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
+
+            if (e.Args.Length > 0 && !string.IsNullOrEmpty(e.Args[0]) && e.Args[0] == "-removeAppData")
+            {
+                try
+                {
+                    appSettingService.AutoStartWithWindows = false;
+                    appSettingService.RemoveAppConfigSettingFile();
+
+                    Environment.Exit(0);
+                }
+                catch
+                {
+                    Environment.Exit(1);
+                }
+            }
+
+            base.OnStartup(e);
 
             // ensure AppConfig Values exist
             bool firstTimeUser = appSettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
