@@ -58,7 +58,7 @@ namespace RecNForget.Services
 
                 if (value == true)
                 {
-                    regKey.SetValue(AppSettingService.applicationName_Key, System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    regKey.SetValue(AppSettingService.applicationName_Key, System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
                 }
                 else
                 {
