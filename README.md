@@ -37,6 +37,7 @@ But, if you feel extra keen to try out the latest, you can
 (downloading is currently only allowed for github users it seems)
 
 # upcoming features in next release
+- upgraded application to .net core 3.1
 - selected file control now also shows file size and play length
 - removed borders from textboxes
 
