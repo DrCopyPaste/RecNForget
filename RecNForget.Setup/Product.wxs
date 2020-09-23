@@ -48,7 +48,7 @@
     <Property Id="WixShellExecTarget" Value="[#fil9BE7C4984D504B6393D728C84A0E0626]" />
 
     <!-- if enabled logs to %temp%\MSI[someid].Log-->
-    <Property Id="MsiLogging" Value="v" />
+    <!-- <Property Id="MsiLogging" Value="v" /> -->
 
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
     <WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)..\icon_generation\installerImages\WixUIBannerBmp.bmp" />
