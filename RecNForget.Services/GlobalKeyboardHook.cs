@@ -300,10 +300,6 @@ namespace PressingIssue.Services.Win32
 
         private IntPtr HookCallbackFunction(int code, IntPtr wParam, IntPtr lParam)
         {
-#if DEBUG
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-#endif
 
             if (code >= 0)
             {
@@ -315,23 +311,13 @@ namespace PressingIssue.Services.Win32
                     try
                     {
                         KeyEvent?.Invoke(this, new GlobalKeyboardHookEventArgs(wParam, lParam));
-
-#if DEBUG
-                        logger.Info($"{nameof(GlobalKeyboardHook)} [{Guid}] invoking keyevent took: {stopwatch.ElapsedMilliseconds} ms");
-#endif
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        // "silently" ignore any errors when triggering key hook events
-                        logger.Error(ex, $"{nameof(GlobalKeyboardHook)} [{Guid}] An error occurred trying to trigger the key hook event.");
+                        // silently ignore any errors when triggering events
                     }
                 }
             }
-
-#if DEBUG
-            stopwatch.Stop();
-            logger.Info($"{nameof(GlobalKeyboardHook)} [{Guid}] processing HookCallbackFunction took: {stopwatch.ElapsedMilliseconds} ms");
-#endif
 
             //you need to call CallNextHookEx without further processing
             //and return the value returned by CallNextHookEx
@@ -343,21 +329,18 @@ namespace PressingIssue.Services.Win32
         private IntPtr currentHook = IntPtr.Zero;
         private Guid guid = Guid.NewGuid();
         private readonly HookProc myCallbackDelegate = null;
-        private readonly NLog.Logger logger = null;
 
         public event EventHandler<GlobalKeyboardHookEventArgs> KeyEvent;
         public Guid Guid { get => guid; private set => guid = value; }
 
         public GlobalKeyboardHook()
         {
-            logger = NLog.LogManager.GetCurrentClassLogger();
             this.myCallbackDelegate = new HookProc(this.HookCallbackFunction);
         }
 
         public void Start()
         {
             Guid = Guid.NewGuid();
-            logger.Info($"{nameof(GlobalKeyboardHook)} [{Guid}] started.");
 
             using Process process = Process.GetCurrentProcess();
             using ProcessModule module = process.MainModule;
@@ -367,7 +350,6 @@ namespace PressingIssue.Services.Win32
             if (currentHook == IntPtr.Zero)
             {
                 int errorCode = Marshal.GetLastWin32Error();
-                logger.Error($"{nameof(GlobalKeyboardHook)} [{Guid}] could not start keyboard hook. ({errorCode})");
                 throw new Win32Exception(errorCode, $"Could not start keyboard hook for '{Process.GetCurrentProcess().ProcessName}'. Error {errorCode}: {new Win32Exception(Marshal.GetLastWin32Error()).Message}.");
             }
         }
@@ -379,12 +361,10 @@ namespace PressingIssue.Services.Win32
                 if (!UnhookWindowsHookEx(currentHook))
                 {
                     int errorCode = Marshal.GetLastWin32Error();
-                    logger.Error($"{nameof(GlobalKeyboardHook)} [{Guid}] error on trying to dispose keyboard hook. ({errorCode})");
                     throw new Win32Exception(errorCode, $"Error on trying to remove keyboard hook for '{Process.GetCurrentProcess().ProcessName}'. Error {errorCode}: {new Win32Exception(Marshal.GetLastWin32Error()).Message}.");
                 }
 
                 currentHook = IntPtr.Zero;
-                logger.Info($"{nameof(GlobalKeyboardHook)} [{Guid}] stopped.");
             }
         }
 

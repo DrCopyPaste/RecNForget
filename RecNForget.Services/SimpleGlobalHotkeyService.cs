@@ -219,7 +219,6 @@ namespace PressingIssue.Services.Win32
 
         #endregion
 
-        private readonly NLog.Logger logger = null;
         private readonly GlobalKeyboardHook keyboardHook = null;
         private readonly HashSet<string> modifierKeys = null;
 
@@ -235,8 +234,6 @@ namespace PressingIssue.Services.Win32
 
         public SimpleGlobalHotkeyService()
         {
-            logger = NLog.LogManager.GetCurrentClassLogger();
-
             modifierKeys = new HashSet<string>()
             {
                 Keys.Control.ToString(),
@@ -262,10 +259,6 @@ namespace PressingIssue.Services.Win32
 
         private void KeyboardHookEvent(object sender, GlobalKeyboardHook.GlobalKeyboardHookEventArgs e)
         {
-#if DEBUG
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-#endif
             if (e.KeyDown)
             {
                 var pressedKeysAsConfig = GetPressedKeysAsSetting(e);
@@ -276,10 +269,6 @@ namespace PressingIssue.Services.Win32
                 }
 
                 KeyChangedEvent(e, pressedKeysAsConfig);
-
-#if DEBUG
-                logger.Info($"{nameof(SimpleGlobalHotkeyService)} processed KeyDown event with setting string ({pressedKeysAsConfig}) and took: {stopwatch.ElapsedMilliseconds} ms");
-#endif
             }
             else if (e.KeyUp)
             {
@@ -293,31 +282,19 @@ namespace PressingIssue.Services.Win32
                 var pressedKeysAsConfig = GetPressedKeysAsSetting(e);
 
                 KeyChangedEvent(e, pressedKeysAsConfig);
-
-#if DEBUG
-                logger.Info($"{nameof(SimpleGlobalHotkeyService)} processed KeyUp event with setting string ({pressedKeysAsConfig}) and took: {stopwatch.ElapsedMilliseconds} ms");
-#endif
             }
         }
 
         private void KeyChangedEvent(GlobalKeyboardHook.GlobalKeyboardHookEventArgs e, string pressedKeysAsConfig)
         {
-#if DEBUG
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-#endif
             try
             {
                 KeyEvent?.Invoke(this, new SimpleGlobalHotkeyServiceEventArgs(e.KeyDown, e.KeyName, pressedKeysAsConfig));
             }
-            catch (Exception ex)
+            catch
             {
-                // "silently" ignore any errors when triggering events
-                logger.Error(ex, $"{nameof(SimpleGlobalHotkeyService)} An error occurred trying to trigger the custom hotkeyservice event.");
+                // silently ignore any errors when triggering events
             }
-#if DEBUG
-            logger.Info($"{nameof(SimpleGlobalHotkeyService)} invoked KeyEvent  and took: {stopwatch.ElapsedMilliseconds} ms");
-#endif
         }
 
         private string GetPressedKeysAsSetting(GlobalKeyboardHook.GlobalKeyboardHookEventArgs e)
@@ -374,13 +351,11 @@ namespace PressingIssue.Services.Win32
                 {
                     try
                     {
-                        // only one action per hotkey allowed atm (dictionary), but that may change
-                        logger.Info($"{nameof(SimpleGlobalHotkeyService)} invoking Quickcast hotkey with setting string ({pressedKeysAsConfig})");
                         quickCastHotkeys[pressedKeysAsConfig].Invoke();
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        logger.Error(ex, $"{nameof(SimpleGlobalHotkeyService)} An error occurred trying to trigger action for quick cast hotkey '{pressedKeysAsConfig}'");
+                        // silently ignore any errors when triggering events
                     }
                 }
             }
@@ -388,17 +363,10 @@ namespace PressingIssue.Services.Win32
             {
                 ResetHotkeyPressedStates();
             }
-#if DEBUG
-            logger.Info($"{nameof(SimpleGlobalHotkeyService)} processed hotkey down event with setting string ({pressedKeysAsConfig}) and took: {stopwatch.ElapsedMilliseconds} ms");
-#endif
         }
 
         private void ProcessHotkeysUp()
         {
-#if DEBUG
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-#endif
             if (onReleaseHotkeys.Any())
             {
                 var hotkeysWaitingForRelease = onReleaseHotkeys.Where(h => hotkeyPressedStates.ContainsKey(h.Key) && hotkeyPressedStates[h.Key]);
@@ -410,19 +378,15 @@ namespace PressingIssue.Services.Win32
                     {
                         try
                         {
-                            logger.Info($"{nameof(SimpleGlobalHotkeyService)} invoking OnRelease hotkey with setting string ({hotkeyAction.Key})");
                             hotkeyAction.Value.Invoke();
                         }
-                        catch (Exception ex)
+                        catch
                         {
-                            logger.Error(ex, $"{nameof(SimpleGlobalHotkeyService)} An error occurred trying to trigger action for on-release hotkey '{hotkeyAction.Key}'");
+                            // silently ignore any errors when triggering events
                         }
                     }
                 }
             }
-#if DEBUG
-            logger.Info($"{nameof(SimpleGlobalHotkeyService)} processing hotkey up event took: {stopwatch.ElapsedMilliseconds} ms");
-#endif
         }
 
         public void Start(bool processHotkeys = true)
