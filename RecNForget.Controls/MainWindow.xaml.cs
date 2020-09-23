@@ -89,7 +89,7 @@ namespace RecNForget.Controls
 
                 trayIcon = new System.Windows.Forms.NotifyIcon
                 {
-                    Icon = System.Drawing.Icon.ExtractAssociatedIcon(Assembly.GetExecutingAssembly().Location),
+                    Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName),
                     Visible = true
                 };
 
