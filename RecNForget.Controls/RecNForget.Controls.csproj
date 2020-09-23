@@ -1,396 +1,212 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{19D9A9C2-3471-4512-AC5F-DE1277374A77}</ProjectGuid>
-    <OutputType>library</OutputType>
-    <RootNamespace>RecNForget.Controls</RootNamespace>
-    <AssemblyName>RecNForget.Controls</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Images\logo.ico</ApplicationIcon>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Design" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <None Remove="Images\logo.ico" />
+    <None Remove="Images\logo_big.png" />
+    <None Remove="Themes\ButtonImages\accept_icon518267.black.png" />
+    <None Remove="Themes\ButtonImages\accept_icon518267.black.white.png" />
+    <None Remove="Themes\ButtonImages\bugfix_icon140609.black.png" />
+    <None Remove="Themes\ButtonImages\cancel_icon428740.black.png" />
+    <None Remove="Themes\ButtonImages\close_icon211720.black.png" />
+    <None Remove="Themes\ButtonImages\close_icon349388.black.png" />
+    <None Remove="Themes\ButtonImages\download_icon602.black.png" />
+    <None Remove="Themes\ButtonImages\editSetting_icon451737.black.png" />
+    <None Remove="Themes\ButtonImages\folder_icon122592.black.png" />
+    <None Remove="Themes\ButtonImages\help_icon544157.black.png" />
+    <None Remove="Themes\ButtonImages\information_icon2132.black.png" />
+    <None Remove="Themes\ButtonImages\information_icon280732.black.png" />
+    <None Remove="Themes\ButtonImages\lightbulb_icon372420.black.png" />
+    <None Remove="Themes\ButtonImages\message_error_icon304479.black.png" />
+    <None Remove="Themes\ButtonImages\message_info_icon277439.black.png" />
+    <None Remove="Themes\ButtonImages\message_question_icon109120.black.png" />
+    <None Remove="Themes\ButtonImages\minimize_icon246566.black.png" />
+    <None Remove="Themes\ButtonImages\nextTrack_icon.black.disabled.png" />
+    <None Remove="Themes\ButtonImages\nextTrack_icon.black.png" />
+    <None Remove="Themes\ButtonImages\openFolder_icon356582.black.png" />
+    <None Remove="Themes\ButtonImages\pause_icon.black.disabled.png" />
+    <None Remove="Themes\ButtonImages\pause_icon.black.png" />
+    <None Remove="Themes\ButtonImages\pencil_icon353603.black.png" />
+    <None Remove="Themes\ButtonImages\pencil_icon79516.black.disabled.png" />
+    <None Remove="Themes\ButtonImages\pencil_icon79516.black.png" />
+    <None Remove="Themes\ButtonImages\play_icon.black.disabled.png" />
+    <None Remove="Themes\ButtonImages\play_icon.black.png" />
+    <None Remove="Themes\ButtonImages\plus_icon171498.black.png" />
+    <None Remove="Themes\ButtonImages\prevTrack_icon.black.disabled.png" />
+    <None Remove="Themes\ButtonImages\prevTrack_icon.black.png" />
+    <None Remove="Themes\ButtonImages\record_icon.black.disabled.png" />
+    <None Remove="Themes\ButtonImages\record_icon.black.png" />
+    <None Remove="Themes\ButtonImages\settings_icon40863.black.png" />
+    <None Remove="Themes\ButtonImages\settings_icon40863.black.white.png" />
+    <None Remove="Themes\ButtonImages\shutDown_icon170336.black.png" />
+    <None Remove="Themes\ButtonImages\stop_icon.black.disabled.png" />
+    <None Remove="Themes\ButtonImages\stop_icon.black.png" />
+    <None Remove="Themes\ButtonImages\tools_icon536263.black.png" />
+    <None Remove="Themes\ButtonImages\trash_icon77730.black.disabled.png" />
+    <None Remove="Themes\ButtonImages\trash_icon77730.black.png" />
+    <None Remove="Themes\ButtonImages\windowSettings_icon248857.black.png" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="AboutWindow.xaml.cs">
-      <DependentUpon>AboutWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DownloadDialog.xaml.cs">
-      <DependentUpon>DownloadDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\WindowExtensions.cs" />
-    <Compile Include="Helper\HotkeyRenderer.cs" />
-    <Compile Include="HelpWindow.xaml.cs">
-      <DependentUpon>HelpWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HotkeyPromptWindow.xaml.cs">
-      <DependentUpon>HotkeyPromptWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewToApplicationWindow.xaml.cs">
-      <DependentUpon>NewToApplicationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewToVersionDialog.xaml.cs">
-      <DependentUpon>NewToVersionDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="QuickTipDialog.xaml.cs">
-      <DependentUpon>QuickTipDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RecordingAndPlaybackControl.xaml.cs">
-      <DependentUpon>RecordingAndPlaybackControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OutputPathControl.xaml.cs">
-      <DependentUpon>OutputPathControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ReleaseInstallationDialog.xaml.cs">
-      <DependentUpon>ReleaseInstallationDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Services\ActionService.cs" />
-    <Compile Include="CustomMessageBox\CustomMessageBox.xaml.cs">
-      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomMessageBox\CustomMessageBoxButtons.cs" />
-    <Compile Include="CustomMessageBox\CustomMessageBoxFocus.cs" />
-    <Compile Include="CustomMessageBox\CustomMessageBoxIcon.cs" />
-    <Compile Include="CustomMessageBox\CustomMessageBoxPromptValidation.cs" />
-    <Compile Include="ImageButton.cs" />
-    <Compile Include="Services\UpdateChecker.cs" />
-    <Compile Include="SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
-    </Compile>
+    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
   </ItemGroup>
+
   <ItemGroup>
-    <Page Include="AboutWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CopyrightControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CustomMessageBox\CustomMessageBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DownloadDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="HelpWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="HotkeyPromptWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NewToApplicationWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NewToVersionDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="QuickTipDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="RecordingAndPlaybackControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="OutputPathControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ReleaseInstallationDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SelectedFileControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="SettingsWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Simple_White.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CopyrightControl.xaml.cs">
-      <DependentUpon>CopyrightControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\ControlExtensions.cs" />
-    <Compile Include="Extensions\FrameworkElementExtensions.cs" />
-    <Compile Include="Extensions\GridExtensions.cs" />
-    <Compile Include="Extensions\HttpClientExtensions.cs" />
-    <Compile Include="Extensions\StreamExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="SelectedFileControl.xaml.cs">
-      <DependentUpon>SelectedFileControl.xaml</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj">
-      <Project>{432066be-8089-4dbc-8d67-755351a57003}</Project>
-      <Name>RecNForget.Help</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj">
-      <Project>{5655259B-8432-46CD-A7CD-F24A15F97A87}</Project>
-      <Name>RecNForget.IoC</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj">
-      <Project>{295D9059-A3AD-4273-9779-64C181ABE364}</Project>
-      <Name>RecNForget.Services.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RecNForget.Services.Designer\RecNForget.Services.Designer.csproj">
-      <Project>{28409155-01ca-4f0b-8a8d-54e8e76ea7fd}</Project>
-      <Name>RecNForget.Services.Designer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RecNForget.Services.Helpers\RecNForget.Services.Helpers.csproj">
-      <Project>{90691580-47FE-44E5-9659-47A23D5CEAC6}</Project>
-      <Name>RecNForget.Services.Helpers</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\accept_icon518267.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\accept_icon518267.black.white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\bugfix_icon140609.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\cancel_icon428740.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\close_icon211720.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\close_icon349388.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\download_icon602.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\editSetting_icon451737.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\folder_icon122592.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\help_icon544157.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\information_icon2132.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\information_icon280732.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\lightbulb_icon372420.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\message_error_icon304479.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\message_info_icon277439.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\message_question_icon109120.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\minimize_icon246566.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\nextTrack_icon.black.disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\nextTrack_icon.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\openFolder_icon356582.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\pause_icon.black.disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\pause_icon.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\pencil_icon353603.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\pencil_icon79516.black.disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\pencil_icon79516.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\play_icon.black.disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\play_icon.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\plus_icon171498.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\prevTrack_icon.black.disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\prevTrack_icon.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\record_icon.black.disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\record_icon.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\settings_icon40863.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\settings_icon40863.black.white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\shutDown_icon170336.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\stop_icon.black.disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\stop_icon.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\tools_icon536263.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\trash_icon77730.black.disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\trash_icon77730.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Themes\ButtonImages\windowSettings_icon248857.black.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\logo_big.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="FMUtils.KeyboardHook">
-      <Version>1.0.140.2145</Version>
-    </PackageReference>
-    <PackageReference Include="NAudio">
-      <Version>1.10.0</Version>
-    </PackageReference>
-    <PackageReference Include="Nerdbank.GitVersioning">
-      <Version>3.2.31</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31">
       <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Octokit">
-      <Version>0.48.0</Version>
-    </PackageReference>
-    <PackageReference Include="Ookii.Dialogs.Wpf">
-      <Version>1.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="StyleCop.MSBuild">
-      <Version>6.2.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
-      <Version>4.7.1</Version>
-    </PackageReference>
-    <PackageReference Include="Unity">
-      <Version>5.11.7</Version>
-    </PackageReference>
+    <PackageReference Include="Octokit" Version="0.48.0" />
+    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.1.0" />
+    <PackageReference Include="Unity" Version="5.11.7" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
+    <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
+    <ProjectReference Include="..\RecNForget.Services.Designer\RecNForget.Services.Designer.csproj" />
+    <ProjectReference Include="..\RecNForget.Services.Helpers\RecNForget.Services.Helpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\logo.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\logo_big.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\accept_icon518267.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\accept_icon518267.black.white.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\bugfix_icon140609.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\cancel_icon428740.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\close_icon211720.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\close_icon349388.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\download_icon602.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\editSetting_icon451737.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\folder_icon122592.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\help_icon544157.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\information_icon2132.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\information_icon280732.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\lightbulb_icon372420.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\message_error_icon304479.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\message_info_icon277439.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\message_question_icon109120.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\minimize_icon246566.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\nextTrack_icon.black.disabled.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\nextTrack_icon.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\openFolder_icon356582.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\pause_icon.black.disabled.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\pause_icon.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\pencil_icon353603.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\pencil_icon79516.black.disabled.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\pencil_icon79516.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\play_icon.black.disabled.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\play_icon.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\plus_icon171498.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\prevTrack_icon.black.disabled.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\prevTrack_icon.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\record_icon.black.disabled.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\record_icon.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\settings_icon40863.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\settings_icon40863.black.white.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\shutDown_icon170336.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\stop_icon.black.disabled.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\stop_icon.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\tools_icon536263.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\trash_icon77730.black.disabled.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\trash_icon77730.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\ButtonImages\windowSettings_icon248857.black.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
 </Project>

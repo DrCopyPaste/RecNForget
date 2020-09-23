@@ -6,3 +6,5 @@ To change this setting:
 - click on 'Open Settings'
 - click on 'show toast messages'
 - exit the settings window by pressing the accept button
+
+Keep in mind that system sounds coming from toast messages can be configured via Taskbar->Settings in Windows itself.

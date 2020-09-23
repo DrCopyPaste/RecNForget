@@ -12,8 +12,6 @@ Click sounds by [lit-audio@gmx.de](mailto:lit-audio@gmx.de)/[soundcloud.com/wolf
 
 The following libaries are used by RecNForget:
 
-[FMUtils.KeyboardHook.1.0.140.2145](https://github.com/factormystic/FMUtils.KeyboardHook#readme) Copyright (c) Factor Mystic - [License](https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt)
-
 [NAudio.1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
 
 [Nerdbank.GitVersioning.3.2.31](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
@@ -22,7 +20,7 @@ The following libaries are used by RecNForget:
 
 [Octokit.0.40.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
-[Ookii.Dialogs.Wpf.1.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot,Caio Proiete - [License](https://github.com/caioproiete/ookii-dialogs-wpf/blob/master/LICENSE)
+[Ookii.Dialogs.Wpf.NETCore.2.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot, Caio Proiete, AceOfAces - [License](https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license)
 
 [WiX Toolset build tools v3.11.2.4516](https://wixtoolset.org/) Copyright (c) .NET Foundation - [MS-RL](https://wixtoolset.org/about/license/)
 

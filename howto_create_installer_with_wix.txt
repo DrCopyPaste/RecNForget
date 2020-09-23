@@ -2,9 +2,17 @@ how to create an upgrade:
 - change first 2 digits via version.json if needed, 
 - DO NOT CHANGE the naming pattern of the msi files (RecNForget.Setup.A.B.C.D.msi)
 
+if you messed up a wix installation that cannot be uninstalled via "add/remove programs":
+- installation creates a subfolder under C:\Windows\Installer\{Product-Code} // so it is useful to have that hardcoded as long as you are making changes
+(and only changing it to * when you are sure it works)
+- but for a quick and dirty removal, you can search registry for you application name under Computer\HKEY_CLASSES_ROOT\Installer\Products and remove the keys you do not want
+
 great video tutorials:
+https://www.youtube.com/watch?v=6Yf-eDsRrnM
 https://www.youtube.com/watch?v=usOh3NQO9Ms
 https://www.youtube.com/watch?v=VEaNe9ZVmeU
+
+https://stackoverflow.com/questions/471424/wix-tricks-and-tips
 
 getting started:
 - get toolset from wixtoolset.org (appropriate to your vs installation)

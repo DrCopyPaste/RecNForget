@@ -79,7 +79,7 @@ namespace RecNForget.Controls
 
         private void SelectedFileService_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(SelectedFileService.HasSelectedFile))
+            if (e.PropertyName == nameof(SelectedFileService.HasSelectedFile) && SelectedFileService.HasSelectedFile)
             {
                 try
                 {

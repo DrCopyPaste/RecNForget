@@ -16,17 +16,17 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class SettingsWindow : INotifyPropertyChanged
     {
-        private IHotkeyService hotkeyService;
+        private IApplicationHotkeyService hotkeyService;
         private IAppSettingService settingService;
 
-        public SettingsWindow(IHotkeyService hotkeyService, IAppSettingService settingService)
+        public SettingsWindow(IApplicationHotkeyService hotkeyService, IAppSettingService settingService)
         {
             DataContext = this;
             InitializeComponent();
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.hotkeyService = new DesignerHotkeyService();
+                this.hotkeyService = new DesignerApplicationHotkeyService();
                 SettingService = new DesignerAppSettingService();
             }
             else
@@ -85,19 +85,16 @@ namespace RecNForget.Controls
 
         private void ConfigureHotkey_StartStopRecording_Click(object sender, RoutedEventArgs e)
         {
-            this.hotkeyService.PauseCapturingHotkeys();
-
             var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey");
 
             dialog.Owner = this;
 
             if (dialog.ShowDialog() == true)
             {
+                this.hotkeyService.ResetAndReadHotkeysFromConfig();
                 SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
                 DisplayHotkey();
             }
-
-            this.hotkeyService.ResumeCapturingHotkeys();
 
             // since there are two buttons on top of each other
             e.Handled = true;

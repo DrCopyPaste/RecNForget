@@ -36,17 +36,32 @@ namespace RecNForget
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-
             UnityHandler.CreateContainer();
-
             var appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-            var hotkeyService = UnityHandler.UnityContainer.Resolve<IHotkeyService>();
 
-            var actionService = new ActionService();
+            if (e.Args.Length > 0 && !string.IsNullOrEmpty(e.Args[0]) && e.Args[0] == "-removeAppData")
+            {
+                try
+                {
+                    appSettingService.AutoStartWithWindows = false;
+                    appSettingService.RemoveAppConfigSettingFile();
+
+                    Environment.Exit(0);
+                }
+                catch
+                {
+                    Environment.Exit(1);
+                }
+            }
+
+            base.OnStartup(e);
 
             // ensure AppConfig Values exist
             bool firstTimeUser = appSettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
+
+            var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
+
+            var actionService = new ActionService();
 
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
             MainWindow mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
@@ -54,7 +69,7 @@ namespace RecNForget
             HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);
         }
 
-        private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IHotkeyService hotkeyService, bool firstTimeUser)
+        private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService, bool firstTimeUser)
         {
             if (appSettingService.CheckForUpdateOnStart)
             {

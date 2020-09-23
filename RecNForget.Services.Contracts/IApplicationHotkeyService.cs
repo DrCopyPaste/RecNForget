@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace RecNForget.Services.Contracts
 {
-    public interface IHotkeyService
+    public interface IApplicationHotkeyService
     {
         void ResetAndReadHotkeysFromConfig();
 

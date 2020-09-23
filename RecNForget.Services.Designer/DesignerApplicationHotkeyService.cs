@@ -7,7 +7,7 @@ using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services.Designer
 {
-    public class DesignerHotkeyService : IHotkeyService
+    public class DesignerApplicationHotkeyService : IApplicationHotkeyService
     {
         public void PauseCapturingHotkeys(bool pause = true)
         {

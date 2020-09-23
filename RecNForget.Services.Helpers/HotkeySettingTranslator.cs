@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using PressingIssue.Services.Contracts.Events;
+using System.Collections.Generic;
 using System.Windows.Input;
-using FMUtils.KeyboardHook;
 
 namespace RecNForget.Services.Helpers
 {
@@ -31,10 +30,10 @@ namespace RecNForget.Services.Helpers
             return string.Join(keySeparator, GetHotkeySettingAsList(settingKey, keyStart, keyEnd));
         }
 
-        public static string GetKeyboardHookEventArgsAsString(KeyboardHookEventArgs keyboardHookEventArgs, string keySeparator = " + ", string keyStart = "[", string keyEnd = "]")
-        {
-            return string.Join(keySeparator, GetKeyboardHookEventArgsAsList(keyboardHookEventArgs, keyStart, keyEnd));
-        }
+        //public static string GetKeyboardHookEventArgsAsString(KeyboardHookEventArgs keyboardHookEventArgs, string keySeparator = " + ", string keyStart = "[", string keyEnd = "]")
+        //{
+        //    return string.Join(keySeparator, GetKeyboardHookEventArgsAsList(keyboardHookEventArgs, keyStart, keyEnd));
+        //}
 
         public static List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]")
         {
@@ -70,46 +69,46 @@ namespace RecNForget.Services.Helpers
             return keys;
         }
 
-        public static List<string> GetKeyboardHookEventArgsAsList(KeyboardHookEventArgs keyboardHookEventArgs, string keyStart = "[", string keyEnd = "]")
-        {
-            List<string> keys = new List<string>();
+        //public static List<string> GetKeyboardHookEventArgsAsList(KeyboardHookEventArgs keyboardHookEventArgs, string keyStart = "[", string keyEnd = "]")
+        //{
+        //    List<string> keys = new List<string>();
 
-            // modifier keys
-            if (keyboardHookEventArgs.isShiftPressed)
-            {
-                keys.Add(keyStart + "Shift" + keyEnd);
-            }
+        //    // modifier keys
+        //    if (keyboardHookEventArgs.isShiftPressed)
+        //    {
+        //        keys.Add(keyStart + "Shift" + keyEnd);
+        //    }
 
-            if (keyboardHookEventArgs.isCtrlPressed)
-            {
-                keys.Add(keyStart + "Ctrl" + keyEnd);
-            }
+        //    if (keyboardHookEventArgs.isCtrlPressed)
+        //    {
+        //        keys.Add(keyStart + "Ctrl" + keyEnd);
+        //    }
 
-            if (keyboardHookEventArgs.isAltPressed)
-            {
-                keys.Add(keyStart + "Alt" + keyEnd);
-            }
+        //    if (keyboardHookEventArgs.isAltPressed)
+        //    {
+        //        keys.Add(keyStart + "Alt" + keyEnd);
+        //    }
 
-            if (keyboardHookEventArgs.isWinPressed)
-            {
-                keys.Add(keyStart + "Win" + keyEnd);
-            }
+        //    if (keyboardHookEventArgs.isWinPressed)
+        //    {
+        //        keys.Add(keyStart + "Win" + keyEnd);
+        //    }
 
-            // actual hotkey
-            if (keyboardHookEventArgs.Key != Keys.None)
-            {
-                keys.Add(keyStart + keyboardHookEventArgs.Key.ToString() + keyEnd);
-            }
+        //    // actual hotkey
+        //    if (keyboardHookEventArgs.Key != Keys.None)
+        //    {
+        //        keys.Add(keyStart + keyboardHookEventArgs.Key.ToString() + keyEnd);
+        //    }
 
-            return keys;
-        }
+        //    return keys;
+        //}
 
-        public static string GetKeyEventArgsAsString(System.Windows.Input.KeyEventArgs keyEventArgs, ModifierKeys modifiers, string keySeparator = " + ", string keyStart = "[", string keyEnd = "]")
+        public static string GetKeyEventArgsAsString(SimpleGlobalHotkeyServiceEventArgs keyEventArgs, ModifierKeys modifiers, string keySeparator = " + ", string keyStart = "[", string keyEnd = "]")
         {
             return string.Join(keySeparator, GetKeyEventArgsAsList(keyEventArgs, modifiers, keyStart, keyEnd));
         }
 
-        public static List<string> GetKeyEventArgsAsList(System.Windows.Input.KeyEventArgs keyEventArgs, ModifierKeys modifiers, string keyStart = "[", string keyEnd = "]")
+        public static List<string> GetKeyEventArgsAsList(SimpleGlobalHotkeyServiceEventArgs keyEventArgs, ModifierKeys modifiers, string keyStart = "[", string keyEnd = "]")
         {
             List<string> keys = new List<string>();
 
@@ -135,7 +134,7 @@ namespace RecNForget.Services.Helpers
             }
 
             // actual hotkey
-            if (keyEventArgs.Key != Key.None && !ModifierKeys.Contains(keyEventArgs.Key))
+            if (keyEventArgs.Key != "None")
             {
                 keys.Add(keyStart + keyEventArgs.Key.ToString() + keyEnd);
             }
