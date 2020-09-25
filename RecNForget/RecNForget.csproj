@@ -43,6 +43,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Controls\RecNForget.Controls.csproj" />
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
+    <ProjectReference Include="..\RecNForget.WPF.Services\RecNForget.WPF.Services.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

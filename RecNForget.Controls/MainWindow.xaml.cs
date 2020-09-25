@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Threading;
 using NAudio.Wave;
-using RecNForget.Controls;
-using RecNForget.Controls.Services;
 using RecNForget.IoC;
-using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.Services.Helpers;
+using RecNForget.WPF.Services.Contracts;
 using Unity;
 
 namespace RecNForget.Controls
@@ -57,7 +49,7 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = new ActionService(this);
+                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
                 this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
                 SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();

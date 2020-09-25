@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Ookii.Dialogs.Wpf;
-using RecNForget.Controls.Services;
+using Unity;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
-using Unity;
+using RecNForget.WPF.Services.Contracts;
 
 namespace RecNForget.Controls
 {
@@ -42,7 +39,7 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = new ActionService(this);
+                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
                 this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
                 this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
 

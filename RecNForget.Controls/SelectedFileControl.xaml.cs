@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using NAudio.Wave;
 using RecNForget.Controls.Extensions;
-using RecNForget.Controls.Services;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
+using RecNForget.WPF.Services.Contracts;
 using Unity;
 
 namespace RecNForget.Controls
@@ -41,7 +40,7 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = new ActionService(this);
+                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
                 this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
                 this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
 
@@ -93,7 +92,7 @@ namespace RecNForget.Controls
                     FileInfoLabel.Content = "error trying to read file size";
 
                     var errorDialog = new CustomMessageBox("error trying to read file size", CustomMessageBoxIcon.Error, CustomMessageBoxButtons.OK, new List<string>() { "an error occurred while trying to parse audio file: " + ex.Message });
-                    errorDialog.SetViewablePositionFromOwner();
+                    errorDialog.TrySetViewablePositionFromOwner();
                     errorDialog.ShowDialog();
                 }
             }

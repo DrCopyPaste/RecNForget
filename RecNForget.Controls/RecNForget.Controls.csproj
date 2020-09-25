@@ -56,6 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="NAudio" Version="1.10.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -68,8 +69,8 @@
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
-    <ProjectReference Include="..\RecNForget.Services.Designer\RecNForget.Services.Designer.csproj" />
     <ProjectReference Include="..\RecNForget.Services.Helpers\RecNForget.Services.Helpers.csproj" />
+    <ProjectReference Include="..\RecNForget.WPF.Serices.Contracts\RecNForget.WPF.Services.Contracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

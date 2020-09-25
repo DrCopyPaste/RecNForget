@@ -6,8 +6,12 @@ namespace RecNForget.Controls.Extensions
     public static class WindowExtensions
     {
         // returns the top left point of window positioned relatively to ownerControl
-        public static void SetViewablePositionFromOwner(this Window window, Control ownerControl = null)
+        public static void TrySetViewablePositionFromOwner(this Window window, Control ownerControl = null)
         {
+            if (window == null || ownerControl == null)
+            {
+                return;
+            }
 
             // TODO: get a sensible position to show the window:
             // if ownerControl has value: center of window should be center of ownerControl (but ajusted conditionally to fit on screen)
