@@ -11,12 +11,14 @@ using NAudio.Wave;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
 using RecNForget.Controls.Extensions;
+using RecNForget.Controls.Services;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
+using RecNForget.WPF.Services.Contracts;
 using Unity;
 
 // ToDo remove coupling with controls from this service, so this service can be moved to RecNForget.Services (it is really only the custom message box so far)
-namespace RecNForget.Controls.Services
+namespace RecNForget.WPF.Services
 {
     public class ActionService : IActionService
     {
@@ -26,13 +28,11 @@ namespace RecNForget.Controls.Services
         private readonly IAppSettingService appSettingService = null;
         private readonly IApplicationHotkeyService hotkeyService = null;
 
-        private readonly Control ownerControl = null;
+        public Control OwnerControl { get; set; }
 
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
-        public ActionService(Control ownerControl = null)
+        public ActionService()
         {
-            this.ownerControl = ownerControl;
-
             this.selectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
             this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
             this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
@@ -53,7 +53,7 @@ namespace RecNForget.Controls.Services
                 controlFocus: CustomMessageBoxFocus.Prompt,
                 promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
 
-            tempDialog.SetViewablePositionFromOwner(ownerControl);
+            tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
 
             if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
             {
@@ -66,8 +66,8 @@ namespace RecNForget.Controls.Services
             var dialog = new VistaFolderBrowserDialog();
 
             bool result =
-                ownerControl != null ?
-                dialog.ShowDialog(Window.GetWindow(ownerControl)) == true :
+                OwnerControl != null ?
+                dialog.ShowDialog(Window.GetWindow(OwnerControl)) == true :
                 dialog.ShowDialog() == true;
 
             if (result)
@@ -91,7 +91,7 @@ namespace RecNForget.Controls.Services
                 controlFocus: CustomMessageBoxFocus.Prompt,
                 promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
 
-            tempDialog.SetViewablePositionFromOwner(ownerControl);
+            tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
 
             if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
             {
@@ -123,7 +123,7 @@ namespace RecNForget.Controls.Services
                     {
                         var installUpdateDialog = new ReleaseInstallationDialog(newerReleases.First(), UpdateChecker.GetValidVersionStringMsiAsset(newerReleases.First()), changeLog);
 
-                        installUpdateDialog.SetViewablePositionFromOwner(ownerControl);
+                        installUpdateDialog.TrySetViewablePositionFromOwner(OwnerControl);
 
                         installUpdateDialog.ShowDialog();
                     });
@@ -141,7 +141,7 @@ namespace RecNForget.Controls.Services
                                 messageRows: new List<string>() { "No newer version found" },
                                 controlFocus: CustomMessageBoxFocus.Ok);
 
-                            tempDialog.SetViewablePositionFromOwner(ownerControl);
+                            tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
 
                             tempDialog.ShowDialog();
                         });
@@ -161,7 +161,7 @@ namespace RecNForget.Controls.Services
                             messageRows: new List<string>() { "An error occurred trying to get updates:", ex.InnerException.Message },
                             controlFocus: CustomMessageBoxFocus.Ok);
 
-                        errorDialog.SetViewablePositionFromOwner(ownerControl);
+                        errorDialog.TrySetViewablePositionFromOwner(OwnerControl);
 
                         errorDialog.ShowDialog();
                     });
@@ -181,7 +181,7 @@ namespace RecNForget.Controls.Services
                 messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
                 controlFocus: CustomMessageBoxFocus.Ok);
 
-            tempDialog.SetViewablePositionFromOwner(ownerControl);
+            tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
 
             if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
             {
@@ -194,7 +194,7 @@ namespace RecNForget.Controls.Services
                         messageRows: new List<string>() { "An error occurred trying to delete the selected file" },
                         controlFocus: CustomMessageBoxFocus.Ok);
 
-                    errorMessageBox.SetViewablePositionFromOwner(ownerControl);
+                    errorMessageBox.TrySetViewablePositionFromOwner(OwnerControl);
 
                     errorMessageBox.ShowDialog();
                 }
@@ -419,15 +419,15 @@ namespace RecNForget.Controls.Services
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             var helpmenu = new HelpWindow();
-            helpmenu.SetViewablePositionFromOwner(ownerControl);
+            helpmenu.TrySetViewablePositionFromOwner(OwnerControl);
 
             helpmenu.Show();
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
-            var aboutDialog = new AboutWindow(appSettingService);
-            aboutDialog.SetViewablePositionFromOwner(ownerControl);
+            var aboutDialog = new AboutWindow();
+            aboutDialog.TrySetViewablePositionFromOwner(OwnerControl);
 
             aboutDialog.ShowDialog();
         }
@@ -455,7 +455,7 @@ namespace RecNForget.Controls.Services
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             var settingsWindow = new SettingsWindow(hotkeyService, appSettingService);
-            settingsWindow.SetViewablePositionFromOwner(ownerControl);
+            settingsWindow.TrySetViewablePositionFromOwner(OwnerControl);
 
             settingsWindow.ShowDialog();
         }

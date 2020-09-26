@@ -1,4 +1,4 @@
-RecNForget is written in C# using .NET Framework 4.8 and Microsoft WPF
+RecNForget is written in C# using [.NET Core Runtime 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) and [WPF.](https://github.com/dotnet/wpf)
 
 Code by DrCopyPaste [github.com/DrCopyPaste/RecNForget](https://github.com/DrCopyPaste/RecNForget)
 
@@ -12,23 +12,23 @@ Click sounds by [lit-audio@gmx.de](mailto:lit-audio@gmx.de)/[soundcloud.com/wolf
 
 The following libaries are used by RecNForget:
 
-[NAudio.1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
+[NAudio v1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
 
-[Nerdbank.GitVersioning.3.2.31](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
+[Nerdbank.GitVersioning v3.2.31](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
 
-[Newtonsoft.Json.12.0.3](https://www.newtonsoft.com/json) Copyright (c) James Newton-King - [MIT](https://licenses.nuget.org/MIT)
+[Notifications.Wpf.Core v1.3.1](https://github.com/mjuen/Notifications.Wpf.Core) Copyright (c) Adrian Gaś, Simon Mauracher, Marcel Juen - [MIT](https://licenses.nuget.org/MIT)
 
-[Octokit.0.40.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
+[Octokit v0.48.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
-[Ookii.Dialogs.Wpf.NETCore.2.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot, Caio Proiete, AceOfAces - [License](https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license)
+[Ookii.Dialogs.Wpf.NETCore v2.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot, Caio Proiete, AceOfAces - [License](https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license)
 
-[WiX Toolset build tools v3.11.2.4516](https://wixtoolset.org/) Copyright (c) .NET Foundation - [MS-RL](https://wixtoolset.org/about/license/)
+[System.Configuration.ConfigurationManager v4.7.0](https://github.com/dotnet/corefx) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
 
-[StyleCop.MSBuild v6.2.0](https://github.com/StyleCop/StyleCop) Copyright (c) StyleCop contributors, Chris Dahlberg - [Ms-PL](https://github.com/StyleCop/StyleCop/blob/master/License.html)
+[System.Drawing.Common v4.7.0](https://github.com/dotnet/corefx) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
 
 [Unity v5.11.7](https://github.com/unitycontainer/unity) Copyright (c) Unity Container Project - [Apache 2.0](https://github.com/unitycontainer/unity/blob/v5.x/LICENSE)
 
-[System.Runtime.CompilerServices.Unsafe v4.5.2](https://dot.net/) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
+[WiX Toolset build tools v3.11.2.4516](https://wixtoolset.org/) Copyright (c) .NET Foundation - [MS-RL](https://wixtoolset.org/about/license/)
 
 
 

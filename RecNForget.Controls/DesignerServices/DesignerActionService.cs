@@ -1,11 +1,15 @@
 ﻿using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using RecNForget.Services.Contracts;
+using RecNForget.WPF.Services.Contracts;
 
 namespace RecNForget.Services.Designer
 {
     public class DesignerActionService : IActionService
     {
+        public Control OwnerControl { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void ChangeFileNamePattern()

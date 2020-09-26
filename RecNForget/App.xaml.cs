@@ -6,6 +6,8 @@ using RecNForget.Controls.Services;
 using RecNForget.IoC;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
+using RecNForget.WPF.Services;
+using RecNForget.WPF.Services.Contracts;
 using Unity;
 using Unity.Lifetime;
 
@@ -56,15 +58,19 @@ namespace RecNForget
 
             base.OnStartup(e);
 
+            // register this application specific action service
+            UnityHandler.UnityContainer.RegisterType<IActionService, ActionService>(lifetimeManager: new SingletonLifetimeManager());
+
             // ensure AppConfig Values exist
             bool firstTimeUser = appSettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 
             var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
-            var actionService = new ActionService();
-
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
             MainWindow mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
+
+            var actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+            actionService.OwnerControl = mainWindow;
 
             HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);
         }

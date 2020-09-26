@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using RecNForget.Controls;
-using RecNForget.Controls.Services;
-using RecNForget.Services;
+using RecNForget.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
+using RecNForget.WPF.Services.Contracts;
+using Unity;
 
 namespace RecNForget.Controls
 {
@@ -23,16 +21,10 @@ namespace RecNForget.Controls
         private readonly IAppSettingService appSettingService;
         private readonly IActionService actionService;
 
-        public AboutWindow(IAppSettingService appSettingService)
+        public AboutWindow()
         {
             DataContext = this;
             InitializeComponent();
-
-            var assemblyInformationalVersion = appSettingService.RuntimeInformalVersionString;
-            var assemblyFileVersion = new Version(appSettingService.RuntimeVersionString);
-
-            AppNameAndVersion.Text = string.Format("RecNForget {0}", string.Format("{0}.{1}.{2}", assemblyFileVersion.Major, assemblyFileVersion.Minor, assemblyFileVersion.Build));
-            VersionLabel.Text = string.Format("{0} - v{1}", "VersionTitle?", assemblyInformationalVersion);
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -42,9 +34,15 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.appSettingService = appSettingService;
-                this.actionService = new ActionService(this);
+                this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
+                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
             }
+
+            var assemblyInformationalVersion = appSettingService.RuntimeInformalVersionString;
+            var assemblyFileVersion = new Version(appSettingService.RuntimeVersionString);
+
+            AppNameAndVersion.Text = string.Format("RecNForget {0}", string.Format("{0}.{1}.{2}", assemblyFileVersion.Major, assemblyFileVersion.Minor, assemblyFileVersion.Build));
+            VersionLabel.Text = string.Format("{0} - v{1}", "VersionTitle?", assemblyInformationalVersion);
         }
 
         private void CheckForUpdateButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +52,7 @@ namespace RecNForget.Controls
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {e.Uri.AbsoluteUri}") { CreateNoWindow = true });
             e.Handled = true;
         }
 

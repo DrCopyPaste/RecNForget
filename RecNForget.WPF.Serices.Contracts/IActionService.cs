@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 
-namespace RecNForget.Services.Contracts
+namespace RecNForget.WPF.Services.Contracts
 {
     public interface IActionService : INotifyPropertyChanged
     {
+        System.Windows.Controls.Control OwnerControl { get; set; }
+
         // change output directory (with dialog)
         void ChangeOutputFolder();
 

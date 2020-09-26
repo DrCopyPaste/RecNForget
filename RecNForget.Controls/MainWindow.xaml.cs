@@ -1,24 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Threading;
 using NAudio.Wave;
-using RecNForget.Controls;
-using RecNForget.Controls.Services;
+using Notifications.Wpf.Core;
 using RecNForget.IoC;
-using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.Services.Helpers;
+using RecNForget.WPF.Services.Contracts;
 using Unity;
 
 namespace RecNForget.Controls
@@ -29,7 +22,6 @@ namespace RecNForget.Controls
     public partial class MainWindow : INotifyPropertyChanged
     {
         private NotifyIcon trayIcon;
-        private int balloonTipTimeout = 3000;
 
         private IAudioRecordingService audioRecordingService = null;
         private IActionService actionService = null;
@@ -39,6 +31,8 @@ namespace RecNForget.Controls
         private ISelectedFileService selectedFileService = null;
 
         private string taskBar_ProgressState = "None";
+
+        private readonly NotificationManager _notificationManager = new NotificationManager();
 
         public MainWindow()
         {
@@ -57,7 +51,7 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = new ActionService(this);
+                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
                 this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
                 SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
@@ -220,8 +214,13 @@ namespace RecNForget.Controls
 
                         if (SettingService.ShowBalloonTipsForRecording)
                         {
-                            trayIcon.ShowBalloonTip(balloonTipTimeout, "Recording started!", "RecNForget now recording...", ToolTipIcon.Info);
-                            trayIcon.BalloonTipClicked -= TaskBarIcon_TrayBalloonTipClicked;
+                            _notificationManager.ShowAsync(
+                                new NotificationContent()
+                                {
+                                    Type = NotificationType.Information,
+                                    Title = "Recording started!",
+                                    Message = "RecNForget now recording..."
+                                });
                         }
 
                         AudioPlaybackService.KillAudio(reset: true);
@@ -251,9 +250,24 @@ namespace RecNForget.Controls
 
                         if (SettingService.ShowBalloonTipsForRecording)
                         {
-                            trayIcon.ShowBalloonTip(balloonTipTimeout, "Recording saved!", AudioRecordingService.LastFileName, ToolTipIcon.Info);
-                            trayIcon.BalloonTipClicked += TaskBarIcon_TrayBalloonTipClicked;
-                        }
+                            _notificationManager.ShowAsync(
+                                content: new NotificationContent()
+                                {
+                                    Type = NotificationType.Success,
+                                    Title = "Recording saved!",
+                                    Message = AudioRecordingService.LastFileName
+                                },
+                                onClick: () =>
+                                {
+                                    if (AudioRecordingService.LastFileName == string.Empty || !File.Exists(AudioRecordingService.LastFileName))
+                                    {
+                                        return;
+                                    }
+
+                                    string argument = "/select, \"" + AudioRecordingService.LastFileName + "\"";
+                                    System.Diagnostics.Process.Start("explorer.exe", argument);
+                                });
+                            }
 
                         if (SettingService.AutoSelectLastRecording)
                         {
@@ -346,7 +360,7 @@ namespace RecNForget.Controls
         private void SwitchToBackgroundMode()
         {
             this.Hide();
-            trayIcon.ShowBalloonTip(balloonTipTimeout, "Running in background now!", @"RecNForget is now running in the background. Double click tray icon to restore", ToolTipIcon.Info);
+            _notificationManager.ShowAsync(new NotificationContent() { Type = NotificationType.Information, Title = "Running in background now!", Message = @"RecNForget is now running in the background. Double click tray icon to restore" });
         }
 
         private void SwitchToForegroundMode()
