@@ -11,8 +11,13 @@
 	<Grid>
 		<TextBlock Style = "{StaticResource DefaultTextBlockStyle}" >
 			<Run>
-				RecNForget is written in C# using .NET Framework 4.8 and Microsoft WPF
+				RecNForget is written in C# using 
 			</Run>
+			<Hyperlink NavigateUri="https://dotnet.microsoft.com/download/dotnet-core/3.1" RequestNavigate="Hyperlink_RequestNavigate">.NET Core Runtime 3.1</Hyperlink>
+			<Run>
+				 and 
+			</Run>
+			<Hyperlink NavigateUri="https://github.com/dotnet/wpf" RequestNavigate="Hyperlink_RequestNavigate">WPF.</Hyperlink>
 			<LineBreak />
 			<Run>
 				Code by DrCopyPaste 
@@ -41,47 +46,47 @@
 				The following libaries are used by RecNForget:
 			</Run>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio.1.10.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio v1.10.0</Hyperlink>
 			<Run>
 				 Copyright (c) Mark Heath &amp; Contributors - 
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning.3.2.31</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning v3.2.31</Hyperlink>
 			<Run>
 				 Copyright (c) Andrew Arnott - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://www.newtonsoft.com/json" RequestNavigate="Hyperlink_RequestNavigate">Newtonsoft.Json.12.0.3</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/mjuen/Notifications.Wpf.Core" RequestNavigate="Hyperlink_RequestNavigate">Notifications.Wpf.Core v1.3.1</Hyperlink>
 			<Run>
-				 Copyright (c) James Newton-King - 
+				 Copyright (c) Adrian Gaś, Simon Mauracher, Marcel Juen - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit.0.40.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit v0.48.0</Hyperlink>
 			<Run>
 				 Copyright (c) GitHub - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf.NETCore.2.1.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf.NETCore v2.1.0</Hyperlink>
 			<Run>
 				 Copyright (c) Sven Groot, Caio Proiete, AceOfAces - 
 			</Run>
 			<Hyperlink NavigateUri="https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://wixtoolset.org/" RequestNavigate="Hyperlink_RequestNavigate">WiX Toolset build tools v3.11.2.4516</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/dotnet/corefx" RequestNavigate="Hyperlink_RequestNavigate">System.Configuration.ConfigurationManager v4.7.0</Hyperlink>
 			<Run>
-				 Copyright (c) .NET Foundation - 
+				 Copyright (c) Microsoft - 
 			</Run>
-			<Hyperlink NavigateUri="https://wixtoolset.org/about/license/" RequestNavigate="Hyperlink_RequestNavigate">MS-RL</Hyperlink>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop" RequestNavigate="Hyperlink_RequestNavigate">StyleCop.MSBuild v6.2.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/dotnet/corefx" RequestNavigate="Hyperlink_RequestNavigate">System.Drawing.Common v4.7.0</Hyperlink>
 			<Run>
-				 Copyright (c) StyleCop contributors, Chris Dahlberg - 
+				 Copyright (c) Microsoft - 
 			</Run>
-			<Hyperlink NavigateUri="https://github.com/StyleCop/StyleCop/blob/master/License.html" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
 			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity" RequestNavigate="Hyperlink_RequestNavigate">Unity v5.11.7</Hyperlink>
 			<Run>
@@ -89,11 +94,11 @@
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity/blob/v5.x/LICENSE" RequestNavigate="Hyperlink_RequestNavigate">Apache 2.0</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://dot.net/" RequestNavigate="Hyperlink_RequestNavigate">System.Runtime.CompilerServices.Unsafe v4.5.2</Hyperlink>
+			<Hyperlink NavigateUri="https://wixtoolset.org/" RequestNavigate="Hyperlink_RequestNavigate">WiX Toolset build tools v3.11.2.4516</Hyperlink>
 			<Run>
-				 Copyright (c) Microsoft - 
+				 Copyright (c) .NET Foundation - 
 			</Run>
-			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<Hyperlink NavigateUri="https://wixtoolset.org/about/license/" RequestNavigate="Hyperlink_RequestNavigate">MS-RL</Hyperlink>
 			<LineBreak />
 			<LineBreak />
 			<Run>

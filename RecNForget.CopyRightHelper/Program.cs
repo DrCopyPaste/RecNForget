@@ -56,7 +56,10 @@ namespace RecNForget.CopyRightHelper
             /*START EDITING COPYRIGHT HERE*/
             /*START EDITING COPYRIGHT HERE*/
 
-            AddText("RecNForget is written in C# using .NET Framework 4.8 and Microsoft WPF");
+            AddText("RecNForget is written in C# using ");
+            AddLink(".NET Core Runtime 3.1", "https://dotnet.microsoft.com/download/dotnet-core/3.1");
+            AddText(" and ");
+            AddLink("WPF.", "https://github.com/dotnet/wpf");
             AddLineBreak();
             AddText("Code by DrCopyPaste ");
             AddLink("github.com/DrCopyPaste/RecNForget", "https://github.com/DrCopyPaste/RecNForget");
@@ -82,68 +85,54 @@ namespace RecNForget.CopyRightHelper
 
             // ------------------ LIBRARIES LIST ----------------------------------
 
-            //AddLibraryLink(
-            //    libaryName: "FMUtils.KeyboardHook.1.0.140.2145",
-            //    libraryUrl: "https://github.com/factormystic/FMUtils.KeyboardHook#readme",
-            //    manufacturerName: "Factor Mystic",
-            //    licenseCaption: "License",
-            //    licenseUrl: "https://github.com/factormystic/FMUtils.KeyboardHook/blob/master/license.txt");
-
-            //AddLibraryLink(
-            //    libaryName: "Hardcodet.NotifyIcon.Wpf.1.0.8",
-            //    libraryUrl: "http://www.hardcodet.net/wpf-notifyicon",
-            //    manufacturerName: "Philipp Sumi",
-            //    licenseCaption: "CPOL 1.02",
-            //    licenseUrl: "https://www.codeproject.com/info/cpol10.aspx");
-
             AddLibraryLink(
-                libaryName: "NAudio.1.10.0",
+                libaryName: "NAudio v1.10.0",
                 libraryUrl: "https://github.com/naudio/NAudio",
                 manufacturerName: "Mark Heath & Contributors",
                 licenseCaption: "Ms-PL",
                 licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
 
             AddLibraryLink(
-                libaryName: "Nerdbank.GitVersioning.3.2.31",
+                libaryName: "Nerdbank.GitVersioning v3.2.31",
                 libraryUrl: "https://github.com/aarnott/Nerdbank.GitVersioning",
                 manufacturerName: "Andrew Arnott",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Newtonsoft.Json.12.0.3",
-                libraryUrl: "https://www.newtonsoft.com/json",
-                manufacturerName: "James Newton-King",
+                libaryName: "Notifications.Wpf.Core v1.3.1",
+                libraryUrl: "https://github.com/mjuen/Notifications.Wpf.Core",
+                manufacturerName: "Adrian Gaś, Simon Mauracher, Marcel Juen",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Octokit.0.40.0",
+                libaryName: "Octokit v0.48.0",
                 libraryUrl: "https://github.com/octokit/octokit.net",
                 manufacturerName: "GitHub",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Ookii.Dialogs.Wpf.NETCore.2.1.0",
+                libaryName: "Ookii.Dialogs.Wpf.NETCore v2.1.0",
                 libraryUrl: "https://github.com/caioproiete/ookii-dialogs-wpf",
                 manufacturerName: "Sven Groot, Caio Proiete, AceOfAces",
                 licenseCaption: "License",
                 licenseUrl: "https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license");
 
             AddLibraryLink(
-                libaryName: "WiX Toolset build tools v3.11.2.4516",
-                libraryUrl: "https://wixtoolset.org/",
-                manufacturerName: ".NET Foundation",
-                licenseCaption: "MS-RL",
-                licenseUrl: "https://wixtoolset.org/about/license/");
+                libaryName: "System.Configuration.ConfigurationManager v4.7.0",
+                libraryUrl: "https://github.com/dotnet/corefx",
+                manufacturerName: "Microsoft",
+                licenseCaption: "MIT",
+                licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "StyleCop.MSBuild v6.2.0",
-                libraryUrl: "https://github.com/StyleCop/StyleCop",
-                manufacturerName: "StyleCop contributors, Chris Dahlberg",
-                licenseCaption: "Ms-PL",
-                licenseUrl: "https://github.com/StyleCop/StyleCop/blob/master/License.html");
+                libaryName: "System.Drawing.Common v4.7.0",
+                libraryUrl: "https://github.com/dotnet/corefx",
+                manufacturerName: "Microsoft",
+                licenseCaption: "MIT",
+                licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
                 libaryName: "Unity v5.11.7",
@@ -153,11 +142,11 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://github.com/unitycontainer/unity/blob/v5.x/LICENSE");
 
             AddLibraryLink(
-                libaryName: "System.Runtime.CompilerServices.Unsafe v4.5.2",
-                libraryUrl: "https://dot.net/",
-                manufacturerName: "Microsoft",
-                licenseCaption: "MIT",
-                licenseUrl: "https://licenses.nuget.org/MIT");
+                libaryName: "WiX Toolset build tools v3.11.2.4516",
+                libraryUrl: "https://wixtoolset.org/",
+                manufacturerName: ".NET Foundation",
+                licenseCaption: "MS-RL",
+                licenseUrl: "https://wixtoolset.org/about/license/");
 
             // ------------------ END LIBRARIES LIST ----------------------------------
 

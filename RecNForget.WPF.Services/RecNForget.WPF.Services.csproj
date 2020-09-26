@@ -7,11 +7,20 @@
 
   <ItemGroup>
     <PackageReference Include="NAudio" Version="1.10.0" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Octokit" Version="0.48.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Controls\RecNForget.Controls.csproj" />
   </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
 
 </Project>
