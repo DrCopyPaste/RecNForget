@@ -96,14 +96,19 @@ namespace RecNForget.Controls
 
                 this.Topmost = SettingService.WindowAlwaysOnTop;
 
+
+                // hacky way to have a window for NotificationManager
+                // is this really needed? (window is loaded into memory even if running in background)
+                this.Show();
                 if (SettingService.MinimizedToTray)
                 {
                     SwitchToBackgroundMode();
                 }
-                else
-                {
-                    SwitchToForegroundMode();
-                }
+
+                //else
+                //{
+                //    SwitchToForegroundMode();
+                //}
             }
         }
 
