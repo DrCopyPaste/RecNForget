@@ -201,6 +201,11 @@ namespace RecNForget.WPF.Services
             }
         }
 
+        public void Exit()
+        {
+            Application.Current.Shutdown();
+        }
+
         public void OpenOutputFolderInExplorer()
         {
             var directory = new DirectoryInfo(appSettingService.OutputPath);
@@ -240,6 +245,16 @@ namespace RecNForget.WPF.Services
             audioPlaybackService.Stop();
         }
 
+        private void ToggleAlwaysOnTop()
+        {
+            appSettingService.WindowAlwaysOnTop = !appSettingService.WindowAlwaysOnTop;
+        }
+
+        private void ToggleMinimizedToTray()
+        {
+            appSettingService.MinimizedToTray = !appSettingService.MinimizedToTray;
+        }
+
         public void TogglePlayPauseSelectedFile()
         {
             if (selectedFileService.HasSelectedFile && audioRecordingService.CurrentlyNotRecording)
@@ -253,6 +268,32 @@ namespace RecNForget.WPF.Services
                 }
 
                 TogglePlayPauseAudio();
+            }
+        }
+
+        public void ToggleOutputPathControlVisibility()
+        {
+            appSettingService.OutputPathControlVisible = !appSettingService.OutputPathControlVisible;
+        }
+
+        public void ToggleSelectedFileControlVisibility()
+        {
+            appSettingService.SelectedFileControlVisible = !appSettingService.SelectedFileControlVisible;
+        }
+
+        public void TogglePlayPauseAudio()
+        {
+            if (audioPlaybackService.PlaybackState == PlaybackState.Stopped)
+            {
+                audioPlaybackService.Play();
+            }
+            else if (audioPlaybackService.PlaybackState == PlaybackState.Playing)
+            {
+                audioPlaybackService.Pause();
+            }
+            else if (audioPlaybackService.PlaybackState == PlaybackState.Paused)
+            {
+                audioPlaybackService.Play();
             }
         }
 
@@ -406,9 +447,35 @@ namespace RecNForget.WPF.Services
             menu.IsOpen = true;
         }
 
+        public void ShowAboutWindow()
+        {
+            var aboutDialog = new AboutWindow();
+            aboutDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+            aboutDialog.ShowDialog();
+        }
+
+        public void ShowHelpWindow()
+        {
+            var helpmenu = new HelpWindow();
+            helpmenu.TrySetViewablePositionFromOwner(OwnerControl);
+
+            helpmenu.Show();
+        }
+
+        public void ShowSettingsMenu()
+        {
+            var settingsWindow = new SettingsWindow(hotkeyService, appSettingService);
+            settingsWindow.TrySetViewablePositionFromOwner(OwnerControl);
+
+            settingsWindow.ShowDialog();
+        }
+
+        #region menu events
+
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Exit();
         }
 
         private void CheckUpdates_Click(object sender, RoutedEventArgs e)
@@ -418,62 +485,39 @@ namespace RecNForget.WPF.Services
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-            var helpmenu = new HelpWindow();
-            helpmenu.TrySetViewablePositionFromOwner(OwnerControl);
-
-            helpmenu.Show();
+            ShowHelpWindow();
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
-            var aboutDialog = new AboutWindow();
-            aboutDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-            aboutDialog.ShowDialog();
+            ShowAboutWindow();
         }
 
         private void ToggleMinimizedToTray(object sender, RoutedEventArgs e)
         {
-            appSettingService.MinimizedToTray = !appSettingService.MinimizedToTray;
+            ToggleMinimizedToTray();
         }
 
         private void ToggleAlwaysOnTop(object sender, RoutedEventArgs e)
         {
-            appSettingService.WindowAlwaysOnTop = !appSettingService.WindowAlwaysOnTop;
+            ToggleAlwaysOnTop();
         }
 
         private void ToggleSelectedFileControlVisibility(object sender, RoutedEventArgs e)
         {
-            appSettingService.SelectedFileControlVisible = !appSettingService.SelectedFileControlVisible;
+            ToggleSelectedFileControlVisibility();
         }
 
         private void ToggleOutputPathControlVisibility(object sender, RoutedEventArgs e)
         {
-            appSettingService.OutputPathControlVisible = !appSettingService.OutputPathControlVisible;
+            ToggleOutputPathControlVisibility();
         }
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingsWindow(hotkeyService, appSettingService);
-            settingsWindow.TrySetViewablePositionFromOwner(OwnerControl);
-
-            settingsWindow.ShowDialog();
+            ShowSettingsMenu();
         }
 
-        public void TogglePlayPauseAudio()
-        {
-            if (audioPlaybackService.PlaybackState == PlaybackState.Stopped)
-            {
-                audioPlaybackService.Play();
-            }
-            else if (audioPlaybackService.PlaybackState == PlaybackState.Playing)
-            {
-                audioPlaybackService.Pause();
-            }
-            else if (audioPlaybackService.PlaybackState == PlaybackState.Paused)
-            {
-                audioPlaybackService.Play();
-            }
-        }
+        #endregion
     }
 }

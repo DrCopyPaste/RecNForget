@@ -44,5 +44,11 @@ namespace RecNForget.WPF.Services.Contracts
         void ShowApplicationMenu();
 
         void TogglePlayPauseAudio();
+        void ShowSettingsMenu();
+        void ToggleSelectedFileControlVisibility();
+        void ToggleOutputPathControlVisibility();
+        void ShowHelpWindow();
+        void ShowAboutWindow();
+        void Exit();
     }
 }

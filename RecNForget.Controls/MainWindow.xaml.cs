@@ -442,7 +442,7 @@ namespace RecNForget.Controls
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            actionService.Exit();
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)

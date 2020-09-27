@@ -37,6 +37,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void Exit()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void OpenOutputFolderInExplorer()
         {
             throw new System.NotImplementedException();
@@ -57,12 +62,32 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void ShowAboutWindow()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void ShowApplicationMenu()
         {
             throw new System.NotImplementedException();
         }
 
+        public void ShowHelpWindow()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ShowSettingsMenu()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void StopPlayingSelectedFile()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ToggleOutputPathControlVisibility()
         {
             throw new System.NotImplementedException();
         }
@@ -73,6 +98,11 @@ namespace RecNForget.Services.Designer
         }
 
         public void TogglePlayPauseSelectedFile()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ToggleSelectedFileControlVisibility()
         {
             throw new System.NotImplementedException();
         }
