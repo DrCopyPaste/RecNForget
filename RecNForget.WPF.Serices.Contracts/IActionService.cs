@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 
 namespace RecNForget.WPF.Services.Contracts
@@ -50,5 +51,8 @@ namespace RecNForget.WPF.Services.Contracts
         void ShowHelpWindow();
         void ShowAboutWindow();
         void Exit();
+        void ShowNewToApplicationWindow();
+        void ShowNewToVersionDialog(Version currentFileVersion, Version lastInstalledVersion);
+        void ShowRandomApplicationTip();
     }
 }

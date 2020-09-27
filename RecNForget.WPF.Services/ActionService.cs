@@ -4,14 +4,17 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using NAudio.Wave;
+using Notifications.Wpf.Core;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
 using RecNForget.Controls.Extensions;
 using RecNForget.Controls.Services;
+using RecNForget.Help;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.WPF.Services.Contracts;
@@ -27,6 +30,8 @@ namespace RecNForget.WPF.Services
         private readonly IAudioRecordingService audioRecordingService = null;
         private readonly IAppSettingService appSettingService = null;
         private readonly IApplicationHotkeyService hotkeyService = null;
+
+        private readonly NotificationManager _notificationManager = new NotificationManager();
 
         public Control OwnerControl { get; set; }
 
@@ -516,6 +521,70 @@ namespace RecNForget.WPF.Services
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             ShowSettingsMenu();
+        }
+
+        public void ShowNewToApplicationWindow()
+        {
+            var dia = new NewToApplicationWindow(hotkeyService, appSettingService);
+
+            if (!appSettingService.MinimizedToTray && OwnerControl != null)
+            {
+                dia.TrySetViewablePositionFromOwner(OwnerControl);
+            }
+
+            dia.Show();
+        }
+
+        public void ShowNewToVersionDialog(Version currentFileVersion, Version lastInstalledVersion)
+        {
+            var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentFileVersion, appSettingService);
+
+            if (!appSettingService.MinimizedToTray && OwnerControl != null)
+            {
+                newToVersionDialog.TrySetViewablePositionFromOwner(OwnerControl);
+            }
+
+            newToVersionDialog.Show();
+        }
+
+        public void ShowRandomApplicationTip()
+        {
+            var randomTip = HelpFeature.GetRandomFeature();
+
+            int rowCount = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Did you know?");
+            sb.AppendLine();
+
+            foreach (var line in randomTip.HelpLines)
+            {
+                if (rowCount > 3) break;
+
+                sb.AppendLine(line.Content);
+                rowCount++;
+            }
+
+            if (rowCount < randomTip.HelpLines.Count)
+            {
+                sb.AppendLine();
+                sb.AppendLine("... (click to read more)");
+            }
+
+            _notificationManager.ShowAsync(
+                content: new NotificationContent()
+                {
+                    Title = randomTip.Title,
+                    Message = sb.ToString(),
+                    Type = NotificationType.Information
+                },
+                expirationTime: TimeSpan.FromSeconds(10),
+                onClick: () =>
+                {
+                    var quickTip = new QuickTipDialog(appSettingService, randomTip);
+
+                    quickTip.TrySetViewablePositionFromOwner(OwnerControl);
+                    quickTip.Show();
+                });
         }
 
         #endregion

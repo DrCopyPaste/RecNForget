@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using RecNForget.Services.Contracts;
@@ -75,6 +76,21 @@ namespace RecNForget.Services.Designer
         public void ShowHelpWindow()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void ShowNewToApplicationWindow()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowNewToVersionDialog(Version currentFileVersion, Version lastInstalledVersion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowRandomApplicationTip()
+        {
+            throw new NotImplementedException();
         }
 
         public void ShowSettingsMenu()
