@@ -7,7 +7,6 @@ using Ookii.Dialogs.Wpf;
 using RecNForget.Controls.Helper;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
-using RecNForget.Services.Helpers;
 
 namespace RecNForget.Controls
 {
@@ -62,7 +61,7 @@ namespace RecNForget.Controls
             }
 
             var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                hotkeys: HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
+                hotkeys: settingService.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
                 buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                 spacing: 6,
                 horizontalAlignment: HorizontalAlignment.Left);

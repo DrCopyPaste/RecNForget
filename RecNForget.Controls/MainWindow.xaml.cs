@@ -10,7 +10,6 @@ using Notifications.Wpf.Core;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
-using RecNForget.Services.Helpers;
 using RecNForget.WPF.Services.Contracts;
 using Unity;
 
@@ -410,7 +409,7 @@ namespace RecNForget.Controls
             // ToDo these keys should be configurable
             // ensure not triggering any of these if hotkey to record is the same
 
-            var recHotkey = HotkeySettingTranslator.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty);
+            var recHotkey = settingService.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty);
 
             if (!recHotkey.Contains(e.Key.ToString()))
             {

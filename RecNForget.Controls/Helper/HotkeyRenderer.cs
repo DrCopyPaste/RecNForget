@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using PressingIssue.Services.Contracts.Events;
 using RecNForget.Controls.Extensions;
 
 namespace RecNForget.Controls.Helper
@@ -50,6 +52,40 @@ namespace RecNForget.Controls.Helper
             }
 
             return buttonGrid;
+        }
+
+        public static List<string> GetKeyEventArgsAsList(SimpleGlobalHotkeyServiceEventArgs keyEventArgs, ModifierKeys modifiers, string keyStart = "[", string keyEnd = "]")
+        {
+            List<string> keys = new List<string>();
+
+            // modifier keys
+            if ((modifiers & System.Windows.Input.ModifierKeys.Shift) > 0)
+            {
+                keys.Add(keyStart + "Shift" + keyEnd);
+            }
+
+            if ((modifiers & System.Windows.Input.ModifierKeys.Control) > 0)
+            {
+                keys.Add(keyStart + "Ctrl" + keyEnd);
+            }
+
+            if ((modifiers & System.Windows.Input.ModifierKeys.Alt) > 0)
+            {
+                keys.Add(keyStart + "Alt" + keyEnd);
+            }
+
+            if ((modifiers & System.Windows.Input.ModifierKeys.Windows) > 0)
+            {
+                keys.Add(keyStart + "Win" + keyEnd);
+            }
+
+            // actual hotkey
+            if (keyEventArgs.Key != "None")
+            {
+                keys.Add(keyStart + keyEventArgs.Key.ToString() + keyEnd);
+            }
+
+            return keys;
         }
     }
 }

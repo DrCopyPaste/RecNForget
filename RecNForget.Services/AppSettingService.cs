@@ -370,6 +370,40 @@ namespace RecNForget.Services
             }
         }
 
+        public List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]")
+        {
+            List<string> keys = new List<string>();
+
+            // modifier keys
+            if (setting.Contains("Shift=True"))
+            {
+                keys.Add(keyStart + "Shift" + keyEnd);
+            }
+
+            if (setting.Contains("Ctrl=True"))
+            {
+                keys.Add(keyStart + "Ctrl" + keyEnd);
+            }
+
+            if (setting.Contains("Alt=True"))
+            {
+                keys.Add(keyStart + "Alt" + keyEnd);
+            }
+
+            if (setting.Contains("Win=True"))
+            {
+                keys.Add(keyStart + "Win" + keyEnd);
+            }
+
+            var actualKey = setting.Split(';')[0].Replace("Key=", string.Empty);
+            if (actualKey != string.Empty && actualKey != "None")
+            {
+                keys.Add(keyStart + actualKey + keyEnd);
+            }
+
+            return keys;
+        }
+
         public string RuntimeVersionString => ThisAssembly.AssemblyFileVersion;
         public string RuntimeInformalVersionString => ThisAssembly.AssemblyInformationalVersion;
 

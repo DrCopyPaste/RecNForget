@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace RecNForget.Services.Contracts
@@ -48,6 +49,7 @@ namespace RecNForget.Services.Contracts
 
         double UiScalingPercent { get; set; }
 
+        List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]");
         void RemoveAppConfigSettingFile();
 
         bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using RecNForget.Services.Contracts;
 
@@ -153,5 +154,10 @@ namespace RecNForget.Services.Designer
         public void RemoveAppConfigSettingFile() => throw new NotImplementedException();
 
         public bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false) => throw new NotImplementedException();
+
+        public List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]")
+        {
+            throw new NotImplementedException();
+        }
     }
 }

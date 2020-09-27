@@ -6,7 +6,6 @@ using PressingIssue.Services.Contracts.Events;
 using RecNForget.Controls.Helper;
 using RecNForget.IoC;
 using RecNForget.Services.Designer;
-using RecNForget.Services.Helpers;
 using Unity;
 
 namespace RecNForget.Controls
@@ -65,7 +64,7 @@ namespace RecNForget.Controls
                 }
 
                 var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                    hotkeys: HotkeySettingTranslator.GetKeyEventArgsAsList(e, currentModifiers, string.Empty, string.Empty),
+                    hotkeys: HotkeyRenderer.GetKeyEventArgsAsList(e, currentModifiers, string.Empty, string.Empty),
                     buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                     spacing: 6);
 

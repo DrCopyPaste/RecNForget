@@ -70,7 +70,6 @@
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
-    <ProjectReference Include="..\RecNForget.Services.Helpers\RecNForget.Services.Helpers.csproj" />
     <ProjectReference Include="..\RecNForget.WPF.Serices.Contracts\RecNForget.WPF.Services.Contracts.csproj" />
   </ItemGroup>
 
