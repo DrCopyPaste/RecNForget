@@ -40,6 +40,7 @@ But, if you feel extra keen to try out the latest, you can
 - upgraded application to .net core 3.1
 - selected file control now also shows file size and play length
 - application toast messages are silent now (no sound - not using the standard windows toast notification anymore)
+- quick tips on start show as toast messages instead of windows popping up
 - removed borders from textboxes
 
 # Features missing for version 1.0

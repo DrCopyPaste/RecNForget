@@ -59,6 +59,15 @@ namespace RecNForget.Help
         /// </summary>
         public Version MaxVersion { get; set; } = null;
 
+        public static HelpFeature GetRandomFeature()
+        {
+            var allFeatures = HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature || f.FeatureClass == HelpFeatureClass.FunFact).ToList();
+            int randomNumber = (new Random()).Next(0, allFeatures.Count - 1);
+            var randomFeature = allFeatures[randomNumber];
+
+            return randomFeature;
+        }
+
         /// <summary>
         /// VERY short one line teaser (only slightly longer than FeatureClass)
         /// </summary>

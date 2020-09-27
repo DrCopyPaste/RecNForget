@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Notifications.Wpf.Core;
 using RecNForget.Controls;
 using RecNForget.Controls.Services;
+using RecNForget.Help;
 using RecNForget.IoC;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
@@ -18,6 +21,10 @@ namespace RecNForget
     /// </summary>
     public partial class App : Application
     {
+        private readonly NotificationManager _notificationManager = new NotificationManager();
+        private MainWindow mainWindow = null;
+        private IActionService actionService;
+
         [STAThread]
         public static void Main()
         {
@@ -67,9 +74,9 @@ namespace RecNForget
             var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
-            MainWindow mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
+            mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
 
-            var actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+            actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
             actionService.OwnerControl = mainWindow;
 
             HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);
@@ -91,9 +98,9 @@ namespace RecNForget
             {
                 var dia = new NewToApplicationWindow(hotkeyService, appSettingService);
 
-                if (!appSettingService.MinimizedToTray)
+                if (!appSettingService.MinimizedToTray && actionService.OwnerControl != null)
                 {
-                    // dia.Owner = this;
+                    dia.Owner = (Window)actionService.OwnerControl;
                 }
 
                 dia.Show();
@@ -102,9 +109,9 @@ namespace RecNForget
             {
                 var newToVersionDialog = new NewToVersionDialog(lastInstalledVersion, currentFileVersion, appSettingService);
 
-                if (!appSettingService.MinimizedToTray)
+                if (!appSettingService.MinimizedToTray && actionService.OwnerControl != null)
                 {
-                    // newToVersionDialog.Owner = this;
+                    newToVersionDialog.Owner = (Window)actionService.OwnerControl;
                 }
 
                 newToVersionDialog.Show();
@@ -117,14 +124,46 @@ namespace RecNForget
 
         private void ShowRandomApplicationTip(IAppSettingService appSettingService)
         {
-            var quickTip = new QuickTipDialog(appSettingService);
+            var randomTip = HelpFeature.GetRandomFeature();
 
-            if (!appSettingService.MinimizedToTray)
+            int rowCount = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Did you know?");
+            sb.AppendLine();
+
+            foreach (var line in randomTip.HelpLines)
             {
-                // quickTip.Owner = this;
+                if (rowCount > 3) break;
+
+                sb.AppendLine(line.Content);
+                rowCount++;
             }
 
-            quickTip.Show();
+            if (rowCount < randomTip.HelpLines.Count)
+            {
+                sb.AppendLine();
+                sb.AppendLine("... (click to read more)");
+            }
+
+            _notificationManager.ShowAsync(
+                content: new NotificationContent()
+                {
+                    Title = randomTip.Title,
+                    Message = sb.ToString(),
+                    Type = NotificationType.Information
+                },
+                expirationTime: TimeSpan.FromSeconds(10),
+                onClick: () =>
+                {
+                    var quickTip = new QuickTipDialog(appSettingService, randomTip);
+
+                    if (!appSettingService.MinimizedToTray && actionService.OwnerControl != null)
+                    {
+                        quickTip.Owner = (Window)actionService.OwnerControl;
+                    }
+
+                    quickTip.Show();
+                });
         }
     }
 }

@@ -19,7 +19,7 @@ namespace RecNForget.Controls
         private string featureCaption;
         private string featureContents;
 
-        public QuickTipDialog(IAppSettingService settingService)
+        public QuickTipDialog(IAppSettingService settingService, HelpFeature randomFeature)
         {
             DataContext = this;
             InitializeComponent();
@@ -35,9 +35,9 @@ namespace RecNForget.Controls
                 SettingService = settingService;
 
                 this.KeyDown += Window_KeyDown;
-
-                GenerateRandomTip();
             }
+
+            SetContents(randomFeature);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -86,11 +86,12 @@ namespace RecNForget.Controls
 
         private void GenerateRandomTip()
         {
-            var allFeatures = HelpFeature.All.Where(f => f.FeatureClass == HelpFeatureClass.NewFeature || f.FeatureClass == HelpFeatureClass.FunFact).ToList();
+            HelpFeature randomFeature = HelpFeature.GetRandomFeature();
+            SetContents(randomFeature);
+        }
 
-            int randomNumber = (new Random()).Next(0, allFeatures.Count - 1);
-            var randomFeature = allFeatures[randomNumber];
-
+        private void SetContents(HelpFeature randomFeature)
+        {
             FeatureCaption = randomFeature.Title;
             FeatureContents = randomFeature.HelpLinesAsString();
         }
