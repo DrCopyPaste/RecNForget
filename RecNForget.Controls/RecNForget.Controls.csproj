@@ -49,6 +49,8 @@
     <None Remove="Themes\ButtonImages\trash_icon77730.black.disabled.png" />
     <None Remove="Themes\ButtonImages\trash_icon77730.black.png" />
     <None Remove="Themes\ButtonImages\windowSettings_icon248857.black.png" />
+    <None Remove="Themes\SvgImages\bugfix_icon140609.svg" />
+    <None Remove="Themes\SvgImages\logo.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,6 +73,7 @@
     <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
     <ProjectReference Include="..\RecNForget.WPF.Serices.Contracts\RecNForget.WPF.Services.Contracts.csproj" />
+    <ProjectReference Include="..\SVGImage\DotNetProjects.SVGImage.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -203,6 +206,8 @@
     <Resource Include="Themes\ButtonImages\windowSettings_icon248857.black.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\bugfix_icon140609.svg" />
+    <Resource Include="Themes\SvgImages\logo.svg" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
