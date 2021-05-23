@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:RecNForget.Controls" xmlns:Sys="clr-namespace:System;assembly=mscorlib">
+                    xmlns:local="clr-namespace:RecNForget.Controls" xmlns:Sys="clr-namespace:System;assembly=mscorlib" xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage">
 
     <!-- ===================================================  Sizes/Margins/Paddings =======================================================================================================  -->
 
@@ -16,6 +16,8 @@
     <Sys:Double x:Key="ChangeSettingButton_Width">25</Sys:Double>
     <Sys:Double x:Key="CheckBoxControl_Height">22</Sys:Double>
     <Sys:Double x:Key="CheckBox_Width">20</Sys:Double>
+
+    <Sys:Double x:Key="HalfButtonCell_Height">30</Sys:Double>
     <Sys:Double x:Key="HalfButtonCell_Width">50</Sys:Double>
     <Sys:Double x:Key="FatButtonCell_Width">109</Sys:Double>
 
@@ -46,6 +48,31 @@
     <!-- /===================================================  SizesMarginsPaddings  ================================================================================================?======  -->
 
     <!-- ====================================================  Colors  ===================================================================================================================  -->
+
+    <!-- New Unified SVG Colors-->
+
+    <Color x:Key="Control_Foreground_Color">Black</Color>
+    <Color x:Key="Control_ForegroundFocused_Color">Black</Color>
+    <Color x:Key="Control_ForegroundHover_Color">Black</Color>
+    <Color x:Key="Control_ForegroundPressed_Color">Black</Color>
+    <Color x:Key="Control_ForegroundDisabled_Color">#dddddd</Color>
+
+    <Brush x:Key="Control_Foreground_Brush">Black</Brush>
+    <Brush x:Key="Control_ForegroundFocused_Brush">Black</Brush>
+    <Brush x:Key="Control_ForegroundHover_Brush">Black</Brush>
+    <Brush x:Key="Control_ForegroundPressed_Brush">Black</Brush>
+    <Brush x:Key="Control_ForegroundDisabled_Brush">#dddddd</Brush>
+
+    <Brush x:Key="Control_Background_Brush">White</Brush>
+    <Brush x:Key="Control_BackgroundFocused_Brush">White</Brush>
+    <Brush x:Key="Control_BackgroundHover_Brush">White</Brush>
+    <Brush x:Key="Control_BackgroundPressed_Brush">White</Brush>
+    <Brush x:Key="Control_BackgroundDisabled_Brush">White</Brush>
+
+    <Brush x:Key="Control_Transparent_Brush">Transparent</Brush>
+
+    <!-- /New Unified SVG Colors-->
+
 
     <!-- COLORS APPLICATION-->
     <Sys:String x:Key="ApplicationBorder_Color">Black</Sys:String>
@@ -301,6 +328,144 @@
     <!--
         Default Button style
     -->
+    <Style x:Key="SvgBaseButtonLayout" TargetType="{x:Type local:SvgImageButton1}">
+         <!--Some setters--> 
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ImagePadding" Value="0" />
+        <Setter Property="ImageMargin" Value="0" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource Control_Background_Brush}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SvgImageButton1}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border
+                            Name="ImageButtonBorder"
+                            Padding="3"
+                            CornerRadius="3"
+                            BorderBrush="{Binding Source={StaticResource Control_Transparent_Brush}}"
+                            BorderThickness="1">
+                            <svg1:SVGImage Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" OverrideColor="{Binding Source={StaticResource Control_Foreground_Color}}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!--Some triggers ( IsFocused, IsMouseOver, etc.)-->
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Control_ForegroundFocused_Brush}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Control_BackgroundHover_Brush}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Control_ForegroundHover_Brush}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <!--<Setter TargetName="ImageContent" Property="Source" Value="{Binding PressedImage, RelativeSource={RelativeSource AncestorType=local:SvgImageButton1, Mode=FindAncestor}}" />-->
+                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource Control_ForegroundPressed_Color}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Control_BackgroundPressed_Brush}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Control_ForegroundPressed_Brush}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DisabledImage, RelativeSource={RelativeSource AncestorType=local:SvgImageButton1, Mode=FindAncestor}}" />
+                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource Control_ForegroundDisabled_Color}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Control_BackgroundDisabled_Brush}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Control_BackgroundDisabled_Brush}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SvgHalfActionButtonSmallIconLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
+        <Setter Property="ImagePadding" Value="8,8,8,8" />
+        <Setter Property="ImageMargin" Value="4,1,4,1" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+    </Style>
+
+    <Style x:Key="SvgComplexConditionButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonSmallIconLayout}">
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition1" Value="True"/>
+                    <Condition Property="IsEnabledCondition2" Value="True"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="True"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition1" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="False"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabledCondition2" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="IsEnabled" Value="False"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SvgHalfActionButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
+        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+    </Style>
+    
+    <Style x:Key="SvgOpenFolderButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
+    </Style>
+
+    <Style x:Key="SvgPrevTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
+    </Style>
+
+    <Style x:Key="SvgNextTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
+    </Style>
+
+    <Style x:Key="SvgPlayTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
+    </Style>
+
+    <Style x:Key="SvgPauseTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
+    </Style>
+
+    <Style x:Key="SvgStopButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+    </Style>
+
+    <Style x:Key="SvgRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
+    </Style>
+
+
     <Style x:Key="BaseButtonLayout" TargetType="{x:Type local:ImageButton}">
         <!-- Some setters -->
         <Setter Property="ImagePadding" Value="4,4,4,4" />
@@ -315,7 +480,9 @@
                        Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
                        BorderBrush="{Binding Source={StaticResource ControlBackground_Color}}"
                        CornerRadius="3"
-                       Background="{TemplateBinding Background}">
+                       Background="{TemplateBinding Background}"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
                         <Grid Name="ImageButtonGrid">
                             <Image Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalAlignment="Bottom" />
                         </Grid>
@@ -460,10 +627,10 @@
         <Setter Property="PressedImage" Value="ButtonImages\windowSettings_icon248857.black.png" />
     </Style>
     <Style x:Key="SettingsButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="ButtonImages\settings_icon488154.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\settings_icon488154.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\settings_icon488154.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\settings_icon488154.black.png" />
+        <Setter Property="DefaultImage" Value="ButtonImages\settings_icon40863.black.png" />
+        <Setter Property="DisabledImage" Value="ButtonImages\settings_icon40863.black.png" />
+        <Setter Property="SelectedImage" Value="ButtonImages\settings_icon40863.black.png" />
+        <Setter Property="PressedImage" Value="ButtonImages\settings_icon40863.black.png" />
     </Style>
     <Style x:Key="MinimizeButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
         <Setter Property="DefaultImage" Value="ButtonImages\minimize_icon246566.black.png" />

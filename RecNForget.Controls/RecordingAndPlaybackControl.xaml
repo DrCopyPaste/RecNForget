@@ -30,29 +30,31 @@
                     <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                 </Grid.ColumnDefinitions>
 
-                <local:ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource OpenFolderButton}"
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="0" Style="{StaticResource SvgOpenFolderButton}"
                                 ToolTip="select selected file in explorer (Hotkey: [Down-Arrow])"
                                 x:Name="OpenSelectedFileButton" Click="OpenOutputFolder_Click" />
-                <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource PrevTrackButton}"
+                <!--<svgimagebutton:SvgImageButton Grid.Row="1" Grid.Column="0" Width="30" Height="30"></svgimagebutton:SvgImageButton>-->
+
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="2" Style="{StaticResource SvgPrevTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="skip to previous file (Hotkey: [Left-Arrow])"
-                                x:Name="SkipPrevButton" Click="SkipPrevButton_Click"/>
-                <local:ImageButton Grid.Row="1" Grid.Column="3" Style="{StaticResource PlayButton}"
+                                x:Name="SkipPrevButton" Click="SkipPrevButton_Click" />
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="3" Style="{StaticResource SvgPlayTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="play selected file (Hotkey: [Space])"
                                 x:Name="TogglePlaySelectedFileButton" Click="ReplayLastRecording_Click" />
-                <local:ImageButton Grid.Row="1" Grid.Column="4" Style="{StaticResource StopButton}"
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="4" Style="{StaticResource SvgStopButton}"
                                 IsEnabled="{Binding Path=AudioPlaybackService.PlayingOrPaused}"
                                 ToolTip="stop playing audio (Hotkey: [Esc])"
                                 x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
-                <local:ImageButton Grid.Row="1" Grid.Column="5" Style="{StaticResource NextTrackButton}"
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="5" Style="{StaticResource SvgNextTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="skip to next file (Hotkey: [Right-Arrow])"
-                                x:Name="SkipNextButton" Click="SkipNextButton_Click"/>
-                <local:ImageButton Grid.Row="1" Grid.Column="7" Style="{StaticResource RecordButton}"
+                                x:Name="SkipNextButton" Click="SkipNextButton_Click" />
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="7" Style="{StaticResource SvgRecordButton}"
                                 IsEnabled="{Binding Path=AudioPlaybackService.Stopped}"
                                 x:Name="RecordButton" Click="RecordButton_Click" />
             </Grid>

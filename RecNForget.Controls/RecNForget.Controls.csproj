@@ -50,7 +50,15 @@
     <None Remove="Themes\ButtonImages\trash_icon77730.black.png" />
     <None Remove="Themes\ButtonImages\windowSettings_icon248857.black.png" />
     <None Remove="Themes\SvgImages\bugfix_icon140609.svg" />
+    <None Remove="Themes\SvgImages\cancel_icon428740.svg" />
     <None Remove="Themes\SvgImages\logo.svg" />
+    <None Remove="Themes\SvgImages\nextTrack_icon.svg" />
+    <None Remove="Themes\SvgImages\openFolder_icon356582.svg" />
+    <None Remove="Themes\SvgImages\pause_icon.svg" />
+    <None Remove="Themes\SvgImages\play_icon.svg" />
+    <None Remove="Themes\SvgImages\prevTrack_icon.svg" />
+    <None Remove="Themes\SvgImages\record_icon.svg" />
+    <None Remove="Themes\SvgImages\stop_icon.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +66,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetProjects.SVGImage" Version="4.1.94" />
     <PackageReference Include="NAudio" Version="1.10.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31">
       <PrivateAssets>all</PrivateAssets>
@@ -73,7 +82,6 @@
     <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
     <ProjectReference Include="..\RecNForget.WPF.Serices.Contracts\RecNForget.WPF.Services.Contracts.csproj" />
-    <ProjectReference Include="..\SVGImage\DotNetProjects.SVGImage.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -206,8 +214,34 @@
     <Resource Include="Themes\ButtonImages\windowSettings_icon248857.black.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\SvgImages\bugfix_icon140609.svg" />
-    <Resource Include="Themes\SvgImages\logo.svg" />
+    <Resource Include="Themes\SvgImages\bugfix_icon140609.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\cancel_icon428740.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\logo.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\nextTrack_icon.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\openFolder_icon356582.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\pause_icon.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\play_icon.svg" />
+    <Resource Include="Themes\SvgImages\prevTrack_icon.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\record_icon.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\stop_icon.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

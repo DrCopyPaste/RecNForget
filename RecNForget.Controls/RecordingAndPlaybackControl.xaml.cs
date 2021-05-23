@@ -111,11 +111,11 @@ namespace RecNForget.Controls
                 {
                     if (AudioRecordingService.CurrentlyRecording)
                     {
-                        RecordButton.Style = (Style)FindResource("StopRecordButton");
+                        RecordButton.Style = (Style)FindResource("SvgStopButton");
                     }
                     else
                     {
-                        RecordButton.Style = (Style)FindResource("RecordButton");
+                        RecordButton.Style = (Style)FindResource("SvgRecordButton");
                     }
 
                     break;
@@ -129,7 +129,7 @@ namespace RecNForget.Controls
             {
                 case nameof(AudioPlaybackService.Paused):
                 {
-                    TogglePlaySelectedFileButton.Style = AudioPlaybackService.Playing && AudioRecordingService.CurrentlyNotRecording ? (Style)FindResource("PauseButton") : (Style)FindResource("PlayButton");
+                    TogglePlaySelectedFileButton.Style = AudioPlaybackService.Playing && AudioRecordingService.CurrentlyNotRecording ? (Style)FindResource("SvgPauseTrackButton") : (Style)FindResource("SvgPlayTrackButton");
                     break;
                 }
             }
