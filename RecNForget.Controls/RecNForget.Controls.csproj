@@ -51,8 +51,10 @@
     <None Remove="Themes\ButtonImages\windowSettings_icon248857.black.png" />
     <None Remove="Themes\SvgImages\bugfix_icon140609.svg" />
     <None Remove="Themes\SvgImages\cancel_icon428740.svg" />
+    <None Remove="Themes\SvgImages\close_icon349388.svg" />
     <None Remove="Themes\SvgImages\folder_icon122592.svg" />
     <None Remove="Themes\SvgImages\logo.svg" />
+    <None Remove="Themes\SvgImages\minimize_icon246566.svg" />
     <None Remove="Themes\SvgImages\nextTrack_icon.svg" />
     <None Remove="Themes\SvgImages\openFolder_icon356582.svg" />
     <None Remove="Themes\SvgImages\pause_icon.svg" />
@@ -60,7 +62,9 @@
     <None Remove="Themes\SvgImages\play_icon.svg" />
     <None Remove="Themes\SvgImages\prevTrack_icon.svg" />
     <None Remove="Themes\SvgImages\record_icon.svg" />
+    <None Remove="Themes\SvgImages\settings_icon40863.svg" />
     <None Remove="Themes\SvgImages\stop_icon.svg" />
+    <None Remove="Themes\SvgImages\windowSettings_icon248857.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -222,10 +226,16 @@
     <Resource Include="Themes\SvgImages\cancel_icon428740.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\close_icon349388.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Themes\SvgImages\folder_icon122592.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\logo.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\minimize_icon246566.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\nextTrack_icon.svg">
@@ -245,7 +255,13 @@
     <Resource Include="Themes\SvgImages\record_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\settings_icon40863.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Themes\SvgImages\stop_icon.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\windowSettings_icon248857.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

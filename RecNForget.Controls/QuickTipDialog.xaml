@@ -67,7 +67,7 @@
                     <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                 </Grid.ColumnDefinitions>
 
-                <local:ImageButton Grid.Row="0" Grid.Column="6" Style="{StaticResource ExitButton}"
+                <local:SvgImageButton1 Grid.Row="0" Grid.Column="6" Style="{StaticResource SvgExitButton}"
                     Click="Exit_Click" />
             </Grid>
 

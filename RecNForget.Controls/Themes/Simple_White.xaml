@@ -206,66 +206,6 @@
     
     <!-- ===================================================  BaseButtons  ===============================================================================================================  -->
 
-    <!-- Header button styles SHOULD be different than any other in app buttons-->
-    <Style x:Key="BaseHeaderButtonLayout" TargetType="{x:Type local:ImageButton}">
-        <!-- Some setters -->
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="ImagePadding" Value="2,2,2,2" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ImageButton}">
-                    <Border Name="ImageButtonBorder"
-                       BorderThickness="1"
-                       Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
-                       Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
-                       BorderBrush="{Binding Source={StaticResource HeaderButtonBorder_Color}}"
-                       CornerRadius="3"
-                       Background="{TemplateBinding Background}">
-                        <Grid Name="ImageButtonGrid">
-                            <Image Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalAlignment="Bottom" />
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <!-- Some triggers ( IsFocused, IsMouseOver, etc.) -->
-                        <Trigger Property="IsPressed" Value="False">
-                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Enabled_Color}}" />
-                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DefaultImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
-                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
-                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Hover_Color}}" />
-                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding SelectedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Pressed_Color}}" />
-                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding PressedImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
-                            <Setter TargetName="ImageButtonGrid" Property="RenderTransform" >
-                                <Setter.Value>
-                                    <TranslateTransform Y="1.0" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
-                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Pressed_Color}}" />
-                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DisabledImage, RelativeSource={RelativeSource AncestorType=local:ImageButton, Mode=FindAncestor}}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <!-- Default style for minibuttons on main window controls
     these are also still special (TODO template binding for used colors, border styles)
     -->
@@ -403,6 +343,60 @@
         <Setter Property="Width" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
     </Style>
 
+    <Style x:Key="SvgBaseHeaderButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+        <Setter Property="ImagePadding" Value="2,2,2,2" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SvgImageButton1}">
+                    <Grid Name="ImageButtonGrid" Background="{TemplateBinding Background}">
+                        <Border
+                            Name="ImageButtonBorder"
+                            Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
+                            Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
+                            CornerRadius="3"
+                            BorderBrush="{Binding Source={StaticResource Control_Transparent_Brush}}"
+                            BorderThickness="1">
+                            <svg1:SVGImage Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" OverrideColor="{Binding Source={StaticResource Control_Foreground_Color}}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!--Some triggers ( IsFocused, IsMouseOver, etc.)-->
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedImage}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Hover_Color}}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedImage}" />
+                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource Control_ForegroundPressed_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Pressed_Color}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource ActionButtonBorder_Focused_Color}}" />
+                            <Setter TargetName="ImageButtonGrid" Property="RenderTransform" >
+                                <Setter.Value>
+                                    <TranslateTransform Y="1.0" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisabledImage}" />
+                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource Control_ForegroundDisabled_Color}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource HeaderButton_Pressed_Color}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource HeaderButtonBorder_Focused_Color}}" />
+                            <Setter Property="Background" Value="{Binding Source={StaticResource HeaderButton_Pressed_Color}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="SvgComplexConditionButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonSmallIconLayout}">
         <Style.Triggers>
             <MultiTrigger>
@@ -427,6 +421,7 @@
         </Style.Triggers>
     </Style>
 
+    <!--Main Window Controls-->
     <Style x:Key="SvgOpenFolderButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
@@ -511,6 +506,33 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
     </Style>
 
+    <!-- Window Header Controls-->
+    <Style x:Key="SvgWindowSettingsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
+    </Style>
+    <Style x:Key="SvgSettingsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
+    </Style>
+    <Style x:Key="SvgMinimizeButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
+    </Style>
+    <Style x:Key="SvgExitButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
+    </Style>
+    
+    
     <Style x:Key="BaseButtonLayout" TargetType="{x:Type local:ImageButton}">
         <!-- Some setters -->
         <Setter Property="ImagePadding" Value="4,4,4,4" />
@@ -664,32 +686,6 @@
     
     <!-- ===================================================  Buttons  ===================================================================================================================  -->
 
-    <!-- Header button styles-->
-    <Style x:Key="WindowSettingsButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="ButtonImages\windowSettings_icon248857.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\windowSettings_icon248857.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\windowSettings_icon248857.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\windowSettings_icon248857.black.png" />
-    </Style>
-    <Style x:Key="SettingsButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="ButtonImages\settings_icon40863.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\settings_icon40863.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\settings_icon40863.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\settings_icon40863.black.png" />
-    </Style>
-    <Style x:Key="MinimizeButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="ButtonImages\minimize_icon246566.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\minimize_icon246566.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\minimize_icon246566.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\minimize_icon246566.black.png" />
-    </Style>
-    <Style x:Key="ExitButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="ButtonImages\close_icon349388.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\close_icon349388.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\close_icon349388.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\close_icon349388.black.png" />
-    </Style>
-
     <Style x:Key="ChangeSettingButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseChangeSettingButtonLayout}">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -818,7 +814,7 @@
                                 <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
                             </Grid.ColumnDefinitions>
 
-                            <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}" IsCancel="True" />
+                            <local:SvgImageButton1 Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource SvgExitButton}" IsCancel="True" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
