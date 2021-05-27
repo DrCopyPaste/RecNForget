@@ -40,7 +40,7 @@
                 <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
                     Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="1" Style="{StaticResource SvgChangeFilePatternMiniButtonLayout}"
                     ToolTip="rename selected file (Hotkey: [Return])"
                     IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
                     x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>

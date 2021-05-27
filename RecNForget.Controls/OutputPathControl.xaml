@@ -35,11 +35,11 @@
                     Text="{Binding Path=OutputPathWithFilePattern, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     ToolTip="{Binding Path=OutputPathWithFilePattern, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ToolTipService.ShowOnDisabled="True" />
 
-                <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="1" Style="{StaticResource SvgChangeFilePatternMiniButtonLayout}"
                     ToolTip="change output file name pattern"
                     Click="ChangeFileNamePatternButton_Clicked"/>
 
-                <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource ChangeOutputFolderMiniButtonLayout}"
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="2" Style="{StaticResource SvgChangeOutputFolderMiniButtonLayout}"
                     ToolTip="change output folder"
                     Click="ChangeOutputFolderButton_Clicked"/>
             </Grid>

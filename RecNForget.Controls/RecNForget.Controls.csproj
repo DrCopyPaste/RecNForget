@@ -51,10 +51,12 @@
     <None Remove="Themes\ButtonImages\windowSettings_icon248857.black.png" />
     <None Remove="Themes\SvgImages\bugfix_icon140609.svg" />
     <None Remove="Themes\SvgImages\cancel_icon428740.svg" />
+    <None Remove="Themes\SvgImages\folder_icon122592.svg" />
     <None Remove="Themes\SvgImages\logo.svg" />
     <None Remove="Themes\SvgImages\nextTrack_icon.svg" />
     <None Remove="Themes\SvgImages\openFolder_icon356582.svg" />
     <None Remove="Themes\SvgImages\pause_icon.svg" />
+    <None Remove="Themes\SvgImages\pencil_icon79516.svg" />
     <None Remove="Themes\SvgImages\play_icon.svg" />
     <None Remove="Themes\SvgImages\prevTrack_icon.svg" />
     <None Remove="Themes\SvgImages\record_icon.svg" />
@@ -220,6 +222,9 @@
     <Resource Include="Themes\SvgImages\cancel_icon428740.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\folder_icon122592.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Themes\SvgImages\logo.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -232,6 +237,7 @@
     <Resource Include="Themes\SvgImages\pause_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\pencil_icon79516.svg" />
     <Resource Include="Themes\SvgImages\play_icon.svg" />
     <Resource Include="Themes\SvgImages\prevTrack_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

@@ -382,6 +382,27 @@
         </Setter>
     </Style>
 
+    <Style x:Key="SvgHalfActionButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
+        <Setter Property="ImagePadding" Value="4,4,4,4" />
+        <Setter Property="ImageMargin" Value="7,1,7,1" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+    </Style>
+    
+    <Style x:Key="SvgHalfActionButtonSmallIconLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
+        <Setter Property="ImagePadding" Value="8,8,8,8" />
+        <Setter Property="ImageMargin" Value="4,1,4,1" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+    </Style>
+
+    <Style x:Key="SvgBaseMiniChangeSettingButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
+        <Setter Property="ImagePadding" Value="2,2,2,2" />
+        <Setter Property="ImageMargin" Value="0,0,0,0" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
+    </Style>
+
     <Style x:Key="SvgComplexConditionButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonSmallIconLayout}">
         <Style.Triggers>
             <MultiTrigger>
@@ -406,25 +427,11 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="SvgHalfActionButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
-        <Setter Property="ImagePadding" Value="4,4,4,4" />
-        <Setter Property="ImageMargin" Value="7,1,7,1" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
-    </Style>
-
     <Style x:Key="SvgOpenFolderButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
-    </Style>
-
-    <Style x:Key="SvgHalfActionButtonSmallIconLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
-        <Setter Property="ImagePadding" Value="8,8,8,8" />
-        <Setter Property="ImageMargin" Value="4,1,4,1" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
     </Style>
 
     <Style x:Key="SvgPrevTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
@@ -481,6 +488,27 @@
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+    </Style>
+
+    <Style x:Key="SvgChangeFilePatternMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
+        <Setter Property="Margin" Value="2,2,2,0" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
+    </Style>
+
+    <Style x:Key="SvgChangeOutputFolderMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
+        <Setter Property="Margin" Value="2,2,2,0" />
+        <Setter Property="ImagePadding" Value="1,1,1,1" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
     </Style>
 
     <Style x:Key="BaseButtonLayout" TargetType="{x:Type local:ImageButton}">
@@ -672,31 +700,6 @@
     </Style>
 
     <!-- Mini Buttons for Main Window Sub Controls-->
-
-    <Style x:Key="ChangeFilePatternMiniButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseMiniChangeSettingButtonLayout}">
-        <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
-        <Setter Property="Margin" Value="2,2,2,0" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="DefaultImage" Value="ButtonImages\pencil_icon79516.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\pencil_icon79516.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\pencil_icon79516.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\pencil_icon79516.black.png" />
-    </Style>
-
-    <Style x:Key="ChangeOutputFolderMiniButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseMiniChangeSettingButtonLayout}">
-        <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
-        <Setter Property="Margin" Value="2,2,2,0" />
-        <Setter Property="ImagePadding" Value="1,1,1,1" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="DefaultImage" Value="ButtonImages\folder_icon122592.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\folder_icon122592.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\folder_icon122592.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\folder_icon122592.black.png" />
-    </Style>
 
     <Style x:Key="DeleteSelectedFileMiniButtonLayout" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource BaseMiniChangeSettingButtonLayout}">
         <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
