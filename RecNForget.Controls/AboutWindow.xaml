@@ -83,7 +83,7 @@
                 Text="Version X.Y.Z.A" />
             <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}">
                 <Run>
-                    (C) 2019-2020 by 
+                    (C) 2019-2021 by 
                 </Run>
                 <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">DrCopyPaste</Hyperlink>
             </TextBlock>

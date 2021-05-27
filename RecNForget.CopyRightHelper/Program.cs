@@ -39,8 +39,19 @@ namespace RecNForget.CopyRightHelper
             xamlHeader.AppendLine("\t\t" + @"xmlns:d=""http://schemas.microsoft.com/expression/blend/2008""");
             xamlHeader.AppendLine("\t\t" + @"xmlns:local=""clr-namespace:RecNForget.Controls""");
             xamlHeader.AppendLine("\t\t" + @"mc:Ignorable=""d"">");
+            xamlHeader.AppendLine("\t" + @"<UserControl.Resources>");
+            xamlHeader.AppendLine("\t\t" + @"<ResourceDictionary>");
+            xamlHeader.AppendLine("\t\t\t" + @"<ResourceDictionary.MergedDictionaries>");
+            xamlHeader.AppendLine("\t\t\t\t" + @"<ResourceDictionary Source=""Themes\Generic.xaml"" />");
+            xamlHeader.AppendLine("\t\t\t" + @"</ResourceDictionary.MergedDictionaries>");
+            xamlHeader.AppendLine("\t\t" + @"</ResourceDictionary>");
+            xamlHeader.AppendLine("\t" + @"</UserControl.Resources>");
             xamlHeader.AppendLine("\t" + @"<Grid>");
             xamlHeader.AppendLine("\t\t" + @"<TextBlock Style = ""{StaticResource DefaultTextBlockStyle}"" >");
+
+
+
+           
 
             var xamlFooter = new StringBuilder();
             xamlFooter.AppendLine("\t\t" + "</TextBlock>");
