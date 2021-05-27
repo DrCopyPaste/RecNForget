@@ -111,7 +111,7 @@ namespace RecNForget.Controls
                 {
                     if (AudioRecordingService.CurrentlyRecording)
                     {
-                        RecordButton.Style = (Style)FindResource("SvgStopButton");
+                        RecordButton.Style = (Style)FindResource("SvgStopRecordButton");
                     }
                     else
                     {

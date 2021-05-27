@@ -341,7 +341,8 @@
                     <Grid Background="{TemplateBinding Background}">
                         <Border
                             Name="ImageButtonBorder"
-                            Padding="3"
+                            Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
+                            Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
                             CornerRadius="3"
                             BorderBrush="{Binding Source={StaticResource Control_Transparent_Brush}}"
                             BorderThickness="1">
@@ -354,11 +355,12 @@
                             <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Control_ForegroundFocused_Brush}}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedImage}" />
                             <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Control_BackgroundHover_Brush}}" />
                             <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Control_ForegroundHover_Brush}}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <!--<Setter TargetName="ImageContent" Property="Source" Value="{Binding PressedImage, RelativeSource={RelativeSource AncestorType=local:SvgImageButton1, Mode=FindAncestor}}" />-->
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedImage}" />
                             <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource Control_ForegroundPressed_Color}}" />
                             <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Control_BackgroundPressed_Brush}}" />
                             <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Control_ForegroundPressed_Brush}}" />
@@ -369,7 +371,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding DisabledImage, RelativeSource={RelativeSource AncestorType=local:SvgImageButton1, Mode=FindAncestor}}" />
+                            <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisabledImage}" />
                             <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource Control_ForegroundDisabled_Color}}" />
                             <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Control_BackgroundDisabled_Brush}}" />
                             <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Control_BackgroundDisabled_Brush}}" />
@@ -378,13 +380,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <Style x:Key="SvgHalfActionButtonSmallIconLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
-        <Setter Property="ImagePadding" Value="8,8,8,8" />
-        <Setter Property="ImageMargin" Value="4,1,4,1" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
     </Style>
 
     <Style x:Key="SvgComplexConditionButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonSmallIconLayout}">
@@ -412,10 +407,12 @@
     </Style>
 
     <Style x:Key="SvgHalfActionButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
+        <Setter Property="ImagePadding" Value="4,4,4,4" />
+        <Setter Property="ImageMargin" Value="7,1,7,1" />
         <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
         <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
     </Style>
-    
+
     <Style x:Key="SvgOpenFolderButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
@@ -423,7 +420,16 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
     </Style>
 
+    <Style x:Key="SvgHalfActionButtonSmallIconLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
+        <Setter Property="ImagePadding" Value="8,8,8,8" />
+        <Setter Property="ImageMargin" Value="4,1,4,1" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
+    </Style>
+
     <Style x:Key="SvgPrevTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="ImagePadding" Value="8,8,8,8" />
+        <Setter Property="ImageMargin" Value="4,1,4,1" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
@@ -431,6 +437,8 @@
     </Style>
 
     <Style x:Key="SvgNextTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="ImagePadding" Value="8,8,8,8" />
+        <Setter Property="ImageMargin" Value="4,1,4,1" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
@@ -438,6 +446,7 @@
     </Style>
 
     <Style x:Key="SvgPlayTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="ImagePadding" Value="4,4,4,4" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
@@ -445,6 +454,7 @@
     </Style>
 
     <Style x:Key="SvgPauseTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+        <Setter Property="ImagePadding" Value="4,4,4,4" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
@@ -458,13 +468,20 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
     </Style>
 
-    <Style x:Key="SvgRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
+    <Style x:Key="SvgRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
     </Style>
 
+    <Style x:Key="SvgStopRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
+        <Setter Property="ImagePadding" Value="5,5,5,5" />
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+    </Style>
 
     <Style x:Key="BaseButtonLayout" TargetType="{x:Type local:ImageButton}">
         <!-- Some setters -->
@@ -694,105 +711,6 @@
     </Style>
 
     <!-- /Mini Buttons for Main Window Sub Controls-->
-
-    <Style x:Key="OpenFolderButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="DefaultImage" Value="ButtonImages\openFolder_icon356582.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\openFolder_icon356582.black.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\openFolder_icon356582.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\openFolder_icon356582.black.png" />
-    </Style>
-
-    <Style x:Key="ComplexConditionButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonSmallIconLayout}">
-        <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsEnabledCondition1" Value="True"/>
-                    <Condition Property="IsEnabledCondition2" Value="True"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="IsEnabled" Value="True"/>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsEnabledCondition1" Value="False"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="IsEnabled" Value="False"/>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsEnabledCondition2" Value="False"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="IsEnabled" Value="False"/>
-            </MultiTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="PrevTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource ComplexConditionButton}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="DefaultImage" Value="ButtonImages\prevTrack_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\prevTrack_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\prevTrack_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\prevTrack_icon.black.png" />
-    </Style>
-
-    <Style x:Key="NextTrackButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource ComplexConditionButton}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="DefaultImage" Value="ButtonImages\nextTrack_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\nextTrack_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\nextTrack_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\nextTrack_icon.black.png" />
-    </Style>
-
-    <Style x:Key="PlayButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource ComplexConditionButton}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="ImagePadding" Value="4,4,4,4" />
-        <Setter Property="DefaultImage" Value="ButtonImages\play_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\play_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\play_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\play_icon.black.png" />
-    </Style>
-
-    <Style x:Key="PauseButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource ComplexConditionButton}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="ImagePadding" Value="4,4,4,4" />
-        <Setter Property="DefaultImage" Value="ButtonImages\pause_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\pause_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\pause_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\pause_icon.black.png" />
-    </Style>
-
-    <Style x:Key="StopButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonSmallIconLayout}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="DefaultImage" Value="ButtonImages\stop_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\stop_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\stop_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\stop_icon.black.png" />
-    </Style>
-
-    <Style x:Key="RecordButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="DefaultImage" Value="ButtonImages\record_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\record_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\record_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\record_icon.black.png" />
-    </Style>
-
-    <Style x:Key="StopRecordButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="ImagePadding" Value="5,5,5,5" />
-        <Setter Property="DefaultImage" Value="ButtonImages\stop_icon.black.png" />
-        <Setter Property="DisabledImage" Value="ButtonImages\stop_icon.black.disabled.png" />
-        <Setter Property="SelectedImage" Value="ButtonImages\stop_icon.black.png" />
-        <Setter Property="PressedImage" Value="ButtonImages\stop_icon.black.png" />
-    </Style>
 
     <Style x:Key="AcceptButton" TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource HalfActionButtonLayout}">
         <Setter Property="Focusable" Value="false"/>
