@@ -71,11 +71,11 @@
             <CheckBox Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
                 IsChecked="{Binding Path=InstallAfterDownload}">install after download</CheckBox>
             
-            <local:ImageButton Grid.Row="8" Grid.Column="2" Style="{StaticResource DownloadButton}"
+            <local:SvgImageButton1 Grid.Row="8" Grid.Column="2" Style="{StaticResource SvgDownloadButton}"
                 HorizontalAlignment="Right"
                 Click="DownloadButton_Click" ToolTip="Download"/>
 
-            <local:ImageButton Grid.Row="8" Grid.Column="0" Style="{StaticResource CancelButton}"
+            <local:SvgImageButton1 Grid.Row="8" Grid.Column="0" Style="{StaticResource SvgCancelButton}"
                 HorizontalAlignment="Left"
                 IsCancel="True"/>
         </Grid>

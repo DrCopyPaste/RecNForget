@@ -94,12 +94,12 @@
                 show tips on start
             </CheckBox>
 
-            <local:ImageButton Grid.Row="7" Grid.Column="0" Style="{StaticResource LightBulbButton}"
+            <local:SvgImageButton1 Grid.Row="7" Grid.Column="0" Style="{StaticResource SvgLightBulbButton}"
                 HorizontalAlignment="Left"
                 ToolTip="Another useful tip please"
                 Click="GenerateAnotherTip_Click"/>
             
-            <local:ImageButton Grid.Row="7" Grid.Column="1" Style="{StaticResource AcceptButton}"
+            <local:SvgImageButton1 Grid.Row="7" Grid.Column="1" Style="{StaticResource SvgAcceptButton}"
                 HorizontalAlignment="Right"
                 ToolTip="good to know"
                 Click="Exit_Click"/>

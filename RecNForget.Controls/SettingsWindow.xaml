@@ -75,7 +75,7 @@
             <Expander Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" ExpandDirection="Down"
               Header="Hotkeys"
               IsExpanded="True">
-                <local:ImageButton Style="{StaticResource BaseSettingButtonLayout}"
+                <Button Style="{StaticResource BaseSettingButtonLayout}"
                 HorizontalAlignment="Stretch"
                 Click="ConfigureHotkey_StartStopRecording_Click">
                     <Grid
@@ -98,11 +98,10 @@
                         <StackPanel Grid.Row="0" Grid.Column="1" Style="{StaticResource HotkeyDisplayStackPanel}"
                         x:Name="HotkeyDisplay" />
 
-                        <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
-                        HorizontalAlignment="Right"
+                        <local:SvgImageButton1 Grid.Row="0" Grid.Column="2" Style="{StaticResource SvgChangeSettingButtonLayout}"
                         Click="ConfigureHotkey_StartStopRecording_Click" />
                     </Grid>
-                </local:ImageButton>
+                </Button>
             </Expander>
 
             <Rectangle Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
@@ -120,7 +119,7 @@
                         <ColumnDefinition Width="349*"/>
                     </Grid.ColumnDefinitions>
 
-                    <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource BaseSettingButtonLayout}"
+                    <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource BaseSettingButtonLayout}"
                 Click="Configure_OutputPath_Click" Grid.ColumnSpan="2">
                         <Grid
                     HorizontalAlignment="Stretch">
@@ -141,13 +140,13 @@
                             <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
                         Text="{Binding Path=SettingService.OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
 
-                            <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
+                            <local:SvgImageButton1 Grid.Row="0" Grid.Column="2" Style="{StaticResource SvgChangeSettingButtonLayout}"
                         HorizontalAlignment="Right"
                         Click="Configure_OutputPath_Click" />
                         </Grid>
-                    </local:ImageButton>
+                    </Button>
 
-                    <local:ImageButton Grid.Row="1" Grid.Column="0" Style="{StaticResource BaseSettingButtonLayout}"
+                    <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource BaseSettingButtonLayout}"
                 Click="Configure_FileNamePattern_Click" Grid.ColumnSpan="2">
                         <Grid
                     HorizontalAlignment="Stretch">
@@ -168,11 +167,11 @@
                             <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
                         Text="{Binding Path=SettingService.FilenamePrefix, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
 
-                            <local:ImageButton Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeSettingButtonLayout}"
+                            <local:SvgImageButton1 Grid.Row="0" Grid.Column="2" Style="{StaticResource SvgChangeSettingButtonLayout}"
                         HorizontalAlignment="Right"
                         Click="Configure_FileNamePattern_Click" />
                         </Grid>
-                    </local:ImageButton>
+                    </Button>
                 </Grid>
             </Expander>
 
@@ -260,7 +259,7 @@
 
             <Rectangle Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
 
-            <local:ImageButton Grid.Row="12" Grid.Column="0" Style="{StaticResource AcceptButton}"
+            <local:SvgImageButton1 Grid.Row="12" Grid.Column="0" Style="{StaticResource SvgAcceptButton}"
                 HorizontalAlignment="Right"
                 Click="OkButton_Click" />
         </Grid>

@@ -165,8 +165,8 @@ namespace RecNForget.Controls
 
             if (buttons != CustomMessageBoxButtons.None)
             {
-                var tempButton = new ImageButton();
-                var buttonStyle = (Style)FindResource("AcceptButton");
+                var tempButton = new SvgImageButton1();
+                var buttonStyle = (Style)FindResource("SvgAcceptButton");
                 if (buttonStyle != null)
                 {
                     tempButton.Style = buttonStyle;
@@ -184,8 +184,8 @@ namespace RecNForget.Controls
 
                 if (buttons == CustomMessageBoxButtons.OkAndCancel)
                 {
-                    var cancelButton = new ImageButton();
-                    var cancelButtonStyle = (Style)FindResource("CancelButton");
+                    var cancelButton = new SvgImageButton1();
+                    var cancelButtonStyle = (Style)FindResource("SvgCancelButton");
                     if (cancelButtonStyle != null)
                     {
                         cancelButton.Style = cancelButtonStyle;

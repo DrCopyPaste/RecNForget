@@ -103,7 +103,7 @@
                 check for updates on start
             </CheckBox>
 
-            <local:ImageButton Grid.Row="11" Style="{StaticResource AcceptButton}"
+            <local:SvgImageButton1 Grid.Row="11" Style="{StaticResource SvgAcceptButton}"
                 HorizontalAlignment="Right"
                 ToolTip="good to know"
                 Click="Exit_Click"/>

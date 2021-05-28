@@ -45,7 +45,7 @@
                     IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
                     x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
 
-                <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource DeleteSelectedFileMiniButtonLayout}"
+                <local:SvgImageButton1 Grid.Row="1" Grid.Column="2" Style="{StaticResource SvgDeleteSelectedFileMiniButtonLayout}"
                     ToolTip="delete selected file (Hotkey: [Delete])"
                     IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
                     x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>

@@ -52,7 +52,7 @@
             <TextBlock Grid.Row="1" Grid.Column="0"
                 Text="{Binding Path=DownloadProgress, StringFormat={}{0:0.00}%}" />
             
-            <local:ImageButton Grid.Row="3" Grid.Column="0" Style="{StaticResource CancelButton}"
+            <local:SvgImageButton1 Grid.Row="3" Grid.Column="0" Style="{StaticResource SvgCancelButton}"
                 HorizontalAlignment="Right"
                 x:Name="CancelButton"
                 IsCancel="True"/>

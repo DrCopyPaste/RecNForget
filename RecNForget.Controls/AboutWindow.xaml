@@ -93,10 +93,10 @@
             <ScrollViewer Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource Default_ScrollViewer_Style}">
                 <local:CopyrightControl />
             </ScrollViewer>
-            <local:ImageButton Grid.Row="10" Grid.Column="0" Style="{StaticResource DownloadButton}"
+            <local:SvgImageButton1 Grid.Row="10" Grid.Column="0" Style="{StaticResource SvgDownloadButton}"
                 HorizontalAlignment="Left" 
                 Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>
-            <local:ImageButton Grid.Row="10" Grid.Column="3" Style="{StaticResource AcceptButton}"
+            <local:SvgImageButton1 Grid.Row="10" Grid.Column="3" Style="{StaticResource SvgAcceptButton}"
                 HorizontalAlignment="Right"
                 Click="OkButton_Click"/>
         </Grid>

@@ -87,7 +87,7 @@
             <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="This is your recording hotkey" />
 
-            <local:ImageButton Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BaseSettingButtonLayout}"
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BaseSettingButtonLayout}"
                 HorizontalAlignment="Stretch"
                 Click="ConfigureHotkey_StartStopRecording_Click">
                 <Grid
@@ -101,12 +101,12 @@
                     <StackPanel Grid.Row="0" Grid.Column="0" Style="{StaticResource AutoSizeHotkeyDisplayStackPanel}"
                         x:Name="HotkeyDisplay" />
                 </Grid>
-            </local:ImageButton>
+            </Button>
 
             <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="Files will be saved here" />
 
-            <local:ImageButton Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BaseSettingButtonLayout}"
+            <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BaseSettingButtonLayout}"
                 HorizontalAlignment="Stretch"
                 Click="Configure_OutputPath_Click">
                 <Grid
@@ -120,18 +120,18 @@
                     <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
                         Text="{Binding Path=SettingService.OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
                 </Grid>
-            </local:ImageButton>
+            </Button>
 
             <TextBlock Grid.Row="8" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="More options in the settings menu" />
-            <local:ImageButton Grid.Row="8" Grid.Column="1" Style="{StaticResource WindowSettingsButton}" />
+            <local:SvgImageButton1 Grid.Row="8" Grid.Column="1" Style="{StaticResource SvgWindowSettingsButton}" />
 
             <CheckBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultCheckboxStyle}"
                     IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
                 check for updates on start
             </CheckBox>
 
-            <local:ImageButton Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource AcceptButton}"
+            <local:SvgImageButton1 Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource SvgAcceptButton}"
                 HorizontalAlignment="Right"
                 Click="Exit_Click"/>
         </Grid>

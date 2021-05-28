@@ -49,10 +49,16 @@
     <None Remove="Themes\ButtonImages\trash_icon77730.black.disabled.png" />
     <None Remove="Themes\ButtonImages\trash_icon77730.black.png" />
     <None Remove="Themes\ButtonImages\windowSettings_icon248857.black.png" />
+    <None Remove="Themes\SvgImages\accept_icon518267.svg" />
     <None Remove="Themes\SvgImages\bugfix_icon140609.svg" />
     <None Remove="Themes\SvgImages\cancel_icon428740.svg" />
     <None Remove="Themes\SvgImages\close_icon349388.svg" />
+    <None Remove="Themes\SvgImages\download_icon602.svg" />
+    <None Remove="Themes\SvgImages\editSetting_icon451737.svg" />
     <None Remove="Themes\SvgImages\folder_icon122592.svg" />
+    <None Remove="Themes\SvgImages\help_icon544157.svg" />
+    <None Remove="Themes\SvgImages\information_icon280732.svg" />
+    <None Remove="Themes\SvgImages\lightbulb_icon372420.svg" />
     <None Remove="Themes\SvgImages\logo.svg" />
     <None Remove="Themes\SvgImages\minimize_icon246566.svg" />
     <None Remove="Themes\SvgImages\nextTrack_icon.svg" />
@@ -63,7 +69,9 @@
     <None Remove="Themes\SvgImages\prevTrack_icon.svg" />
     <None Remove="Themes\SvgImages\record_icon.svg" />
     <None Remove="Themes\SvgImages\settings_icon40863.svg" />
+    <None Remove="Themes\SvgImages\shutDown_icon170336.svg" />
     <None Remove="Themes\SvgImages\stop_icon.svg" />
+    <None Remove="Themes\SvgImages\trash_icon77730.svg" />
     <None Remove="Themes\SvgImages\windowSettings_icon248857.svg" />
   </ItemGroup>
 
@@ -220,6 +228,9 @@
     <Resource Include="Themes\ButtonImages\windowSettings_icon248857.black.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\accept_icon518267.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Themes\SvgImages\bugfix_icon140609.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -229,7 +240,22 @@
     <Resource Include="Themes\SvgImages\close_icon349388.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\download_icon602.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\editSetting_icon451737.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Themes\SvgImages\folder_icon122592.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\help_icon544157.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\information_icon280732.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\lightbulb_icon372420.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\logo.svg">
@@ -258,7 +284,13 @@
     <Resource Include="Themes\SvgImages\settings_icon40863.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\shutDown_icon170336.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Themes\SvgImages\stop_icon.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\trash_icon77730.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\windowSettings_icon248857.svg">
