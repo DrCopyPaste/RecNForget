@@ -717,7 +717,12 @@
                                     Background="{Binding Source={StaticResource Font_Color}}"
                                     BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"
                                     BorderThickness="1">
-                                    <Image x:Name="CheckMark" Source="ButtonImages\accept_icon518267.black.white.png" VerticalAlignment="Bottom" />
+                                    <svg1:SVGImage x:Name="CheckMark"
+                                        Source="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg"
+                                        VerticalContentAlignment="Bottom"
+                                        HorizontalContentAlignment="Center"
+                                        SizeType="SizeToContent"
+                                        OverrideColor="{Binding Source={StaticResource Application_Background_Color}}" />
                                 </Border>
                             </BulletDecorator.Bullet>
                             <ContentPresenter
@@ -734,14 +739,11 @@
                             <Setter TargetName="ContentPart" Property="Background" Value="{Binding Source={StaticResource ActionButtonBorder_Color}}"/>
                             <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}"/>
                         </Trigger>
-                        <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Font_Color}}"/>
-                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
-                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Background" Value="{Binding Source={StaticResource Application_Background_Color}}" />
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ContentPart" Property="Background" Value="{Binding Source={StaticResource ActionButtonBorder_Color}}"/>
                             <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Font_Color}}" />
-                            <Setter TargetName="Border" Property="BorderBrush" Value="Gainsboro" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1081,7 +1083,12 @@
                                             Background="{Binding Source={StaticResource Font_Color}}"
                                             BorderBrush="{Binding Source={StaticResource ActionButtonRow_Background_Color}}"
                                             BorderThickness="1">
-                                            <Image x:Name="CheckMark" Width="23" Source="ButtonImages\accept_icon518267.black.white.png" VerticalAlignment="Bottom" />
+                                            <svg1:SVGImage x:Name="CheckMark"
+                                                Source="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg"
+                                                VerticalContentAlignment="Bottom"
+                                                HorizontalContentAlignment="Center"
+                                                SizeType="SizeToContent"
+                                                OverrideColor="{Binding Source={StaticResource Application_Background_Color}}" />
                                         </Border>
                                     </BulletDecorator.Bullet>
                                 </BulletDecorator>
