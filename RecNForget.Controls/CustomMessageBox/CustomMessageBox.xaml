@@ -2,11 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
         mc:Ignorable="d"
         Topmost="True"
         WindowStartupLocation="CenterOwner"
-        Style="{StaticResource DefaultWindowStyle}">
+        Style="{DynamicResource DefaultWindowStyle}">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
@@ -46,7 +46,7 @@
             <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"
                 Grid.ColumnSpan="2"/>
 
-            <Image Grid.Row="1" Grid.Column="0" Style="{StaticResource CustomMessageBoxDefaultIconStyle}"
+            <svg1:SVGImage Grid.Row="1" Grid.Column="0" Style="{StaticResource CustomMessageBoxDefaultIconStyle}"
                 Name="DialogImage" />
 
             <Grid Grid.Row="1" Grid.Column="1"

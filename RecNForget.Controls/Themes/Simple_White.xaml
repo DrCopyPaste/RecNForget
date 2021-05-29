@@ -112,7 +112,7 @@
         <Setter Property="Source" Value="..\Images\logo_big.png" />
     </Style>
 
-    <Style x:Key="FeatureClass_Image_Style" TargetType="Image">
+    <Style x:Key="FeatureClass_Image_Style" TargetType="{x:Type svg1:SVGImage}">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="3,3,5,3" />
@@ -120,46 +120,46 @@
         <Setter Property="Width" Value="15" />
     </Style>
 
-    <Style x:Key="AddedFeature_Image_Style" TargetType="Image" BasedOn="{StaticResource FeatureClass_Image_Style}">
-        <Setter Property="Source" Value="ButtonImages\plus_icon171498.black.png" />
+    <Style x:Key="AddedFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/plus_icon171498.svg" />
+        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Control_Foreground_Color}}" />
     </Style>
 
-    <Style x:Key="BugFix_Image_Style" TargetType="Image" BasedOn="{StaticResource FeatureClass_Image_Style}">
-        <Setter Property="Source" Value="ButtonImages\bugfix_icon140609.black.png" />
+    <Style x:Key="BugFix_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/bugfix_icon140609.svg" />
+        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Control_Foreground_Color}}" />
     </Style>
 
-    <Style x:Key="VerboseInformationFeature_Image_Style" TargetType="Image" BasedOn="{StaticResource FeatureClass_Image_Style}">
-        <Setter Property="Source" Value="ButtonImages\information_icon2132.black.png" />
+    <Style x:Key="VerboseInformationFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/information_icon2132.svg" />
+        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Control_Foreground_Color}}" />
     </Style>
 
-    <Style x:Key="CustomMessageBoxDefaultIconStyle" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="..\Images\logo_big.png" />
+    <Style x:Key="CustomMessageBoxDefaultIconStyle" TargetType="{x:Type svg1:SVGImage}">
+        <!-- TODO Logo HERE! <Setter Property="Source" Value="..\Images\logo_big.png" />-->
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_info_icon277439.svg" />
+        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Control_Foreground_Color}}" />
+        <Setter Property="Height" Value="80" />
         <Setter Property="Width" Value="80" />
         <Setter Property="Margin" Value="4,4,4,4" />
     </Style>
 
-    <Style x:Key="CustomMessageBoxInformationIconStyle" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="ButtonImages\message_info_icon277439.black.png" />
-        <Setter Property="Width" Value="80" />
+    <Style x:Key="CustomMessageBoxInformationIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_info_icon277439.svg" />
+        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Control_Foreground_Color}}" />
         <Setter Property="Margin" Value="4,4,4,4" />
     </Style>
 
-    <Style x:Key="CustomMessageBoxQuestionIconStyle" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="ButtonImages\message_question_icon109120.black.png" />
-        <Setter Property="Width" Value="80" />
-        <Setter Property="Margin" Value="4,4,4,4" />
+    <Style x:Key="CustomMessageBoxQuestionIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_question_icon109120.svg" />
     </Style>
 
-    <Style x:Key="CustomMessageBoxErrorIconStyle" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="ButtonImages\message_error_icon304479.black.png" />
-        <Setter Property="Width" Value="80" />
-        <Setter Property="Margin" Value="4,4,4,4" />
+    <Style x:Key="CustomMessageBoxErrorIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_error_icon304479.svg" />
     </Style>
 
-    <Style x:Key="QuickTip_LightBulbIconStyle" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="ButtonImages\lightbulb_icon372420.black.png" />
-        <Setter Property="Width" Value="50" />
-        <Setter Property="Margin" Value="4,4,4,4" />
+    <Style x:Key="QuickTip_LightBulbIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
     </Style>
 
     <!-- /==================================================  Images  ====================================================================================================================  -->

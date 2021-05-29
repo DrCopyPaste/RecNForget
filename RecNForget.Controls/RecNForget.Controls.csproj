@@ -60,6 +60,9 @@
     <None Remove="Themes\SvgImages\information_icon280732.svg" />
     <None Remove="Themes\SvgImages\lightbulb_icon372420.svg" />
     <None Remove="Themes\SvgImages\logo.svg" />
+    <None Remove="Themes\SvgImages\message_error_icon304479.svg" />
+    <None Remove="Themes\SvgImages\message_info_icon277439.svg" />
+    <None Remove="Themes\SvgImages\message_question_icon109120.svg" />
     <None Remove="Themes\SvgImages\minimize_icon246566.svg" />
     <None Remove="Themes\SvgImages\nextTrack_icon.svg" />
     <None Remove="Themes\SvgImages\openFolder_icon356582.svg" />
@@ -259,6 +262,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\logo.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\message_error_icon304479.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\message_info_icon277439.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\message_question_icon109120.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\minimize_icon246566.svg">
