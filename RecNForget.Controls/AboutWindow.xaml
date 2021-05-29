@@ -67,7 +67,7 @@
 
             <!--Style="{StaticResource About_Logo_Style}"-->
 
-            <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Padding="5" Background="{Binding Source={StaticResource Control_Background_Brush}}">
+            <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Padding="5" Background="{Binding Source={StaticResource Secondary_Brush}}">
             <Image  Style="{StaticResource About_Logo_Style}" />
             </Border>
 
