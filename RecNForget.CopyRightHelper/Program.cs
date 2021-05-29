@@ -19,7 +19,8 @@ namespace RecNForget.CopyRightHelper
     // <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
     public class Program
     {
-        private static string iconBasePath = @"..\..\..\..\icon_generation";
+        private static string installerImages = @"..\..\..\..\icon_generation\installerImages";
+        private static string iconBasePath = @"..\..\..\..\RecNForget.Controls\Themes\SvgImages";
         private static string copyRightFilePath = @"..\..\..\..\COPYRIGHT.md";
         private static string copyRightControlPath = @"..\..\..\..\RecNForget.Controls\CopyrightControl.xaml";
 
@@ -51,7 +52,7 @@ namespace RecNForget.CopyRightHelper
 
 
 
-           
+
 
             var xamlFooter = new StringBuilder();
             xamlFooter.AppendLine("\t\t" + "</TextBlock>");
@@ -189,41 +190,28 @@ namespace RecNForget.CopyRightHelper
             var textBlockInfoTemplate = textBlockInfoTemplateBuilder.ToString();
 
             var baseDirectory = new DirectoryInfo(iconBasePath);
-            var allFiles = new List<string>();
+            var isntallerImagesDirectory = new DirectoryInfo(installerImages);
             var unmatchedFiles = new List<string>();
-
-            var matchedFileonlinewebfontsUrls = new Dictionary<string, int>();
-
-            // we dont expect more levels than just one
-            foreach (var subDir in baseDirectory.GetDirectories())
-            {
-                foreach (var file in subDir.GetFiles())
-                {
-                    // this still relies on the convention that ONLY one number shall exist in the filename and that is the identifier for onlinewebfonts
-                    var pattern = new Regex(@".*icon\d+\..*");
-                    var numberPattern = new Regex(@"\d+");
-
-                    matchedFileonlinewebfontsUrls.Add(
-                        file.Name,
-                        pattern.IsMatch(file.Name) ? int.Parse(numberPattern.Match(file.Name).Value) : -1);
-
-                    allFiles.Add(file.FullName);
-                }
-            }
 
             var mdFileCopyrightInfos = new Dictionary<string, string>();
             var xamlFileCopyrightInfos = new Dictionary<string, string>();
 
-            foreach (var file in matchedFileonlinewebfontsUrls)
+            foreach (var file in baseDirectory.GetFiles().Union(isntallerImagesDirectory.GetFiles()))
             {
-                if (file.Value > -1)
+                // this still relies on the convention that ONLY one number shall exist in the filename and that is the identifier for onlinewebfonts
+                var pattern = new Regex(@".*icon\d+\..*");
+                var numberPattern = new Regex(@"\d+");
+
+                var matchedUrlId = pattern.IsMatch(file.Name) ? int.Parse(numberPattern.Match(file.Name).Value) : -1;
+
+                if (matchedUrlId > -1)
                 {
-                    mdFileCopyrightInfos.Add(file.Key, string.Format(mdBaseInfoTemplate, file.Key, file.Value.ToString()));
-                    xamlFileCopyrightInfos.Add(file.Key, string.Format(textBlockInfoTemplate, file.Key, file.Value.ToString()));
+                    mdFileCopyrightInfos.Add(file.Name, string.Format(mdBaseInfoTemplate, file.Name, matchedUrlId.ToString()));
+                    xamlFileCopyrightInfos.Add(file.Name, string.Format(textBlockInfoTemplate, file.Name, matchedUrlId.ToString()));
                 }
                 else
                 {
-                    unmatchedFiles.Add(file.Key);
+                    unmatchedFiles.Add(file.Name);
                 }
             }
 
