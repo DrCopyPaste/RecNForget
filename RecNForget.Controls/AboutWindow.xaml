@@ -66,14 +66,10 @@
             <!-- <Image Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Style="{StaticResource About_Logo_Style}" /> -->
 
             <!--Style="{StaticResource About_Logo_Style}"-->
-            
-            <svg1:SVGImage Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" 
-                Source="/RecNForget.Controls;component/Themes/SvgImages/bugfix_icon140609.svg"
-                Background="White"
-                OverrideColor="Black"
-                Height="70"
-                Width="70"
-                Margin="5,0,5,0" />
+
+            <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Padding="5" Background="{Binding Source={StaticResource Control_Background_Brush}}">
+            <Image  Style="{StaticResource About_Logo_Style}" />
+            </Border>
 
             <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource ApplicationName_TextBox_Style}"
                 Text="RecNForget"
