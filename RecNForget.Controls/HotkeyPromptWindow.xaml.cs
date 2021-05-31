@@ -54,23 +54,21 @@ namespace RecNForget.Controls
 
         private void SimpleGlobalHotkeyService_KeyEvent(object sender, SimpleGlobalHotkeyServiceEventArgs e)
         {
-            if (e.KeyDown)
+            if (HotkeyDisplay.Children.Count > 0)
             {
-                var currentModifiers = Keyboard.Modifiers;
+                HotkeyDisplay.Children.Clear();
+            }
 
-                if (HotkeyDisplay.Children.Count > 0)
-                {
-                    HotkeyDisplay.Children.Clear();
-                }
-
-                var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                    hotkeys: HotkeyRenderer.GetKeyEventArgsAsList(e, currentModifiers, string.Empty, string.Empty),
+            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
+                    hotkeys: HotkeyRenderer.GetKeyEventArgsAsList(e, string.Empty, string.Empty),
                     buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
                     spacing: 6);
 
-                HotkeyDisplay.Children.Add(buttonGrid);
+            HotkeyDisplay.Children.Add(buttonGrid);
 
-                if (e.Key != "None")
+            if (e.KeyDown)
+            {
+                if (!e.KeyIsModifier)
                 {
                     HotkeysAppSetting = e.AsSettingString;
                     DialogResult = true;

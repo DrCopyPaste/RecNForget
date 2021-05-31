@@ -16,6 +16,7 @@
     <None Remove="Themes\SvgImages\editSetting_icon451737.svg" />
     <None Remove="Themes\SvgImages\folder_icon122592.svg" />
     <None Remove="Themes\SvgImages\help_icon544157.svg" />
+    <None Remove="Themes\SvgImages\information_icon2132.svg" />
     <None Remove="Themes\SvgImages\information_icon280732.svg" />
     <None Remove="Themes\SvgImages\lightbulb_icon372420.svg" />
     <None Remove="Themes\SvgImages\logo.svg" />
@@ -28,6 +29,7 @@
     <None Remove="Themes\SvgImages\pause_icon.svg" />
     <None Remove="Themes\SvgImages\pencil_icon79516.svg" />
     <None Remove="Themes\SvgImages\play_icon.svg" />
+    <None Remove="Themes\SvgImages\plus_icon171498.svg" />
     <None Remove="Themes\SvgImages\prevTrack_icon.svg" />
     <None Remove="Themes\SvgImages\record_icon.svg" />
     <None Remove="Themes\SvgImages\settings_icon40863.svg" />
@@ -91,6 +93,9 @@
     <Resource Include="Themes\SvgImages\help_icon544157.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Themes\SvgImages\information_icon2132.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Themes\SvgImages\information_icon280732.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -123,6 +128,9 @@
     </Resource>
     <Resource Include="Themes\SvgImages\pencil_icon79516.svg" />
     <Resource Include="Themes\SvgImages\play_icon.svg" />
+    <Resource Include="Themes\SvgImages\plus_icon171498.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Themes\SvgImages\prevTrack_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
