@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Border Style="{StaticResource DefaultWindowBorderStyle}">
+        <Border Style="{StaticResource DefaultControlBorderStyle}">
             <Grid Style="{StaticResource DefaultGridStyle}">
                 <Grid.RowDefinitions>
                     <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />

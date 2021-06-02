@@ -79,12 +79,16 @@
                         <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
                     </Grid.ColumnDefinitions>
 
-                    <local:OutputPathControl Grid.Row="0" Grid.Column="0"
-                        x:Name="OutputPathControl" />
-                    <local:SelectedFileControl Grid.Row="1" Grid.Column="0"
-                        x:Name="SelectedFileControl" />
-                    <local:RecordingAndPlaybackControl Grid.Row="2" Grid.Column="0"
-                        x:Name="RecordingAndPlaybackControl"/>
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <local:OutputPathControl
+                            x:Name="OutputPathControl" />
+                        <Separator x:Name="OutputPathControlSpacer" Style="{StaticResource DefaultSeparator_Style}" />
+                        <local:SelectedFileControl
+                            x:Name="SelectedFileControl" />
+                        <Separator x:Name="SelectedFileControlSpacer" Style="{StaticResource DefaultSeparator_Style}" />
+                        <local:RecordingAndPlaybackControl
+                            x:Name="RecordingAndPlaybackControl"/>
+                    </StackPanel>
                 </Grid>
             </Border>
         </Grid>

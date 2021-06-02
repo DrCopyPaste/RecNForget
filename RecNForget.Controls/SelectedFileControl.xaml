@@ -34,11 +34,12 @@
                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ControlLabelStyle}"
                     HorizontalAlignment="Right"
                     HorizontalContentAlignment="Right"
-                    Content="00:12.235s (237.98 kB)"
+                    d:Content="00:12.235s (237.98 kB)"
                     Name="FileInfoLabel" />
 
                 <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
-                    Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    d:Text="C:\YourPath\yourFile.wav" />
 
                 <local:SvgImageButton1 Grid.Row="1" Grid.Column="1" Style="{StaticResource SvgChangeFilePatternMiniButtonLayout}"
                     ToolTip="rename selected file (Hotkey: [Return])"

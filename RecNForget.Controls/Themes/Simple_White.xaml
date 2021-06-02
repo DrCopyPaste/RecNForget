@@ -136,18 +136,31 @@
     </Style>
 
     <!-- /==================================================  Images  ====================================================================================================================  -->
-    
+
+    <Style x:Key="DefaultSeparator_Style" TargetType="Separator">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Border BorderThickness="0" Padding="5,1,5,1">
+                        <Rectangle HorizontalAlignment="Stretch" Fill="{Binding Source={StaticResource Primary_Brush}}" Height="1"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- ===================================================  Borders  ===================================================================================================================  -->
 
     <!-- seemingly transparent brush that is technically not transparent, to enable "aura" of main window where a mouse enter event will trigger visibiity changes
             Because setting to transparent would not trigger that hit box test-->
-    <SolidColorBrush x:Key="TransparentBrush" Color="{Binding Source={StaticResource Secondary_Brush}}" Opacity="0.005">
+    <SolidColorBrush x:Key="FakeTransparentBrush" Color="#ffffff" Opacity="0.005">
     </SolidColorBrush>
 
     <Style x:Key="OuterHitBoxindowBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="{StaticResource TransparentBrush}" />
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
-        <Setter Property="BorderThickness" Value="1,1,1,1" />
+        <Setter Property="BorderBrush" Value="{StaticResource FakeTransparentBrush}" />
+        <Setter Property="Background" Value="{StaticResource FakeTransparentBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="3,3,3,3" />
         <Setter Property="Padding" Value="7,2,7,7" />
         <Setter Property="Visibility" Value="Visible" />
@@ -155,24 +168,28 @@
 
     <Style x:Key="OptionalTitleBarWindowBorderStyle" TargetType="{x:Type Border}">
         <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
-        <Setter Property="BorderThickness" Value="1,1,1,1" />
-        <Setter Property="CornerRadius" Value="3,3,3,3" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="5" />
         <Setter Property="Padding" Value="2,2,2,2" />
     </Style>
     
     <Style x:Key="DefaultWindowBorderStyle" TargetType="{x:Type Border}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="3,3,3,3" />
+        <Setter Property="CornerRadius" Value="5" />
         <Setter Property="Padding" Value="2,2,2,2" />
     </Style>
-
+    
     <Style x:Key="DefaultControlBorderStyle" TargetType="{x:Type Border}" BasedOn="{StaticResource DefaultWindowBorderStyle}">
-        <Setter Property="Margin" Value="0,0,0,5" />
-        <Setter Property="CornerRadius" Value="3,3,3,3" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Transparent_Brush}}" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource Transparent_Brush}}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="CornerRadius" Value="5" />
     </Style>
 
     <!-- /==================================================  Borders  ===================================================================================================================  -->
@@ -183,7 +200,7 @@
         <!-- Some setters -->
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
+        <Setter Property="Background" Value="{StaticResource Transparent_Brush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -536,7 +553,7 @@
     <Style x:Key="HelpTopicButtonLayout" TargetType="{x:Type Button}">
         <!-- Some setters -->
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
+        <Setter Property="Background" Value="{StaticResource Transparent_Brush}" />
         <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -574,7 +591,7 @@
     <Style x:Key="DefaultWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="AllowsTransparency" Value="True" />
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
+        <Setter Property="Background" Value="{StaticResource Transparent_Brush}" />
         <Setter Property="SizeToContent" Value="WidthAndHeight" />
     </Style>
 
@@ -686,7 +703,7 @@
                        BorderBrush="{Binding Source={StaticResource SecondaryShade_Brush}}"
                        CornerRadius="3"
                        Background="{Binding Source={StaticResource Secondary_Brush}}">
-                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource TransparentBrush}">
+                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
                             <BulletDecorator.Bullet>
                                 <Border x:Name="Border"  
                                     Width="{Binding Source={StaticResource CheckBox_Width}}" 
@@ -741,7 +758,7 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="IsEnabled" Value="False" />
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
+        <Setter Property="Background" Value="{StaticResource Transparent_Brush}" />
     </Style>
 
     <Style x:Key="HotkeyDisplayStackPanel" TargetType="StackPanel">
@@ -827,7 +844,7 @@
                        BorderBrush="{Binding Source={StaticResource Secondary_Brush}}"
                        CornerRadius="3,0,0,3"
                        Background="{TemplateBinding Background}">
-                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource TransparentBrush}">
+                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
                             <ContentPresenter Content="{TemplateBinding Content}"
                             Margin="0,0,0,0"
                             VerticalAlignment="Center"
@@ -939,7 +956,7 @@
                        BorderBrush="{Binding Source={StaticResource Secondary_Brush}}"
                        CornerRadius="0,0,0,0"
                        Background="{TemplateBinding Background}">
-                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource TransparentBrush}">
+                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
                             <ContentPresenter Content="{TemplateBinding Text}"
                             Margin="0,0,0,0"
                             VerticalAlignment="Center"
@@ -981,7 +998,7 @@
                        BorderBrush="{Binding Source={StaticResource SecondaryShade_Brush}}"
                        CornerRadius="0,0,0,0"
                        Background="{TemplateBinding Background}">
-                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource TransparentBrush}">
+                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
                             <ContentPresenter Content="{TemplateBinding Text}"
                             Margin="0,0,0,0"
                             VerticalAlignment="Center"
@@ -1045,7 +1062,7 @@
 
                                 <ContentPresenter x:Name="Icon" ContentSource="Icon" Grid.Column="0" Grid.Row="0" />
                                 <BulletDecorator x:Name="CheckMarkPicture" Grid.Column="0" Grid.Row="0"
-                                    Background="{StaticResource TransparentBrush}"
+                                    Background="{StaticResource Transparent_Brush}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center">
                                     <BulletDecorator.Bullet>
@@ -1624,7 +1641,7 @@
         <Setter Property="Foreground"
                 Value="{StaticResource Secondary_Brush}"/>
         <Setter Property="Background"
-                Value="{StaticResource TransparentBrush}"/>
+                Value="{StaticResource Transparent_Brush}"/>
         <Setter Property="HorizontalContentAlignment"
                 Value="Stretch"/>
         <Setter Property="VerticalContentAlignment"
