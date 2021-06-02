@@ -59,6 +59,22 @@
     
     -->
 
+    <!--<Color x:Key="Transparent_Color">Transparent</Color>
+    <Brush x:Key="Transparent_Brush">Transparent</Brush>
+
+    <Color x:Key="Primary_Color">White</Color>
+    <Brush x:Key="Primary_Brush">White</Brush>
+
+    <Color x:Key="Secondary_Color">Black</Color>
+    <Brush x:Key="Secondary_Brush">Black</Brush>
+
+
+    <Color x:Key="PrimaryShade_Color">#808080</Color>
+    <Brush x:Key="PrimaryShade_Brush">#808080</Brush>
+
+    <Color x:Key="SecondaryShade_Color">#dddddd</Color>
+    <Brush x:Key="SecondaryShade_Brush">#dddddd</Brush>-->
+
     <Color x:Key="Transparent_Color">Transparent</Color>
     <Brush x:Key="Transparent_Brush">Transparent</Brush>
 
@@ -1425,8 +1441,10 @@
     <!-- /==================================================  ScrollViewers  =============================================================================================================  -->
 
 
-    <!--<Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
+    <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
         <Setter Property="TabStripPlacement" Value="Left" />
+        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Secondary_Brush}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -1444,13 +1462,12 @@
                             <RowDefinition x:Name="RowDefinition1" Height="*" />
                         </Grid.RowDefinitions>
                         
-                        <UniformGrid
+                        <StackPanel
                                 x:Name="headerPanel"
                                 Grid.Row="0"
                                 Grid.Column="0"               
                                 Panel.ZIndex="1"
-                                Columns="1"
-                                Background="#FF007ACC"
+                                Background="{Binding Source={StaticResource Secondary_Brush}}"
                                 IsItemsHost="true"
                                 KeyboardNavigation.TabIndex="1" />
                         <Border
@@ -1459,7 +1476,9 @@
                                 Grid.Column="0"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderThickness="1"
+                                MinWidth="400"
+                                MinHeight="200"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2"
                                 KeyboardNavigation.TabNavigation="Local">
@@ -1475,7 +1494,7 @@
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
                             <Setter TargetName="RowDefinition1" Property="Height" Value="Auto" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="2,0,2,2" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
@@ -1486,7 +1505,7 @@
                             <Setter TargetName="ColumnDefinition1" Property="Width" Value="*" />
                             <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
                             <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="2,2,0,2" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
@@ -1497,20 +1516,59 @@
                             <Setter TargetName="ColumnDefinition1" Property="Width" Value="Auto" />
                             <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
                             <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="0,2,2,2" />
+                            <Setter TargetName="headerPanel" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{Binding Source={StaticResource SecondaryShade_Brush}}" />
+                            <Setter TargetName="templateRoot" Property="TextElement.Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="Tag" Value="115"/>
-        <Setter Property="Background" Value="#FFD8E4F4"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}"/>
+        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Transparent_Brush}}"/>
         <Setter Property="BorderThickness" Value="0"/>
-    </Style>-->
+    </Style>
+
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid>
+                        <Border  Name="Border" 
+                                     Background="{Binding Source={StaticResource Primary_Brush}}"
+                                     HorizontalAlignment="Stretch" MinWidth="75" MaxHeight="20"
+                                     Margin="0" BorderThickness="1" CornerRadius="0" Padding="0">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              ContentSource="Header" Margin="0"
+                              RecognizesAccessKey="True" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <!--<Setter Property="Panel.ZIndex" Value="100" />-->
+                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!--<Style x:Key="Style-TabControl-Main" TargetType="{x:Type TabControl}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
