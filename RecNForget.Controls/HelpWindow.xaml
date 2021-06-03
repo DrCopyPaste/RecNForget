@@ -28,9 +28,8 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Style="{StaticResource DefaultGridStyle}"
-            MouseDown="Window_MouseDown">
+    <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+        <Grid Style="{StaticResource DefaultGridStyle}">
             <Grid.RowDefinitions>
                 <!-- row 0 for title bar-->
                 <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />

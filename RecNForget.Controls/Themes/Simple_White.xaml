@@ -96,9 +96,10 @@
     <!-- ===================================================  Images  ====================================================================================================================  -->
 
     <Style x:Key="About_Logo_Style" TargetType="{x:Type Image}">
-        <Setter Property="Width" Value="100" />
-        <Setter Property="Margin" Value="1,0,15,0" />
+        <Setter Property="Width" Value="70" />
         <Setter Property="Source" Value="/RecNForget.Controls;component/Images/logo_big.png" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="FeatureClass_Image_Style" TargetType="{x:Type svg1:SVGImage}">
@@ -1237,8 +1238,20 @@
 
     <!-- ===================================================  HyperLinks  ================================================================================================================  -->
 
-    <Style x:Key="Default_Hyperlink_Style" TargetType="Hyperlink">
-        <Setter Property="TextDecorations" Value="None" />
+    <Style TargetType="{x:Type Hyperlink}">
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource PrimaryShade_Brush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- /==================================================  HyperLinks  ================================================================================================================  -->

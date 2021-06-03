@@ -67,8 +67,11 @@
 
             <!--Style="{StaticResource About_Logo_Style}"-->
 
-            <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Padding="5" Background="{Binding Source={StaticResource Secondary_Brush}}">
-            <Image  Style="{StaticResource About_Logo_Style}" />
+            <Border Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Padding="5" Background="{Binding Source={StaticResource Secondary_Brush}}">
+                <!-- this MUST be white (not binding to the primary or secondary brush, because logo cannot be properly recolored right now -->
+                <Border Style="{Binding Source={StaticResource DefaultControlBorderStyle}}" Padding="1" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image  Style="{StaticResource About_Logo_Style}" />
+                </Border>
             </Border>
 
             <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource ApplicationName_TextBox_Style}"
@@ -81,7 +84,7 @@
                 <Run>
                     (C) 2019-2021 by 
                 </Run>
-                <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">DrCopyPaste</Hyperlink>
+                <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate">DrCopyPaste</Hyperlink>
             </TextBlock>
             <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource DefaultTextBlockStyle}"
                 Text="RecNForget is a free application that helps you sample audio faster."  />

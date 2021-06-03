@@ -334,7 +334,7 @@ namespace RecNForget.CopyRightHelper
 
         private static string XamlLink(string caption, string url)
         {
-            // xaml links: <Hyperlink NavigateUri="link url" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">link text</ Hyperlink>
+            // xaml links: <Hyperlink NavigateUri="link url" RequestNavigate="Hyperlink_RequestNavigate" >link text</ Hyperlink>
             var xamlUrlPatternBuilder = new StringBuilder();
             xamlUrlPatternBuilder.AppendLine("\t\t\t<Hyperlink NavigateUri=\"{0}\" RequestNavigate=\"Hyperlink_RequestNavigate\">{1}</Hyperlink>");
 
