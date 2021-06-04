@@ -67,9 +67,9 @@
 
             <!--Style="{StaticResource About_Logo_Style}"-->
 
-            <Border Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Padding="5" Background="{Binding Source={StaticResource Secondary_Brush}}">
+            <Border Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Padding="5" Background="{StaticResource Secondary_Brush}">
                 <!-- this MUST be white (not binding to the primary or secondary brush, because logo cannot be properly recolored right now -->
-                <Border Style="{Binding Source={StaticResource DefaultControlBorderStyle}}" Padding="1" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border Style="{StaticResource DefaultControlBorderStyle}" Padding="1" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image  Style="{StaticResource About_Logo_Style}" />
                 </Border>
             </Border>

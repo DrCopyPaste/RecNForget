@@ -73,7 +73,7 @@
                 </Grid>
             </ScrollViewer>
 
-            <Label Grid.Row="1" Grid.Column="1" Style="{Binding Source={StaticResource HeadlineLabelStyle}}"
+            <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource HeadlineLabelStyle}"
                 Name="TopicTitle"
                 Content="Help - Topic"/>
 

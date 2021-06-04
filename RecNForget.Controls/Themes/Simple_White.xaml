@@ -112,23 +112,23 @@
 
     <Style x:Key="AddedFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/plus_icon171498.svg" />
-        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Primary_Color}}" />
+        <Setter Property="OverrideColor" Value="{StaticResource Primary_Color}" />
     </Style>
 
     <Style x:Key="BugFix_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/bugfix_icon140609.svg" />
-        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Primary_Color}}" />
+        <Setter Property="OverrideColor" Value="{StaticResource Primary_Color}" />
     </Style>
 
     <Style x:Key="VerboseInformationFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/information_icon2132.svg" />
-        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Primary_Color}}" />
+        <Setter Property="OverrideColor" Value="{StaticResource Primary_Color}" />
     </Style>
 
     <Style x:Key="CustomMessageBoxDefaultIconStyle" TargetType="{x:Type svg1:SVGImage}">
         <!-- TODO Logo HERE! <Setter Property="Source" Value="..\Images\logo_big.png" />-->
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_info_icon277439.svg" />
-        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Primary_Color}}" />
+        <Setter Property="OverrideColor" Value="{StaticResource Primary_Color}" />
         <Setter Property="Height" Value="80" />
         <Setter Property="Width" Value="80" />
         <Setter Property="Margin" Value="4,4,4,4" />
@@ -136,7 +136,7 @@
 
     <Style x:Key="CustomMessageBoxInformationIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_info_icon277439.svg" />
-        <Setter Property="OverrideColor" Value="{Binding Source={StaticResource Primary_Color}}" />
+        <Setter Property="OverrideColor" Value="{StaticResource Primary_Color}" />
         <Setter Property="Margin" Value="4,4,4,4" />
     </Style>
 
@@ -160,7 +160,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Separator}">
                     <Border BorderThickness="0" Padding="5,1,5,1">
-                        <Rectangle HorizontalAlignment="Stretch" Fill="{Binding Source={StaticResource Primary_Brush}}" Height="1"/>
+                        <Rectangle HorizontalAlignment="Stretch" Fill="{StaticResource Primary_Brush}" Height="1"/>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -184,7 +184,7 @@
     </Style>
 
     <Style x:Key="OptionalTitleBarWindowBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
         <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="5" />
@@ -193,8 +193,8 @@
     
     <Style x:Key="DefaultWindowBorderStyle" TargetType="{x:Type Border}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="5" />
         <Setter Property="Padding" Value="2,2,2,2" />
@@ -202,8 +202,8 @@
     
     <Style x:Key="DefaultControlBorderStyle" TargetType="{x:Type Border}" BasedOn="{StaticResource DefaultWindowBorderStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Transparent_Brush}}" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Transparent_Brush}}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Transparent_Brush}" />
+        <Setter Property="Background" Value="{StaticResource Transparent_Brush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="CornerRadius" Value="5" />
@@ -224,7 +224,7 @@
                     <Border Name="ButtonBorder"
                        BorderThickness="1"
                        Padding="2,2,2,2"
-                       BorderBrush="{Binding Source={StaticResource Secondary_Brush}}"
+                       BorderBrush="{StaticResource Secondary_Brush}"
                        CornerRadius="3"
                        Background="{TemplateBinding Background}">
                         <Grid Name="ButtonGrid">
@@ -233,16 +233,16 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Secondary_Brush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -259,7 +259,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="ImagePadding" Value="0" />
         <Setter Property="ImageMargin" Value="0" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:SvgImageButton1}">
@@ -269,26 +269,26 @@
                             Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
                             Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
                             CornerRadius="3"
-                            BorderBrush="{Binding Source={StaticResource Transparent_Brush}}"
+                            BorderBrush="{StaticResource Transparent_Brush}"
                             BorderThickness="1">
-                            <svg1:SVGImage Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" OverrideColor="{Binding Source={StaticResource Primary_Color}}" />
+                            <svg1:SVGImage Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" OverrideColor="{StaticResource Primary_Color}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <!--Some triggers ( IsFocused, IsMouseOver, etc.)-->
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedImage}" />
-                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{StaticResource Secondary_Brush}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedImage}" />
-                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource Primary_Color}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{StaticResource Primary_Color}" />
+                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{StaticResource Secondary_Brush}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                             <Setter TargetName="ImageButtonBorder" Property="RenderTransform" >
                                 <Setter.Value>
                                     <TranslateTransform Y="1.0" />
@@ -297,9 +297,9 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisabledImage}" />
-                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource SecondaryShade_Color}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{StaticResource SecondaryShade_Color}" />
+                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{StaticResource Secondary_Brush}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{StaticResource Secondary_Brush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -343,26 +343,26 @@
                             Padding="{Binding ImagePadding, RelativeSource={RelativeSource TemplatedParent}}"
                             Margin="{Binding ImageMargin, RelativeSource={RelativeSource TemplatedParent}}"
                             CornerRadius="3"
-                            BorderBrush="{Binding Source={StaticResource Transparent_Brush}}"
+                            BorderBrush="{StaticResource Transparent_Brush}"
                             BorderThickness="1">
-                            <svg1:SVGImage Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" OverrideColor="{Binding Source={StaticResource Primary_Color}}" />
+                            <svg1:SVGImage Name="ImageContent" Source="{TemplateBinding DefaultImage}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" OverrideColor="{StaticResource Primary_Color}" />
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <!--Some triggers ( IsFocused, IsMouseOver, etc.)-->
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedImage}" />
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter Property="Background" Value="{Binding Source={StaticResource SecondaryShade_Brush}}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{StaticResource Secondary_Brush}" />
+                            <Setter Property="Background" Value="{StaticResource SecondaryShade_Brush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=PressedImage}" />
-                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource Primary_Color}}" />
-                            <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{StaticResource Primary_Color}" />
+                            <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                             <Setter TargetName="ImageButtonGrid" Property="RenderTransform" >
                                 <Setter.Value>
                                     <TranslateTransform Y="1.0" />
@@ -371,10 +371,10 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="ImageContent" Property="Source" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DisabledImage}" />
-                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{Binding Source={StaticResource SecondaryShade_Color}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter TargetName="ImageContent" Property="OverrideColor" Value="{StaticResource SecondaryShade_Color}" />
+                            <Setter TargetName="ImageButtonBorder" Property="Background" Value="{StaticResource Secondary_Brush}" />
+                            <Setter TargetName="ImageButtonBorder" Property="BorderBrush" Value="{StaticResource Secondary_Brush}" />
+                            <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -571,14 +571,14 @@
         <!-- Some setters -->
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Background" Value="{StaticResource Transparent_Brush}" />
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Name="ButtonBorder"
                        BorderThickness="1"
                        Padding="2,2,2,2"
-                       BorderBrush="{Binding Source={StaticResource Secondary_Brush}}"
+                       BorderBrush="{StaticResource Secondary_Brush}"
                        CornerRadius="3"
                        Background="{TemplateBinding Background}">
                         <Grid Name="ButtonGrid">
@@ -587,15 +587,15 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
-                            <Setter Property="Background" Value="{Binding Source={StaticResource Primary_Brush}}" />
-                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
+                            <Setter Property="Background" Value="{StaticResource Primary_Brush}" />
+                            <Setter Property="Foreground" Value="{StaticResource Secondary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -635,10 +635,10 @@
                     <Border Name="ImageButtonBorder"
                        BorderThickness="0"
                        Padding="0,0,0,0"
-                       BorderBrush="{Binding Source={StaticResource Secondary_Brush}}"
+                       BorderBrush="{StaticResource Secondary_Brush}"
                        CornerRadius="3"
                        Background="{TemplateBinding Background}">
-                        <Grid Background="{Binding Source={StaticResource Secondary_Brush}}">
+                        <Grid Background="{StaticResource Secondary_Brush}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
                             </Grid.RowDefinitions>
@@ -665,7 +665,7 @@
     <!-- ===================================================  Grids  =====================================================================================================================  -->
 
     <Style x:Key="DefaultGridStyle" TargetType="Grid">
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
     </Style>
 
     <Style x:Key="GrowForContainedControlsRowStyle" TargetType="RowDefinition">
@@ -707,8 +707,8 @@
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}"/>
-        <Setter Property="Background" Value="{Binding Source={StaticResource SecondaryShade_Brush}}"/>
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
+        <Setter Property="Background" Value="{StaticResource SecondaryShade_Brush}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -717,9 +717,9 @@
                        BorderThickness="1"
                        Padding="0,0,0,0"
                        Margin="0,0,0,0"
-                       BorderBrush="{Binding Source={StaticResource SecondaryShade_Brush}}"
+                       BorderBrush="{StaticResource SecondaryShade_Brush}"
                        CornerRadius="3"
-                       Background="{Binding Source={StaticResource Secondary_Brush}}">
+                       Background="{StaticResource Secondary_Brush}">
                         <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
                             <BulletDecorator.Bullet>
                                 <Border x:Name="Border"  
@@ -727,15 +727,15 @@
                                     Height="{Binding Source={StaticResource CheckBox_Width}}"
                                     Padding="1,1,1,1"
                                     CornerRadius="3" 
-                                    Background="{Binding Source={StaticResource Primary_Brush}}"
-                                    BorderBrush="{Binding Source={StaticResource SecondaryShade_Brush}}"
+                                    Background="{StaticResource Primary_Brush}"
+                                    BorderBrush="{StaticResource SecondaryShade_Brush}"
                                     BorderThickness="1">
                                     <svg1:SVGImage x:Name="CheckMark"
                                         Source="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg"
                                         VerticalContentAlignment="Bottom"
                                         HorizontalContentAlignment="Center"
                                         SizeType="SizeToContent"
-                                        OverrideColor="{Binding Source={StaticResource Secondary_Color}}" />
+                                        OverrideColor="{StaticResource Secondary_Color}" />
                                 </Border>
                             </BulletDecorator.Bullet>
                             <ContentPresenter
@@ -749,13 +749,13 @@
                         <Trigger Property="IsChecked" Value="false">
                             <Setter Property="Foreground" Value="{Binding Source={StaticResource PrimaryShade_Brush}}"/>
                             <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="ContentPart" Property="Background" Value="{Binding Source={StaticResource SecondaryShade_Brush}}"/>
-                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}"/>
+                            <Setter TargetName="ContentPart" Property="Background" Value="{StaticResource SecondaryShade_Brush}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource Secondary_Brush}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter TargetName="ContentPart" Property="Background" Value="{Binding Source={StaticResource SecondaryShade_Brush}}"/>
-                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
+                            <Setter TargetName="ContentPart" Property="Background" Value="{StaticResource SecondaryShade_Brush}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -813,7 +813,7 @@
     </Style>
     
     <Style x:Key="ControlLabelStyle" TargetType="Label">
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="3,0,0,2" />
@@ -824,7 +824,7 @@
     </Style>
 
     <Style x:Key="HeadlineLabelStyle" TargetType="Label">
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="3,0,0,2" />
@@ -847,8 +847,8 @@
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}"/>
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}"/>
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}"/>
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
@@ -858,7 +858,7 @@
                        BorderThickness="1,1,0,1"
                        Padding="1,0,0,0"
                        Margin="0,0,0,0"
-                       BorderBrush="{Binding Source={StaticResource Secondary_Brush}}"
+                       BorderBrush="{StaticResource Secondary_Brush}"
                        CornerRadius="3,0,0,3"
                        Background="{TemplateBinding Background}">
                         <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
@@ -881,7 +881,7 @@
     <Style x:Key="DefaultSeparatorStyle" TargetType="Rectangle">
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="Fill" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Fill" Value="{StaticResource Secondary_Brush}" />
     </Style>
 
     <!-- /==================================================  Separators  ================================================================================================================  -->
@@ -889,7 +889,7 @@
     <!-- ===================================================  TextBlocks  ================================================================================================================  -->
 
     <Style x:Key="DefaultTextBlockStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Margin" Value="3,0,0,2" />
@@ -902,13 +902,13 @@
     </Style>
 
     <Style x:Key="ApplicationName_TextBox_Style" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Heading_1_FontSize}}" />
     </Style>
 
     <Style x:Key="VersionName_TextBox_Style" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Heading_2_FontSize}}" />
     </Style>
@@ -918,7 +918,7 @@
     <!-- ===================================================  TextBoxes  =================================================================================================================  -->
 
     <Style x:Key="MainWindowTextBoxStyle" TargetType="TextBox">
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Width" Value="{StaticResource MainWindow_TextBox_Width}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -931,14 +931,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                    <Border CornerRadius="3" Padding="1" x:Name="InnerBorder" Background="{Binding Source={StaticResource Secondary_Brush}}" BorderBrush="{Binding Source={StaticResource Primary_Brush}}" BorderThickness="0,0,0,0">
-                        <ScrollViewer Padding="0" Margin="0" Background="{Binding Source={StaticResource Secondary_Brush}}" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" x:Name="PART_ContentHost" />
+                    <Border CornerRadius="3" Padding="1" x:Name="InnerBorder" Background="{StaticResource Secondary_Brush}" BorderBrush="{StaticResource Primary_Brush}" BorderThickness="0,0,0,0">
+                        <ScrollViewer Padding="0" Margin="0" Background="{StaticResource Secondary_Brush}" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" x:Name="PART_ContentHost" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="True">
-                            <Setter TargetName="InnerBorder" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}"/>
+                            <Setter TargetName="InnerBorder" Property="Background" Value="{StaticResource Secondary_Brush}"/>
                             <Setter TargetName="InnerBorder" Property="BorderThickness" Value="0,0,0,1"/>
-                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}"/>
+                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{StaticResource Secondary_Brush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -959,8 +959,8 @@
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}"/>
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}"/>
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}"/>
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
@@ -970,7 +970,7 @@
                        BorderThickness="0,1,1,0"
                        Padding="1,0,0,0"
                        Margin="0,0,0,0"
-                       BorderBrush="{Binding Source={StaticResource Secondary_Brush}}"
+                       BorderBrush="{StaticResource Secondary_Brush}"
                        CornerRadius="0,0,0,0"
                        Background="{TemplateBinding Background}">
                         <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
@@ -1000,8 +1000,8 @@
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}"/>
-        <Setter Property="Background" Value="{Binding Source={StaticResource SecondaryShade_Brush}}"/>
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
+        <Setter Property="Background" Value="{StaticResource SecondaryShade_Brush}"/>
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
@@ -1012,7 +1012,7 @@
                        BorderThickness="0,1,1,0"
                        Padding="1,0,0,0"
                        Margin="0,0,0,0"
-                       BorderBrush="{Binding Source={StaticResource SecondaryShade_Brush}}"
+                       BorderBrush="{StaticResource SecondaryShade_Brush}"
                        CornerRadius="0,0,0,0"
                        Background="{TemplateBinding Background}">
                         <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
@@ -1033,7 +1033,7 @@
     <!-- ===================================================  ContextMenues  =============================================================================================================  -->
 
     <Style x:Key="ContextMenu_Default_Style" TargetType="ContextMenu">
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Grid.IsSharedSizeScope" Value="true" />
@@ -1042,7 +1042,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
                     <Border x:Name="Border"
-                        Background="{Binding Source={StaticResource Secondary_Brush}}"
+                        Background="{StaticResource Secondary_Brush}"
                         CornerRadius="3"
                         BorderThickness="1">
                         <Border.BorderBrush>
@@ -1061,7 +1061,7 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
@@ -1088,15 +1088,15 @@
                                             Height="{Binding Source={StaticResource CheckBox_Width}}"
                                             Padding="1,1,1,1"
                                             CornerRadius="3" 
-                                            Background="{Binding Source={StaticResource Primary_Brush}}"
-                                            BorderBrush="{Binding Source={StaticResource SecondaryShade_Brush}}"
+                                            Background="{StaticResource Primary_Brush}"
+                                            BorderBrush="{StaticResource SecondaryShade_Brush}"
                                             BorderThickness="1">
                                             <svg1:SVGImage x:Name="CheckMark"
                                                 Source="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg"
                                                 VerticalContentAlignment="Bottom"
                                                 HorizontalContentAlignment="Center"
                                                 SizeType="SizeToContent"
-                                                OverrideColor="{Binding Source={StaticResource Secondary_Color}}" />
+                                                OverrideColor="{StaticResource Secondary_Color}" />
                                         </Border>
                                     </BulletDecorator.Bullet>
                                 </BulletDecorator>
@@ -1107,8 +1107,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted" Value="True">
-                            <Setter Property="Background" TargetName="MenuItemBorder" Value="{Binding Source={StaticResource SecondaryShade_Brush}}"/>
-                            <Setter Property="BorderBrush" TargetName="MenuItemBorder" Value="{Binding Source={StaticResource SecondaryShade_Brush}}"/>
+                            <Setter Property="Background" TargetName="MenuItemBorder" Value="{StaticResource SecondaryShade_Brush}"/>
+                            <Setter Property="BorderBrush" TargetName="MenuItemBorder" Value="{StaticResource SecondaryShade_Brush}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
                             <Setter Property="Visibility" TargetName="CheckMarkPicture" Value="Collapsed"/>
@@ -1150,7 +1150,7 @@
                     Source="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    OverrideColor="{Binding Source={StaticResource Primary_Color}}" />
+                    OverrideColor="{StaticResource Primary_Color}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -1162,7 +1162,7 @@
                     Source="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    OverrideColor="{Binding Source={StaticResource Primary_Color}}" />
+                    OverrideColor="{StaticResource Primary_Color}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -1174,7 +1174,7 @@
                     Source="/RecNForget.Controls;component/Themes/SvgImages/information_icon280732.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    OverrideColor="{Binding Source={StaticResource Primary_Color}}" />
+                    OverrideColor="{StaticResource Primary_Color}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -1186,7 +1186,7 @@
                     Source="/RecNForget.Controls;component/Themes/SvgImages/help_icon544157.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    OverrideColor="{Binding Source={StaticResource Primary_Color}}" />
+                    OverrideColor="{StaticResource Primary_Color}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -1198,7 +1198,7 @@
                     Source="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    OverrideColor="{Binding Source={StaticResource Primary_Color}}" />
+                    OverrideColor="{StaticResource Primary_Color}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -1210,7 +1210,7 @@
                     Source="/RecNForget.Controls;component/Themes/SvgImages/shutDown_icon170336.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
-                    OverrideColor="{Binding Source={StaticResource Primary_Color}}" />
+                    OverrideColor="{StaticResource Primary_Color}" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -1270,8 +1270,8 @@
                         Margin="1"
                         CornerRadius="2"
                         BorderThickness="1"
-                        BorderBrush="{Binding Source={StaticResource Secondary_Brush}}"
-                        Background="{Binding Source={StaticResource Secondary_Brush}}">
+                        BorderBrush="{StaticResource Secondary_Brush}"
+                        Background="{StaticResource Secondary_Brush}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal" />
@@ -1281,14 +1281,14 @@
                                         <ColorAnimationUsingKeyFrames
                                                 Storyboard.TargetName="Border"
                                                 Storyboard.TargetProperty="(BorderBrush).Color">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Source={StaticResource Primary_Color}}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource Primary_Color}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Arrow" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{Binding Source={StaticResource SecondaryShade_Color}}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource SecondaryShade_Color}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -1300,7 +1300,7 @@
                             Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"
                             x:Name="Arrow">
                             <Path.Fill>
-                                <SolidColorBrush Color="{Binding Source={StaticResource Primary_Color}}"/>
+                                <SolidColorBrush Color="{StaticResource Primary_Color}"/>
                             </Path.Fill>
                         </Path>
                     </Border>
@@ -1336,7 +1336,7 @@
             </Grid.RowDefinitions>
             <Border Grid.RowSpan="3"
                 CornerRadius="2"
-                Background="{Binding Source={StaticResource Secondary_Brush}}" />
+                Background="{StaticResource Secondary_Brush}" />
             <RepeatButton Grid.Row="0"
                 Style="{StaticResource ScrollBarLineButton}"
                 Height="18"
@@ -1350,8 +1350,8 @@
                 <Track.Thumb>
                     <Thumb Style="{StaticResource ScrollBarThumb}"
                         Margin="1,0,1,0"
-                        BorderBrush="{Binding Source={StaticResource Primary_Brush}}"
-                        Background="{Binding Source={StaticResource Secondary_Brush}}" />
+                        BorderBrush="{StaticResource Primary_Brush}"
+                        Background="{StaticResource Secondary_Brush}" />
                 </Track.Thumb>
             </Track>
             <RepeatButton Grid.Row="2" Style="{StaticResource ScrollBarLineButton}"
@@ -1370,7 +1370,7 @@
             </Grid.ColumnDefinitions>
             <Border Grid.ColumnSpan="3"
                 CornerRadius="2"
-                Background="{Binding Source={StaticResource Secondary_Brush}}" />
+                Background="{StaticResource Secondary_Brush}" />
             <RepeatButton Grid.Column="0" Style="{StaticResource ScrollBarLineButton}"
                   Width="18"
                   Command="ScrollBar.LineLeftCommand"
@@ -1382,8 +1382,8 @@
                 <Track.Thumb>
                     <Thumb Style="{StaticResource ScrollBarThumb}"
                         Margin="0,1,0,1"
-                        BorderBrush="{Binding Source={StaticResource Primary_Brush}}"
-                        Background="{Binding Source={StaticResource Secondary_Brush}}" />
+                        BorderBrush="{StaticResource Primary_Brush}"
+                        Background="{StaticResource Secondary_Brush}" />
                 </Track.Thumb>
             </Track>
             <RepeatButton Grid.Column="2"
@@ -1415,40 +1415,40 @@
     <Style x:Key="Default_ScrollViewer_Style" TargetType="ScrollViewer">
         <Setter Property="MaxHeight" Value="300" />
         <Setter Property="Margin" Value="5,0,5,0" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
     </Style>
 
     <Style x:Key="PatchNotes_ScrollViewer_Style" TargetType="ScrollViewer">
         <Setter Property="Height" Value="{StaticResource PatchNotes_TextBox_Height}" />
         <Setter Property="Width" Value="{StaticResource PatchNotes_TextBox_Width}" />
         <Setter Property="Margin" Value="0,0,5,0" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
     </Style>
 
     <Style x:Key="HelpTopicList_ScrollViewer_Style" TargetType="ScrollViewer">
         <Setter Property="Height" Value="500" />
         <Setter Property="Margin" Value="0,0,5,0" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
     </Style>
 
     <Style x:Key="HelpTopic_ScrollViewer_Style" TargetType="ScrollViewer">
         <Setter Property="Height" Value="500" />
         <Setter Property="Width" Value="600" />
         <Setter Property="Margin" Value="0,0,5,0" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
     </Style>
 
     <Style x:Key="NewToVersion_FeatureList_ScrollViewer_Style" TargetType="ScrollViewer">
         <Setter Property="MaxHeight" Value="200" />
         <Setter Property="Margin" Value="0,0,5,0" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
     </Style>
 
     <Style x:Key="QuickTip_ScrollViewer_Style" TargetType="ScrollViewer">
         <Setter Property="Height" Value="150" />
         <Setter Property="Width" Value="600" />
         <Setter Property="Margin" Value="0,0,5,0" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
     </Style>
 
     <!-- /==================================================  ScrollViewers  =============================================================================================================  -->
@@ -1456,8 +1456,8 @@
 
     <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
         <Setter Property="TabStripPlacement" Value="Left" />
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Secondary_Brush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -1480,7 +1480,7 @@
                                 Grid.Row="0"
                                 Grid.Column="0"               
                                 Panel.ZIndex="1"
-                                Background="{Binding Source={StaticResource Secondary_Brush}}"
+                                Background="{StaticResource Secondary_Brush}"
                                 IsItemsHost="true"
                                 KeyboardNavigation.TabIndex="1" />
                         <Border
@@ -1532,27 +1532,27 @@
                             <Setter TargetName="headerPanel" Property="Margin" Value="0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{Binding Source={StaticResource SecondaryShade_Brush}}" />
-                            <Setter TargetName="templateRoot" Property="TextElement.Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter TargetName="templateRoot" Property="TextElement.Foreground" Value="{StaticResource SecondaryShade_Brush}" />
+                            <Setter TargetName="templateRoot" Property="TextElement.Background" Value="{StaticResource Secondary_Brush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Setter Property="Tag" Value="115"/>
-        <Setter Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}"/>
-        <Setter Property="BorderBrush" Value="{Binding Source={StaticResource Transparent_Brush}}"/>
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Transparent_Brush}"/>
         <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
     <Style TargetType="{x:Type TabItem}">
-        <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid>
                         <Border  Name="Border" 
-                                     Background="{Binding Source={StaticResource Primary_Brush}}"
+                                     Background="{StaticResource Primary_Brush}"
                                      HorizontalAlignment="Stretch" MinWidth="75" MaxHeight="20"
                                      Margin="0" BorderThickness="1" CornerRadius="0" Padding="0">
                             <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center"
@@ -1564,18 +1564,18 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <!--<Setter Property="Panel.ZIndex" Value="100" />-->
-                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Primary_Brush}}" />
-                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource Primary_Brush}" />
+                            <Setter Property="Foreground" Value="{StaticResource Secondary_Brush}" />
                             <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="False">
-                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Secondary_Brush}}" />
-                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Primary_Brush}}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource Secondary_Brush}" />
+                            <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{Binding Source={StaticResource Primary_Brush}}" />
-                            <Setter Property="Foreground" Value="{Binding Source={StaticResource Secondary_Brush}}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource Primary_Brush}" />
+                            <Setter Property="Foreground" Value="{StaticResource Secondary_Brush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
