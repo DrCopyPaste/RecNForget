@@ -620,46 +620,7 @@
     </Style>
 
     <!-- /==================================================  Windows  ===================================================================================================================  -->
-    
-    <!-- ===================================================  TitleBars  =================================================================================================================  -->
-
-    <Style x:Key="TitleBarLayout" TargetType="{x:Type Label}">
-        <!-- Some setters -->
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Label}">
-                    <Border Name="ImageButtonBorder"
-                       BorderThickness="0"
-                       Padding="0,0,0,0"
-                       BorderBrush="{StaticResource Secondary_Brush}"
-                       CornerRadius="3"
-                       Background="{TemplateBinding Background}">
-                        <Grid Background="{StaticResource Secondary_Brush}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                                <ColumnDefinition Width="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-                            </Grid.ColumnDefinitions>
-
-                            <local:SvgImageButton1 Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource SvgExitButton}" IsCancel="True" />
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- /==================================================  TitleBars  =================================================================================================================  -->
-
+ 
     <!-- ===================================================  Grids  =====================================================================================================================  -->
 
     <Style x:Key="DefaultGridStyle" TargetType="Grid">

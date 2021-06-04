@@ -28,7 +28,7 @@
     </Window.Resources>
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
         <StackPanel Orientation="Vertical">
-            <Label Style="{StaticResource TitleBarLayout}" />
+            <local:TitleBar HorizontalAlignment="Stretch" />
             <Grid>
                 <ProgressBar Style="{StaticResource Default_ProgressBar_Style}"
                     Name="DownloadProgressBar"

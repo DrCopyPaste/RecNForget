@@ -32,7 +32,7 @@
 
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
         <StackPanel>
-            <Label Grid.Row="0" Style="{StaticResource TitleBarLayout}"/>
+            <local:TitleBar HorizontalAlignment="Stretch" />
             <TabControl Style="{StaticResource TabControlStyle}">
                 <TabItem Header="Hotkeys">
                     <StackPanel>
@@ -203,108 +203,5 @@
                     HorizontalAlignment="Right"
                     Click="OkButton_Click" />
         </StackPanel>
-        <!--<Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Style="{StaticResource TitleBarLayout}"/>
-
-            
-            
-            <Grid Style="{StaticResource DefaultGridStyle}" Grid.Row="1">
-                <Grid.RowDefinitions>
-                    -->
-        <!-- row 0 for title bar-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 1 for separator-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 2 for current title-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 3 for setting row-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 4 for separator-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 5 for current title-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 6 for setting row-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 7 for setting row-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 8 for separator-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 9 for current title-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 10 for application settings row-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 11 for separator-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 12 for current title-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 13 for messages settings row-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    -->
-        <!-- row 14 for setting row-->
-        <!--
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                </Grid.ColumnDefinitions>
-
-                <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-
-                
-
-                <Rectangle Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-
-                
-
-                <Rectangle Grid.Row="5" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-
-                
-
-                <Rectangle Grid.Row="7" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-
-                
-
-                <Rectangle Grid.Row="9" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-
-                
-
-                <Rectangle Grid.Row="11" Grid.Column="0" Style="{StaticResource DefaultSeparatorStyle}"/>
-
-                <local:SvgImageButton1 Grid.Row="12" Grid.Column="0" Style="{StaticResource SvgAcceptButton}"
-                    HorizontalAlignment="Right"
-                    Click="OkButton_Click" />
-            </Grid>
-        </Grid>-->
     </Border>
 </Window>

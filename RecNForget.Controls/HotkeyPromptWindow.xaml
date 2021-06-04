@@ -28,7 +28,7 @@
 
     <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
-            <Label Style="{StaticResource TitleBarLayout}"/>
+            <local:TitleBar HorizontalAlignment="Stretch" />
             <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
                 Text="Hold down all modifier keys you wish to set and add your preferred hotkey." />
             <StackPanel Style="{StaticResource HotkeyPrompt_DisplayStackPanel}"

@@ -29,7 +29,7 @@
 
     <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
-            <Label Style="{StaticResource TitleBarLayout}" />
+            <local:TitleBar HorizontalAlignment="Stretch" />
             <StackPanel Orientation="Horizontal">
                 <svg1:SVGImage Style="{StaticResource QuickTip_LightBulbIconStyle}" VerticalAlignment="Top"
                 Name="DialogImage" />

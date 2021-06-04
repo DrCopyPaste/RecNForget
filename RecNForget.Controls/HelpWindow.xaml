@@ -30,7 +30,7 @@
 
     <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
-            <Label Style="{StaticResource TitleBarLayout}" />
+            <local:TitleBar HorizontalAlignment="Stretch" />
             <StackPanel Orientation="Horizontal">
                 <ScrollViewer Style="{StaticResource HelpTopicList_ScrollViewer_Style}">
                     <Grid

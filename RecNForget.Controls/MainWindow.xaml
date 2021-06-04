@@ -31,19 +31,7 @@
         <StackPanel Orientation="Vertical">
             <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="0"
                 Name="TitleBar" Visibility="Hidden" d:Visibility="Visible">
-                <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
-                <Grid>
-                    <local:SvgImageButton1 Style="{StaticResource SvgWindowSettingsButton}"
-                            HorizontalAlignment="Left"
-                            x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click" />
-
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <local:SvgImageButton1 Style="{StaticResource SvgMinimizeButton}"
-                            Click="MinimizeButton_Click" />
-                        <local:SvgImageButton1 Style="{StaticResource SvgExitButton}"
-                            Click="Exit_Click" />
-                    </StackPanel>
-                </Grid>
+                <local:TitleBar HorizontalAlignment="Stretch" WithSettingsButton="True" WithMinimizeButton="True" />
             </Border>
 
             <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">

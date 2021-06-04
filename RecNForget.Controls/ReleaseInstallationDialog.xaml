@@ -27,7 +27,7 @@
     </Window.Resources>
     <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
-            <Label Style="{StaticResource TitleBarLayout}" />
+            <local:TitleBar HorizontalAlignment="Stretch" />
             <TextBlock Style="{StaticResource ApplicationName_TextBox_Style}"
                 Text="An Update is available!"/>
 
