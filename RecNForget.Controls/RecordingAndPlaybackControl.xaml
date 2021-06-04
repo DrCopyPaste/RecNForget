@@ -14,50 +14,33 @@
     </UserControl.Resources>
     <Grid>
         <Border Style="{StaticResource DefaultControlBorderStyle}">
-            <Grid Style="{StaticResource DefaultGridStyle}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                </Grid.ColumnDefinitions>
-
-                <local:SvgImageButton1 Grid.Row="1" Grid.Column="0" Style="{StaticResource SvgOpenFolderButton}"
+            <UniformGrid Rows="1">
+                <local:SvgImageButton1 Style="{StaticResource SvgOpenFolderButton}"
                                 ToolTip="select selected file in explorer (Hotkey: [Down-Arrow])"
                                 x:Name="OpenSelectedFileButton" Click="OpenOutputFolder_Click" />
-                <!--<svgimagebutton:SvgImageButton Grid.Row="1" Grid.Column="0" Width="30" Height="30"></svgimagebutton:SvgImageButton>-->
-
-                <local:SvgImageButton1 Grid.Row="1" Grid.Column="2" Style="{StaticResource SvgPrevTrackButton}"
+                <local:SvgImageButton1 Style="{StaticResource SvgPrevTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="skip to previous file (Hotkey: [Left-Arrow])"
                                 x:Name="SkipPrevButton" Click="SkipPrevButton_Click" />
-                <local:SvgImageButton1 Grid.Row="1" Grid.Column="3" Style="{StaticResource SvgPlayTrackButton}"
+                <local:SvgImageButton1 Style="{StaticResource SvgPlayTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="play selected file (Hotkey: [Space])"
                                 x:Name="TogglePlaySelectedFileButton" Click="ReplayLastRecording_Click" />
-                <local:SvgImageButton1 Grid.Row="1" Grid.Column="4" Style="{StaticResource SvgStopButton}"
+                <local:SvgImageButton1 Style="{StaticResource SvgStopButton}"
                                 IsEnabled="{Binding Path=AudioPlaybackService.PlayingOrPaused}"
                                 ToolTip="stop playing audio (Hotkey: [Esc])"
                                 x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
-                <local:SvgImageButton1 Grid.Row="1" Grid.Column="5" Style="{StaticResource SvgNextTrackButton}"
+                <local:SvgImageButton1 Style="{StaticResource SvgNextTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="skip to next file (Hotkey: [Right-Arrow])"
                                 x:Name="SkipNextButton" Click="SkipNextButton_Click" />
-                <local:SvgImageButton1 Grid.Row="1" Grid.Column="7" Style="{StaticResource SvgRecordButton}"
+                <local:SvgImageButton1 Style="{StaticResource SvgRecordButton}"
                                 IsEnabled="{Binding Path=AudioPlaybackService.Stopped}"
                                 x:Name="RecordButton" Click="RecordButton_Click" />
-            </Grid>
+            </UniformGrid>
         </Border>
     </Grid>
 </UserControl>

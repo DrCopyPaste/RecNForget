@@ -27,35 +27,26 @@
         </ResourceDictionary>
     </Window.Resources>
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Style="{StaticResource DefaultGridStyle}"
-            MouseDown="Window_MouseDown">
-            <Grid.RowDefinitions>
-                <!-- row 0 for title bar-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 for progress bar-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 2 for spacing-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 3 for cancel button-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-            </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical">
+            <Label Style="{StaticResource TitleBarLayout}" />
+            <Grid>
+                <ProgressBar Style="{StaticResource Default_ProgressBar_Style}"
+                    Name="DownloadProgressBar"
+                    Value="{Binding Path=DownloadProgress}" d:Value="87" />
 
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
-
-            <ProgressBar Grid.Row="1" Grid.Column="0" Style="{StaticResource Default_ProgressBar_Style}"
-                Name="DownloadProgressBar"
-                Value="{Binding Path=DownloadProgress}" d:Value="87" />
-
-            <TextBlock Grid.Row="1" Grid.Column="0" Foreground="{StaticResource Secondary_Brush}"
-                Text="{Binding Path=DownloadProgress, StringFormat={}{0:0.00}%}" d:Text="12%" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            
-            <local:SvgImageButton1 Grid.Row="3" Grid.Column="0" Style="{StaticResource SvgCancelButton}"
+                <TextBlock Foreground="{StaticResource Secondary_Brush}"
+                    Text="{Binding Path=DownloadProgress, StringFormat={}{0:0.00}%}" d:Text="12%" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <local:SvgImageButton1 Style="{StaticResource SvgCancelButton}"
                 HorizontalAlignment="Right"
                 x:Name="CancelButton"
                 IsCancel="True"/>
-        </Grid>
+        </StackPanel>
+        <!--
+
+            
+            
+            
+        </Grid>-->
     </Border>
 </Window>

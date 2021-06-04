@@ -4,46 +4,31 @@
 
     <!-- ===================================================  Sizes/Margins/Paddings =======================================================================================================  -->
 
+    <!-- Font Sizes -->
+    <Sys:Double x:Key="Default_FontSize">12</Sys:Double>
+    <Sys:Double x:Key="SmallCaption_FontSize">10</Sys:Double>
+    <Sys:Double x:Key="Heading_1_FontSize">45</Sys:Double>
+    <Sys:Double x:Key="Heading_2_FontSize">20</Sys:Double>
+    <Sys:Double x:Key="Heading_3_FontSize">18</Sys:Double>
+    
     <!-- Control Heights/Widths -->
-    <Sys:Double x:Key="MainWindow_TextBox_Width">300</Sys:Double>
-
     <Sys:Double x:Key="HotkeyPromptWindow_Width">355</Sys:Double>
 
-    <Sys:Double x:Key="TitleRow_Height">15</Sys:Double>
     <Sys:Double x:Key="TitleRow_ColumnWidth">15</Sys:Double>
 
     <Sys:Double x:Key="ButtonRow_Height">31</Sys:Double>
     <Sys:Double x:Key="ChangeSettingButton_Width">25</Sys:Double>
-    <Sys:Double x:Key="CheckBoxControl_Height">22</Sys:Double>
     <Sys:Double x:Key="CheckBox_Width">20</Sys:Double>
 
     <Sys:Double x:Key="HalfButtonCell_Height">30</Sys:Double>
     <Sys:Double x:Key="HalfButtonCell_Width">50</Sys:Double>
-    <Sys:Double x:Key="FatButtonCell_Width">109</Sys:Double>
 
     <Sys:Double x:Key="SettingTextBox_Width">250</Sys:Double>
 
     <Sys:Double x:Key="PatchNotes_TextBox_Width">800</Sys:Double>
     <Sys:Double x:Key="PatchNotes_TextBox_Height">300</Sys:Double>
-
-    <Sys:Double x:Key="SeparatorRow_Height">2</Sys:Double>
-    <Sys:Double x:Key="SeparatorTitleRow_Height">15</Sys:Double>
     <Sys:Double x:Key="MainWindowControl_InnerWidth">21</Sys:Double>
-    <Sys:Double x:Key="MainWindowControl_Height">23</Sys:Double>
-    <Sys:Double x:Key="MainWindowControl_HeightWithMargin">25</Sys:Double>
-
     <Sys:Double x:Key="Paragraph_Separator_Height">9</Sys:Double>
-    <Sys:Double x:Key="Control_Separator_Height">5</Sys:Double>
-
-    <Sys:Double x:Key="CreditsBox_Height">150</Sys:Double>
-
-    <!-- Font Sizes -->
-    <Sys:Double x:Key="Default_FontSize">12</Sys:Double>
-    <Sys:Double x:Key="SmallCaption_FontSize">10</Sys:Double>
-
-    <Sys:Double x:Key="Heading_1_FontSize">45</Sys:Double>
-    <Sys:Double x:Key="Heading_2_FontSize">20</Sys:Double>
-    <Sys:Double x:Key="Heading_3_FontSize">18</Sys:Double>
 
     <!-- /===================================================  SizesMarginsPaddings  ================================================================================================?======  -->
 
@@ -167,6 +152,19 @@
         </Setter>
     </Style>
 
+    <Style x:Key="TransparentSeparator_Style" TargetType="Separator">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Border BorderThickness="0" Padding="5,1,5,1">
+                        <Rectangle HorizontalAlignment="Stretch" Fill="{StaticResource Transparent_Brush}" Height="1"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- ===================================================  Borders  ===================================================================================================================  -->
 
     <!-- seemingly transparent brush that is technically not transparent, to enable "aura" of main window where a mouse enter event will trigger visibiity changes
@@ -202,8 +200,8 @@
     
     <Style x:Key="DefaultControlBorderStyle" TargetType="{x:Type Border}" BasedOn="{StaticResource DefaultWindowBorderStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="BorderBrush" Value="{StaticResource Transparent_Brush}" />
-        <Setter Property="Background" Value="{StaticResource Transparent_Brush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Secondary_Brush}" />
+        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="CornerRadius" Value="5" />
@@ -677,11 +675,7 @@
     </Style>
 
     <Style x:Key="ParagaphSeparatorRowStyle" TargetType="RowDefinition">
-        <Setter Property="Height" Value="{Binding Source={StaticResource Paragraph_Separator_Height}}" />
-    </Style>
-
-    <Style x:Key="ControlSeparatorRowStyle" TargetType="RowDefinition">
-        <Setter Property="Height" Value="{Binding Source={StaticResource Control_Separator_Height}}" />
+        <Setter Property="Height" Value="{StaticResource Paragraph_Separator_Height}" />
     </Style>
 
     <Style x:Key="GrowForContainedControlsColumnStyle" TargetType="ColumnDefinition">
@@ -704,7 +698,7 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="1,1,1,1" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
@@ -771,7 +765,7 @@
         <!--<Setter Property="Padding" Value="1,3,1,3" />-->
         <Setter Property="Margin" Value="0,1,0,1" />
         <Setter Property="Height" Value="23" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="IsEnabled" Value="False" />
@@ -809,7 +803,7 @@
         <Setter Property="Height" Value="13" />
         <Setter Property="Width" Value="281" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource SmallCaption_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallCaption_FontSize}" />
     </Style>
     
     <Style x:Key="ControlLabelStyle" TargetType="Label">
@@ -818,9 +812,8 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="3,0,0,2" />
         <Setter Property="Height" Value="Auto" />
-        <Setter Property="Width" Value="281" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource SmallCaption_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallCaption_FontSize}" />
     </Style>
 
     <Style x:Key="HeadlineLabelStyle" TargetType="Label">
@@ -831,7 +824,7 @@
         <Setter Property="Height" Value="35" />
         <Setter Property="Width" Value="500" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Heading_3_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Heading_3_FontSize}" />
     </Style>
 
     <Style x:Key="SettingTextBoxLabelStyle" TargetType="Label">
@@ -843,13 +836,13 @@
         <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
         <Setter Property="Width" Value="130" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
         <Setter Property="Background" Value="{StaticResource Secondary_Brush}"/>
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -894,7 +887,7 @@
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Margin" Value="3,0,0,2" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
     </Style>
 
     <Style x:Key="CustomMessageBox_TextBlock_Style" TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}">
@@ -904,13 +897,13 @@
     <Style x:Key="ApplicationName_TextBox_Style" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Heading_1_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Heading_1_FontSize}" />
     </Style>
 
     <Style x:Key="VersionName_TextBox_Style" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Heading_2_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Heading_2_FontSize}" />
     </Style>
 
     <!-- /==================================================  TextBlocks  ================================================================================================================  -->
@@ -920,13 +913,11 @@
     <Style x:Key="MainWindowTextBoxStyle" TargetType="TextBox">
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Width" Value="{StaticResource MainWindow_TextBox_Width}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="Padding" Value="0,0,0,0" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_Height}}" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="IsEnabled" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -955,13 +946,13 @@
         <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
         <Setter Property="Width" Value="{Binding Source={StaticResource SettingTextBox_Width}}" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
         <Setter Property="Background" Value="{StaticResource Secondary_Brush}"/>
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -997,12 +988,12 @@
         <Setter Property="Height" Value="{Binding Source={StaticResource PatchNotes_TextBox_Height}}" />
         <Setter Property="Width" Value="{Binding Source={StaticResource PatchNotes_TextBox_Width}}" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
         <Setter Property="Background" Value="{StaticResource SecondaryShade_Brush}"/>
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}"/>
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="Template">
@@ -1060,7 +1051,7 @@
         <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{Binding Source={StaticResource Default_FontSize}}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
         <Setter Property="Template">
             <Setter.Value>

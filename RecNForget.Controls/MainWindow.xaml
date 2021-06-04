@@ -28,70 +28,37 @@
 
     <Border Style="{StaticResource OuterHitBoxindowBorderStyle}"
         MouseLeave="MainWindow_MouseLeave" MouseEnter="MainWindow_MouseEnter" MouseDown="Window_MouseDown">
-        <Grid>
-            <Grid.RowDefinitions>
-                <!-- row 0 for title bar-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 for all other controls-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-            </Grid.ColumnDefinitions>
-
+        <StackPanel Orientation="Vertical">
             <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="0"
-                Name="TitleBar" Visibility="Hidden">
+                Name="TitleBar" Visibility="Hidden" d:Visibility="Visible">
                 <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
-                <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultGridStyle}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    </Grid.ColumnDefinitions>
-
-                    <local:SvgImageButton1 Grid.Row="0" Grid.Column="0" Style="{StaticResource SvgWindowSettingsButton}"
+                <Grid>
+                    <local:SvgImageButton1 Style="{StaticResource SvgWindowSettingsButton}"
+                            HorizontalAlignment="Left"
                             x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click" />
-                    <local:SvgImageButton1 Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource SvgMinimizeButton}"
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <local:SvgImageButton1 Style="{StaticResource SvgMinimizeButton}"
                             Click="MinimizeButton_Click" />
-                    <local:SvgImageButton1 Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource SvgExitButton}"
+                        <local:SvgImageButton1 Style="{StaticResource SvgExitButton}"
                             Click="Exit_Click" />
+                    </StackPanel>
                 </Grid>
             </Border>
 
             <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
-                <Grid Style="{StaticResource DefaultGridStyle}">
-                    <Grid.RowDefinitions>
-                        <!-- row 0 for output path control-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 1 for selected file control-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 2 for recording and playback control-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Row="0" Grid.Column="0">
-                        <local:OutputPathControl
+                <StackPanel>
+                    <local:OutputPathControl
                             x:Name="OutputPathControl" />
-                        <Separator x:Name="OutputPathControlSpacer" Style="{StaticResource DefaultSeparator_Style}" />
-                        <local:SelectedFileControl
+                    <Separator x:Name="OutputPathControlSpacer" Style="{StaticResource DefaultSeparator_Style}" />
+                    <local:SelectedFileControl
                             x:Name="SelectedFileControl" />
-                        <Separator x:Name="SelectedFileControlSpacer" Style="{StaticResource DefaultSeparator_Style}" />
-                        <local:RecordingAndPlaybackControl
+                    <Separator x:Name="SelectedFileControlSpacer" Style="{StaticResource DefaultSeparator_Style}" />
+                    <local:RecordingAndPlaybackControl
                             x:Name="RecordingAndPlaybackControl"/>
-                    </StackPanel>
-                </Grid>
+                </StackPanel>
             </Border>
-        </Grid>
+        </StackPanel>
     </Border>
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo Description="RecNForget"

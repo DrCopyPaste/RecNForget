@@ -25,32 +25,14 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Style="{StaticResource DefaultGridStyle}"
-            MouseDown="Window_MouseDown">
-            <Grid.RowDefinitions>
-                <!-- row 0 for title bar-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 prompt message-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 2 spacing-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 3 hotkey display-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-            </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
+    <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+        <StackPanel Orientation="Vertical">
+            <Label Style="{StaticResource TitleBarLayout}"/>
+            <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
                 Text="Hold down all modifier keys you wish to set and add your preferred hotkey." />
-
-            <StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource HotkeyPrompt_DisplayStackPanel}"
-                x:Name="HotkeyDisplay">
-            </StackPanel>
-        </Grid>
+            <StackPanel Style="{StaticResource HotkeyPrompt_DisplayStackPanel}"
+                x:Name="HotkeyDisplay" />
+        </StackPanel>
     </Border>
 </Window>
