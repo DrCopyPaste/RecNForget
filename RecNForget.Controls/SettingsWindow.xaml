@@ -6,6 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Topmost="True"
         Style="{DynamicResource Settings_WindowStyle}"
         WindowStartupLocation="CenterOwner"
@@ -30,106 +31,35 @@
         </ResourceDictionary>
     </Window.Resources>
 
+    <!--                                 <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}"
+                            Content="Output folder" />
+                                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
+                            Text="{Binding Path=SettingService.OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
+    
+    -->
+    
     <Border Style="{StaticResource DefaultWindowBorderStyle}">
         <StackPanel>
             <local:TitleBar HorizontalAlignment="Stretch" />
             <TabControl Style="{StaticResource TabControlStyle}">
                 <TabItem Header="Hotkeys">
                     <StackPanel>
-                        <Button Style="{StaticResource BaseSettingButtonLayout}"
-                    HorizontalAlignment="Stretch"
-                    Click="ConfigureHotkey_StartStopRecording_Click">
-                            <Grid
-                        HorizontalAlignment="Stretch">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition
-                                Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition
-                                Width="3*" />
-                                    <ColumnDefinition
-                                Width="6*" />
-                                    <ColumnDefinition
-                                Width="1*" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}"
-                            Content="Toggle Record"/>
-
-                                <StackPanel Grid.Row="0" Grid.Column="1" Style="{StaticResource HotkeyDisplayStackPanel}"
-                            x:Name="HotkeyDisplay" />
-
-                                <local:SvgImageButton1 Grid.Row="0" Grid.Column="2" Style="{StaticResource SvgChangeSettingButtonLayout}"
-                            Click="ConfigureHotkey_StartStopRecording_Click" />
-                            </Grid>
-                        </Button>
+                        <local:HotkeySettingButton HorizontalAlignment="Stretch"
+                                                   SettingCaption="Toggle Record" SettingValue="{Binding Path=SettingService.HotKey_StartStopRecording, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" />
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Output">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" Width="65*" />
-                            <ColumnDefinition Width="349*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource BaseSettingButtonLayout}"
-                    Click="Configure_OutputPath_Click" Grid.ColumnSpan="2">
-                            <Grid
-                        HorizontalAlignment="Stretch">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition
-                                Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition
-                                Width="3*" />
-                                    <ColumnDefinition
-                                Width="6*" />
-                                    <ColumnDefinition
-                                Width="1*" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}"
-                            Content="Output folder" />
-                                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
-                            Text="{Binding Path=SettingService.OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
-
-                                <local:SvgImageButton1 Grid.Row="0" Grid.Column="2" Style="{StaticResource SvgChangeSettingButtonLayout}"
-                            HorizontalAlignment="Right"
-                            Click="Configure_OutputPath_Click" />
-                            </Grid>
-                        </Button>
-
-                        <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource BaseSettingButtonLayout}"
-                    Click="Configure_FileNamePattern_Click" Grid.ColumnSpan="2">
-                            <Grid
-                        HorizontalAlignment="Stretch">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition
-                                Height="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition
-                                Width="3*" />
-                                    <ColumnDefinition
-                                Width="6*" />
-                                    <ColumnDefinition
-                                Width="1*" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}"
-                            Content="File name pattern" />
-                                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
-                            Text="{Binding Path=SettingService.FilenamePrefix, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
-
-                                <local:SvgImageButton1 Grid.Row="0" Grid.Column="2" Style="{StaticResource SvgChangeSettingButtonLayout}"
-                            HorizontalAlignment="Right"
-                            Click="Configure_FileNamePattern_Click" />
-                            </Grid>
-                        </Button>
-                    </Grid>
+                    <StackPanel>
+                        <local:StringSettingButton HorizontalAlignment="Stretch"
+                                                   SettingCaption="Output folder" SettingValue="{Binding Path=SettingService.OutputPath, Mode=TwoWay}"
+                                                   d:SettingValue="C:\TargetPathToFile"
+                                                   Click="Configure_OutputPath_Click"/>
+                        
+                        <local:StringSettingButton HorizontalAlignment="Stretch"
+                                                   SettingCaption="File name pattern" SettingValue="{Binding Path=SettingService.FilenamePrefix, Mode=TwoWay}"
+                                                   d:SettingValue="RecNForget_"
+                                                   Click="Configure_FileNamePattern_Click"/>
+                    </StackPanel>
                 </TabItem>
                 <TabItem Header="Application">
                     <Grid>

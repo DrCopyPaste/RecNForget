@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Topmost="True"
         Style="{DynamicResource DefaultWindowStyle}"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         WindowStartupLocation="CenterOwner"
         Title="RecNForget - Quick Start" >
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
@@ -34,33 +35,29 @@
                 Text="New here?" />
 
             <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                Text="This is your recording hotkey" />
+                Text="Please take a look at your default output folder and hotkey setting." />
+            
+            <Separator Style="{StaticResource TransparentSeparator_Style}" />
+            <Separator Style="{StaticResource TransparentSeparator_Style}" />
 
-            <Button Style="{StaticResource BaseSettingButtonLayout}"
-                HorizontalAlignment="Stretch"
-                Click="ConfigureHotkey_StartStopRecording_Click">
-                <Grid
-                    HorizontalAlignment="Stretch">
-                    <StackPanel Style="{StaticResource AutoSizeHotkeyDisplayStackPanel}"
-                        x:Name="HotkeyDisplay" />
-                </Grid>
-            </Button>
-            <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                Text="Files will be saved here" />
+            <local:StringSettingButton HorizontalAlignment="Stretch"
+                                                   SettingCaption="Output folder" SettingValue="{Binding Path=SettingService.OutputPath, Mode=TwoWay}"
+                                                   d:SettingValue="C:\TargetPathToFile"
+                                                   Click="Configure_OutputPath_Click"/>
 
-            <Button Style="{StaticResource BaseSettingButtonLayout}"
-                HorizontalAlignment="Stretch"
-                Click="Configure_OutputPath_Click">
-                <Grid
-                    HorizontalAlignment="Center">
-                    <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                        Text="{Binding Path=SettingService.OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
-                </Grid>
-            </Button>
+            <local:HotkeySettingButton HorizontalAlignment="Stretch"
+                                                   SettingCaption="Toggle Record" SettingValue="{Binding Path=SettingService.HotKey_StartStopRecording, Mode=TwoWay}" />
 
-            <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                Text="More options in the settings menu" />
-            <local:SvgImageButton1 Style="{StaticResource SvgWindowSettingsButton}" />
+            <Separator Style="{StaticResource TransparentSeparator_Style}" />
+            <Separator Style="{StaticResource TransparentSeparator_Style}" />
+
+
+            <Grid>
+                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+                           HorizontalAlignment="Left"
+                Text="You'll find More options in the settings menu" />
+                <local:SvgImageButton1 Style="{StaticResource SvgWindowSettingsButton}" HorizontalAlignment="Right" Click="OpenSettings_Click" />
+            </Grid>
 
             <CheckBox  Style="{StaticResource DefaultCheckboxStyle}"
                     IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >

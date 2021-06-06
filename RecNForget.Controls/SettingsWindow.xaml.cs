@@ -20,7 +20,6 @@ namespace RecNForget.Controls
 
         public SettingsWindow(IApplicationHotkeyService hotkeyService, IAppSettingService settingService)
         {
-            DataContext = this;
             InitializeComponent();
 
             if (DesignerProperties.GetIsInDesignMode(this))
@@ -32,8 +31,6 @@ namespace RecNForget.Controls
             {
                 this.hotkeyService = hotkeyService;
                 SettingService = settingService;
-
-                DisplayHotkey();
             }
         }
 
@@ -51,22 +48,6 @@ namespace RecNForget.Controls
                 settingService = value;
                 OnPropertyChanged();
             }
-        }
-
-        private void DisplayHotkey()
-        {
-            if (HotkeyDisplay.Children.Count > 0)
-            {
-                HotkeyDisplay.Children.Clear();
-            }
-
-            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                hotkeys: settingService.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
-                buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
-                spacing: 6,
-                horizontalAlignment: HorizontalAlignment.Left);
-
-            HotkeyDisplay.Children.Add(buttonGrid);
         }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -92,7 +73,6 @@ namespace RecNForget.Controls
             {
                 SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
                 this.hotkeyService.ResetAndReadHotkeysFromConfig();
-                DisplayHotkey();
             }
 
             // since there are two buttons on top of each other

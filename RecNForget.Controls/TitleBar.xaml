@@ -25,7 +25,7 @@
                 </Grid.ColumnDefinitions>
                 <local:SvgImageButton1 Grid.Column="0" Style="{StaticResource SvgWindowSettingsButton}" Click="SettingsButton_Click" Visibility="{Binding WithSettingsButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
                 <local:SvgImageButton1 Grid.Column="2" Style="{StaticResource SvgMinimizeButton}" Click="MinimizeButton_Click" Visibility="{Binding WithMinimizeButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                <local:SvgImageButton1 Grid.Column="3" Style="{StaticResource SvgExitButton}" Click="ExitButton_Click" IsCancel="{Binding Path=SelectedFileService.SelectedFileDisplay}" />
+                <local:SvgImageButton1 Grid.Column="3" Style="{StaticResource SvgExitButton}" Click="ExitButton_Click" IsCancel="{Binding ExitIsCancel}" />
             </Grid>
         </Border>
 </UserControl>

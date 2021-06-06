@@ -9,6 +9,7 @@ using RecNForget.Controls.Helper;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
+using RecNForget.WPF.Services.Contracts;
 
 namespace RecNForget.Controls
 {
@@ -19,10 +20,10 @@ namespace RecNForget.Controls
     {
         private readonly IApplicationHotkeyService hotkeyService;
         private IAppSettingService settingService;
+        private IActionService actionService;
 
-        public NewToApplicationWindow(IApplicationHotkeyService hotkeyService, IAppSettingService settingService)
+        public NewToApplicationWindow(IApplicationHotkeyService hotkeyService, IAppSettingService settingService, IActionService actionService)
         {
-            DataContext = this;
             InitializeComponent();
 
             this.Title = "New to RecNForget?";
@@ -37,13 +38,7 @@ namespace RecNForget.Controls
             {
                 this.hotkeyService = hotkeyService;
                 SettingService = settingService;
-
-                var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                hotkeys: settingService.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
-                buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
-                spacing: 6);
-
-                HotkeyDisplay.Children.Add(buttonGrid);
+                this.actionService = actionService;
 
                 this.KeyDown += Window_KeyDown;
             }            
@@ -65,21 +60,6 @@ namespace RecNForget.Controls
             }
         }
 
-        private void DisplayHotkey()
-        {
-            if (HotkeyDisplay.Children.Count > 0)
-            {
-                HotkeyDisplay.Children.Clear();
-            }
-
-            var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                hotkeys: settingService.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty),
-                buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
-                spacing: 6);
-
-            HotkeyDisplay.Children.Add(buttonGrid);
-        }
-
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
@@ -99,7 +79,6 @@ namespace RecNForget.Controls
             {
                 SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
                 this.hotkeyService.ResetAndReadHotkeysFromConfig();
-                DisplayHotkey();
             }
 
             // since there are two buttons on top of each other
@@ -140,6 +119,11 @@ namespace RecNForget.Controls
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OpenSettings_Click(object sender, RoutedEventArgs e)
+        {
+            actionService.ShowSettingsMenu();
         }
     }
 }

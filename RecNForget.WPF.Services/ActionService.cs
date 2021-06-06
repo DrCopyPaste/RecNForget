@@ -525,7 +525,7 @@ namespace RecNForget.WPF.Services
 
         public void ShowNewToApplicationWindow()
         {
-            var dia = new NewToApplicationWindow(hotkeyService, appSettingService);
+            var dia = new NewToApplicationWindow(hotkeyService, appSettingService, this);
 
             if (!appSettingService.MinimizedToTray && OwnerControl != null)
             {
