@@ -305,7 +305,8 @@ namespace PressingIssue.Services.Win32
         {
             if (e.KeyUp)
             {
-                // cannot really determine here which keys were lifted (but we should know which modifier is being pressed
+                // cannot really determine here which keys were lifted (but we should know which modifier is being pressed... to some degree,
+                // if multiple keys are being held down then released all at once, this might "think" that some, but not all, modifiers are still being pressed)
                 return string.Format("Key={0}; Win={1}; Alt={2}; Ctrl={3}; Shift={4}", new object[] { "None", isWinPressed, isAltPressed, isCtrlPressed, isShiftPressed });
             }
 

@@ -12,23 +12,17 @@
     <Sys:Double x:Key="Heading_3_FontSize">18</Sys:Double>
     
     <!-- Control Heights/Widths -->
-    <Sys:Double x:Key="HotkeyPromptWindow_Width">355</Sys:Double>
-
     <Sys:Double x:Key="TitleRow_ColumnWidth">15</Sys:Double>
 
     <Sys:Double x:Key="ButtonRow_Height">31</Sys:Double>
-    <Sys:Double x:Key="ChangeSettingButton_Width">25</Sys:Double>
-    <Sys:Double x:Key="CheckBox_Width">20</Sys:Double>
-
-    <Sys:Double x:Key="HalfButtonCell_Height">30</Sys:Double>
+    
+    <Sys:Double x:Key="Width_SmallControl">20</Sys:Double>
+    <Sys:Double x:Key="Width_NormalControl">30</Sys:Double>
+    
     <Sys:Double x:Key="HalfButtonCell_Width">50</Sys:Double>
-
-    <Sys:Double x:Key="SettingTextBox_Width">250</Sys:Double>
 
     <Sys:Double x:Key="PatchNotes_TextBox_Width">800</Sys:Double>
     <Sys:Double x:Key="PatchNotes_TextBox_Height">300</Sys:Double>
-    <Sys:Double x:Key="MainWindowControl_InnerWidth">21</Sys:Double>
-    <Sys:Double x:Key="Paragraph_Separator_Height">9</Sys:Double>
 
     <!-- /===================================================  SizesMarginsPaddings  ================================================================================================?======  -->
 
@@ -81,8 +75,8 @@
     <!-- ===================================================  Images  ====================================================================================================================  -->
 
     <Style x:Key="About_Logo_Style" TargetType="{x:Type Image}">
-        <Setter Property="Width" Value="70" />
         <Setter Property="Source" Value="/RecNForget.Controls;component/Images/logo_big.png" />
+        <Setter Property="Width" Value="70" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -308,22 +302,22 @@
     <Style x:Key="SvgHalfActionButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
         <Setter Property="ImagePadding" Value="4,4,4,4" />
         <Setter Property="ImageMargin" Value="7,1,7,1" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource Width_NormalControl}}" />
         <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
     </Style>
     
     <Style x:Key="SvgHalfActionButtonSmallIconLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="ImagePadding" Value="8,8,8,8" />
         <Setter Property="ImageMargin" Value="4,1,4,1" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource HalfButtonCell_Height}}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource Width_NormalControl}}" />
         <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
     </Style>
 
     <Style x:Key="SvgBaseMiniChangeSettingButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
         <Setter Property="ImagePadding" Value="2,2,2,2" />
         <Setter Property="ImageMargin" Value="0,0,0,0" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource MainWindowControl_InnerWidth}}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource Width_SmallControl}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource Width_SmallControl}}" />
     </Style>
 
     <Style x:Key="SvgBaseHeaderButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
@@ -635,10 +629,6 @@
         <Setter Property="Height" Value="*" />
     </Style>
 
-    <Style x:Key="ParagaphSeparatorRowStyle" TargetType="RowDefinition">
-        <Setter Property="Height" Value="{StaticResource Paragraph_Separator_Height}" />
-    </Style>
-
     <Style x:Key="GrowForContainedControlsColumnStyle" TargetType="ColumnDefinition">
         <Setter Property="Width" Value="Auto" />
     </Style>
@@ -678,8 +668,8 @@
                         <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
                             <BulletDecorator.Bullet>
                                 <Border x:Name="Border"  
-                                    Width="{Binding Source={StaticResource CheckBox_Width}}" 
-                                    Height="{Binding Source={StaticResource CheckBox_Width}}"
+                                    Width="{Binding Source={StaticResource Width_SmallControl}}" 
+                                    Height="{Binding Source={StaticResource Width_SmallControl}}"
                                     Padding="1,1,1,1"
                                     CornerRadius="3" 
                                     Background="{StaticResource Primary_Brush}"
@@ -748,27 +738,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="HotkeyDisplayStackPanel" TargetType="StackPanel">
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Margin" Value="1,1,1,0" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource SettingTextBox_Width}}" />
-        <Setter Property="Background" Value="{StaticResource Secondary_Brush}" />
-    </Style>
-
-    <Style x:Key="HotkeyPrompt_DisplayStackPanel" TargetType="StackPanel">
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="Width" Value="{StaticResource HotkeyPromptWindow_Width}" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
-    </Style>
-
-    <Style x:Key="AutoSizeHotkeyDisplayStackPanel" TargetType="StackPanel">
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Margin" Value="1,1,1,0" />
-    </Style>
-
     <!-- /==================================================  HotkeyDisplays  ============================================================================================================  -->
 
     <!-- ===================================================  Labels  ====================================================================================================================  -->
@@ -790,16 +759,6 @@
     <Style x:Key="SettingsStringValue_Label" TargetType="Label" BasedOn="{StaticResource Base_Label}">
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
-
-    <Style x:Key="DefaultLabelStyle" TargetType="Label">
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Margin" Value="3,0,0,2" />
-        <Setter Property="Height" Value="13" />
-        <Setter Property="Width" Value="281" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{StaticResource SmallCaption_FontSize}" />
-    </Style>
     
     <Style x:Key="ControlLabelStyle" TargetType="Label">
         <Setter Property="Foreground" Value="{StaticResource Primary_Brush}" />
@@ -820,20 +779,6 @@
         <Setter Property="Width" Value="500" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="{StaticResource Heading_3_FontSize}" />
-    </Style>
-
-    <Style x:Key="SettingTextBoxLabelStyle" TargetType="Label">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Margin" Value="1,1,0,0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
-        <Setter Property="SnapsToDevicePixels" Value="true"/>
-        <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
-        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
-        <Setter Property="Background" Value="{StaticResource Secondary_Brush}"/>
-        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
     <!-- /==================================================  Labels  ====================================================================================================================  -->
@@ -946,48 +891,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="PatchNotesTextBoxStyle" TargetType="TextBox">
-        <Setter Property="Focusable" Value="false"/>
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="IsReadOnly" Value="True"/>
-        <Setter Property="IsEnabled" Value="True"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Margin" Value="1,1,1,0" />
-        <Setter Property="Height" Value="{Binding Source={StaticResource PatchNotes_TextBox_Height}}" />
-        <Setter Property="Width" Value="{Binding Source={StaticResource PatchNotes_TextBox_Width}}" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
-        <Setter Property="SnapsToDevicePixels" Value="true"/>
-        <Setter Property="OverridesDefaultStyle" Value="true"/>
-        <Setter Property="Foreground" Value="{StaticResource Primary_Brush}"/>
-        <Setter Property="Background" Value="{StaticResource SecondaryShade_Brush}"/>
-        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Border x:Name="Border"  
-                       BorderThickness="0,1,1,0"
-                       Padding="1,0,0,0"
-                       Margin="0,0,0,0"
-                       BorderBrush="{StaticResource SecondaryShade_Brush}"
-                       CornerRadius="0,0,0,0"
-                       Background="{TemplateBinding Background}">
-                        <BulletDecorator x:Name="ContentPart" Background="{StaticResource Transparent_Brush}">
-                            <ContentPresenter Content="{TemplateBinding Text}"
-                            Margin="0,0,0,0"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            RecognizesAccessKey="True"/>
-                        </BulletDecorator>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <!-- /==================================================  TextBoxes  =================================================================================================================  -->
 
     <!-- ===================================================  ContextMenues  =============================================================================================================  -->
@@ -1044,8 +947,8 @@
                                     HorizontalAlignment="Center">
                                     <BulletDecorator.Bullet>
                                         <Border x:Name="Border"  
-                                            Width="{Binding Source={StaticResource CheckBox_Width}}" 
-                                            Height="{Binding Source={StaticResource CheckBox_Width}}"
+                                            Width="{Binding Source={StaticResource Width_SmallControl}}" 
+                                            Height="{Binding Source={StaticResource Width_SmallControl}}"
                                             Padding="1,1,1,1"
                                             CornerRadius="3" 
                                             Background="{StaticResource Primary_Brush}"
@@ -1542,241 +1445,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--<Style x:Key="Style-TabControl-Main" TargetType="{x:Type TabControl}">
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-
-                        <Border>
-                            <UniformGrid x:Name="HeaderPanel" IsItemsHost="True" 
-                                     Rows="1" />
-                        </Border>
-
-                        <Border x:Name="Border" Grid.Row="1" 
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}">
-                            <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
-
-
-    <!-- ==================================================  Expander =============================================================================================================  -->
-
-    <!--<ControlTemplate x:Key="ExpanderToggleButton"
-                 TargetType="{x:Type ToggleButton}">
-        <Border x:Name="Border"
-          CornerRadius="2,0,0,0"
-          BorderThickness="0,0,1,0"
-          Background="{StaticResource Primary_Brush}"
-          BorderBrush="{StaticResource Primary_Brush}"
-                >
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Normal" />
-                    <VisualState x:Name="MouseOver">
-                        <Storyboard>
-
-                            <ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="Background" To="{StaticResource Secondary_Color}" />
-                            
-                            
-                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
-                                          Storyboard.TargetProperty="(Panel.Background).
-                (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource Secondary_Color}" />
-                            </ColorAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </VisualState>
-                    <VisualState x:Name="Pressed">
-                        <Storyboard>
-                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
-                                          Storyboard.TargetProperty="(Panel.Background).
-                (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource Secondary_Color}" />
-                            </ColorAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </VisualState>
-                    <VisualState x:Name="Disabled">
-                        <Storyboard>
-                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
-                                          Storyboard.TargetProperty="(Panel.Background).
-                (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource SecondaryShade_Color}" />
-                            </ColorAnimationUsingKeyFrames>
-                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
-                                          Storyboard.TargetProperty="(Border.BorderBrush).
-                (GradientBrush.GradientStops)[1].(GradientStop.Color)">
-                                <EasingColorKeyFrame KeyTime="0"
-                                   Value="{StaticResource PrimaryShade_Color}" />
-                            </ColorAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </VisualState>
-                </VisualStateGroup>
-                <VisualStateGroup x:Name="CheckStates">
-                    <VisualState x:Name="Checked">
-                        <Storyboard>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-                                           Storyboard.TargetName="CollapsedArrow">
-                                <DiscreteObjectKeyFrame KeyTime="0"
-                                      Value="{x:Static Visibility.Hidden}" />
-                            </ObjectAnimationUsingKeyFrames>
-                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
-                                           Storyboard.TargetName="ExpandededArrow">
-                                <DiscreteObjectKeyFrame KeyTime="0"
-                                      Value="{x:Static Visibility.Visible}" />
-                            </ObjectAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </VisualState>
-                    <VisualState x:Name="Unchecked" />
-                    <VisualState x:Name="Indeterminate" />
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-            <Grid>
-                <Path x:Name="CollapsedArrow"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Data="M 0 0 L 4 4 L 8 0 Z">
-                    <Path.Fill>
-                        <SolidColorBrush Color="{StaticResource Secondary_Color}" />
-                    </Path.Fill>
-                </Path>
-                <Path x:Name="ExpandededArrow"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Visibility="Collapsed"
-            Data="M 0 4 L 4 0 L 8 4 Z">
-                    <Path.Fill>
-                        <SolidColorBrush Color="{StaticResource Secondary_Color}" />
-                    </Path.Fill>
-                </Path>
-            </Grid>
-        </Border>
-    </ControlTemplate>
-
-    <Style x:Key="{x:Type Expander}"
-           TargetType="{x:Type Expander}">
-        <Setter Property="Foreground"
-                Value="{StaticResource Secondary_Brush}"/>
-        <Setter Property="Background"
-                Value="{StaticResource Transparent_Brush}"/>
-        <Setter Property="HorizontalContentAlignment"
-                Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment"
-                Value="Stretch"/>
-        <Setter Property="BorderBrush"
-                Value="{StaticResource Primary_Brush}"/>
-        <Setter Property="BorderThickness"
-                Value="1"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Expander}">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="3"
-                            SnapsToDevicePixels="true">
-                        <DockPanel>
-                            <ToggleButton x:Name="HeaderSite"
-                                          Template="{StaticResource ExpanderToggleButton}"
-                                          DockPanel.Dock="Top"
-                                          Margin="1"
-                                          MinWidth="0"
-                                          MinHeight="0"
-                                          
-                                          IsChecked="{Binding Path=IsExpanded,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
-                                          Content="{TemplateBinding Header}"
-                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
-                                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
-                                          Foreground="{TemplateBinding Foreground}"
-                                          Padding="{TemplateBinding Padding}"
-                                          FontFamily="{TemplateBinding FontFamily}"
-                                          FontSize="{TemplateBinding FontSize}"
-                                          FontStyle="{TemplateBinding FontStyle}"
-                                          FontStretch="{TemplateBinding FontStretch}"
-                                          FontWeight="{TemplateBinding FontWeight}"
-                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <ContentPresenter x:Name="ExpandSite"
-                                              DockPanel.Dock="Bottom"
-                                              Visibility="Collapsed"
-                                              Focusable="false"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              Margin="{TemplateBinding Padding}"/>
-                        </DockPanel>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsExpanded"
-                                 Value="true">
-                            <Setter Property="Visibility"
-                                    Value="Visible"
-                                    TargetName="ExpandSite"/>
-                        </Trigger>
-                        <Trigger Property="ExpandDirection"
-                                 Value="Right">
-                            <Setter Property="DockPanel.Dock"
-                                    Value="Right"
-                                    TargetName="ExpandSite"/>
-                            <Setter Property="DockPanel.Dock"
-                                    Value="Left"
-                                    TargetName="HeaderSite"/>
-                            --><!--<Setter Property="Style"
-                                    Value="{StaticResource &#243;}"
-                                    TargetName="HeaderSite"/>--><!--
-                        </Trigger>
-                        <Trigger Property="ExpandDirection"
-                                 Value="Up">
-                            <Setter Property="DockPanel.Dock"
-                                    Value="Top"
-                                    TargetName="ExpandSite"/>
-                            <Setter Property="DockPanel.Dock"
-                                    Value="Bottom"
-                                    TargetName="HeaderSite"/>
-                            --><!--<Setter Property="Style"
-                                    Value="{StaticResource &#241;}"
-                                    TargetName="HeaderSite"/>--><!--
-                        </Trigger>
-                        <Trigger Property="ExpandDirection"
-                                 Value="Left">
-                            <Setter Property="DockPanel.Dock"
-                                    Value="Left"
-                                    TargetName="ExpandSite"/>
-                            <Setter Property="DockPanel.Dock"
-                                    Value="Right"
-                                    TargetName="HeaderSite"/>
-                            --><!--<Setter Property="Style"
-                                    Value="{StaticResource &#242;}"
-                                    TargetName="HeaderSite"/>--><!--
-                        </Trigger>
-                        <Trigger Property="IsEnabled"
-                                 Value="false">
-                            <Setter Property="Foreground"
-                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
-
-    <!-- /==================================================  Expander =============================================================================================================  -->
-
-    <!-- =================================================================================================================================================================================  -->
-    <!-- /================================================================================================================================================================================  -->
-
 
 </ResourceDictionary>
