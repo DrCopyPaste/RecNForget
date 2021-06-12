@@ -91,17 +91,17 @@
         <Setter Property="Width" Value="15" />
     </Style>
 
-    <Style x:Key="AddedFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{DynamicResource FeatureClass_Image_Style}">
+    <Style x:Key="AddedFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/plus_icon171498.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
     </Style>
 
-    <Style x:Key="BugFix_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{DynamicResource FeatureClass_Image_Style}">
+    <Style x:Key="BugFix_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/bugfix_icon140609.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
     </Style>
 
-    <Style x:Key="VerboseInformationFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{DynamicResource FeatureClass_Image_Style}">
+    <Style x:Key="VerboseInformationFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/information_icon2132.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
     </Style>
@@ -115,21 +115,21 @@
         <Setter Property="Margin" Value="4,4,4,4" />
     </Style>
 
-    <Style x:Key="CustomMessageBoxInformationIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{DynamicResource CustomMessageBoxDefaultIconStyle}">
+    <Style x:Key="CustomMessageBoxInformationIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_info_icon277439.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
         <Setter Property="Margin" Value="4,4,4,4" />
     </Style>
 
-    <Style x:Key="CustomMessageBoxQuestionIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{DynamicResource CustomMessageBoxDefaultIconStyle}">
+    <Style x:Key="CustomMessageBoxQuestionIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_question_icon109120.svg" />
     </Style>
 
-    <Style x:Key="CustomMessageBoxErrorIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{DynamicResource CustomMessageBoxDefaultIconStyle}">
+    <Style x:Key="CustomMessageBoxErrorIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_error_icon304479.svg" />
     </Style>
 
-    <Style x:Key="QuickTip_LightBulbIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{DynamicResource CustomMessageBoxDefaultIconStyle}">
+    <Style x:Key="QuickTip_LightBulbIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
         <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
     </Style>
 
@@ -169,8 +169,8 @@
     </SolidColorBrush>
 
     <Style x:Key="OuterHitBoxindowBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="{DynamicResource FakeTransparentBrush}" />
-        <Setter Property="Background" Value="{DynamicResource FakeTransparentBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource FakeTransparentBrush}" />
+        <Setter Property="Background" Value="{StaticResource FakeTransparentBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="3,3,3,3" />
         <Setter Property="Padding" Value="7,2,7,7" />
@@ -194,7 +194,7 @@
         <Setter Property="Padding" Value="2,2,2,2" />
     </Style>
     
-    <Style x:Key="DefaultControlBorderStyle" TargetType="{x:Type Border}" BasedOn="{DynamicResource DefaultWindowBorderStyle}">
+    <Style x:Key="DefaultControlBorderStyle" TargetType="{x:Type Border}" BasedOn="{StaticResource DefaultWindowBorderStyle}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderBrush" Value="{DynamicResource Secondary_Brush}" />
         <Setter Property="Background" Value="{DynamicResource Secondary_Brush}" />
@@ -301,32 +301,32 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SvgHalfActionButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseButtonLayout}">
+    <Style x:Key="SvgHalfActionButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
         <Setter Property="ImagePadding" Value="4,4,4,4" />
         <Setter Property="ImageMargin" Value="7,1,7,1" />
-        <Setter Property="Height" Value="{Binding Source={DynamicResource Width_NormalControl}}" />
-        <Setter Property="Width" Value="{Binding Source={DynamicResource HalfButtonCell_Width}}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource Width_NormalControl}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
     </Style>
     
-    <Style x:Key="SvgHalfActionButtonSmallIconLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonLayout}">
+    <Style x:Key="SvgHalfActionButtonSmallIconLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="ImagePadding" Value="8,8,8,8" />
         <Setter Property="ImageMargin" Value="4,1,4,1" />
-        <Setter Property="Height" Value="{Binding Source={DynamicResource Width_NormalControl}}" />
-        <Setter Property="Width" Value="{Binding Source={DynamicResource HalfButtonCell_Width}}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource Width_NormalControl}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource HalfButtonCell_Width}}" />
     </Style>
 
-    <Style x:Key="SvgBaseMiniChangeSettingButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseButtonLayout}">
+    <Style x:Key="SvgBaseMiniChangeSettingButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
         <Setter Property="ImagePadding" Value="2,2,2,2" />
         <Setter Property="ImageMargin" Value="0,0,0,0" />
-        <Setter Property="Height" Value="{Binding Source={DynamicResource Width_SmallControl}}" />
-        <Setter Property="Width" Value="{Binding Source={DynamicResource Width_SmallControl}}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource Width_SmallControl}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource Width_SmallControl}}" />
     </Style>
 
-    <Style x:Key="SvgBaseHeaderButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseButtonLayout}">
+    <Style x:Key="SvgBaseHeaderButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="Height" Value="{Binding Source={DynamicResource TitleRow_ColumnWidth}}" />
-        <Setter Property="Width" Value="{Binding Source={DynamicResource TitleRow_ColumnWidth}}" />
+        <Setter Property="Height" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
         <Setter Property="ImagePadding" Value="2,2,2,2" />
         <Setter Property="Template">
             <Setter.Value>
@@ -376,7 +376,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SvgComplexConditionButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonSmallIconLayout}">
+    <Style x:Key="SvgComplexConditionButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonSmallIconLayout}">
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -401,14 +401,14 @@
     </Style>
 
     <!--Main Window Controls-->
-    <Style x:Key="SvgOpenFolderButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonLayout}">
+    <Style x:Key="SvgOpenFolderButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
     </Style>
 
-    <Style x:Key="SvgPrevTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgComplexConditionButton}">
+    <Style x:Key="SvgPrevTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="ImagePadding" Value="8,8,8,8" />
         <Setter Property="ImageMargin" Value="4,1,4,1" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
@@ -417,7 +417,7 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
     </Style>
 
-    <Style x:Key="SvgNextTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgComplexConditionButton}">
+    <Style x:Key="SvgNextTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="ImagePadding" Value="8,8,8,8" />
         <Setter Property="ImageMargin" Value="4,1,4,1" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
@@ -426,7 +426,7 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
     </Style>
 
-    <Style x:Key="SvgPlayTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgComplexConditionButton}">
+    <Style x:Key="SvgPlayTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="ImagePadding" Value="4,4,4,4" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
@@ -434,7 +434,7 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
     </Style>
 
-    <Style x:Key="SvgPauseTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgComplexConditionButton}">
+    <Style x:Key="SvgPauseTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="ImagePadding" Value="4,4,4,4" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
@@ -442,21 +442,21 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
     </Style>
 
-    <Style x:Key="SvgStopButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgComplexConditionButton}">
+    <Style x:Key="SvgStopButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
     </Style>
 
-    <Style x:Key="SvgRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonLayout}">
+    <Style x:Key="SvgRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
     </Style>
 
-    <Style x:Key="SvgStopRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonLayout}">
+    <Style x:Key="SvgStopRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="ImagePadding" Value="5,5,5,5" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
@@ -464,7 +464,7 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
     </Style>
 
-    <Style x:Key="SvgChangeFilePatternMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseMiniChangeSettingButtonLayout}">
+    <Style x:Key="SvgChangeFilePatternMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
         <Setter Property="Margin" Value="2,2,2,0" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
@@ -474,7 +474,7 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
     </Style>
 
-    <Style x:Key="SvgChangeOutputFolderMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseMiniChangeSettingButtonLayout}">
+    <Style x:Key="SvgChangeOutputFolderMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
         <Setter Property="Margin" Value="2,2,2,0" />
         <Setter Property="ImagePadding" Value="1,1,1,1" />
         <Setter Property="HorizontalAlignment" Value="Right" />
@@ -485,7 +485,7 @@
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
     </Style>
 
-    <Style x:Key="SvgDeleteSelectedFileMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseMiniChangeSettingButtonLayout}">
+    <Style x:Key="SvgDeleteSelectedFileMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
         <Setter Property="Margin" Value="2,2,2,0" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
@@ -496,16 +496,16 @@
     </Style>
     
     <!--"general"/common buttons-->
-    <Style x:Key="SvgAcceptButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonLayout}">
+    <Style x:Key="SvgAcceptButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg" />
     </Style>
 
-    <Style x:Key="SvgChangeSettingButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseButtonLayout}">
-        <Setter Property="Height" Value="{Binding Source={DynamicResource TitleRow_ColumnWidth}}" />
-        <Setter Property="Width" Value="{Binding Source={DynamicResource TitleRow_ColumnWidth}}" />
+    <Style x:Key="SvgChangeSettingButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
+        <Setter Property="Height" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/editSetting_icon451737.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/editSetting_icon451737.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/editSetting_icon451737.svg" />
@@ -514,31 +514,31 @@
 
 
     <!-- Window Header Controls-->
-    <Style x:Key="SvgWindowSettingsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseHeaderButtonLayout}">
+    <Style x:Key="SvgWindowSettingsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
     </Style>
-    <Style x:Key="SvgSettingsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseHeaderButtonLayout}">
+    <Style x:Key="SvgWindowOptionsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
+        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowOptions_icon510828.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowOptions_icon510828.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowOptions_icon510828.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowOptions_icon510828.svg" />
+    </Style>
+    <Style x:Key="SvgSettingsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
     </Style>
-    <Style x:Key="SvgWindowOptionsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
-    </Style>
-    <Style x:Key="SvgMinimizeButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseHeaderButtonLayout}">
+    <Style x:Key="SvgMinimizeButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
     </Style>
-    <Style x:Key="SvgExitButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgBaseHeaderButtonLayout}">
+    <Style x:Key="SvgExitButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
@@ -546,19 +546,19 @@
     </Style>
 
     <!-- /Mini Buttons for Main Window Sub Controls-->
-    <Style x:Key="SvgLightBulbButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonLayout}">
+    <Style x:Key="SvgLightBulbButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
     </Style>
-    <Style x:Key="SvgDownloadButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonLayout}">
+    <Style x:Key="SvgDownloadButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
         <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
     </Style>
-    <Style x:Key="SvgCancelButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{DynamicResource SvgHalfActionButtonLayout}">
+    <Style x:Key="SvgCancelButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg" />
         <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg" />
         <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg" />
@@ -612,11 +612,11 @@
         <Setter Property="SizeToContent" Value="WidthAndHeight" />
     </Style>
 
-    <Style x:Key="Info_WindowStyle" TargetType="{x:Type Window}" BasedOn="{DynamicResource DefaultWindowStyle}">
+    <Style x:Key="Info_WindowStyle" TargetType="{x:Type Window}" BasedOn="{StaticResource DefaultWindowStyle}">
         <Setter Property="MaxWidth" Value="600" />
     </Style>
 
-    <Style x:Key="Settings_WindowStyle" TargetType="{x:Type Window}" BasedOn="{DynamicResource DefaultWindowStyle}">
+    <Style x:Key="Settings_WindowStyle" TargetType="{x:Type Window}" BasedOn="{StaticResource DefaultWindowStyle}">
         <!--<Setter Property="MinWidth" Value="400" />
         <Setter Property="MinHeight" Value="600" />-->
     </Style>
@@ -667,7 +667,7 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="1,1,1,1" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{DynamicResource Default_FontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}"/>
@@ -686,8 +686,8 @@
                         <BulletDecorator x:Name="ContentPart" Background="{DynamicResource Transparent_Brush}">
                             <BulletDecorator.Bullet>
                                 <Border x:Name="Border"  
-                                    Width="{Binding Source={DynamicResource Width_SmallControl}}" 
-                                    Height="{Binding Source={DynamicResource Width_SmallControl}}"
+                                    Width="{Binding Source={StaticResource Width_SmallControl}}" 
+                                    Height="{Binding Source={StaticResource Width_SmallControl}}"
                                     Padding="1,1,1,1"
                                     CornerRadius="3" 
                                     Background="{DynamicResource Primary_Brush}"
@@ -734,7 +734,7 @@
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{DynamicResource Default_FontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="IsEnabled" Value="False" />
@@ -766,24 +766,24 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}" />
-        <Setter Property="FontSize" Value="{DynamicResource Default_FontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
     </Style>
 
-    <Style x:Key="SettingsCaption_Label" TargetType="Label" BasedOn="{DynamicResource Base_Label}">
+    <Style x:Key="SettingsCaption_Label" TargetType="Label" BasedOn="{StaticResource Base_Label}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Width" Value="100" />
     </Style>
 
-    <Style x:Key="SettingsStringValue_Label" TargetType="Label" BasedOn="{DynamicResource Base_Label}">
+    <Style x:Key="SettingsStringValue_Label" TargetType="Label" BasedOn="{StaticResource Base_Label}">
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="HeadlineLabelStyle" TargetType="Label" BasedOn="{DynamicResource Base_Label}">
-        <Setter Property="FontSize" Value="{DynamicResource Heading_3_FontSize}" />
+    <Style x:Key="HeadlineLabelStyle" TargetType="Label" BasedOn="{StaticResource Base_Label}">
+        <Setter Property="FontSize" Value="{StaticResource Heading_3_FontSize}" />
     </Style>
 
-    <Style x:Key="ControlLabelStyle" TargetType="Label" BasedOn="{DynamicResource Base_Label}">
-        <Setter Property="FontSize" Value="{DynamicResource SmallCaption_FontSize}" />
+    <Style x:Key="ControlLabelStyle" TargetType="Label" BasedOn="{StaticResource Base_Label}">
+        <Setter Property="FontSize" Value="{StaticResource SmallCaption_FontSize}" />
     </Style>
 
     <!-- /==================================================  Labels  ====================================================================================================================  -->
@@ -795,19 +795,19 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="FontSize" Value="{DynamicResource Default_FontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
     </Style>
 
-    <Style x:Key="CustomMessageBox_TextBlock_Style" TargetType="TextBlock" BasedOn="{DynamicResource DefaultTextBlockStyle}">
+    <Style x:Key="CustomMessageBox_TextBlock_Style" TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}">
         <Setter Property="VerticalAlignment" Value="Top" />
     </Style>
 
-    <Style x:Key="ApplicationName_TextBox_Style" TargetType="TextBlock" BasedOn="{DynamicResource DefaultTextBlockStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource Heading_1_FontSize}" />
+    <Style x:Key="ApplicationName_TextBox_Style" TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}">
+        <Setter Property="FontSize" Value="{StaticResource Heading_1_FontSize}" />
     </Style>
 
-    <Style x:Key="VersionName_TextBox_Style" TargetType="TextBlock" BasedOn="{DynamicResource DefaultTextBlockStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource Heading_2_FontSize}" />
+    <Style x:Key="VersionName_TextBox_Style" TargetType="TextBlock" BasedOn="{StaticResource DefaultTextBlockStyle}">
+        <Setter Property="FontSize" Value="{StaticResource Heading_2_FontSize}" />
     </Style>
 
     <!-- /==================================================  TextBlocks  ================================================================================================================  -->
@@ -821,7 +821,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="Padding" Value="0,0,0,0" />
-        <Setter Property="FontSize" Value="{DynamicResource Default_FontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="IsEnabled" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -847,16 +847,16 @@
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="1,1,1,0" />
-        <!--<Setter Property="Height" Value="{Binding Source={DynamicResource ChangeSettingButton_Width}}" />
-        <Setter Property="Width" Value="{Binding Source={DynamicResource SettingTextBox_Width}}" />-->
+        <!--<Setter Property="Height" Value="{Binding Source={StaticResource ChangeSettingButton_Width}}" />
+        <Setter Property="Width" Value="{Binding Source={StaticResource SettingTextBox_Width}}" />-->
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{DynamicResource Default_FontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <!--<Setter Property="FontFamily" Value="{DynamicResource MetroFontRegular}"/>-->
         <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}"/>
         <Setter Property="Background" Value="{DynamicResource Secondary_Brush}"/>
-        <Setter Property="FontSize" Value="{DynamicResource Default_FontSize}"/>
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -913,7 +913,7 @@
         <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{DynamicResource Default_FontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -937,8 +937,8 @@
                                     HorizontalAlignment="Center">
                                     <BulletDecorator.Bullet>
                                         <Border x:Name="Border"  
-                                            Width="{Binding Source={DynamicResource Width_SmallControl}}" 
-                                            Height="{Binding Source={DynamicResource Width_SmallControl}}"
+                                            Width="{Binding Source={StaticResource Width_SmallControl}}" 
+                                            Height="{Binding Source={StaticResource Width_SmallControl}}"
                                             Padding="1,1,1,1"
                                             CornerRadius="3" 
                                             Background="{DynamicResource Primary_Brush}"
@@ -996,7 +996,7 @@
 
     <!-- context menu image styles-->
 
-    <Style x:Key="ContextMenu_Cancel_Style" TargetType="MenuItem" BasedOn="{DynamicResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_Cancel_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
                 <svg1:SVGImage Width="23"
@@ -1008,7 +1008,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_Settings_Style" TargetType="MenuItem" BasedOn="{DynamicResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_Settings_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
                 <svg1:SVGImage Width="23"
@@ -1020,7 +1020,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_About_Style" TargetType="MenuItem" BasedOn="{DynamicResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_About_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
                 <svg1:SVGImage Width="23"
@@ -1032,7 +1032,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_Help_Style" TargetType="MenuItem" BasedOn="{DynamicResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_Help_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
                 <svg1:SVGImage Width="23"
@@ -1044,7 +1044,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_CheckUpdates_Style" TargetType="MenuItem" BasedOn="{DynamicResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_CheckUpdates_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
                 <svg1:SVGImage Width="23"
@@ -1056,7 +1056,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_ShutDown_Style" TargetType="MenuItem" BasedOn="{DynamicResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_ShutDown_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
                 <svg1:SVGImage Width="23"
@@ -1079,7 +1079,7 @@
         <Setter Property="Minimum" Value="0"/>
         <Setter Property="Maximum" Value="100"/>
         <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="{DynamicResource ButtonRow_Height}" />
+        <Setter Property="Height" Value="{StaticResource ButtonRow_Height}" />
     </Style>
 
     <Style x:Key="Default_ProgressBar_TextBlock_Style" TargetType="{x:Type TextBlock}">
@@ -1191,7 +1191,7 @@
                 CornerRadius="2"
                 Background="{DynamicResource Secondary_Brush}" />
             <RepeatButton Grid.Row="0"
-                Style="{DynamicResource ScrollBarLineButton}"
+                Style="{StaticResource ScrollBarLineButton}"
                 Height="18"
                 Command="ScrollBar.LineUpCommand"
                 Content="M 0 4 L 8 4 L 4 0 Z" />
@@ -1201,13 +1201,13 @@
                 x:Name="PART_Track">
                 <!-- thumb is the actual draggable scroll bar -->
                 <Track.Thumb>
-                    <Thumb Style="{DynamicResource ScrollBarThumb}"
+                    <Thumb Style="{StaticResource ScrollBarThumb}"
                         Margin="1,0,1,0"
                         BorderBrush="{DynamicResource Primary_Brush}"
                         Background="{DynamicResource Secondary_Brush}" />
                 </Track.Thumb>
             </Track>
-            <RepeatButton Grid.Row="2" Style="{DynamicResource ScrollBarLineButton}"
+            <RepeatButton Grid.Row="2" Style="{StaticResource ScrollBarLineButton}"
                 Height="18"
                 Command="ScrollBar.LineDownCommand"
                 Content="M 0 0 L 4 4 L 8 0 Z" />
@@ -1224,7 +1224,7 @@
             <Border Grid.ColumnSpan="3"
                 CornerRadius="2"
                 Background="{DynamicResource Secondary_Brush}" />
-            <RepeatButton Grid.Column="0" Style="{DynamicResource ScrollBarLineButton}"
+            <RepeatButton Grid.Column="0" Style="{StaticResource ScrollBarLineButton}"
                   Width="18"
                   Command="ScrollBar.LineLeftCommand"
                   Content="M 4 0 L 4 8 L 0 4 Z" />
@@ -1233,14 +1233,14 @@
                IsDirectionReversed="False">
                 <!-- thumb is the actual draggable scroll bar -->
                 <Track.Thumb>
-                    <Thumb Style="{DynamicResource ScrollBarThumb}"
+                    <Thumb Style="{StaticResource ScrollBarThumb}"
                         Margin="0,1,0,1"
                         BorderBrush="{DynamicResource Primary_Brush}"
                         Background="{DynamicResource Secondary_Brush}" />
                 </Track.Thumb>
             </Track>
             <RepeatButton Grid.Column="2"
-                  Style="{DynamicResource ScrollBarLineButton}"
+                  Style="{StaticResource ScrollBarLineButton}"
                   Width="18"
                   Command="ScrollBar.LineRightCommand"
                   Content="M 0 0 L 4 4 L 0 8 Z" />
@@ -1255,12 +1255,12 @@
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Width" Value="Auto" />
                 <Setter Property="Height" Value="15" />
-                <Setter Property="Template" Value="{DynamicResource HorizontalScrollBar}" />
+                <Setter Property="Template" Value="{StaticResource HorizontalScrollBar}" />
             </Trigger>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Width" Value="15" />
                 <Setter Property="Height" Value="Auto" />
-                <Setter Property="Template" Value="{DynamicResource VerticalScrollBar}" />
+                <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -1272,8 +1272,8 @@
     </Style>
 
     <Style x:Key="PatchNotes_ScrollViewer_Style" TargetType="ScrollViewer">
-        <Setter Property="Height" Value="{DynamicResource PatchNotes_TextBox_Height}" />
-        <Setter Property="Width" Value="{DynamicResource PatchNotes_TextBox_Width}" />
+        <Setter Property="Height" Value="{StaticResource PatchNotes_TextBox_Height}" />
+        <Setter Property="Width" Value="{StaticResource PatchNotes_TextBox_Width}" />
         <Setter Property="Margin" Value="0,0,5,0" />
         <Setter Property="Background" Value="{DynamicResource Secondary_Brush}" />
     </Style>

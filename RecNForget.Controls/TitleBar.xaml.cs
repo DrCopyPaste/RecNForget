@@ -90,7 +90,6 @@ namespace RecNForget.Controls
 
         private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            var myResourceDictionary = new ResourceDictionary();
             Uri dictUri = new Uri("/RecNForget.Controls;component/Themes/Simple_Black.xaml", UriKind.RelativeOrAbsolute);
 
             //Uri dictUri = new Uri(@"/Resources/Themes/MyTheme.xaml", UriKind.Relative);
