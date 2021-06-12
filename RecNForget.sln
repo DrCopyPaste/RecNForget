@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecNForget.WPF.Services.Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecNForget.WPF.Services", "RecNForget.WPF.Services\RecNForget.WPF.Services.csproj", "{C0B5726E-E53E-4E5E-AFDE-3961FB11BE74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecNForget.SimpleThemeGenerator", "RecNForget.SimpleThemeGenerator\RecNForget.SimpleThemeGenerator.csproj", "{706DD4EA-8565-4C1C-BEFD-27522272F040}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,14 @@ Global
 		{C0B5726E-E53E-4E5E-AFDE-3961FB11BE74}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0B5726E-E53E-4E5E-AFDE-3961FB11BE74}.Release|x86.ActiveCfg = Release|Any CPU
 		{C0B5726E-E53E-4E5E-AFDE-3961FB11BE74}.Release|x86.Build.0 = Release|Any CPU
+		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Debug|x86.Build.0 = Debug|Any CPU
+		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Release|x86.ActiveCfg = Release|Any CPU
+		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,6 +165,7 @@ Global
 		{0DE40921-5E11-499F-81AB-C28D267CF4A6} = {ED5DE19C-E058-46F5-A63F-32FDAC2C5FFE}
 		{9438A89E-1B5B-450F-BBB6-851FCF7F7B76} = {275532C5-1FE5-46CC-BADB-1FB9B0691311}
 		{C0B5726E-E53E-4E5E-AFDE-3961FB11BE74} = {275532C5-1FE5-46CC-BADB-1FB9B0691311}
+		{706DD4EA-8565-4C1C-BEFD-27522272F040} = {CFBC7F46-F49D-405B-886F-C9B9BF02E00A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {122FF43F-DAC2-4BC3-A98C-ADAD470C311D}

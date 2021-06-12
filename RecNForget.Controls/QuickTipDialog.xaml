@@ -43,8 +43,9 @@
                 Text="{Binding Path=FeatureCaption}" d:Text="This is a very important feature"/>
                     <Border Style="{StaticResource DefaultControlBorderStyle}">
                         <ScrollViewer Style="{StaticResource QuickTip_ScrollViewer_Style}">
-                            <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
-                        Text="{Binding Path=FeatureContents}" />
+                            <TextBlock Style="{StaticResource CustomMessageBox_TextBlock_Style}"
+                        Text="{Binding Path=FeatureContents}"
+                        d:Text="Design Time only Text, this is just for shows. Notice how this wraps just as it should and the mere fact this text exists helps you in design time ;)"/>
                         </ScrollViewer>
                     </Border>
                 </StackPanel>

@@ -36,6 +36,7 @@
     <None Remove="Themes\SvgImages\shutDown_icon170336.svg" />
     <None Remove="Themes\SvgImages\stop_icon.svg" />
     <None Remove="Themes\SvgImages\trash_icon77730.svg" />
+    <None Remove="Themes\SvgImages\windowOptions_icon510828.svg" />
     <None Remove="Themes\SvgImages\windowSettings_icon248857.svg" />
   </ItemGroup>
 
@@ -147,6 +148,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\trash_icon77730.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\windowOptions_icon510828.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\windowSettings_icon248857.svg">
