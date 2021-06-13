@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
         Style="{DynamicResource DefaultWindowStyle}"
+        AllowsTransparency="True"
         Title="RecNForget">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line

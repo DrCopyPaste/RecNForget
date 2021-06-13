@@ -50,6 +50,8 @@ namespace RecNForget.Controls
             }
             else
             {
+                this.Resources.MergedDictionaries.Clear();
+
                 this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
                 this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 

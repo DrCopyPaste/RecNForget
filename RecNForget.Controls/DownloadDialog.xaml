@@ -8,6 +8,7 @@
         Topmost="True"
         Style="{DynamicResource DefaultWindowStyle}"
         WindowStartupLocation="CenterOwner"
+        AllowsTransparency="True"
         Title="RecNForget - Downloading Update">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
@@ -34,7 +35,7 @@
                     Name="DownloadProgressBar"
                     Value="{Binding Path=DownloadProgress}" d:Value="87" />
 
-                <TextBlock Foreground="{StaticResource Secondary_Brush}"
+                <TextBlock Foreground="{DynamicResource Secondary_Brush}"
                     Text="{Binding Path=DownloadProgress, StringFormat={}{0:0.00}%}" d:Text="12%" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
             <local:SvgImageButton1 Style="{StaticResource SvgCancelButton}"

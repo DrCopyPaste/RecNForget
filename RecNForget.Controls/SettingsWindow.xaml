@@ -11,6 +11,7 @@
         Style="{DynamicResource Settings_WindowStyle}"
         WindowStartupLocation="CenterOwner"
         Title="RecNForget - Settings"
+        AllowsTransparency="True"
         MouseDown="Window_MouseDown">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line

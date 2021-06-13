@@ -8,7 +8,8 @@
         Topmost="True"
         Style="{DynamicResource DefaultWindowStyle}"
         WindowStartupLocation="CenterOwner"
-        Title="RecNForget - Things changed" >
+        AllowsTransparency="True"
+        Title="RecNForget - Things changed">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	

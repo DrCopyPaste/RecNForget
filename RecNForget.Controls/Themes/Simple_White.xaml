@@ -171,8 +171,8 @@
     </SolidColorBrush>
 
     <Style x:Key="OuterHitBoxindowBorderStyle" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="{StaticResource FakeTransparentBrush}" />
-        <Setter Property="Background" Value="{StaticResource FakeTransparentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource FakeTransparentBrush}" />
+        <Setter Property="Background" Value="{DynamicResource FakeTransparentBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="3,3,3,3" />
         <Setter Property="Padding" Value="7,2,7,7" />
@@ -609,7 +609,6 @@
 
     <Style x:Key="DefaultWindowStyle" TargetType="{x:Type Window}">
         <Setter Property="WindowStyle" Value="None" />
-        <Setter Property="AllowsTransparency" Value="True" />
         <Setter Property="Background" Value="{DynamicResource Transparent_Brush}" />
         <Setter Property="SizeToContent" Value="WidthAndHeight" />
     </Style>

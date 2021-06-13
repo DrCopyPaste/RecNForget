@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Button Style="{StaticResource BaseSettingButtonLayout}"
-                Background="{StaticResource Secondary_Brush}"
+                Background="{DynamicResource Secondary_Brush}"
                 HorizontalAlignment="Stretch"
                 Click="Click_Internal"
             >

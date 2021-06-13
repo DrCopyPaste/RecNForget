@@ -9,7 +9,8 @@
         Style="{DynamicResource DefaultWindowStyle}"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         WindowStartupLocation="CenterOwner"
-        Title="RecNForget - Quick Start" >
+        AllowsTransparency="True"
+        Title="RecNForget - Quick Start">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	

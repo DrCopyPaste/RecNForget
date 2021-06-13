@@ -90,14 +90,19 @@ namespace RecNForget.Controls
 
         private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            Uri dictUri = new Uri("/RecNForget.Controls;component/Themes/Simple_Black.xaml", UriKind.RelativeOrAbsolute);
+            var rng = new Random();
+
+            var name = rng.Next() % 2 == 0 ? "/RecNForget.Controls;component/Themes/Simple_Black.xaml" : "/RecNForget.Controls;component/Themes/Simple_White.xaml";
+
+            Uri dictUri = new Uri(name, UriKind.RelativeOrAbsolute);
 
             //Uri dictUri = new Uri(@"/Resources/Themes/MyTheme.xaml", UriKind.Relative);
             //Uri dictUri = new Uri("pack://application:,,,/RecNForget.Controls;component/Themes/Simple_White.xaml", UriKind.RelativeOrAbsolute);
 
             ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
-            Application.Current.Resources.MergedDictionaries.Clear();
-            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            //Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries[0] = resourceDict;
+            //Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
     }
 }

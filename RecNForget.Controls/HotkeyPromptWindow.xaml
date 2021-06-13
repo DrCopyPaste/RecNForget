@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         Topmost="True"
+        AllowsTransparency="True"
         Title="RecNForget - Configure hotkey" Style="{DynamicResource DefaultWindowStyle}">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
