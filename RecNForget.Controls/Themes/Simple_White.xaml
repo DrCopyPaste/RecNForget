@@ -78,13 +78,13 @@
     
     <!-- ===================================================  Images  ====================================================================================================================  -->
 
-    <Style x:Key="About_Logo_Style" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Images/logo_big.png" />
+    <Style x:Key="About_Logo_Style" TargetType="{x:Type svg1:SVGImage}">
+        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/logo.svg" />
+        <Setter Property="Height" Value="70" />
         <Setter Property="Width" Value="70" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
     </Style>
-
+    
     <Style x:Key="FeatureClass_Image_Style" TargetType="{x:Type svg1:SVGImage}">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />

@@ -33,10 +33,7 @@
             <local:TitleBar HorizontalAlignment="Stretch" />
             <StackPanel Orientation="Horizontal">
                 <Border Padding="8" Background="{DynamicResource Secondary_Brush}">
-                    <!-- this MUST be white (not binding to the primary or secondary brush, because logo cannot be properly recolored right now -->
-                    <Border Style="{StaticResource DefaultControlBorderStyle}" Padding="1" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Image  Style="{StaticResource About_Logo_Style}" />
-                    </Border>
+                    <svg1:SVGImage  Style="{DynamicResource About_Logo_Style}" />
                 </Border>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Style="{StaticResource ApplicationName_TextBox_Style}"
