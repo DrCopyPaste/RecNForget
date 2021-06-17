@@ -98,56 +98,56 @@ namespace RecNForget.CopyRightHelper
             // ------------------ LIBRARIES LIST ----------------------------------
 
             AddLibraryLink(
-                libaryName: "NAudio v1.10.0",
+                libaryName: "NAudio v2.0.1",
                 libraryUrl: "https://github.com/naudio/NAudio",
                 manufacturerName: "Mark Heath & Contributors",
-                licenseCaption: "Ms-PL",
+                licenseCaption: "License",
                 licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
 
             AddLibraryLink(
-                libaryName: "Nerdbank.GitVersioning v3.2.31",
+                libaryName: "Nerdbank.GitVersioning v3.4.216",
                 libraryUrl: "https://github.com/aarnott/Nerdbank.GitVersioning",
                 manufacturerName: "Andrew Arnott",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Notifications.Wpf.Core v1.3.1",
+                libaryName: "Notifications.Wpf.Core v1.3.2",
                 libraryUrl: "https://github.com/mjuen/Notifications.Wpf.Core",
                 manufacturerName: "Adrian Gaś, Simon Mauracher, Marcel Juen",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Octokit v0.48.0",
+                libaryName: "Octokit v0.50.0",
                 libraryUrl: "https://github.com/octokit/octokit.net",
                 manufacturerName: "GitHub",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Ookii.Dialogs.Wpf.NETCore v2.1.0",
+                libaryName: "Ookii.Dialogs.Wpf v3.1.0",
                 libraryUrl: "https://github.com/caioproiete/ookii-dialogs-wpf",
-                manufacturerName: "Sven Groot, Caio Proiete, AceOfAces",
-                licenseCaption: "License",
-                licenseUrl: "https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license");
+                manufacturerName: "Ookii Dialogs Contributors",
+                licenseCaption: "BSD-3-Clause",
+                licenseUrl: "https://licenses.nuget.org/BSD-3-Clause");
 
             AddLibraryLink(
-                libaryName: "System.Configuration.ConfigurationManager v4.7.0",
+                libaryName: "System.Configuration.ConfigurationManager v5.0.0",
                 libraryUrl: "https://github.com/dotnet/corefx",
                 manufacturerName: "Microsoft",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
-            AddLibraryLink(
-                libaryName: "System.Drawing.Common v4.7.0",
-                libraryUrl: "https://github.com/dotnet/corefx",
-                manufacturerName: "Microsoft",
-                licenseCaption: "MIT",
-                licenseUrl: "https://licenses.nuget.org/MIT");
+            //AddLibraryLink(
+            //    libaryName: "System.Drawing.Common v4.7.0",
+            //    libraryUrl: "https://github.com/dotnet/corefx",
+            //    manufacturerName: "Microsoft",
+            //    licenseCaption: "MIT",
+            //    licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Unity v5.11.7",
+                libaryName: "Unity v5.11.10",
                 libraryUrl: "https://github.com/unitycontainer/unity",
                 manufacturerName: "Unity Container Project",
                 licenseCaption: "Apache 2.0",

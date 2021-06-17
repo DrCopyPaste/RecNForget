@@ -8,15 +8,15 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:local="clr-namespace:RecNForget.Controls"
 		mc:Ignorable="d">
-	<!--<UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>-->
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Themes\Generic.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<Grid>
-		<TextBlock Style = "{DynamicResource DefaultTextBlockStyle}" >
+		<TextBlock Style = "{StaticResource DefaultTextBlockStyle}" >
 			<Run>
 				RecNForget is written in C# using 
 			</Run>
@@ -53,49 +53,43 @@
 				The following libaries are used by RecNForget:
 			</Run>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio v1.10.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio v2.0.1</Hyperlink>
 			<Run>
 				 Copyright (c) Mark Heath &amp; Contributors - 
 			</Run>
-			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">Ms-PL</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning v3.2.31</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning v3.4.216</Hyperlink>
 			<Run>
 				 Copyright (c) Andrew Arnott - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/mjuen/Notifications.Wpf.Core" RequestNavigate="Hyperlink_RequestNavigate">Notifications.Wpf.Core v1.3.1</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/mjuen/Notifications.Wpf.Core" RequestNavigate="Hyperlink_RequestNavigate">Notifications.Wpf.Core v1.3.2</Hyperlink>
 			<Run>
 				 Copyright (c) Adrian Gaś, Simon Mauracher, Marcel Juen - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit v0.48.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/octokit/octokit.net" RequestNavigate="Hyperlink_RequestNavigate">Octokit v0.50.0</Hyperlink>
 			<Run>
 				 Copyright (c) GitHub - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf.NETCore v2.1.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf v3.1.0</Hyperlink>
 			<Run>
-				 Copyright (c) Sven Groot, Caio Proiete, AceOfAces - 
+				 Copyright (c) Ookii Dialogs Contributors - 
 			</Run>
-			<Hyperlink NavigateUri="https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/BSD-3-Clause" RequestNavigate="Hyperlink_RequestNavigate">BSD-3-Clause</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/dotnet/corefx" RequestNavigate="Hyperlink_RequestNavigate">System.Configuration.ConfigurationManager v4.7.0</Hyperlink>
-			<Run>
-				 Copyright (c) Microsoft - 
-			</Run>
-			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
-			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/dotnet/corefx" RequestNavigate="Hyperlink_RequestNavigate">System.Drawing.Common v4.7.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/dotnet/corefx" RequestNavigate="Hyperlink_RequestNavigate">System.Configuration.ConfigurationManager v5.0.0</Hyperlink>
 			<Run>
 				 Copyright (c) Microsoft - 
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity" RequestNavigate="Hyperlink_RequestNavigate">Unity v5.11.7</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/unitycontainer/unity" RequestNavigate="Hyperlink_RequestNavigate">Unity v5.11.10</Hyperlink>
 			<Run>
 				 Copyright (c) Unity Container Project - 
 			</Run>
@@ -233,6 +227,21 @@
 			</Run>
 			<LineBreak />
 			<Run>
+				information_icon2132.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/2132" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/2132</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
 				information_icon280732.svg was generated from 
 			</Run>
 			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/280732" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/280732</Hyperlink>
@@ -353,6 +362,21 @@
 			</Run>
 			<LineBreak />
 			<Run>
+				plus_icon171498.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/171498" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/171498</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
 				settings_icon40863.svg was generated from 
 			</Run>
 			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/40863" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/40863</Hyperlink>
@@ -386,6 +410,21 @@
 				trash_icon77730.svg was generated from 
 			</Run>
 			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/77730" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/77730</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				windowOptions_icon510828.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/510828" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/510828</Hyperlink>
 
 			<LineBreak />
 			<Run>
