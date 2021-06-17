@@ -11,12 +11,14 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
-        <Border >
+        <Border>
             <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
             <Grid HorizontalAlignment="Stretch">
+                <Grid.Resources>
+                    <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+                </Grid.Resources>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -24,10 +26,10 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <local:SvgImageButton1 Grid.Column="0" Style="{StaticResource SvgWindowSettingsButton}" Click="SettingsButton_Click" Visibility="{Binding WithSettingsButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                <local:SvgImageButton1 Grid.Column="2" Style="{StaticResource SvgWindowOptionsButton}" Click="WindowOptionsButton_Click" Visibility="{Binding WithWindowOptionsButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                <local:SvgImageButton1 Grid.Column="3" Style="{StaticResource SvgMinimizeButton}" Click="MinimizeButton_Click" Visibility="{Binding WithMinimizeButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                <local:SvgImageButton1 Grid.Column="4" Style="{StaticResource SvgExitButton}" Click="ExitButton_Click" IsCancel="{Binding ExitIsCancel}" />
+                <local:SvgImageButton1 Grid.Column="0" Style="{DynamicResource SvgWindowSettingsButton}" Click="SettingsButton_Click" Visibility="{Binding WithSettingsButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                <local:SvgImageButton1 Grid.Column="2" Style="{DynamicResource SvgWindowOptionsButton}" Click="WindowOptionsButton_Click" Visibility="{Binding WithWindowOptionsButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                <local:SvgImageButton1 Grid.Column="3" Style="{DynamicResource SvgMinimizeButton}" Click="MinimizeButton_Click" Visibility="{Binding WithMinimizeButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                <local:SvgImageButton1 Grid.Column="4" Style="{DynamicResource SvgExitButton}" Click="ExitButton_Click" IsCancel="{Binding ExitIsCancel}" />
             </Grid>
         </Border>
 </UserControl>

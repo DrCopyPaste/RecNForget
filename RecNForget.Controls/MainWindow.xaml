@@ -11,7 +11,7 @@
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
@@ -19,30 +19,30 @@
         </NodeName>
         -->
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </Window.Resources>-->
 
-    <Border Style="{StaticResource OuterHitBoxindowBorderStyle}"
+    <Border Style="{DynamicResource OuterHitBoxindowBorderStyle}"
         MouseLeave="MainWindow_MouseLeave" MouseEnter="MainWindow_MouseEnter" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
-            <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="0"
+            <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="0"
                 Name="TitleBar" Visibility="Hidden" d:Visibility="Visible">
                 <local:TitleBar HorizontalAlignment="Stretch" WithSettingsButton="True" WithWindowOptionsButton="True" WithMinimizeButton="True" />
             </Border>
 
-            <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
+            <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
                 <StackPanel>
                     <local:OutputPathControl
                             x:Name="OutputPathControl" />
-                    <Separator x:Name="OutputPathControlSpacer" Style="{StaticResource DefaultSeparator_Style}" />
+                    <Separator x:Name="OutputPathControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:SelectedFileControl
                             x:Name="SelectedFileControl" />
-                    <Separator x:Name="SelectedFileControlSpacer" Style="{StaticResource DefaultSeparator_Style}" />
+                    <Separator x:Name="SelectedFileControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:RecordingAndPlaybackControl
                             x:Name="RecordingAndPlaybackControl"/>
                 </StackPanel>

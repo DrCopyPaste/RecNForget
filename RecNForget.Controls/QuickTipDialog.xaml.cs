@@ -32,6 +32,9 @@ namespace RecNForget.Controls
             }
             else
             {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+
                 SettingService = settingService;
 
                 this.KeyDown += Window_KeyDown;

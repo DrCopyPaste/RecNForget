@@ -5,39 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RecNForget.Controls"
              mc:Ignorable="d">
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <Grid>
-        <Border Style="{StaticResource DefaultControlBorderStyle}">
+        <Border Style="{DynamicResource DefaultControlBorderStyle}">
             <UniformGrid Rows="1">
-                <local:SvgImageButton1 Style="{StaticResource SvgOpenFolderButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgOpenFolderButton}"
                                 ToolTip="select selected file in explorer (Hotkey: [Down-Arrow])"
                                 x:Name="OpenSelectedFileButton" Click="OpenOutputFolder_Click" />
-                <local:SvgImageButton1 Style="{StaticResource SvgPrevTrackButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgPrevTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="skip to previous file (Hotkey: [Left-Arrow])"
                                 x:Name="SkipPrevButton" Click="SkipPrevButton_Click" />
-                <local:SvgImageButton1 Style="{StaticResource SvgPlayTrackButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgPlayTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="play selected file (Hotkey: [Space])"
                                 x:Name="TogglePlaySelectedFileButton" Click="ReplayLastRecording_Click" />
-                <local:SvgImageButton1 Style="{StaticResource SvgStopButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgStopButton}"
                                 IsEnabled="{Binding Path=AudioPlaybackService.PlayingOrPaused}"
                                 ToolTip="stop playing audio (Hotkey: [Esc])"
                                 x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
-                <local:SvgImageButton1 Style="{StaticResource SvgNextTrackButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgNextTrackButton}"
                                 IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
                                 IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
                                 ToolTip="skip to next file (Hotkey: [Right-Arrow])"
                                 x:Name="SkipNextButton" Click="SkipNextButton_Click" />
-                <local:SvgImageButton1 Style="{StaticResource SvgRecordButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgRecordButton}"
                                 IsEnabled="{Binding Path=AudioPlaybackService.Stopped}"
                                 x:Name="RecordButton" Click="RecordButton_Click" />
             </UniformGrid>

@@ -50,9 +50,14 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.Resources.MergedDictionaries.Clear();
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
 
                 this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+                //actionService.ChangeTheme("Simple_Black");
+                //this.InvalidateVisual();
+
+
                 this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
                 SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();

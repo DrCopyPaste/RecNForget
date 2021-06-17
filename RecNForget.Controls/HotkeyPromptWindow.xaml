@@ -12,25 +12,25 @@
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </Window.Resources>-->
 
-    <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
             <local:TitleBar HorizontalAlignment="Stretch" />
-            <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+            <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                 Text="Hold down all modifier keys you wish to set and add your preferred hotkey." />
             <local:HotkeyDisplay x:Name="HotkeyDisplay" d:HotkeySettingString="Key=Pause; Win=False; Alt=True; Ctrl=True; Shift=False" HorizontalAlignment="Center" />
         </StackPanel>

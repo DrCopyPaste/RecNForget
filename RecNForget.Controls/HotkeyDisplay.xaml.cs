@@ -4,6 +4,7 @@ using RecNForget.IoC;
 using RecNForget.Services.Contracts;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -97,6 +98,14 @@ namespace RecNForget.Controls
         public HotkeyDisplay()
         {
             InitializeComponent();
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+            { }
+            else
+            {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+            }
         }
 
         public static StackPanel GetHotkeyListAsButtonGrid(List<string> hotkeys, Style buttonStyle = null, Style labelStyle = null, double ? spacing = null, System.Windows.HorizontalAlignment horizontalAlignment = System.Windows.HorizontalAlignment.Center, System.Windows.VerticalAlignment verticalAlignment = System.Windows.VerticalAlignment.Center)

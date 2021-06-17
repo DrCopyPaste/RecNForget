@@ -5,37 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RecNForget.Controls"
              mc:Ignorable="d">
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>
-    <Border Style="{StaticResource DefaultControlBorderStyle}" HorizontalAlignment="Stretch">
+    </UserControl.Resources>-->
+    <Border Style="{DynamicResource DefaultControlBorderStyle}" HorizontalAlignment="Stretch">
         <StackPanel Orientation="Vertical">
             <DockPanel>
-                <Label Style="{StaticResource ControlLabelStyle}"
+                <Label Style="{DynamicResource ControlLabelStyle}"
                        HorizontalAlignment="Left"
                         Content="Selected file" />
-                <Label Style="{StaticResource ControlLabelStyle}"
+                <Label Style="{DynamicResource ControlLabelStyle}"
                             HorizontalAlignment="Right"
                             HorizontalContentAlignment="Right"
                             d:Content="00:12.235s (237.98 kB)"
                             Name="FileInfoLabel" />
             </DockPanel>
             <DockPanel>
-                <TextBox Style="{StaticResource MainWindowTextBoxStyle}"
+                <TextBox Style="{DynamicResource MainWindowTextBoxStyle}"
                          HorizontalAlignment="Left"
                         Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         d:Text="C:\YourPath\yourFile.wav" />
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <local:SvgImageButton1 Style="{StaticResource SvgChangeFilePatternMiniButtonLayout}"
+                    <local:SvgImageButton1 Style="{DynamicResource SvgChangeFilePatternMiniButtonLayout}"
                         ToolTip="rename selected file (Hotkey: [Return])"
                         IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
                         x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
 
-                    <local:SvgImageButton1 Style="{StaticResource SvgDeleteSelectedFileMiniButtonLayout}"
+                    <local:SvgImageButton1 Style="{DynamicResource SvgDeleteSelectedFileMiniButtonLayout}"
                         ToolTip="delete selected file (Hotkey: [Delete])"
                         IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
                         x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>

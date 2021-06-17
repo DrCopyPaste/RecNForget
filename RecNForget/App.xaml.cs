@@ -72,10 +72,11 @@ namespace RecNForget
 
             var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
+            actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+            actionService.ChangeTheme("Simple_Black");
+
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
             mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
-
-            actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
             actionService.OwnerControl = mainWindow;
 
             HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);

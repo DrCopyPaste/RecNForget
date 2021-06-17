@@ -40,7 +40,15 @@ namespace RecNForget.Controls
         public HotkeySettingButton()
         {
             InitializeComponent();
-            this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>(); 
+            this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+            { }
+            else
+            {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

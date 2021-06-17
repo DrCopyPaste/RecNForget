@@ -41,6 +41,14 @@ namespace RecNForget.Controls
             DataContext = this;
             InitializeComponent();
 
+            if (DesignerProperties.GetIsInDesignMode(this))
+            { }
+            else
+            {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+            }
+
             int currentIndex = 0;
 
             this.Title = caption;
@@ -67,48 +75,48 @@ namespace RecNForget.Controls
             switch (icon)
             {
                 case CustomMessageBoxIcon.Information:
-                {
-                    var informationStyle = (Style)FindResource("CustomMessageBoxInformationIconStyle");
-                    if (informationStyle != null)
                     {
-                        DialogImage.Style = informationStyle;
-                    }
+                        var informationStyle = (Style)FindResource("CustomMessageBoxInformationIconStyle");
+                        if (informationStyle != null)
+                        {
+                            DialogImage.Style = informationStyle;
+                        }
 
-                    break;
-                }
+                        break;
+                    }
 
                 case CustomMessageBoxIcon.Question:
-                {
-                    var questionStyle = (Style)FindResource("CustomMessageBoxQuestionIconStyle");
-                    if (questionStyle != null)
                     {
-                        DialogImage.Style = questionStyle;
-                    }
+                        var questionStyle = (Style)FindResource("CustomMessageBoxQuestionIconStyle");
+                        if (questionStyle != null)
+                        {
+                            DialogImage.Style = questionStyle;
+                        }
 
-                    break;
-                }
+                        break;
+                    }
 
                 case CustomMessageBoxIcon.Error:
-                {
-                    var errorStyle = (Style)FindResource("CustomMessageBoxErrorIconStyle");
-                    if (errorStyle != null)
                     {
-                        DialogImage.Style = errorStyle;
-                    }
+                        var errorStyle = (Style)FindResource("CustomMessageBoxErrorIconStyle");
+                        if (errorStyle != null)
+                        {
+                            DialogImage.Style = errorStyle;
+                        }
 
-                    break;
-                }
+                        break;
+                    }
 
                 case CustomMessageBoxIcon.Default:
-                {
-                    var defaultStyle = (Style)FindResource("CustomMessageBoxDefaultIconStyle");
-                    if (defaultStyle != null)
                     {
-                        DialogImage.Style = defaultStyle;
-                    }
+                        var defaultStyle = (Style)FindResource("CustomMessageBoxDefaultIconStyle");
+                        if (defaultStyle != null)
+                        {
+                            DialogImage.Style = defaultStyle;
+                        }
 
-                    break;
-                }
+                        break;
+                    }
             }
 
             var textblockStyle = (Style)FindResource("CustomMessageBox_TextBlock_Style");
@@ -254,7 +262,7 @@ namespace RecNForget.Controls
             {
                 this.DragMove();
             }
-        }        
+        }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

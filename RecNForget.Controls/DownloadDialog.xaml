@@ -13,32 +13,32 @@
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
-    <Border Style="{StaticResource DefaultWindowBorderStyle}">
+    </Window.Resources>-->
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}">
         <StackPanel Orientation="Vertical">
             <local:TitleBar HorizontalAlignment="Stretch" />
             <Grid>
-                <ProgressBar Style="{StaticResource Default_ProgressBar_Style}"
+                <ProgressBar Style="{DynamicResource Default_ProgressBar_Style}"
                     Name="DownloadProgressBar"
                     Value="{Binding Path=DownloadProgress}" d:Value="87" />
 
                 <TextBlock Foreground="{DynamicResource Secondary_Brush}"
                     Text="{Binding Path=DownloadProgress, StringFormat={}{0:0.00}%}" d:Text="12%" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
-            <local:SvgImageButton1 Style="{StaticResource SvgCancelButton}"
+            <local:SvgImageButton1 Style="{DynamicResource SvgCancelButton}"
                 HorizontalAlignment="Right"
                 x:Name="CancelButton"
                 IsCancel="True"/>

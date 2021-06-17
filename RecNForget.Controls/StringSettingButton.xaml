@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RecNForget.Controls"
              mc:Ignorable="d" >
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>
-    <Button Style="{StaticResource BaseSettingButtonLayout}"
+    </UserControl.Resources>-->
+    <Button Style="{DynamicResource BaseSettingButtonLayout}"
                 Background="{DynamicResource Secondary_Brush}"
                 HorizontalAlignment="Stretch"
                 Click="Click_Internal"
@@ -23,13 +23,13 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0"  Style="{StaticResource SettingsCaption_Label}"
+            <Label Grid.Column="0"  Style="{DynamicResource SettingsCaption_Label}"
                             Content="{Binding SettingCaption, RelativeSource={RelativeSource AncestorType=local:StringSettingButton}}"/>
 
-            <Label Grid.Column="1" Style="{StaticResource SettingsStringValue_Label}"
+            <Label Grid.Column="1" Style="{DynamicResource SettingsStringValue_Label}"
                             Content="{Binding SettingValue, RelativeSource={RelativeSource AncestorType=local:StringSettingButton}}" ToolTipService.ToolTip="{Binding Content, RelativeSource={RelativeSource Self}}" />
 
-            <local:SvgImageButton1 Grid.Column="2" Style="{StaticResource SvgChangeSettingButtonLayout}" HorizontalAlignment="Right"
+            <local:SvgImageButton1 Grid.Column="2" Style="{DynamicResource SvgChangeSettingButtonLayout}" HorizontalAlignment="Right"
                                    Click="Click_Internal"/>
         </Grid>
     </Button>

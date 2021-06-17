@@ -28,6 +28,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void ChangeTheme(string themeName)
+        {
+            throw new NotImplementedException();
+        }
+
         public void CheckForUpdates(bool showMessages = false)
         {
             throw new System.NotImplementedException();

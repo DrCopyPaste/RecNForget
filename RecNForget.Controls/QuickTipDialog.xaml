@@ -13,63 +13,63 @@
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </Window.Resources>-->
 
-    <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
             <local:TitleBar HorizontalAlignment="Stretch" />
             <StackPanel Orientation="Horizontal">
-                <svg1:SVGImage Style="{StaticResource QuickTip_LightBulbIconStyle}" VerticalAlignment="Top"
+                <svg1:SVGImage Style="{DynamicResource QuickTip_LightBulbIconStyle}" VerticalAlignment="Top"
                 Name="DialogImage" />
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Style="{StaticResource ApplicationName_TextBox_Style}"
+                    <TextBlock Style="{DynamicResource ApplicationName_TextBox_Style}"
                 VerticalAlignment="Center" HorizontalAlignment="Left"
                 Text="Did you know?" />
-                    <TextBlock  Style="{StaticResource VersionName_TextBox_Style}"
+                    <TextBlock  Style="{DynamicResource VersionName_TextBox_Style}"
                 VerticalAlignment="Center" HorizontalAlignment="Left"
                 Text="{Binding Path=FeatureCaption}" d:Text="This is a very important feature"/>
-                    <Border Style="{StaticResource DefaultControlBorderStyle}">
-                        <ScrollViewer Style="{StaticResource QuickTip_ScrollViewer_Style}">
-                            <TextBlock Style="{StaticResource CustomMessageBox_TextBlock_Style}"
+                    <Border Style="{DynamicResource DefaultControlBorderStyle}">
+                        <ScrollViewer Style="{DynamicResource QuickTip_ScrollViewer_Style}">
+                            <TextBlock Style="{DynamicResource CustomMessageBox_TextBlock_Style}"
                         Text="{Binding Path=FeatureContents}"
                         d:Text="Design Time only Text, this is just for shows. Notice how this wraps just as it should and the mere fact this text exists helps you in design time ;)"/>
                         </ScrollViewer>
                     </Border>
                 </StackPanel>
             </StackPanel>
-            <CheckBox Style="{StaticResource DefaultCheckboxStyle}"
+            <CheckBox Style="{DynamicResource DefaultCheckboxStyle}"
                     IsChecked="{Binding Path=SettingService.ShowTipsAtApplicationStart}">
                 show tips on start
             </CheckBox>
 
             <Grid>
-                <local:SvgImageButton1 Style="{StaticResource SvgLightBulbButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgLightBulbButton}"
                     HorizontalAlignment="Left"
                     ToolTip="Another useful tip please"
                     Click="GenerateAnotherTip_Click"/>
 
-                <local:SvgImageButton1 Style="{StaticResource SvgAcceptButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgAcceptButton}"
                     HorizontalAlignment="Right"
                     ToolTip="good to know"
                     Click="Exit_Click"/>
             </Grid>
 
         </StackPanel>
-        <!--<Grid Style="{StaticResource DefaultGridStyle}"
+        <!--<Grid Style="{DynamicResource DefaultGridStyle}"
             MouseDown="Window_MouseDown">
 
            

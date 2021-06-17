@@ -34,6 +34,9 @@ namespace RecNForget.Controls
             }
             else
             {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+
                 this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
                 this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
             }

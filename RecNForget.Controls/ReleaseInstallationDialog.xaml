@@ -12,46 +12,46 @@
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
-    <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+    </Window.Resources>-->
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
             <local:TitleBar HorizontalAlignment="Stretch" />
-            <TextBlock Style="{StaticResource ApplicationName_TextBox_Style}"
+            <TextBlock Style="{DynamicResource ApplicationName_TextBox_Style}"
                 Text="An Update is available!"/>
 
-            <TextBlock Style="{StaticResource VersionName_TextBox_Style}"
+            <TextBlock Style="{DynamicResource VersionName_TextBox_Style}"
                 Text="{Binding Path=VersionInfoString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+            <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                 Text="Please read the patch and change notes below:"/>
 
-            <ScrollViewer Style="{StaticResource PatchNotes_ScrollViewer_Style}">
-                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+            <ScrollViewer Style="{DynamicResource PatchNotes_ScrollViewer_Style}">
+                <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                     Text="{Binding Path=ReleaseNotes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
             </ScrollViewer>
 
-            <CheckBox Style="{StaticResource DefaultCheckboxStyle}"
+            <CheckBox Style="{DynamicResource DefaultCheckboxStyle}"
                 IsChecked="{Binding Path=InstallAfterDownload}">install after download</CheckBox>
 
             <Grid>
-                <local:SvgImageButton1 Style="{StaticResource SvgDownloadButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgDownloadButton}"
                 HorizontalAlignment="Right"
                 Click="DownloadButton_Click" ToolTip="Download"/>
 
-                <local:SvgImageButton1 Style="{StaticResource SvgCancelButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgCancelButton}"
                 HorizontalAlignment="Left"
                 IsCancel="True"/>
             </Grid>

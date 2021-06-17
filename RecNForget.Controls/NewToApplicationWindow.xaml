@@ -14,32 +14,32 @@
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </Window.Resources>-->
 
-    <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
             <local:TitleBar HorizontalAlignment="Stretch" WithSettingsButton="True" WithMinimizeButton="True" />
-            <TextBlock Style="{StaticResource ApplicationName_TextBox_Style}"
+            <TextBlock Style="{DynamicResource ApplicationName_TextBox_Style}"
                 Text="New here?" />
 
-            <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+            <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                 Text="Please take a look at your default output folder and hotkey setting." />
             
-            <Separator Style="{StaticResource TransparentSeparator_Style}" />
-            <Separator Style="{StaticResource TransparentSeparator_Style}" />
+            <Separator Style="{DynamicResource TransparentSeparator_Style}" />
+            <Separator Style="{DynamicResource TransparentSeparator_Style}" />
 
             <local:StringSettingButton HorizontalAlignment="Stretch"
                                                    SettingCaption="Output folder" SettingValue="{Binding Path=SettingService.OutputPath, Mode=TwoWay}"
@@ -49,23 +49,23 @@
             <local:HotkeySettingButton HorizontalAlignment="Stretch"
                                                    SettingCaption="Toggle Record" SettingValue="{Binding Path=SettingService.HotKey_StartStopRecording, Mode=TwoWay}" />
 
-            <Separator Style="{StaticResource TransparentSeparator_Style}" />
-            <Separator Style="{StaticResource TransparentSeparator_Style}" />
+            <Separator Style="{DynamicResource TransparentSeparator_Style}" />
+            <Separator Style="{DynamicResource TransparentSeparator_Style}" />
 
 
             <Grid>
-                <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+                <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                            HorizontalAlignment="Left"
                 Text="You'll find More options in the settings menu" />
-                <local:SvgImageButton1 Style="{StaticResource SvgWindowSettingsButton}" HorizontalAlignment="Right" Click="OpenSettings_Click" />
+                <local:SvgImageButton1 Style="{DynamicResource SvgWindowSettingsButton}" HorizontalAlignment="Right" Click="OpenSettings_Click" />
             </Grid>
 
-            <CheckBox  Style="{StaticResource DefaultCheckboxStyle}"
+            <CheckBox  Style="{DynamicResource DefaultCheckboxStyle}"
                     IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
                 check for updates on start
             </CheckBox>
 
-            <local:SvgImageButton1 Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource SvgAcceptButton}"
+            <local:SvgImageButton1 Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource SvgAcceptButton}"
                 HorizontalAlignment="Right"
                 Click="Exit_Click"/>
         </StackPanel>

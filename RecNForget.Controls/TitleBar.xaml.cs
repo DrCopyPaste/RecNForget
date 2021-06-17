@@ -60,6 +60,8 @@ namespace RecNForget.Controls
             }
             else
             {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
                 this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
             }
         }
@@ -90,19 +92,36 @@ namespace RecNForget.Controls
 
         private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            var rng = new Random();
+            actionService.ChangeTheme("Simple_White");
 
-            var name = rng.Next() % 2 == 0 ? "/RecNForget.Controls;component/Themes/Simple_Black.xaml" : "/RecNForget.Controls;component/Themes/Simple_White.xaml";
+            //var rng = new Random();
 
-            Uri dictUri = new Uri(name, UriKind.RelativeOrAbsolute);
 
-            //Uri dictUri = new Uri(@"/Resources/Themes/MyTheme.xaml", UriKind.Relative);
-            //Uri dictUri = new Uri("pack://application:,,,/RecNForget.Controls;component/Themes/Simple_White.xaml", UriKind.RelativeOrAbsolute);
+            //string themeName = "Simple_White.xaml";
 
-            ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
-            //Application.Current.Resources.MergedDictionaries.Clear();
-            Application.Current.Resources.MergedDictionaries[0] = resourceDict;
-            //Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            //var name = rng.Next() % 2 == 0 ? "/RecNForget.Controls;component/Themes/Simple_Black.xaml" : "/RecNForget.Controls;component/Themes/Simple_White.xaml";
+
+            ////Uri dictUri = new Uri(name, UriKind.RelativeOrAbsolute);
+
+            ////Uri dictUri = new Uri(@"/Resources/Themes/MyTheme.xaml", UriKind.Relative);
+            ////Uri dictUri = new Uri("pack://application:,,,/RecNForget.Controls;component/Themes/Simple_White.xaml", UriKind.RelativeOrAbsolute);
+
+            ////ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
+
+            ////Application.Current.Resources.MergedDictionaries.Clear();
+            ////Application.Current.Resources.MergedDictionaries[0] = resourceDict;
+            ////Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            //try
+            //{
+            //    Application.Current.Resources.Source = new Uri("pack://application:,,,/RecNForget.Controls;component/Themes/" + themeName);
+            //    Window.GetWindow(this).Resources.Source = new Uri("pack://application:,,,/RecNForget.Controls;component/Themes/" + themeName);
+            //}
+            //catch
+            //{ }
+
+            //Window.GetWindow(this).InvalidateVisual();
+            //Window.GetWindow(this).Hide();
+            //Window.GetWindow(this).Show();
         }
     }
 }

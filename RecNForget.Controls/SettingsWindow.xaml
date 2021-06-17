@@ -16,7 +16,7 @@
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
@@ -24,25 +24,25 @@
         </NodeName>
         -->
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </Window.Resources>-->
 
-    <!--                                 <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource SettingTextBoxLabelStyle}"
+    <!--                                 <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource SettingTextBoxLabelStyle}"
                             Content="Output folder" />
-                                <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource SettingTextBoxStyle}"
+                                <TextBox Grid.Row="0" Grid.Column="1" Style="{DynamicResource SettingTextBoxStyle}"
                             Text="{Binding Path=SettingService.OutputPath, Mode=TwoWay}" ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" />
     
     -->
     
-    <Border Style="{StaticResource DefaultWindowBorderStyle}">
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}">
         <StackPanel>
             <local:TitleBar HorizontalAlignment="Stretch" />
-            <TabControl Style="{StaticResource TabControlStyle}">
+            <TabControl Style="{DynamicResource TabControlStyle}">
                 <TabItem Header="Hotkeys">
                     <StackPanel>
                         <local:HotkeySettingButton HorizontalAlignment="Stretch"
@@ -65,27 +65,27 @@
                 <TabItem Header="Application">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                            <RowDefinition Style="{DynamicResource GrowForContainedControlsRowStyle}" />
+                            <RowDefinition Style="{DynamicResource GrowForContainedControlsRowStyle}" />
+                            <RowDefinition Style="{DynamicResource GrowForContainedControlsRowStyle}" />
+                            <RowDefinition Style="{DynamicResource GrowForContainedControlsRowStyle}" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                            <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                        <CheckBox Grid.Row="0" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
                             check for updates on start
                         </CheckBox>
-                        <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                        <CheckBox Grid.Row="1" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=SettingService.AutoStartWithWindows}" >
                             auto start
                         </CheckBox>
-                        <CheckBox Grid.Row="2" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                        <CheckBox Grid.Row="2" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=SettingService.AutoSelectLastRecording}" >
                             auto select last recording
                         </CheckBox>
-                        <CheckBox Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                        <CheckBox Grid.Row="3" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=SettingService.AutoReplayAudioAfterRecording}">
                             auto replay last recording
                         </CheckBox>
@@ -94,17 +94,17 @@
                 <TabItem Header="Toast Messages">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                            <RowDefinition Style="{DynamicResource GrowForContainedControlsRowStyle}" />
+                            <RowDefinition Style="{DynamicResource GrowForContainedControlsRowStyle}" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                            <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                        <CheckBox Grid.Row="0" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=SettingService.ShowBalloonTipsForRecording}">
                             toast messages on toggle record
                         </CheckBox>
-                        <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                        <CheckBox Grid.Row="1" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=SettingService.ShowTipsAtApplicationStart}">
                             show tips on start
                         </CheckBox>
@@ -113,24 +113,24 @@
                 <TabItem Header="Sound Effects">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                            <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
+                            <RowDefinition Style="{DynamicResource GrowForContainedControlsRowStyle}" />
+                            <RowDefinition Style="{DynamicResource GrowForContainedControlsRowStyle}" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                            <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
                         </Grid.ColumnDefinitions>
-                        <CheckBox Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                        <CheckBox Grid.Row="0" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=SettingService.PlayAudioFeedBackMarkingStartAndStopRecording}">
                             sound on toggle record
                         </CheckBox>
-                        <CheckBox Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+                        <CheckBox Grid.Row="1" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying}">
                             sound on toggle play
                         </CheckBox>
                     </Grid>
                 </TabItem>
             </TabControl>
-            <local:SvgImageButton1 Grid.Row="12" Grid.Column="0" Style="{StaticResource SvgAcceptButton}"
+            <local:SvgImageButton1 Grid.Row="12" Grid.Column="0" Style="{DynamicResource SvgAcceptButton}"
                     HorizontalAlignment="Right"
                     Click="OkButton_Click" />
         </StackPanel>

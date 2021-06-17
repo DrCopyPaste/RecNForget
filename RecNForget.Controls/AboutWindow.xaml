@@ -13,22 +13,22 @@
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    <Window.Resources>
+    <!--<Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>
+    </Window.Resources>-->
 
-    <Border Style="{StaticResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
             <local:TitleBar HorizontalAlignment="Stretch" />
             <StackPanel Orientation="Horizontal">
@@ -36,33 +36,33 @@
                     <svg1:SVGImage  Style="{DynamicResource About_Logo_Style}" />
                 </Border>
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Style="{StaticResource ApplicationName_TextBox_Style}"
+                    <TextBlock Style="{DynamicResource ApplicationName_TextBox_Style}"
                 Text="RecNForget"
                 Name="AppNameAndVersion" />
-                    <TextBlock Style="{StaticResource VersionName_TextBox_Style}"
+                    <TextBlock Style="{DynamicResource VersionName_TextBox_Style}"
                 Name="VersionLabel"
                 Text="Version X.Y.Z.A" />
-                    <TextBlock Style="{StaticResource DefaultTextBlockStyle}">
+                    <TextBlock Style="{DynamicResource DefaultTextBlockStyle}">
                 <Run>
                     (C) 2019-2021 by 
                 </Run>
                 <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate">DrCopyPaste</Hyperlink>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource DefaultTextBlockStyle}"
+                    <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                 Text="RecNForget is a free application that helps you sample audio faster."  />
                 </StackPanel>
             </StackPanel>
 
-            <Separator Style="{StaticResource TransparentSeparator_Style}" />
+            <Separator Style="{DynamicResource TransparentSeparator_Style}" />
 
-            <ScrollViewer Style="{StaticResource Default_ScrollViewer_Style}" >
+            <ScrollViewer Style="{DynamicResource Default_ScrollViewer_Style}" >
                 <local:CopyrightControl />
             </ScrollViewer>
             <Grid>
-                <local:SvgImageButton1 Style="{StaticResource SvgDownloadButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgDownloadButton}"
                     HorizontalAlignment="Left" 
                     Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>
-                <local:SvgImageButton1 Style="{StaticResource SvgAcceptButton}"
+                <local:SvgImageButton1 Style="{DynamicResource SvgAcceptButton}"
                     HorizontalAlignment="Right"
                     Click="OkButton_Click"/>
             </Grid>

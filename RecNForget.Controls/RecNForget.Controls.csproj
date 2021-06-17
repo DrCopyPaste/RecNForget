@@ -45,7 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetProjects.SVGImage" Version="4.1.94" />
     <PackageReference Include="NAudio" Version="1.10.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31">
       <PrivateAssets>all</PrivateAssets>
@@ -61,6 +60,7 @@
     <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
     <ProjectReference Include="..\RecNForget.WPF.Serices.Contracts\RecNForget.WPF.Services.Contracts.csproj" />
+    <ProjectReference Include="..\SVGImage\DotNetProjects.SVGImage.csproj" />
   </ItemGroup>
 
   <ItemGroup>

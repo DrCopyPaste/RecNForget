@@ -35,6 +35,9 @@ namespace RecNForget.Controls
                 this.simpleGlobalHotkeyService.KeyEvent += SimpleGlobalHotkeyService_KeyEvent;
 
                 this.Closing += HotkeyPromptWindow_Closing;
+
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
             }
         }
 

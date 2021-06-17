@@ -47,6 +47,28 @@ namespace RecNForget.WPF.Services
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public void ChangeTheme(string themeName)
+        {
+            Uri dictUri = new Uri("/RecNForget.Controls;component/Themes/" + themeName + ".xaml", UriKind.RelativeOrAbsolute);
+            ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
+
+            try
+            {
+                Application.Current.Resources = resourceDict;
+            }
+            catch { }
+
+            try
+            {
+                if (OwnerControl != null)
+                {
+                    Window.GetWindow(OwnerControl).Resources = resourceDict;
+                }
+            }
+            catch
+            { }
+        }
+
         public void ChangeFileNamePattern()
         {
             CustomMessageBox tempDialog = new CustomMessageBox(

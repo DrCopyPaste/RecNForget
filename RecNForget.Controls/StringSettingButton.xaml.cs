@@ -31,6 +31,14 @@ namespace RecNForget.Controls
         public StringSettingButton()
         {
             InitializeComponent();
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+            { }
+            else
+            {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

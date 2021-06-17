@@ -4,6 +4,5 @@
     xmlns:local="clr-namespace:RecNForget.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/RecNForget.Controls;component/Themes/Simple_White.xaml" />
-        <!--<ResourceDictionary Source="/RecNForget.Controls;component/Themes/Simple_Black.xaml" />-->
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
