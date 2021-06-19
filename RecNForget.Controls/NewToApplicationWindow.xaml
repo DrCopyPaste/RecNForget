@@ -21,13 +21,13 @@
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    <!--<Window.Resources>
+    <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>-->
+    </Window.Resources>
 
     <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">

@@ -6,13 +6,13 @@
              xmlns:local="clr-namespace:RecNForget.Controls"
              mc:Ignorable="d" 
 >
-    <!--<UserControl.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>-->
+    </UserControl.Resources>
     <Grid>
         <Button Style="{DynamicResource BaseSettingButtonLayout}" Background="{DynamicResource Secondary_Brush}"
                     HorizontalAlignment="Stretch" Click="Click_Internal">

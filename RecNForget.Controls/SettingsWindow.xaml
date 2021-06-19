@@ -24,13 +24,13 @@
         </NodeName>
         -->
 
-    <!--<Window.Resources>
+    <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>-->
+    </Window.Resources>
 
     <!--                                 <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource SettingTextBoxLabelStyle}"
                             Content="Output folder" />

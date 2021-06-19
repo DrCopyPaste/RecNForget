@@ -19,13 +19,13 @@
         </NodeName>
         -->
 
-    <!--<Window.Resources>
+    <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes\Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </Window.Resources>-->
+    </Window.Resources>
 
     <Border Style="{DynamicResource OuterHitBoxindowBorderStyle}"
         MouseLeave="MainWindow_MouseLeave" MouseEnter="MainWindow_MouseEnter" MouseDown="Window_MouseDown">
