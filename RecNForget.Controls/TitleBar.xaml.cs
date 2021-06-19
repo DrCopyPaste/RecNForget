@@ -1,5 +1,6 @@
 ﻿using RecNForget.Controls.Helper;
 using RecNForget.IoC;
+using RecNForget.Services.Contracts;
 using RecNForget.WPF.Services.Contracts;
 using System;
 using System.ComponentModel;
@@ -93,7 +94,7 @@ namespace RecNForget.Controls
 
         private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            ThemeManager.ChangeTheme("Simple_White");
+            actionService.ShowThemeSelectionMenu();
         }
     }
 }

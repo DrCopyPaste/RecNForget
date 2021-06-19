@@ -98,6 +98,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void ShowThemeSelectionMenu()
+        {
+            throw new NotImplementedException();
+        }
+
         public void StopPlayingSelectedFile()
         {
             throw new System.NotImplementedException();
