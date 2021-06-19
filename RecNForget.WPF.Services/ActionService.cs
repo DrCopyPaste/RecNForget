@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ using Notifications.Wpf.Core;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
 using RecNForget.Controls.Extensions;
+using RecNForget.Controls.Helper;
 using RecNForget.Controls.Services;
 using RecNForget.Help;
 using RecNForget.IoC;
@@ -46,28 +48,6 @@ namespace RecNForget.WPF.Services
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public void ChangeTheme(string themeName)
-        {
-            Uri dictUri = new Uri("/RecNForget.Controls;component/Themes/" + themeName + ".xaml", UriKind.RelativeOrAbsolute);
-            ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
-
-            try
-            {
-                Application.Current.Resources = resourceDict;
-            }
-            catch { }
-
-            try
-            {
-                if (OwnerControl != null)
-                {
-                    Window.GetWindow(OwnerControl).Resources = resourceDict;
-                }
-            }
-            catch
-            { }
-        }
 
         public void ChangeFileNamePattern()
         {

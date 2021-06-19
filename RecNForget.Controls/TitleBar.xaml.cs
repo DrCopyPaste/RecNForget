@@ -1,4 +1,5 @@
-﻿using RecNForget.IoC;
+﻿using RecNForget.Controls.Helper;
+using RecNForget.IoC;
 using RecNForget.WPF.Services.Contracts;
 using System;
 using System.ComponentModel;
@@ -92,36 +93,7 @@ namespace RecNForget.Controls
 
         private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            actionService.ChangeTheme("Simple_White");
-
-            //var rng = new Random();
-
-
-            //string themeName = "Simple_White.xaml";
-
-            //var name = rng.Next() % 2 == 0 ? "/RecNForget.Controls;component/Themes/Simple_Black.xaml" : "/RecNForget.Controls;component/Themes/Simple_White.xaml";
-
-            ////Uri dictUri = new Uri(name, UriKind.RelativeOrAbsolute);
-
-            ////Uri dictUri = new Uri(@"/Resources/Themes/MyTheme.xaml", UriKind.Relative);
-            ////Uri dictUri = new Uri("pack://application:,,,/RecNForget.Controls;component/Themes/Simple_White.xaml", UriKind.RelativeOrAbsolute);
-
-            ////ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
-
-            ////Application.Current.Resources.MergedDictionaries.Clear();
-            ////Application.Current.Resources.MergedDictionaries[0] = resourceDict;
-            ////Application.Current.Resources.MergedDictionaries.Add(resourceDict);
-            //try
-            //{
-            //    Application.Current.Resources.Source = new Uri("pack://application:,,,/RecNForget.Controls;component/Themes/" + themeName);
-            //    Window.GetWindow(this).Resources.Source = new Uri("pack://application:,,,/RecNForget.Controls;component/Themes/" + themeName);
-            //}
-            //catch
-            //{ }
-
-            //Window.GetWindow(this).InvalidateVisual();
-            //Window.GetWindow(this).Hide();
-            //Window.GetWindow(this).Show();
+            ThemeManager.ChangeTheme("Simple_White");
         }
     }
 }

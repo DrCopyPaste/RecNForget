@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Notifications.Wpf.Core;
 using RecNForget.Controls;
+using RecNForget.Controls.Helper;
 using RecNForget.Controls.Services;
 using RecNForget.Help;
 using RecNForget.IoC;
@@ -73,7 +74,7 @@ namespace RecNForget
             var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
             actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
-            actionService.ChangeTheme("Simple_Black");
+            ThemeManager.ChangeTheme(appSettingService.WindowTheme);
 
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
             mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();

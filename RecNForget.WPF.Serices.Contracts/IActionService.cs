@@ -54,6 +54,5 @@ namespace RecNForget.WPF.Services.Contracts
         void ShowNewToApplicationWindow();
         void ShowNewToVersionDialog(Version currentFileVersion, Version lastInstalledVersion);
         void ShowRandomApplicationTip();
-        void ChangeTheme(string themeName);
     }
 }
