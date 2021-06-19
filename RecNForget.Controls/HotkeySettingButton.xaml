@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="RecNForget.Controls.HotkeySettingButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RecNForget.Controls"
+             mc:Ignorable="d" 
+>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Button Style="{DynamicResource BaseSettingButtonLayout}" Background="{DynamicResource Secondary_Brush}"
+                    HorizontalAlignment="Stretch" Click="Click_Internal">
+            <Grid
+                        HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"  Style="{DynamicResource SettingsCaption_Label}"
+                            Content="{Binding SettingCaption, RelativeSource={RelativeSource AncestorType=local:HotkeySettingButton}}"/>
+
+                <local:HotkeyDisplay Grid.Column="1" HotkeySettingString="{Binding SettingValue, RelativeSource={RelativeSource AncestorType=local:HotkeySettingButton}}" d:HotkeySettingString="Key=Pause; Win=False; Alt=True; Ctrl=True; Shift=False" HorizontalAlignment="Left"  />
+
+                <local:SvgImageButton1 Grid.Column="2" Style="{DynamicResource SvgChangeSettingButtonLayout}" Click="Click_Internal"/>
+            </Grid>
+        </Button>
+    </Grid>
+</UserControl>

@@ -351,7 +351,7 @@ namespace RecNForget.Services
 
             set
             {
-                SetAppConfigSetting(AppSettingService.selectedFileControlVisible_Key, value);
+                SetAppConfigSetting(AppSettingService.windowTheme_Key, value);
                 OnPropertyChanged();
             }
         }
@@ -365,7 +365,7 @@ namespace RecNForget.Services
 
             set
             {
-                SetAppConfigSetting(AppSettingService.selectedFileControlVisible_Key, value.ToString());
+                SetAppConfigSetting(AppSettingService.uiScalingPercent_Key, value.ToString());
                 OnPropertyChanged();
             }
         }

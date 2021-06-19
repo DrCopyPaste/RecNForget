@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +14,7 @@ using Notifications.Wpf.Core;
 using Ookii.Dialogs.Wpf;
 using RecNForget.Controls;
 using RecNForget.Controls.Extensions;
+using RecNForget.Controls.Helper;
 using RecNForget.Controls.Services;
 using RecNForget.Help;
 using RecNForget.IoC;
@@ -452,6 +454,38 @@ namespace RecNForget.WPF.Services
             menu.IsOpen = true;
         }
 
+        public void ShowThemeSelectionMenu()
+        {
+            var menu = new System.Windows.Controls.ContextMenu();
+            menu.Style = (Style)menu.FindResource("ContextMenu_Default_Style");
+
+            //var item = new System.Windows.Controls.MenuItem()
+            //{
+            //    Header = "Cancel",
+            //    Style = (Style)menu.FindResource("ContextMenu_Cancel_Style")
+            //};
+            //menu.Items.Add(item);
+
+            //menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+
+            foreach (var themeName in ThemeManager.GetAllThemeNames())
+            {
+                var item = new System.Windows.Controls.MenuItem()
+                {
+                    Header = themeName,
+                    Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+                    IsCheckable = true,
+                    IsChecked = appSettingService.WindowTheme.ToUpper() == themeName.ToUpper()
+                };
+                item.Click += (object sender, RoutedEventArgs e) => { ThemeManager.ChangeTheme(themeName); appSettingService.WindowTheme = themeName; };
+
+                menu.Items.Add(item);
+            }
+
+            menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
+            menu.IsOpen = true;
+        }
+
         public void ShowAboutWindow()
         {
             var aboutDialog = new AboutWindow();
@@ -525,7 +559,7 @@ namespace RecNForget.WPF.Services
 
         public void ShowNewToApplicationWindow()
         {
-            var dia = new NewToApplicationWindow(hotkeyService, appSettingService);
+            var dia = new NewToApplicationWindow(hotkeyService, appSettingService, this);
 
             if (!appSettingService.MinimizedToTray && OwnerControl != null)
             {

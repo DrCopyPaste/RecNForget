@@ -8,11 +8,12 @@
         Topmost="True"
         Style="{DynamicResource DefaultWindowStyle}"
         WindowStartupLocation="CenterOwner"
+        AllowsTransparency="True"
         Title="RecNForget - Help">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
@@ -23,70 +24,45 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Generic.xaml" />
+                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Style="{StaticResource DefaultGridStyle}"
-            MouseDown="Window_MouseDown">
-            <Grid.RowDefinitions>
-                <!-- row 0 for title bar-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 for help topic title -->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 2 for help lines -->
-                <RowDefinition Style="{StaticResource GrowForRemainingSpaceRowStyle}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource DefaultGridStyle}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                </Grid.ColumnDefinitions>
-
-                <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}"
-                    Click="MinimizeButton_Click" />
-                <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}"
-                    Click="Exit_Click" />
-            </Grid>
-
-            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource HelpTopicList_ScrollViewer_Style}">
-                <Grid
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+        <StackPanel Orientation="Vertical">
+            <local:TitleBar HorizontalAlignment="Stretch" />
+            <StackPanel Orientation="Horizontal">
+                <ScrollViewer Style="{DynamicResource HelpTopicList_ScrollViewer_Style}">
+                    <Grid
                     Name="TopicListGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                    </Grid.ColumnDefinitions>
-                    <!-- Row Definitions dynamic (depending on how many topics are found) -->
-                </Grid>
-            </ScrollViewer>
-
-            <Label Grid.Row="1" Grid.Column="1" Style="{Binding Source={StaticResource HeadlineLabelStyle}}"
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
+                        </Grid.ColumnDefinitions>
+                        <!-- Row Definitions dynamic (depending on how many topics are found) -->
+                    </Grid>
+                </ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <Label Style="{DynamicResource HeadlineLabelStyle}"
                 Name="TopicTitle"
                 Content="Help - Topic"/>
 
-            <ScrollViewer Grid.Row="2" Grid.Column="1" Style="{StaticResource HelpTopic_ScrollViewer_Style}">
-                <Grid
+                    <ScrollViewer Style="{DynamicResource HelpTopic_ScrollViewer_Style}">
+                        <Grid
                     Name="HelpLinesGrid">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                    </Grid.ColumnDefinitions>
-                    <!-- Row Definitions dynamic (depending on how many help lines are found) -->
-                </Grid>
-            </ScrollViewer>
-        </Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
+                            </Grid.ColumnDefinitions>
+                            <!-- Row Definitions dynamic (depending on how many help lines are found) -->
+                        </Grid>
+                    </ScrollViewer>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <!--
+            
+
+            
+        </Grid>-->
     </Border>
 </Window>

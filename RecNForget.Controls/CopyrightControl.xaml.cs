@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,14 @@ namespace RecNForget.Controls
         {
             DataContext = this;
             InitializeComponent();
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+            { }
+            else
+            {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

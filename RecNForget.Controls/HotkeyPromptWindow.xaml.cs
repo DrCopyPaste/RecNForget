@@ -35,6 +35,9 @@ namespace RecNForget.Controls
                 this.simpleGlobalHotkeyService.KeyEvent += SimpleGlobalHotkeyService_KeyEvent;
 
                 this.Closing += HotkeyPromptWindow_Closing;
+
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
             }
         }
 
@@ -54,23 +57,11 @@ namespace RecNForget.Controls
 
         private void SimpleGlobalHotkeyService_KeyEvent(object sender, SimpleGlobalHotkeyServiceEventArgs e)
         {
+            HotkeyDisplay.HotkeySettingString = e.AsSettingString;
+
             if (e.KeyDown)
             {
-                var currentModifiers = Keyboard.Modifiers;
-
-                if (HotkeyDisplay.Children.Count > 0)
-                {
-                    HotkeyDisplay.Children.Clear();
-                }
-
-                var buttonGrid = HotkeyRenderer.GetHotkeyListAsButtonGrid(
-                    hotkeys: HotkeyRenderer.GetKeyEventArgsAsList(e, currentModifiers, string.Empty, string.Empty),
-                    buttonStyle: (Style)FindResource("HotkeyDisplayButton"),
-                    spacing: 6);
-
-                HotkeyDisplay.Children.Add(buttonGrid);
-
-                if (e.Key != "None")
+                if (!e.KeyIsModifier)
                 {
                     HotkeysAppSetting = e.AsSettingString;
                     DialogResult = true;

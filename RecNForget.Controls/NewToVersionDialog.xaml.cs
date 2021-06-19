@@ -37,6 +37,9 @@ namespace RecNForget.Controls
             }
             else
             {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+
                 SettingService = settingService;
 
                 this.KeyDown += Window_KeyDown;
@@ -92,11 +95,13 @@ namespace RecNForget.Controls
             featureRowDefinition.Height = GridLength.Auto;
             targetGrid.RowDefinitions.Add(featureRowDefinition);
 
+            Style textBlockStyle = (Style)FindResource("DefaultTextBlockStyle");
             Style addedFeatureImageStyle = (Style)FindResource("AddedFeature_Image_Style");
             Style bugfixImageStyle = (Style)FindResource("BugFix_Image_Style");
             Style verboseInfoImageStyle = (Style)FindResource("VerboseInformationFeature_Image_Style");
 
             var featureText = new TextBlock();
+            featureText.Style = textBlockStyle;
             featureText.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             featureText.VerticalAlignment = System.Windows.VerticalAlignment.Center;
             featureText.Text = feature.Title;
@@ -109,7 +114,7 @@ namespace RecNForget.Controls
                 {
                     if (verboseInfoImageStyle != null)
                     {
-                        var featureType = new Image();
+                        var featureType = new SVGImage.SVG.SVGImage();
                         featureType.Style = verboseInfoImageStyle;
                         featureType.SetCustomToolTip("important information");
 
@@ -123,7 +128,7 @@ namespace RecNForget.Controls
                 {
                     if (addedFeatureImageStyle != null)
                     {
-                        var featureType = new Image();
+                        var featureType = new SVGImage.SVG.SVGImage();
                         featureType.Style = addedFeatureImageStyle;
                         featureType.SetCustomToolTip("added feature");
 
@@ -137,7 +142,7 @@ namespace RecNForget.Controls
                 {
                     if (bugfixImageStyle != null)
                     {
-                        var featureType = new Image();
+                        var featureType = new SVGImage.SVG.SVGImage();
                         featureType.Style = bugfixImageStyle;
                         featureType.SetCustomToolTip("bug fix");
 

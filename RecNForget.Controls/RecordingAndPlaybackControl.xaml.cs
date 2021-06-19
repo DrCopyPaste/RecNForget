@@ -37,6 +37,9 @@ namespace RecNForget.Controls
             }
             else
             {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+
                 this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
                 this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
                 AudioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
@@ -111,11 +114,11 @@ namespace RecNForget.Controls
                 {
                     if (AudioRecordingService.CurrentlyRecording)
                     {
-                        RecordButton.Style = (Style)FindResource("StopRecordButton");
+                        RecordButton.Style = (Style)FindResource("SvgStopRecordButton");
                     }
                     else
                     {
-                        RecordButton.Style = (Style)FindResource("RecordButton");
+                        RecordButton.Style = (Style)FindResource("SvgRecordButton");
                     }
 
                     break;
@@ -129,7 +132,7 @@ namespace RecNForget.Controls
             {
                 case nameof(AudioPlaybackService.Paused):
                 {
-                    TogglePlaySelectedFileButton.Style = AudioPlaybackService.Playing && AudioRecordingService.CurrentlyNotRecording ? (Style)FindResource("PauseButton") : (Style)FindResource("PlayButton");
+                    TogglePlaySelectedFileButton.Style = AudioPlaybackService.Playing && AudioRecordingService.CurrentlyNotRecording ? (Style)FindResource("SvgPauseTrackButton") : (Style)FindResource("SvgPlayTrackButton");
                     break;
                 }
             }

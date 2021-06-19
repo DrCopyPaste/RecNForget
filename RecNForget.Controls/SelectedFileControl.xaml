@@ -8,48 +8,39 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Generic.xaml" />
+                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <Border Style="{StaticResource DefaultControlBorderStyle}">
-            <Grid Style="{StaticResource DefaultGridStyle}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="13*" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                    <ColumnDefinition
-                        Width="{Binding Source={StaticResource MainWindowControl_HeightWithMargin}}" />
-                </Grid.ColumnDefinitions>
+    <Border Style="{DynamicResource DefaultControlBorderStyle}" HorizontalAlignment="Stretch">
+        <StackPanel Orientation="Vertical">
+            <DockPanel>
+                <Label Style="{DynamicResource ControlLabelStyle}"
+                       HorizontalAlignment="Left"
+                        Content="Selected file" />
+                <Label Style="{DynamicResource ControlLabelStyle}"
+                            HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Right"
+                            d:Content="00:12.235s (237.98 kB)"
+                            Name="FileInfoLabel" />
+            </DockPanel>
+            <DockPanel>
+                <TextBox Style="{DynamicResource MainWindowTextBoxStyle}"
+                         HorizontalAlignment="Left"
+                        Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        d:Text="C:\YourPath\yourFile.wav" />
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <local:SvgImageButton1 Style="{DynamicResource SvgChangeFilePatternMiniButtonLayout}"
+                        ToolTip="rename selected file (Hotkey: [Return])"
+                        IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
+                        x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
 
-                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ControlLabelStyle}"
-                    Content="Selected file" />
-
-                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ControlLabelStyle}"
-                    HorizontalAlignment="Right"
-                    HorizontalContentAlignment="Right"
-                    Content="00:12.235s (237.98 kB)"
-                    Name="FileInfoLabel" />
-
-                <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource MainWindowTextBoxStyle}"
-                    Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
-                <local:ImageButton Grid.Row="1" Grid.Column="1" Style="{StaticResource ChangeFilePatternMiniButtonLayout}"
-                    ToolTip="rename selected file (Hotkey: [Return])"
-                    IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                    x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
-
-                <local:ImageButton Grid.Row="1" Grid.Column="2" Style="{StaticResource DeleteSelectedFileMiniButtonLayout}"
-                    ToolTip="delete selected file (Hotkey: [Delete])"
-                    IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                    x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
-            </Grid>
-        </Border>
-    </Grid>
+                    <local:SvgImageButton1 Style="{DynamicResource SvgDeleteSelectedFileMiniButtonLayout}"
+                        ToolTip="delete selected file (Hotkey: [Delete])"
+                        IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
+                        x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+    </Border>
 </UserControl>

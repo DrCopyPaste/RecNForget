@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
         Style="{DynamicResource DefaultWindowStyle}"
+        AllowsTransparency="True"
         Title="RecNForget">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
@@ -21,73 +22,32 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Generic.xaml" />
+                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
-    <Border Style="{StaticResource OuterHitBoxindowBorderStyle}"
+    <Border Style="{DynamicResource OuterHitBoxindowBorderStyle}"
         MouseLeave="MainWindow_MouseLeave" MouseEnter="MainWindow_MouseEnter" MouseDown="Window_MouseDown">
-        <Grid>
-            <Grid.RowDefinitions>
-                <!-- row 0 for title bar-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 for all other controls-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-            </Grid.ColumnDefinitions>
-
-            <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="0"
-                Name="TitleBar" Visibility="Hidden">
-                <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
-                <Grid Grid.Row="0" Grid.Column="0" Style="{StaticResource DefaultGridStyle}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    </Grid.ColumnDefinitions>
-
-                    <local:ImageButton Grid.Row="0" Grid.Column="0" Style="{StaticResource WindowSettingsButton}"
-                            x:Name="WindowOptionsButton" Click="WindowOptionsButton_Click" />
-                    <local:ImageButton Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" Style="{StaticResource MinimizeButton}"
-                            Click="MinimizeButton_Click" />
-                    <local:ImageButton Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" Style="{StaticResource ExitButton}"
-                            Click="Exit_Click" />
-                </Grid>
+        <StackPanel Orientation="Vertical">
+            <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="0"
+                Name="TitleBar" Visibility="Hidden" d:Visibility="Visible">
+                <local:TitleBar HorizontalAlignment="Stretch" WithSettingsButton="True" WithWindowOptionsButton="True" WithMinimizeButton="True" />
             </Border>
 
-            <Border Style="{StaticResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
-                <Grid Style="{StaticResource DefaultGridStyle}">
-                    <Grid.RowDefinitions>
-                        <!-- row 0 for output path control-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 1 for selected file control-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                        <!-- row 2 for recording and playback control-->
-                        <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    </Grid.ColumnDefinitions>
-
-                    <local:OutputPathControl Grid.Row="0" Grid.Column="0"
-                        x:Name="OutputPathControl" />
-                    <local:SelectedFileControl Grid.Row="1" Grid.Column="0"
-                        x:Name="SelectedFileControl" />
-                    <local:RecordingAndPlaybackControl Grid.Row="2" Grid.Column="0"
-                        x:Name="RecordingAndPlaybackControl"/>
-                </Grid>
+            <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
+                <StackPanel>
+                    <local:OutputPathControl
+                            x:Name="OutputPathControl" />
+                    <Separator x:Name="OutputPathControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
+                    <local:SelectedFileControl
+                            x:Name="SelectedFileControl" />
+                    <Separator x:Name="SelectedFileControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
+                    <local:RecordingAndPlaybackControl
+                            x:Name="RecordingAndPlaybackControl"/>
+                </StackPanel>
             </Border>
-        </Grid>
+        </StackPanel>
     </Border>
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo Description="RecNForget"

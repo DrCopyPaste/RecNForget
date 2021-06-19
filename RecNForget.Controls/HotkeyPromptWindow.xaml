@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterOwner"
         Topmost="True"
+        AllowsTransparency="True"
         Title="RecNForget - Configure hotkey" Style="{DynamicResource DefaultWindowStyle}">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
@@ -21,36 +22,17 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Generic.xaml" />
+                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Style="{StaticResource DefaultGridStyle}"
-            MouseDown="Window_MouseDown">
-            <Grid.RowDefinitions>
-                <!-- row 0 for title bar-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 prompt message-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 2 spacing-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 3 hotkey display-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-            </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TitleBarLayout}"/>
-
-            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+        <StackPanel Orientation="Vertical">
+            <local:TitleBar HorizontalAlignment="Stretch" />
+            <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                 Text="Hold down all modifier keys you wish to set and add your preferred hotkey." />
-
-            <StackPanel Grid.Row="3" Grid.Column="0" Style="{StaticResource HotkeyPrompt_DisplayStackPanel}"
-                x:Name="HotkeyDisplay">
-            </StackPanel>
-        </Grid>
+            <local:HotkeyDisplay x:Name="HotkeyDisplay" d:HotkeySettingString="Key=Pause; Win=False; Alt=True; Ctrl=True; Shift=False" HorizontalAlignment="Center" />
+        </StackPanel>
     </Border>
 </Window>

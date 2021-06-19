@@ -19,7 +19,8 @@ namespace RecNForget.CopyRightHelper
     // <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
     public class Program
     {
-        private static string iconBasePath = @"..\..\..\..\icon_generation";
+        private static string installerImages = @"..\..\..\..\icon_generation\installerImages";
+        private static string iconBasePath = @"..\..\..\..\RecNForget.Controls\Themes\SvgImages";
         private static string copyRightFilePath = @"..\..\..\..\COPYRIGHT.md";
         private static string copyRightControlPath = @"..\..\..\..\RecNForget.Controls\CopyrightControl.xaml";
 
@@ -39,8 +40,19 @@ namespace RecNForget.CopyRightHelper
             xamlHeader.AppendLine("\t\t" + @"xmlns:d=""http://schemas.microsoft.com/expression/blend/2008""");
             xamlHeader.AppendLine("\t\t" + @"xmlns:local=""clr-namespace:RecNForget.Controls""");
             xamlHeader.AppendLine("\t\t" + @"mc:Ignorable=""d"">");
+            xamlHeader.AppendLine("\t" + @"<UserControl.Resources>");
+            xamlHeader.AppendLine("\t\t" + @"<ResourceDictionary>");
+            xamlHeader.AppendLine("\t\t\t" + @"<ResourceDictionary.MergedDictionaries>");
+            xamlHeader.AppendLine("\t\t\t\t" + @"<ResourceDictionary Source=""Themes\Generic.xaml"" />");
+            xamlHeader.AppendLine("\t\t\t" + @"</ResourceDictionary.MergedDictionaries>");
+            xamlHeader.AppendLine("\t\t" + @"</ResourceDictionary>");
+            xamlHeader.AppendLine("\t" + @"</UserControl.Resources>");
             xamlHeader.AppendLine("\t" + @"<Grid>");
             xamlHeader.AppendLine("\t\t" + @"<TextBlock Style = ""{StaticResource DefaultTextBlockStyle}"" >");
+
+
+
+
 
             var xamlFooter = new StringBuilder();
             xamlFooter.AppendLine("\t\t" + "</TextBlock>");
@@ -86,56 +98,56 @@ namespace RecNForget.CopyRightHelper
             // ------------------ LIBRARIES LIST ----------------------------------
 
             AddLibraryLink(
-                libaryName: "NAudio v1.10.0",
+                libaryName: "NAudio v2.0.1",
                 libraryUrl: "https://github.com/naudio/NAudio",
                 manufacturerName: "Mark Heath & Contributors",
-                licenseCaption: "Ms-PL",
+                licenseCaption: "License",
                 licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
 
             AddLibraryLink(
-                libaryName: "Nerdbank.GitVersioning v3.2.31",
+                libaryName: "Nerdbank.GitVersioning v3.4.216",
                 libraryUrl: "https://github.com/aarnott/Nerdbank.GitVersioning",
                 manufacturerName: "Andrew Arnott",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Notifications.Wpf.Core v1.3.1",
+                libaryName: "Notifications.Wpf.Core v1.3.2",
                 libraryUrl: "https://github.com/mjuen/Notifications.Wpf.Core",
                 manufacturerName: "Adrian Gaś, Simon Mauracher, Marcel Juen",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Octokit v0.48.0",
+                libaryName: "Octokit v0.50.0",
                 libraryUrl: "https://github.com/octokit/octokit.net",
                 manufacturerName: "GitHub",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Ookii.Dialogs.Wpf.NETCore v2.1.0",
+                libaryName: "Ookii.Dialogs.Wpf v3.1.0",
                 libraryUrl: "https://github.com/caioproiete/ookii-dialogs-wpf",
-                manufacturerName: "Sven Groot, Caio Proiete, AceOfAces",
-                licenseCaption: "License",
-                licenseUrl: "https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license");
+                manufacturerName: "Ookii Dialogs Contributors",
+                licenseCaption: "BSD-3-Clause",
+                licenseUrl: "https://licenses.nuget.org/BSD-3-Clause");
 
             AddLibraryLink(
-                libaryName: "System.Configuration.ConfigurationManager v4.7.0",
+                libaryName: "System.Configuration.ConfigurationManager v5.0.0",
                 libraryUrl: "https://github.com/dotnet/corefx",
                 manufacturerName: "Microsoft",
                 licenseCaption: "MIT",
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
-            AddLibraryLink(
-                libaryName: "System.Drawing.Common v4.7.0",
-                libraryUrl: "https://github.com/dotnet/corefx",
-                manufacturerName: "Microsoft",
-                licenseCaption: "MIT",
-                licenseUrl: "https://licenses.nuget.org/MIT");
+            //AddLibraryLink(
+            //    libaryName: "System.Drawing.Common v4.7.0",
+            //    libraryUrl: "https://github.com/dotnet/corefx",
+            //    manufacturerName: "Microsoft",
+            //    licenseCaption: "MIT",
+            //    licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Unity v5.11.7",
+                libaryName: "Unity v5.11.10",
                 libraryUrl: "https://github.com/unitycontainer/unity",
                 manufacturerName: "Unity Container Project",
                 licenseCaption: "Apache 2.0",
@@ -178,41 +190,28 @@ namespace RecNForget.CopyRightHelper
             var textBlockInfoTemplate = textBlockInfoTemplateBuilder.ToString();
 
             var baseDirectory = new DirectoryInfo(iconBasePath);
-            var allFiles = new List<string>();
+            var isntallerImagesDirectory = new DirectoryInfo(installerImages);
             var unmatchedFiles = new List<string>();
-
-            var matchedFileonlinewebfontsUrls = new Dictionary<string, int>();
-
-            // we dont expect more levels than just one
-            foreach (var subDir in baseDirectory.GetDirectories())
-            {
-                foreach (var file in subDir.GetFiles())
-                {
-                    // this still relies on the convention that ONLY one number shall exist in the filename and that is the identifier for onlinewebfonts
-                    var pattern = new Regex(@".*icon\d+\..*");
-                    var numberPattern = new Regex(@"\d+");
-
-                    matchedFileonlinewebfontsUrls.Add(
-                        file.Name,
-                        pattern.IsMatch(file.Name) ? int.Parse(numberPattern.Match(file.Name).Value) : -1);
-
-                    allFiles.Add(file.FullName);
-                }
-            }
 
             var mdFileCopyrightInfos = new Dictionary<string, string>();
             var xamlFileCopyrightInfos = new Dictionary<string, string>();
 
-            foreach (var file in matchedFileonlinewebfontsUrls)
+            foreach (var file in baseDirectory.GetFiles().Union(isntallerImagesDirectory.GetFiles()))
             {
-                if (file.Value > -1)
+                // this still relies on the convention that ONLY one number shall exist in the filename and that is the identifier for onlinewebfonts
+                var pattern = new Regex(@".*icon\d+\..*");
+                var numberPattern = new Regex(@"\d+");
+
+                var matchedUrlId = pattern.IsMatch(file.Name) ? int.Parse(numberPattern.Match(file.Name).Value) : -1;
+
+                if (matchedUrlId > -1)
                 {
-                    mdFileCopyrightInfos.Add(file.Key, string.Format(mdBaseInfoTemplate, file.Key, file.Value.ToString()));
-                    xamlFileCopyrightInfos.Add(file.Key, string.Format(textBlockInfoTemplate, file.Key, file.Value.ToString()));
+                    mdFileCopyrightInfos.Add(file.Name, string.Format(mdBaseInfoTemplate, file.Name, matchedUrlId.ToString()));
+                    xamlFileCopyrightInfos.Add(file.Name, string.Format(textBlockInfoTemplate, file.Name, matchedUrlId.ToString()));
                 }
                 else
                 {
-                    unmatchedFiles.Add(file.Key);
+                    unmatchedFiles.Add(file.Name);
                 }
             }
 
@@ -335,7 +334,7 @@ namespace RecNForget.CopyRightHelper
 
         private static string XamlLink(string caption, string url)
         {
-            // xaml links: <Hyperlink NavigateUri="link url" RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource Default_Hyperlink_Style}">link text</ Hyperlink>
+            // xaml links: <Hyperlink NavigateUri="link url" RequestNavigate="Hyperlink_RequestNavigate" >link text</ Hyperlink>
             var xamlUrlPatternBuilder = new StringBuilder();
             xamlUrlPatternBuilder.AppendLine("\t\t\t<Hyperlink NavigateUri=\"{0}\" RequestNavigate=\"Hyperlink_RequestNavigate\">{1}</Hyperlink>");
 

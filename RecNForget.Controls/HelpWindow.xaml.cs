@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -22,6 +23,14 @@ namespace RecNForget.Controls
         {
             DataContext = this;
             InitializeComponent();
+
+            if (DesignerProperties.GetIsInDesignMode(this))
+            { }
+            else
+            {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+            }
 
             this.KeyDown += Window_KeyDown;
 

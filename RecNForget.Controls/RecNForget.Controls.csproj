@@ -8,47 +8,36 @@
   <ItemGroup>
     <None Remove="Images\logo.ico" />
     <None Remove="Images\logo_big.png" />
-    <None Remove="Themes\ButtonImages\accept_icon518267.black.png" />
-    <None Remove="Themes\ButtonImages\accept_icon518267.black.white.png" />
-    <None Remove="Themes\ButtonImages\bugfix_icon140609.black.png" />
-    <None Remove="Themes\ButtonImages\cancel_icon428740.black.png" />
-    <None Remove="Themes\ButtonImages\close_icon211720.black.png" />
-    <None Remove="Themes\ButtonImages\close_icon349388.black.png" />
-    <None Remove="Themes\ButtonImages\download_icon602.black.png" />
-    <None Remove="Themes\ButtonImages\editSetting_icon451737.black.png" />
-    <None Remove="Themes\ButtonImages\folder_icon122592.black.png" />
-    <None Remove="Themes\ButtonImages\help_icon544157.black.png" />
-    <None Remove="Themes\ButtonImages\information_icon2132.black.png" />
-    <None Remove="Themes\ButtonImages\information_icon280732.black.png" />
-    <None Remove="Themes\ButtonImages\lightbulb_icon372420.black.png" />
-    <None Remove="Themes\ButtonImages\message_error_icon304479.black.png" />
-    <None Remove="Themes\ButtonImages\message_info_icon277439.black.png" />
-    <None Remove="Themes\ButtonImages\message_question_icon109120.black.png" />
-    <None Remove="Themes\ButtonImages\minimize_icon246566.black.png" />
-    <None Remove="Themes\ButtonImages\nextTrack_icon.black.disabled.png" />
-    <None Remove="Themes\ButtonImages\nextTrack_icon.black.png" />
-    <None Remove="Themes\ButtonImages\openFolder_icon356582.black.png" />
-    <None Remove="Themes\ButtonImages\pause_icon.black.disabled.png" />
-    <None Remove="Themes\ButtonImages\pause_icon.black.png" />
-    <None Remove="Themes\ButtonImages\pencil_icon353603.black.png" />
-    <None Remove="Themes\ButtonImages\pencil_icon79516.black.disabled.png" />
-    <None Remove="Themes\ButtonImages\pencil_icon79516.black.png" />
-    <None Remove="Themes\ButtonImages\play_icon.black.disabled.png" />
-    <None Remove="Themes\ButtonImages\play_icon.black.png" />
-    <None Remove="Themes\ButtonImages\plus_icon171498.black.png" />
-    <None Remove="Themes\ButtonImages\prevTrack_icon.black.disabled.png" />
-    <None Remove="Themes\ButtonImages\prevTrack_icon.black.png" />
-    <None Remove="Themes\ButtonImages\record_icon.black.disabled.png" />
-    <None Remove="Themes\ButtonImages\record_icon.black.png" />
-    <None Remove="Themes\ButtonImages\settings_icon40863.black.png" />
-    <None Remove="Themes\ButtonImages\settings_icon40863.black.white.png" />
-    <None Remove="Themes\ButtonImages\shutDown_icon170336.black.png" />
-    <None Remove="Themes\ButtonImages\stop_icon.black.disabled.png" />
-    <None Remove="Themes\ButtonImages\stop_icon.black.png" />
-    <None Remove="Themes\ButtonImages\tools_icon536263.black.png" />
-    <None Remove="Themes\ButtonImages\trash_icon77730.black.disabled.png" />
-    <None Remove="Themes\ButtonImages\trash_icon77730.black.png" />
-    <None Remove="Themes\ButtonImages\windowSettings_icon248857.black.png" />
+    <None Remove="Themes\SvgImages\accept_icon518267.svg" />
+    <None Remove="Themes\SvgImages\bugfix_icon140609.svg" />
+    <None Remove="Themes\SvgImages\cancel_icon428740.svg" />
+    <None Remove="Themes\SvgImages\close_icon349388.svg" />
+    <None Remove="Themes\SvgImages\download_icon602.svg" />
+    <None Remove="Themes\SvgImages\editSetting_icon451737.svg" />
+    <None Remove="Themes\SvgImages\folder_icon122592.svg" />
+    <None Remove="Themes\SvgImages\help_icon544157.svg" />
+    <None Remove="Themes\SvgImages\information_icon2132.svg" />
+    <None Remove="Themes\SvgImages\information_icon280732.svg" />
+    <None Remove="Themes\SvgImages\lightbulb_icon372420.svg" />
+    <None Remove="Themes\SvgImages\logo.svg" />
+    <None Remove="Themes\SvgImages\message_error_icon304479.svg" />
+    <None Remove="Themes\SvgImages\message_info_icon277439.svg" />
+    <None Remove="Themes\SvgImages\message_question_icon109120.svg" />
+    <None Remove="Themes\SvgImages\minimize_icon246566.svg" />
+    <None Remove="Themes\SvgImages\nextTrack_icon.svg" />
+    <None Remove="Themes\SvgImages\openFolder_icon356582.svg" />
+    <None Remove="Themes\SvgImages\pause_icon.svg" />
+    <None Remove="Themes\SvgImages\pencil_icon79516.svg" />
+    <None Remove="Themes\SvgImages\play_icon.svg" />
+    <None Remove="Themes\SvgImages\plus_icon171498.svg" />
+    <None Remove="Themes\SvgImages\prevTrack_icon.svg" />
+    <None Remove="Themes\SvgImages\record_icon.svg" />
+    <None Remove="Themes\SvgImages\settings_icon40863.svg" />
+    <None Remove="Themes\SvgImages\shutDown_icon170336.svg" />
+    <None Remove="Themes\SvgImages\stop_icon.svg" />
+    <None Remove="Themes\SvgImages\trash_icon77730.svg" />
+    <None Remove="Themes\SvgImages\windowOptions_icon510828.svg" />
+    <None Remove="Themes\SvgImages\windowSettings_icon248857.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,21 +45,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NAudio" Version="1.10.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31">
+    <PackageReference Include="NAudio" Version="2.0.1" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.216">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Notifications.Wpf.Core" Version="1.3.1" />
-    <PackageReference Include="Octokit" Version="0.48.0" />
-    <PackageReference Include="Ookii.Dialogs.Wpf.NETCore" Version="2.1.0" />
-    <PackageReference Include="Unity" Version="5.11.7" />
+    <PackageReference Include="Notifications.Wpf.Core" Version="1.3.2" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
+    <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
     <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
     <ProjectReference Include="..\RecNForget.WPF.Serices.Contracts\RecNForget.WPF.Services.Contracts.csproj" />
+    <ProjectReference Include="..\SVGImage\DotNetProjects.SVGImage.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -80,127 +70,90 @@
     <Resource Include="Images\logo_big.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\accept_icon518267.black.png">
+    <Resource Include="Themes\SvgImages\accept_icon518267.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\accept_icon518267.black.white.png">
+    <Resource Include="Themes\SvgImages\bugfix_icon140609.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\bugfix_icon140609.black.png">
+    <Resource Include="Themes\SvgImages\cancel_icon428740.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\cancel_icon428740.black.png">
+    <Resource Include="Themes\SvgImages\close_icon349388.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\close_icon211720.black.png">
+    <Resource Include="Themes\SvgImages\download_icon602.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\close_icon349388.black.png">
+    <Resource Include="Themes\SvgImages\editSetting_icon451737.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\download_icon602.black.png">
+    <Resource Include="Themes\SvgImages\folder_icon122592.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\editSetting_icon451737.black.png">
+    <Resource Include="Themes\SvgImages\help_icon544157.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\folder_icon122592.black.png">
+    <Resource Include="Themes\SvgImages\information_icon2132.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\help_icon544157.black.png">
+    <Resource Include="Themes\SvgImages\information_icon280732.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\information_icon2132.black.png">
+    <Resource Include="Themes\SvgImages\lightbulb_icon372420.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\information_icon280732.black.png">
+    <Resource Include="Themes\SvgImages\logo.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\lightbulb_icon372420.black.png">
+    <Resource Include="Themes\SvgImages\message_error_icon304479.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\message_error_icon304479.black.png">
+    <Resource Include="Themes\SvgImages\message_info_icon277439.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\message_info_icon277439.black.png">
+    <Resource Include="Themes\SvgImages\message_question_icon109120.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\message_question_icon109120.black.png">
+    <Resource Include="Themes\SvgImages\minimize_icon246566.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\minimize_icon246566.black.png">
+    <Resource Include="Themes\SvgImages\nextTrack_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\nextTrack_icon.black.disabled.png">
+    <Resource Include="Themes\SvgImages\openFolder_icon356582.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\nextTrack_icon.black.png">
+    <Resource Include="Themes\SvgImages\pause_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\openFolder_icon356582.black.png">
+    <Resource Include="Themes\SvgImages\pencil_icon79516.svg" />
+    <Resource Include="Themes\SvgImages\play_icon.svg" />
+    <Resource Include="Themes\SvgImages\plus_icon171498.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\pause_icon.black.disabled.png">
+    <Resource Include="Themes\SvgImages\prevTrack_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\pause_icon.black.png">
+    <Resource Include="Themes\SvgImages\record_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\pencil_icon353603.black.png">
+    <Resource Include="Themes\SvgImages\settings_icon40863.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\pencil_icon79516.black.disabled.png">
+    <Resource Include="Themes\SvgImages\shutDown_icon170336.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\pencil_icon79516.black.png">
+    <Resource Include="Themes\SvgImages\stop_icon.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\play_icon.black.disabled.png">
+    <Resource Include="Themes\SvgImages\trash_icon77730.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\play_icon.black.png">
+    <Resource Include="Themes\SvgImages\windowOptions_icon510828.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Themes\ButtonImages\plus_icon171498.black.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\prevTrack_icon.black.disabled.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\prevTrack_icon.black.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\record_icon.black.disabled.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\record_icon.black.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\settings_icon40863.black.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\settings_icon40863.black.white.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\shutDown_icon170336.black.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\stop_icon.black.disabled.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\stop_icon.black.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\tools_icon536263.black.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\trash_icon77730.black.disabled.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\trash_icon77730.black.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Themes\ButtonImages\windowSettings_icon248857.black.png">
+    <Resource Include="Themes\SvgImages\windowSettings_icon248857.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -1,8 +1,0 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:RecNForget.Controls">
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/RecNForget.Controls;component/Themes/Simple_White.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-</ResourceDictionary>

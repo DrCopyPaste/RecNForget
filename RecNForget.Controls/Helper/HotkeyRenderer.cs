@@ -54,33 +54,33 @@ namespace RecNForget.Controls.Helper
             return buttonGrid;
         }
 
-        public static List<string> GetKeyEventArgsAsList(SimpleGlobalHotkeyServiceEventArgs keyEventArgs, ModifierKeys modifiers, string keyStart = "[", string keyEnd = "]")
+        public static List<string> GetKeyEventArgsAsList(SimpleGlobalHotkeyServiceEventArgs keyEventArgs, string keyStart = "[", string keyEnd = "]")
         {
             List<string> keys = new List<string>();
 
             // modifier keys
-            if ((modifiers & System.Windows.Input.ModifierKeys.Shift) > 0)
+            if (keyEventArgs.IsShiftPressed)
             {
                 keys.Add(keyStart + "Shift" + keyEnd);
             }
 
-            if ((modifiers & System.Windows.Input.ModifierKeys.Control) > 0)
+            if (keyEventArgs.IsCtrlPressed)
             {
                 keys.Add(keyStart + "Ctrl" + keyEnd);
             }
 
-            if ((modifiers & System.Windows.Input.ModifierKeys.Alt) > 0)
+            if (keyEventArgs.IsAltPressed)
             {
                 keys.Add(keyStart + "Alt" + keyEnd);
             }
 
-            if ((modifiers & System.Windows.Input.ModifierKeys.Windows) > 0)
+            if (keyEventArgs.IsWinPressed)
             {
                 keys.Add(keyStart + "Win" + keyEnd);
             }
 
             // actual hotkey
-            if (keyEventArgs.Key != "None")
+            if (!keyEventArgs.KeyIsModifier)
             {
                 keys.Add(keyStart + keyEventArgs.Key.ToString() + keyEnd);
             }

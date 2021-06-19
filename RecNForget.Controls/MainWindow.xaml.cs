@@ -50,7 +50,14 @@ namespace RecNForget.Controls
             }
             else
             {
+                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
+                this.Resources = null;
+
                 this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+                //actionService.ChangeTheme("Simple_Black");
+                //this.InvalidateVisual();
+
+
                 this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
                 SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
@@ -91,7 +98,9 @@ namespace RecNForget.Controls
 
                 // initialize control visibility (is being toggled via SettingService_PropertyChanged - binding with bool to visibility converter did not update)
                 OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                OutputPathControlSpacer.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
                 SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                SelectedFileControlSpacer.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
 
                 this.Topmost = SettingService.WindowAlwaysOnTop;
 
@@ -323,12 +332,14 @@ namespace RecNForget.Controls
                 case nameof(SettingService.OutputPathControlVisible):
                 {
                     OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                    OutputPathControlSpacer.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 }
 
                 case nameof(SettingService.SelectedFileControlVisible):
                 {
                     SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                    SelectedFileControlSpacer.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 }
             }

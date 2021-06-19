@@ -8,11 +8,12 @@
         Topmost="True"
         Style="{DynamicResource DefaultWindowStyle}"
         WindowStartupLocation="CenterOwner"
-        Title="RecNForget - Things changed" >
+        AllowsTransparency="True"
+        Title="RecNForget - Things changed">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
-        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{StaticResource DefaultButtonStyle}"
+        <NodeNme Grid.Row="0" Grid.Column="0" Grid.RowSpan="optional" Grid.ColSpan="optional" Style="{DynamicResource DefaultButtonStyle}"
             ...custom style definitions...
 			...
             Name="ControlName" Visibility="optional" Click="ClickEvent" ...event definitions...
@@ -22,91 +23,54 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Generic.xaml" />
+                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    <Border Style="{StaticResource DefaultWindowBorderStyle}">
-        <Grid Style="{StaticResource DefaultGridStyle}"
-            MouseDown="Window_MouseDown">
-            <Grid.RowDefinitions>
-                <!-- row 0 for title bar-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 1 for caption-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 2 for separator -->
-                <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
-                <!-- row 3 for verbose version info feature caption-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 4 for verbose version info features list-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 5 for new features caption-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 6 for new features features list-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 7 for bug fixes caption-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 8 for bug fixes features list-->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 9 for spacing -->
-                <RowDefinition Style="{StaticResource ParagaphSeparatorRowStyle}" />
-                <!-- row 10 for updates checkbox -->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                <!-- row 11 for buttons -->
-                <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource DefaultGridStyle}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Style="{StaticResource GrowForContainedControlsRowStyle}" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                    <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                </Grid.ColumnDefinitions>
+    <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
+        <StackPanel Orientation="Vertical">
+            <local:TitleBar HorizontalAlignment="Stretch" WithMinimizeButton="True" />
 
-                <local:ImageButton Grid.Row="0" Grid.Column="6" Style="{StaticResource ExitButton}"
-                    Click="Exit_Click" />
-            </Grid>
-
-            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource ApplicationName_TextBox_Style}"
+            <TextBlock Style="{DynamicResource ApplicationName_TextBox_Style}"
                 Text="Things changed since we last met" />
 
-            <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource DefaultTextBlockStyle}"
+            <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                 Name="VersionInfoCaption"
                 Text="Have a look at what's new!" />
-
-            <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource DefaultWindowBorderStyle}">
-                <ScrollViewer Style="{StaticResource NewToVersion_FeatureList_ScrollViewer_Style}">
+            <Border Style="{DynamicResource DefaultWindowBorderStyle}">
+                <ScrollViewer Style="{DynamicResource NewToVersion_FeatureList_ScrollViewer_Style}">
                     <Grid
                         Name="VersionInfoFeatureList">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Style="{StaticResource GrowForContainedControlsColumnStyle}" />
-                            <ColumnDefinition Style="{StaticResource GrowForRemainingSpaceColumnStyle}" />
+                            <ColumnDefinition Style="{DynamicResource GrowForContainedControlsColumnStyle}" />
+                            <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
                         </Grid.ColumnDefinitions>
                         <!-- Row Definitions dynamic (depending on how many features are found) -->
                     </Grid>
                 </ScrollViewer>
             </Border>
-
-            <CheckBox Grid.Row="10" Grid.Column="0" Style="{StaticResource DefaultCheckboxStyle}"
+            <CheckBox Grid.Row="10" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
                     IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
                 check for updates on start
             </CheckBox>
 
-            <local:ImageButton Grid.Row="11" Style="{StaticResource AcceptButton}"
+            <local:SvgImageButton1 Grid.Row="11" Style="{DynamicResource SvgAcceptButton}"
                 HorizontalAlignment="Right"
                 ToolTip="good to know"
                 Click="Exit_Click"/>
-        </Grid>
+        </StackPanel>
+        
+        
+        <!--<Grid Style="{DynamicResource DefaultGridStyle}"
+            >
+
+
+            
+
+            
+
+            
+        </Grid>-->
     </Border>
 </Window>

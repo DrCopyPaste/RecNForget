@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="RecNForget.Controls.TitleBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RecNForget.Controls"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+        <Border>
+            <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.Resources>
+                    <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <local:SvgImageButton1 Grid.Column="0" Style="{DynamicResource SvgWindowSettingsButton}" Click="SettingsButton_Click" Visibility="{Binding WithSettingsButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                <local:SvgImageButton1 Grid.Column="2" Style="{DynamicResource SvgWindowOptionsButton}" Click="WindowOptionsButton_Click" Visibility="{Binding WithWindowOptionsButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                <local:SvgImageButton1 Grid.Column="3" Style="{DynamicResource SvgMinimizeButton}" Click="MinimizeButton_Click" Visibility="{Binding WithMinimizeButton, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                <local:SvgImageButton1 Grid.Column="4" Style="{DynamicResource SvgExitButton}" Click="ExitButton_Click" IsCancel="{Binding ExitIsCancel}" />
+            </Grid>
+        </Border>
+</UserControl>
