@@ -48,6 +48,8 @@ namespace RecNForget.Services.Contracts
         string WindowTheme { get; set; }
 
         double UiScalingPercent { get; set; }
+        int Mp3ExportBitrate { get; set; }
+        bool PromptForExportFileName { get; set; }
 
         List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]");
         void RemoveAppConfigSettingFile();

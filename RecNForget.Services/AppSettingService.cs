@@ -34,6 +34,8 @@ namespace RecNForget.Services
         private static string selectedFileControlVisible_Key = "SelectedFileControlVisible";
         private static string windowTheme_Key = "WindowTheme";
         private static string uiScalingPercent_Key = "UiScalingPercent";
+        private static string mp3ExportBitrate_Key = "Mp3ExportBitrate";
+        private static string promptForExportFileName_Key = "PromptForExportFileName";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -370,6 +372,34 @@ namespace RecNForget.Services
             }
         }
 
+        public int Mp3ExportBitrate
+        {
+            get
+            {
+                return int.Parse(GetAppConfigSetting(AppSettingService.mp3ExportBitrate_Key));
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.mp3ExportBitrate_Key, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
+        public bool PromptForExportFileName
+        {
+            get
+            {
+                return Convert.ToBoolean(GetAppConfigSetting(AppSettingService.promptForExportFileName_Key));
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.promptForExportFileName_Key, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
         public List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]")
         {
             List<string> keys = new List<string>();
@@ -470,6 +500,8 @@ namespace RecNForget.Services
                 { AppSettingService.selectedFileControlVisible_Key, "False" },
                 { AppSettingService.windowTheme_Key, "Simple_White" },
                 { AppSettingService.uiScalingPercent_Key, (100.0).ToString() },
+                { AppSettingService.mp3ExportBitrate_Key, 320.ToString() },
+                { AppSettingService.promptForExportFileName_Key, "False" },
 
                 // dont show feature updates for versions below 0.3
                 { AppSettingService.lastInstalledVersion_Key, "0.3.0.0" }

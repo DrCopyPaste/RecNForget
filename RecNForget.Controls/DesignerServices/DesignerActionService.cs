@@ -43,6 +43,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void ExportSelectedFile()
+        {
+            throw new NotImplementedException();
+        }
+
         public void OpenOutputFolderInExplorer()
         {
             throw new System.NotImplementedException();

@@ -100,6 +100,11 @@ namespace RecNForget.Controls
             }
         }
 
+        private void ExportSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            actionService.ExportSelectedFile();
+        }
+
         private void ChangeSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
         {
             actionService.ChangeSelectedFileName();

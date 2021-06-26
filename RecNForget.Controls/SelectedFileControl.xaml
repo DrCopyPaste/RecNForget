@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
+                <ResourceDictionary Source="Themes\Simple_White.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -25,15 +25,21 @@
                             Name="FileInfoLabel" />
             </DockPanel>
             <DockPanel>
-                <TextBox Style="{DynamicResource MainWindowTextBoxStyle}"
-                         HorizontalAlignment="Left"
+                <Button Style="{DynamicResource BaseSettingButtonLayout}"
+                Background="{DynamicResource Secondary_Brush}"
+                HorizontalAlignment="Stretch"
+                ToolTip="rename selected file (Hotkey: [Return])"
+                Click="ChangeSelectedFileNameButton_Clicked">
+                    <TextBox Style="{DynamicResource MainWindowTextBoxStyle}"
+                         HorizontalAlignment="Stretch"
                         Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         d:Text="C:\YourPath\yourFile.wav" />
+                </Button>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <local:SvgImageButton1 Style="{DynamicResource SvgChangeFilePatternMiniButtonLayout}"
-                        ToolTip="rename selected file (Hotkey: [Return])"
+                    <local:SvgImageButton1 Style="{DynamicResource SvgExportFileMiniButtonLayout}"
+                        ToolTip="export selected file using default export settings (Hotkey: [X])"
                         IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                        x:Name="ChangeSelectedFileNameButton" Click="ChangeSelectedFileNameButton_Clicked"/>
+                        x:Name="ChangeSelectedFileNameButton" Click="ExportSelectedFileNameButton_Clicked"/>
 
                     <local:SvgImageButton1 Style="{DynamicResource SvgDeleteSelectedFileMiniButtonLayout}"
                         ToolTip="delete selected file (Hotkey: [Delete])"

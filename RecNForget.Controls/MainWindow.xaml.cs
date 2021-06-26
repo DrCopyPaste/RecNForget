@@ -452,6 +452,10 @@ namespace RecNForget.Controls
                 {
                     actionService.StopPlayingSelectedFile();
                 }
+                else if (e.Key == Key.X)
+                {
+                    actionService.ExportSelectedFile();
+                }
             }
         }
 

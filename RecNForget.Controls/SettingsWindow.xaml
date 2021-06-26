@@ -27,7 +27,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Simple_Black.xaml" />
+                <ResourceDictionary Source="Themes\Simple_White.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -51,6 +51,9 @@
                 </TabItem>
                 <TabItem Header="Output">
                     <StackPanel>
+                        <Label Style="{DynamicResource ControlLabelStyle}"
+                    Content="Recording Output"/>
+                        
                         <local:StringSettingButton HorizontalAlignment="Stretch"
                                                    SettingCaption="Output folder" SettingValue="{Binding Path=SettingService.OutputPath, Mode=TwoWay}"
                                                    d:SettingValue="C:\TargetPathToFile"
@@ -60,6 +63,58 @@
                                                    SettingCaption="File name pattern" SettingValue="{Binding Path=SettingService.FilenamePrefix, Mode=TwoWay}"
                                                    d:SettingValue="RecNForget_"
                                                    Click="Configure_FileNamePattern_Click"/>
+
+                        <Separator Style="{DynamicResource TransparentSeparator_Style}" />
+                        <Label Style="{DynamicResource ControlLabelStyle}" Content="MP3 Export Settings"/>
+
+                        <Grid  HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Bitrate" Style="{DynamicResource SettingsCaption_Label}" VerticalAlignment="Center" />
+                            <ComboBox Grid.Column="1" Style="{DynamicResource DefaultDropDownStyle}" SelectedValuePath="Tag" SelectedValue="{Binding Path=SettingService.Mp3ExportBitrate, Mode=TwoWay}">
+                                <ComboBoxItem Content="32 Kbps">
+                                    <ComboBoxItem.Tag>
+                                        <sys:Int32>32</sys:Int32>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="64 Kbps" d:IsSelected="True" IsSelected="True">
+                                    <ComboBoxItem.Tag>
+                                        <sys:Int32>64</sys:Int32>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="96 Kbps">
+                                    <ComboBoxItem.Tag>
+                                        <sys:Int32>96</sys:Int32>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="128 Kbps">
+                                    <ComboBoxItem.Tag>
+                                        <sys:Int32>128</sys:Int32>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="192 Kbps">
+                                    <ComboBoxItem.Tag>
+                                        <sys:Int32>192</sys:Int32>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="256 Kbps">
+                                    <ComboBoxItem.Tag>
+                                        <sys:Int32>256</sys:Int32>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                                <ComboBoxItem Content="320 Kbps">
+                                    <ComboBoxItem.Tag>
+                                        <sys:Int32>320</sys:Int32>
+                                    </ComboBoxItem.Tag>
+                                </ComboBoxItem>
+                            </ComboBox>
+                        </Grid>
+                        <CheckBox Style="{DynamicResource DefaultCheckboxStyle}"
+                        IsChecked="{Binding Path=SettingService.PromptForExportFileName}">
+                            prompt for exported file name
+                        </CheckBox>
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Application">

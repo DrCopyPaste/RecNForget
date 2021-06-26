@@ -34,5 +34,10 @@ namespace RecNForget.Services.Designer
         public bool DeleteSelectedFile() => throw new NotImplementedException();
 
         public bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension) => throw new NotImplementedException();
+
+        public string ExportFile(string preferredFileName = "")
+        {
+            throw new NotImplementedException();
+        }
     }
 }

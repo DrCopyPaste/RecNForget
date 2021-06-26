@@ -84,6 +84,62 @@ namespace RecNForget.WPF.Services
             }
         }
 
+        public void ExportSelectedFile()
+        {
+            audioPlaybackService.Stop();
+            audioPlaybackService.KillAudio();
+
+            string preferredFileName = string.Empty;
+
+            if (appSettingService.PromptForExportFileName)
+            {
+                CustomMessageBox tempDialog = new CustomMessageBox(
+                    caption: "Select a filename for the exported file",
+                    icon: CustomMessageBoxIcon.Question,
+                    buttons: CustomMessageBoxButtons.OkAndCancel,
+                    messageRows: new List<string>(),
+                    prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
+                    controlFocus: CustomMessageBoxFocus.Prompt,
+                    promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+                tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+                if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
+                {
+                    return;
+                }
+
+                preferredFileName = tempDialog.PromptContent;
+            }
+
+            var exportedFileName = selectedFileService.ExportFile(preferredFileName);
+            if (string.IsNullOrEmpty(exportedFileName))
+            {
+                CustomMessageBox errorMessageBox = new CustomMessageBox(
+                        caption: "Something went wrong",
+                        icon: CustomMessageBoxIcon.Error,
+                        buttons: CustomMessageBoxButtons.OK,
+                        messageRows: new List<string>() { "An error occurred trying to export the selected file" },
+                        controlFocus: CustomMessageBoxFocus.Ok);
+
+                return;
+            }
+
+
+            _notificationManager.ShowAsync(
+              content: new NotificationContent()
+              {
+                  Type = NotificationType.Success,
+                  Title = $"{selectedFileService.SelectedFile.Name} exported to MP3!",
+                  Message = $"Export was successful, file has been exported to {exportedFileName}."
+              },
+              onClick: () =>
+              {
+                  string argument = "/select, \"" + exportedFileName + "\"";
+                  System.Diagnostics.Process.Start("explorer.exe", argument);
+              });
+        }
+
         public void ChangeSelectedFileName()
         {
             audioPlaybackService.Stop();

@@ -23,5 +23,6 @@ namespace RecNForget.Services.Contracts
         bool DeleteSelectedFile();
 
         bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension);
+        string ExportFile(string preferredFileName = "");
     }
 }

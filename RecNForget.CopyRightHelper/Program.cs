@@ -43,7 +43,7 @@ namespace RecNForget.CopyRightHelper
             xamlHeader.AppendLine("\t" + @"<UserControl.Resources>");
             xamlHeader.AppendLine("\t\t" + @"<ResourceDictionary>");
             xamlHeader.AppendLine("\t\t\t" + @"<ResourceDictionary.MergedDictionaries>");
-            xamlHeader.AppendLine("\t\t\t\t" + @"<ResourceDictionary Source=""Themes\Generic.xaml"" />");
+            xamlHeader.AppendLine("\t\t\t\t" + @"<ResourceDictionary Source=""Themes\Simple_White.xaml"" />");
             xamlHeader.AppendLine("\t\t\t" + @"</ResourceDictionary.MergedDictionaries>");
             xamlHeader.AppendLine("\t\t" + @"</ResourceDictionary>");
             xamlHeader.AppendLine("\t" + @"</UserControl.Resources>");

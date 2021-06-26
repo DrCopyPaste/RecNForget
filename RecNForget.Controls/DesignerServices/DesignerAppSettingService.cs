@@ -151,6 +151,9 @@ namespace RecNForget.Services.Designer
         public string RuntimeVersionString => "0.0.0.0";
         public string RuntimeInformalVersionString => "0.0.0.0";
 
+        public int Mp3ExportBitrate { get => 320; set => throw new NotImplementedException(); }
+        public bool PromptForExportFileName { get => true; set => throw new NotImplementedException(); }
+
         public void RemoveAppConfigSettingFile() => throw new NotImplementedException();
 
         public bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false) => throw new NotImplementedException();

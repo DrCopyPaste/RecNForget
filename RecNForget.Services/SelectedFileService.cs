@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using NAudio.Wave;
 using RecNForget.Services.Contracts;
+using NAudio.Lame;
 
 namespace RecNForget.Services
 {
@@ -137,6 +138,46 @@ namespace RecNForget.Services
             {
                 return false;
             }
+        }
+
+        public string ExportFile(string preferredFileName = "")
+        {
+            string pseudoUniqueFileName = string.Empty;
+            string exportFolder = SelectedFile.DirectoryName;
+
+            try
+            {
+                // ToDo ensure file does not exist yet (would now be just overridden without asking)
+                // ToDo ensure unique export file name
+                pseudoUniqueFileName =
+                    string.IsNullOrEmpty(preferredFileName) ?
+                        Path.Combine(exportFolder, $"{SelectedFile.Name.Replace(SelectedFile.Extension, ".mp3")}") :
+                        Path.Combine(exportFolder, $"{preferredFileName}.mp3");
+
+                var generatedFileInfo = new FileInfo(pseudoUniqueFileName);
+                var generatedFileName = generatedFileInfo.Name.Replace(generatedFileInfo.Extension, string.Empty);
+
+                // ToDo progress indicator (longer files might take considerable longer to convert :D))
+                using (var reader = new AudioFileReader(SelectedFile.FullName))
+                using (var writer = new LameMP3FileWriter(
+                    outFileName: pseudoUniqueFileName,
+                    format: reader.WaveFormat,
+                    quality: (LAMEPreset)Enum.Parse(typeof(LAMEPreset), appSettingService.Mp3ExportBitrate.ToString()),
+                    id3: new ID3TagData()
+                    {
+                        Title = generatedFileName,
+                        Comment = "Powered by RecNForget @ https://github.com/DrCopyPaste/RecNForget/releases/latest",
+                        Year = DateTime.Now.Year.ToString()
+                    }
+                    ))
+                    reader.CopyTo(writer);
+            }
+            catch (Exception ex)
+            {
+                pseudoUniqueFileName = string.Empty;
+            }
+
+            return pseudoUniqueFileName;
         }
 
         /// <summary>

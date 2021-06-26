@@ -14,6 +14,7 @@
     <None Remove="Themes\SvgImages\close_icon349388.svg" />
     <None Remove="Themes\SvgImages\download_icon602.svg" />
     <None Remove="Themes\SvgImages\editSetting_icon451737.svg" />
+    <None Remove="Themes\SvgImages\export_icon343310.svg" />
     <None Remove="Themes\SvgImages\folder_icon122592.svg" />
     <None Remove="Themes\SvgImages\help_icon544157.svg" />
     <None Remove="Themes\SvgImages\information_icon2132.svg" />
@@ -86,6 +87,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\editSetting_icon451737.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Themes\SvgImages\export_icon343310.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Themes\SvgImages\folder_icon122592.svg">
