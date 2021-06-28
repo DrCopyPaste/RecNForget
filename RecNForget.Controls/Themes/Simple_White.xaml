@@ -961,6 +961,33 @@
         </Setter>
     </Style>
 
+    <Style x:Key="MainWindowTextBoxStyle2" TargetType="{x:Type local:TimeSpanTextBox}">
+        <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
+        <Setter Property="IsEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border CornerRadius="3" Padding="1" x:Name="InnerBorder" Background="{DynamicResource Secondary_Brush}" BorderBrush="{DynamicResource Primary_Brush}" BorderThickness="0,0,0,0">
+                        <ScrollViewer Padding="0" Margin="0" Background="{DynamicResource Secondary_Brush}" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" x:Name="PART_ContentHost" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="InnerBorder" Property="Background" Value="{DynamicResource Secondary_Brush}"/>
+                            <Setter TargetName="InnerBorder" Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{DynamicResource Secondary_Brush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="SettingTextBoxStyle" TargetType="TextBox">
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />

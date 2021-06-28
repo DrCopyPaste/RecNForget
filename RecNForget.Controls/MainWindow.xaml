@@ -37,6 +37,9 @@
 
             <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
                 <StackPanel>
+                    <local:RecordingTimerControl
+                            x:Name="Peter"/>
+                    <Separator Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:OutputPathControl
                             x:Name="OutputPathControl" />
                     <Separator x:Name="OutputPathControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
