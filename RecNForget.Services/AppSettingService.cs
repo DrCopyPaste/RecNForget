@@ -32,6 +32,11 @@ namespace RecNForget.Services
         private static string mainWindowTopY_Key = "MainWindowTopY";
         private static string outputPathControlVisible_Key = "OutputPathControlVisible";
         private static string selectedFileControlVisible_Key = "SelectedFileControlVisible";
+        private static string recordingTimerControlVisible_Key = "RecordingTimerControlVisible";
+        private static string recordingTimerStartAfterIsEnabled_Key = "RecordingTimerStartAfterIsEnabled";
+        private static string recordingTimerStopAfterIsEnabled_Key = "RecordingTimerStopAfterIsEnabled";
+        private static string recordingTimerStartAfterMax_Key = "RecordingTimerStartAfterMax";
+        private static string recordingTimerStopAfterMax_Key = "RecordingTimerStopAfterMax";
         private static string windowTheme_Key = "WindowTheme";
         private static string uiScalingPercent_Key = "UiScalingPercent";
         private static string mp3ExportBitrate_Key = "Mp3ExportBitrate";
@@ -344,6 +349,76 @@ namespace RecNForget.Services
             }
         }
 
+        public bool RecordingTimerControlVisible
+        {
+            get
+            {
+                return Convert.ToBoolean(GetAppConfigSetting(AppSettingService.recordingTimerControlVisible_Key));
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.recordingTimerControlVisible_Key, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
+        public bool RecordingTimerStartAfterIsEnabled
+        {
+            get
+            {
+                return Convert.ToBoolean(GetAppConfigSetting(AppSettingService.recordingTimerStartAfterIsEnabled_Key));
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.recordingTimerStartAfterIsEnabled_Key, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
+        public bool RecordingTimerStopAfterIsEnabled
+        {
+            get
+            {
+                return Convert.ToBoolean(GetAppConfigSetting(AppSettingService.recordingTimerStopAfterIsEnabled_Key));
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.recordingTimerStopAfterIsEnabled_Key, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
+        public string RecordingTimerStartAfterMax
+        {
+            get
+            {
+                return GetAppConfigSetting(AppSettingService.recordingTimerStartAfterMax_Key);
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.recordingTimerStartAfterMax_Key, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
+        public string RecordingTimerStopAfterMax
+        {
+            get
+            {
+                return GetAppConfigSetting(AppSettingService.recordingTimerStopAfterMax_Key);
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.recordingTimerStopAfterMax_Key, value.ToString());
+                OnPropertyChanged();
+            }
+        }
+
         public string WindowTheme
         {
             get
@@ -498,6 +573,11 @@ namespace RecNForget.Services
                 { AppSettingService.showTipsAtApplicationStart_Key, "True" },
                 { AppSettingService.outputPathControlVisible_Key, "False" },
                 { AppSettingService.selectedFileControlVisible_Key, "False" },
+                { AppSettingService.recordingTimerControlVisible_Key, "False" },
+                { AppSettingService.recordingTimerStartAfterIsEnabled_Key, "False" },
+                { AppSettingService.recordingTimerStopAfterIsEnabled_Key, "False" },
+                { AppSettingService.recordingTimerStartAfterMax_Key, "0:00:00:00" },
+                { AppSettingService.recordingTimerStopAfterMax_Key, "0:00:00:00" },
                 { AppSettingService.windowTheme_Key, "Simple_White" },
                 { AppSettingService.uiScalingPercent_Key, (100.0).ToString() },
                 { AppSettingService.mp3ExportBitrate_Key, 320.ToString() },

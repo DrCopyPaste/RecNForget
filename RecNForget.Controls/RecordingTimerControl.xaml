@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RecNForget.Controls"
+             xmlns:local="clr-namespace:RecNForget.Controls" d:DataContext="{d:DesignInstance Type=local:RecordingTimerControl}"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -14,48 +14,41 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Border Style="{DynamicResource DefaultControlBorderStyle}" HorizontalAlignment="Stretch">
-        <StackPanel Orientation="Vertical">
-            <DockPanel>
-                <Label Style="{DynamicResource ControlLabelStyle}"
-                       HorizontalAlignment="Left"
-                        Content="Record with timer" />
-            </DockPanel>
-            <DockPanel>
-                <Grid>
-                    <CheckBox Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.PromptForExportFileName}">
-                        <StackPanel Orientation="Horizontal">
-                            <Label>Check this</Label>
-                            <local:TimeSpanTextBox Style="{DynamicResource MainWindowTextBoxStyle}"
-                             x:Name="TimerTimeSpanTextBox"
-                                           SelectionChanged="TimeSpanTextBox_SelectionChanged"
-                         HorizontalAlignment="Stretch"
-                             IsEnabled="True"
-                        Text="{Binding Path=CurrentCountDownTimerMax, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        KeyDown="TextBox_KeyDown"
-                             />
-                            <local:SvgImageButton1 Style="{DynamicResource SvgDeleteSelectedFileMiniButtonLayout}"
-                        ToolTip="delete selected file (Hotkey: [Delete])"
-                        x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Click"/>
-                        </StackPanel>
-                    </CheckBox>
-                </Grid>
-
-                <!-- , Converter={StaticResource _StringToTimeSpanConverter} -->
-                
-                
-                <!--<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <local:SvgImageButton1 Style="{DynamicResource SvgCancelButton}"
-                        ToolTip="export selected file using default export settings (Hotkey: [X])"
-                        IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                        x:Name="ChangeSelectedFileNameButton" Click="ExportSelectedFileNameButton_Clicked"/>
-
-                    <local:SvgImageButton1 Style="{DynamicResource SvgRecordButton}"
-                        ToolTip="delete selected file (Hotkey: [Delete])"
-                        IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                        x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
-                </StackPanel>-->
-            </DockPanel>
+        <StackPanel>
+            <Label Style="{DynamicResource ControlLabelStyle}"
+                    Content="Recording timers (d:hh:mm:ss)"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
+                        HorizontalAlignment="Stretch"
+                        IsChecked="{Binding Path=SettingService.RecordingTimerStopAfterIsEnabled}">
+                    <DockPanel HorizontalAlignment="Right">
+                        <Label HorizontalAlignment="Left" >Stop after</Label>
+                        <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
+                            x:Name="StopAfterTimeSpanTextBox"
+                            IsEnabled="{Binding Path=ActionService.TimerForRecordingStopAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                            TimerBoundTextValueTimeSpan="{Binding Path=ActionService.CurrentRecordingStopAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                            SettingTextValueTimeSpan="{Binding Path=SettingService.RecordingTimerStopAfterMax, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            />
+                    </DockPanel>
+                </CheckBox>
+                <CheckBox Grid.Column="1" Style="{DynamicResource DefaultCheckboxStyle}"
+                        HorizontalAlignment="Stretch"
+                        IsChecked="{Binding Path=SettingService.RecordingTimerStartAfterIsEnabled}">
+                    <DockPanel HorizontalAlignment="Right">
+                        <Label HorizontalAlignment="Left" >Stop after</Label>
+                        <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
+                            x:Name="StartAfterTimeSpanTextBox"
+                            IsEnabled="{Binding Path=ActionService.TimerForRecordingStartAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                            TimerBoundTextValueTimeSpan="{Binding Path=ActionService.CurrentRecordingStartAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                            SettingTextValueTimeSpan="{Binding Path=SettingService.RecordingTimerStartAfterMax, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            />
+                    </DockPanel>
+                </CheckBox>
+            </Grid>
         </StackPanel>
-        </Border>
+    </Border>
 </UserControl>

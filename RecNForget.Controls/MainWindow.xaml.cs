@@ -38,6 +38,7 @@ namespace RecNForget.Controls
             DataContext = this;
             InitializeComponent();
 
+
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 this.actionService = new DesignerActionService();
@@ -340,6 +341,13 @@ namespace RecNForget.Controls
                 {
                     SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
                     SelectedFileControlSpacer.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                    break;
+                }
+
+                case nameof(SettingService.RecordingTimerControlVisible):
+                {
+                    RecordingTimerControl.Visibility = SettingService.RecordingTimerControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                    RecordingTimerControlSpacer.Visibility = SettingService.RecordingTimerControlVisible ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 }
             }

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using NAudio.Wave;
 using Notifications.Wpf.Core;
 using Ookii.Dialogs.Wpf;
@@ -35,7 +38,20 @@ namespace RecNForget.WPF.Services
 
         private readonly NotificationManager _notificationManager = new NotificationManager();
 
+        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private string GetCurrentDispatcherTimeString()
+        {
+            return dispatcherTimerCurrentTime.ToString(TimeSpanTextBox.ParseFormat);
+        }
+
+        private TimeSpan dispatcherTimerCurrentTime = TimeSpan.Zero;
+
         public Control OwnerControl { get; set; }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
         public ActionService()
@@ -45,6 +61,122 @@ namespace RecNForget.WPF.Services
             this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
             this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
             this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
+
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+        }
+
+        private bool timerForRecordingStartAfterNotRunning = true;
+        public bool TimerForRecordingStartAfterNotRunning
+        {
+            get { return timerForRecordingStartAfterNotRunning; }
+            set { timerForRecordingStartAfterNotRunning = value; OnPropertyChanged(); }
+        }
+
+        private bool timerForRecordingStopAfterNotRunning = true;
+
+        public bool TimerForRecordingStopAfterNotRunning
+        {
+            get { return timerForRecordingStopAfterNotRunning; }
+            set { timerForRecordingStopAfterNotRunning = value; OnPropertyChanged(); }
+        }
+
+
+        private string currentRecordingStopAfterTimer = "0:00:00:00";
+
+        public string CurrentRecordingStopAfterTimer
+        {
+            get { return currentRecordingStopAfterTimer; }
+            set { currentRecordingStopAfterTimer = value; OnPropertyChanged(); }
+        }
+
+        private string currentRecordingStartAfterTimer = "0:00:00:00";
+
+        public string CurrentRecordingStartAfterTimer
+        {
+            get { return currentRecordingStartAfterTimer; }
+            set { currentRecordingStartAfterTimer = value; OnPropertyChanged(); }
+        }
+
+
+        // only one timer at the same time (either stopping time until recording start or stop)
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            dispatcherTimerCurrentTime = dispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));
+
+            if (!TimerForRecordingStartAfterNotRunning)
+            {
+                CurrentRecordingStartAfterTimer = GetCurrentDispatcherTimeString();
+            }
+            else
+            {
+                CurrentRecordingStopAfterTimer = GetCurrentDispatcherTimeString();
+            }
+
+            if (dispatcherTimerCurrentTime.TotalSeconds < 1)
+            {
+                // ToDo more than two timer options?
+                // timer finished, trigger respective method either way
+                if (!TimerForRecordingStartAfterNotRunning)
+                {
+                    if (!audioRecordingService.CurrentlyRecording)
+                    {
+                        audioRecordingService.ToggleRecording();
+
+                        if (appSettingService.RecordingTimerStopAfterIsEnabled)
+                        {
+                            StartTimerToStopRecordingAfter();
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    if (audioRecordingService.CurrentlyRecording)
+                    {
+                        audioRecordingService.ToggleRecording();
+                    }
+                }
+
+                ResetDispatcherTimer();
+            }
+        }
+
+        public void StartTimerToStartRecordingAfter()
+        {
+            // reset all other possibly running timers
+            ResetDispatcherTimer();
+            dispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
+            CurrentRecordingStartAfterTimer = GetCurrentDispatcherTimeString();
+            TimerForRecordingStartAfterNotRunning = false;
+
+            dispatcherTimer.Start();
+        }
+
+        public void StartTimerToStopRecordingAfter()
+        {
+            // reset all other possibly running timers
+            ResetDispatcherTimer();
+            dispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
+            CurrentRecordingStopAfterTimer = GetCurrentDispatcherTimeString();
+            TimerForRecordingStopAfterNotRunning = false;
+
+            dispatcherTimer.Start();
+        }
+
+        private void ResetDispatcherTimer()
+        {
+            dispatcherTimer.Stop();
+
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimerCurrentTime = TimeSpan.Zero;
+            TimerForRecordingStartAfterNotRunning = true;
+            TimerForRecordingStopAfterNotRunning = true;
+
+            CurrentRecordingStartAfterTimer = appSettingService.RecordingTimerStartAfterMax;
+            CurrentRecordingStopAfterTimer = appSettingService.RecordingTimerStopAfterMax;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -339,6 +471,11 @@ namespace RecNForget.WPF.Services
             appSettingService.OutputPathControlVisible = !appSettingService.OutputPathControlVisible;
         }
 
+        public void ToggleRecordingTimerControlVisibility()
+        {
+            appSettingService.RecordingTimerControlVisible = !appSettingService.RecordingTimerControlVisible;
+        }
+
         public void ToggleSelectedFileControlVisibility()
         {
             appSettingService.SelectedFileControlVisible = !appSettingService.SelectedFileControlVisible;
@@ -362,7 +499,28 @@ namespace RecNForget.WPF.Services
 
         public void ToggleStartStopRecording()
         {
-            audioRecordingService.ToggleRecording();
+            ResetDispatcherTimer();
+
+            if (!appSettingService.RecordingTimerStartAfterIsEnabled && !appSettingService.RecordingTimerStopAfterIsEnabled)
+            {
+                audioRecordingService.ToggleRecording();
+                return;
+            }
+
+            // stop recording immediately if this is triggered
+            if (audioRecordingService.CurrentlyRecording)
+            {
+                audioRecordingService.ToggleRecording();
+                return;
+            }
+
+            if (appSettingService.RecordingTimerStartAfterIsEnabled)
+            {
+                StartTimerToStartRecordingAfter();
+                return;
+            }
+
+            // no reason to arrive here?
         }
 
         public bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
@@ -441,6 +599,18 @@ namespace RecNForget.WPF.Services
                 IsCheckable = true,
                 IsChecked = appSettingService.SelectedFileControlVisible,
                 Header = "Selected File Control",
+                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+            };
+            item.Click += ToggleSelectedFileControlVisibility;
+            menu.Items.Add(item);
+
+            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+
+            item = new System.Windows.Controls.MenuItem()
+            {
+                IsCheckable = true,
+                IsChecked = appSettingService.SelectedFileControlVisible,
+                Header = "Recording Timer Control",
                 Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
             };
             item.Click += ToggleSelectedFileControlVisibility;
@@ -596,6 +766,11 @@ namespace RecNForget.WPF.Services
         private void ToggleAlwaysOnTop(object sender, RoutedEventArgs e)
         {
             ToggleAlwaysOnTop();
+        }
+
+        private void ToggleRecordingTimerControlVisibility(object sender, RoutedEventArgs e)
+        {
+            ToggleRecordingTimerControlVisibility();
         }
 
         private void ToggleSelectedFileControlVisibility(object sender, RoutedEventArgs e)
