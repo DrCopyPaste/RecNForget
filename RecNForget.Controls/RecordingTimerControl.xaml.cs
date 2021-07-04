@@ -79,5 +79,21 @@ namespace RecNForget.Controls
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void StopAfter_Checked_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!actionService.TimerForRecordingStopAfterNotRunning && (!StopAfter_CheckBox.IsChecked.HasValue || !StopAfter_CheckBox.IsChecked.Value))
+            {
+                actionService.ResetDispatcherTimer();
+            }
+        }
+
+        private void StartAfter_Checked_Changed(object sender, RoutedEventArgs e)
+        {
+            if (!actionService.TimerForRecordingStartAfterNotRunning && (!StartAfter_CheckBox.IsChecked.HasValue || !StartAfter_CheckBox.IsChecked.Value))
+            {
+                actionService.ResetDispatcherTimer();
+            }
+        }
     }
 }

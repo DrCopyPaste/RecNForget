@@ -62,6 +62,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void ResetDispatcherTimer()
+        {
+            throw new NotImplementedException();
+        }
+
         public void SelectNextFile()
         {
             throw new System.NotImplementedException();

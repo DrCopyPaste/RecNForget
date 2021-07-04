@@ -23,7 +23,9 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <CheckBox Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
+                        x:Name="StopAfter_CheckBox"
                         HorizontalAlignment="Stretch"
+                        Checked="StopAfter_Checked_Changed" Unchecked="StopAfter_Checked_Changed"
                         IsChecked="{Binding Path=SettingService.RecordingTimerStopAfterIsEnabled}">
                     <DockPanel HorizontalAlignment="Right">
                         <Label HorizontalAlignment="Left" >Stop after</Label>
@@ -36,7 +38,9 @@
                     </DockPanel>
                 </CheckBox>
                 <CheckBox Grid.Column="1" Style="{DynamicResource DefaultCheckboxStyle}"
+                        x:Name="StartAfter_CheckBox"
                         HorizontalAlignment="Stretch"
+                        Checked="StartAfter_Checked_Changed" Unchecked="StartAfter_Checked_Changed"
                         IsChecked="{Binding Path=SettingService.RecordingTimerStartAfterIsEnabled}">
                     <DockPanel HorizontalAlignment="Right">
                         <Label HorizontalAlignment="Left" >Start after</Label>

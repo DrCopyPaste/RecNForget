@@ -164,7 +164,7 @@ namespace RecNForget.WPF.Services
             dispatcherTimer.Start();
         }
 
-        private void ResetDispatcherTimer()
+        public void ResetDispatcherTimer()
         {
             dispatcherTimer.Stop();
 
