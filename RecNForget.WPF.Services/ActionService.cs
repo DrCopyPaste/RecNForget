@@ -499,10 +499,9 @@ namespace RecNForget.WPF.Services
 
         public void ToggleStartStopRecording()
         {
-            ResetDispatcherTimer();
-
             if (!appSettingService.RecordingTimerStartAfterIsEnabled && !appSettingService.RecordingTimerStopAfterIsEnabled)
             {
+                ResetDispatcherTimer();
                 audioRecordingService.ToggleRecording();
                 return;
             }
@@ -510,14 +509,28 @@ namespace RecNForget.WPF.Services
             // stop recording immediately if this is triggered
             if (audioRecordingService.CurrentlyRecording)
             {
+                ResetDispatcherTimer();
                 audioRecordingService.ToggleRecording();
                 return;
             }
 
             if (appSettingService.RecordingTimerStartAfterIsEnabled)
             {
+                // override start to recording timer if action was triggered again
+                if (dispatcherTimer.IsEnabled)
+                {
+                    ResetDispatcherTimer();
+                    audioRecordingService.ToggleRecording();
+
+                    if (appSettingService.RecordingTimerStopAfterIsEnabled)
+                    {
+                        StartTimerToStopRecordingAfter();
+                    }
+
+                    return;
+                }
+
                 StartTimerToStartRecordingAfter();
-                return;
             }
 
             // no reason to arrive here?

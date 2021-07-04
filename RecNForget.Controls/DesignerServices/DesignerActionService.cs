@@ -10,10 +10,10 @@ namespace RecNForget.Services.Designer
     public class DesignerActionService : IActionService
     {
         public Control OwnerControl { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public string CurrentRecordingStartAfterTimer { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string CurrentRecordingStopAfterTimer { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool TimerForRecordingStartAfterNotRunning { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool TimerForRecordingStopAfterNotRunning { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string CurrentRecordingStartAfterTimer { get => "0:00:13:37"; set => throw new NotImplementedException(); }
+        public string CurrentRecordingStopAfterTimer { get => "0:00:31:41"; set => throw new NotImplementedException(); }
+        public bool TimerForRecordingStartAfterNotRunning { get => false; set => throw new NotImplementedException(); }
+        public bool TimerForRecordingStopAfterNotRunning { get => false; set => throw new NotImplementedException(); }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

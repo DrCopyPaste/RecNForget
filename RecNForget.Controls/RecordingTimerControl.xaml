@@ -39,7 +39,7 @@
                         HorizontalAlignment="Stretch"
                         IsChecked="{Binding Path=SettingService.RecordingTimerStartAfterIsEnabled}">
                     <DockPanel HorizontalAlignment="Right">
-                        <Label HorizontalAlignment="Left" >Stop after</Label>
+                        <Label HorizontalAlignment="Left" >Start after</Label>
                         <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="StartAfterTimeSpanTextBox"
                             IsEnabled="{Binding Path=ActionService.TimerForRecordingStartAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"

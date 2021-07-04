@@ -1,5 +1,6 @@
 ﻿using RecNForget.IoC;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace RecNForget.Controls
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
+                ActionService = new DesignerActionService();
+                SettingService = new DesignerAppSettingService();
+
                 return;
             }
             else

@@ -19,8 +19,9 @@
             <TextBox Style="{DynamicResource TimeSpanTextBoxStyle}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="SettingTextValueTimeSpanBoxTextBox"
                             TextChanged="TimeSpanTextBox_TextChanged"
-                     
+                            
                             IsEnabled="True"
+                            d:IsEnabled="True"
                             Text="{Binding Path=SettingTextValueTimeSpan, RelativeSource={RelativeSource AncestorType=local:TimeSpanTextBox}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             d:Text="0:00:00:00"
                             d:Visibility="Visible">
@@ -28,6 +29,7 @@
             <TextBox Style="{DynamicResource TimeSpanTextBoxStyle}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="TimerBoundTextValueTimeSpanTextBox"                    
                             IsEnabled="True"
+                            d:IsEnabled="False"
                             Text="{Binding Path=TimerBoundTextValueTimeSpan, RelativeSource={RelativeSource AncestorType=local:TimeSpanTextBox},Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             d:Visibility="Visible"
                             d:Text="0:00:00:00"
