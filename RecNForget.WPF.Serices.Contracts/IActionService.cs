@@ -62,5 +62,6 @@ namespace RecNForget.WPF.Services.Contracts
         void ExportSelectedFile();
         void StartTimerToStartRecordingAfter();
         void ResetDispatcherTimer();
+        void StartTimerToStopRecordingAfter();
     }
 }

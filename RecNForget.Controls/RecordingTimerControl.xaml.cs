@@ -28,6 +28,7 @@ namespace RecNForget.Controls
     {
         private IAppSettingService settingService;
         private IActionService actionService;
+        private IAudioRecordingService audioRecordingService;
 
         public RecordingTimerControl()
         {
@@ -37,6 +38,7 @@ namespace RecNForget.Controls
             {
                 ActionService = new DesignerActionService();
                 SettingService = new DesignerAppSettingService();
+                AudioRecordingService = new DesignerAudioRecordingService();
 
                 return;
             }
@@ -44,6 +46,7 @@ namespace RecNForget.Controls
             {
                 ActionService = UnityHandler.UnityContainer.Resolve<IActionService>();
                 SettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
+                AudioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
             }
         }
         public IActionService ActionService
@@ -73,6 +76,20 @@ namespace RecNForget.Controls
             }
         }
 
+        public IAudioRecordingService AudioRecordingService
+        {
+            get
+            {
+                return audioRecordingService;
+            }
+
+            set
+            {
+                audioRecordingService = value;
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -82,6 +99,14 @@ namespace RecNForget.Controls
 
         private void StopAfter_Checked_Changed(object sender, RoutedEventArgs e)
         {
+            if (StopAfter_CheckBox.IsChecked.HasValue && StopAfter_CheckBox.IsChecked.Value)
+            {
+                if (AudioRecordingService.CurrentlyRecording)
+                {
+                    actionService.StartTimerToStopRecordingAfter();
+                }
+            }
+
             if (!actionService.TimerForRecordingStopAfterNotRunning && (!StopAfter_CheckBox.IsChecked.HasValue || !StopAfter_CheckBox.IsChecked.Value))
             {
                 actionService.ResetDispatcherTimer();

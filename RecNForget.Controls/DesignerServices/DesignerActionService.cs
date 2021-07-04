@@ -122,6 +122,11 @@ namespace RecNForget.Services.Designer
             throw new NotImplementedException();
         }
 
+        public void StartTimerToStopRecordingAfter()
+        {
+            throw new NotImplementedException();
+        }
+
         public void StopPlayingSelectedFile()
         {
             throw new System.NotImplementedException();
