@@ -102,6 +102,8 @@ namespace RecNForget.Controls
                 OutputPathControlSpacer.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
                 SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
                 SelectedFileControlSpacer.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                RecordingTimerControl.Visibility = SettingService.RecordingTimerControlVisible ? Visibility.Visible : Visibility.Collapsed;
+                RecordingTimerControlSpacer.Visibility = SettingService.RecordingTimerControlVisible ? Visibility.Visible : Visibility.Collapsed;
 
                 this.Topmost = SettingService.WindowAlwaysOnTop;
 

@@ -622,11 +622,11 @@ namespace RecNForget.WPF.Services
             item = new System.Windows.Controls.MenuItem()
             {
                 IsCheckable = true,
-                IsChecked = appSettingService.SelectedFileControlVisible,
+                IsChecked = appSettingService.RecordingTimerControlVisible,
                 Header = "Recording Timer Control",
                 Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
             };
-            item.Click += ToggleSelectedFileControlVisibility;
+            item.Click += ToggleRecordingTimerControlVisibility;
             menu.Items.Add(item);
 
             menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
