@@ -28,7 +28,7 @@
                         Checked="StopAfter_Checked_Changed" Unchecked="StopAfter_Checked_Changed"
                         IsChecked="{Binding Path=SettingService.RecordingTimerStopAfterIsEnabled}">
                     <DockPanel HorizontalAlignment="Right">
-                        <Label HorizontalAlignment="Left" >Stop after</Label>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource Base_Label}" Margin="0,0,3,0">Stop after</Label>
                         <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="StopAfterTimeSpanTextBox"
                             IsEnabled="{Binding Path=ActionService.TimerForRecordingStopAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
@@ -43,7 +43,7 @@
                         Checked="StartAfter_Checked_Changed" Unchecked="StartAfter_Checked_Changed"
                         IsChecked="{Binding Path=SettingService.RecordingTimerStartAfterIsEnabled}">
                     <DockPanel HorizontalAlignment="Right">
-                        <Label HorizontalAlignment="Left" >Start after</Label>
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource Base_Label}" Margin="0,0,3,0">Start after</Label>
                         <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="StartAfterTimeSpanTextBox"
                             IsEnabled="{Binding Path=ActionService.TimerForRecordingStartAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"

@@ -40,10 +40,9 @@ namespace RecNForget.Controls
             }
         }
 
-        public HotkeySettingButton(IActionService actionService)
+        public HotkeySettingButton()
         {
             InitializeComponent();
-            this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -51,7 +50,9 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = actionService;
+                this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
+                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
             }
