@@ -2,6 +2,7 @@
 using System.Windows.Threading;
 using PressingIssue.Services.Contracts;
 using RecNForget.Services.Contracts;
+using RecNForget.WPF.Services.Contracts;
 
 namespace RecNForget.Services
 {
@@ -13,14 +14,18 @@ namespace RecNForget.Services
 
         private readonly ISimpleGlobalHotkeyService globalHotkeyService;
 
-        public ApplicationHotkeyService(ISimpleGlobalHotkeyService globalHotkeyService, IAppSettingService appSettingService, IAudioRecordingService audioRecordingService, IAudioPlaybackService audioPlaybackService)
+        public ApplicationHotkeyService(
+            ISimpleGlobalHotkeyService globalHotkeyService,
+            IAppSettingService appSettingService,
+            IAudioRecordingService audioRecordingService,
+            IAudioPlaybackService audioPlaybackService)
         {
             this.globalHotkeyService = globalHotkeyService;
             this.appSettingService = appSettingService;
             this.audioRecordingService = audioRecordingService;
             this.audioPlaybackService = audioPlaybackService;
 
-            ResetAndReadHotkeysFromConfig();
+            //ResetAndReadHotkeysFromConfig();
         }
 
         public void PauseCapturingHotkeys(bool pause = true)
@@ -28,7 +33,7 @@ namespace RecNForget.Services
             globalHotkeyService.ProcessingHotkeys = !pause;
         }
 
-        public void ResetAndReadHotkeysFromConfig()
+        public void ResetAndReadHotkeysFromConfig(IActionService actionService)
         {
             globalHotkeyService.RemoveAllHotkeys();
 
@@ -37,7 +42,7 @@ namespace RecNForget.Services
             // hotkey action should not make hotkeyservice/hook wait
             globalHotkeyService.AddOrUpdateOnReleaseHotkey(
                 appSettingService.HotKey_StartStopRecording,
-                () => new Task(() => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => audioRecordingService.ToggleRecording()); } }).Start());
+                () => new Task(() => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } }).Start());
         }
 
         public void ResumeCapturingHotkeys()

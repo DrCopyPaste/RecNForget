@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RecNForget.Services.Contracts;
+using RecNForget.WPF.Services.Contracts;
 
 namespace RecNForget.Services.Designer
 {
@@ -14,7 +15,7 @@ namespace RecNForget.Services.Designer
             throw new NotImplementedException();
         }
 
-        public void ResetAndReadHotkeysFromConfig()
+        public void ResetAndReadHotkeysFromConfig(IActionService actionService)
         {
             throw new NotImplementedException();
         }

@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
+﻿using RecNForget.WPF.Services.Contracts;
+using System.ComponentModel;
 using System.Windows;
 
 namespace RecNForget.Services.Contracts
 {
     public interface IApplicationHotkeyService
     {
-        void ResetAndReadHotkeysFromConfig();
-
         void PauseCapturingHotkeys(bool pause = true);
 
         void ResumeCapturingHotkeys();
+        void ResetAndReadHotkeysFromConfig(IActionService actionService);
     }
 }

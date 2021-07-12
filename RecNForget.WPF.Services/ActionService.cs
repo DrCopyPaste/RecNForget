@@ -62,6 +62,8 @@ namespace RecNForget.WPF.Services
             this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
             this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
+            hotkeyService.ResetAndReadHotkeysFromConfig(this);
+
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
         }
@@ -753,7 +755,7 @@ namespace RecNForget.WPF.Services
 
         public void ShowSettingsMenu()
         {
-            var settingsWindow = new SettingsWindow(hotkeyService, appSettingService);
+            var settingsWindow = new SettingsWindow(hotkeyService, appSettingService, this);
             settingsWindow.TrySetViewablePositionFromOwner(OwnerControl);
 
             settingsWindow.ShowDialog();

@@ -1,6 +1,8 @@
 ﻿using RecNForget.Controls.Helper;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
+using RecNForget.WPF.Services.Contracts;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -26,6 +28,7 @@ namespace RecNForget.Controls
             DependencyProperty.Register("SettingValue", typeof(string), typeof(HotkeySettingButton), new PropertyMetadata(default(string)));
 
         private readonly IApplicationHotkeyService hotkeyService;
+        private readonly IActionService actionService;
 
         public string SettingValue
         {
@@ -37,15 +40,18 @@ namespace RecNForget.Controls
             }
         }
 
-        public HotkeySettingButton()
+        public HotkeySettingButton(IActionService actionService)
         {
             InitializeComponent();
             this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
             if (DesignerProperties.GetIsInDesignMode(this))
-            { }
+            {
+                this.actionService = new DesignerActionService();
+            }
             else
             {
+                this.actionService = actionService;
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
             }
@@ -68,7 +74,7 @@ namespace RecNForget.Controls
             if (dialog.ShowDialog() == true)
             {
                 SettingValue = dialog.HotkeysAppSetting;
-                this.hotkeyService.ResetAndReadHotkeysFromConfig();
+                this.hotkeyService.ResetAndReadHotkeysFromConfig(actionService);
             }
         }
     }
