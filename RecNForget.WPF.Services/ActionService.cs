@@ -497,20 +497,24 @@ namespace RecNForget.WPF.Services
             }
         }
 
+        private void ToggleRecordingWithTimerReset()
+        {
+            ResetDispatcherTimer();
+            audioRecordingService.ToggleRecording();
+        }
+
         public void ToggleStartStopRecording()
         {
             if (!appSettingService.RecordingTimerStartAfterIsEnabled && !appSettingService.RecordingTimerStopAfterIsEnabled)
             {
-                ResetDispatcherTimer();
-                audioRecordingService.ToggleRecording();
+                ToggleRecordingWithTimerReset();
                 return;
             }
 
             // stop recording immediately if this is triggered
             if (audioRecordingService.CurrentlyRecording)
             {
-                ResetDispatcherTimer();
-                audioRecordingService.ToggleRecording();
+                ToggleRecordingWithTimerReset();
                 return;
             }
 
@@ -519,8 +523,7 @@ namespace RecNForget.WPF.Services
                 // override start to recording timer if action was triggered again
                 if (dispatcherTimer.IsEnabled)
                 {
-                    ResetDispatcherTimer();
-                    audioRecordingService.ToggleRecording();
+                    ToggleRecordingWithTimerReset();
 
                     if (appSettingService.RecordingTimerStopAfterIsEnabled)
                     {
@@ -532,8 +535,15 @@ namespace RecNForget.WPF.Services
 
                 StartTimerToStartRecordingAfter();
             }
+            else
+            {
+                ToggleRecordingWithTimerReset();
 
-            // no reason to arrive here?
+                if (appSettingService.RecordingTimerStopAfterIsEnabled)
+                {
+                    StartTimerToStopRecordingAfter();
+                }
+            }
         }
 
         public bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
