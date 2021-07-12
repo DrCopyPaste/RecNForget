@@ -31,6 +31,7 @@ namespace RecNForget.Controls
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 this.hotkeyService = new DesignerApplicationHotkeyService();
+                this.actionService = new DesignerActionService();
                 SettingService = new DesignerAppSettingService();
                 return;
             }
@@ -81,7 +82,7 @@ namespace RecNForget.Controls
             if (dialog.ShowDialog() == true)
             {
                 SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
-                this.hotkeyService.ResetAndReadHotkeysFromConfig();
+                this.hotkeyService.ResetAndReadHotkeysFromConfig(actionService);
             }
 
             // since there are two buttons on top of each other

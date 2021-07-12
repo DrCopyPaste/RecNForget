@@ -43,6 +43,9 @@
                     <local:SelectedFileControl
                             x:Name="SelectedFileControl" />
                     <Separator x:Name="SelectedFileControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
+                    <local:RecordingTimerControl
+                            x:Name="RecordingTimerControl"/>
+                    <Separator x:Name="RecordingTimerControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:RecordingAndPlaybackControl
                             x:Name="RecordingAndPlaybackControl"/>
                 </StackPanel>

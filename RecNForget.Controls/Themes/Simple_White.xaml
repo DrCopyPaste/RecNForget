@@ -822,9 +822,9 @@
                                 </Border>
                             </BulletDecorator.Bullet>
                             <ContentPresenter
-                                Margin="8,0,0,0"
+                                Margin="4,0,0,0"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Left"
+                                HorizontalAlignment="Stretch"
                                 RecognizesAccessKey="True"/>
                         </BulletDecorator>
                     </Border>
@@ -959,6 +959,51 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="TimeSpanTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
+        <Setter Property="IsEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <ScrollViewer Padding="0" Margin="0" Background="{DynamicResource Transparent_Brush}" HorizontalAlignment="Stretch" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" x:Name="PART_ContentHost" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TimeSpanTextBoxStyle2" TargetType="{x:Type local:TimeSpanTextBox}">
+        <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="0,0,0,0" />
+        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
+        <Setter Property="IsEnabled" Value="False"/>
+        <!--<Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border CornerRadius="3" Padding="1" x:Name="InnerBorder" Background="{DynamicResource Transparent_Brush}" BorderBrush="{DynamicResource Primary_Brush}" BorderThickness="0">
+                        <ScrollViewer Padding="0" Margin="0" Background="{DynamicResource Transparent_Brush}" HorizontalAlignment="Stretch" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom" x:Name="PART_ContentHost" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="InnerBorder" Property="Background" Value="{DynamicResource Transparent_Brush}"/>
+                            <Setter TargetName="InnerBorder" Property="BorderThickness" Value="1"/>
+                            <Setter TargetName="PART_ContentHost" Property="Background" Value="{DynamicResource Transparent_Brush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>-->
     </Style>
 
     <Style x:Key="SettingTextBoxStyle" TargetType="TextBox">

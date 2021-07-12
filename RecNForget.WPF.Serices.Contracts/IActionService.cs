@@ -7,6 +7,10 @@ namespace RecNForget.WPF.Services.Contracts
     public interface IActionService : INotifyPropertyChanged
     {
         System.Windows.Controls.Control OwnerControl { get; set; }
+        string CurrentRecordingStartAfterTimer { get; set; }
+        string CurrentRecordingStopAfterTimer { get; set; }
+        bool TimerForRecordingStartAfterNotRunning { get; set; }
+        bool TimerForRecordingStopAfterNotRunning { get; set; }
 
         // change output directory (with dialog)
         void ChangeOutputFolder();
@@ -56,5 +60,8 @@ namespace RecNForget.WPF.Services.Contracts
         void ShowRandomApplicationTip();
         void ShowThemeSelectionMenu();
         void ExportSelectedFile();
+        void StartTimerToStartRecordingAfter();
+        void ResetDispatcherTimer();
+        void StartTimerToStopRecordingAfter();
     }
 }

@@ -50,6 +50,11 @@ namespace RecNForget.Services.Contracts
         double UiScalingPercent { get; set; }
         int Mp3ExportBitrate { get; set; }
         bool PromptForExportFileName { get; set; }
+        bool RecordingTimerStopAfterIsEnabled { get; set; }
+        bool RecordingTimerStartAfterIsEnabled { get; set; }
+        bool RecordingTimerControlVisible { get; set; }
+        string RecordingTimerStartAfterMax { get; set; }
+        string RecordingTimerStopAfterMax { get; set; }
 
         List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]");
         void RemoveAppConfigSettingFile();

@@ -153,6 +153,11 @@ namespace RecNForget.Services.Designer
 
         public int Mp3ExportBitrate { get => 320; set => throw new NotImplementedException(); }
         public bool PromptForExportFileName { get => true; set => throw new NotImplementedException(); }
+        public bool RecordingTimerStopAfterIsEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool RecordingTimerStartAfterIsEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool RecordingTimerControlVisible { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string RecordingTimerStartAfterMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string RecordingTimerStopAfterMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void RemoveAppConfigSettingFile() => throw new NotImplementedException();
 

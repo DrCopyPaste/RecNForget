@@ -10,6 +10,10 @@ namespace RecNForget.Services.Designer
     public class DesignerActionService : IActionService
     {
         public Control OwnerControl { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public string CurrentRecordingStartAfterTimer { get => "0:00:13:37"; set => throw new NotImplementedException(); }
+        public string CurrentRecordingStopAfterTimer { get => "0:00:31:41"; set => throw new NotImplementedException(); }
+        public bool TimerForRecordingStartAfterNotRunning { get => false; set => throw new NotImplementedException(); }
+        public bool TimerForRecordingStopAfterNotRunning { get => false; set => throw new NotImplementedException(); }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -58,6 +62,11 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void ResetDispatcherTimer()
+        {
+            throw new NotImplementedException();
+        }
+
         public void SelectNextFile()
         {
             throw new System.NotImplementedException();
@@ -104,6 +113,16 @@ namespace RecNForget.Services.Designer
         }
 
         public void ShowThemeSelectionMenu()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartTimerToStartRecordingAfter()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartTimerToStopRecordingAfter()
         {
             throw new NotImplementedException();
         }
