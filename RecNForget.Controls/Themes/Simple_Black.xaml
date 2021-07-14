@@ -1047,106 +1047,11 @@
     <!-- /==================================================  TextBoxes  =================================================================================================================  -->
 
     <!-- ===================================================  ContextMenues  =============================================================================================================  -->
+    
+    <!-- explicitly NOT using a key here so this overrides stlye on EVERY level of submenu items x:Key="Base_ContextMenu_MenuItem_Style"-->
+    <!--<Style TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}" />-->
 
-    <Style x:Key="ContextMenu_Default_Style" TargetType="ContextMenu">
-        <Setter Property="Background" Value="{DynamicResource Secondary_Brush}" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Grid.IsSharedSizeScope" Value="true" />
-        <Setter Property="HasDropShadow" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ContextMenu}">
-                    <Border x:Name="Border"
-                        Background="{DynamicResource Secondary_Brush}"
-                        CornerRadius="3"
-                        BorderThickness="1">
-                        <Border.BorderBrush>
-                            <SolidColorBrush Color="#FF888888" />
-                        </Border.BorderBrush>
-                        <StackPanel IsItemsHost="True"
-                            KeyboardNavigation.DirectionalNavigation="Cycle" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="Base_ContextMenu_MenuItem_Style" TargetType="MenuItem">
-        <Setter Property="Margin" Value="0,2,0,2" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource Default_FontSize}" />
-        <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type MenuItem}">
-                    <Border x:Name="MenuItemBorder" Padding="5,0,5,0" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                        <StackPanel>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="23" />
-                                    <ColumnDefinition Width="7" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <ContentPresenter x:Name="Icon" ContentSource="Icon" Grid.Column="0" Grid.Row="0" />
-                                <BulletDecorator x:Name="CheckMarkPicture" Grid.Column="0" Grid.Row="0"
-                                    Background="{DynamicResource Transparent_Brush}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                    <BulletDecorator.Bullet>
-                                        <Border x:Name="Border"  
-                                            Width="{Binding Source={StaticResource Width_SmallControl}}" 
-                                            Height="{Binding Source={StaticResource Width_SmallControl}}"
-                                            Padding="1,1,1,1"
-                                            CornerRadius="3" 
-                                            Background="{DynamicResource Primary_Brush}"
-                                            BorderBrush="{DynamicResource SecondaryShade_Brush}"
-                                            BorderThickness="1">
-                                            <svg1:SVGImage x:Name="CheckMark"
-                                                Source="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg"
-                                                VerticalContentAlignment="Bottom"
-                                                HorizontalContentAlignment="Center"
-                                                SizeType="SizeToContent"
-                                                OverrideColor="{DynamicResource Secondary_Color}" />
-                                        </Border>
-                                    </BulletDecorator.Bullet>
-                                </BulletDecorator>
-                                <!-- Content for the menu text etc -->
-                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="True" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsHighlighted" Value="True">
-                            <Setter Property="Background" TargetName="MenuItemBorder" Value="{DynamicResource SecondaryShade_Brush}"/>
-                            <Setter Property="BorderBrush" TargetName="MenuItemBorder" Value="{DynamicResource SecondaryShade_Brush}"/>
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Visibility" TargetName="CheckMarkPicture" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="Icon" Value="Visible"/>
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="true">
-                            <Setter Property="Visibility" TargetName="CheckMarkPicture" Value="Visible"/>
-                            <Setter Property="Visibility" TargetName="Icon" Value="Collapsed"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Resources>
-            <Style TargetType="Image">
-                <Setter Property="Width" Value="25" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
-            </Style>
-        </Style.Resources>
-    </Style>
-
-    <Style x:Key="MenuSeparator_Style" TargetType="Separator">
+    <Style x:Key="MenuSeparator_Style" TargetType="{x:Type Separator}">
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1159,10 +1064,10 @@
 
     <!-- context menu image styles-->
 
-    <Style x:Key="ContextMenu_Cancel_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_Cancel_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <svg1:SVGImage Width="23"
+                <svg1:SVGImage 
                     Source="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
@@ -1171,10 +1076,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_Settings_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_Settings_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <svg1:SVGImage Width="23"
+                <svg1:SVGImage 
                     Source="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
@@ -1183,10 +1088,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_About_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_About_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <svg1:SVGImage Width="23"
+                <svg1:SVGImage 
                     Source="/RecNForget.Controls;component/Themes/SvgImages/information_icon280732.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
@@ -1195,10 +1100,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_Help_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_Help_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <svg1:SVGImage Width="23"
+                <svg1:SVGImage 
                     Source="/RecNForget.Controls;component/Themes/SvgImages/help_icon544157.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
@@ -1207,10 +1112,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_CheckUpdates_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_CheckUpdates_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <svg1:SVGImage Width="23"
+                <svg1:SVGImage 
                     Source="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
@@ -1219,10 +1124,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_ShutDown_Style" TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
+    <Style x:Key="ContextMenu_ShutDown_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
         <Setter Property="Icon">
             <Setter.Value>
-                <svg1:SVGImage Width="23"
+                <svg1:SVGImage
                     Source="/RecNForget.Controls;component/Themes/SvgImages/shutDown_icon170336.svg"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"

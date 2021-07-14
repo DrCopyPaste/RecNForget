@@ -588,33 +588,39 @@ namespace RecNForget.WPF.Services
         public void ShowApplicationMenu()
         {
             var menu = new System.Windows.Controls.ContextMenu();
-            menu.Style = (Style)menu.FindResource("ContextMenu_Default_Style");
+            //menu.Style = (Style)menu.FindResource("ContextMenu_Default_Style");
 
             var item = new System.Windows.Controls.MenuItem()
             {
                 Header = "Cancel",
-                Style = (Style)menu.FindResource("ContextMenu_Cancel_Style")
+                //Style = (Style)menu.FindResource("ContextMenu_Cancel_Style")
             };
             menu.Items.Add(item);
 
-            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+            menu.Items.Add(new System.Windows.Controls.Separator()
+            {
+                //Style = (Style)menu.FindResource("MenuSeparator_Style")
+            });
 
             item = new System.Windows.Controls.MenuItem()
             {
                 Header = "Open settings",
-                Style = (Style)menu.FindResource("ContextMenu_Settings_Style"),
+                //Style = (Style)menu.FindResource("ContextMenu_Settings_Style"),
             };
             item.Click += SettingsButton_Click;
             menu.Items.Add(item);
 
-            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+            menu.Items.Add(new System.Windows.Controls.Separator()
+            {
+                //Style = (Style)menu.FindResource("MenuSeparator_Style")
+            });
 
             item = new System.Windows.Controls.MenuItem()
             {
                 IsCheckable = true,
                 IsChecked = appSettingService.OutputPathControlVisible,
                 Header = "Output Path Control",
-                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+                // Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
             };
             item.Click += ToggleOutputPathControlVisibility;
             menu.Items.Add(item);
@@ -624,31 +630,37 @@ namespace RecNForget.WPF.Services
                 IsCheckable = true,
                 IsChecked = appSettingService.SelectedFileControlVisible,
                 Header = "Selected File Control",
-                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+                // Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
             };
             item.Click += ToggleSelectedFileControlVisibility;
             menu.Items.Add(item);
 
-            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+            menu.Items.Add(new System.Windows.Controls.Separator()
+            {
+                //Style = (Style)menu.FindResource("MenuSeparator_Style")
+            });
 
             item = new System.Windows.Controls.MenuItem()
             {
                 IsCheckable = true,
                 IsChecked = appSettingService.RecordingTimerControlVisible,
                 Header = "Recording Timer Control",
-                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+                // Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
             };
             item.Click += ToggleRecordingTimerControlVisibility;
             menu.Items.Add(item);
 
-            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+            menu.Items.Add(new System.Windows.Controls.Separator()
+            {
+                //Style = (Style)menu.FindResource("MenuSeparator_Style")
+            });
 
             item = new System.Windows.Controls.MenuItem()
             {
                 IsCheckable = true,
                 IsChecked = appSettingService.WindowAlwaysOnTop,
                 Header = "always on top",
-                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+                // Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
             };
             item.Click += ToggleAlwaysOnTop;
             menu.Items.Add(item);
@@ -658,17 +670,20 @@ namespace RecNForget.WPF.Services
                 IsCheckable = true,
                 IsChecked = appSettingService.MinimizedToTray,
                 Header = "run in background",
-                Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+                // Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
             };
             item.Click += ToggleMinimizedToTray;
             menu.Items.Add(item);
 
-            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+            menu.Items.Add(new System.Windows.Controls.Separator()
+            {
+                //Style = (Style)menu.FindResource("MenuSeparator_Style")
+            });
 
             item = new System.Windows.Controls.MenuItem()
             {
                 Header = "About RecNForget",
-                Style = (Style)menu.FindResource("ContextMenu_About_Style"),
+                //Style = (Style)menu.FindResource("ContextMenu_About_Style"),
             };
             item.Click += AboutButton_Click;
             menu.Items.Add(item);
@@ -676,33 +691,74 @@ namespace RecNForget.WPF.Services
             item = new System.Windows.Controls.MenuItem()
             {
                 Header = "Help",
-                Style = (Style)menu.FindResource("ContextMenu_Help_Style"),
+                //Style = (Style)menu.FindResource("ContextMenu_Help_Style"),
             };
             item.Click += Help_Click;
             menu.Items.Add(item);
 
-            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+            menu.Items.Add(new System.Windows.Controls.Separator()
+            {
+                //Style = (Style)menu.FindResource("MenuSeparator_Style")
+            });
 
             item = new System.Windows.Controls.MenuItem()
             {
                 Header = "Check for updates",
-                Style = (Style)menu.FindResource("ContextMenu_CheckUpdates_Style"),
+                //Style = (Style)menu.FindResource("ContextMenu_CheckUpdates_Style"),
             };
             item.Click += CheckUpdates_Click;
             menu.Items.Add(item);
 
-            menu.Items.Add(new System.Windows.Controls.Separator() { Style = (Style)menu.FindResource("MenuSeparator_Style") });
+            menu.Items.Add(new System.Windows.Controls.Separator()
+            {
+                //Style = (Style)menu.FindResource("MenuSeparator_Style")
+            });
 
             item = new System.Windows.Controls.MenuItem()
             {
                 Header = "Close RecNForget",
-                Style = (Style)menu.FindResource("ContextMenu_ShutDown_Style"),
+                //Style = (Style)menu.FindResource("ContextMenu_ShutDown_Style"),
             };
             item.Click += Exit_Click;
             menu.Items.Add(item);
 
+            //------------------- EXPERIMENTAL SUB MENU :D -----------------------------------------------
+            item = new System.Windows.Controls.MenuItem()
+            {
+                Header = "Change Theme",
+                // Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+            };
+
+            var tmpItem = GetMenuItem(header: "Theme1", "Base_ContextMenu_MenuItem_Style");
+            tmpItem.IsCheckable = true;
+            tmpItem.IsChecked = true;
+
+            item.Items.Add(tmpItem);
+            item.Items.Add(GetMenuItem(header: "Theme2-sdddddddddddddddddddddddddddddd", "Base_ContextMenu_MenuItem_Style"));
+
+
+            tmpItem = GetMenuItem(header: "Recursive Item", "ContextMenu_Settings_Style");
+            tmpItem.Items.Add(GetMenuItem(header: "this is still one under", "ContextMenu_CheckUpdates_Style"));
+            item.Items.Add(tmpItem);
+
+            menu.Items.Add(item);
+
+            //------------------- EXPERIMENTAL SUB MENU :D -----------------------------------------------
+
             menu.Placement = System.Windows.Controls.Primitives.PlacementMode.MousePoint;
             menu.IsOpen = true;
+        }
+
+        private MenuItem GetMenuItem(string header, string style)
+        {
+            var tmpItem = new MenuItem()
+            {
+                Header = header,
+            };
+
+            //tmpItem.Style = (Style)tmpItem.FindResource(style);
+
+            return tmpItem;
         }
 
         public void ShowThemeSelectionMenu()
@@ -724,7 +780,7 @@ namespace RecNForget.WPF.Services
                 var item = new System.Windows.Controls.MenuItem()
                 {
                     Header = themeName,
-                    Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
+                    // Style = (Style)menu.FindResource("Base_ContextMenu_MenuItem_Style"),
                     IsCheckable = true,
                     IsChecked = appSettingService.WindowTheme.ToUpper() == themeName.ToUpper()
                 };
