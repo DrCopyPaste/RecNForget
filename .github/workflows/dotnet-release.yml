@@ -3,9 +3,14 @@ name: release test
 on:
   workflow_dispatch:
     inputs:
-      msg:
-        description: 'a message'
-        default: 'triggered manually?'
+      releaseTitle:
+        description: 'Release Title'     
+        required: true
+        default: 'Work in progress release'
+      releaseBody:
+        description: 'Release Body'     
+        required: true
+        default: 'details'
         
 jobs:
   test:
@@ -59,7 +64,7 @@ jobs:
                 - name: releasing
                   uses: ncipollo/release-action@v1
                   with:
-                    tag: 'testTag0815'
-                    body: "This is the body of the release"
-                    artifacts: "RecNForget.Setup/bin/Release/en-us/*.msi"
+                    tag: '${{ github.event.inputs.releaseTitle }}'
+                    body: '${{ github.event.inputs.releaseBody }}'
+                    artifacts: 'RecNForget.Setup/bin/Release/en-us/*.msi'
                     draft: true
