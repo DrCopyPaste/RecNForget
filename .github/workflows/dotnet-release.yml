@@ -10,12 +10,56 @@ on:
 jobs:
   test:
         runs-on: windows-latest
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         steps:
                 - name: logging
                   run: echo 'logging something'
+                - name: checkout code
+                  uses: actions/checkout@v2
+                  with:
+                    fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+                - name: Setup MSBuild path
+                  uses: microsoft/setup-msbuild@v1.0.0
+                  env:
+                    ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'  
+                - name: Setup NuGet
+                  uses: NuGet/setup-nuget@v1.0.2
+                  env:
+                    ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+                - name: Setup NuGet
+                  uses: NuGet/setup-nuget@v1.0.2
+                - name: Restore NuGet Packages
+                  run: nuget restore RecNForget.sln
+                - name: Nerdbank.GitVersioning
+                  uses: AArnott/nbgv@v0.3
+                  id: nbgv
+                  with:
+                    setAllVars: true
+                - name: Building semver2 version
+                  run: echo 'SemVer2:${{ steps.nbgv.outputs.SemVer2 }}'
+                - name: Building assembly file version
+                  run: echo 'AssemblyFileVersion:${{ steps.nbgv.outputs.AssemblyFileVersion }}'
+                  # with:
+                    # The path to the directory for which the version should be determined. This should be at or below the directory containing the version.json file. Default is repo root directory.
+                    # path: # optional, default is .
+                    # Defines ALL version variables as environment variables, with a "NBGV_" prefix.
+                    # setAllVars: # optional
+                    # Defines a few common version variables as environment variables, with a "Git" prefix (e.g. GitBuildVersion, GitBuildVersionSimple, GitAssemblyInformationalVersion).
+                    # setCommonVars: # optional
+                    # The version of the nbgv dotnet CLI tool to install and use. If not specified, the default is the latest stable version.
+                    # toolVersion: # optional
+                - name: Build and Publish
+                  run: msbuild RecNForget.Setup\RecNForget.Setup.wixproj /p:Configuration=Release /p:PublicRelease=true  /p:ProductVersion=${{ steps.nbgv.outputs.SemVer2 }}
+                #- name: Upload Artifact
+                #  uses: actions/upload-artifact@v1.0.0
+                #  with:
+                #    name: RecNForget_TestBuild
+                #    path: RecNForget.Setup\bin\Release\en-us
                 - name: releasing
                   uses: ncipollo/release-action@v1
                   with:
                     tag: 'testTag0815'
                     body: "This is the body of the release"
+                    artifacts: "*.msi"
                     draft: true
