@@ -1050,94 +1050,156 @@
 
     <!-- ===================================================  ContextMenues  =============================================================================================================  -->
     
-    <!-- explicitly NOT using a key here so this overrides stlye on EVERY level of submenu items x:Key="Base_ContextMenu_MenuItem_Style"-->
-    <!--<Style TargetType="MenuItem" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}" />-->
+    <!-- Context Menu Images-->
+    <Style TargetType="{x:Type svg1:SVGImage}" x:Key="ContextMenuImageStyle">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SizeType" Value="SizeToContent" />
+        <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
+    </Style>
 
-    <Style x:Key="MenuSeparator_Style" TargetType="{x:Type Separator}">
-        <Setter Property="OverridesDefaultStyle" Value="true" />
+    <Style TargetType="{x:Type Separator}"
+           x:Key="SeparatorStyle">
+        <Setter Property="Margin" Value="0,2,0,2" />
+        <Setter Property="Height" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource Secondary_Brush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Separator}">
-                    <Border HorizontalAlignment="Stretch" Height="1" Margin="4" BorderThickness="1" BorderBrush="#FF888888"/>
+                    <Rectangle Height="{TemplateBinding Height}" Fill="{DynamicResource Primary_Brush}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!-- context menu image styles-->
+    <Style TargetType="{x:Type MenuItem}">
+        <Setter Property="Background" Value="{DynamicResource Secondary_Brush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}"/>
+        <Setter Property="Margin" Value="0,1,0,1"/>
+        <Style.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Background" Value="{DynamicResource SecondaryShade_Brush}"/>
+                <!--<Setter Property="Foreground" Value="{DynamicResource Secondary_Brush}"/>-->
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryShade_Brush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
-    <Style x:Key="ContextMenu_Cancel_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
+    <Style TargetType="{x:Type ContextMenu}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
             <Setter.Value>
-                <svg1:SVGImage 
-                    Source="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    OverrideColor="{DynamicResource Primary_Color}" />
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border x:Name="Border" CornerRadius="3" Padding="0,3,0,3"
+                            Background="{DynamicResource Secondary_Brush}" BorderBrush="{DynamicResource Primary_Brush}" BorderThickness="1">
+                        <StackPanel ClipToBounds="True" Orientation="Vertical" IsItemsHost="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource Secondary_Brush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style x:Key="ContextMenu_Settings_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <svg1:SVGImage 
-                    Source="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    OverrideColor="{DynamicResource Primary_Color}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
+        <Border Name="Border" Padding="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
+                    <ColumnDefinition Width="13" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter x:Name="Icon" Margin="6,0,6,0" VerticalAlignment="Center" Width="23" Height="23" ContentSource="Icon" />
+                <Border Name="Check" Width="23" Height="23" Visibility="Hidden" Margin="6,0,6,0" BorderThickness="1"
+                        Background="{DynamicResource Secondary_Brush}"
+                        BorderBrush="{DynamicResource Primary_Brush}">
+                    <Path Name="CheckMark" Width="7" Height="7" Visibility="Hidden" SnapsToDevicePixels="False" Stroke="{DynamicResource Primary_Brush}" StrokeThickness="2" Data="M 0 0 L 7 7 M 0 7 L 7 0" />
+                </Border>
+                <ContentPresenter Name="HeaderHost" Grid.Column="1" ContentSource="Header" VerticalAlignment="Center" Margin="5,0,0,0" RecognizesAccessKey="True" />
+                <TextBlock x:Name="InputGestureText" Grid.Column="2" VerticalAlignment="Center" Text="{TemplateBinding InputGestureText}" Margin="5,2,0,2" DockPanel.Dock="Right" />
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="true">
+                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger Property="IsCheckable" Value="true">
+                <Setter TargetName="Check" Property="Visibility" Value="Visible" />
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden" />
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="False">
+                <!--<Setter TargetName="Icon" Property="svg1:SVGImage.OverrideColor" Value="{DynamicResource Primary_Color}" />-->
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource Secondary_Brush}"/>
+                <!--<Setter Property="Foreground" Value="{DynamicResource Primary_Brush}"/>-->
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="True">
+                <!--<Setter TargetName="Icon" Property="svg1:SVGImage.OverrideColor" Value="{DynamicResource Secondary_Color}" />-->
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource SecondaryShade_Brush}"/>
+                <!--<Setter Property="Foreground" Value="{DynamicResource Secondary_Brush}"/>-->
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryShade_Brush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
-    <Style x:Key="ContextMenu_About_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <svg1:SVGImage 
-                    Source="/RecNForget.Controls;component/Themes/SvgImages/information_icon280732.svg"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    OverrideColor="{DynamicResource Primary_Color}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
+        <Border Name="Border" Padding="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Icon" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
+                    <ColumnDefinition Width="23" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter x:Name="Icon" Margin="6,0,6,0" VerticalAlignment="Center" Width="23" Height="23" ContentSource="Icon" />
+                <ContentPresenter Name="HeaderHost" Grid.Column="1" ContentSource="Header" VerticalAlignment="Center" Margin="5,0,0,0" RecognizesAccessKey="True" />
+                <TextBlock x:Name="InputGestureText" Grid.Column="2" VerticalAlignment="Center" Text="{TemplateBinding InputGestureText}" Margin="5,2,2,2" DockPanel.Dock="Right" />
+                <Border Grid.Column="3">
+                    <Path Name="SubMenuArrow" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 0 7 L 4 3.5 Z"
+                          Fill="{DynamicResource Primary_Brush}" />
+                </Border>
+                <Popup Name="Popup" Placement="Right" HorizontalOffset="-4" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+                    <Border Name="SubmenuBorder" SnapsToDevicePixels="True" BorderThickness="1" CornerRadius="3" Padding="0,3,0,3"
+                            Background="{DynamicResource Secondary_Brush}"
+                            BorderBrush="{DynamicResource Primary_Brush}">
+                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                </Popup>
+            </Grid>
+        </Border>
 
-    <Style x:Key="ContextMenu_Help_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <svg1:SVGImage 
-                    Source="/RecNForget.Controls;component/Themes/SvgImages/help_icon544157.svg"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    OverrideColor="{DynamicResource Primary_Color}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ContextMenu_CheckUpdates_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <svg1:SVGImage 
-                    Source="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    OverrideColor="{DynamicResource Primary_Color}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="ContextMenu_ShutDown_Style" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource Base_ContextMenu_MenuItem_Style}">
-        <Setter Property="Icon">
-            <Setter.Value>
-                <svg1:SVGImage
-                    Source="/RecNForget.Controls;component/Themes/SvgImages/shutDown_icon170336.svg"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    OverrideColor="{DynamicResource Primary_Color}" />
-            </Setter.Value>
-        </Setter>
-    </Style>
-
+        <ControlTemplate.Triggers>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden" />
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="False">
+                <!--<Setter TargetName="Icon" Property="svg1:SVGImage.OverrideColor" Value="{DynamicResource Primary_Color}" />-->
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource Secondary_Brush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Primary_Brush}"/>
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="True">
+                <!--<Setter TargetName="Icon" Property="svg1:SVGImage.OverrideColor" Value="{DynamicResource Secondary_Color}" />
+                <Setter TargetName="SubMenuArrow" Property="Fill" Value="{DynamicResource Secondary_Brush}"/>-->
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource SecondaryShade_Brush}" />
+                <!--<Setter Property="Foreground" Value="{DynamicResource Secondary_Brush}"/>-->
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryShade_Brush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
     <!-- /==================================================  ContextMenues  =============================================================================================================  -->
 
     <!-- ===================================================  ProgressBars  ==============================================================================================================  -->

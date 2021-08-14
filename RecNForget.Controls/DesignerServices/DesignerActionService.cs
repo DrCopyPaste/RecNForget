@@ -112,11 +112,6 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
-        public void ShowThemeSelectionMenu()
-        {
-            throw new NotImplementedException();
-        }
-
         public void StartTimerToStartRecordingAfter()
         {
             throw new NotImplementedException();
@@ -145,6 +140,11 @@ namespace RecNForget.Services.Designer
         public void TogglePlayPauseSelectedFile()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void ToggleRecordingTimerControlVisibility()
+        {
+            throw new NotImplementedException();
         }
 
         public void ToggleSelectedFileControlVisibility()

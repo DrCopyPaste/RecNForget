@@ -10,13 +10,13 @@ namespace RecNForget.Controls.Helper
 {
     public class ThemeManager
     {
-        public static List<string> GetAllThemeNames()
+        public static Dictionary<string, string> GetAllThemeNames()
         {
             var asm = Assembly.GetExecutingAssembly();
             Stream stream = asm.GetManifestResourceStream(asm.GetName().Name + ".g.resources");
 
             var pages = new List<Uri>();
-            var themeNames = new List<string>();
+            var themeNames = new Dictionary<string, string>();
 
             using (var reader = new System.Resources.ResourceReader(stream))
             {
@@ -26,7 +26,10 @@ namespace RecNForget.Controls.Helper
 
                     if (keyName.StartsWith("themes") && keyName.EndsWith("baml"))
                     {
-                        themeNames.Add(keyName.Replace(".baml", "").Split('/')[1]);
+                        var fileName = keyName.Replace(".baml", "").Split('/')[1];
+                        var displayName = fileName.ToLower().Replace("_", " ");
+
+                        themeNames.Add(fileName, displayName);
                     }
                 }
             }
@@ -34,9 +37,9 @@ namespace RecNForget.Controls.Helper
             return themeNames;
         }
 
-        public static void ChangeTheme(string themeName)
+        public static void ChangeTheme(string themeFileName)
         {
-            Uri dictUri = new Uri("/RecNForget.Controls;component/Themes/" + themeName + ".xaml", UriKind.RelativeOrAbsolute);
+            Uri dictUri = new Uri("/RecNForget.Controls;component/Themes/" + themeFileName + ".xaml", UriKind.RelativeOrAbsolute);
             ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
 
             try

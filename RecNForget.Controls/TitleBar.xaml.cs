@@ -27,14 +27,6 @@ namespace RecNForget.Controls
             set { withSettingsButton = value; OnPropertyChanged(); }
         }
 
-        private bool withWindowOptionsButton = false;
-
-        public bool WithWindowOptionsButton
-        {
-            get { return withWindowOptionsButton; }
-            set { withWindowOptionsButton = value; OnPropertyChanged(); }
-        }
-
         private bool withMinimizeButton = false;
 
         public bool WithMinimizeButton
@@ -90,11 +82,6 @@ namespace RecNForget.Controls
         {
             var parentWindow = Window.GetWindow(this);
             parentWindow?.Close();
-        }
-
-        private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
-        {
-            actionService.ShowThemeSelectionMenu();
         }
     }
 }
