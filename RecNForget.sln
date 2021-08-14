@@ -47,8 +47,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecNForget.WPF.Services", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecNForget.SimpleThemeGenerator", "RecNForget.SimpleThemeGenerator\RecNForget.SimpleThemeGenerator.csproj", "{706DD4EA-8565-4C1C-BEFD-27522272F040}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetProjects.SVGImage", "SVGImage\DotNetProjects.SVGImage.csproj", "{6F3C2013-BC91-4282-9342-4B1BC2CDB617}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,14 +149,6 @@ Global
 		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Release|Any CPU.Build.0 = Release|Any CPU
 		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Release|x86.ActiveCfg = Release|Any CPU
 		{706DD4EA-8565-4C1C-BEFD-27522272F040}.Release|x86.Build.0 = Release|Any CPU
-		{6F3C2013-BC91-4282-9342-4B1BC2CDB617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F3C2013-BC91-4282-9342-4B1BC2CDB617}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F3C2013-BC91-4282-9342-4B1BC2CDB617}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6F3C2013-BC91-4282-9342-4B1BC2CDB617}.Debug|x86.Build.0 = Debug|Any CPU
-		{6F3C2013-BC91-4282-9342-4B1BC2CDB617}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F3C2013-BC91-4282-9342-4B1BC2CDB617}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6F3C2013-BC91-4282-9342-4B1BC2CDB617}.Release|x86.ActiveCfg = Release|Any CPU
-		{6F3C2013-BC91-4282-9342-4B1BC2CDB617}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
