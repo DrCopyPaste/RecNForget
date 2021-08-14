@@ -6,7 +6,7 @@ on:
       releaseTitle:
         description: 'Release Title'     
         required: true
-        default: 'Work in progress release'
+        default: 'Prerelease'
       releaseBody:
         description: 'Release Body'     
         required: true
