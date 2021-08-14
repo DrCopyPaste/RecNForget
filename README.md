@@ -64,21 +64,21 @@ Click sounds by [lit-audio@gmx.de](mailto:lit-audio@gmx.de)/[soundcloud.com/wolf
 
 The following libaries are used by RecNForget:
 
-[NAudio v1.10.0](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [Ms-PL](https://github.com/naudio/NAudio/blob/master/license.txt)
+[DotNetProjects.SVGImage v4.1.97](https://github.com/dotnetprojects/SVGImage) Copyright (c) DotNetProjects - [MIT](https://licenses.nuget.org/MIT)
 
-[Nerdbank.GitVersioning v3.2.31](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
+[NAudio v2.0.1](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [License](https://github.com/naudio/NAudio/blob/master/license.txt)
 
-[Notifications.Wpf.Core v1.3.1](https://github.com/mjuen/Notifications.Wpf.Core) Copyright (c) Adrian Gaś, Simon Mauracher, Marcel Juen - [MIT](https://licenses.nuget.org/MIT)
+[Nerdbank.GitVersioning v3.4.231](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
 
-[Octokit v0.48.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
+[Notifications.Wpf.Core v1.3.2](https://github.com/mjuen/Notifications.Wpf.Core) Copyright (c) Adrian Gaś, Simon Mauracher, Marcel Juen - [MIT](https://licenses.nuget.org/MIT)
 
-[Ookii.Dialogs.Wpf.NETCore v2.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Sven Groot, Caio Proiete, AceOfAces - [License](https://www.nuget.org/packages/Ookii.Dialogs.Wpf.NETCore/2.1.0/license)
+[Octokit v0.50.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
-[System.Configuration.ConfigurationManager v4.7.0](https://github.com/dotnet/corefx) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
+[Ookii.Dialogs.Wpf v3.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Ookii Dialogs Contributors - [BSD-3-Clause](https://licenses.nuget.org/BSD-3-Clause)
 
-[System.Drawing.Common v4.7.0](https://github.com/dotnet/corefx) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
+[System.Configuration.ConfigurationManager v5.0.0](https://github.com/dotnet/corefx) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
 
-[Unity v5.11.7](https://github.com/unitycontainer/unity) Copyright (c) Unity Container Project - [Apache 2.0](https://github.com/unitycontainer/unity/blob/v5.x/LICENSE)
+[Unity v5.11.10](https://github.com/unitycontainer/unity) Copyright (c) Unity Container Project - [Apache 2.0](https://github.com/unitycontainer/unity/blob/v5.x/LICENSE)
 
 [WiX Toolset build tools v3.11.2.4516](https://wixtoolset.org/) Copyright (c) .NET Foundation - [MS-RL](https://wixtoolset.org/about/license/)
 
@@ -110,11 +110,19 @@ editSetting_icon451737.svg was generated from [onlinewebfonts.com/icon/451737](h
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
+export_icon343310.svg was generated from [onlinewebfonts.com/icon/343310](https://www.onlinewebfonts.com/icon/343310)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
 folder_icon122592.svg was generated from [onlinewebfonts.com/icon/122592](https://www.onlinewebfonts.com/icon/122592)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
 help_icon544157.svg was generated from [onlinewebfonts.com/icon/544157](https://www.onlinewebfonts.com/icon/544157)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+information_icon2132.svg was generated from [onlinewebfonts.com/icon/2132](https://www.onlinewebfonts.com/icon/2132)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
@@ -150,6 +158,10 @@ pencil_icon79516.svg was generated from [onlinewebfonts.com/icon/79516](https://
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
+plus_icon171498.svg was generated from [onlinewebfonts.com/icon/171498](https://www.onlinewebfonts.com/icon/171498)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
 settings_icon40863.svg was generated from [onlinewebfonts.com/icon/40863](https://www.onlinewebfonts.com/icon/40863)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
@@ -159,6 +171,10 @@ shutDown_icon170336.svg was generated from [onlinewebfonts.com/icon/170336](http
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
 trash_icon77730.svg was generated from [onlinewebfonts.com/icon/77730](https://www.onlinewebfonts.com/icon/77730)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+windowOptions_icon510828.svg was generated from [onlinewebfonts.com/icon/510828](https://www.onlinewebfonts.com/icon/510828)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 

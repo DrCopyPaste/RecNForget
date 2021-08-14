@@ -98,6 +98,13 @@ namespace RecNForget.CopyRightHelper
             // ------------------ LIBRARIES LIST ----------------------------------
 
             AddLibraryLink(
+                libaryName: "DotNetProjects.SVGImage v4.1.97",
+                libraryUrl: "https://github.com/dotnetprojects/SVGImage",
+                manufacturerName: "DotNetProjects",
+                licenseCaption: "MIT",
+                licenseUrl: "https://licenses.nuget.org/MIT");
+
+            AddLibraryLink(
                 libaryName: "NAudio v2.0.1",
                 libraryUrl: "https://github.com/naudio/NAudio",
                 manufacturerName: "Mark Heath & Contributors",
@@ -105,7 +112,7 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
 
             AddLibraryLink(
-                libaryName: "Nerdbank.GitVersioning v3.4.216",
+                libaryName: "Nerdbank.GitVersioning v3.4.231",
                 libraryUrl: "https://github.com/aarnott/Nerdbank.GitVersioning",
                 manufacturerName: "Andrew Arnott",
                 licenseCaption: "MIT",

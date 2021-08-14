@@ -12,9 +12,11 @@ Click sounds by [lit-audio@gmx.de](mailto:lit-audio@gmx.de)/[soundcloud.com/wolf
 
 The following libaries are used by RecNForget:
 
+[DotNetProjects.SVGImage v4.1.97](https://github.com/dotnetprojects/SVGImage) Copyright (c) DotNetProjects - [MIT](https://licenses.nuget.org/MIT)
+
 [NAudio v2.0.1](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [License](https://github.com/naudio/NAudio/blob/master/license.txt)
 
-[Nerdbank.GitVersioning v3.4.216](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
+[Nerdbank.GitVersioning v3.4.231](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
 
 [Notifications.Wpf.Core v1.3.2](https://github.com/mjuen/Notifications.Wpf.Core) Copyright (c) Adrian Gaś, Simon Mauracher, Marcel Juen - [MIT](https://licenses.nuget.org/MIT)
 
@@ -53,6 +55,10 @@ download_icon602.svg was generated from [onlinewebfonts.com/icon/602](https://ww
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 
 editSetting_icon451737.svg was generated from [onlinewebfonts.com/icon/451737](https://www.onlinewebfonts.com/icon/451737)
+
+Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
+
+export_icon343310.svg was generated from [onlinewebfonts.com/icon/343310](https://www.onlinewebfonts.com/icon/343310)
 
 Icon made from [Icon Fonts](http://www.onlinewebfonts.com/icon) is licensed by CC BY 3.0
 

@@ -53,13 +53,19 @@
 				The following libaries are used by RecNForget:
 			</Run>
 			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/dotnetprojects/SVGImage" RequestNavigate="Hyperlink_RequestNavigate">DotNetProjects.SVGImage v4.1.97</Hyperlink>
+			<Run>
+				 Copyright (c) DotNetProjects - 
+			</Run>
+			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<LineBreak />
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio" RequestNavigate="Hyperlink_RequestNavigate">NAudio v2.0.1</Hyperlink>
 			<Run>
 				 Copyright (c) Mark Heath &amp; Contributors - 
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning v3.4.216</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning v3.4.231</Hyperlink>
 			<Run>
 				 Copyright (c) Andrew Arnott - 
 			</Run>
@@ -185,6 +191,21 @@
 				editSetting_icon451737.svg was generated from 
 			</Run>
 			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/451737" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/451737</Hyperlink>
+
+			<LineBreak />
+			<Run>
+				Icon made from 
+			</Run>
+			<Hyperlink NavigateUri="http://www.onlinewebfonts.com/icon" RequestNavigate="Hyperlink_RequestNavigate">Icon Fonts</Hyperlink>
+
+			<Run>
+				 is licensed by CC BY 3.0
+			</Run>
+			<LineBreak />
+			<Run>
+				export_icon343310.svg was generated from 
+			</Run>
+			<Hyperlink NavigateUri="https://www.onlinewebfonts.com/icon/343310" RequestNavigate="Hyperlink_RequestNavigate">onlinewebfonts.com/icon/343310</Hyperlink>
 
 			<LineBreak />
 			<Run>
