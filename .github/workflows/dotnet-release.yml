@@ -61,5 +61,5 @@ jobs:
                   with:
                     tag: 'testTag0815'
                     body: "This is the body of the release"
-                    artifacts: "*.msi"
+                    artifacts: "RecNForget.Setup/bin/Release/en-us/*.msi"
                     draft: true
