@@ -1,0 +1,15 @@
+name: release test
+
+on:
+  workflow_dispatch:
+    inputs:
+      msg:
+        description: 'a message'
+        default: 'triggered manually?'
+        
+jobs:
+  test:
+        runs-on: windows-latest
+        steps:
+                - name: loggining
+                  run: echo 'logging something'
