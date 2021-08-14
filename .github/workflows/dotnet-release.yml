@@ -16,5 +16,6 @@ jobs:
                 - name: releasing
                   uses: ncipollo/release-action@v1
                   with:
+                    tag: 'testTag0815'
                     body: "This is the body of the release"
                     draft: true
