@@ -64,7 +64,7 @@ jobs:
                 - name: releasing
                   uses: ncipollo/release-action@v1
                   with:
-                    tag: '${{ steps.nbgv.outputs.AssemblyFileVersion }} ${{ github.event.inputs.releaseTitle }}'
+                    tag: '${{ steps.nbgv.outputs.SemVer2 }} ${{ github.event.inputs.releaseTitle }}'
                     body: '${{ github.event.inputs.releaseBody }}'
                     artifacts: 'RecNForget.Setup/bin/Release/en-us/*.msi'
                     draft: true
