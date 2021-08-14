@@ -11,5 +11,10 @@ jobs:
   test:
         runs-on: windows-latest
         steps:
-                - name: loggining
+                - name: logging
                   run: echo 'logging something'
+                - name: releasing
+                - uses: ncipollo/release-action@v1
+                  with:
+                    body: "This is the body of the release"
+                    draft: true
