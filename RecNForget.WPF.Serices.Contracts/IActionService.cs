@@ -58,10 +58,10 @@ namespace RecNForget.WPF.Services.Contracts
         void ShowNewToApplicationWindow();
         void ShowNewToVersionDialog(Version currentFileVersion, Version lastInstalledVersion);
         void ShowRandomApplicationTip();
-        void ShowThemeSelectionMenu();
         void ExportSelectedFile();
         void StartTimerToStartRecordingAfter();
         void ResetDispatcherTimer();
         void StartTimerToStopRecordingAfter();
+        void ToggleRecordingTimerControlVisibility();
     }
 }
