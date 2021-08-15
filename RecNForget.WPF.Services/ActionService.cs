@@ -249,13 +249,14 @@ namespace RecNForget.WPF.Services
             var exportedFileName = selectedFileService.ExportFile(preferredFileName);
             if (string.IsNullOrEmpty(exportedFileName))
             {
-                CustomMessageBox errorMessageBox = new CustomMessageBox(
-                        caption: "Something went wrong",
-                        icon: CustomMessageBoxIcon.Error,
-                        buttons: CustomMessageBoxButtons.OK,
-                        messageRows: new List<string>() { "An error occurred trying to export the selected file" },
-                        controlFocus: CustomMessageBoxFocus.Ok);
-
+                _notificationManager.ShowAsync(
+                    content: new NotificationContent()
+                    {
+                        Title = "Something went wrong",
+                        Message = "An unknown error occurred trying to export the selected file",
+                        Type = NotificationType.Error
+                    },
+                    expirationTime: TimeSpan.FromSeconds(10));
                 return;
             }
 
@@ -294,14 +295,14 @@ namespace RecNForget.WPF.Services
             {
                 if (!selectedFileService.RenameSelectedFileWithoutExtension(tempDialog.PromptContent))
                 {
-                    CustomMessageBox errorMessageBox = new CustomMessageBox(
-                        caption: "Something went wrong",
-                        icon: CustomMessageBoxIcon.Error,
-                        buttons: CustomMessageBoxButtons.OK,
-                        messageRows: new List<string>() { "An error occurred trying to rename the selected file" },
-                        controlFocus: CustomMessageBoxFocus.Ok);
-
-                    errorMessageBox.ShowDialog();
+                    _notificationManager.ShowAsync(
+                        content: new NotificationContent()
+                        {
+                            Title = "Something went wrong",
+                            Message = "An unknown error occurred trying to rename the selected file",
+                            Type = NotificationType.Error
+                        },
+                        expirationTime: TimeSpan.FromSeconds(10));
                 }
             }
         }
@@ -330,16 +331,14 @@ namespace RecNForget.WPF.Services
                     {
                         System.Windows.Application.Current.Dispatcher.Invoke(() =>
                         {
-                            CustomMessageBox tempDialog = new CustomMessageBox(
-                                caption: "RecNForget is already up to date!",
-                                icon: CustomMessageBoxIcon.Information,
-                                buttons: CustomMessageBoxButtons.OK,
-                                messageRows: new List<string>() { "No newer version found" },
-                                controlFocus: CustomMessageBoxFocus.Ok);
-
-                            tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-                            tempDialog.ShowDialog();
+                            _notificationManager.ShowAsync(
+                                content: new NotificationContent()
+                                {
+                                    Title = "No newer version found.",
+                                    Message = "RecNForget is already up to date.",
+                                    Type = NotificationType.Information
+                                },
+                                expirationTime: TimeSpan.FromSeconds(10));
                         });
                     }
                 }
@@ -350,16 +349,14 @@ namespace RecNForget.WPF.Services
                 {
                     System.Windows.Application.Current.Dispatcher.Invoke(() =>
                     {
-                        var errorDialog = new CustomMessageBox(
-                            caption: "Error during update",
-                            icon: CustomMessageBoxIcon.Error,
-                            buttons: CustomMessageBoxButtons.OK,
-                            messageRows: new List<string>() { "An error occurred trying to get updates:", ex.InnerException.Message },
-                            controlFocus: CustomMessageBoxFocus.Ok);
-
-                        errorDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-                        errorDialog.ShowDialog();
+                        _notificationManager.ShowAsync(
+                            content: new NotificationContent()
+                            {
+                                Title = "Error during update",
+                                Message = "An error occurred trying to get updates:",
+                                Type = NotificationType.Error
+                            },
+                            expirationTime: TimeSpan.FromSeconds(10));
                     });
                 }
             }
@@ -383,16 +380,14 @@ namespace RecNForget.WPF.Services
             {
                 if (!selectedFileService.DeleteSelectedFile())
                 {
-                    CustomMessageBox errorMessageBox = new CustomMessageBox(
-                        caption: "Something went wrong",
-                        icon: CustomMessageBoxIcon.Error,
-                        buttons: CustomMessageBoxButtons.OK,
-                        messageRows: new List<string>() { "An error occurred trying to delete the selected file" },
-                        controlFocus: CustomMessageBoxFocus.Ok);
-
-                    errorMessageBox.TrySetViewablePositionFromOwner(OwnerControl);
-
-                    errorMessageBox.ShowDialog();
+                    _notificationManager.ShowAsync(
+                        content: new NotificationContent()
+                        {
+                            Title = "Something went wrong",
+                            Message = "An unknown error occurred trying to delete the selected file.",
+                            Type = NotificationType.Error
+                        },
+                        expirationTime: TimeSpan.FromSeconds(10));
                 }
             }
         }

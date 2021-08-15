@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using NAudio.Wave;
+using Notifications.Wpf.Core;
 using RecNForget.Controls.Extensions;
 using RecNForget.IoC;
 using RecNForget.Services.Contracts;
@@ -19,6 +20,7 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class SelectedFileControl : UserControl, INotifyPropertyChanged
     {
+        private readonly NotificationManager _notificationManager = new NotificationManager();
         private readonly IActionService actionService = null;
         private readonly IAppSettingService appSettingService = null;
         private readonly IAudioPlaybackService audioPlaybackService = null;
@@ -93,9 +95,14 @@ namespace RecNForget.Controls
                 {
                     FileInfoLabel.Content = "error trying to read file size";
 
-                    var errorDialog = new CustomMessageBox("error trying to read file size", CustomMessageBoxIcon.Error, CustomMessageBoxButtons.OK, new List<string>() { "an error occurred while trying to parse audio file: " + ex.Message });
-                    errorDialog.TrySetViewablePositionFromOwner();
-                    errorDialog.ShowDialog();
+                    _notificationManager.ShowAsync(
+                        content: new NotificationContent()
+                        {
+                            Title = "Error trying to read file size",
+                            Message = "an error occurred while trying to parse audio file: " + ex.Message,
+                            Type = NotificationType.Error
+                        },
+                        expirationTime: TimeSpan.FromSeconds(10));
                 }
             }
         }

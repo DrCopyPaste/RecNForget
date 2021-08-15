@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Notifications.Wpf.Core;
 using Octokit;
 using RecNForget.Controls;
 using RecNForget.Controls.Extensions;
@@ -18,6 +19,7 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class DownloadDialog : Window, INotifyPropertyChanged
     {
+        private readonly NotificationManager _notificationManager = new NotificationManager();
         private string targetDownloadPath;
         private ReleaseAsset asset;
         private HttpClient httpClient;
@@ -103,18 +105,14 @@ namespace RecNForget.Controls
             {
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
-                    var errorMessageBox = new CustomMessageBox(
-                    caption: "An error occurred",
-                    buttons: CustomMessageBoxButtons.OK,
-                    icon: CustomMessageBoxIcon.Error,
-                    messageRows: new List<string>()
-                    {
-                        string.Format("An error occurred trying to download {0} to {1}", asset.BrowserDownloadUrl, targetDownloadPath),
-                        e.Message
-                    },
-                    controlFocus: CustomMessageBoxFocus.Ok);
-
-                    errorMessageBox.ShowDialog();
+                    _notificationManager.ShowAsync(
+                        content: new NotificationContent()
+                        {
+                            Title = "Error trying to download update",
+                            Message = string.Format("An error occurred trying to download {0} to {1}. \n{2}", asset.BrowserDownloadUrl, targetDownloadPath, e.Message),
+                            Type = NotificationType.Error
+                        },
+                        expirationTime: TimeSpan.FromSeconds(10));
                 });
             }
             finally
