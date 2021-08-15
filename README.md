@@ -40,8 +40,38 @@ But, if you feel extra keen to try out the latest, you can
 - upgraded application to .net core 3.1
 - selected file control now also shows file size and play length
 - application toast messages are silent now (no sound - not using the standard windows toast notification anymore)
-- quick tips on start show as toast messages instead of windows popping up
-- removed borders from textboxes
+
+- switched to svg for icons
+- reworked most windows for a more consistent layout
+- layout is STILL not final, but I dont expect any HUGE future changes except for Font/Sizes/Paddings/Margins :D - BUT
+- RecNForget now has a dark mode, which is the new default
+- window colors can now be changed with the context menu -> Change theme -> (Select theme)
+
+
+- selected file can now be exported as mp3, this action can be reached by
+- pressing the 'X'-Button, while having the RecNForget-Window open or
+- clicking the export button in the selected file control
+- bitrate can be set via context menu -> open settings -> output -> Bitrate
+- a dialog, prompting for an export name can be enabled under context menu -> open settings -> output -> 'prompt for exported file name'
+(otherwise filename is taken from original wav-file with mp3-extension)
+
+- introducing themes:
+
+
+
+- new recording timer control:
+- users can now delay recording start/ stop with the new recording timer control
+- this control can be toggled with the context menu-> show recording timer control
+- if the "Stops after"- timer is enabled, a recording session  will be automatically ended after that time span
+- "stop recording" can still be forced by hitting record again if "Stops after"- timer is already running)
+- if the "Starts after"- timer is enabled, the "start recording" action will be delayed by that time span
+- "start recording" can be forced by triggering record again (if "Starts after"- timer is already running)
+
+- timerspans are entered right to left (seconds first) in the following format: d:hh:mm:ss
+
+
+
+- TODO popup info windows have been replaced with non blocking toast messages(errors and warnings)
 
 # Features missing for version 1.0
 - allow toggling input source (default output, or maybe mic/something else)?

@@ -1050,9 +1050,10 @@
     
     <!-- Context Menu Images-->
     <Style TargetType="{x:Type svg1:SVGImage}" x:Key="ContextMenuImageStyle">
-        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="SizeType" Value="SizeToContent" />
+        <Setter Property="Width" Value="23" />
+        <!--<Setter Property="SizeType" Value="SizeToContent" />-->
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
     </Style>
 

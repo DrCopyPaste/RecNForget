@@ -18,6 +18,15 @@ namespace RecNForget.Controls
     public partial class ApplicationMenu : INotifyPropertyChanged
     {
         private IAppSettingService appSettingService;
+
+        private string currentSelectedThemeDisplayName;
+
+        public string CurrentSelectedThemeDisplayName
+        {
+            get { return currentSelectedThemeDisplayName; }
+            set { currentSelectedThemeDisplayName = value; OnPropertyChanged(); }
+        }
+
         private IActionService actionService;
 
         public IAppSettingService AppSettingService
@@ -55,11 +64,14 @@ namespace RecNForget.Controls
 
             foreach (var theme in ThemeManager.GetAllThemeNames())
             {
+                var isCurrentTheme = appSettingService.WindowTheme.ToUpper() == theme.Key.ToUpper();
+                if (isCurrentTheme) CurrentSelectedThemeDisplayName = theme.Value;
+
                 var item = new System.Windows.Controls.MenuItem()
                 {
                     Header = theme.Value,
                     IsCheckable = true,
-                    IsChecked = appSettingService.WindowTheme.ToUpper() == theme.Key.ToUpper()
+                    IsChecked = isCurrentTheme
                 };
                 item.Click += (object sender, RoutedEventArgs e) => { ThemeManager.ChangeTheme(theme.Key); appSettingService.WindowTheme = theme.Key; };
                 ThemeNode.Items.Add(item);
