@@ -62,7 +62,6 @@ namespace RecNForget.Controls
                 this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
 
                 SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
-                SelectedFileService.SelectLatestFile();
 
                 SettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
                 SettingService.PropertyChanged += SettingService_PropertyChanged;
@@ -116,6 +115,8 @@ namespace RecNForget.Controls
                     SwitchToBackgroundMode();
                 }
 
+
+                SelectedFileService.SelectLatestFile();
                 //else
                 //{
                 //    SwitchToForegroundMode();

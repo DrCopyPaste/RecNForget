@@ -50,7 +50,7 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- click on 'Selected File Control'"
+					Content = "- click on 'Show Selected File Control'"
 				}
 			};
 		}

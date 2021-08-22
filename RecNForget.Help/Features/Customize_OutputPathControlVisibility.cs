@@ -42,7 +42,7 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- click on 'Output Path Control'"
+					Content = "- click on 'Show Output Path Control'"
 				}
 			};
 		}

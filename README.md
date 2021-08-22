@@ -38,40 +38,31 @@ But, if you feel extra keen to try out the latest, you can
 
 # upcoming features in next release
 - upgraded application to .net core 3.1
-- selected file control now also shows file size and play length
-- application toast messages are silent now (no sound - not using the standard windows toast notification anymore)
-
-- switched to svg for icons
 - reworked most windows for a more consistent layout
 - layout is STILL not final, but I dont expect any HUGE future changes except for Font/Sizes/Paddings/Margins :D - BUT
 - RecNForget now has a dark mode, which is the new default
-- window colors can now be changed with the context menu -> Change theme -> (Select theme)
-
-
+- window colors can now be changed using context menu -> Change theme -> (Select theme)
 - selected file can now be exported as mp3, this action can be reached by
 - pressing the 'X'-Button, while having the RecNForget-Window open or
-- clicking the export button in the selected file control
-- bitrate can be set via context menu -> open settings -> output -> Bitrate
-- a dialog, prompting for an export name can be enabled under context menu -> open settings -> output -> 'prompt for exported file name'
-(otherwise filename is taken from original wav-file with mp3-extension)
-
-- introducing themes:
-
-
-
+- clicking the export button right next to the file name in the selected file control
+- bitrate can be set using context menu -> open settings -> output -> Bitrate
+- a dialog, prompting for an export name can be enabled using context menu -> open settings -> output -> 'prompt for exported file name'
+- (otherwise filename is taken from original wav-file with mp3-extension)
 - new recording timer control:
 - users can now delay recording start/ stop with the new recording timer control
-- this control can be toggled with the context menu-> show recording timer control
+- this control can be toggled using context menu-> show recording timer control
 - if the "Stops after"- timer is enabled, a recording session  will be automatically ended after that time span
-- "stop recording" can still be forced by hitting record again if "Stops after"- timer is already running)
+- "stop recording" can still be forced by hitting record again (if "Stops after"- timer is already running)
+- "Stops after" can also be enabled while already recording
 - if the "Starts after"- timer is enabled, the "start recording" action will be delayed by that time span
 - "start recording" can be forced by triggering record again (if "Starts after"- timer is already running)
+- time spans are entered right to left (seconds first) in the following format: d:hh:mm:ss
 
-- timerspans are entered right to left (seconds first) in the following format: d:hh:mm:ss
+- switched to svg for icons
+- popup info windows have been replaced with non blocking toast messages(errors and warnings)
+- selected file control now also shows file size and play length
+- application toast messages are silent now (no sound - not using the standard windows toast notification anymore)
 
-
-
-- TODO popup info windows have been replaced with non blocking toast messages(errors and warnings)
 
 # Features missing for version 1.0
 - allow toggling input source (default output, or maybe mic/something else)?

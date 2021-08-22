@@ -57,10 +57,6 @@ namespace RecNForget.Controls
             get { return (string)GetValue(SettingTextValueTimeSpanProperty); }
             set {
                 SetValue(SettingTextValueTimeSpanProperty, value);
-
-                var parseSuccessful = TimeSpan.TryParseExact(value, ParseFormat, CultureInfo.InvariantCulture, out TimeSpan outputTimeSpan);
-                ValidationErrorMark.Visibility = parseSuccessful ? Visibility.Hidden : Visibility.Visible;
-
                 OnPropertyChanged();
             }
         }
@@ -119,6 +115,9 @@ namespace RecNForget.Controls
             // maybe only write back setting value when focus is lost?
             tbEntry.Text = workingValue;
             tbEntry.CaretIndex = tbEntry.Text.Length;
+
+            var parseSuccessful = TimeSpan.TryParseExact(workingValue, ParseFormat, CultureInfo.InvariantCulture, out TimeSpan outputTimeSpan);
+            ValidationErrorMark.Visibility = parseSuccessful ? Visibility.Hidden : Visibility.Visible;
         }
     }
 }
