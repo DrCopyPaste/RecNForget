@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj" />
-    <ProjectReference Include="..\RecNForget.WPF.Serices.Contracts\RecNForget.WPF.Services.Contracts.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
