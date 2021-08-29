@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using PressingIssue.Services.Contracts;
@@ -61,7 +62,7 @@ namespace RecNForget.Controls
 
             if (e.KeyDown)
             {
-                if (!e.KeyIsModifier)
+                if (!Enum.IsDefined(typeof(PressingIssue.Services.Contracts.ModifierKeys), (int)e.Key))
                 {
                     HotkeysAppSetting = e.AsSettingString;
                     DialogResult = true;

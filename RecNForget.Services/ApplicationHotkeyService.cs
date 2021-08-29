@@ -41,8 +41,15 @@ namespace RecNForget.Services
 
             // hotkey action should not make hotkeyservice/hook wait
             globalHotkeyService.AddOrUpdateOnReleaseHotkey(
-                appSettingService.HotKey_StartStopRecording,
+                PressedKeysInfo.FromString(appSettingService.HotKey_StartStopRecording),
                 () => new Task(() => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } }).Start());
+            //() =>
+            //{
+            //    var task = Task.Run(() => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } });
+            //    task.Start();
+            //    task.Wait();
+            //    task.Dispose();
+            //});
         }
 
         public void ResumeCapturingHotkeys()
