@@ -40,10 +40,6 @@ namespace RecNForget.WPF.Services
 
         private DispatcherTimer startAfterDispatcherTimer = new DispatcherTimer();
         private DispatcherTimer stopAfterdispatcherTimer = new DispatcherTimer();
-        private string GetCurrentDispatcherTimeString()
-        {
-            return dispatcherTimerCurrentTime.ToString(TimeSpanTextBox.ParseFormat);
-        }
 
         private string GetCurrentStartAfterDispatcherTimeString()
         {
@@ -55,7 +51,6 @@ namespace RecNForget.WPF.Services
             return stopAfterDispatcherTimerCurrentTime.ToString(TimeSpanTextBox.ParseFormat);
         }
 
-        private TimeSpan dispatcherTimerCurrentTime = TimeSpan.Zero;
         private TimeSpan startAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
         private TimeSpan stopAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
 
@@ -176,8 +171,8 @@ namespace RecNForget.WPF.Services
         {
             // reset all other possibly running timers
             ResetStartAfterDispatcherTimer();
-            dispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
-            CurrentRecordingStartAfterTimer = GetCurrentDispatcherTimeString();
+            startAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
+            CurrentRecordingStartAfterTimer = GetCurrentStartAfterDispatcherTimeString();
             TimerForRecordingStartAfterNotRunning = false;
 
             startAfterDispatcherTimer.Start();
@@ -187,8 +182,8 @@ namespace RecNForget.WPF.Services
         {
             // reset all other possibly running timers
             ResetStopAfterDispatcherTimer();
-            dispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
-            CurrentRecordingStopAfterTimer = GetCurrentDispatcherTimeString();
+            stopAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
+            CurrentRecordingStopAfterTimer = GetCurrentStopAfterDispatcherTimeString();
             TimerForRecordingStopAfterNotRunning = false;
 
             stopAfterdispatcherTimer.Start();
