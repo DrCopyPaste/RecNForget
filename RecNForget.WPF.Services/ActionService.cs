@@ -38,13 +38,26 @@ namespace RecNForget.WPF.Services
 
         private readonly NotificationManager _notificationManager = new NotificationManager();
 
-        private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private DispatcherTimer startAfterDispatcherTimer = new DispatcherTimer();
+        private DispatcherTimer stopAfterdispatcherTimer = new DispatcherTimer();
         private string GetCurrentDispatcherTimeString()
         {
             return dispatcherTimerCurrentTime.ToString(TimeSpanTextBox.ParseFormat);
         }
 
+        private string GetCurrentStartAfterDispatcherTimeString()
+        {
+            return startAfterDispatcherTimerCurrentTime.ToString(TimeSpanTextBox.ParseFormat);
+        }
+
+        private string GetCurrentStopAfterDispatcherTimeString()
+        {
+            return stopAfterDispatcherTimerCurrentTime.ToString(TimeSpanTextBox.ParseFormat);
+        }
+
         private TimeSpan dispatcherTimerCurrentTime = TimeSpan.Zero;
+        private TimeSpan startAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
+        private TimeSpan stopAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
 
         public Control OwnerControl { get; set; }
 
@@ -64,8 +77,11 @@ namespace RecNForget.WPF.Services
 
             hotkeyService.ResetAndReadHotkeysFromConfig(this);
 
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            startAfterDispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            startAfterDispatcherTimer.Tick += StartAfter_DispatcherTimer_Tick;
+            stopAfterdispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            stopAfterdispatcherTimer.Tick += StopAfter_DispatcherTimer_Tick;
+
         }
 
         private bool timerForRecordingStartAfterNotRunning = true;
@@ -100,22 +116,34 @@ namespace RecNForget.WPF.Services
             set { currentRecordingStartAfterTimer = value; OnPropertyChanged(); }
         }
 
-
-        // only one timer at the same time (either stopping time until recording start or stop)
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        private void StartAfter_DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            dispatcherTimerCurrentTime = dispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));
+            startAfterDispatcherTimerCurrentTime = startAfterDispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));
+            CurrentRecordingStartAfterTimer = GetCurrentStartAfterDispatcherTimeString();
 
-            if (!TimerForRecordingStartAfterNotRunning)
+            if (startAfterDispatcherTimerCurrentTime.TotalSeconds < 1)
             {
-                CurrentRecordingStartAfterTimer = GetCurrentDispatcherTimeString();
-            }
-            else
-            {
-                CurrentRecordingStopAfterTimer = GetCurrentDispatcherTimeString();
-            }
+                if (!audioRecordingService.CurrentlyRecording)
+                {
+                    audioRecordingService.ToggleRecording();
 
-            if (dispatcherTimerCurrentTime.TotalSeconds < 1)
+                    if (appSettingService.RecordingTimerStopAfterIsEnabled)
+                    {
+                        StartTimerToStopRecordingAfter();
+                        return;
+                    }
+                }
+
+                ResetStartAfterDispatcherTimer();
+            }
+        }
+
+        private void StopAfter_DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            stopAfterDispatcherTimerCurrentTime = stopAfterDispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));
+            CurrentRecordingStopAfterTimer = GetCurrentStopAfterDispatcherTimeString();
+
+            if (stopAfterDispatcherTimerCurrentTime.TotalSeconds < 1)
             {
                 // ToDo more than two timer options?
                 // timer finished, trigger respective method either way
@@ -140,45 +168,52 @@ namespace RecNForget.WPF.Services
                     }
                 }
 
-                ResetDispatcherTimer();
+                ResetStopAfterDispatcherTimer();
             }
         }
 
         public void StartTimerToStartRecordingAfter()
         {
             // reset all other possibly running timers
-            ResetDispatcherTimer();
+            ResetStartAfterDispatcherTimer();
             dispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
             CurrentRecordingStartAfterTimer = GetCurrentDispatcherTimeString();
             TimerForRecordingStartAfterNotRunning = false;
 
-            dispatcherTimer.Start();
+            startAfterDispatcherTimer.Start();
         }
 
         public void StartTimerToStopRecordingAfter()
         {
             // reset all other possibly running timers
-            ResetDispatcherTimer();
+            ResetStopAfterDispatcherTimer();
             dispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
             CurrentRecordingStopAfterTimer = GetCurrentDispatcherTimeString();
             TimerForRecordingStopAfterNotRunning = false;
 
-            dispatcherTimer.Start();
+            stopAfterdispatcherTimer.Start();
         }
 
-        public void ResetDispatcherTimer()
+        public void ResetStartAfterDispatcherTimer()
         {
-            dispatcherTimer.Stop();
-
-            dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
-            dispatcherTimerCurrentTime = TimeSpan.Zero;
+            startAfterDispatcherTimer.Stop();
             TimerForRecordingStartAfterNotRunning = true;
-            TimerForRecordingStopAfterNotRunning = true;
-
+            startAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
             CurrentRecordingStartAfterTimer = appSettingService.RecordingTimerStartAfterMax;
+        }
+
+        public void ResetStopAfterDispatcherTimer()
+        {
+            stopAfterdispatcherTimer.Stop();
+            TimerForRecordingStopAfterNotRunning = true;
+            stopAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, TimeSpanTextBox.ParseFormat, CultureInfo.InvariantCulture);
             CurrentRecordingStopAfterTimer = appSettingService.RecordingTimerStopAfterMax;
+        }
+
+        public void ResetAllTimers()
+        {
+            ResetStartAfterDispatcherTimer();
+            ResetStopAfterDispatcherTimer();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -493,33 +528,32 @@ namespace RecNForget.WPF.Services
             }
         }
 
-        private void ToggleRecordingWithTimerReset()
-        {
-            ResetDispatcherTimer();
-            audioRecordingService.ToggleRecording();
-        }
-
         public void ToggleStartStopRecording()
         {
+            // if no timers are configured, reset all timers and toggle record directly
             if (!appSettingService.RecordingTimerStartAfterIsEnabled && !appSettingService.RecordingTimerStopAfterIsEnabled)
             {
-                ToggleRecordingWithTimerReset();
+                ResetAllTimers();
+                audioRecordingService.ToggleRecording();
                 return;
             }
 
-            // stop recording immediately if this is triggered
+            // if currently recording, all timers can be ignored - stop after recording timer is ignored
             if (audioRecordingService.CurrentlyRecording)
             {
-                ToggleRecordingWithTimerReset();
+                ResetAllTimers();
+                audioRecordingService.ToggleRecording();
                 return;
             }
 
+            // if NOT currently recording, recording MIGHT be delayed by a timespan set in 
             if (appSettingService.RecordingTimerStartAfterIsEnabled)
             {
                 // override start to recording timer if action was triggered again
-                if (dispatcherTimer.IsEnabled)
+                if (startAfterDispatcherTimer.IsEnabled)
                 {
-                    ToggleRecordingWithTimerReset();
+                    ResetAllTimers();
+                    audioRecordingService.ToggleRecording();
 
                     if (appSettingService.RecordingTimerStopAfterIsEnabled)
                     {
@@ -533,7 +567,8 @@ namespace RecNForget.WPF.Services
             }
             else
             {
-                ToggleRecordingWithTimerReset();
+                ResetAllTimers();
+                audioRecordingService.ToggleRecording();
 
                 if (appSettingService.RecordingTimerStopAfterIsEnabled)
                 {

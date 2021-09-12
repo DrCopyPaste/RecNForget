@@ -60,8 +60,10 @@ namespace RecNForget.WPF.Services.Contracts
         void ShowRandomApplicationTip();
         void ExportSelectedFile();
         void StartTimerToStartRecordingAfter();
-        void ResetDispatcherTimer();
         void StartTimerToStopRecordingAfter();
         void ToggleRecordingTimerControlVisibility();
+        void ResetStartAfterDispatcherTimer();
+        void ResetStopAfterDispatcherTimer();
+        void ResetAllTimers();
     }
 }

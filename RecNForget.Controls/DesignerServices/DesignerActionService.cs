@@ -62,7 +62,22 @@ namespace RecNForget.Services.Designer
             throw new System.NotImplementedException();
         }
 
+        public void ResetAllTimers()
+        {
+            throw new NotImplementedException();
+        }
+
         public void ResetDispatcherTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResetStartAfterDispatcherTimer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResetStopAfterDispatcherTimer()
         {
             throw new NotImplementedException();
         }

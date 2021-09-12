@@ -112,7 +112,7 @@ namespace RecNForget.Controls
 
             if (!actionService.TimerForRecordingStopAfterNotRunning && (!StopAfter_CheckBox.IsChecked.HasValue || !StopAfter_CheckBox.IsChecked.Value))
             {
-                actionService.ResetDispatcherTimer();
+                actionService.ResetStopAfterDispatcherTimer();
             }
         }
 
@@ -120,7 +120,7 @@ namespace RecNForget.Controls
         {
             if (!actionService.TimerForRecordingStartAfterNotRunning && (!StartAfter_CheckBox.IsChecked.HasValue || !StartAfter_CheckBox.IsChecked.Value))
             {
-                actionService.ResetDispatcherTimer();
+                actionService.ResetStartAfterDispatcherTimer();
             }
         }
     }

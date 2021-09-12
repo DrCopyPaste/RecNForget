@@ -49,6 +49,49 @@ namespace RecNForget.Services
             }
         }
 
+        //public void ToggleStartStopRecording()
+        //{
+        //    if (!appSettingService.RecordingTimerStartAfterIsEnabled && !appSettingService.RecordingTimerStopAfterIsEnabled)
+        //    {
+        //        ToggleRecordingWithTimerReset();
+        //        return;
+        //    }
+
+        //    // stop recording immediately if this is triggered
+        //    if (audioRecordingService.CurrentlyRecording)
+        //    {
+        //        ToggleRecordingWithTimerReset();
+        //        return;
+        //    }
+
+        //    if (appSettingService.RecordingTimerStartAfterIsEnabled)
+        //    {
+        //        // override start to recording timer if action was triggered again
+        //        if (dispatcherTimer.IsEnabled)
+        //        {
+        //            ToggleRecordingWithTimerReset();
+
+        //            if (appSettingService.RecordingTimerStopAfterIsEnabled)
+        //            {
+        //                StartTimerToStopRecordingAfter();
+        //            }
+
+        //            return;
+        //        }
+
+        //        StartTimerToStartRecordingAfter();
+        //    }
+        //    else
+        //    {
+        //        ToggleRecordingWithTimerReset();
+
+        //        if (appSettingService.RecordingTimerStopAfterIsEnabled)
+        //        {
+        //            StartTimerToStopRecordingAfter();
+        //        }
+        //    }
+        //}
+
         public void StartRecording()
         {
             CurrentlyRecording = true;
