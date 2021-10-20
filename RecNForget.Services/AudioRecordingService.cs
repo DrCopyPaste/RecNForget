@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows.Threading;
 using NAudio.Wave;
 using RecNForget.Services.Contracts;
 
@@ -17,6 +19,22 @@ namespace RecNForget.Services
 
         private readonly IAppSettingService appSettingService;
 
+        private DispatcherTimer startAfterDispatcherTimer = new DispatcherTimer();
+        private DispatcherTimer stopAfterdispatcherTimer = new DispatcherTimer();
+
+        private string GetCurrentStartAfterDispatcherTimeString()
+        {
+            return startAfterDispatcherTimerCurrentTime.ToString(Formats.TimeSpanFormat);
+        }
+
+        private string GetCurrentStopAfterDispatcherTimeString()
+        {
+            return stopAfterDispatcherTimerCurrentTime.ToString(Formats.TimeSpanFormat);
+        }
+
+        private TimeSpan startAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
+        private TimeSpan stopAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
+
         public AudioRecordingService(IAppSettingService appSettingService)
         {
             this.appSettingService = appSettingService;
@@ -24,6 +42,11 @@ namespace RecNForget.Services
             CurrentlyRecording = false;
             CurrentlyNotRecording = true;
             UpdateProperties();
+
+            startAfterDispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            startAfterDispatcherTimer.Tick += StartAfter_DispatcherTimer_Tick;
+            stopAfterdispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            stopAfterdispatcherTimer.Tick += StopAfter_DispatcherTimer_Tick;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -37,7 +60,7 @@ namespace RecNForget.Services
         public bool CurrentlyNotRecording { get; private set; } = true;
 
         // starts or stops recording according to CurrentlyRecording state
-        public void ToggleRecording()
+        private void ToggleRecordingInternal()
         {
             if (!CurrentlyRecording)
             {
@@ -49,48 +72,186 @@ namespace RecNForget.Services
             }
         }
 
-        //public void ToggleStartStopRecording()
-        //{
-        //    if (!appSettingService.RecordingTimerStartAfterIsEnabled && !appSettingService.RecordingTimerStopAfterIsEnabled)
-        //    {
-        //        ToggleRecordingWithTimerReset();
-        //        return;
-        //    }
+        private bool timerForRecordingStartAfterNotRunning = true;
+        public bool TimerForRecordingStartAfterNotRunning
+        {
+            get { return timerForRecordingStartAfterNotRunning; }
+            set { timerForRecordingStartAfterNotRunning = value; OnPropertyChanged(); }
+        }
 
-        //    // stop recording immediately if this is triggered
-        //    if (audioRecordingService.CurrentlyRecording)
-        //    {
-        //        ToggleRecordingWithTimerReset();
-        //        return;
-        //    }
+        private bool timerForRecordingStopAfterNotRunning = true;
 
-        //    if (appSettingService.RecordingTimerStartAfterIsEnabled)
-        //    {
-        //        // override start to recording timer if action was triggered again
-        //        if (dispatcherTimer.IsEnabled)
-        //        {
-        //            ToggleRecordingWithTimerReset();
+        public bool TimerForRecordingStopAfterNotRunning
+        {
+            get { return timerForRecordingStopAfterNotRunning; }
+            set { timerForRecordingStopAfterNotRunning = value; OnPropertyChanged(); }
+        }
 
-        //            if (appSettingService.RecordingTimerStopAfterIsEnabled)
-        //            {
-        //                StartTimerToStopRecordingAfter();
-        //            }
 
-        //            return;
-        //        }
+        private string currentRecordingStopAfterTimer = "0:00:00:00";
 
-        //        StartTimerToStartRecordingAfter();
-        //    }
-        //    else
-        //    {
-        //        ToggleRecordingWithTimerReset();
+        public string CurrentRecordingStopAfterTimer
+        {
+            get { return currentRecordingStopAfterTimer; }
+            set { currentRecordingStopAfterTimer = value; OnPropertyChanged(); }
+        }
 
-        //        if (appSettingService.RecordingTimerStopAfterIsEnabled)
-        //        {
-        //            StartTimerToStopRecordingAfter();
-        //        }
-        //    }
-        //}
+        private string currentRecordingStartAfterTimer = "0:00:00:00";
+
+        public string CurrentRecordingStartAfterTimer
+        {
+            get { return currentRecordingStartAfterTimer; }
+            set { currentRecordingStartAfterTimer = value; OnPropertyChanged(); }
+        }
+
+        private void StartAfter_DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            startAfterDispatcherTimerCurrentTime = startAfterDispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));
+            CurrentRecordingStartAfterTimer = GetCurrentStartAfterDispatcherTimeString();
+
+            if (startAfterDispatcherTimerCurrentTime.TotalSeconds < 1)
+            {
+                if (!CurrentlyRecording)
+                {
+                    ToggleRecordingInternal();
+
+                    if (appSettingService.RecordingTimerStopAfterIsEnabled)
+                    {
+                        StartTimerToStopRecordingAfter();
+                        return;
+                    }
+                }
+
+                ResetStartAfterDispatcherTimer();
+            }
+        }
+
+        private void StopAfter_DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            stopAfterDispatcherTimerCurrentTime = stopAfterDispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));
+            CurrentRecordingStopAfterTimer = GetCurrentStopAfterDispatcherTimeString();
+
+            if (stopAfterDispatcherTimerCurrentTime.TotalSeconds < 1)
+            {
+                // ToDo more than two timer options?
+                // timer finished, trigger respective method either way
+                if (!TimerForRecordingStartAfterNotRunning)
+                {
+                    if (!CurrentlyRecording)
+                    {
+                        ToggleRecordingInternal();
+
+                        if (appSettingService.RecordingTimerStopAfterIsEnabled)
+                        {
+                            StartTimerToStopRecordingAfter();
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    if (CurrentlyRecording)
+                    {
+                        ToggleRecordingInternal();
+                    }
+                }
+
+                ResetStopAfterDispatcherTimer();
+            }
+        }
+
+        public void StartTimerToStartRecordingAfter()
+        {
+            // reset all other possibly running timers
+            ResetStartAfterDispatcherTimer();
+            startAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, Formats.TimeSpanFormat, CultureInfo.InvariantCulture);
+            CurrentRecordingStartAfterTimer = GetCurrentStartAfterDispatcherTimeString();
+            TimerForRecordingStartAfterNotRunning = false;
+
+            startAfterDispatcherTimer.Start();
+        }
+
+        public void StartTimerToStopRecordingAfter()
+        {
+            // reset all other possibly running timers
+            ResetStopAfterDispatcherTimer();
+            stopAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, Formats.TimeSpanFormat, CultureInfo.InvariantCulture);
+            CurrentRecordingStopAfterTimer = GetCurrentStopAfterDispatcherTimeString();
+            TimerForRecordingStopAfterNotRunning = false;
+
+            stopAfterdispatcherTimer.Start();
+        }
+
+        public void ResetStartAfterDispatcherTimer()
+        {
+            startAfterDispatcherTimer.Stop();
+            TimerForRecordingStartAfterNotRunning = true;
+            startAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, Formats.TimeSpanFormat, CultureInfo.InvariantCulture);
+            CurrentRecordingStartAfterTimer = appSettingService.RecordingTimerStartAfterMax;
+        }
+
+        public void ResetStopAfterDispatcherTimer()
+        {
+            stopAfterdispatcherTimer.Stop();
+            TimerForRecordingStopAfterNotRunning = true;
+            stopAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, Formats.TimeSpanFormat, CultureInfo.InvariantCulture);
+            CurrentRecordingStopAfterTimer = appSettingService.RecordingTimerStopAfterMax;
+        }
+
+        public void ResetAllTimers()
+        {
+            ResetStartAfterDispatcherTimer();
+            ResetStopAfterDispatcherTimer();
+        }
+
+        public void ToggleRecording()
+        {
+            // if no timers are configured, reset all timers and toggle record directly
+            if (!appSettingService.RecordingTimerStartAfterIsEnabled && !appSettingService.RecordingTimerStopAfterIsEnabled)
+            {
+                ResetAllTimers();
+                ToggleRecordingInternal();
+                return;
+            }
+
+            // if currently recording, all timers can be ignored - stop after recording timer is ignored
+            if (CurrentlyRecording)
+            {
+                ResetAllTimers();
+                ToggleRecordingInternal();
+                return;
+            }
+
+            // if NOT currently recording, recording MIGHT be delayed by a timespan set in 
+            if (appSettingService.RecordingTimerStartAfterIsEnabled)
+            {
+                // override start to recording timer if action was triggered again
+                if (startAfterDispatcherTimer.IsEnabled)
+                {
+                    ResetAllTimers();
+                    ToggleRecordingInternal();
+
+                    if (appSettingService.RecordingTimerStopAfterIsEnabled)
+                    {
+                        StartTimerToStopRecordingAfter();
+                    }
+
+                    return;
+                }
+
+                StartTimerToStartRecordingAfter();
+            }
+            else
+            {
+                ResetAllTimers();
+                ToggleRecordingInternal();
+
+                if (appSettingService.RecordingTimerStopAfterIsEnabled)
+                {
+                    StartTimerToStopRecordingAfter();
+                }
+            }
+        }
 
         public void StartRecording()
         {

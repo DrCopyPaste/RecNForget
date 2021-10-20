@@ -106,21 +106,21 @@ namespace RecNForget.Controls
             {
                 if (AudioRecordingService.CurrentlyRecording)
                 {
-                    actionService.StartTimerToStopRecordingAfter();
+                    AudioRecordingService.StartTimerToStopRecordingAfter();
                 }
             }
 
-            if (!actionService.TimerForRecordingStopAfterNotRunning && (!StopAfter_CheckBox.IsChecked.HasValue || !StopAfter_CheckBox.IsChecked.Value))
+            if (!AudioRecordingService.TimerForRecordingStopAfterNotRunning && (!StopAfter_CheckBox.IsChecked.HasValue || !StopAfter_CheckBox.IsChecked.Value))
             {
-                actionService.ResetStopAfterDispatcherTimer();
+                AudioRecordingService.ResetStopAfterDispatcherTimer();
             }
         }
 
         private void StartAfter_Checked_Changed(object sender, RoutedEventArgs e)
         {
-            if (!actionService.TimerForRecordingStartAfterNotRunning && (!StartAfter_CheckBox.IsChecked.HasValue || !StartAfter_CheckBox.IsChecked.Value))
+            if (!AudioRecordingService.TimerForRecordingStartAfterNotRunning && (!StartAfter_CheckBox.IsChecked.HasValue || !StartAfter_CheckBox.IsChecked.Value))
             {
-                actionService.ResetStartAfterDispatcherTimer();
+                AudioRecordingService.ResetStartAfterDispatcherTimer();
             }
         }
     }
