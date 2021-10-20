@@ -1,5 +1,5 @@
 ﻿using RecNForget.Controls.Helper;
-using RecNForget.IoC;
+using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;

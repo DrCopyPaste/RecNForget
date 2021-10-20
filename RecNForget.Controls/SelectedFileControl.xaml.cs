@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using NAudio.Wave;
 using Notifications.Wpf.Core;
 using RecNForget.Controls.Extensions;
-using RecNForget.IoC;
+using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;

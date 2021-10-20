@@ -1,6 +1,6 @@
 ﻿using RecNForget.Controls.Extensions;
 using RecNForget.Controls.Helper;
-using RecNForget.IoC;
+using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using System;
 using System.Collections.Generic;
