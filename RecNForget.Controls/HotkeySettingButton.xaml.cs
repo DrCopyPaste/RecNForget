@@ -75,7 +75,7 @@ namespace RecNForget.Controls
             if (dialog.ShowDialog() == true)
             {
                 SettingValue = dialog.HotkeysAppSetting;
-                this.hotkeyService.ResetAndReadHotkeysFromConfig(actionService);
+                this.hotkeyService.ResetAndReadHotkeysFromConfig();
             }
         }
     }

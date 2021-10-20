@@ -28,15 +28,9 @@ namespace RecNForget.Controls.Services
         private readonly IAudioPlaybackService audioPlaybackService = null;
         private readonly IAudioRecordingService audioRecordingService = null;
         private readonly IAppSettingService appSettingService = null;
-        private readonly IApplicationHotkeyService hotkeyService = null;
 
         private readonly NotificationManager _notificationManager = new NotificationManager();
         public Control OwnerControl { get; set; }
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
         public ActionService()
@@ -45,10 +39,6 @@ namespace RecNForget.Controls.Services
             this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
             this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
             this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
-            this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
-
-            hotkeyService.ResetAndReadHotkeysFromConfig(this);
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -429,7 +419,8 @@ namespace RecNForget.Controls.Services
 
         public void ShowSettingsMenu()
         {
-            var settingsWindow = new SettingsWindow(hotkeyService, appSettingService, this);
+            var settingsWindow = UnityHandler.UnityContainer.Resolve<SettingsWindow>();
+
             settingsWindow.TrySetViewablePositionFromOwner(OwnerControl);
 
             settingsWindow.ShowDialog();
@@ -489,7 +480,7 @@ namespace RecNForget.Controls.Services
 
         public void ShowNewToApplicationWindow()
         {
-            var dia = new NewToApplicationWindow(hotkeyService, appSettingService, this);
+            var dia = UnityHandler.UnityContainer.Resolve<NewToApplicationWindow>();
 
             if (!appSettingService.MinimizedToTray && OwnerControl != null)
             {

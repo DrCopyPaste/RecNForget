@@ -35,7 +35,11 @@ namespace RecNForget.Controls.IoC
             UnityContainer.RegisterType<ISimpleGlobalHotkeyService, SimpleGlobalHotkeyService>(lifetimeManager: new SingletonLifetimeManager());
             UnityContainer.RegisterType<IAudioRecordingService, AudioRecordingService>(lifetimeManager: new SingletonLifetimeManager());
             // UnityContainer.RegisterType<IActionService, ActionService>(lifetimeManager: new SingletonLifetimeManager());
+
             // UnityContainer.RegisterType<IMainWindow, MainWindow>();
+
+            UnityContainer.RegisterType<SettingsWindow>();
+            UnityContainer.RegisterType<NewToApplicationWindow>();
         }
     }
 }

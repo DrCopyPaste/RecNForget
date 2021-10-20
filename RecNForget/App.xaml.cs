@@ -94,6 +94,7 @@ namespace RecNForget
             Version lastInstalledVersion = appSettingService.LastInstalledVersion;
 
             appSettingService.LastInstalledVersion = currentFileVersion;
+            hotkeyService.ResetAndReadHotkeysFromConfig();
 
             if (firstTimeUser)
             {

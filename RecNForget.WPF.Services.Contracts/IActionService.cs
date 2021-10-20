@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace RecNForget.WPF.Services.Contracts
 {
-    public interface IActionService : INotifyPropertyChanged
+    public interface IActionService
     {
         System.Windows.Controls.Control OwnerControl { get; set; }
 
