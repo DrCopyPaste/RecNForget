@@ -14,7 +14,7 @@ namespace RecNForget.Help.Features
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "You can open output folder by clicking the folder-button at the bottom left of the main window."
+					Content = "You can open the output folder by clicking the folder-button at the bottom left of the main window."
 				},
 				new HelpFeatureDetailLine()
 				{

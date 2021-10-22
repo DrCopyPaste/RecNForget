@@ -34,23 +34,15 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- click on 'Open Settings'"
+					Content = "- click on 'Open Settings' -> 'Toast Messages'"
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- click on 'show toast messages'"
+					Content = "- click on 'show toast messages on toggle record'"
 				},
 				new HelpFeatureDetailLine()
 				{
 					Content = "- exit the settings window by pressing the accept button"
-				},
-				new HelpFeatureDetailLine()
-				{
-					Content = string.Empty
-				},
-				new HelpFeatureDetailLine()
-				{
-					Content = "Keep in mind that system sounds coming from toast messages can be configured via Taskbar->Settings in Windows itself."
 				}
 			};
 		}

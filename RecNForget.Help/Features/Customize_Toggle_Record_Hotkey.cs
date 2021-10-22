@@ -34,7 +34,7 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- click on 'Open Settings'"
+					Content = "- click on 'Open Settings' -> 'Hotkeys'"
 				},
 				new HelpFeatureDetailLine()
 				{

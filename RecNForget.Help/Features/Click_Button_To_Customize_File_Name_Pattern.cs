@@ -15,6 +15,14 @@ namespace RecNForget.Help.Features
 				new HelpFeatureDetailLine()
 				{
 					Content = "You can customize the file pattern used to generate new file names by clicking on the pencil-button next to the recording path in the main window."
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = string.Empty
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "NOTE: This requires you to have the selected file control enabled (Context Menu-> 'Show Selected File Control')"
 				}
 			};
 		}

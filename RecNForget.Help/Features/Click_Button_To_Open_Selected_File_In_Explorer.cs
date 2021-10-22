@@ -22,7 +22,7 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "NOTE: This will only open that folder in the explorer if no file is selected."
+					Content = "NOTE: If there is no file selected this will just open the output folder."
 				}
 			};
 		}

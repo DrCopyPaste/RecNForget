@@ -35,6 +35,14 @@ namespace RecNForget.Help.Features
 				new HelpFeatureDetailLine()
 				{
 					Content = "Settings -> Output -> Mp3 Export Settings"
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = string.Empty
+				},
+				new HelpFeatureDetailLine()
+				{
+					Content = "NOTE: To do this you need to have the selected file control enabled (Context Menu-> 'Show Selected File Control')"
 				}
 			};
 		}
