@@ -21,11 +21,13 @@ http://pinvoke.net/default.aspx/Constants.WM
  */
 
 
+using PressingIssue.Services.Contracts;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace PressingIssue.Services.Win32
 {
@@ -300,7 +302,6 @@ namespace PressingIssue.Services.Win32
 
         private IntPtr HookCallbackFunction(int code, IntPtr wParam, IntPtr lParam)
         {
-
             if (code >= 0)
             {
                 // WM_KEYDOWN / WM_KEYUP capture most key events
@@ -311,10 +312,12 @@ namespace PressingIssue.Services.Win32
                     try
                     {
                         KeyEvent?.Invoke(this, new GlobalKeyboardHookEventArgs(wParam, lParam));
+
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        // silently ignore any errors when triggering events
+                        // "silently" ignore any errors when triggering key hook events
+                        //logger.Error(ex, $"{nameof(GlobalKeyboardHook)} [{Guid}] @{nameof(HookCallbackFunction)} An error occurred trying to trigger the key hook event.");
                     }
                 }
             }
@@ -325,22 +328,24 @@ namespace PressingIssue.Services.Win32
         }
 
         #endregion
-
         private IntPtr currentHook = IntPtr.Zero;
         private Guid guid = Guid.NewGuid();
         private readonly HookProc myCallbackDelegate = null;
+        //private readonly NLog.Logger logger = null;
 
         public event EventHandler<GlobalKeyboardHookEventArgs> KeyEvent;
         public Guid Guid { get => guid; private set => guid = value; }
 
         public GlobalKeyboardHook()
         {
+            //logger = NLog.LogManager.GetCurrentClassLogger();
             this.myCallbackDelegate = new HookProc(this.HookCallbackFunction);
         }
 
         public void Start()
         {
             Guid = Guid.NewGuid();
+            //logger.Info($"{nameof(GlobalKeyboardHook)} [{Guid}] @{nameof(Start)} started.");
 
             using Process process = Process.GetCurrentProcess();
             using ProcessModule module = process.MainModule;
@@ -350,7 +355,8 @@ namespace PressingIssue.Services.Win32
             if (currentHook == IntPtr.Zero)
             {
                 int errorCode = Marshal.GetLastWin32Error();
-                throw new Win32Exception(errorCode, $"Could not start keyboard hook for '{Process.GetCurrentProcess().ProcessName}'. Error {errorCode}: {new Win32Exception(Marshal.GetLastWin32Error()).Message}.");
+                //logger.Error($"{nameof(GlobalKeyboardHook)} [{Guid}] @{nameof(Start)} could not start keyboard hook. ({errorCode})");
+                throw new Win32Exception(errorCode, $"{nameof(GlobalKeyboardHook)} [{Guid}] @{nameof(Start)} Could not start keyboard hook for '{Process.GetCurrentProcess().ProcessName}'. Error {errorCode}: {new Win32Exception(Marshal.GetLastWin32Error()).Message}.");
             }
         }
 
@@ -361,10 +367,12 @@ namespace PressingIssue.Services.Win32
                 if (!UnhookWindowsHookEx(currentHook))
                 {
                     int errorCode = Marshal.GetLastWin32Error();
-                    throw new Win32Exception(errorCode, $"Error on trying to remove keyboard hook for '{Process.GetCurrentProcess().ProcessName}'. Error {errorCode}: {new Win32Exception(Marshal.GetLastWin32Error()).Message}.");
+                    //logger.Error($"{nameof(GlobalKeyboardHook)} [{Guid}] @{nameof(Stop)} error on trying to dispose keyboard hook. ({errorCode})");
+                    throw new Win32Exception(errorCode, $"{nameof(GlobalKeyboardHook)} [{Guid}] @{nameof(Stop)} Error on trying to remove keyboard hook for '{Process.GetCurrentProcess().ProcessName}'. Error {errorCode}: {new Win32Exception(Marshal.GetLastWin32Error()).Message}.");
                 }
 
                 currentHook = IntPtr.Zero;
+                //logger.Info($"{nameof(GlobalKeyboardHook)} [{Guid}] @{nameof(Stop)} stopped.");
             }
         }
 
@@ -372,8 +380,7 @@ namespace PressingIssue.Services.Win32
         {
             public bool KeyDown { get; private set; }
             public bool KeyUp { get; private set; }
-            public int Key { get; private set; }
-            public string KeyName { get; private set; }
+            public Keys Key { get; private set; }
 
             /// <summary>
             /// wParam may be WM_KEYDOWN / WM_KEYUP or WM_SYSKEYUP / WM_SYSKEYDOWN
@@ -384,12 +391,7 @@ namespace PressingIssue.Services.Win32
                 this.KeyDown = wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_SYSKEYDOWN;
                 this.KeyUp = wParam == (IntPtr)WM_KEYUP || wParam == (IntPtr)WM_SYSKEYUP;
 
-                this.Key = Marshal.ReadInt32(lParam);
-
-                // seems OP to include System.Windows.Forms just for this
-                // but this enum is EXACTLY what we need to map lParam to something sensible
-                // one COULD of course also just copy the enum from https://github.com/dotnet/winforms/blob/master/src/System.Windows.Forms/src/System/Windows/Forms/Keys.cs
-                KeyName = ((Keys)this.Key).ToString();
+                this.Key = (Keys)Marshal.ReadInt32(lParam);
             }
         }
     }

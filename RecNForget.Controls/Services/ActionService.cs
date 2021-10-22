@@ -1,32 +1,26 @@
-﻿using System;
+﻿using NAudio.Wave;
+using Notifications.Wpf.Core;
+using Ookii.Dialogs.Wpf;
+using RecNForget.Controls.Extensions;
+using RecNForget.Controls.IoC;
+using RecNForget.Help;
+using RecNForget.Services.Contracts;
+using RecNForget.WPF.Services.Contracts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using NAudio.Wave;
-using Notifications.Wpf.Core;
-using Ookii.Dialogs.Wpf;
-using RecNForget.Controls;
-using RecNForget.Controls.Extensions;
-using RecNForget.Controls.Helper;
-using RecNForget.Controls.Services;
-using RecNForget.Help;
-using RecNForget.IoC;
-using RecNForget.Services.Contracts;
-using RecNForget.WPF.Services.Contracts;
 using Unity;
 
-// ToDo remove coupling with controls from this service, so this service can be moved to RecNForget.Services (it is really only the custom message box so far)
-namespace RecNForget.WPF.Services
+namespace RecNForget.Controls.Services
 {
     public class ActionService : IActionService
     {
@@ -34,15 +28,9 @@ namespace RecNForget.WPF.Services
         private readonly IAudioPlaybackService audioPlaybackService = null;
         private readonly IAudioRecordingService audioRecordingService = null;
         private readonly IAppSettingService appSettingService = null;
-        private readonly IApplicationHotkeyService hotkeyService = null;
 
         private readonly NotificationManager _notificationManager = new NotificationManager();
         public Control OwnerControl { get; set; }
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
         public ActionService()
@@ -51,10 +39,6 @@ namespace RecNForget.WPF.Services
             this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
             this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
             this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
-            this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
-
-            hotkeyService.ResetAndReadHotkeysFromConfig(this);
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -96,59 +80,66 @@ namespace RecNForget.WPF.Services
 
         public void ExportSelectedFile()
         {
-            audioPlaybackService.Stop();
-            audioPlaybackService.KillAudio();
-
-            string preferredFileName = string.Empty;
-
-            if (appSettingService.PromptForExportFileName)
+            var task = Task.Run(() =>
             {
-                CustomMessageBox tempDialog = new CustomMessageBox(
-                    caption: "Select a filename for the exported file",
-                    icon: CustomMessageBoxIcon.Question,
-                    buttons: CustomMessageBoxButtons.OkAndCancel,
-                    messageRows: new List<string>(),
-                    prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
-                    controlFocus: CustomMessageBoxFocus.Prompt,
-                    promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+                string preferredFileName = string.Empty;
 
-                tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-                if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
+                if (appSettingService.PromptForExportFileName)
                 {
+                    CustomMessageBox tempDialog = new CustomMessageBox(
+                        caption: "Select a filename for the exported file",
+                        icon: CustomMessageBoxIcon.Question,
+                        buttons: CustomMessageBoxButtons.OkAndCancel,
+                        messageRows: new List<string>(),
+                        prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
+                        controlFocus: CustomMessageBoxFocus.Prompt,
+                        promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+                    tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+                    if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
+                    {
+                        return;
+                    }
+
+                    preferredFileName = tempDialog.PromptContent;
+                }
+                _notificationManager.ShowAsync(
+                  content: new NotificationContent()
+                  {
+                      Type = NotificationType.Information,
+                      Title = $"Exporting {selectedFileService.SelectedFile.Name} MP3 @ {appSettingService.Mp3ExportBitrate} kbps",
+                      Message = $"Export has started, this may take a moment..."
+                  });
+
+                var exportedFileName = selectedFileService.ExportFile(preferredFileName);
+
+                if (string.IsNullOrEmpty(exportedFileName))
+                {
+                    _notificationManager.ShowAsync(
+                        content: new NotificationContent()
+                        {
+                            Title = "Something went wrong",
+                            Message = "An unknown error occurred trying to export the selected file",
+                            Type = NotificationType.Error
+                        },
+                        expirationTime: TimeSpan.FromSeconds(10));
                     return;
                 }
 
-                preferredFileName = tempDialog.PromptContent;
-            }
-
-            var exportedFileName = selectedFileService.ExportFile(preferredFileName);
-            if (string.IsNullOrEmpty(exportedFileName))
-            {
                 _notificationManager.ShowAsync(
-                    content: new NotificationContent()
-                    {
-                        Title = "Something went wrong",
-                        Message = "An unknown error occurred trying to export the selected file",
-                        Type = NotificationType.Error
-                    },
-                    expirationTime: TimeSpan.FromSeconds(10));
-                return;
-            }
-
-
-            _notificationManager.ShowAsync(
-              content: new NotificationContent()
-              {
-                  Type = NotificationType.Success,
-                  Title = $"{selectedFileService.SelectedFile.Name} exported to MP3!",
-                  Message = $"Export was successful, file has been exported to {exportedFileName}."
-              },
-              onClick: () =>
-              {
-                  string argument = "/select, \"" + exportedFileName + "\"";
-                  System.Diagnostics.Process.Start("explorer.exe", argument);
-              });
+                  content: new NotificationContent()
+                  {
+                      Type = NotificationType.Success,
+                      Title = $"{selectedFileService.SelectedFile.Name} exported to MP3!",
+                      Message = $"Export was successful, file has been exported to {exportedFileName}."
+                  },
+                  onClick: () =>
+                  {
+                      string argument = "/select, \"" + exportedFileName + "\"";
+                      System.Diagnostics.Process.Start("explorer.exe", argument);
+                  });
+            });
         }
 
         public void ChangeSelectedFileName()
@@ -435,7 +426,8 @@ namespace RecNForget.WPF.Services
 
         public void ShowSettingsMenu()
         {
-            var settingsWindow = new SettingsWindow(hotkeyService, appSettingService, this);
+            var settingsWindow = UnityHandler.UnityContainer.Resolve<SettingsWindow>();
+
             settingsWindow.TrySetViewablePositionFromOwner(OwnerControl);
 
             settingsWindow.ShowDialog();
@@ -495,7 +487,7 @@ namespace RecNForget.WPF.Services
 
         public void ShowNewToApplicationWindow()
         {
-            var dia = new NewToApplicationWindow(hotkeyService, appSettingService, this);
+            var dia = UnityHandler.UnityContainer.Resolve<NewToApplicationWindow>();
 
             if (!appSettingService.MinimizedToTray && OwnerControl != null)
             {

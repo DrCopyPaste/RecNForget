@@ -11,20 +11,22 @@ namespace RecNForget.Services
         private readonly IAppSettingService appSettingService;
         private readonly IAudioRecordingService audioRecordingService;
         private readonly IAudioPlaybackService audioPlaybackService;
-
+        private readonly IActionService actionService;
         private readonly ISimpleGlobalHotkeyService globalHotkeyService;
 
         public ApplicationHotkeyService(
             ISimpleGlobalHotkeyService globalHotkeyService,
             IAppSettingService appSettingService,
             IAudioRecordingService audioRecordingService,
-            IAudioPlaybackService audioPlaybackService)
+            IAudioPlaybackService audioPlaybackService,
+            IActionService actionService)
         {
             this.globalHotkeyService = globalHotkeyService;
             this.appSettingService = appSettingService;
             this.audioRecordingService = audioRecordingService;
             this.audioPlaybackService = audioPlaybackService;
 
+            this.actionService = actionService;
             //ResetAndReadHotkeysFromConfig();
         }
 
@@ -33,7 +35,7 @@ namespace RecNForget.Services
             globalHotkeyService.ProcessingHotkeys = !pause;
         }
 
-        public void ResetAndReadHotkeysFromConfig(IActionService actionService)
+        public void ResetAndReadHotkeysFromConfig()
         {
             globalHotkeyService.RemoveAllHotkeys();
 
@@ -41,8 +43,15 @@ namespace RecNForget.Services
 
             // hotkey action should not make hotkeyservice/hook wait
             globalHotkeyService.AddOrUpdateOnReleaseHotkey(
-                appSettingService.HotKey_StartStopRecording,
-                () => new Task(() => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } }).Start());
+                PressedKeysInfo.FromString(appSettingService.HotKey_StartStopRecording),
+                () => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } });
+            //() =>
+            //{
+            //    var task = Task.Run(() => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } });
+            //    task.Start();
+            //    task.Wait();
+            //    task.Dispose();
+            //});
         }
 
         public void ResumeCapturingHotkeys()

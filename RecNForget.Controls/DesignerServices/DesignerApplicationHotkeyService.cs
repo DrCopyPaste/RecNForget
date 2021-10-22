@@ -15,7 +15,7 @@ namespace RecNForget.Services.Designer
             throw new NotImplementedException();
         }
 
-        public void ResetAndReadHotkeysFromConfig(IActionService actionService)
+        public void ResetAndReadHotkeysFromConfig()
         {
             throw new NotImplementedException();
         }

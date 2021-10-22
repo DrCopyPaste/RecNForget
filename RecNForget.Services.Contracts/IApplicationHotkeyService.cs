@@ -9,6 +9,6 @@ namespace RecNForget.Services.Contracts
         void PauseCapturingHotkeys(bool pause = true);
 
         void ResumeCapturingHotkeys();
-        void ResetAndReadHotkeysFromConfig(IActionService actionService);
+        void ResetAndReadHotkeysFromConfig();
     }
 }

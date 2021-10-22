@@ -4,13 +4,9 @@ using System.Windows;
 
 namespace RecNForget.WPF.Services.Contracts
 {
-    public interface IActionService : INotifyPropertyChanged
+    public interface IActionService
     {
         System.Windows.Controls.Control OwnerControl { get; set; }
-        string CurrentRecordingStartAfterTimer { get; set; }
-        string CurrentRecordingStopAfterTimer { get; set; }
-        bool TimerForRecordingStartAfterNotRunning { get; set; }
-        bool TimerForRecordingStopAfterNotRunning { get; set; }
 
         // change output directory (with dialog)
         void ChangeOutputFolder();
@@ -59,9 +55,6 @@ namespace RecNForget.WPF.Services.Contracts
         void ShowNewToVersionDialog(Version currentFileVersion, Version lastInstalledVersion);
         void ShowRandomApplicationTip();
         void ExportSelectedFile();
-        void StartTimerToStartRecordingAfter();
-        void ResetDispatcherTimer();
-        void StartTimerToStopRecordingAfter();
         void ToggleRecordingTimerControlVisibility();
     }
 }

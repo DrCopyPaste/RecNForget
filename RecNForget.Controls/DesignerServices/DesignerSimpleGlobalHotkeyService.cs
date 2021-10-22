@@ -17,12 +17,27 @@ namespace RecNForget.Services.Designer
             throw new NotImplementedException();
         }
 
+        public void AddOrUpdateOnReleaseHotkey(PressedKeysInfo pressedKeysInfo, Action hotkeyAction)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddOrUpdateQuickCastHotkey(string settingString, Action hotkeyAction)
         {
             throw new NotImplementedException();
         }
 
+        public void AddOrUpdateQuickCastHotkey(PressedKeysInfo pressedKeysInfo, Action hotkeyAction)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetPressedKeysAsSetting(PressedKeysInfo pressedKeysInfo)
         {
             throw new NotImplementedException();
         }
