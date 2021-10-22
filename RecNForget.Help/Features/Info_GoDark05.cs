@@ -10,7 +10,7 @@ namespace RecNForget.Help.Features
 			Priority = 999;
 			MinVersion = HelpFeatureVersion.v0_5_ChiliGarlicShrimps;
 			FeatureClass = HelpFeatureClass.Information;
-			Title = "Going with the times, RecNForget now goes dark.";
+			Title = "Going with the times, RecNForget now can go dark too.";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
