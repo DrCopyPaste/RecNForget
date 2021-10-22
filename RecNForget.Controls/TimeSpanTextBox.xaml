@@ -22,7 +22,7 @@
                             
                             IsEnabled="True"
                             d:IsEnabled="True"
-                            Text="{Binding Path=SettingTextValueTimeSpan, RelativeSource={RelativeSource AncestorType=local:TimeSpanTextBox}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding Path=SettingTextValueTimeSpan, RelativeSource={RelativeSource AncestorType=local:TimeSpanTextBox}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
                             d:Text="0:00:00:00"
                             d:Visibility="Visible">
             </TextBox>

@@ -9,7 +9,7 @@ namespace RecNForget.Help.Features
 		{
 			MinVersion = HelpFeatureVersion.v0_5_____;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "click button to export as mp3";
+			Title = "press hotkey to export as mp3";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()

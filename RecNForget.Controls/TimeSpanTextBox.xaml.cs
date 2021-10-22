@@ -6,13 +6,14 @@ using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace RecNForget.Controls
 {
     /// <summary>
     /// Interaction logic for TimeSpanTextBox.xaml
     /// 
-    /// Display can awlays be set directly via TextValueTimeSpan
+    /// Display can always be set directly via TextValueTimeSpan
     /// When the control (TimeSpanTextBox) is enabled a change in ExternallyBoundTextValueTimeSpan also triggers a value change of TextValueTimeSpan and vice versa (if that value is valid)
     /// 
     /// 
@@ -35,7 +36,6 @@ namespace RecNForget.Controls
             set { SetValue(TimerBoundTextValueTimeSpanProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for TimerBoundTextValueTimeSpan.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TimerBoundTextValueTimeSpanProperty =
             DependencyProperty.Register("TimerBoundTextValueTimeSpan", typeof(string), typeof(TimeSpanTextBox), new PropertyMetadata(string.Empty));
 
@@ -51,7 +51,6 @@ namespace RecNForget.Controls
             }
         }
 
-        // Using a DependencyProperty as the backing store for ExternallyBoundTextValueTimeSpan.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SettingTextValueTimeSpanProperty =
             DependencyProperty.Register("SettingTextValueTimeSpan", typeof(string), typeof(TimeSpanTextBox), new PropertyMetadata("0:00:00:00"));
 
@@ -108,6 +107,13 @@ namespace RecNForget.Controls
 
             var parseSuccessful = TimeSpan.TryParseExact(workingValue, Formats.TimeSpanFormat, CultureInfo.InvariantCulture, out TimeSpan outputTimeSpan);
             ValidationErrorMark.Visibility = parseSuccessful ? Visibility.Hidden : Visibility.Visible;
+
+            // only update underlying bound value if the entered value was valid
+            if (parseSuccessful)
+            {
+                BindingExpression binding = SettingTextValueTimeSpanBoxTextBox.GetBindingExpression(TextBox.TextProperty);
+                binding.UpdateSource();
+            }
         }
     }
 }
