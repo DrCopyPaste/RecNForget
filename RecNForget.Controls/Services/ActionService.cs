@@ -17,9 +17,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using Unity;
 
-// ToDo remove coupling with controls from this service, so this service can be moved to RecNForget.Services (it is really only the custom message box so far)
 namespace RecNForget.Controls.Services
 {
     public class ActionService : IActionService
@@ -80,59 +80,66 @@ namespace RecNForget.Controls.Services
 
         public void ExportSelectedFile()
         {
-            audioPlaybackService.Stop();
-            audioPlaybackService.KillAudio();
-
-            string preferredFileName = string.Empty;
-
-            if (appSettingService.PromptForExportFileName)
+            var task = Task.Run(() =>
             {
-                CustomMessageBox tempDialog = new CustomMessageBox(
-                    caption: "Select a filename for the exported file",
-                    icon: CustomMessageBoxIcon.Question,
-                    buttons: CustomMessageBoxButtons.OkAndCancel,
-                    messageRows: new List<string>(),
-                    prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
-                    controlFocus: CustomMessageBoxFocus.Prompt,
-                    promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+                string preferredFileName = string.Empty;
 
-                tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-                if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
+                if (appSettingService.PromptForExportFileName)
                 {
+                    CustomMessageBox tempDialog = new CustomMessageBox(
+                        caption: "Select a filename for the exported file",
+                        icon: CustomMessageBoxIcon.Question,
+                        buttons: CustomMessageBoxButtons.OkAndCancel,
+                        messageRows: new List<string>(),
+                        prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
+                        controlFocus: CustomMessageBoxFocus.Prompt,
+                        promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+                    tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+                    if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
+                    {
+                        return;
+                    }
+
+                    preferredFileName = tempDialog.PromptContent;
+                }
+                _notificationManager.ShowAsync(
+                  content: new NotificationContent()
+                  {
+                      Type = NotificationType.Information,
+                      Title = $"Exporting {selectedFileService.SelectedFile.Name} MP3 @ {appSettingService.Mp3ExportBitrate} kbps",
+                      Message = $"Export has started, this may take a moment..."
+                  });
+
+                var exportedFileName = selectedFileService.ExportFile(preferredFileName);
+
+                if (string.IsNullOrEmpty(exportedFileName))
+                {
+                    _notificationManager.ShowAsync(
+                        content: new NotificationContent()
+                        {
+                            Title = "Something went wrong",
+                            Message = "An unknown error occurred trying to export the selected file",
+                            Type = NotificationType.Error
+                        },
+                        expirationTime: TimeSpan.FromSeconds(10));
                     return;
                 }
 
-                preferredFileName = tempDialog.PromptContent;
-            }
-
-            var exportedFileName = selectedFileService.ExportFile(preferredFileName);
-            if (string.IsNullOrEmpty(exportedFileName))
-            {
                 _notificationManager.ShowAsync(
-                    content: new NotificationContent()
-                    {
-                        Title = "Something went wrong",
-                        Message = "An unknown error occurred trying to export the selected file",
-                        Type = NotificationType.Error
-                    },
-                    expirationTime: TimeSpan.FromSeconds(10));
-                return;
-            }
-
-
-            _notificationManager.ShowAsync(
-              content: new NotificationContent()
-              {
-                  Type = NotificationType.Success,
-                  Title = $"{selectedFileService.SelectedFile.Name} exported to MP3!",
-                  Message = $"Export was successful, file has been exported to {exportedFileName}."
-              },
-              onClick: () =>
-              {
-                  string argument = "/select, \"" + exportedFileName + "\"";
-                  System.Diagnostics.Process.Start("explorer.exe", argument);
-              });
+                  content: new NotificationContent()
+                  {
+                      Type = NotificationType.Success,
+                      Title = $"{selectedFileService.SelectedFile.Name} exported to MP3!",
+                      Message = $"Export was successful, file has been exported to {exportedFileName}."
+                  },
+                  onClick: () =>
+                  {
+                      string argument = "/select, \"" + exportedFileName + "\"";
+                      System.Diagnostics.Process.Start("explorer.exe", argument);
+                  });
+            });
         }
 
         public void ChangeSelectedFileName()
