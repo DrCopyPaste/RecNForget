@@ -32,7 +32,7 @@
         <StackPanel Orientation="Vertical">
             <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="0"
                 Name="TitleBar" Visibility="Hidden" d:Visibility="Visible">
-                <local:TitleBar HorizontalAlignment="Stretch" WithSettingsButton="True" WithMinimizeButton="True" />
+                <local:TitleBar HorizontalAlignment="Stretch" WithSettingsButton="True" WithMinimizeButton="True" ExitIsCancel="False" />
             </Border>
 
             <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
