@@ -112,7 +112,14 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://github.com/naudio/NAudio/blob/master/license.txt");
 
             AddLibraryLink(
-                libaryName: "Nerdbank.GitVersioning v3.4.231",
+                libaryName: "NAudio.Lame v2.0.0",
+                libraryUrl: "https://github.com/Corey-M/NAudio.Lame",
+                manufacturerName: "Mark Heath & Contributors",
+                licenseCaption: "MIT",
+                licenseUrl: "https://www.nuget.org/packages/NAudio.Lame/2.0.0/license");
+
+            AddLibraryLink(
+                libaryName: "Nerdbank.GitVersioning v3.4.240",
                 libraryUrl: "https://github.com/aarnott/Nerdbank.GitVersioning",
                 manufacturerName: "Andrew Arnott",
                 licenseCaption: "MIT",
@@ -133,7 +140,7 @@ namespace RecNForget.CopyRightHelper
                 licenseUrl: "https://licenses.nuget.org/MIT");
 
             AddLibraryLink(
-                libaryName: "Ookii.Dialogs.Wpf v3.1.0",
+                libaryName: "Ookii.Dialogs.Wpf v4.0.0",
                 libraryUrl: "https://github.com/caioproiete/ookii-dialogs-wpf",
                 manufacturerName: "Ookii Dialogs Contributors",
                 licenseCaption: "BSD-3-Clause",

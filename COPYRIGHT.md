@@ -1,4 +1,4 @@
-RecNForget is written in C# using [.NET 5](https://dotnet.microsoft.com/download/dotnet-core/3.1) and [WPF.](https://github.com/dotnet/wpf)
+RecNForget is written in C# using [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0) and [WPF.](https://github.com/dotnet/wpf)
 
 Code by DrCopyPaste [github.com/DrCopyPaste/RecNForget](https://github.com/DrCopyPaste/RecNForget)
 
@@ -16,13 +16,15 @@ The following libaries are used by RecNForget:
 
 [NAudio v2.0.1](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [License](https://github.com/naudio/NAudio/blob/master/license.txt)
 
-[Nerdbank.GitVersioning v3.4.231](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
+[NAudio.Lame v2.0.0](https://github.com/Corey-M/NAudio.Lame) Copyright (c) Mark Heath & Contributors - [MIT](https://www.nuget.org/packages/NAudio.Lame/2.0.0/license)
+
+[Nerdbank.GitVersioning v3.4.240](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
 
 [Notifications.Wpf.Core v1.3.2](https://github.com/mjuen/Notifications.Wpf.Core) Copyright (c) Adrian Gaś, Simon Mauracher, Marcel Juen - [MIT](https://licenses.nuget.org/MIT)
 
 [Octokit v0.50.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
-[Ookii.Dialogs.Wpf v3.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Ookii Dialogs Contributors - [BSD-3-Clause](https://licenses.nuget.org/BSD-3-Clause)
+[Ookii.Dialogs.Wpf v4.0.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Ookii Dialogs Contributors - [BSD-3-Clause](https://licenses.nuget.org/BSD-3-Clause)
 
 [System.Configuration.ConfigurationManager v5.0.0](https://github.com/dotnet/corefx) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
 

@@ -10,8 +10,6 @@ Recording should be as easy as pressing a button.
 For more detailed help refer to the [online help pages](https://github.com/DrCopyPaste/RecNForget/blob/master/Help/toc.md).
 
 # Installation
-Be sure to have [Microsoft .Net Framework 4.8](https://dotnet.microsoft.com/download/dotnet-framework/net48) installed.
-
 Run msi-file from the [latest release](https://github.com/DrCopyPaste/RecNForget/releases/latest) to install.
 
 # The code
@@ -23,7 +21,7 @@ For stable and buildable code please refer to the version tagged commits, in bet
 - To build the setup project you need to have the [WiX Toolset](https://wixtoolset.org/releases/v3.11.2/stable) installed.
 
 # Version
-latest stable release: [0.4](https://github.com/DrCopyPaste/RecNForget/releases/latest).
+latest stable release: [0.5](https://github.com/DrCopyPaste/RecNForget/releases/latest).
 
 - Currently developing: [0.6](https://github.com/DrCopyPaste/RecNForget/projects/4).
 - ![CI](https://github.com/DrCopyPaste/RecNForget/workflows/CI/badge.svg)
@@ -37,39 +35,10 @@ But, if you feel extra keen to try out the latest, you can
 (downloading is currently only allowed for github users it seems)
 
 # upcoming features in next release
-- upgraded application to .net 5.0
-- reworked most windows for a more consistent layout
-- layout is STILL not final, but I don't expect any HUGE future changes except for Font/Sizes/Paddings/Margins :D - BUT
-- RecNForget now has a dark mode, which is the new default
-- window colors can now be changed using context menu -> Change theme -> (Select theme)
-- selected file control now also shows file size and play length
-- selected file can now be exported as mp3, this action can be reached by
-- pressing the 'X'-Button, while having the RecNForget-Window open or
-- clicking the export button right next to the file name in the selected file control
-- bitrate can be set using context menu -> open settings -> output -> Bitrate
-- a dialog, prompting for an export name can be enabled using context menu -> open settings -> output -> 'prompt for exported file name'
-- (otherwise filename is taken from original wav-file with mp3-extension)
-- new recording timer control:
-- users can now delay recording start/ stop with the new recording timer control
-- this control can be toggled using context menu-> show recording timer control
-- time spans used are entered right to left (seconds first) in the following format: d:hh:mm:ss
-- if the "Stops after"- timer is enabled, a recording session  will be automatically ended after that time span
-- "stop recording" can still be forced by hitting record again (if "Stops after"- timer is already running)
-- "Stops after" can also be enabled while already recording
-- if the "Starts after"- timer is enabled, the "start recording" action will be delayed by that time span
-- "start recording" can be forced by triggering record again (if "Starts after"- timer is already running)
-- switched to svg for icons
-- popup info windows have been replaced with non blocking toast messages(errors and warnings)
-- toast messages now use Notifications.Wpf.Core, which makes them consistently silent (not adding random windows sounds to recorded samples)
-
-# Features missing for version 1.0
-- allow toggling input source (default output, or maybe mic/something else)?
-- show record icon (red circle) in bottom right corner when recording (configurable)
-- (meaning something always on top other than the main window showing recording details (recording time/buffersize etc)
-- clean up source code for maintainability
+- be excited, not even I know :-)
 
 # Copyright and License
-RecNForget is written in C# using [.NET Core Runtime 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) and [WPF.](https://github.com/dotnet/wpf)
+RecNForget is written in C# using [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0) and [WPF.](https://github.com/dotnet/wpf)
 
 Code by DrCopyPaste [github.com/DrCopyPaste/RecNForget](https://github.com/DrCopyPaste/RecNForget)
 
@@ -87,13 +56,15 @@ The following libaries are used by RecNForget:
 
 [NAudio v2.0.1](https://github.com/naudio/NAudio) Copyright (c) Mark Heath & Contributors - [License](https://github.com/naudio/NAudio/blob/master/license.txt)
 
-[Nerdbank.GitVersioning v3.4.231](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
+[NAudio.Lame v2.0.0](https://github.com/Corey-M/NAudio.Lame) Copyright (c) Mark Heath & Contributors - [MIT](https://www.nuget.org/packages/NAudio.Lame/2.0.0/license)
+
+[Nerdbank.GitVersioning v3.4.240](https://github.com/aarnott/Nerdbank.GitVersioning) Copyright (c) Andrew Arnott - [MIT](https://licenses.nuget.org/MIT)
 
 [Notifications.Wpf.Core v1.3.2](https://github.com/mjuen/Notifications.Wpf.Core) Copyright (c) Adrian Gaś, Simon Mauracher, Marcel Juen - [MIT](https://licenses.nuget.org/MIT)
 
 [Octokit v0.50.0](https://github.com/octokit/octokit.net) Copyright (c) GitHub - [MIT](https://licenses.nuget.org/MIT)
 
-[Ookii.Dialogs.Wpf v3.1.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Ookii Dialogs Contributors - [BSD-3-Clause](https://licenses.nuget.org/BSD-3-Clause)
+[Ookii.Dialogs.Wpf v4.0.0](https://github.com/caioproiete/ookii-dialogs-wpf) Copyright (c) Ookii Dialogs Contributors - [BSD-3-Clause](https://licenses.nuget.org/BSD-3-Clause)
 
 [System.Configuration.ConfigurationManager v5.0.0](https://github.com/dotnet/corefx) Copyright (c) Microsoft - [MIT](https://licenses.nuget.org/MIT)
 

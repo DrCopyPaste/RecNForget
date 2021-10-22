@@ -20,7 +20,7 @@
 			<Run>
 				RecNForget is written in C# using 
 			</Run>
-			<Hyperlink NavigateUri="https://dotnet.microsoft.com/download/dotnet-core/3.1" RequestNavigate="Hyperlink_RequestNavigate">.NET 5</Hyperlink>
+			<Hyperlink NavigateUri="https://dotnet.microsoft.com/download/dotnet/5.0" RequestNavigate="Hyperlink_RequestNavigate">.NET 5</Hyperlink>
 			<Run>
 				 and 
 			</Run>
@@ -65,7 +65,13 @@
 			</Run>
 			<Hyperlink NavigateUri="https://github.com/naudio/NAudio/blob/master/license.txt" RequestNavigate="Hyperlink_RequestNavigate">License</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning v3.4.231</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/Corey-M/NAudio.Lame" RequestNavigate="Hyperlink_RequestNavigate">NAudio.Lame v2.0.0</Hyperlink>
+			<Run>
+				 Copyright (c) Mark Heath &amp; Contributors - 
+			</Run>
+			<Hyperlink NavigateUri="https://www.nuget.org/packages/NAudio.Lame/2.0.0/license" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
+			<LineBreak />
+			<Hyperlink NavigateUri="https://github.com/aarnott/Nerdbank.GitVersioning" RequestNavigate="Hyperlink_RequestNavigate">Nerdbank.GitVersioning v3.4.240</Hyperlink>
 			<Run>
 				 Copyright (c) Andrew Arnott - 
 			</Run>
@@ -83,7 +89,7 @@
 			</Run>
 			<Hyperlink NavigateUri="https://licenses.nuget.org/MIT" RequestNavigate="Hyperlink_RequestNavigate">MIT</Hyperlink>
 			<LineBreak />
-			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf v3.1.0</Hyperlink>
+			<Hyperlink NavigateUri="https://github.com/caioproiete/ookii-dialogs-wpf" RequestNavigate="Hyperlink_RequestNavigate">Ookii.Dialogs.Wpf v4.0.0</Hyperlink>
 			<Run>
 				 Copyright (c) Ookii Dialogs Contributors - 
 			</Run>
