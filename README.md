@@ -42,6 +42,7 @@ But, if you feel extra keen to try out the latest, you can
 - layout is STILL not final, but I don't expect any HUGE future changes except for Font/Sizes/Paddings/Margins :D - BUT
 - RecNForget now has a dark mode, which is the new default
 - window colors can now be changed using context menu -> Change theme -> (Select theme)
+- selected file control now also shows file size and play length
 - selected file can now be exported as mp3, this action can be reached by
 - pressing the 'X'-Button, while having the RecNForget-Window open or
 - clicking the export button right next to the file name in the selected file control
@@ -58,9 +59,8 @@ But, if you feel extra keen to try out the latest, you can
 - if the "Starts after"- timer is enabled, the "start recording" action will be delayed by that time span
 - "start recording" can be forced by triggering record again (if "Starts after"- timer is already running)
 - switched to svg for icons
-- popup info windows have been replaced with non blocking toast messages(errors and warnings), this also means we now have control over whether windows makes a sound on a toast message
-(which RecNForget DOES NOT, so toast messages are actually viable now :D)
-- selected file control now also shows file size and play length
+- popup info windows have been replaced with non blocking toast messages(errors and warnings)
+- toast messages now use Notifications.Wpf.Core, which makes them consistently silent (not adding random windows sounds to recorded samples)
 
 # Features missing for version 1.0
 - allow toggling input source (default output, or maybe mic/something else)?

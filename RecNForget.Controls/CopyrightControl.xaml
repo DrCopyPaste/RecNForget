@@ -20,7 +20,7 @@
 			<Run>
 				RecNForget is written in C# using 
 			</Run>
-			<Hyperlink NavigateUri="https://dotnet.microsoft.com/download/dotnet-core/3.1" RequestNavigate="Hyperlink_RequestNavigate">.NET Core Runtime 3.1</Hyperlink>
+			<Hyperlink NavigateUri="https://dotnet.microsoft.com/download/dotnet-core/3.1" RequestNavigate="Hyperlink_RequestNavigate">.NET 5</Hyperlink>
 			<Run>
 				 and 
 			</Run>

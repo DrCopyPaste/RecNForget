@@ -7,7 +7,7 @@ namespace RecNForget.Help.Features
 	{
 		public Customize_SelectedFileControlVisibility()
 		{
-			MinVersion = HelpFeatureVersion.v0_5_____;
+			MinVersion = HelpFeatureVersion.v0_4_WirsingKopf;
 			FeatureClass = HelpFeatureClass.NewFeature;
 			Title = "customize selected file control visibility";
 			HelpLines = new List<HelpFeatureDetailLine>()

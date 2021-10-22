@@ -1,4 +1,4 @@
-RecNForget is written in C# using [.NET Core Runtime 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1) and [WPF.](https://github.com/dotnet/wpf)
+RecNForget is written in C# using [.NET 5](https://dotnet.microsoft.com/download/dotnet-core/3.1) and [WPF.](https://github.com/dotnet/wpf)
 
 Code by DrCopyPaste [github.com/DrCopyPaste/RecNForget](https://github.com/DrCopyPaste/RecNForget)
 

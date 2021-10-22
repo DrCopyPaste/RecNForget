@@ -10,6 +10,6 @@ namespace RecNForget.Help
 		public static Version v0_2_preRelease = new Version("0.2.0.0");
 		public static Version v0_3_release = new Version("0.3.0.0");
 		public static Version v0_4_WirsingKopf = new Version("0.4.0.0");
-		public static Version v0_5_____ = new Version("0.5.0.0");
+		public static Version v0_5_ChiliGarlicShrimps = new Version("0.5.0.0");
 	}
 }

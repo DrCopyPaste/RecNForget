@@ -69,7 +69,7 @@ namespace RecNForget.CopyRightHelper
             /*START EDITING COPYRIGHT HERE*/
 
             AddText("RecNForget is written in C# using ");
-            AddLink(".NET Core Runtime 3.1", "https://dotnet.microsoft.com/download/dotnet-core/3.1");
+            AddLink(".NET 5", "https://dotnet.microsoft.com/download/dotnet/5.0");
             AddText(" and ");
             AddLink("WPF.", "https://github.com/dotnet/wpf");
             AddLineBreak();
