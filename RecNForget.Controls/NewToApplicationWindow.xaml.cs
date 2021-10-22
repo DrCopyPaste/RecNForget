@@ -82,7 +82,7 @@ namespace RecNForget.Controls
             if (dialog.ShowDialog() == true)
             {
                 SettingService.HotKey_StartStopRecording = dialog.HotkeysAppSetting;
-                this.hotkeyService.ResetAndReadHotkeysFromConfig(actionService);
+                this.hotkeyService.ResetAndReadHotkeysFromConfig();
             }
 
             // since there are two buttons on top of each other

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -80,7 +81,7 @@ namespace RecNForget.Controls.Helper
             }
 
             // actual hotkey
-            if (!keyEventArgs.KeyIsModifier)
+            if (!Enum.IsDefined(typeof(PressingIssue.Services.Contracts.ModifierKeys), (int)keyEventArgs.Key))
             {
                 keys.Add(keyStart + keyEventArgs.Key.ToString() + keyEnd);
             }

@@ -31,8 +31,8 @@
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource Base_Label}" Margin="0,0,3,0">Stop after</Label>
                         <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="StopAfterTimeSpanTextBox"
-                            IsEnabled="{Binding Path=ActionService.TimerForRecordingStopAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
-                            TimerBoundTextValueTimeSpan="{Binding Path=ActionService.CurrentRecordingStopAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                            IsEnabled="{Binding Path=AudioRecordingService.TimerForRecordingStopAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                            TimerBoundTextValueTimeSpan="{Binding Path=AudioRecordingService.CurrentRecordingStopAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
                             SettingTextValueTimeSpan="{Binding Path=SettingService.RecordingTimerStopAfterMax, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             />
                     </DockPanel>
@@ -46,8 +46,8 @@
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource Base_Label}" Margin="0,0,3,0">Start after</Label>
                         <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="StartAfterTimeSpanTextBox"
-                            IsEnabled="{Binding Path=ActionService.TimerForRecordingStartAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
-                            TimerBoundTextValueTimeSpan="{Binding Path=ActionService.CurrentRecordingStartAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                            IsEnabled="{Binding Path=AudioRecordingService.TimerForRecordingStartAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                            TimerBoundTextValueTimeSpan="{Binding Path=AudioRecordingService.CurrentRecordingStartAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
                             SettingTextValueTimeSpan="{Binding Path=SettingService.RecordingTimerStartAfterMax, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             />
                     </DockPanel>

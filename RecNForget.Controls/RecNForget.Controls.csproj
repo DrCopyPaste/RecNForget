@@ -60,7 +60,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
-    <ProjectReference Include="..\RecNForget.IoC\RecNForget.IoC.csproj" />
+    <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj" />
+    <ProjectReference Include="..\RecNForget.Services\RecNForget.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

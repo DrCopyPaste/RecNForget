@@ -7,7 +7,7 @@ using RecNForget.Controls;
 using RecNForget.Controls.Helper;
 using RecNForget.Controls.Services;
 using RecNForget.Help;
-using RecNForget.IoC;
+using RecNForget.Controls.IoC;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.WPF.Services;
@@ -94,6 +94,7 @@ namespace RecNForget
             Version lastInstalledVersion = appSettingService.LastInstalledVersion;
 
             appSettingService.LastInstalledVersion = currentFileVersion;
+            hotkeyService.ResetAndReadHotkeysFromConfig();
 
             if (firstTimeUser)
             {
