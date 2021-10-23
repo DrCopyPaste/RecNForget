@@ -5,6 +5,6 @@ NOTE: This will NOT automatically install any update - you will still be prompte
 
 To enable or disable this setting:
 - open the menu at the top left of the main window
-- click on 'Open Settings'
+- click on 'Open Settings' -> 'Application'
 - click on 'check for updates on start'
 - exit the settings window by pressing the accept button

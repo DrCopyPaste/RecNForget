@@ -3,6 +3,6 @@ You can have RecNForget automatically select a file after recording it (changing
 
 To enable or disable this setting:
 - open the menu at the top left of the main window
-- click on 'Open Settings'
+- click on 'Open Settings' -> 'Application'
 - click on 'sound on toggle record'
 - exit the settings window by pressing the accept button

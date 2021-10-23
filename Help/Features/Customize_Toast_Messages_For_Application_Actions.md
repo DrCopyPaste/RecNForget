@@ -3,8 +3,6 @@ You can configure RecNForget to show toast messages above the task bar for all t
 
 To change this setting:
 - open the menu at the top left of the main window
-- click on 'Open Settings'
-- click on 'show toast messages'
+- click on 'Open Settings' -> 'Toast Messages'
+- click on 'show toast messages on toggle record'
 - exit the settings window by pressing the accept button
-
-Keep in mind that system sounds coming from toast messages can be configured via Taskbar->Settings in Windows itself.

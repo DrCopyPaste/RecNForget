@@ -7,4 +7,4 @@ The Selected File Control provides quick access to file manipulation and informa
 
 To enable or disable the Selected File Control:
 - open the menu at the top left of the main window
-- click on 'Selected File Control'
+- click on 'Show Selected File Control'

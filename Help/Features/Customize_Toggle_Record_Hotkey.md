@@ -3,7 +3,7 @@ You can change the global hotkey to start or stop recording.
 
 To change this setting:
 - open the menu at the top left of the main window
-- click on 'Open Settings'
+- click on 'Open Settings' -> 'Hotkeys'
 - click on 'Toggle Record'
 - close the new dialog by pressing the hotkey you want
 - exit the settings window by pressing the accept button

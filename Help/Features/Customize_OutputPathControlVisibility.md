@@ -5,4 +5,4 @@ The Output Path Control can be shown in the main window - this allows
 
 To enable or disable the Output Path Control:
 - open the menu at the top left of the main window
-- click on 'Output Path Control'
+- click on 'Show Output Path Control'
