@@ -93,16 +93,17 @@ namespace RecNForget.Help
         /// and how it can be changed
         /// a single line might be plain simple text or an image (just actual image pixel size , no resizing for now)
         /// </summary>
-        public List<HelpFeatureDetailLine> HelpLines { get; set; } = null;
+        public List<HelpFeatureDetailLine> HelpLines { get; set; } = new List<HelpFeatureDetailLine>();
 
         /// <summary>
         /// shorter help lines controls can subscribe to and show when hovered over by mouse
         /// </summary>
-        public List<HelpFeatureDetailLine> HoverHelpLines { get; set; } = null;
+        public List<HelpFeatureDetailLine> HoverHelpLines { get; set; } = new List<HelpFeatureDetailLine>();
 
         public string HelpLinesAsString()
         {
-            StringBuilder detailsHelpBuilder = new StringBuilder();
+            StringBuilder detailsHelpBuilder = new StringBuilder(string.Empty);
+
             for (int i = 0; i < this.HelpLines.Count; i++)
             {
                 if (i == (this.HelpLines.Count - 1))

@@ -24,6 +24,7 @@ namespace RecNForget.Services
         private static string hotKey_StartStopRecording_Key = "HotKey_StartStopRecording";
         private static string filenamePrefix_Key = "FilenamePrefix";
         private static string outputPath_Key = "OutputPath";
+        private static string exportOutputPath_Key = "ExportOutputPath";
         private static string windowAlwaysOnTop_Key = "WindowAlwaysOnTop";
         private static string showBalloonTipsForRecording_Key = "ShowBalloonTipsForRecording";
         private static string showTipsAtApplicationStart_Key = "ShowTipsAtApplicationStart";
@@ -184,6 +185,20 @@ namespace RecNForget.Services
             set
             {
                 SetAppConfigSetting(AppSettingService.filenamePrefix_Key, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string ExportOutputPath
+        {
+            get
+            {
+                return GetAppConfigSetting(AppSettingService.exportOutputPath_Key);
+            }
+
+            set
+            {
+                SetAppConfigSetting(AppSettingService.exportOutputPath_Key, value);
                 OnPropertyChanged();
             }
         }
@@ -568,6 +583,7 @@ namespace RecNForget.Services
                 { AppSettingService.hotKey_StartStopRecording_Key, "Key=Pause; Win=False; Alt=False; Ctrl=False; Shift=False" },
                 { AppSettingService.filenamePrefix_Key, "RecNForget_" },
                 { AppSettingService.outputPath_Key, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RecNForget") },
+                { AppSettingService.exportOutputPath_Key, Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RecNForget", "Export") },
                 { AppSettingService.windowAlwaysOnTop_Key, "False" },
                 { AppSettingService.showBalloonTipsForRecording_Key, "True" },
                 { AppSettingService.showTipsAtApplicationStart_Key, "True" },

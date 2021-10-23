@@ -143,21 +143,27 @@ namespace RecNForget.Services
         public string ExportFile(string preferredFileName = "")
         {
             string pseudoUniqueFileName = string.Empty;
-            string exportFolder = SelectedFile.DirectoryName;
+            string exportFolderName = appSettingService.ExportOutputPath;
 
             try
             {
+                var exportFolder = new DirectoryInfo(exportFolderName);
+                if (!exportFolder.Exists)
+                {
+                    exportFolder.Create();
+                }
+
                 // ToDo ensure file does not exist yet (would now be just overridden without asking)
                 // ToDo ensure unique export file name
                 pseudoUniqueFileName =
                     string.IsNullOrEmpty(preferredFileName) ?
-                        Path.Combine(exportFolder, $"{SelectedFile.Name.Replace(SelectedFile.Extension, ".mp3")}") :
-                        Path.Combine(exportFolder, $"{preferredFileName}.mp3");
+                        Path.Combine(exportFolder.FullName, $"{SelectedFile.Name.Replace(SelectedFile.Extension, ".mp3")}") :
+                        Path.Combine(exportFolder.FullName, $"{preferredFileName}.mp3");
 
                 var generatedFileInfo = new FileInfo(pseudoUniqueFileName);
                 var generatedFileName = generatedFileInfo.Name.Replace(generatedFileInfo.Extension, string.Empty);
 
-                // ToDo progress indicator (longer files might take considerable longer to convert :D))
+                // ToDo progress indicator (longer files might take considerably longer to convert :D))
                 using (var reader = new AudioFileReader(SelectedFile.FullName))
                 using (var writer = new LameMP3FileWriter(
                     outFileName: pseudoUniqueFileName,

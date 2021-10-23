@@ -95,6 +95,19 @@ namespace RecNForget.Controls
             e.Handled = true;
         }
 
+        private void Configure_ExportOutputPath_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new VistaFolderBrowserDialog();
+
+            if (dialog.ShowDialog() == true)
+            {
+                SettingService.ExportOutputPath = dialog.SelectedPath;
+            }
+
+            // since there are two buttons on top of each other
+            e.Handled = true;
+        }
+
         private void Configure_FileNamePattern_Click(object sender, RoutedEventArgs e)
         {
             CustomMessageBox tempDialog = new CustomMessageBox(

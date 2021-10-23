@@ -158,6 +158,7 @@ namespace RecNForget.Services.Designer
         public bool RecordingTimerControlVisible { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string RecordingTimerStartAfterMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string RecordingTimerStopAfterMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ExportOutputPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void RemoveAppConfigSettingFile() => throw new NotImplementedException();
 

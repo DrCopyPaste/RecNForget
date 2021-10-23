@@ -55,6 +55,7 @@ namespace RecNForget.Services.Contracts
         bool RecordingTimerControlVisible { get; set; }
         string RecordingTimerStartAfterMax { get; set; }
         string RecordingTimerStopAfterMax { get; set; }
+        string ExportOutputPath { get; set; }
 
         List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]");
         void RemoveAppConfigSettingFile();

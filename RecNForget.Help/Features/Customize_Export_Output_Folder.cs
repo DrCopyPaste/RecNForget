@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace RecNForget.Help.Features
 {
-	public class Customize_Output_Folder : HelpFeature
+	public class Customize_Export_Output_Folder : HelpFeature
 	{
-		public Customize_Output_Folder()
+		public Customize_Export_Output_Folder()
 		{
-			MinVersion = HelpFeatureVersion.v0_1_preRelease;
+			MinVersion = HelpFeatureVersion.v0_6;
 			FeatureClass = HelpFeatureClass.NewFeature;
-			Title = "customize output folder";
+			Title = "customize mp3 export output folder";
 			HelpLines = new List<HelpFeatureDetailLine>()
 			{
 				new HelpFeatureDetailLine()
 				{
-					Content = "You can change the output folder RecNForget puts recorded files into."
+					Content = "You can change the output folder RecNForget puts exported mp3 files into."
 				},
 				new HelpFeatureDetailLine()
 				{
@@ -34,11 +34,11 @@ namespace RecNForget.Help.Features
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- click on the setting 'output folder'"
+					Content = "- click on the setting 'Export folder'"
 				},
 				new HelpFeatureDetailLine()
 				{
-					Content = "- select the output folder you desire"
+					Content = "- select the export folder you desire"
 				},
 				new HelpFeatureDetailLine()
 				{
