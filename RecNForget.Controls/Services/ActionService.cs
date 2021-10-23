@@ -80,30 +80,31 @@ namespace RecNForget.Controls.Services
 
         public void ExportSelectedFile()
         {
+            var preferredFileName = string.Empty;
+
+            if (appSettingService.PromptForExportFileName)
+            {
+                CustomMessageBox tempDialog = new CustomMessageBox(
+                    caption: "Select a filename for the exported file",
+                    icon: CustomMessageBoxIcon.Question,
+                    buttons: CustomMessageBoxButtons.OkAndCancel,
+                    messageRows: new List<string>(),
+                    prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
+                    controlFocus: CustomMessageBoxFocus.Prompt,
+                    promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+                tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+                if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
+                {
+                    return;
+                }
+
+                preferredFileName = tempDialog.PromptContent;
+            }
+
             var task = Task.Run(() =>
             {
-                string preferredFileName = string.Empty;
-
-                if (appSettingService.PromptForExportFileName)
-                {
-                    CustomMessageBox tempDialog = new CustomMessageBox(
-                        caption: "Select a filename for the exported file",
-                        icon: CustomMessageBoxIcon.Question,
-                        buttons: CustomMessageBoxButtons.OkAndCancel,
-                        messageRows: new List<string>(),
-                        prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
-                        controlFocus: CustomMessageBoxFocus.Prompt,
-                        promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
-
-                    tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-                    if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
-                    {
-                        return;
-                    }
-
-                    preferredFileName = tempDialog.PromptContent;
-                }
                 _notificationManager.ShowAsync(
                   content: new NotificationContent()
                   {
