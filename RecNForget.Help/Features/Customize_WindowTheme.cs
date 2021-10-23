@@ -7,7 +7,7 @@ namespace RecNForget.Help.Features
 	{
 		public Customize_WindowTheme()
 		{
-			MinVersion = HelpFeatureVersion.v0_5_ChiliGarlicShrimps;
+			MinVersion = HelpFeatureVersion.v0_6_ChiliGarlicShrimps;
 			FeatureClass = HelpFeatureClass.NewFeature;
 			Title = "customize window theme";
 			HelpLines = new List<HelpFeatureDetailLine>()

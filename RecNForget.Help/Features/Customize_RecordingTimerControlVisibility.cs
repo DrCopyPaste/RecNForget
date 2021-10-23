@@ -7,7 +7,7 @@ namespace RecNForget.Help.Features
 	{
 		public Customize_RecordingTimerControlVisibility()
 		{
-			MinVersion = HelpFeatureVersion.v0_5_ChiliGarlicShrimps;
+			MinVersion = HelpFeatureVersion.v0_6_ChiliGarlicShrimps;
 			FeatureClass = HelpFeatureClass.NewFeature;
 			Title = "customize recording timer control visibility";
 			HelpLines = new List<HelpFeatureDetailLine>()

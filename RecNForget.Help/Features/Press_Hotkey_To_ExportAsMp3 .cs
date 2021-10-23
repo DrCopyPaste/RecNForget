@@ -7,7 +7,7 @@ namespace RecNForget.Help.Features
 	{
 		public Press_Hotkey_To_ExportAsMp3()
 		{
-			MinVersion = HelpFeatureVersion.v0_5_ChiliGarlicShrimps;
+			MinVersion = HelpFeatureVersion.v0_6_ChiliGarlicShrimps;
 			FeatureClass = HelpFeatureClass.NewFeature;
 			Title = "press hotkey to export as mp3";
 			HelpLines = new List<HelpFeatureDetailLine>()

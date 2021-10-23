@@ -7,7 +7,7 @@ namespace RecNForget.Help.Features
 	{
 		public Fix_DialogWindowsWithoutUpperBorder()
 		{
-			MinVersion = HelpFeatureVersion.v0_6;
+			MinVersion = HelpFeatureVersion.v0_6_ChiliGarlicShrimps;
 			FeatureClass = HelpFeatureClass.BugFix;
 			Title = "Custom dialog windows do not show excessive borders on top";
 		}

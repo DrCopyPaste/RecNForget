@@ -7,7 +7,7 @@ namespace RecNForget.Help.Features
 	{
 		public Customize_Export_Output_Folder()
 		{
-			MinVersion = HelpFeatureVersion.v0_6;
+			MinVersion = HelpFeatureVersion.v0_6_ChiliGarlicShrimps;
 			FeatureClass = HelpFeatureClass.NewFeature;
 			Title = "customize mp3 export output folder";
 			HelpLines = new List<HelpFeatureDetailLine>()

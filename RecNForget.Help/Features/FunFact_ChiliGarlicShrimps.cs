@@ -7,7 +7,7 @@ namespace RecNForget.Help.Features
 	{
 		public FunFact_ChiliGarlicShrimps()
 		{
-			MinVersion = HelpFeatureVersion.v0_5_ChiliGarlicShrimps;
+			MinVersion = HelpFeatureVersion.v0_6_ChiliGarlicShrimps;
 			FeatureClass = HelpFeatureClass.FunFact;
 			Title = "Garlic chili shrimps:";
 			HelpLines = new List<HelpFeatureDetailLine>()
