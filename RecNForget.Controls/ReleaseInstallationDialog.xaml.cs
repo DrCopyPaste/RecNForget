@@ -125,7 +125,7 @@ namespace RecNForget.Controls
             {
                 if (InstallAfterDownload)
                 {
-                    Process.Start(targetPath);
+                    Process.Start("explorer.exe", "\"" + targetPath + "\"");
                 }
                 else
                 {
