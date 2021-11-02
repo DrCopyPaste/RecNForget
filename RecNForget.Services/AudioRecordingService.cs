@@ -277,19 +277,8 @@ namespace RecNForget.Services
                 audioPlaybackService.KillAudio(reset: true);
             }
 
-            FileInfo file;
-            do
-            {
-                file = new FileInfo(GetFileNameWithReplacePlaceholders());
-            }
-            while (file.Exists);
 
-            DirectoryInfo directory = new DirectoryInfo(file.DirectoryName);
-            if (!directory.Exists)
-            {
-                directory.Create();
-            }
-
+            var file = GetUniqueWorkingFileName(appSettingService.OutputPath, "wav");
             captureInstance = new WasapiLoopbackCapture();
 
             // Redefine the audio writer instance with the given configuration
@@ -310,7 +299,10 @@ namespace RecNForget.Services
                 recordedAudioWriter = null;
                 captureInstance.Dispose();
 
-                LastFileName = CurrentFileName;
+                var targetFile = GetUniqueTargetFileName(appSettingService.OutputPath, "wav");
+                File.Move(CurrentFileName, targetFile.FullName);
+
+                LastFileName = targetFile.FullName;
                 CurrentFileName = string.Empty;
                 UpdateProperties();
 
@@ -341,6 +333,40 @@ namespace RecNForget.Services
 
             // Start audio recording !
             captureInstance.StartRecording();
+        }
+
+        private FileInfo GetUniqueWorkingFileName(string outputFolderPath = "", string extensionWithoutDot = "wav")
+        {
+            var outputFolder = new DirectoryInfo(outputFolderPath);
+            if (!outputFolder.Exists)
+            {
+                outputFolder.Create();
+            }
+
+            FileInfo file;
+            do
+            {
+                file = new FileInfo(Path.Combine(outputFolder.FullName, $"{Guid.NewGuid():N}.{extensionWithoutDot}"));
+            } while (file.Exists);
+
+            return file;
+        }
+
+        private FileInfo GetUniqueTargetFileName(string outputFolderPath = "", string extensionWithoutDot = "wav")
+        {
+            var outputFolder = new DirectoryInfo(outputFolderPath);
+            if (!outputFolder.Exists)
+            {
+                outputFolder.Create();
+            }
+
+            FileInfo file;
+            do
+            {
+                file = new FileInfo(GetFileNameWithReplacePlaceholders());
+            } while (file.Exists);
+
+            return file;
         }
 
         public void StopRecording()
