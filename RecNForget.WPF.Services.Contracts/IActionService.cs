@@ -39,12 +39,9 @@ namespace RecNForget.WPF.Services.Contracts
 
         // delete selected file (with dialog)
         void DeleteSelectedFile();
-
-        bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null);
-
         void ShowApplicationMenu();
 
-        void TogglePlayPauseAudio();
+        //void TogglePlayPauseAudio();
         void ShowSettingsMenu();
         void ToggleSelectedFileControlVisibility();
         void ToggleOutputPathControlVisibility();

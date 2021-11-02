@@ -217,18 +217,6 @@ namespace RecNForget.Controls
                 {
                     if (AudioRecordingService.CurrentlyRecording)
                     {
-                        if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
-                        {
-                            audioPlaybackService.KillAudio(reset: true);
-
-                            audioPlaybackService.QueueFile(audioPlaybackService.RecordStartAudioFeedbackPath);
-                            audioPlaybackService.Play();
-
-                            while (audioPlaybackService.PlaybackState != PlaybackState.Stopped) { }
-
-                            audioPlaybackService.KillAudio(reset: true);
-                        }
-
                         if (SettingService.ShowBalloonTipsForRecording)
                         {
                             _notificationManager.ShowAsync(
@@ -240,29 +228,10 @@ namespace RecNForget.Controls
                                 });
                         }
 
-                        AudioPlaybackService.KillAudio(reset: true);
                         TaskBar_ProgressState = "Error";
                     }
                     else
                     {
-                        if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording || SettingService.AutoReplayAudioAfterRecording)
-                        {
-                            if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
-                            {
-                                actionService.QueueAudioPlayback(fileName: audioPlaybackService.RecordStopAudioFeedbackPath);
-                            }
-
-                            if (SettingService.AutoReplayAudioAfterRecording)
-                            {
-                                actionService.QueueAudioPlayback(
-                                    fileName: AudioRecordingService.LastFileName,
-                                    startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
-                                    endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
-                            }
-
-                            actionService.TogglePlayPauseAudio();
-                        }
-
                         TaskBar_ProgressState = "None";
 
                         if (SettingService.ShowBalloonTipsForRecording)
@@ -284,11 +253,6 @@ namespace RecNForget.Controls
                                     string argument = "/select, \"" + AudioRecordingService.LastFileName + "\"";
                                     System.Diagnostics.Process.Start("explorer.exe", argument);
                                 });
-                            }
-
-                        if (SettingService.AutoSelectLastRecording)
-                        {
-                            SelectedFileService.SelectFile(new FileInfo(AudioRecordingService.LastFileName));
                         }
                     }
 

@@ -320,13 +320,13 @@ namespace RecNForget.Controls.Services
             {
                 if (audioPlaybackService.ItemsCount == 0)
                 {
-                    QueueAudioPlayback(
+                    audioPlaybackService.QueueAudioPlayback(
                         fileName: selectedFileService.SelectedFile.FullName,
                         startIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
                         endIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
                 }
 
-                TogglePlayPauseAudio();
+                audioPlaybackService.TogglePlayPauseAudio();
             }
         }
 
@@ -345,62 +345,9 @@ namespace RecNForget.Controls.Services
             appSettingService.SelectedFileControlVisible = !appSettingService.SelectedFileControlVisible;
         }
 
-        public void TogglePlayPauseAudio()
-        {
-            if (audioPlaybackService.PlaybackState == PlaybackState.Stopped)
-            {
-                audioPlaybackService.Play();
-            }
-            else if (audioPlaybackService.PlaybackState == PlaybackState.Playing)
-            {
-                audioPlaybackService.Pause();
-            }
-            else if (audioPlaybackService.PlaybackState == PlaybackState.Paused)
-            {
-                audioPlaybackService.Play();
-            }
-        }
-
         public void ToggleStartStopRecording()
         {
             audioRecordingService.ToggleRecording();
-        }
-
-        public bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
-        {
-            bool replayFileExists = false;
-            string fileNameToPlay;
-
-            if (fileName == null)
-            {
-                replayFileExists = selectedFileService.SelectedFile.Exists;
-                fileNameToPlay = selectedFileService.SelectedFile.FullName;
-            }
-            else
-            {
-                var fileInfo = new FileInfo(fileName);
-                replayFileExists = fileInfo.Exists;
-                fileNameToPlay = fileName;
-            }
-
-            if (!replayFileExists)
-            {
-                return false;
-            }
-
-            if (!string.IsNullOrEmpty(startIndicatorFileName))
-            {
-                audioPlaybackService.QueueFile(startIndicatorFileName);
-            }
-
-            audioPlaybackService.QueueFile(fileNameToPlay);
-
-            if (!string.IsNullOrEmpty(endIndicatorFileName))
-            {
-                audioPlaybackService.QueueFile(endIndicatorFileName);
-            }
-
-            return true;
         }
 
         public void ShowApplicationMenu()

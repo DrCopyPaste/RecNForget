@@ -13,13 +13,17 @@ namespace RecNForget.Services
         private readonly Action queueErrorAction = null;
         private readonly List<string> filePathList = null;
 
+        private readonly ISelectedFileService selectedFileService;
+
         private WaveOutEvent audioOutputDevice = null;
         private AudioFileReader audioFileReader = null;
         private int currentPlayIndex = 0;
 
-        public AudioPlaybackService()
+        public AudioPlaybackService(ISelectedFileService selectedFileService)
         {
             filePathList = new List<string>();
+
+            this.selectedFileService = selectedFileService;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -122,6 +126,59 @@ namespace RecNForget.Services
                 currentPlayIndex = 0;
                 filePathList.Clear();
             }
+        }
+
+        public void TogglePlayPauseAudio()
+        {
+            if (PlaybackState == PlaybackState.Stopped)
+            {
+                Play();
+            }
+            else if (PlaybackState == PlaybackState.Playing)
+            {
+                Pause();
+            }
+            else if (PlaybackState == PlaybackState.Paused)
+            {
+                Play();
+            }
+        }
+
+        public bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
+        {
+            bool replayFileExists = false;
+            string fileNameToPlay;
+
+            if (fileName == null)
+            {
+                replayFileExists = selectedFileService.SelectedFile.Exists;
+                fileNameToPlay = selectedFileService.SelectedFile.FullName;
+            }
+            else
+            {
+                var fileInfo = new FileInfo(fileName);
+                replayFileExists = fileInfo.Exists;
+                fileNameToPlay = fileName;
+            }
+
+            if (!replayFileExists)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(startIndicatorFileName))
+            {
+                QueueFile(startIndicatorFileName);
+            }
+
+            QueueFile(fileNameToPlay);
+
+            if (!string.IsNullOrEmpty(endIndicatorFileName))
+            {
+                QueueFile(endIndicatorFileName);
+            }
+
+            return true;
         }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

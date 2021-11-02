@@ -53,5 +53,15 @@ namespace RecNForget.Services.Designer
         {
             throw new NotImplementedException();
         }
+
+        public bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TogglePlayPauseAudio()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

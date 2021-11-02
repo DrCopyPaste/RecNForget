@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 using NAudio.Wave;
 using RecNForget.Services.Contracts;
+using RecNForget.WPF.Services.Contracts;
 
 namespace RecNForget.Services
 {
@@ -18,6 +19,8 @@ namespace RecNForget.Services
         private static WasapiLoopbackCapture captureInstance;
 
         private readonly IAppSettingService appSettingService;
+        private readonly IAudioPlaybackService audioPlaybackService;
+        private readonly ISelectedFileService selectedFileService;
 
         private DispatcherTimer startAfterDispatcherTimer = new DispatcherTimer();
         private DispatcherTimer stopAfterdispatcherTimer = new DispatcherTimer();
@@ -35,9 +38,11 @@ namespace RecNForget.Services
         private TimeSpan startAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
         private TimeSpan stopAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
 
-        public AudioRecordingService(IAppSettingService appSettingService)
+        public AudioRecordingService(IAppSettingService appSettingService, IAudioPlaybackService audioPlaybackService, ISelectedFileService selectedFileService)
         {
             this.appSettingService = appSettingService;
+            this.audioPlaybackService = audioPlaybackService;
+            this.selectedFileService = selectedFileService;
 
             CurrentlyRecording = false;
             CurrentlyNotRecording = true;
@@ -259,6 +264,19 @@ namespace RecNForget.Services
             CurrentlyNotRecording = false;
             UpdateProperties();
 
+            // play pre recording signal
+            if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
+            {
+                audioPlaybackService.KillAudio(reset: true);
+
+                audioPlaybackService.QueueFile(audioPlaybackService.RecordStartAudioFeedbackPath);
+                audioPlaybackService.Play();
+
+                while (audioPlaybackService.PlaybackState != PlaybackState.Stopped) { }
+
+                audioPlaybackService.KillAudio(reset: true);
+            }
+
             FileInfo file;
             do
             {
@@ -295,6 +313,30 @@ namespace RecNForget.Services
                 LastFileName = CurrentFileName;
                 CurrentFileName = string.Empty;
                 UpdateProperties();
+
+                // play post recording signal
+                if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording || appSettingService.AutoReplayAudioAfterRecording)
+                {
+                    if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
+                    {
+                        audioPlaybackService.QueueAudioPlayback(fileName: audioPlaybackService.RecordStopAudioFeedbackPath);
+                    }
+
+                    if (appSettingService.AutoReplayAudioAfterRecording)
+                    {
+                        audioPlaybackService.QueueAudioPlayback(
+                            fileName: LastFileName,
+                            startIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
+                            endIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
+                    }
+
+                    audioPlaybackService.TogglePlayPauseAudio();
+                }
+
+                if (appSettingService.AutoSelectLastRecording)
+                {
+                    selectedFileService.SelectFile(new FileInfo(LastFileName));
+                }
             };
 
             // Start audio recording !
