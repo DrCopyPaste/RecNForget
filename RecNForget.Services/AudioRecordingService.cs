@@ -15,12 +15,10 @@ namespace RecNForget.Services
         private static string outputFilePathPattern = @"{0}\{1}.wav";
         private static string outputFileDateFormat = "yyyy_MM_dd_HH_mm_ss_fff";
 
-        // will be newly instantiated every time record starting is triggered
-        private static WasapiLoopbackCapture captureInstance;
+        private readonly WasapiLoopbackRecordingService wasapiLoopbackRecordingService;
 
         private readonly IAppSettingService appSettingService;
         private readonly IAudioPlaybackService audioPlaybackService;
-        private readonly ISelectedFileService selectedFileService;
 
         private DispatcherTimer startAfterDispatcherTimer = new DispatcherTimer();
         private DispatcherTimer stopAfterdispatcherTimer = new DispatcherTimer();
@@ -40,9 +38,40 @@ namespace RecNForget.Services
 
         public AudioRecordingService(IAppSettingService appSettingService, IAudioPlaybackService audioPlaybackService, ISelectedFileService selectedFileService)
         {
+            this.wasapiLoopbackRecordingService = new WasapiLoopbackRecordingService();
+            this.wasapiLoopbackRecordingService.OnRecordingStop = (resultFileName) =>
+            {
+                LastFileName = resultFileName;
+                CurrentFileName = string.Empty;
+                UpdateProperties();
+
+                // play post recording signal
+                if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording || appSettingService.AutoReplayAudioAfterRecording)
+                {
+                    if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
+                    {
+                        audioPlaybackService.QueueAudioPlayback(fileName: audioPlaybackService.RecordStopAudioFeedbackPath);
+                    }
+
+                    if (appSettingService.AutoReplayAudioAfterRecording)
+                    {
+                        audioPlaybackService.QueueAudioPlayback(
+                            fileName: LastFileName,
+                            startIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
+                            endIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
+                    }
+
+                    audioPlaybackService.TogglePlayPauseAudio();
+                }
+
+                if (appSettingService.AutoSelectLastRecording)
+                {
+                    selectedFileService.SelectFile(new FileInfo(LastFileName));
+                }
+            };
+
             this.appSettingService = appSettingService;
             this.audioPlaybackService = audioPlaybackService;
-            this.selectedFileService = selectedFileService;
 
             CurrentlyRecording = false;
             CurrentlyNotRecording = true;
@@ -277,62 +306,16 @@ namespace RecNForget.Services
                 audioPlaybackService.KillAudio(reset: true);
             }
 
+            wasapiLoopbackRecordingService.RecordTo(
+                GetUniqueWorkingFileName(appSettingService.OutputPath, "wav").FullName,
+                () => { return GetFileNameWithReplacePlaceholders(); });
+        }
 
-            var file = GetUniqueWorkingFileName(appSettingService.OutputPath, "wav");
-            captureInstance = new WasapiLoopbackCapture();
-
-            // Redefine the audio writer instance with the given configuration
-            WaveFileWriter recordedAudioWriter = new WaveFileWriter(file.FullName, captureInstance.WaveFormat);
-            CurrentFileName = file.FullName;
-
-            // When the capturer receives audio, start writing the buffer into the mentioned file
-            captureInstance.DataAvailable += (s, a) =>
-            {
-                // Write buffer into the file of the writer instance
-                recordedAudioWriter.Write(a.Buffer, 0, a.BytesRecorded);
-            };
-
-            // When the Capturer Stops, dispose instances of the capturer and writer
-            captureInstance.RecordingStopped += (s, a) =>
-            {
-                recordedAudioWriter.Dispose();
-                recordedAudioWriter = null;
-                captureInstance.Dispose();
-
-                var targetFile = GetUniqueTargetFileName(appSettingService.OutputPath, "wav");
-                File.Move(CurrentFileName, targetFile.FullName);
-
-                LastFileName = targetFile.FullName;
-                CurrentFileName = string.Empty;
-                UpdateProperties();
-
-                // play post recording signal
-                if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording || appSettingService.AutoReplayAudioAfterRecording)
-                {
-                    if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
-                    {
-                        audioPlaybackService.QueueAudioPlayback(fileName: audioPlaybackService.RecordStopAudioFeedbackPath);
-                    }
-
-                    if (appSettingService.AutoReplayAudioAfterRecording)
-                    {
-                        audioPlaybackService.QueueAudioPlayback(
-                            fileName: LastFileName,
-                            startIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
-                            endIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
-                    }
-
-                    audioPlaybackService.TogglePlayPauseAudio();
-                }
-
-                if (appSettingService.AutoSelectLastRecording)
-                {
-                    selectedFileService.SelectFile(new FileInfo(LastFileName));
-                }
-            };
-
-            // Start audio recording !
-            captureInstance.StartRecording();
+        public void StopRecording()
+        {
+            CurrentlyRecording = false;
+            CurrentlyNotRecording = true;
+            wasapiLoopbackRecordingService.StopRecording();
         }
 
         private FileInfo GetUniqueWorkingFileName(string outputFolderPath = "", string extensionWithoutDot = "wav")
@@ -350,30 +333,6 @@ namespace RecNForget.Services
             } while (file.Exists);
 
             return file;
-        }
-
-        private FileInfo GetUniqueTargetFileName(string outputFolderPath = "", string extensionWithoutDot = "wav")
-        {
-            var outputFolder = new DirectoryInfo(outputFolderPath);
-            if (!outputFolder.Exists)
-            {
-                outputFolder.Create();
-            }
-
-            FileInfo file;
-            do
-            {
-                file = new FileInfo(GetFileNameWithReplacePlaceholders());
-            } while (file.Exists);
-
-            return file;
-        }
-
-        public void StopRecording()
-        {
-            CurrentlyRecording = false;
-            CurrentlyNotRecording = true;
-            captureInstance.StopRecording();
         }
 
         public string GetTargetPathTemplateString()
