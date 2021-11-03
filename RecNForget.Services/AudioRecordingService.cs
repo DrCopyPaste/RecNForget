@@ -16,6 +16,7 @@ namespace RecNForget.Services
         private static string outputFileDateFormat = "yyyy_MM_dd_HH_mm_ss_fff";
 
         private readonly WasapiLoopbackRecordingService wasapiLoopbackRecordingService;
+        private readonly MicrophoneRecordingService microphoneRecordingService;
 
         private readonly IAppSettingService appSettingService;
         private readonly IAudioPlaybackService audioPlaybackService;
@@ -38,6 +39,8 @@ namespace RecNForget.Services
 
         public AudioRecordingService(IAppSettingService appSettingService, IAudioPlaybackService audioPlaybackService, ISelectedFileService selectedFileService)
         {
+            this.microphoneRecordingService = new MicrophoneRecordingService();
+
             this.wasapiLoopbackRecordingService = new WasapiLoopbackRecordingService();
             this.wasapiLoopbackRecordingService.OnRecordingStop = (resultFileName) =>
             {
@@ -306,6 +309,10 @@ namespace RecNForget.Services
                 audioPlaybackService.KillAudio(reset: true);
             }
 
+            microphoneRecordingService.RecordTo(
+                GetUniqueWorkingFileName(appSettingService.OutputPath, "mic.wav").FullName,
+                () => { return GetFileNameWithReplacePlaceholders(".mic"); });
+
             wasapiLoopbackRecordingService.RecordTo(
                 GetUniqueWorkingFileName(appSettingService.OutputPath, "wav").FullName,
                 () => { return GetFileNameWithReplacePlaceholders(); });
@@ -316,6 +323,7 @@ namespace RecNForget.Services
             CurrentlyRecording = false;
             CurrentlyNotRecording = true;
             wasapiLoopbackRecordingService.StopRecording();
+            microphoneRecordingService.StopRecording();
         }
 
         private FileInfo GetUniqueWorkingFileName(string outputFolderPath = "", string extensionWithoutDot = "wav")
@@ -340,7 +348,7 @@ namespace RecNForget.Services
             return string.Format(AudioRecordingService.outputFilePathPattern, appSettingService.OutputPath, appSettingService.FilenamePrefix);
         }
 
-        private string GetFileNameWithReplacePlaceholders()
+        private string GetFileNameWithReplacePlaceholders(string extensionPrefix = "")
         {
             bool nameUniquePlaceholderFound = false;
             string tempString = string.Format(AudioRecordingService.outputFilePathPattern, appSettingService.OutputPath, appSettingService.FilenamePrefix);
@@ -367,7 +375,7 @@ namespace RecNForget.Services
                 string filename = Path.GetFileNameWithoutExtension(fileInfo.Name) + "_" + DateTime.Now.ToString(AudioRecordingService.outputFileDateFormat);
                 string extension = fileInfo.Extension;
 
-                tempString = Path.Combine(directory, filename + extension);
+                tempString = Path.Combine(directory, filename + extensionPrefix + extension);
             }
 
             return tempString;
