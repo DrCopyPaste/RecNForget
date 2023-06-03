@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Images\logo.ico" />
     <None Remove="Images\logo_big.png" />
@@ -40,11 +38,9 @@
     <None Remove="Themes\SvgImages\windowOptions_icon510828.svg" />
     <None Remove="Themes\SvgImages\windowSettings_icon248857.svg" />
   </ItemGroup>
-
   <ItemGroup>
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="DotNetProjects.SVGImage" Version="4.1.97" />
     <PackageReference Include="NAudio" Version="2.0.1" />
@@ -57,13 +53,11 @@
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="4.0.0" />
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Help\RecNForget.Help.csproj" />
     <ProjectReference Include="..\RecNForget.Services.Contracts\RecNForget.Services.Contracts.csproj" />
     <ProjectReference Include="..\RecNForget.Services\RecNForget.Services.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="Images\logo.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -161,10 +155,8 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
-
 </Project>

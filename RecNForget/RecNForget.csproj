@@ -1,22 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
   <PropertyGroup>
     <EnableDefaultApplicationDefinition>false</EnableDefaultApplicationDefinition>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Sounds\playbackStart.wav" />
     <None Remove="Sounds\playbackStop.wav" />
     <None Remove="Sounds\startRec.wav" />
     <None Remove="Sounds\stopRec.wav" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="Sounds\playbackStart.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -31,7 +27,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.240">
       <PrivateAssets>all</PrivateAssets>
@@ -39,19 +34,15 @@
     </PackageReference>
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Controls\RecNForget.Controls.csproj" />
   </ItemGroup>
-
   <PropertyGroup>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <ApplicationIcon>logo.ico</ApplicationIcon>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
-
 </Project>

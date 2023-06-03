@@ -36,6 +36,7 @@ But, if you feel extra keen to try out the latest, you can
 
 # upcoming features in next release
 - be excited, not even I know :-)
+- Upgraded to .net 7.0
 
 # Copyright and License
 RecNForget is written in C# using [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0) and [WPF.](https://github.com/dotnet/wpf)
