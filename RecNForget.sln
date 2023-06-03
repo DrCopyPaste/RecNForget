@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30128.74
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecNForget", "RecNForget\RecNForget.csproj", "{82AC7D19-6718-4294-A099-DB75B5D5C277}"
 EndProject
@@ -14,9 +14,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F3B29A4-7215-483A-8330-E003E0E13233}"
 	ProjectSection(SolutionItems) = preProject
 		COPYRIGHT.md = COPYRIGHT.md
-		how_to_build.txt = how_to_build.txt
 		howto_create_installer_with_wix.txt = howto_create_installer_with_wix.txt
 		howto_update_help.txt = howto_update_help.txt
+		how_to_build.txt = how_to_build.txt
 		LICENSE = LICENSE
 		README.md = README.md
 		Settings.StyleCop = Settings.StyleCop
@@ -42,6 +42,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecNForget.SimpleThemeGenerator", "RecNForget.SimpleThemeGenerator\RecNForget.SimpleThemeGenerator.csproj", "{706DD4EA-8565-4C1C-BEFD-27522272F040}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecNForget.WPF.Services.Contracts", "RecNForget.WPF.Services.Contracts\RecNForget.WPF.Services.Contracts.csproj", "{22B30F6D-D581-4C2A-B28A-877CEA8DDEA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".GithubWorkflows", ".GithubWorkflows", "{60148D35-1F5F-452D-BD81-1BEF8B7867EF}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-release.yml = .github\workflows\dotnet-release.yml
+		.github\workflows\testbuild.yml = .github\workflows\testbuild.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
