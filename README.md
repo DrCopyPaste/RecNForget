@@ -36,10 +36,10 @@ But, if you feel extra keen to try out the latest, you can
 
 # upcoming features in next release
 - be excited, not even I know :-)
-- Upgraded to .net 7.0
+- Upgraded to .net 7.0 and used third party libraries
 
 # Copyright and License
-RecNForget is written in C# using [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0) and [WPF.](https://github.com/dotnet/wpf)
+RecNForget is written in C# using [.NET 7](https://dotnet.microsoft.com/download/dotnet/7.0) and [WPF.](https://github.com/dotnet/wpf)
 
 Code by DrCopyPaste [github.com/DrCopyPaste/RecNForget](https://github.com/DrCopyPaste/RecNForget)
 
