@@ -7,8 +7,8 @@
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NAudio.Lame" Version="2.0.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.240">
+    <PackageReference Include="NAudio.Lame" Version="2.1.0" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.133">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
