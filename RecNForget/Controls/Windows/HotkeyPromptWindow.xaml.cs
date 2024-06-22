@@ -21,7 +21,6 @@ namespace RecNForget.Controls
         {
             DataContext = this;
             InitializeComponent();
-            Closing += HotkeyPromptWindow_Closing1;
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -37,12 +36,6 @@ namespace RecNForget.Controls
 
                 this.Closing += HotkeyPromptWindow_Closing;
             }
-        }
-
-        private void HotkeyPromptWindow_Closing1(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            Visibility = Visibility.Hidden;
         }
 
         public string HotkeysAppSetting
@@ -61,13 +54,14 @@ namespace RecNForget.Controls
 
         private void SimpleGlobalHotkeyService_KeyEvent(object sender, SimpleGlobalHotkeyServiceEventArgs e)
         {
-            HotkeyDisplay.HotkeySettingString = e.AsSettingString;
+            var keysAsSettingString = simpleGlobalHotkeyService.GetPressedKeysAsSetting(e.PressedKeysInfo);
+            HotkeyDisplay.HotkeySettingString = keysAsSettingString;
 
             if (e.KeyDown)
             {
                 if (!Enum.IsDefined(typeof(PressingIssue.Services.Contracts.ModifierKeys), (int)e.Key))
                 {
-                    HotkeysAppSetting = e.AsSettingString;
+                    HotkeysAppSetting = keysAsSettingString;
                     DialogResult = true;
                 }
             }
