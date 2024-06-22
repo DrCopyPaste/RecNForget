@@ -41,14 +41,6 @@ namespace RecNForget.Controls
             DataContext = this;
             InitializeComponent();
 
-            if (DesignerProperties.GetIsInDesignMode(this))
-            { }
-            else
-            {
-                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
-                this.Resources = null;
-            }
-
             int currentIndex = 0;
 
             this.Title = caption;

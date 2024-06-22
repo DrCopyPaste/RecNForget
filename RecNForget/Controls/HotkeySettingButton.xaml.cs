@@ -51,9 +51,6 @@ namespace RecNForget.Controls
             {
                 this.hotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<IApplicationHotkeyService>();
                 this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
-
-                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
-                this.Resources = null;
             }
         }
 

@@ -55,9 +55,6 @@ namespace RecNForget.Controls
             {
                 AppSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
                 actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
-
-                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
-                this.Resources = null;
             }
 
             foreach (var theme in ThemeManager.GetAllThemeNames())

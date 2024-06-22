@@ -61,14 +61,6 @@ namespace RecNForget.Controls
 
             this.IsEnabledChanged += TimeSpanTextBox_IsEnabledChanged;
             ShowEditableTextBoxConditionally();
-
-            if (DesignerProperties.GetIsInDesignMode(this))
-            { }
-            else
-            {
-                // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
-                this.Resources = null;
-            }
         }
 
         private void TimeSpanTextBox_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
