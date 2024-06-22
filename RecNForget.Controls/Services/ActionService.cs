@@ -1,6 +1,6 @@
-﻿using NAudio.Wave;
+﻿using Microsoft.Win32;
+using NAudio.Wave;
 using Notifications.Wpf.Core;
-using Ookii.Dialogs.Wpf;
 using RecNForget.Controls.Extensions;
 using RecNForget.Controls.IoC;
 using RecNForget.Help;
@@ -12,12 +12,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Threading;
 using Unity;
 
 namespace RecNForget.Controls.Services
@@ -64,7 +62,11 @@ namespace RecNForget.Controls.Services
 
         public void ChangeOutputFolder()
         {
-            var dialog = new VistaFolderBrowserDialog();
+            var dialog = new OpenFolderDialog();
+            if (!string.IsNullOrEmpty(appSettingService.OutputPath))
+            {
+                dialog.DefaultDirectory = appSettingService.OutputPath;
+            };
 
             bool result =
                 OwnerControl != null ?
@@ -73,7 +75,7 @@ namespace RecNForget.Controls.Services
 
             if (result)
             {
-                appSettingService.OutputPath = dialog.SelectedPath;
+                appSettingService.OutputPath = dialog.FolderName;
                 selectedFileService.SelectLatestFile();
             }
         }

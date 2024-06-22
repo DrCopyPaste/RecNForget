@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using Ookii.Dialogs.Wpf;
-using RecNForget.Controls.Helper;
-using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
-using RecNForget.WPF.Services.Contracts;
 
 namespace RecNForget.Controls
 {
@@ -84,11 +82,15 @@ namespace RecNForget.Controls
 
         private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new VistaFolderBrowserDialog();
+            var dialog = new OpenFolderDialog();
+            if (!string.IsNullOrEmpty(SettingService.OutputPath))
+            {
+                dialog.DefaultDirectory = SettingService.OutputPath;
+            };
 
             if (dialog.ShowDialog() == true)
             {
-                SettingService.OutputPath = dialog.SelectedPath;
+                SettingService.OutputPath = dialog.FolderName;
             }
 
             // since there are two buttons on top of each other
@@ -97,11 +99,15 @@ namespace RecNForget.Controls
 
         private void Configure_ExportOutputPath_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new VistaFolderBrowserDialog();
+            var dialog = new OpenFolderDialog();
+            if (!string.IsNullOrEmpty(SettingService.ExportOutputPath))
+            {
+                dialog.DefaultDirectory = SettingService.ExportOutputPath;
+            };
 
             if (dialog.ShowDialog() == true)
             {
-                SettingService.ExportOutputPath = dialog.SelectedPath;
+                SettingService.ExportOutputPath = dialog.FolderName;
             }
 
             // since there are two buttons on top of each other
