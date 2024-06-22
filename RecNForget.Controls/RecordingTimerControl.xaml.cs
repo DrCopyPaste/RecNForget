@@ -1,4 +1,5 @@
-﻿using RecNForget.Controls.IoC;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;
@@ -6,7 +7,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Unity;
 
 namespace RecNForget.Controls
 {
@@ -36,9 +36,9 @@ namespace RecNForget.Controls
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
 
-                ActionService = UnityHandler.UnityContainer.Resolve<IActionService>();
-                SettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-                AudioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
+                ActionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
+                SettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
+                AudioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
             }
         }
         public IActionService ActionService

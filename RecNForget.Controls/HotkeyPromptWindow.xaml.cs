@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PressingIssue.Services.Contracts;
+using PressingIssue.Services.Contracts.Events;
+using RecNForget.Controls.IoC;
+using RecNForget.Services.Designer;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using PressingIssue.Services.Contracts;
-using PressingIssue.Services.Contracts.Events;
-using RecNForget.Controls.Helper;
-using RecNForget.Controls.IoC;
-using RecNForget.Services.Designer;
-using Unity;
 
 namespace RecNForget.Controls
 {
@@ -22,6 +21,7 @@ namespace RecNForget.Controls
         {
             DataContext = this;
             InitializeComponent();
+            Closing += HotkeyPromptWindow_Closing1;
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -30,7 +30,7 @@ namespace RecNForget.Controls
             else
             {
                 this.Title = title;
-                this.simpleGlobalHotkeyService = UnityHandler.UnityContainer.Resolve<ISimpleGlobalHotkeyService>();
+                this.simpleGlobalHotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<ISimpleGlobalHotkeyService>();
 
                 this.simpleGlobalHotkeyService.ProcessingHotkeys = false;
                 this.simpleGlobalHotkeyService.KeyEvent += SimpleGlobalHotkeyService_KeyEvent;
@@ -40,6 +40,12 @@ namespace RecNForget.Controls
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
             }
+        }
+
+        private void HotkeyPromptWindow_Closing1(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Visibility = Visibility.Hidden;
         }
 
         public string HotkeysAppSetting

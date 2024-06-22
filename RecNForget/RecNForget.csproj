@@ -28,11 +28,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.6.139">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RecNForget.Controls\RecNForget.Controls.csproj" />

@@ -1,14 +1,11 @@
-﻿using RecNForget.Controls.Helper;
-using RecNForget.Controls.IoC;
-using RecNForget.Services.Contracts;
+﻿using RecNForget.Controls.IoC;
 using RecNForget.WPF.Services.Contracts;
 using System;
 using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Unity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RecNForget.Controls
 {
@@ -56,7 +53,7 @@ namespace RecNForget.Controls
             {
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
-                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
             }
         }
 

@@ -1,17 +1,17 @@
-﻿using System;
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Input;
+﻿using Microsoft.Extensions.DependencyInjection;
 using NAudio.Wave;
 using Notifications.Wpf.Core;
 using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;
-using Unity;
+using System;
+using System.ComponentModel;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace RecNForget.Controls
 {
@@ -38,7 +38,6 @@ namespace RecNForget.Controls
             DataContext = this;
             InitializeComponent();
 
-
             if (DesignerProperties.GetIsInDesignMode(this))
             {
                 this.actionService = new DesignerActionService();
@@ -54,22 +53,22 @@ namespace RecNForget.Controls
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
 
-                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
                 //actionService.ChangeTheme("Simple_Black");
                 //this.InvalidateVisual();
 
 
-                this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
+                this.hotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<IApplicationHotkeyService>();
 
-                SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
+                SelectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
 
-                SettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
+                SettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
                 SettingService.PropertyChanged += SettingService_PropertyChanged;
 
-                AudioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
+                AudioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
                 AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
 
-                AudioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
+                AudioPlaybackService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioPlaybackService>();
                 AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
 
                 // try restore last window positon

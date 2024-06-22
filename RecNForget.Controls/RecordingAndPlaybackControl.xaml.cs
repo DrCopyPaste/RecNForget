@@ -1,12 +1,12 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
+﻿using Microsoft.Extensions.DependencyInjection;
 using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;
-using Unity;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace RecNForget.Controls
 {
@@ -40,11 +40,11 @@ namespace RecNForget.Controls
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
 
-                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
-                this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-                AudioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
-                AudioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
-                SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
+                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
+                this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
+                AudioPlaybackService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioPlaybackService>();
+                AudioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
+                SelectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
 
                 AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
                 AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;

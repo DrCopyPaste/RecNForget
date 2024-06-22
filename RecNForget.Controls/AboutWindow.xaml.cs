@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RecNForget.Controls.IoC;
+using RecNForget.Services.Contracts;
+using RecNForget.Services.Designer;
+using RecNForget.WPF.Services.Contracts;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using RecNForget.Controls.IoC;
-using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
-using RecNForget.WPF.Services.Contracts;
-using Unity;
 
 namespace RecNForget.Controls
 {
@@ -24,6 +24,7 @@ namespace RecNForget.Controls
         public AboutWindow()
         {
             DataContext = this;
+            Closing += AboutWindow_Closing;
             InitializeComponent();
 
             if (DesignerProperties.GetIsInDesignMode(this))
@@ -37,8 +38,8 @@ namespace RecNForget.Controls
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
 
-                this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+                this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
+                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
             }
 
             var assemblyInformationalVersion = appSettingService.RuntimeInformalVersionString;
@@ -46,6 +47,12 @@ namespace RecNForget.Controls
 
             AppNameAndVersion.Text = string.Format("RecNForget {0}", string.Format("{0}.{1}.{2}", assemblyFileVersion.Major, assemblyFileVersion.Minor, assemblyFileVersion.Build));
             VersionLabel.Text = string.Format("{0} - v{1}", "Chili Garlic Shrimps", assemblyInformationalVersion);
+        }
+
+        private void AboutWindow_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Visibility = Visibility.Hidden;
         }
 
         private void CheckForUpdateButton_Click(object sender, RoutedEventArgs e)

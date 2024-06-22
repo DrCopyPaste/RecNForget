@@ -1,4 +1,4 @@
-﻿using RecNForget.Controls.Helper;
+﻿using Microsoft.Extensions.DependencyInjection;
 using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Unity;
 
 namespace RecNForget.Controls
 {
@@ -50,8 +49,8 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
-                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+                this.hotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<IApplicationHotkeyService>();
+                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
 
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;

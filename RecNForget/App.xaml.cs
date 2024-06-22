@@ -1,19 +1,13 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Notifications.Wpf.Core;
+﻿using Microsoft.Extensions.DependencyInjection;
 using RecNForget.Controls;
 using RecNForget.Controls.Helper;
-using RecNForget.Controls.Services;
-using RecNForget.Help;
 using RecNForget.Controls.IoC;
-using RecNForget.Services;
+using RecNForget.Controls.Services;
 using RecNForget.Services.Contracts;
-using RecNForget.WPF.Services;
 using RecNForget.WPF.Services.Contracts;
-using Unity;
-using Unity.Lifetime;
+using System;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace RecNForget
 {
@@ -45,8 +39,10 @@ namespace RecNForget
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            UnityHandler.CreateContainer();
-            var appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
+            ConfiguredServices.ServiceCollection.AddSingleton<IActionService, ActionService>();
+            ConfiguredServices.ServiceCollection.BuildServiceProvider();
+
+            var appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
 
             if (e.Args.Length > 0 && !string.IsNullOrEmpty(e.Args[0]) && e.Args[0] == "-removeAppData")
             {
@@ -65,19 +61,16 @@ namespace RecNForget
 
             base.OnStartup(e);
 
-            // register this application specific action service
-            UnityHandler.UnityContainer.RegisterType<IActionService, ActionService>(lifetimeManager: new SingletonLifetimeManager());
-
             // ensure AppConfig Values exist
             bool firstTimeUser = appSettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
 
-            var hotkeyService = UnityHandler.UnityContainer.Resolve<IApplicationHotkeyService>();
+            var hotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<IApplicationHotkeyService>();
 
-            actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
+            actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
             ThemeManager.ChangeTheme(appSettingService.WindowTheme);
 
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
-            mainWindow = UnityHandler.UnityContainer.Resolve<MainWindow>();
+            mainWindow = ConfiguredServices.ServiceProvider.GetRequiredService<MainWindow>();
             actionService.OwnerControl = mainWindow;
 
             HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);

@@ -1,12 +1,12 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
-using Unity;
+﻿using Microsoft.Extensions.DependencyInjection;
 using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace RecNForget.Controls
 {
@@ -42,11 +42,11 @@ namespace RecNForget.Controls
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
 
-                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
-                this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-                this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
+                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
+                this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
+                this.audioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
 
-                SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
+                SelectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
 
                 appSettingService.PropertyChanged += AppSettingService_PropertyChanged;
 

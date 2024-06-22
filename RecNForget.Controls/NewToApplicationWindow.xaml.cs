@@ -22,6 +22,7 @@ namespace RecNForget.Controls
         public NewToApplicationWindow(IApplicationHotkeyService hotkeyService, IAppSettingService settingService, IActionService actionService)
         {
             InitializeComponent();
+            Closing += NewToApplicationWindow_Closing;
 
             this.Title = "New to RecNForget?";
 
@@ -43,6 +44,12 @@ namespace RecNForget.Controls
 
                 this.KeyDown += Window_KeyDown;
             }            
+        }
+
+        private void NewToApplicationWindow_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Visibility = Visibility.Hidden;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

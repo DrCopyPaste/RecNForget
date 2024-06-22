@@ -20,6 +20,7 @@ namespace RecNForget.Controls
         public SettingsWindow(IApplicationHotkeyService hotkeyService, IAppSettingService settingService)
         {
             InitializeComponent();
+            Closing += SettingsWindow_Closing;
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
@@ -33,6 +34,12 @@ namespace RecNForget.Controls
                 this.hotkeyService = hotkeyService;
                 SettingService = settingService;
             }
+        }
+
+        private void SettingsWindow_Closing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Visibility = Visibility.Hidden;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

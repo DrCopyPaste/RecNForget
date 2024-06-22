@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
 using NAudio.Wave;
 using Notifications.Wpf.Core;
 using RecNForget.Controls.Extensions;
@@ -16,7 +17,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Unity;
 
 namespace RecNForget.Controls.Services
 {
@@ -33,10 +33,10 @@ namespace RecNForget.Controls.Services
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
         public ActionService()
         {
-            this.selectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
-            this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-            this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
-            this.audioRecordingService = UnityHandler.UnityContainer.Resolve<IAudioRecordingService>();
+            this.selectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
+            this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
+            this.audioPlaybackService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioPlaybackService>();
+            this.audioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -429,7 +429,7 @@ namespace RecNForget.Controls.Services
 
         public void ShowSettingsMenu()
         {
-            var settingsWindow = UnityHandler.UnityContainer.Resolve<SettingsWindow>();
+            var settingsWindow = ConfiguredServices.ServiceProvider.GetRequiredService<SettingsWindow>();
 
             settingsWindow.TrySetViewablePositionFromOwner(OwnerControl);
 
@@ -490,7 +490,7 @@ namespace RecNForget.Controls.Services
 
         public void ShowNewToApplicationWindow()
         {
-            var dia = UnityHandler.UnityContainer.Resolve<NewToApplicationWindow>();
+            var dia = ConfiguredServices.ServiceProvider.GetRequiredService<NewToApplicationWindow>();
 
             if (!appSettingService.MinimizedToTray && OwnerControl != null)
             {

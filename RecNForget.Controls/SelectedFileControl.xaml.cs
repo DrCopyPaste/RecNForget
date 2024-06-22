@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
+﻿using Microsoft.Extensions.DependencyInjection;
 using NAudio.Wave;
 using Notifications.Wpf.Core;
-using RecNForget.Controls.Extensions;
 using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;
-using Unity;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace RecNForget.Controls
 {
@@ -44,11 +42,11 @@ namespace RecNForget.Controls
             {
                 // ToDo: Evil Hack to have the cake (see actual design in design mode) and eat it too (have different styles at runtime)
                 this.Resources = null;
-                this.actionService = UnityHandler.UnityContainer.Resolve<IActionService>();
-                this.appSettingService = UnityHandler.UnityContainer.Resolve<IAppSettingService>();
-                this.audioPlaybackService = UnityHandler.UnityContainer.Resolve<IAudioPlaybackService>();
+                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
+                this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
+                this.audioPlaybackService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioPlaybackService>();
 
-                this.SelectedFileService = UnityHandler.UnityContainer.Resolve<ISelectedFileService>();
+                this.SelectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
 
                 SelectedFileService.PropertyChanged += SelectedFileService_PropertyChanged;
             }
