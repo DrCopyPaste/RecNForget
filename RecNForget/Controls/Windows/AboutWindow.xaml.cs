@@ -21,7 +21,7 @@ namespace RecNForget.Controls
         private readonly IAppSettingService appSettingService;
         private readonly IActionService actionService;
 
-        public AboutWindow()
+        public AboutWindow(IAppSettingService appSettingService, IActionService actionService)
         {
             DataContext = this;
             Closing += AboutWindow_Closing;
@@ -35,8 +35,8 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
-                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
+                this.appSettingService = appSettingService;
+                this.actionService = actionService;
             }
 
             var assemblyInformationalVersion = appSettingService.RuntimeInformalVersionString;

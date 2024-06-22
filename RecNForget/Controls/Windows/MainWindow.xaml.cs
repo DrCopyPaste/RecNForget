@@ -33,7 +33,13 @@ namespace RecNForget.Controls
 
         private readonly NotificationManager _notificationManager = new NotificationManager();
 
-        public MainWindow()
+        public MainWindow(
+            IAudioRecordingService audioRecordingService,
+            IActionService actionService,
+            IApplicationHotkeyService hotkeyService,
+            IAppSettingService settingService,
+            IAudioPlaybackService audioPlaybackService,
+            ISelectedFileService selectedFileService)
         {
             DataContext = this;
             InitializeComponent();
@@ -50,22 +56,16 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
-                //actionService.ChangeTheme("Simple_Black");
-                //this.InvalidateVisual();
-
-
-                this.hotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<IApplicationHotkeyService>();
-
-                SelectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
-
-                SettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
+                this.actionService = actionService;
+                this.hotkeyService = hotkeyService;
+                SelectedFileService = selectedFileService;
+                SettingService = settingService;
                 SettingService.PropertyChanged += SettingService_PropertyChanged;
 
-                AudioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
+                AudioRecordingService = audioRecordingService;
                 AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
 
-                AudioPlaybackService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioPlaybackService>();
+                AudioPlaybackService = audioPlaybackService;
                 AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
 
                 // try restore last window positon

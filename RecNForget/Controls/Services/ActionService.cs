@@ -413,7 +413,7 @@ namespace RecNForget.Controls.Services
 
         public void ShowAboutWindow()
         {
-            var aboutDialog = new AboutWindow();
+            var aboutDialog = ConfiguredServices.ServiceProvider.GetRequiredService<AboutWindow>();
             aboutDialog.TrySetViewablePositionFromOwner(OwnerControl);
 
             aboutDialog.ShowDialog();
@@ -421,7 +421,7 @@ namespace RecNForget.Controls.Services
 
         public void ShowHelpWindow()
         {
-            var helpmenu = new HelpWindow();
+            var helpmenu = ConfiguredServices.ServiceProvider.GetRequiredService<HelpWindow>();
             helpmenu.TrySetViewablePositionFromOwner(OwnerControl);
 
             helpmenu.Show();
