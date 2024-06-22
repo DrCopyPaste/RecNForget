@@ -172,5 +172,14 @@ namespace RecNForget.Services
                 Stop();
             }
         }
+
+        public string GetFileLengthInSecondsFormatted(string filePath)
+        {
+            var audioFileReader = new AudioFileReader(filePath);
+            var ret = audioFileReader.TotalTime.ToString("g") + " s";
+            audioFileReader.Dispose();
+
+            return ret;
+        }
     }
 }

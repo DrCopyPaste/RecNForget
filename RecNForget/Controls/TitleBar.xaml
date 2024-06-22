@@ -6,13 +6,6 @@
              xmlns:local="clr-namespace:RecNForget.Controls"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" >
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Simple_White.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
         <Border>
             <!--Title bar: 3 slots for icon buttons left and right plus one big middle bar => 7 columns-->
             <Grid HorizontalAlignment="Stretch">

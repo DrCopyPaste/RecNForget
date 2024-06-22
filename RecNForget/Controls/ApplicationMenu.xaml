@@ -7,18 +7,11 @@
              xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Simple_White.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <UserControl.ContextMenu>
         <ContextMenu Name="UserControlContextMenu">
             <MenuItem Header="Cancel">
                 <MenuItem.Icon>
-                    <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg" />
+                    <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget;component/Themes/SvgImages/cancel_icon428740.svg" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -45,7 +38,7 @@
             <Separator Style="{DynamicResource SeparatorStyle}" />
             <MenuItem Header="Open settings" Click="Settings_MenuItem_Click">
                 <MenuItem.Icon>
-                    <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
+                    <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget;component/Themes/SvgImages/settings_icon40863.svg" />
                 </MenuItem.Icon>
             </MenuItem>
 
@@ -54,19 +47,19 @@
             
                 <MenuItem Header="About RecNForget" Click="About_MenuItem_Click">
                     <MenuItem.Icon>
-                        <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget.Controls;component/Themes/SvgImages/information_icon280732.svg" />
+                        <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget;component/Themes/SvgImages/information_icon280732.svg" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Help" Click="Help_MenuItem_Click">
                     <MenuItem.Icon>
-                        <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget.Controls;component/Themes/SvgImages/help_icon544157.svg" />
+                        <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget;component/Themes/SvgImages/help_icon544157.svg" />
                     </MenuItem.Icon>
                 </MenuItem>
 
                 <Separator Style="{DynamicResource SeparatorStyle}" />
                 <MenuItem Header="Check for Updates" Click="CheckForUpdates_MenuItem_Click">
                     <MenuItem.Icon>
-                        <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
+                        <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget;component/Themes/SvgImages/download_icon602.svg" />
                     </MenuItem.Icon>
                 </MenuItem>
 
@@ -75,7 +68,7 @@
             <Separator Style="{DynamicResource SeparatorStyle}" />
             <MenuItem Header="Exit" Click="Exit_MenuItem_Click">
                 <MenuItem.Icon>
-                    <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget.Controls;component/Themes/SvgImages/shutDown_icon170336.svg" />
+                    <svg1:SVGImage Style="{DynamicResource ContextMenuImageStyle}" Source="/RecNForget;component/Themes/SvgImages/shutDown_icon170336.svg" />
                 </MenuItem.Icon>
             </MenuItem>
             

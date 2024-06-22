@@ -39,7 +39,7 @@ namespace RecNForget.Controls.Helper
 
         public static void ChangeTheme(string themeFileName)
         {
-            Uri dictUri = new Uri("/RecNForget.Controls;component/Themes/" + themeFileName + ".xaml", UriKind.RelativeOrAbsolute);
+            Uri dictUri = new Uri("/RecNForget;component/Themes/" + themeFileName + ".xaml", UriKind.RelativeOrAbsolute);
             ResourceDictionary resourceDict = Application.LoadComponent(dictUri) as ResourceDictionary;
 
             try

@@ -19,13 +19,6 @@
 			Content/Text/Value="optional">
         </NodeName>
         -->
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Simple_White.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
             <local:TitleBar HorizontalAlignment="Stretch" />

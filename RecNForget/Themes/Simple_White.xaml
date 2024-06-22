@@ -79,7 +79,7 @@
     <!-- ===================================================  Images  ====================================================================================================================  -->
 
     <Style x:Key="About_Logo_Style" TargetType="{x:Type svg1:SVGImage}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/logo.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/logo.svg" />
         <Setter Property="Height" Value="70" />
         <Setter Property="Width" Value="70" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
@@ -94,23 +94,23 @@
     </Style>
 
     <Style x:Key="AddedFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/plus_icon171498.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/plus_icon171498.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
     </Style>
 
     <Style x:Key="BugFix_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/bugfix_icon140609.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/bugfix_icon140609.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
     </Style>
 
     <Style x:Key="VerboseInformationFeature_Image_Style" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource FeatureClass_Image_Style}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/information_icon2132.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/information_icon2132.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
     </Style>
 
     <Style x:Key="CustomMessageBoxDefaultIconStyle" TargetType="{x:Type svg1:SVGImage}">
         <!-- TODO Logo HERE! <Setter Property="Source" Value="..\Images\logo_big.png" />-->
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_info_icon277439.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/message_info_icon277439.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
         <Setter Property="Height" Value="80" />
         <Setter Property="Width" Value="80" />
@@ -118,21 +118,21 @@
     </Style>
 
     <Style x:Key="CustomMessageBoxInformationIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_info_icon277439.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/message_info_icon277439.svg" />
         <Setter Property="OverrideColor" Value="{DynamicResource Primary_Color}" />
         <Setter Property="Margin" Value="4,4,4,4" />
     </Style>
 
     <Style x:Key="CustomMessageBoxQuestionIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_question_icon109120.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/message_question_icon109120.svg" />
     </Style>
 
     <Style x:Key="CustomMessageBoxErrorIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/message_error_icon304479.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/message_error_icon304479.svg" />
     </Style>
 
     <Style x:Key="QuickTip_LightBulbIconStyle" TargetType="{x:Type svg1:SVGImage}" BasedOn="{StaticResource CustomMessageBoxDefaultIconStyle}">
-        <Setter Property="Source" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
+        <Setter Property="Source" Value="/RecNForget;component/Themes/SvgImages/lightbulb_icon372420.svg" />
     </Style>
 
     <!-- /==================================================  Images  ====================================================================================================================  -->
@@ -404,76 +404,76 @@
 
     <!--Main Window Controls-->
     <Style x:Key="SvgOpenFolderButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/openFolder_icon356582.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/openFolder_icon356582.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/openFolder_icon356582.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/openFolder_icon356582.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/openFolder_icon356582.svg" />
     </Style>
 
     <Style x:Key="SvgPrevTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="ImagePadding" Value="8,8,8,8" />
         <Setter Property="ImageMargin" Value="4,1,4,1" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/prevTrack_icon.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/prevTrack_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/prevTrack_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/prevTrack_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/prevTrack_icon.svg" />
     </Style>
 
     <Style x:Key="SvgNextTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="ImagePadding" Value="8,8,8,8" />
         <Setter Property="ImageMargin" Value="4,1,4,1" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/nextTrack_icon.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/nextTrack_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/nextTrack_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/nextTrack_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/nextTrack_icon.svg" />
     </Style>
 
     <Style x:Key="SvgPlayTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="ImagePadding" Value="4,4,4,4" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/play_icon.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/play_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/play_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/play_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/play_icon.svg" />
     </Style>
 
     <Style x:Key="SvgPauseTrackButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
         <Setter Property="ImagePadding" Value="4,4,4,4" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pause_icon.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/pause_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/pause_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/pause_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/pause_icon.svg" />
     </Style>
 
     <Style x:Key="SvgStopButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgComplexConditionButton}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/stop_icon.svg" />
     </Style>
 
     <Style x:Key="SvgRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/record_icon.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/record_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/record_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/record_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/record_icon.svg" />
     </Style>
 
     <Style x:Key="SvgStopRecordButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
         <Setter Property="ImagePadding" Value="5,5,5,5" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/stop_icon.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/stop_icon.svg" />
     </Style>
 
     <Style x:Key="SvgChangeFilePatternMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
         <Setter Property="Margin" Value="2,2,2,0" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/pencil_icon79516.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/pencil_icon79516.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/pencil_icon79516.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/pencil_icon79516.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/pencil_icon79516.svg" />
     </Style>
 
     <Style x:Key="SvgExportFileMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
@@ -484,10 +484,10 @@
         <Setter Property="Width" Value="{Binding Source={StaticResource Width_SmallControl}}" />-->
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/export_icon343310.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/export_icon343310.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/export_icon343310.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/export_icon343310.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/export_icon343310.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/export_icon343310.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/export_icon343310.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/export_icon343310.svg" />
     </Style>
 
     <Style x:Key="SvgChangeOutputFolderMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
@@ -495,90 +495,90 @@
         <Setter Property="ImagePadding" Value="1,1,1,1" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/folder_icon122592.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/folder_icon122592.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/folder_icon122592.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/folder_icon122592.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/folder_icon122592.svg" />
     </Style>
 
     <Style x:Key="SvgDeleteSelectedFileMiniButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseMiniChangeSettingButtonLayout}">
         <Setter Property="Margin" Value="2,2,2,0" />
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/trash_icon77730.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/trash_icon77730.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/trash_icon77730.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/trash_icon77730.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/trash_icon77730.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/trash_icon77730.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/trash_icon77730.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/trash_icon77730.svg" />
     </Style>
     
     <!--"general"/common buttons-->
     <Style x:Key="SvgAcceptButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/accept_icon518267.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/accept_icon518267.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/accept_icon518267.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/accept_icon518267.svg" />
     </Style>
 
     <Style x:Key="SvgChangeSettingButtonLayout" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseButtonLayout}">
         <Setter Property="Height" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
         <Setter Property="Width" Value="{Binding Source={StaticResource TitleRow_ColumnWidth}}" />
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/editSetting_icon451737.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/editSetting_icon451737.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/editSetting_icon451737.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/editSetting_icon451737.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/editSetting_icon451737.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/editSetting_icon451737.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/editSetting_icon451737.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/editSetting_icon451737.svg" />
     </Style>
 
 
     <!-- Window Header Controls-->
     <Style x:Key="SvgWindowSettingsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowSettings_icon248857.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/windowSettings_icon248857.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/windowSettings_icon248857.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/windowSettings_icon248857.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/windowSettings_icon248857.svg" />
     </Style>
     <Style x:Key="SvgWindowOptionsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowOptions_icon510828.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowOptions_icon510828.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowOptions_icon510828.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/windowOptions_icon510828.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/windowOptions_icon510828.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/windowOptions_icon510828.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/windowOptions_icon510828.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/windowOptions_icon510828.svg" />
     </Style>
     <Style x:Key="SvgSettingsButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/settings_icon40863.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/settings_icon40863.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/settings_icon40863.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/settings_icon40863.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/settings_icon40863.svg" />
     </Style>
     <Style x:Key="SvgMinimizeButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/minimize_icon246566.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/minimize_icon246566.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/minimize_icon246566.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/minimize_icon246566.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/minimize_icon246566.svg" />
     </Style>
     <Style x:Key="SvgExitButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgBaseHeaderButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/close_icon349388.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/close_icon349388.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/close_icon349388.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/close_icon349388.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/close_icon349388.svg" />
     </Style>
 
     <!-- /Mini Buttons for Main Window Sub Controls-->
     <Style x:Key="SvgLightBulbButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/lightbulb_icon372420.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/lightbulb_icon372420.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/lightbulb_icon372420.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/lightbulb_icon372420.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/lightbulb_icon372420.svg" />
     </Style>
     <Style x:Key="SvgDownloadButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/download_icon602.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/download_icon602.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/download_icon602.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/download_icon602.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/download_icon602.svg" />
     </Style>
     <Style x:Key="SvgCancelButton" TargetType="{x:Type local:SvgImageButton1}" BasedOn="{StaticResource SvgHalfActionButtonLayout}">
-        <Setter Property="DefaultImage" Value="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg" />
-        <Setter Property="DisabledImage" Value="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg" />
-        <Setter Property="SelectedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg" />
-        <Setter Property="PressedImage" Value="/RecNForget.Controls;component/Themes/SvgImages/cancel_icon428740.svg" />
+        <Setter Property="DefaultImage" Value="/RecNForget;component/Themes/SvgImages/cancel_icon428740.svg" />
+        <Setter Property="DisabledImage" Value="/RecNForget;component/Themes/SvgImages/cancel_icon428740.svg" />
+        <Setter Property="SelectedImage" Value="/RecNForget;component/Themes/SvgImages/cancel_icon428740.svg" />
+        <Setter Property="PressedImage" Value="/RecNForget;component/Themes/SvgImages/cancel_icon428740.svg" />
     </Style>
     <!-- /==================================================  Buttons  ===================================================================================================================  -->
 
@@ -814,7 +814,7 @@
                                     BorderBrush="{DynamicResource SecondaryShade_Brush}"
                                     BorderThickness="1">
                                     <svg1:SVGImage x:Name="CheckMark"
-                                        Source="/RecNForget.Controls;component/Themes/SvgImages/accept_icon518267.svg"
+                                        Source="/RecNForget;component/Themes/SvgImages/accept_icon518267.svg"
                                         VerticalContentAlignment="Bottom"
                                         HorizontalContentAlignment="Center"
                                         SizeType="SizeToContent"

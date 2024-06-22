@@ -53,5 +53,10 @@ namespace RecNForget.Services.Designer
         {
             throw new NotImplementedException();
         }
+
+        public string GetFileLengthInSecondsFormatted(string filePath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

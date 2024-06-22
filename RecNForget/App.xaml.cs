@@ -3,11 +3,11 @@ using RecNForget.Controls;
 using RecNForget.Controls.Helper;
 using RecNForget.Controls.IoC;
 using RecNForget.Controls.Services;
-using RecNForget.Services.Contracts;
-using RecNForget.WPF.Services.Contracts;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using RecNForget.WPF.Services.Contracts;
+using RecNForget.Services.Contracts;
 
 namespace RecNForget
 {

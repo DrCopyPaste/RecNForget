@@ -6,14 +6,6 @@
              xmlns:local="clr-namespace:RecNForget.Controls" xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
              IsEnabled="False"
              mc:Ignorable="d" >
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\Simple_White.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <!--<local:StringToTimeSpanConverter x:Key="_StringToTimeSpanConverter"/>-->
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Border CornerRadius="3" Padding="1" x:Name="ControlBorder" Background="{DynamicResource Transparent_Brush}" BorderBrush="{DynamicResource Primary_Brush}" BorderThickness="1">
         <StackPanel Orientation="Horizontal">
             <TextBox Style="{DynamicResource TimeSpanTextBoxStyle}" Background="{DynamicResource Transparent_Brush}"

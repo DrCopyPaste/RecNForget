@@ -84,7 +84,7 @@ namespace RecNForget.Controls
             {
                 try
                 {
-                    var audioFileLengthString = (new AudioFileReader(SelectedFileService.SelectedFile.FullName)).TotalTime.ToString("g") + " s";
+                    var audioFileLengthString = audioPlaybackService.GetFileLengthInSecondsFormatted(SelectedFileService.SelectedFile.FullName);
                     var fileSizeString = (SelectedFileService.SelectedFile.Length / (double)1024).ToString("N2") + " kB";
 
                     FileInfoLabel.Content = audioFileLengthString + " (" + fileSizeString + ")";
