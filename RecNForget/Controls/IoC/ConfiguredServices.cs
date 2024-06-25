@@ -50,17 +50,18 @@ public class ConfiguredServices
         serviceCollection.AddSingleton<ISimpleGlobalHotkeyService, SimpleGlobalHotkeyService>();
         serviceCollection.AddSingleton<IAudioRecordingService, AudioRecordingService>();
 
-        serviceCollection.AddSingleton<AboutWindow>();
-        //serviceCollection.AddSingleton<DownloadDialog>();
-        serviceCollection.AddSingleton<HelpWindow>();
-        //serviceCollection.AddSingleton<HotkeyPromptWindow>();
         serviceCollection.AddSingleton<MainWindow>();
-        serviceCollection.AddSingleton<NewToApplicationWindow>();
+        serviceCollection.AddTransient<AboutWindow>();
+        //serviceCollection.AddSingleton<DownloadDialog>();
+        serviceCollection.AddTransient<HelpWindow>();
+        //serviceCollection.AddSingleton<HotkeyPromptWindow>();
+        
+        serviceCollection.AddTransient<NewToApplicationWindow>();
         //serviceCollection.AddSingleton<NewToVersionDialog>();
         //serviceCollection.AddSingleton<QuickTipDialog>();
         //serviceCollection.AddSingleton<ReleaseInstallationDialog>();
-        serviceCollection.AddSingleton<SettingsWindow>();
+        serviceCollection.AddTransient<SettingsWindow>();
 
-        serviceCollection.AddSingleton<AboutViewModel>();
+        serviceCollection.AddTransient<AboutViewModel>();
     }
 }

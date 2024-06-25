@@ -15,14 +15,7 @@ namespace RecNForget.Controls
         public AboutWindow(AboutViewModel aboutViewModel)
         {
             DataContext = aboutViewModel;
-            Closing += AboutWindow_Closing;
             InitializeComponent();
-        }
-
-        private void AboutWindow_Closing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            Visibility = Visibility.Hidden;
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

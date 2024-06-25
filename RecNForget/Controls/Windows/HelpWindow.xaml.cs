@@ -22,7 +22,6 @@ namespace RecNForget.Controls
         public HelpWindow()
         {
             DataContext = this;
-            Closing += HelpWindow_Closing;
             InitializeComponent();
 
             this.KeyDown += Window_KeyDown;
@@ -81,12 +80,6 @@ namespace RecNForget.Controls
 
             quickStartButton.PerformClick();
             quickStartButton.Focus();
-        }
-
-        private void HelpWindow_Closing(object sender, CancelEventArgs e)
-        {
-            e.Cancel = true;
-            Visibility = Visibility.Hidden;
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
