@@ -93,7 +93,7 @@ namespace RecNForget.Controls
         
         private void CheckForUpdates_MenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            actionService.CheckForUpdates(showMessages: true);
+            actionService.CheckForUpdatesAsync(showMessages: true);
         }
 
         private void Exit_MenuItem_Click(object sender, System.Windows.RoutedEventArgs e)

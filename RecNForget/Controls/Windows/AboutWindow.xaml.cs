@@ -1,12 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RecNForget.Controls.IoC;
-using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
-using RecNForget.WPF.Services.Contracts;
-using System;
+﻿using RecNForget.ViewModels;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -18,43 +12,17 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class AboutWindow : Window
     {
-        private readonly IAppSettingService appSettingService;
-        private readonly IActionService actionService;
-
-        public AboutWindow(IAppSettingService appSettingService, IActionService actionService)
+        public AboutWindow(AboutViewModel aboutViewModel)
         {
-            DataContext = this;
+            DataContext = aboutViewModel;
             Closing += AboutWindow_Closing;
             InitializeComponent();
-
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                this.appSettingService = new DesignerAppSettingService();
-                this.actionService = new DesignerActionService();
-                return;
-            }
-            else
-            {
-                this.appSettingService = appSettingService;
-                this.actionService = actionService;
-            }
-
-            var assemblyInformationalVersion = appSettingService.RuntimeInformalVersionString;
-            var assemblyFileVersion = new Version(appSettingService.RuntimeVersionString);
-
-            AppNameAndVersion.Text = string.Format("RecNForget {0}", string.Format("{0}.{1}.{2}", assemblyFileVersion.Major, assemblyFileVersion.Minor, assemblyFileVersion.Build));
-            VersionLabel.Text = string.Format("{0} - v{1}", "Chili Garlic Shrimps", assemblyInformationalVersion);
         }
 
         private void AboutWindow_Closing(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
             Visibility = Visibility.Hidden;
-        }
-
-        private void CheckForUpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            Task.Run(() => { actionService.CheckForUpdates(true); });
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)

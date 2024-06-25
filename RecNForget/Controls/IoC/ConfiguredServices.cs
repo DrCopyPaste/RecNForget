@@ -3,6 +3,7 @@ using PressingIssue.Services.Contracts;
 using PressingIssue.Services.Win32;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
+using RecNForget.ViewModels;
 using System;
 
 namespace RecNForget.Controls.IoC;
@@ -59,5 +60,7 @@ public class ConfiguredServices
         //serviceCollection.AddSingleton<QuickTipDialog>();
         //serviceCollection.AddSingleton<ReleaseInstallationDialog>();
         serviceCollection.AddSingleton<SettingsWindow>();
+
+        serviceCollection.AddSingleton<AboutViewModel>();
     }
 }

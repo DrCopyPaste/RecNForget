@@ -172,5 +172,10 @@ namespace RecNForget.Services.Designer
         {
             throw new System.NotImplementedException();
         }
+
+        Task<bool> IActionService.CheckForUpdatesAsync(bool showMessages)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

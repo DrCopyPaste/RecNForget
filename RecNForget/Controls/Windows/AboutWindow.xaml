@@ -30,14 +30,15 @@
                 </Border>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Style="{DynamicResource ApplicationName_TextBox_Style}"
-                Text="RecNForget"
-                Name="AppNameAndVersion" />
+                        d:Text="RecNForget 3.14.1"
+                        Text="{Binding AppNameAndVersion}"
+                        Name="AppNameAndVersion" />
                     <TextBlock Style="{DynamicResource VersionName_TextBox_Style}"
-                Name="VersionLabel"
-                Text="Version X.Y.Z.A" />
+                        d:Text="Chili Garlic Shrimps v3.14.20+123abc456"
+                        Text="{Binding VersionLabel}" />
                     <TextBlock Style="{DynamicResource DefaultTextBlockStyle}">
                 <Run>
-                    (C) 2019-2021 by 
+                    (C) 2019-2024 by 
                 </Run>
                 <Hyperlink NavigateUri="https://github.com/DrCopyPaste" RequestNavigate="Hyperlink_RequestNavigate">DrCopyPaste</Hyperlink>
                     </TextBlock>
@@ -53,8 +54,7 @@
             </ScrollViewer>
             <Grid>
                 <local:SvgImageButton1 Style="{DynamicResource SvgDownloadButton}"
-                    HorizontalAlignment="Left" 
-                    Click="CheckForUpdateButton_Click" ToolTip="Check for updates"/>
+                    HorizontalAlignment="Left" Command="{Binding CheckForUpdatesCommand}" ToolTip="Check for updates"/>
                 <local:SvgImageButton1 Style="{DynamicResource SvgAcceptButton}"
                     HorizontalAlignment="Right"
                     Click="OkButton_Click"/>

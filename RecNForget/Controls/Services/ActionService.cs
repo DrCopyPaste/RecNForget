@@ -28,6 +28,7 @@ namespace RecNForget.Controls.Services
         private readonly IAppSettingService appSettingService = null;
 
         private readonly NotificationManager _notificationManager = new NotificationManager();
+        private static bool checkingForUpdates = false;
         public Control OwnerControl { get; set; }
 
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
@@ -177,8 +178,11 @@ namespace RecNForget.Controls.Services
             }
         }
 
-        public async void CheckForUpdates(bool showMessages = false)
+        public async Task<bool> CheckForUpdatesAsync(bool showMessages = false)
         {
+            if (checkingForUpdates) return false;
+            checkingForUpdates = true;
+
             try
             {
                 var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: appSettingService.RuntimeVersionString);
@@ -212,6 +216,8 @@ namespace RecNForget.Controls.Services
                         });
                     }
                 }
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -230,6 +236,12 @@ namespace RecNForget.Controls.Services
                     });
                 }
             }
+            finally
+            {
+                checkingForUpdates = false;
+            }
+
+            return false;
         }
 
         public void DeleteSelectedFile()
@@ -437,56 +449,6 @@ namespace RecNForget.Controls.Services
         }
 
         #region menu events
-
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Exit();
-        }
-
-        private void CheckUpdates_Click(object sender, RoutedEventArgs e)
-        {
-            Task.Run(() => { CheckForUpdates(showMessages: true); });
-        }
-
-        private void Help_Click(object sender, RoutedEventArgs e)
-        {
-            ShowHelpWindow();
-        }
-
-        private void AboutButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShowAboutWindow();
-        }
-
-        private void ToggleMinimizedToTray(object sender, RoutedEventArgs e)
-        {
-            ToggleMinimizedToTray();
-        }
-
-        private void ToggleAlwaysOnTop(object sender, RoutedEventArgs e)
-        {
-            ToggleAlwaysOnTop();
-        }
-
-        private void ToggleRecordingTimerControlVisibility(object sender, RoutedEventArgs e)
-        {
-            ToggleRecordingTimerControlVisibility();
-        }
-
-        private void ToggleSelectedFileControlVisibility(object sender, RoutedEventArgs e)
-        {
-            ToggleSelectedFileControlVisibility();
-        }
-
-        private void ToggleOutputPathControlVisibility(object sender, RoutedEventArgs e)
-        {
-            ToggleOutputPathControlVisibility();
-        }
-
-        private void SettingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShowSettingsMenu();
-        }
 
         public void ShowNewToApplicationWindow()
         {

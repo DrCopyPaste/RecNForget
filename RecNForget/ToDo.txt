@@ -1,1 +1,4 @@
 add Signature!?!
+
+getting updates should be cancellable
+renew/ improve? copyright helper/ content helpers

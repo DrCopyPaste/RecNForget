@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace RecNForget.WPF.Services.Contracts
@@ -14,7 +15,7 @@ namespace RecNForget.WPF.Services.Contracts
         // change file name pattern (with dialog)
         void ChangeFileNamePattern();
 
-        void CheckForUpdates(bool showMessages = false);
+        Task<bool> CheckForUpdatesAsync(bool showMessages = false);
 
         // open explorer for output folder (select file if there is any)
         void OpenOutputFolderInExplorer();

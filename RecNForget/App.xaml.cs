@@ -80,7 +80,7 @@ namespace RecNForget
         {
             if (appSettingService.CheckForUpdateOnStart)
             {
-                Task.Run(() => { actionService.CheckForUpdates(showMessages: false); });
+                Task.Run(() => { actionService.CheckForUpdatesAsync(showMessages: false); });
             }
 
             var currentFileVersion = new Version(ThisAssembly.AssemblyFileVersion);
