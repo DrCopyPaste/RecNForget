@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services.Designer
@@ -165,6 +166,16 @@ namespace RecNForget.Services.Designer
         public bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false) => throw new NotImplementedException();
 
         public List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]")
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Persist()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task PersistAsync()
         {
             throw new NotImplementedException();
         }

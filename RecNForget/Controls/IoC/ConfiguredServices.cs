@@ -43,7 +43,7 @@ public class ConfiguredServices
     {
         //serviceCollection.AddSingleton<IActionService, ActionService>();
 
-        serviceCollection.AddSingleton<IAppSettingService, AppSettingService>();
+        serviceCollection.AddSingleton<IAppSettingService>(UserConfigurationService.Init());
         serviceCollection.AddSingleton<ISelectedFileService, SelectedFileService>();
         serviceCollection.AddSingleton<IAudioPlaybackService, AudioPlaybackService>();
         serviceCollection.AddSingleton<IApplicationHotkeyService, ApplicationHotkeyService>();
@@ -63,5 +63,6 @@ public class ConfiguredServices
         serviceCollection.AddTransient<SettingsWindow>();
 
         serviceCollection.AddTransient<AboutViewModel>();
+        serviceCollection.AddTransient<SettingsViewModel>();
     }
 }

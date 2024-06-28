@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace RecNForget.Services.Contracts
 {
@@ -58,6 +59,8 @@ namespace RecNForget.Services.Contracts
         string ExportOutputPath { get; set; }
 
         List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]");
+        void Persist();
+        Task PersistAsync();
         void RemoveAppConfigSettingFile();
 
         bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false);

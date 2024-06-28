@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using RecNForget.WPF.Services.Contracts;
 using RecNForget.Services.Contracts;
+using RecNForget.Services;
 
 namespace RecNForget
 {

@@ -6,7 +6,6 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Topmost="True"
         Style="{DynamicResource Settings_WindowStyle}"
         WindowStartupLocation="CenterOwner"
@@ -38,7 +37,7 @@
                 <TabItem Header="Hotkeys">
                     <StackPanel>
                         <local:HotkeySettingButton HorizontalAlignment="Stretch"
-                                                   SettingCaption="Toggle Record" SettingValue="{Binding Path=SettingService.HotKey_StartStopRecording, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=local:SettingsWindow}}" />
+                                                   SettingCaption="Toggle Record" SettingValue="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}" />
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Output">
@@ -47,12 +46,12 @@
                     Content="Recording Output"/>
                         
                         <local:StringSettingButton HorizontalAlignment="Stretch"
-                                                   SettingCaption="Output folder" SettingValue="{Binding Path=SettingService.OutputPath, Mode=TwoWay}"
+                                                   SettingCaption="Output folder" SettingValue="{Binding Path=OutputPath, Mode=TwoWay}"
                                                    d:SettingValue="C:\TargetPathToFile"
                                                    Click="Configure_OutputPath_Click"/>
                         
                         <local:StringSettingButton HorizontalAlignment="Stretch"
-                                                   SettingCaption="File name pattern" SettingValue="{Binding Path=SettingService.FilenamePrefix, Mode=TwoWay}"
+                                                   SettingCaption="File name pattern" SettingValue="{Binding Path=FilenamePrefix, Mode=TwoWay}"
                                                    d:SettingValue="RecNForget_"
                                                    Click="Configure_FileNamePattern_Click"/>
 
@@ -65,7 +64,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Content="Bitrate" Style="{DynamicResource SettingsCaption_Label}" VerticalAlignment="Center" />
-                            <ComboBox Grid.Column="1" Style="{DynamicResource DefaultDropDownStyle}" SelectedValuePath="Tag" SelectedValue="{Binding Path=SettingService.Mp3ExportBitrate, Mode=TwoWay}">
+                            <ComboBox Grid.Column="1" Style="{DynamicResource DefaultDropDownStyle}" SelectedValuePath="Tag" SelectedValue="{Binding Path=Mp3ExportBitrate, Mode=TwoWay}">
                                 <ComboBoxItem Content="32 Kbps">
                                     <ComboBoxItem.Tag>
                                         <sys:Int32>32</sys:Int32>
@@ -104,11 +103,11 @@
                             </ComboBox>
                         </Grid>
                         <local:StringSettingButton HorizontalAlignment="Stretch"
-                                                   SettingCaption="Export folder" SettingValue="{Binding Path=SettingService.ExportOutputPath, Mode=TwoWay}"
+                                                   SettingCaption="Export folder" SettingValue="{Binding Path=ExportOutputPath, Mode=TwoWay}"
                                                    d:SettingValue="C:\TargetPathToFile\Export"
-                                                   Click="Configure_OutputPath_Click"/>
+                                                   Click="Configure_ExportOutputPath_Click"/>
                         <CheckBox Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.PromptForExportFileName}">
+                        IsChecked="{Binding Path=PromptForExportFileName}">
                             prompt for exported file name
                         </CheckBox>
                     </StackPanel>
@@ -125,19 +124,19 @@
                             <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
                         </Grid.ColumnDefinitions>
                         <CheckBox Grid.Row="0" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
+                        IsChecked="{Binding Path=CheckForUpdateOnStart}" >
                             check for updates on start
                         </CheckBox>
                         <CheckBox Grid.Row="1" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.AutoStartWithWindows}" >
+                        IsChecked="{Binding Path=AutoStartWithWindows}" >
                             auto start
                         </CheckBox>
                         <CheckBox Grid.Row="2" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.AutoSelectLastRecording}" >
+                        IsChecked="{Binding Path=AutoSelectLastRecording}" >
                             auto select last recording
                         </CheckBox>
                         <CheckBox Grid.Row="3" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.AutoReplayAudioAfterRecording}">
+                        IsChecked="{Binding Path=AutoReplayAudioAfterRecording}">
                             auto replay last recording
                         </CheckBox>
                     </Grid>
@@ -152,11 +151,11 @@
                             <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
                         </Grid.ColumnDefinitions>
                         <CheckBox Grid.Row="0" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.ShowBalloonTipsForRecording}">
+                        IsChecked="{Binding Path=ShowBalloonTipsForRecording}">
                             toast messages on toggle record
                         </CheckBox>
                         <CheckBox Grid.Row="1" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.ShowTipsAtApplicationStart}">
+                        IsChecked="{Binding Path=ShowTipsAtApplicationStart}">
                             show tips on start
                         </CheckBox>
                     </Grid>
@@ -171,11 +170,11 @@
                             <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
                         </Grid.ColumnDefinitions>
                         <CheckBox Grid.Row="0" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.PlayAudioFeedBackMarkingStartAndStopRecording}">
+                        IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopRecording}">
                             sound on toggle record
                         </CheckBox>
                         <CheckBox Grid.Row="1" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        IsChecked="{Binding Path=SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying}">
+                        IsChecked="{Binding Path=PlayAudioFeedBackMarkingStartAndStopReplaying}">
                             sound on toggle play
                         </CheckBox>
                     </Grid>
