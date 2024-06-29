@@ -64,6 +64,7 @@ public class ConfiguredServices
 
         serviceCollection.AddSingleton<AboutViewModel>();
         serviceCollection.AddSingleton<MainViewModel>();
+        serviceCollection.AddSingleton<NewToApplicationViewModel>();
         serviceCollection.AddSingleton<SettingsViewModel>();
     }
 }

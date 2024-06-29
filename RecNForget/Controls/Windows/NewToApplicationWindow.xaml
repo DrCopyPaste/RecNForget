@@ -5,9 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
-        Topmost="True"
         Style="{DynamicResource DefaultWindowStyle}"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         WindowStartupLocation="CenterOwner"
         AllowsTransparency="True"
         Title="RecNForget - Quick Start">
@@ -35,12 +33,13 @@
             <Separator Style="{DynamicResource TransparentSeparator_Style}" />
 
             <local:StringSettingButton HorizontalAlignment="Stretch"
-                                                   SettingCaption="Output folder" SettingValue="{Binding Path=SettingService.OutputPath, Mode=TwoWay}"
-                                                   d:SettingValue="C:\TargetPathToFile"
-                                                   Click="Configure_OutputPath_Click"/>
+                SettingCaption="Output folder" SettingValue="{Binding Path=OutputFolder, Mode=TwoWay}"
+                d:SettingValue="C:\TargetPathToFile"
+                Click="Configure_OutputPath_Click" />
 
             <local:HotkeySettingButton HorizontalAlignment="Stretch"
-                                                   SettingCaption="Toggle Record" SettingValue="{Binding Path=SettingService.HotKey_StartStopRecording, Mode=TwoWay}" />
+                SettingCaption="Toggle Record" SettingValue="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"
+                RelayCommand="{Binding Path=UpdateToggleRecordingHotkeyCommand}"/>
 
             <Separator Style="{DynamicResource TransparentSeparator_Style}" />
             <Separator Style="{DynamicResource TransparentSeparator_Style}" />
@@ -54,7 +53,7 @@
             </Grid>
 
             <CheckBox  Style="{DynamicResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
+                    IsChecked="{Binding Path=CheckForUpdateOnStart}" >
                 check for updates on start
             </CheckBox>
 

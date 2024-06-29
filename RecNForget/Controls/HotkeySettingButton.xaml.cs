@@ -1,10 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RecNForget.Controls.IoC;
-using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
-using RecNForget.WPF.Services.Contracts;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,66 +7,38 @@ namespace RecNForget.Controls
     /// <summary>
     /// Interaction logic for HotkeySettingButton.xaml
     /// </summary>
-    public partial class HotkeySettingButton : UserControl, INotifyPropertyChanged
+    public partial class HotkeySettingButton : UserControl
     {
         public static readonly DependencyProperty SettingCaptionProperty =
             DependencyProperty.Register("SettingCaption", typeof(string), typeof(HotkeySettingButton), new PropertyMetadata(default(string)));
         public string SettingCaption
         {
             get { return (string)GetValue(SettingCaptionProperty); }
-            set { SetValue(SettingCaptionProperty, value); OnPropertyChanged(); }
+            set { SetValue(SettingCaptionProperty, value); }
         }
 
         public static readonly DependencyProperty SettingValueProperty =
             DependencyProperty.Register("SettingValue", typeof(string), typeof(HotkeySettingButton), new PropertyMetadata(default(string)));
 
-        private readonly IApplicationHotkeyService hotkeyService;
-        private readonly IActionService actionService;
-
         public string SettingValue
         {
             get { return (string)GetValue(SettingValueProperty); }
-            set
-            {
-                SetValue(SettingValueProperty, value);
-                OnPropertyChanged();
-            }
+            set { SetValue(SettingValueProperty, value); }
         }
 
         public HotkeySettingButton()
         {
             InitializeComponent();
-
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                this.actionService = new DesignerActionService();
-            }
-            else
-            {
-                this.hotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<IApplicationHotkeyService>();
-                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
-            }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public RelayCommand RelayCommand
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return (RelayCommand)GetValue(RelayCommandProperty); }
+            set { SetValue(RelayCommandProperty, value); }
         }
 
-        private void Click_Internal(object sender, RoutedEventArgs e)
-        {
-            var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey");
-
-            var parentWindow = Window.GetWindow(this);
-            dialog.Owner = parentWindow;
-
-            if (dialog.ShowDialog() == true)
-            {
-                SettingValue = dialog.HotkeysAppSetting;
-                this.hotkeyService.ResetAndReadHotkeysFromConfig();
-            }
-        }
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RelayCommandProperty =
+            DependencyProperty.Register("RelayCommand", typeof(RelayCommand), typeof(HotkeySettingButton), new PropertyMetadata(null));
     }
 }

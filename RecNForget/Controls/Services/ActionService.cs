@@ -462,7 +462,7 @@ namespace RecNForget.Controls.Services
                 dia.TrySetViewablePositionFromOwner(OwnerControl);
             }
 
-            dia.Show();
+            dia.ShowDialog();
         }
 
         public void ShowNewToVersionDialog(Version currentFileVersion, Version lastInstalledVersion)

@@ -37,7 +37,8 @@
                 <TabItem Header="Hotkeys">
                     <StackPanel>
                         <local:HotkeySettingButton HorizontalAlignment="Stretch"
-                                                   SettingCaption="Toggle Record" SettingValue="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}" />
+                                                   SettingCaption="Toggle Record" SettingValue="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"
+                                                   RelayCommand="{Binding Path=UpdateToggleRecordingHotkeyCommand}" />
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Output">

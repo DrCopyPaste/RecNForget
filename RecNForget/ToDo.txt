@@ -8,3 +8,7 @@ renew/ improve? copyright helper/ content helpers
 better place for lame mp3 dlls?
 viewmodel testing
 owners for dialogs if opened from viewmodels (pass as para?)
+stacked buttons ontop of each other (StringSettingsButton, others?)
+extra button in StringSettingsButton is useless now
+commands for StringSettingsButton
+ActionService for ALL actions?

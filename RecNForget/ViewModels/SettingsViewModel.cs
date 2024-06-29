@@ -2,36 +2,47 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using RecNForget.Controls;
+using RecNForget.Controls.Services;
 using RecNForget.Services.Contracts;
+using RecNForget.WPF.Services.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace RecNForget.ViewModels;
 
 public partial class SettingsViewModel : ObservableValidator
 {
+    private readonly IActionService actionService;
     private readonly IAppSettingService settingService;
     private readonly IApplicationHotkeyService hotkeyService;
 
-    public SettingsViewModel(IAppSettingService settingService, IApplicationHotkeyService hotkeyService)
+    public SettingsViewModel(IActionService actionService, IAppSettingService settingService, IApplicationHotkeyService hotkeyService)
     {
+        this.actionService = actionService;
         this.settingService = settingService;
         this.hotkeyService = hotkeyService;
     }
 
     [RelayCommand]
-    private void Configure_OutputPath_Click()
+    private void UpdateToggleRecordingHotkey()
     {
-        var dialog = new OpenFolderDialog();
-        if (!string.IsNullOrEmpty(OutputPath))
-        {
-            dialog.DefaultDirectory = OutputPath;
-        }
+        var dialog = new HotkeyPromptWindow("Configure start/stop recording hotkey");
+
+        var parentWindow = Window.GetWindow(new DependencyObject());
+        dialog.Owner = parentWindow;
 
         if (dialog.ShowDialog() == true)
         {
-            OutputPath = dialog.FolderName;
+            HotKey_StartStopRecording = dialog.HotkeysAppSetting;
+            hotkeyService.ResetAndReadHotkeysFromConfig();
         }
+    }
+
+    [RelayCommand]
+    private void Configure_OutputPath_Click()
+    {
+        actionService.ChangeOutputFolder();
     }
 
     [RelayCommand]

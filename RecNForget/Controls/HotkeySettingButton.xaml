@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
 >
     <Grid>
-        <Button Style="{DynamicResource BaseSettingButtonLayout}" Background="{DynamicResource Secondary_Brush}"
-                    HorizontalAlignment="Stretch" Click="Click_Internal">
+        <Button Style="{DynamicResource BaseSettingButtonLayout}" Background="{DynamicResource Secondary_Brush}" HorizontalAlignment="Stretch"
+                Command="{Binding RelayCommand, RelativeSource={RelativeSource AncestorType=local:HotkeySettingButton}}">
             <Grid
                         HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
 
                 <local:HotkeyDisplay Grid.Column="1" HotkeySettingString="{Binding SettingValue, RelativeSource={RelativeSource AncestorType=local:HotkeySettingButton}}" d:HotkeySettingString="Key=Pause; Win=False; Alt=True; Ctrl=True; Shift=False" HorizontalAlignment="Left"  />
 
-                <local:SvgImageButton1 Grid.Column="2" Style="{DynamicResource SvgChangeSettingButtonLayout}" Click="Click_Internal"/>
+                <local:SvgImageButton1 Grid.Column="2" Style="{DynamicResource SvgChangeSettingButtonLayout}" />
             </Grid>
         </Button>
     </Grid>
