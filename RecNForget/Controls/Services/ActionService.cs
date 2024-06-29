@@ -510,8 +510,8 @@ namespace RecNForget.Controls.Services
                 expirationTime: TimeSpan.FromSeconds(10),
                 onClick: () =>
                 {
-                    var quickTip = new QuickTipDialog(appSettingService, randomTip);
-
+                    var quickTip = ConfiguredServices.ServiceProvider.GetRequiredService<QuickTipDialog>();
+                    quickTip.SetQuickTip(randomTip);
                     quickTip.TrySetViewablePositionFromOwner(OwnerControl);
                     quickTip.Show();
                 });

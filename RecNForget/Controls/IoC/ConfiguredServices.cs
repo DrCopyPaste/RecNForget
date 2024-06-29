@@ -58,13 +58,14 @@ public class ConfiguredServices
         
         serviceCollection.AddTransient<NewToApplicationWindow>();
         //serviceCollection.AddSingleton<NewToVersionDialog>();
-        //serviceCollection.AddSingleton<QuickTipDialog>();
+        serviceCollection.AddTransient<QuickTipDialog>();
         //serviceCollection.AddSingleton<ReleaseInstallationDialog>();
         serviceCollection.AddTransient<SettingsWindow>();
 
         serviceCollection.AddSingleton<AboutViewModel>();
         serviceCollection.AddSingleton<MainViewModel>();
         serviceCollection.AddSingleton<NewToApplicationViewModel>();
+        serviceCollection.AddSingleton<QuickTipViewModel>();
         serviceCollection.AddSingleton<SettingsViewModel>();
     }
 }

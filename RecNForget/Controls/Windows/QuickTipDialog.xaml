@@ -9,7 +9,7 @@
         Style="{DynamicResource DefaultWindowStyle}"
         WindowStartupLocation="CenterOwner"
         AllowsTransparency="True"
-        Title="RecNForget - Things changed">
+        Title="Did you know?">
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
@@ -33,18 +33,18 @@
                 Text="Did you know?" />
                     <TextBlock  Style="{DynamicResource VersionName_TextBox_Style}"
                 VerticalAlignment="Center" HorizontalAlignment="Left"
-                Text="{Binding Path=FeatureCaption}" d:Text="This is a very important feature"/>
+                Text="{Binding FeatureCaption}" d:Text="This is a very important feature"/>
                     <Border Style="{DynamicResource DefaultControlBorderStyle}">
                         <ScrollViewer Style="{DynamicResource QuickTip_ScrollViewer_Style}">
                             <TextBlock Style="{DynamicResource CustomMessageBox_TextBlock_Style}"
-                        Text="{Binding Path=FeatureContents}"
+                        Text="{Binding FeatureContents}"
                         d:Text="Design Time only Text, this is just for shows. Notice how this wraps just as it should and the mere fact this text exists helps you in design time ;)"/>
                         </ScrollViewer>
                     </Border>
                 </StackPanel>
             </StackPanel>
             <CheckBox Style="{DynamicResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=SettingService.ShowTipsAtApplicationStart}">
+                    IsChecked="{Binding ShowTipsAtApplicationStart}">
                 show tips on start
             </CheckBox>
 
@@ -52,7 +52,7 @@
                 <local:SvgImageButton1 Style="{DynamicResource SvgLightBulbButton}"
                     HorizontalAlignment="Left"
                     ToolTip="Another useful tip please"
-                    Click="GenerateAnotherTip_Click"/>
+                    Command="{Binding GenerateRandomQuickTipCommand}" />
 
                 <local:SvgImageButton1 Style="{DynamicResource SvgAcceptButton}"
                     HorizontalAlignment="Right"

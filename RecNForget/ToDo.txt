@@ -12,3 +12,4 @@ stacked buttons ontop of each other (StringSettingsButton, others?)
 extra button in StringSettingsButton is useless now
 commands for StringSettingsButton
 ActionService for ALL actions?
+dialogs, topmost, viewposition, dragging and exiting (also via esc)

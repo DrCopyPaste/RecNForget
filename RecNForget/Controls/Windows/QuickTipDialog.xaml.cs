@@ -1,99 +1,29 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using RecNForget.Help;
+using RecNForget.ViewModels;
 using System.Windows;
 using System.Windows.Input;
-using RecNForget.Help;
-using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
 
 namespace RecNForget.Controls
 {
     /// <summary>
     /// Interaction logic for QuickTipDialog.xaml
     /// </summary>
-    public partial class QuickTipDialog : INotifyPropertyChanged
+    public partial class QuickTipDialog : Window
     {
-        private IAppSettingService settingService;
         private string featureCaption;
         private string featureContents;
 
-        public QuickTipDialog(IAppSettingService settingService, HelpFeature randomFeature)
+        public QuickTipDialog(QuickTipViewModel quickTipViewModel)
         {
-            DataContext = this;
             InitializeComponent();
+            DataContext = quickTipViewModel;
 
-            this.Title = "Did you know?";
-
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                SettingService = new DesignerAppSettingService();
-            }
-            else
-            {
-                SettingService = settingService;
-
-                this.KeyDown += Window_KeyDown;
-            }
-
-            SetContents(randomFeature);
+            this.KeyDown += Window_KeyDown;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public IAppSettingService SettingService
+        public void SetQuickTip(HelpFeature helpFeature)
         {
-            get
-            {
-                return settingService;
-            }
-
-            set
-            {
-                settingService = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string FeatureCaption
-        {
-            get
-            {
-                return featureCaption;
-            }
-
-            set
-            {
-                featureCaption = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string FeatureContents
-        {
-            get
-            {
-                return featureContents;
-            }
-
-            set
-            {
-                featureContents = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private void GenerateRandomTip()
-        {
-            HelpFeature randomFeature = HelpFeature.GetRandomFeature();
-            SetContents(randomFeature);
-        }
-
-        private void SetContents(HelpFeature randomFeature)
-        {
-            FeatureCaption = randomFeature.Title;
-            FeatureContents = randomFeature.HelpLinesAsString();
+            ((QuickTipViewModel)DataContext).SetFeatureCommand.Execute(helpFeature);
         }
 
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -102,11 +32,6 @@ namespace RecNForget.Controls
             {
                 this.Close();
             }
-        }
-
-        private void GenerateAnotherTip_Click(object sender, RoutedEventArgs e)
-        {
-            GenerateRandomTip();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -120,11 +45,6 @@ namespace RecNForget.Controls
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
