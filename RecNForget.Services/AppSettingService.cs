@@ -528,6 +528,8 @@ namespace RecNForget.Services
         public string RuntimeVersionString => ThisAssembly.AssemblyFileVersion;
         public string RuntimeInformalVersionString => ThisAssembly.AssemblyInformationalVersion;
 
+        public bool FirstApplicationStart => throw new NotImplementedException();
+
         public void RemoveAppConfigSettingFile()
         {
             // check if user config file exists
@@ -679,6 +681,11 @@ namespace RecNForget.Services
         }
 
         public Task PersistAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateConfigVersion()
         {
             throw new NotImplementedException();
         }

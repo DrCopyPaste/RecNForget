@@ -62,9 +62,6 @@ namespace RecNForget
 
             base.OnStartup(e);
 
-            // ensure AppConfig Values exist
-            bool firstTimeUser = appSettingService.RestoreDefaultAppConfigSetting(settingKey: null, overrideSetting: false);
-
             var hotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<IApplicationHotkeyService>();
 
             actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
@@ -74,29 +71,27 @@ namespace RecNForget
             mainWindow = ConfiguredServices.ServiceProvider.GetRequiredService<MainWindow>();
             actionService.OwnerControl = mainWindow;
 
-            HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService, firstTimeUser);
+            HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService);
         }
 
-        private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService, bool firstTimeUser)
+        private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService)
         {
             if (appSettingService.CheckForUpdateOnStart)
             {
                 Task.Run(() => { actionService.CheckForUpdatesAsync(showMessages: false); });
             }
 
-            var currentFileVersion = new Version(ThisAssembly.AssemblyFileVersion);
-            Version lastInstalledVersion = appSettingService.LastInstalledVersion;
-
-            appSettingService.LastInstalledVersion = currentFileVersion;
+            var previouslyInstalledVersion = appSettingService.LastInstalledVersion;
             hotkeyService.ResetAndReadHotkeysFromConfig();
 
-            if (firstTimeUser)
+            if (appSettingService.FirstApplicationStart)
             {
                 actionService.ShowNewToApplicationWindow();
             }
-            else if (currentFileVersion.CompareTo(lastInstalledVersion) > 0)
+            else if (appSettingService.UpdateConfigVersion())
             {
-                actionService.ShowNewToVersionDialog(currentFileVersion, lastInstalledVersion);
+                appSettingService.Persist();
+                actionService.ShowNewToVersionDialog(appSettingService.LastInstalledVersion, previouslyInstalledVersion);
             }
             else if (appSettingService.ShowTipsAtApplicationStart)
             {

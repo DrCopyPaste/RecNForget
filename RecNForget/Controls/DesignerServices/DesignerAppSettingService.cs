@@ -161,6 +161,8 @@ namespace RecNForget.Services.Designer
         public string RecordingTimerStopAfterMax { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string ExportOutputPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        public bool FirstApplicationStart => throw new NotImplementedException();
+
         public void RemoveAppConfigSettingFile() => throw new NotImplementedException();
 
         public bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false) => throw new NotImplementedException();
@@ -176,6 +178,11 @@ namespace RecNForget.Services.Designer
         }
 
         public Task PersistAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateConfigVersion()
         {
             throw new NotImplementedException();
         }

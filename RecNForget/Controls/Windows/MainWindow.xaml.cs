@@ -58,7 +58,6 @@ namespace RecNForget.Controls
                 this.hotkeyService = hotkeyService;
                 SelectedFileService = selectedFileService;
                 SettingService = settingService;
-                SettingService.PropertyChanged += SettingService_PropertyChanged;
 
                 AudioRecordingService = audioRecordingService;
                 AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
@@ -120,7 +119,6 @@ namespace RecNForget.Controls
 
         ~MainWindow()
         {
-            SettingService.PropertyChanged -= SettingService_PropertyChanged;
             AudioPlaybackService.PropertyChanged -= AudioPlaybackService_PropertyChanged;
             AudioRecordingService.PropertyChanged -= AudioRecordingService_PropertyChanged;
         }

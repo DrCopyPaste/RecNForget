@@ -1,10 +1,9 @@
 ﻿using RecNForget.Services.Contracts;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Reflection.Metadata;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace RecNForget.Services;
@@ -13,6 +12,14 @@ public class UserConfigurationService : IAppSettingService
 {
     private static readonly string configurationFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), nameof(RecNForget), "user.config.json");
     private readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true };
+
+    public UserConfigurationService() : this(firstStart: false)
+    { }
+
+    public UserConfigurationService(bool firstStart = true)
+    {
+        FirstApplicationStart = firstStart;
+    }
 
     public static UserConfigurationService Init()
     {
@@ -27,8 +34,7 @@ public class UserConfigurationService : IAppSettingService
         using var sr = new StreamReader(fileInfo.FullName);
         var fileContents = sr.ReadToEnd();
 
-        if (fileContents == string.Empty) return new UserConfigurationService();
-
+        if (fileContents == string.Empty) return new UserConfigurationService(firstStart: true);
         return JsonSerializer.Deserialize<UserConfigurationService>(fileContents);
     }
 
@@ -60,7 +66,7 @@ public class UserConfigurationService : IAppSettingService
     public bool WindowAlwaysOnTop { get; set; } = false;
     public bool ShowBalloonTipsForRecording { get; set; } = true;
     public bool ShowTipsAtApplicationStart { get; set; } = true;
-    public Version LastInstalledVersion { get; set; } = new Version(1, 3, 3, 7);
+    public Version LastInstalledVersion { get; set; } = new Version(0, 7, 0, 0);
     public double? MainWindowLeftX { get; set; } = 10;
     public double? MainWindowTopY { get; set; } = 10;
     public bool OutputPathControlVisible { get; set; } = false;
@@ -78,14 +84,46 @@ public class UserConfigurationService : IAppSettingService
 
     #endregion
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    [JsonIgnore]
+    public bool FirstApplicationStart { get; private set; } = false;
 
-    public string RuntimeVersionString => "0.8.15";
+    [JsonIgnore]
+    public string RuntimeVersionString => "0.3.0";
 
-    public string RuntimeInformalVersionString => "0.8.15+abcdef123";
+    [JsonIgnore]
+    public string RuntimeInformalVersionString => "0.3.0+abcdef123";
     public List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]")
     {
-        return new List<string>();
+        List<string> keys = new List<string>();
+
+        // modifier keys
+        if (setting.Contains("Shift=True"))
+        {
+            keys.Add(keyStart + "Shift" + keyEnd);
+        }
+
+        if (setting.Contains("Ctrl=True"))
+        {
+            keys.Add(keyStart + "Ctrl" + keyEnd);
+        }
+
+        if (setting.Contains("Alt=True"))
+        {
+            keys.Add(keyStart + "Alt" + keyEnd);
+        }
+
+        if (setting.Contains("Win=True"))
+        {
+            keys.Add(keyStart + "Win" + keyEnd);
+        }
+
+        var actualKey = setting.Split(';')[0].Replace("Key=", string.Empty);
+        if (actualKey != string.Empty && actualKey != "None")
+        {
+            keys.Add(keyStart + actualKey + keyEnd);
+        }
+
+        return keys;
     }
 
     public void RemoveAppConfigSettingFile()
@@ -96,5 +134,15 @@ public class UserConfigurationService : IAppSettingService
     public bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false)
     {
         return true;
+    }
+
+    public bool UpdateConfigVersion()
+    {
+        var previouslyInstalledVersion = LastInstalledVersion;
+        var currentFileVersion = new Version(ThisAssembly.AssemblyFileVersion);
+
+        LastInstalledVersion = currentFileVersion;
+
+        return (currentFileVersion.CompareTo(previouslyInstalledVersion) > 0);
     }
 }

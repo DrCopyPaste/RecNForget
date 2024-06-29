@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RecNForget.Services.Contracts
 {
-    public interface IAppSettingService : INotifyPropertyChanged
+    public interface IAppSettingService
     {
         string RuntimeVersionString { get; }
         string RuntimeInformalVersionString { get; }
@@ -57,12 +57,12 @@ namespace RecNForget.Services.Contracts
         string RecordingTimerStartAfterMax { get; set; }
         string RecordingTimerStopAfterMax { get; set; }
         string ExportOutputPath { get; set; }
+        bool FirstApplicationStart { get; }
 
         List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]");
         void Persist();
         Task PersistAsync();
         void RemoveAppConfigSettingFile();
-
-        bool RestoreDefaultAppConfigSetting(string settingKey = null, bool overrideSetting = false);
+        bool UpdateConfigVersion();
     }
 }
