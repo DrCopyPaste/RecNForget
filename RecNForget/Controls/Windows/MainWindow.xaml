@@ -29,8 +29,12 @@
 
             <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
                 <StackPanel>
-                    <local:OutputPathControl
-                            x:Name="OutputPathControl" />
+                    <local:OutputPathControl x:Name="OutputPathControl"
+                        ProjectedOutputPathIncludingFilePattern="{Binding ProjectedOutputPathIncludingFilePattern}"
+                        d:ProjectedOutputPathIncludingFilePattern="C:\Path\To\File(Date)_(Guid).ext"
+                        UpdateFileNamePatternCommand="{Binding UpdateFileNamePatternCommand}"
+                        UpdateOutputFolderCommand="{Binding UpdateOutputFolderCommand}"
+                        />
                     <Separator x:Name="OutputPathControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:SelectedFileControl
                             x:Name="SelectedFileControl" />

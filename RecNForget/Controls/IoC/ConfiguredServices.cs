@@ -63,6 +63,7 @@ public class ConfiguredServices
         serviceCollection.AddTransient<SettingsWindow>();
 
         serviceCollection.AddTransient<AboutViewModel>();
+        serviceCollection.AddTransient<MainViewModel>();
         serviceCollection.AddTransient<SettingsViewModel>();
     }
 }

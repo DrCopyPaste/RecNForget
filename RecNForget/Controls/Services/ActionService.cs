@@ -58,6 +58,7 @@ namespace RecNForget.Controls.Services
             if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
             {
                 appSettingService.FilenamePrefix = tempDialog.PromptContent;
+                appSettingService.Persist();
             }
         }
 
@@ -77,6 +78,8 @@ namespace RecNForget.Controls.Services
             if (result)
             {
                 appSettingService.OutputPath = dialog.FolderName;
+                appSettingService.Persist();
+
                 selectedFileService.SelectLatestFile();
             }
         }

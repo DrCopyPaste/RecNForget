@@ -1,9 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 using Notifications.Wpf.Core;
-using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
+using RecNForget.ViewModels;
 using RecNForget.WPF.Services.Contracts;
 using System;
 using System.ComponentModel;
@@ -34,6 +33,7 @@ namespace RecNForget.Controls
         private readonly NotificationManager _notificationManager = new NotificationManager();
 
         public MainWindow(
+            MainViewModel mainViewModel,
             IAudioRecordingService audioRecordingService,
             IActionService actionService,
             IApplicationHotkeyService hotkeyService,
@@ -41,7 +41,7 @@ namespace RecNForget.Controls
             IAudioPlaybackService audioPlaybackService,
             ISelectedFileService selectedFileService)
         {
-            DataContext = this;
+            DataContext = mainViewModel;
             InitializeComponent();
 
             if (DesignerProperties.GetIsInDesignMode(this))

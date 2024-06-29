@@ -1,6 +1,7 @@
 add Signature!?!
 
 replace overly specialized (and service bound) controls (simple string selection, file selection, folder selection, etc.)
+singleton viewmodels
 try migrate old settings from appsettingsservice to new userconfigurationservice settings on start
 getting updates should be cancellable
 renew/ improve? copyright helper/ content helpers

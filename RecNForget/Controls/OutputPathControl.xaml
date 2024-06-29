@@ -9,21 +9,22 @@
         <StackPanel Orientation="Vertical">
             <DockPanel>
                 <Label Style="{DynamicResource ControlLabelStyle}"
-                    Content="Output Path"/>
+                Content="Output Path"/>
             </DockPanel>
             <DockPanel>
                 <TextBox Style="{DynamicResource MainWindowTextBoxStyle}"
-                    Text="{Binding Path=OutputPathWithFilePattern, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                    d:Text="C:\YourPath\yourFilePattern.wav"
-                    ToolTip="{Binding Path=OutputPathWithFilePattern, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ToolTipService.ShowOnDisabled="True" />
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <local:SvgImageButton1 Grid.Row="1" Grid.Column="1" Style="{DynamicResource SvgChangeFilePatternMiniButtonLayout}"
-                    ToolTip="change output file name pattern"
-                    Click="ChangeFileNamePatternButton_Clicked"/>
+                Text="{Binding Path=ProjectedOutputPathIncludingFilePattern, RelativeSource={RelativeSource FindAncestor,AncestorType=local:OutputPathControl}}"
+                d:Text="C:\YourPath\yourFilePattern.wav"
+                ToolTip="{Binding Path=ProjectedOutputPathIncludingFilePattern, RelativeSource={RelativeSource FindAncestor,AncestorType=local:OutputPathControl}}" ToolTipService.ShowOnDisabled="True" />
 
-                    <local:SvgImageButton1 Grid.Row="1" Grid.Column="2" Style="{DynamicResource SvgChangeOutputFolderMiniButtonLayout}"
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <local:SvgImageButton1 Style="{DynamicResource SvgChangeFilePatternMiniButtonLayout}"
+                    ToolTip="change output file name pattern"
+                    Command="{Binding Path=UpdateFileNamePatternCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=local:OutputPathControl}}" />
+
+                    <local:SvgImageButton1 Style="{DynamicResource SvgChangeOutputFolderMiniButtonLayout}"
                     ToolTip="change output folder"
-                    Click="ChangeOutputFolderButton_Clicked"/>
+                    Command="{Binding Path=UpdateOutputFolderCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=local:OutputPathControl}}" />
                 </StackPanel>
             </DockPanel>
         </StackPanel>
