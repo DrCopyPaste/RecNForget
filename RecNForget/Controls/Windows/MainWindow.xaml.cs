@@ -28,8 +28,6 @@ namespace RecNForget.Controls
         private IAudioPlaybackService audioPlaybackService = null;
         private ISelectedFileService selectedFileService = null;
 
-        private string taskBar_ProgressState = "None";
-
         private readonly NotificationManager _notificationManager = new NotificationManager();
 
         public MainWindow(
@@ -185,20 +183,6 @@ namespace RecNForget.Controls
             }
         }
 
-        public string TaskBar_ProgressState
-        {
-            get
-            {
-                return taskBar_ProgressState;
-            }
-
-            set
-            {
-                taskBar_ProgressState = value;
-                OnPropertyChanged();
-            }
-        }
-
         protected override void OnClosing(CancelEventArgs e)
         {
             SettingService.MainWindowLeftX = this.Left;
@@ -237,7 +221,7 @@ namespace RecNForget.Controls
                         }
 
                         AudioPlaybackService.KillAudio(reset: true);
-                        TaskBar_ProgressState = "Error";
+                        ((MainViewModel)DataContext).TaskBar_ProgressState = "Error";
                     }
                     else
                     {
@@ -259,7 +243,7 @@ namespace RecNForget.Controls
                             actionService.TogglePlayPauseAudio();
                         }
 
-                        TaskBar_ProgressState = "None";
+                        ((MainViewModel)DataContext).TaskBar_ProgressState = "None";
 
                         if (SettingService.ShowBalloonTipsForRecording)
                         {
@@ -299,7 +283,7 @@ namespace RecNForget.Controls
             {
                 case nameof(AudioPlaybackService.Stopped):
                 {
-                    TaskBar_ProgressState = AudioPlaybackService.Stopped || AudioRecordingService.CurrentlyRecording ? "None" : "Normal";
+                    ((MainViewModel)DataContext).TaskBar_ProgressState = AudioPlaybackService.Stopped || AudioRecordingService.CurrentlyRecording ? "None" : "Normal";
                     break;
                 }
             }

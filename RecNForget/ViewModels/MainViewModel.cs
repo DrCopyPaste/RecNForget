@@ -17,8 +17,12 @@ public partial class MainViewModel : ObservableValidator
         this.appSettingService = appSettingService;
         this.audioRecordingService = audioRecordingService;
 
+        TaskBar_ProgressState = "None";
         ProjectedOutputPathIncludingFilePattern = audioRecordingService.GetTargetPathTemplateString();
     }
+
+    [ObservableProperty]
+    private string taskBar_ProgressState;
 
     [ObservableProperty]
     private string projectedOutputPathIncludingFilePattern;
