@@ -62,8 +62,8 @@ public class ConfiguredServices
         //serviceCollection.AddSingleton<ReleaseInstallationDialog>();
         serviceCollection.AddTransient<SettingsWindow>();
 
-        serviceCollection.AddTransient<AboutViewModel>();
-        serviceCollection.AddTransient<MainViewModel>();
-        serviceCollection.AddTransient<SettingsViewModel>();
+        serviceCollection.AddSingleton<AboutViewModel>();
+        serviceCollection.AddSingleton<MainViewModel>();
+        serviceCollection.AddSingleton<SettingsViewModel>();
     }
 }
