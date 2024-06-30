@@ -14,4 +14,10 @@ commands for StringSettingsButton
 ActionService for ALL actions?
 dialogs, topmost, viewposition, dragging and exiting (also via esc)
 
+timing control looks different design time (doubled numbers?)
+
 rethink designtime services/viewmodels?
+
+IsEnabledCondition1/IsEnabledCondition2 should be not needed when using viewmodels
+
+fix stylechanges for playpause- and togglerecord-buttons (with glyph icons?)

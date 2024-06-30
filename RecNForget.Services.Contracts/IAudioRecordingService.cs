@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
+﻿using RecNForget.Services.Contracts.Events;
+using System;
+using System.ComponentModel;
 using System.Windows;
 
 namespace RecNForget.Services.Contracts
 {
-    public interface IAudioRecordingService : INotifyPropertyChanged
+    public interface IAudioRecordingService
     {
         string CurrentRecordingStartAfterTimer { get; set; }
         string CurrentRecordingStopAfterTimer { get; set; }
@@ -16,6 +18,8 @@ namespace RecNForget.Services.Contracts
         bool CurrentlyRecording { get; }
 
         bool CurrentlyNotRecording { get; }
+
+        event EventHandler<AudioRecordingServiceEventArgs> AudioRecordingStateChanged;
 
         // starts or stops recording according to CurrentlyRecording state
         void ToggleRecording();

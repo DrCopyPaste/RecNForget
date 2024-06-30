@@ -1,10 +1,10 @@
-﻿using System;
+﻿using NAudio.Wave;
+using RecNForget.Services.Contracts;
+using RecNForget.Services.Contracts.Events;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
-using NAudio.Wave;
-using RecNForget.Services.Contracts;
 
 namespace RecNForget.Services
 {
@@ -22,6 +22,16 @@ namespace RecNForget.Services
             filePathList = new List<string>();
         }
 
+        public event EventHandler<AudioPlaybackServiceEventArgs> AudioPlaybackChanged;
+        protected virtual void OnAudioPlaybackChanged(AudioPlaybackServiceEventArgs e)
+        {
+            EventHandler<AudioPlaybackServiceEventArgs> handler = AudioPlaybackChanged;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string ReplayStartAudioFeedbackPath => Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "playbackStart.wav");
@@ -31,14 +41,6 @@ namespace RecNForget.Services
         public string RecordStartAudioFeedbackPath => Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "startRec.wav");
 
         public string RecordStopAudioFeedbackPath => Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "Sounds", "stopRec.wav");
-
-        public bool Paused => PlaybackState == PlaybackState.Paused;
-
-        public bool Playing => PlaybackState == PlaybackState.Playing;
-
-        public bool PlayingOrPaused => Paused || Playing;
-
-        public bool Stopped => PlaybackState == PlaybackState.Stopped;
 
         public PlaybackState PlaybackState => audioOutputDevice == null ? PlaybackState.Stopped : audioOutputDevice.PlaybackState;
 
@@ -67,8 +69,7 @@ namespace RecNForget.Services
                     if (InitTitle(filePathList[currentPlayIndex]))
                     {
                         audioOutputDevice.Play();
-                        UpdateProperties();
-
+                        OnAudioPlaybackChanged(new AudioPlaybackServiceEventArgs(PlaybackState));
                         return true;
                     }
                     else
@@ -80,12 +81,11 @@ namespace RecNForget.Services
             else if (audioOutputDevice.PlaybackState == PlaybackState.Paused)
             {
                 audioOutputDevice.Play();
-                UpdateProperties();
-
+                OnAudioPlaybackChanged(new AudioPlaybackServiceEventArgs(PlaybackState));
                 return true;
             }
 
-            UpdateProperties();
+            OnAudioPlaybackChanged(new AudioPlaybackServiceEventArgs(PlaybackState));
 
             return false;
         }
@@ -93,14 +93,14 @@ namespace RecNForget.Services
         public void Pause()
         {
             audioOutputDevice.Pause();
-            UpdateProperties();
+            OnAudioPlaybackChanged(new AudioPlaybackServiceEventArgs(PlaybackState));
         }
 
         public void Stop()
         {
             audioOutputDevice?.Stop();
             KillAudio(reset: true);
-            UpdateProperties();
+            OnAudioPlaybackChanged(new AudioPlaybackServiceEventArgs(PlaybackState));
         }
 
         public void KillAudio(bool reset = false)
@@ -122,19 +122,6 @@ namespace RecNForget.Services
                 currentPlayIndex = 0;
                 filePathList.Clear();
             }
-        }
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void UpdateProperties()
-        {
-            OnPropertyChanged(nameof(Playing));
-            OnPropertyChanged(nameof(PlayingOrPaused));
-            OnPropertyChanged(nameof(Stopped));
-            OnPropertyChanged(nameof(Paused));
         }
 
         private bool InitTitle(string titlePath)

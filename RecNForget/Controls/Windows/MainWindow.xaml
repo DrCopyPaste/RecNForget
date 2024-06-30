@@ -48,7 +48,19 @@
                             x:Name="RecordingTimerControl"/>
                     <Separator x:Name="RecordingTimerControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:RecordingAndPlaybackControl
-                            x:Name="RecordingAndPlaybackControl"/>
+                        SkipPrevButtonEnabled="{Binding SkipPrevButtonEnabled}"
+                        PlayPauseButtonEnabled="{Binding PlayPauseButtonEnabled}"
+                        StopButtonEnabled="{Binding StopButtonEnabled}"
+                        SkipNextButtonEnabled="{Binding SkipNextButtonEnabled}"
+                        RecordButtonEnabled="{Binding RecordButtonEnabled}"
+                        
+                        SelectInExplorerCommand="{Binding SelectInExplorerCommand}"
+                        SkipPrevCommand="{Binding SelectPreviousFileCommand}"
+                        PlayPauseCommand="{Binding TogglePlaySelectedFileCommand}"
+                        StopCommand="{Binding StopPlayingCommand}"
+                        SkipNextCommand="{Binding SelectNextFileCommand}"
+                        ToggleRecordCommand="{Binding ToggleRecordingCommand}"
+                        x:Name="RecordingAndPlaybackControl"/>
                 </StackPanel>
             </Border>
         </StackPanel>

@@ -1,10 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RecNForget.Controls.IoC;
-using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
-using RecNForget.WPF.Services.Contracts;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,156 +8,121 @@ namespace RecNForget.Controls
     /// <summary>
     /// Interaction logic for RecordingAndPlaybackControl.xaml
     /// </summary>
-    public partial class RecordingAndPlaybackControl : UserControl, INotifyPropertyChanged
+    public partial class RecordingAndPlaybackControl : UserControl
     {
-        private readonly IActionService actionService = null;
-        private readonly IAppSettingService appSettingService = null;
-        private IAudioPlaybackService audioPlaybackService = null;
-        private IAudioRecordingService audioRecordingService;
-        private ISelectedFileService selectedFileService = null;
-
         public RecordingAndPlaybackControl()
         {
-            DataContext = this;
             InitializeComponent();
-
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                this.actionService = new DesignerActionService();
-                this.appSettingService = new DesignerAppSettingService();
-
-                AudioPlaybackService = new DesignerAudioPlaybackService();
-                AudioRecordingService = new DesignerAudioRecordingService();
-                SelectedFileService = new DesignerSelectedFileService();
-            }
-            else
-            {
-                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
-                this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
-                AudioPlaybackService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioPlaybackService>();
-                AudioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
-                SelectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
-
-                AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
-                AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
-            }
         }
 
-        ~RecordingAndPlaybackControl()
+        public RelayCommand SelectInExplorerCommand
         {
-            AudioPlaybackService.PropertyChanged -= AudioPlaybackService_PropertyChanged;
-            AudioRecordingService.PropertyChanged -= AudioRecordingService_PropertyChanged;
+            get { return (RelayCommand)GetValue(SelectInExplorerCommandProperty); }
+            set { SetValue(SelectInExplorerCommandProperty, value); }
         }
 
-        public IAudioRecordingService AudioRecordingService
+        // Using a DependencyProperty as the backing store for SelectInExplorerCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectInExplorerCommandProperty =
+            DependencyProperty.Register("SelectInExplorerCommand", typeof(RelayCommand), typeof(RecordingAndPlaybackControl), new PropertyMetadata(null));
+
+        public RelayCommand SkipPrevCommand
         {
-            get
-            {
-                return audioRecordingService;
-            }
-
-            set
-            {
-                audioRecordingService = value;
-                OnPropertyChanged();
-            }
+            get { return (RelayCommand)GetValue(SkipPrevCommandProperty); }
+            set { SetValue(SkipPrevCommandProperty, value); }
         }
 
-        public ISelectedFileService SelectedFileService
+        // Using a DependencyProperty as the backing store for SkipPrevCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SkipPrevCommandProperty =
+            DependencyProperty.Register("SkipPrevCommand", typeof(RelayCommand), typeof(RecordingAndPlaybackControl), new PropertyMetadata(null));
+
+        public RelayCommand PlayPauseCommand
         {
-            get
-            {
-                return selectedFileService;
-            }
-
-            set
-            {
-                selectedFileService = value;
-                OnPropertyChanged();
-            }
+            get { return (RelayCommand)GetValue(PlayPauseCommandProperty); }
+            set { SetValue(PlayPauseCommandProperty, value); }
         }
 
-        public IAudioPlaybackService AudioPlaybackService
+        // Using a DependencyProperty as the backing store for PlayPauseCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PlayPauseCommandProperty =
+            DependencyProperty.Register("PlayPauseCommand", typeof(RelayCommand), typeof(RecordingAndPlaybackControl), new PropertyMetadata(null));
+
+        public RelayCommand StopCommand
         {
-            get
-            {
-                return audioPlaybackService;
-            }
-
-            set
-            {
-                audioPlaybackService = value;
-                OnPropertyChanged();
-            }
+            get { return (RelayCommand)GetValue(StopCommandProperty); }
+            set { SetValue(StopCommandProperty, value); }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        // Using a DependencyProperty as the backing store for StopCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StopCommandProperty =
+            DependencyProperty.Register("StopCommand", typeof(RelayCommand), typeof(RecordingAndPlaybackControl), new PropertyMetadata(null));
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public RelayCommand SkipNextCommand
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return (RelayCommand)GetValue(SkipNextCommandProperty); }
+            set { SetValue(SkipNextCommandProperty, value); }
         }
 
-        private void AudioRecordingService_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        // Using a DependencyProperty as the backing store for SkipNextCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SkipNextCommandProperty =
+            DependencyProperty.Register("SkipNextCommand", typeof(RelayCommand), typeof(RecordingAndPlaybackControl), new PropertyMetadata(null));
+
+        public RelayCommand ToggleRecordCommand
         {
-            switch (e.PropertyName)
-            {
-                case nameof(AudioRecordingService.CurrentlyRecording):
-                {
-                    if (AudioRecordingService.CurrentlyRecording)
-                    {
-                        RecordButton.Style = (Style)FindResource("SvgStopRecordButton");
-                    }
-                    else
-                    {
-                        RecordButton.Style = (Style)FindResource("SvgRecordButton");
-                    }
-
-                    break;
-                }
-            }
+            get { return (RelayCommand)GetValue(ToggleRecordCommandProperty); }
+            set { SetValue(ToggleRecordCommandProperty, value); }
         }
 
-        private void AudioPlaybackService_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        // Using a DependencyProperty as the backing store for ToggleRecordCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ToggleRecordCommandProperty =
+            DependencyProperty.Register("ToggleRecordCommand", typeof(RelayCommand), typeof(RecordingAndPlaybackControl), new PropertyMetadata(null));
+
+        public bool SkipPrevButtonEnabled
         {
-            switch (e.PropertyName)
-            {
-                case nameof(AudioPlaybackService.Paused):
-                {
-                    TogglePlaySelectedFileButton.Style = AudioPlaybackService.Playing && AudioRecordingService.CurrentlyNotRecording ? (Style)FindResource("SvgPauseTrackButton") : (Style)FindResource("SvgPlayTrackButton");
-                    break;
-                }
-            }
+            get { return (bool)GetValue(SkipPrevButtonEnabledProperty); }
+            set { SetValue(SkipPrevButtonEnabledProperty, value); }
         }
 
-        private void OpenOutputFolder_Click(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for SkipPrevButtonEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SkipPrevButtonEnabledProperty =
+            DependencyProperty.Register("SkipPrevButtonEnabled", typeof(bool), typeof(RecordingAndPlaybackControl), new PropertyMetadata(false));
+
+        public bool PlayPauseButtonEnabled
         {
-            actionService.OpenOutputFolderInExplorer();
+            get { return (bool)GetValue(PlayPauseButtonEnabledProperty); }
+            set { SetValue(PlayPauseButtonEnabledProperty, value); }
         }
 
-        private void StopReplayLastRecording_Click(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for PlayPauseButtonEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PlayPauseButtonEnabledProperty =
+            DependencyProperty.Register("PlayPauseButtonEnabled", typeof(bool), typeof(RecordingAndPlaybackControl), new PropertyMetadata(false));
+
+        public bool StopButtonEnabled
         {
-            actionService.StopPlayingSelectedFile();
+            get { return (bool)GetValue(StopButtonEnabledProperty); }
+            set { SetValue(StopButtonEnabledProperty, value); }
         }
 
-        private void SkipPrevButton_Click(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for StopButtonEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StopButtonEnabledProperty =
+            DependencyProperty.Register("StopButtonEnabled", typeof(bool), typeof(RecordingAndPlaybackControl), new PropertyMetadata(false));
+
+        public bool SkipNextButtonEnabled
         {
-            actionService.SelectPreviousFile();
+            get { return (bool)GetValue(SkipNextButtonEnabledProperty); }
+            set { SetValue(SkipNextButtonEnabledProperty, value); }
         }
 
-        private void SkipNextButton_Click(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for SkipNextButtonEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SkipNextButtonEnabledProperty =
+            DependencyProperty.Register("SkipNextButtonEnabled", typeof(bool), typeof(RecordingAndPlaybackControl), new PropertyMetadata(false));
+
+        public bool RecordButtonEnabled
         {
-            actionService.SelectNextFile();
+            get { return (bool)GetValue(RecordButtonEnabledProperty); }
+            set { SetValue(RecordButtonEnabledProperty, value); }
         }
 
-        private void ReplayLastRecording_Click(object sender, RoutedEventArgs e)
-        {
-            actionService.TogglePlayPauseSelectedFile();
-        }
-
-        private void RecordButton_Click(object sender, RoutedEventArgs e)
-        {
-            actionService.ToggleStartStopRecording();
-        }
+        // Using a DependencyProperty as the backing store for RecordButtonEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RecordButtonEnabledProperty =
+            DependencyProperty.Register("RecordButtonEnabled", typeof(bool), typeof(RecordingAndPlaybackControl), new PropertyMetadata(false));
     }
 }

@@ -2,12 +2,14 @@
 using System.ComponentModel;
 using NAudio.Wave;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Contracts.Events;
 
 namespace RecNForget.Services.Designer
 {
     public class DesignerAudioPlaybackService : IAudioPlaybackService
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<AudioPlaybackServiceEventArgs> AudioPlaybackChanged;
 
         public bool Paused => false;
 

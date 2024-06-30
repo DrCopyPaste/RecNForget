@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Contracts.Events;
 
 namespace RecNForget.Services.Designer
 {
@@ -20,6 +21,7 @@ namespace RecNForget.Services.Designer
         public bool TimerForRecordingStopAfterNotRunning { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<AudioRecordingServiceEventArgs> AudioRecordingStateChanged;
 
         public string GetTargetPathTemplateString() => @"C:\imaginary\Path\demo(guid).wav";
 

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Threading;
+using NAudio.Wave;
 using PressingIssue.Services.Contracts;
 using RecNForget.Services.Contracts;
 using RecNForget.WPF.Services.Contracts;
@@ -44,7 +45,7 @@ namespace RecNForget.Services
             // hotkey action should not make hotkeyservice/hook wait
             globalHotkeyService.AddOrUpdateOnReleaseHotkey(
                 PressedKeysInfo.FromString(appSettingService.HotKey_StartStopRecording),
-                () => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } });
+                () => { if (audioPlaybackService.PlaybackState == PlaybackState.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } });
             //() =>
             //{
             //    var task = Task.Run(() => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } });

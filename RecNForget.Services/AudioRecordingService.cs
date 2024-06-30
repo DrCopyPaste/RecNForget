@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Threading;
 using NAudio.Wave;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Contracts.Events;
 
 namespace RecNForget.Services
 {
@@ -41,12 +42,22 @@ namespace RecNForget.Services
 
             CurrentlyRecording = false;
             CurrentlyNotRecording = true;
-            UpdateProperties();
+            OnAudioRecordingStateChanged(new AudioRecordingServiceEventArgs(isRecording: false));
 
             startAfterDispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             startAfterDispatcherTimer.Tick += StartAfter_DispatcherTimer_Tick;
             stopAfterdispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             stopAfterdispatcherTimer.Tick += StopAfter_DispatcherTimer_Tick;
+        }
+
+        public event EventHandler<AudioRecordingServiceEventArgs> AudioRecordingStateChanged;
+        protected virtual void OnAudioRecordingStateChanged(AudioRecordingServiceEventArgs e)
+        {
+            EventHandler<AudioRecordingServiceEventArgs> handler = AudioRecordingStateChanged;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -257,7 +268,7 @@ namespace RecNForget.Services
         {
             CurrentlyRecording = true;
             CurrentlyNotRecording = false;
-            UpdateProperties();
+            OnAudioRecordingStateChanged(new AudioRecordingServiceEventArgs(isRecording: true));
 
             FileInfo file;
             do
@@ -294,7 +305,7 @@ namespace RecNForget.Services
 
                 LastFileName = CurrentFileName;
                 CurrentFileName = string.Empty;
-                UpdateProperties();
+                OnAudioRecordingStateChanged(new AudioRecordingServiceEventArgs(isRecording: false));
             };
 
             // Start audio recording !
@@ -349,12 +360,6 @@ namespace RecNForget.Services
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void UpdateProperties()
-        {
-            OnPropertyChanged(nameof(CurrentlyNotRecording));
-            OnPropertyChanged(nameof(CurrentlyRecording));
         }
     }
 }

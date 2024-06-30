@@ -10,29 +10,33 @@
             <UniformGrid Rows="1">
                 <local:SvgImageButton1 Style="{DynamicResource SvgOpenFolderButton}"
                                 ToolTip="select selected file in explorer (Hotkey: [Down-Arrow])"
-                                x:Name="OpenSelectedFileButton" Click="OpenOutputFolder_Click" />
+                                x:Name="OpenSelectedFileButton"
+                                Command="{Binding SelectInExplorerCommand, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}"
+                                />
                 <local:SvgImageButton1 Style="{DynamicResource SvgPrevTrackButton}"
-                                IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
-                                IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
+                                IsEnabled="{Binding Path=SkipPrevButtonEnabled, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}"
                                 ToolTip="skip to previous file (Hotkey: [Left-Arrow])"
-                                x:Name="SkipPrevButton" Click="SkipPrevButton_Click" />
+                                x:Name="SkipPrevButton"
+                                Command="{Binding SkipPrevCommand, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}" />
                 <local:SvgImageButton1 Style="{DynamicResource SvgPlayTrackButton}"
-                                IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
-                                IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
+                                IsEnabled="{Binding Path=PlayPauseButtonEnabled, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}"
                                 ToolTip="play selected file (Hotkey: [Space])"
-                                x:Name="TogglePlaySelectedFileButton" Click="ReplayLastRecording_Click" />
+                                x:Name="TogglePlaySelectedFileButton"
+                                Command="{Binding PlayPauseCommand, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}" />
                 <local:SvgImageButton1 Style="{DynamicResource SvgStopButton}"
-                                IsEnabled="{Binding Path=AudioPlaybackService.PlayingOrPaused}"
+                                IsEnabled="{Binding Path=StopButtonEnabled, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}"
                                 ToolTip="stop playing audio (Hotkey: [Esc])"
-                                x:Name="StopReplayLastRecordingButton" Click="StopReplayLastRecording_Click"  />
+                                x:Name="StopReplayLastRecordingButton"
+                                Command="{Binding StopCommand, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}" />
                 <local:SvgImageButton1 Style="{DynamicResource SvgNextTrackButton}"
-                                IsEnabledCondition1="{Binding Path=SelectedFileService.HasSelectedFile}"
-                                IsEnabledCondition2="{Binding Path=AudioRecordingService.CurrentlyNotRecording}"
+                                IsEnabled="{Binding Path=SkipNextButtonEnabled, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}"
                                 ToolTip="skip to next file (Hotkey: [Right-Arrow])"
-                                x:Name="SkipNextButton" Click="SkipNextButton_Click" />
+                                x:Name="SkipNextButton"
+                                Command="{Binding SkipNextCommand, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}" />
                 <local:SvgImageButton1 Style="{DynamicResource SvgRecordButton}"
-                                IsEnabled="{Binding Path=AudioPlaybackService.Stopped}"
-                                x:Name="RecordButton" Click="RecordButton_Click" />
+                                IsEnabled="{Binding Path=RecordButtonEnabled, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}"
+                                x:Name="RecordButton"
+                                Command="{Binding ToggleRecordCommand, RelativeSource={RelativeSource AncestorType=local:RecordingAndPlaybackControl}}" />
             </UniformGrid>
         </Border>
     </Grid>

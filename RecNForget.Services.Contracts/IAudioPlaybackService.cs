@@ -1,10 +1,10 @@
-﻿using System.ComponentModel;
-using System.IO;
-using NAudio.Wave;
+﻿using NAudio.Wave;
+using RecNForget.Services.Contracts.Events;
+using System;
 
 namespace RecNForget.Services.Contracts
 {
-    public interface IAudioPlaybackService : INotifyPropertyChanged
+    public interface IAudioPlaybackService
     {
         string ReplayStartAudioFeedbackPath { get; }
 
@@ -16,15 +16,9 @@ namespace RecNForget.Services.Contracts
 
         int ItemsCount { get; }
 
-        bool Paused { get; }
-
-        bool Playing { get; }
-
-        bool PlayingOrPaused { get; }
-
-        bool Stopped { get; }
-
         PlaybackState PlaybackState { get; }
+
+        event EventHandler<AudioPlaybackServiceEventArgs> AudioPlaybackChanged;
 
         bool QueueFile(string filePath);
 

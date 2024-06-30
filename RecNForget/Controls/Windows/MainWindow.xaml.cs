@@ -60,10 +60,8 @@ namespace RecNForget.Controls
                 SettingService = settingService;
 
                 AudioRecordingService = audioRecordingService;
-                AudioRecordingService.PropertyChanged += AudioRecordingService_PropertyChanged;
 
                 AudioPlaybackService = audioPlaybackService;
-                AudioPlaybackService.PropertyChanged += AudioPlaybackService_PropertyChanged;
 
                 // try restore last window positon
                 if (!SettingService.MainWindowLeftX.HasValue || !SettingService.MainWindowTopY.HasValue)
@@ -112,12 +110,6 @@ namespace RecNForget.Controls
                 //    SwitchToForegroundMode();
                 //}
             }
-        }
-
-        ~MainWindow()
-        {
-            AudioPlaybackService.PropertyChanged -= AudioPlaybackService_PropertyChanged;
-            AudioRecordingService.PropertyChanged -= AudioRecordingService_PropertyChanged;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -182,106 +174,6 @@ namespace RecNForget.Controls
         {
             SettingService.MainWindowLeftX = this.Left;
             SettingService.MainWindowTopY = this.Top;
-        }
-
-        private void AudioRecordingService_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(AudioRecordingService.CurrentlyRecording):
-                {
-                    if (AudioRecordingService.CurrentlyRecording)
-                    {
-                        if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
-                        {
-                            audioPlaybackService.KillAudio(reset: true);
-
-                            audioPlaybackService.QueueFile(audioPlaybackService.RecordStartAudioFeedbackPath);
-                            audioPlaybackService.Play();
-
-                            while (audioPlaybackService.PlaybackState != PlaybackState.Stopped) { }
-
-                            audioPlaybackService.KillAudio(reset: true);
-                        }
-
-                        if (SettingService.ShowBalloonTipsForRecording)
-                        {
-                            _notificationManager.ShowAsync(
-                                new NotificationContent()
-                                {
-                                    Type = NotificationType.Information,
-                                    Title = "Recording started!",
-                                    Message = "RecNForget now recording..."
-                                });
-                        }
-
-                        AudioPlaybackService.KillAudio(reset: true);
-                        ((MainViewModel)DataContext).TaskBar_ProgressState = "Error";
-                    }
-                    else
-                    {
-                        if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording || SettingService.AutoReplayAudioAfterRecording)
-                        {
-                            if (SettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
-                            {
-                                actionService.QueueAudioPlayback(fileName: audioPlaybackService.RecordStopAudioFeedbackPath);
-                            }
-
-                            if (SettingService.AutoReplayAudioAfterRecording)
-                            {
-                                actionService.QueueAudioPlayback(
-                                    fileName: AudioRecordingService.LastFileName,
-                                    startIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
-                                    endIndicatorFileName: SettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
-                            }
-
-                            actionService.TogglePlayPauseAudio();
-                        }
-
-                        ((MainViewModel)DataContext).TaskBar_ProgressState = "None";
-
-                        if (SettingService.ShowBalloonTipsForRecording)
-                        {
-                            _notificationManager.ShowAsync(
-                                content: new NotificationContent()
-                                {
-                                    Type = NotificationType.Success,
-                                    Title = "Recording saved!",
-                                    Message = AudioRecordingService.LastFileName
-                                },
-                                onClick: () =>
-                                {
-                                    if (AudioRecordingService.LastFileName == string.Empty || !File.Exists(AudioRecordingService.LastFileName))
-                                    {
-                                        return;
-                                    }
-
-                                    string argument = "/select, \"" + AudioRecordingService.LastFileName + "\"";
-                                    System.Diagnostics.Process.Start("explorer.exe", argument);
-                                });
-                            }
-
-                        if (SettingService.AutoSelectLastRecording)
-                        {
-                            SelectedFileService.SelectFile(new FileInfo(AudioRecordingService.LastFileName));
-                        }
-                    }
-
-                    break;
-                }
-            }
-        }
-
-        private void AudioPlaybackService_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case nameof(AudioPlaybackService.Stopped):
-                {
-                    ((MainViewModel)DataContext).TaskBar_ProgressState = AudioPlaybackService.Stopped || AudioRecordingService.CurrentlyRecording ? "None" : "Normal";
-                    break;
-                }
-            }
         }
 
         private void SettingService_PropertyChanged(object sender, PropertyChangedEventArgs e)

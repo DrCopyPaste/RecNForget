@@ -1,14 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using NAudio.Wave;
 using Notifications.Wpf.Core;
-using RecNForget.Controls;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Contracts.Events;
 using RecNForget.WPF.Services.Contracts;
 using System;
 using System.IO;
-using System.Windows;
 
 namespace RecNForget.ViewModels;
 
@@ -35,8 +34,12 @@ public partial class MainViewModel : ObservableValidator
         this.selectedFileService = selectedFileService;
 
         selectedFileService.SelectedFileChanged += SelectedFileService_SelectedFileChanged;
+        audioPlaybackService.AudioPlaybackChanged += AudioPlaybackService_AudioPlaybackChanged;
+        audioRecordingService.AudioRecordingStateChanged += AudioRecordingService_AudioRecordingStateChanged;
+
         TaskBar_ProgressState = "None";
         ProjectedOutputPathIncludingFilePattern = audioRecordingService.GetTargetPathTemplateString();
+        RecordButtonEnabled = true;
 
         selectedFileService.SelectLatestFile();
     }
@@ -44,12 +47,117 @@ public partial class MainViewModel : ObservableValidator
     ~MainViewModel()
     {
         selectedFileService.SelectedFileChanged -= SelectedFileService_SelectedFileChanged;
+        audioPlaybackService.AudioPlaybackChanged -= AudioPlaybackService_AudioPlaybackChanged;
+        audioRecordingService.AudioRecordingStateChanged -= AudioRecordingService_AudioRecordingStateChanged;
+    }
+
+    private void AudioRecordingService_AudioRecordingStateChanged(object sender, AudioRecordingServiceEventArgs e)
+    {
+        PlayPauseButtonEnabled = !e.IsRecording && selectedFileService.HasSelectedFile;
+        StopButtonEnabled = false;
+        SkipPrevButtonEnabled = !e.IsRecording && selectedFileService.HasSelectedFile;
+        SkipNextButtonEnabled = !e.IsRecording && selectedFileService.HasSelectedFile;
+
+        CurrentlyRecording = e.IsRecording;
+        CurrentlyNotRecording = !e.IsRecording;
+
+        if (e.IsRecording)
+        {
+            if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
+            {
+                audioPlaybackService.KillAudio(reset: true);
+
+                audioPlaybackService.QueueFile(audioPlaybackService.RecordStartAudioFeedbackPath);
+                audioPlaybackService.Play();
+
+                while (audioPlaybackService.PlaybackState != PlaybackState.Stopped) { }
+
+                audioPlaybackService.KillAudio(reset: true);
+            }
+
+            if (appSettingService.ShowBalloonTipsForRecording)
+            {
+                notificationManager.ShowAsync(
+                    new NotificationContent()
+                    {
+                        Type = NotificationType.Information,
+                        Title = "Recording started!",
+                        Message = "RecNForget now recording..."
+                    });
+            }
+
+            audioPlaybackService.KillAudio(reset: true);
+            TaskBar_ProgressState = "Error";
+        }
+        else
+        {
+            if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording || appSettingService.AutoReplayAudioAfterRecording)
+            {
+                if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
+                {
+                    actionService.QueueAudioPlayback(fileName: audioPlaybackService.RecordStopAudioFeedbackPath);
+                }
+
+                if (appSettingService.AutoReplayAudioAfterRecording)
+                {
+                    actionService.QueueAudioPlayback(
+                        fileName: audioRecordingService.LastFileName,
+                        startIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
+                        endIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
+                }
+
+                actionService.TogglePlayPauseAudio();
+            }
+
+            TaskBar_ProgressState = "None";
+
+            if (appSettingService.ShowBalloonTipsForRecording)
+            {
+                notificationManager.ShowAsync(
+                    content: new NotificationContent()
+                    {
+                        Type = NotificationType.Success,
+                        Title = "Recording saved!",
+                        Message = audioRecordingService.LastFileName
+                    },
+                    onClick: () =>
+                    {
+                        if (audioRecordingService.LastFileName == string.Empty || !File.Exists(audioRecordingService.LastFileName))
+                        {
+                            return;
+                        }
+
+                        string argument = "/select, \"" + audioRecordingService.LastFileName + "\"";
+                        System.Diagnostics.Process.Start("explorer.exe", argument);
+                    });
+            }
+
+            if (appSettingService.AutoSelectLastRecording)
+            {
+                selectedFileService.SelectFile(new FileInfo(audioRecordingService.LastFileName));
+            }
+        }
+    }
+
+    private void AudioPlaybackService_AudioPlaybackChanged(object sender, AudioPlaybackServiceEventArgs e)
+    {
+        Playing = e.PlaybackState == PlaybackState.Playing;
+        Paused = e.PlaybackState == PlaybackState.Paused;
+        PlayingOrPaused = e.PlaybackState == PlaybackState.Playing || e.PlaybackState == PlaybackState.Paused;
+        Stopped = e.PlaybackState == PlaybackState.Stopped;
+
+        RecordButtonEnabled = e.PlaybackState == PlaybackState.Stopped;
     }
 
     private void SelectedFileService_SelectedFileChanged(object sender, SelectedFileServiceEventArgs e)
     {
         HasSelectedFile = e.HasFileSelected;
         SelectedFilePath = e.HasFileSelected ? e.FileName : "(no file found or selected)";
+
+        PlayPauseButtonEnabled = e.HasFileSelected;
+        StopButtonEnabled = e.HasFileSelected;
+        SkipPrevButtonEnabled = e.HasFileSelected;
+        SkipNextButtonEnabled = e.HasFileSelected;
 
         try
         {
@@ -76,19 +184,25 @@ public partial class MainViewModel : ObservableValidator
     [RelayCommand]
     private void ChangeSelectedFileName()
     {
-        actionService.ChangeSelectedFileName();
+        if (selectedFileService.HasSelectedFile) actionService.ChangeSelectedFileName();
     }
 
     [RelayCommand]
     private void DeleteSelectedFile()
     {
-        actionService.DeleteSelectedFile();
+        if (selectedFileService.HasSelectedFile) actionService.DeleteSelectedFile();
     }
 
     [RelayCommand]
     private void ExportSelectedFile()
     {
-        actionService.ExportSelectedFile();
+        if (selectedFileService.HasSelectedFile) actionService.ExportSelectedFile();
+    }
+
+    [RelayCommand]
+    private void SelectInExplorer()
+    {
+        if (selectedFileService.HasSelectedFile) actionService.OpenOutputFolderInExplorer();
     }
 
     [RelayCommand]
@@ -98,24 +212,28 @@ public partial class MainViewModel : ObservableValidator
     }
 
     [RelayCommand]
+    private void TogglePlaySelectedFile()
+    {
+        actionService.TogglePlayPauseSelectedFile();
+    }
+
+    [RelayCommand]
+    private void StopPlaying()
+    {
+        actionService.StopPlayingSelectedFile();
+    }
+
+    [RelayCommand]
     private void SelectNextFile()
     {
         if (!selectedFileService.SelectNextFile()) ResetSelectedFile();
     }
 
-    //[RelayCommand]
-    //private void SelectFile(FileInfo file)
-    //{
-    //    if (selectedFileService.SelectFile(file))
-    //    {
-    //        ResetSelectedFile();
-    //        return;
-    //    }
-
-    //    HasSelectedFile = true;
-    //    SelectedFileDisplay = selectedFileService.SelectedFile.Name;
-
-    //}
+    [RelayCommand]
+    private void ToggleRecording()
+    {
+        actionService.ToggleStartStopRecording();
+    }
 
     [RelayCommand]
     private void UpdateFileNamePattern()
@@ -136,6 +254,39 @@ public partial class MainViewModel : ObservableValidator
         HasSelectedFile = false;
         SelectedFilePath = "(no file found or selected)";
     }
+
+    [ObservableProperty]
+    private bool skipPrevButtonEnabled;
+
+    [ObservableProperty]
+    private bool playPauseButtonEnabled;
+
+    [ObservableProperty]
+    private bool stopButtonEnabled;
+
+    [ObservableProperty]
+    private bool skipNextButtonEnabled;
+
+    [ObservableProperty]
+    private bool recordButtonEnabled;
+
+    [ObservableProperty]
+    private bool playing;
+
+    [ObservableProperty]
+    private bool paused;
+
+    [ObservableProperty]
+    private bool playingOrPaused;
+
+    [ObservableProperty]
+    private bool stopped;
+
+    [ObservableProperty]
+    private bool currentlyRecording;
+
+    [ObservableProperty]
+    private bool currentlyNotRecording;
 
     [ObservableProperty]
     private string taskBar_ProgressState;
