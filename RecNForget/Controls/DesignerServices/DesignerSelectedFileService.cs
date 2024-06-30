@@ -2,12 +2,14 @@
 using System.ComponentModel;
 using System.IO;
 using RecNForget.Services.Contracts;
+using RecNForget.Services.Contracts.Events;
 
 namespace RecNForget.Services.Designer
 {
     public class DesignerSelectedFileService : ISelectedFileService
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<SelectedFileServiceEventArgs> SelectedFileChanged;
 
         public FileInfo SelectedFile => new FileInfo(@"C:\imaginaryPath\2020-04-12-190654512_A_file.wav");
 

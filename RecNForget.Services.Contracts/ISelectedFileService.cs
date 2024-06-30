@@ -1,28 +1,25 @@
-﻿using System;
-using System.ComponentModel;
+﻿using RecNForget.Services.Contracts.Events;
+using System;
 using System.IO;
 
-namespace RecNForget.Services.Contracts
+namespace RecNForget.Services.Contracts;
+
+public interface ISelectedFileService
 {
-    public interface ISelectedFileService : INotifyPropertyChanged
-    {
-        FileInfo SelectedFile { get; }
+    event EventHandler<SelectedFileServiceEventArgs> SelectedFileChanged;
+    FileInfo SelectedFile { get; }
+    bool HasSelectedFile { get; }
 
-        bool HasSelectedFile { get; }
+    bool SelectFile(FileInfo file);
 
-        string SelectedFileDisplay { get; set; }
+    bool SelectLatestFile();
 
-        bool SelectFile(FileInfo file);
+    bool SelectNextFile();
 
-        bool SelectLatestFile();
+    bool SelectPrevFile();
 
-        bool SelectNextFile();
+    bool DeleteSelectedFile();
 
-        bool SelectPrevFile();
-
-        bool DeleteSelectedFile();
-
-        bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension);
-        string ExportFile(string preferredFileName = "");
-    }
+    bool RenameSelectedFileWithoutExtension(string newNameWithoutExtension);
+    string ExportFile(string preferredFileName = "");
 }

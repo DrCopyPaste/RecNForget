@@ -1,13 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NAudio.Wave;
-using Notifications.Wpf.Core;
-using RecNForget.Controls.IoC;
+﻿using CommunityToolkit.Mvvm.Input;
 using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
 using RecNForget.WPF.Services.Contracts;
-using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,104 +12,80 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class SelectedFileControl : UserControl, INotifyPropertyChanged
     {
-        private readonly NotificationManager _notificationManager = new NotificationManager();
         private readonly IActionService actionService = null;
         private readonly IAppSettingService appSettingService = null;
         private readonly IAudioPlaybackService audioPlaybackService = null;
 
-        private ISelectedFileService selectedFileService = null;
-
         public SelectedFileControl()
         {
-            DataContext = this;
             InitializeComponent();
-
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                this.actionService = new DesignerActionService();
-                this.appSettingService = new DesignerAppSettingService();
-                this.audioPlaybackService = new DesignerAudioPlaybackService();
-
-                this.SelectedFileService = new DesignerSelectedFileService();
-            }
-            else
-            {
-                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
-                this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
-                this.audioPlaybackService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioPlaybackService>();
-
-                this.SelectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
-
-                SelectedFileService.PropertyChanged += SelectedFileService_PropertyChanged;
-            }
-        }
-
-        ~SelectedFileControl()
-        {
-            SelectedFileService.PropertyChanged -= SelectedFileService_PropertyChanged;
-        }
-
-        public ISelectedFileService SelectedFileService
-        {
-            get
-            {
-                return selectedFileService;
-            }
-
-            set
-            {
-                selectedFileService = value;
-                OnPropertyChanged();
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged(string name)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        private void SelectedFileService_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public string FileInfoText
         {
-            if (e.PropertyName == nameof(SelectedFileService.HasSelectedFile) && SelectedFileService.HasSelectedFile)
-            {
-                try
-                {
-                    var audioFileLengthString = audioPlaybackService.GetFileLengthInSecondsFormatted(SelectedFileService.SelectedFile.FullName);
-                    var fileSizeString = (SelectedFileService.SelectedFile.Length / (double)1024).ToString("N2") + " kB";
-
-                    FileInfoLabel.Content = audioFileLengthString + " (" + fileSizeString + ")";
-                }
-                catch (Exception ex)
-                {
-                    FileInfoLabel.Content = "error trying to read file size";
-
-                    _notificationManager.ShowAsync(
-                        content: new NotificationContent()
-                        {
-                            Title = "Error trying to read file size",
-                            Message = "an error occurred while trying to parse audio file: " + ex.Message,
-                            Type = NotificationType.Error
-                        },
-                        expirationTime: TimeSpan.FromSeconds(10));
-                }
-            }
+            get { return (string)GetValue(FileInfoTextProperty); }
+            set { SetValue(FileInfoTextProperty, value); }
         }
 
-        private void ExportSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for FileInfoText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FileInfoTextProperty =
+            DependencyProperty.Register("FileInfoText", typeof(string), typeof(SelectedFileControl), new PropertyMetadata(string.Empty));
+
+        private static void OnSelectedFilePathChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            actionService.ExportSelectedFile();
+            var control = d as SelectedFileControl;
+            control.OnPropertyChanged(nameof(HasSelectedFile));
         }
 
-        private void ChangeSelectedFileNameButton_Clicked(object sender, RoutedEventArgs e)
+        public bool HasSelectedFile
         {
-            actionService.ChangeSelectedFileName();
+            get { return !string.IsNullOrEmpty(SelectedFilePath); }
         }
 
-        private void DeleteSelectedFileButton_Clicked(object sender, RoutedEventArgs e)
+        public string SelectedFilePath
         {
-            actionService.DeleteSelectedFile();
+            get { return (string)GetValue(SelectedFilePathProperty); }
+            set { SetValue(SelectedFilePathProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for SelectedFilePath.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedFilePathProperty =
+            DependencyProperty.Register("SelectedFilePath", typeof(string), typeof(SelectedFileControl), new PropertyMetadata(string.Empty, OnSelectedFilePathChanged));
+
+        public RelayCommand ChangeSelectedFileNameCommand
+        {
+            get { return (RelayCommand)GetValue(ChangeSelectedFileNameCommandProperty); }
+            set { SetValue(ChangeSelectedFileNameCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ChangeSelectedFileNameCommandProperty =
+            DependencyProperty.Register("ChangeSelectedFileNameCommand", typeof(RelayCommand), typeof(SelectedFileControl), new PropertyMetadata(null));
+
+        public RelayCommand DeleteSelectedFileCommand
+        {
+            get { return (RelayCommand)GetValue(DeleteSelectedFileCommandProperty); }
+            set { SetValue(DeleteSelectedFileCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DeleteSelectedFile.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DeleteSelectedFileCommandProperty =
+            DependencyProperty.Register("DeleteSelectedFileCommand", typeof(RelayCommand), typeof(SelectedFileControl), new PropertyMetadata(null));
+
+        public RelayCommand ExportSelectedFileCommand
+        {
+            get { return (RelayCommand)GetValue(ExportSelectedFileCommandProperty); }
+            set { SetValue(ExportSelectedFileCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ExportSelectedFile.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ExportSelectedFileCommandProperty =
+            DependencyProperty.Register("ExportSelectedFileCommand", typeof(RelayCommand), typeof(SelectedFileControl), new PropertyMetadata(null));
     }
 }

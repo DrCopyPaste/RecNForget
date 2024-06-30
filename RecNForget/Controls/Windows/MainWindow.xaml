@@ -37,6 +37,11 @@
                         />
                     <Separator x:Name="OutputPathControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:SelectedFileControl
+                        FileInfoText="{Binding FileInfoText}"
+                        SelectedFilePath="{Binding SelectedFilePath}"
+                        ChangeSelectedFileNameCommand="{Binding ChangeSelectedFileNameCommand}"
+                        DeleteSelectedFileCommand="{Binding DeleteSelectedFileCommand}"
+                        ExportSelectedFileCommand="{Binding ExportSelectedFileCommand}"
                             x:Name="SelectedFileControl" />
                     <Separator x:Name="SelectedFileControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:RecordingTimerControl

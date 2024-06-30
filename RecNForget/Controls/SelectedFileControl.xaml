@@ -12,32 +12,34 @@
                        HorizontalAlignment="Left"
                         Content="Selected file" />
                 <Label Style="{DynamicResource ControlLabelStyle}"
-                            HorizontalAlignment="Right"
-                            HorizontalContentAlignment="Right"
-                            d:Content="00:12.235s (237.98 kB)"
-                            Name="FileInfoLabel" />
+                    HorizontalAlignment="Right"
+                    HorizontalContentAlignment="Right"
+                    Content="{Binding Path=FileInfoText, RelativeSource={RelativeSource FindAncestor,AncestorType=local:SelectedFileControl}}"
+                    d:Content="00:12.235s (237.98 kB)" />
             </DockPanel>
             <DockPanel>
                 <Button Style="{DynamicResource BaseSettingButtonLayout}"
                 Background="{DynamicResource Secondary_Brush}"
                 HorizontalAlignment="Stretch"
                 ToolTip="rename selected file (Hotkey: [Return])"
-                Click="ChangeSelectedFileNameButton_Clicked">
+                Command="{Binding Path=ChangeSelectedFileNameCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=local:SelectedFileControl}}">
                     <TextBox Style="{DynamicResource MainWindowTextBoxStyle}"
                          HorizontalAlignment="Stretch"
-                        Text="{Binding Path=SelectedFileService.SelectedFileDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding Path=SelectedFilePath, RelativeSource={RelativeSource FindAncestor,AncestorType=local:SelectedFileControl}}"
                         d:Text="C:\YourPath\yourFile.wav" />
                 </Button>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <local:SvgImageButton1 Style="{DynamicResource SvgExportFileMiniButtonLayout}"
                         ToolTip="export selected file using default export settings (Hotkey: [X])"
-                        IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                        x:Name="ChangeSelectedFileNameButton" Click="ExportSelectedFileNameButton_Clicked"/>
+                        IsEnabled="{Binding HasSelectedFile}"
+                        x:Name="ChangeSelectedFileNameButton"
+                        Command="{Binding Path=ExportSelectedFileCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=local:SelectedFileControl}}" />
 
                     <local:SvgImageButton1 Style="{DynamicResource SvgDeleteSelectedFileMiniButtonLayout}"
                         ToolTip="delete selected file (Hotkey: [Delete])"
-                        IsEnabled="{Binding SelectedFileService.HasSelectedFile}"
-                        x:Name="DeleteSelectedFileButton" Click="DeleteSelectedFileButton_Clicked"/>
+                        IsEnabled="{Binding HasSelectedFile}"
+                        x:Name="DeleteSelectedFileButton"
+                        Command="{Binding Path=DeleteSelectedFileCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=local:SelectedFileControl}}" />
                 </StackPanel>
             </DockPanel>
         </StackPanel>

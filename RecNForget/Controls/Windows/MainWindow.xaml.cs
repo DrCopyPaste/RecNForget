@@ -107,9 +107,6 @@ namespace RecNForget.Controls
                 {
                     SwitchToBackgroundMode();
                 }
-
-
-                SelectedFileService.SelectLatestFile();
                 //else
                 //{
                 //    SwitchToForegroundMode();

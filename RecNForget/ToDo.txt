@@ -13,3 +13,5 @@ extra button in StringSettingsButton is useless now
 commands for StringSettingsButton
 ActionService for ALL actions?
 dialogs, topmost, viewposition, dragging and exiting (also via esc)
+
+rethink designtime services/viewmodels?
