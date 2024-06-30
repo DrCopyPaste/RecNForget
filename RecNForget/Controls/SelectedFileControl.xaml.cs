@@ -1,6 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using RecNForget.Services.Contracts;
-using RecNForget.WPF.Services.Contracts;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,10 +10,6 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class SelectedFileControl : UserControl, INotifyPropertyChanged
     {
-        private readonly IActionService actionService = null;
-        private readonly IAppSettingService appSettingService = null;
-        private readonly IAudioPlaybackService audioPlaybackService = null;
-
         public SelectedFileControl()
         {
             InitializeComponent();

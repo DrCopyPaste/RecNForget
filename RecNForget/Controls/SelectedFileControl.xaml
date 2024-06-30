@@ -10,7 +10,7 @@
             <DockPanel>
                 <Label Style="{DynamicResource ControlLabelStyle}"
                        HorizontalAlignment="Left"
-                        Content="Selected file" />
+                       Content="Selected file" />
                 <Label Style="{DynamicResource ControlLabelStyle}"
                     HorizontalAlignment="Right"
                     HorizontalContentAlignment="Right"
@@ -19,12 +19,12 @@
             </DockPanel>
             <DockPanel>
                 <Button Style="{DynamicResource BaseSettingButtonLayout}"
-                Background="{DynamicResource Secondary_Brush}"
-                HorizontalAlignment="Stretch"
-                ToolTip="rename selected file (Hotkey: [Return])"
-                Command="{Binding Path=ChangeSelectedFileNameCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=local:SelectedFileControl}}">
+                    Background="{DynamicResource Secondary_Brush}"
+                    HorizontalAlignment="Stretch"
+                    ToolTip="rename selected file (Hotkey: [Return])"
+                    Command="{Binding Path=ChangeSelectedFileNameCommand, RelativeSource={RelativeSource FindAncestor,AncestorType=local:SelectedFileControl}}">
                     <TextBox Style="{DynamicResource MainWindowTextBoxStyle}"
-                         HorizontalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
                         Text="{Binding Path=SelectedFilePath, RelativeSource={RelativeSource FindAncestor,AncestorType=local:SelectedFileControl}}"
                         d:Text="C:\YourPath\yourFile.wav" />
                 </Button>
