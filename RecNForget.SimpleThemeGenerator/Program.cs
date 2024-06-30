@@ -7,7 +7,7 @@ namespace RecNForget.SimpleThemeGenerator
     class Program
     {
         private static string baseThemeName = @"Simple_White";
-        private static string baseThemePath = $@"..\..\..\..\RecNForget.Controls\Themes\{baseThemeName}.xaml";
+        private static string baseThemePath = $@"..\..\..\..\RecNForget\Themes\{baseThemeName}.xaml";
 
         private static string simpleWhiteColors = @"
     <Color x:Key=""Transparent_Color"">Transparent</Color>
