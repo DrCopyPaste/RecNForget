@@ -88,10 +88,11 @@ public class UserConfigurationService : IAppSettingService
     public bool FirstApplicationStart { get; private set; } = false;
 
     [JsonIgnore]
-    public string RuntimeVersionString => "0.3.0";
+    public string RuntimeVersionString => ThisAssembly.AssemblyFileVersion;
 
     [JsonIgnore]
-    public string RuntimeInformalVersionString => "0.3.0+abcdef123";
+    public string RuntimeInformalVersionString => ThisAssembly.AssemblyInformationalVersion;
+
     public List<string> GetHotkeySettingAsList(string setting, string keyStart = "[", string keyEnd = "]")
     {
         List<string> keys = new List<string>();
@@ -142,6 +143,7 @@ public class UserConfigurationService : IAppSettingService
         var currentFileVersion = new Version(ThisAssembly.AssemblyFileVersion);
 
         LastInstalledVersion = currentFileVersion;
+        Persist();
 
         return (currentFileVersion.CompareTo(previouslyInstalledVersion) > 0);
     }

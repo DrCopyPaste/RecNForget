@@ -76,26 +76,27 @@ namespace RecNForget
 
         private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService)
         {
-            if (appSettingService.CheckForUpdateOnStart)
-            {
-                Task.Run(() => { actionService.CheckForUpdatesAsync(showMessages: false); });
-            }
-
             var previouslyInstalledVersion = appSettingService.LastInstalledVersion;
             hotkeyService.ResetAndReadHotkeysFromConfig();
+
+            var configVersionWasUpdated = appSettingService.UpdateConfigVersion();
 
             if (appSettingService.FirstApplicationStart)
             {
                 actionService.ShowNewToApplicationWindow();
             }
-            else if (appSettingService.UpdateConfigVersion())
+            else if (configVersionWasUpdated)
             {
-                appSettingService.Persist();
                 actionService.ShowNewToVersionDialog(appSettingService.LastInstalledVersion, previouslyInstalledVersion);
             }
             else if (appSettingService.ShowTipsAtApplicationStart)
             {
                 actionService.ShowRandomApplicationTip();
+            }
+
+            if (appSettingService.CheckForUpdateOnStart)
+            {
+                Task.Run(() => { actionService.CheckForUpdatesAsync(showMessages: false); });
             }
         }
     }
