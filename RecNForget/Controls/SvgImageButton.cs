@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -13,6 +14,16 @@ namespace RecNForget.Controls
                 typeof(SvgImageButton1),
                 new FrameworkPropertyMetadata(typeof(SvgImageButton1)));
         }
+
+        public RelayCommand RelayCommand
+        {
+            get { return (RelayCommand)GetValue(RelayCommandProperty); }
+            set { SetValue(RelayCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RelayCommandProperty =
+            DependencyProperty.Register("RelayCommand", typeof(RelayCommand), typeof(SvgImageButton1), new PropertyMetadata(null));
 
         public static readonly DependencyProperty ImagePaddingProperty = DependencyProperty.Register("ImagePadding", typeof(string), typeof(SvgImageButton1), new PropertyMetadata("0,0,0,0"));
         public string ImagePadding

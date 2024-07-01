@@ -40,21 +40,6 @@ namespace RecNForget.Controls
             }
         }
 
-        private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
-        {
-            ((SettingsViewModel)DataContext).Configure_OutputPath_ClickCommand.Execute(this);
-        }
-
-        private void Configure_ExportOutputPath_Click(object sender, RoutedEventArgs e)
-        {
-            ((SettingsViewModel)DataContext).Configure_ExportOutputPath_ClickCommand.Execute(this);
-        }
-
-        private void Configure_FileNamePattern_Click(object sender, RoutedEventArgs e)
-        {
-            ((SettingsViewModel)DataContext).Configure_FileNamePattern_ClickCommand.Execute(this);
-        }
-
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;

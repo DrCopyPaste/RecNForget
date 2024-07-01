@@ -40,13 +40,13 @@ public partial class SettingsViewModel : ObservableValidator
     }
 
     [RelayCommand]
-    private void Configure_OutputPath_Click()
+    private void Configure_OutputPath()
     {
         actionService.ChangeOutputFolder();
     }
 
     [RelayCommand]
-    private void Configure_ExportOutputPath_Click()
+    private void Configure_ExportOutputPath()
     {
         var dialog = new OpenFolderDialog();
         if (!string.IsNullOrEmpty(ExportOutputPath))
@@ -61,7 +61,7 @@ public partial class SettingsViewModel : ObservableValidator
     }
 
     [RelayCommand]
-    private void Configure_FileNamePattern_Click()
+    private void Configure_FileNamePattern()
     {
         CustomMessageBox tempDialog = new CustomMessageBox(
             caption: "Type in a new pattern for file name generation.",

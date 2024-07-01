@@ -8,8 +8,7 @@
     <Button Style="{DynamicResource BaseSettingButtonLayout}"
                 Background="{DynamicResource Secondary_Brush}"
                 HorizontalAlignment="Stretch"
-                Click="Click_Internal"
-            >
+                Command="{Binding RelayCommand, RelativeSource={RelativeSource AncestorType=local:StringSettingButton}}">
         <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -22,8 +21,7 @@
             <Label Grid.Column="1" Style="{DynamicResource SettingsStringValue_Label}"
                             Content="{Binding SettingValue, RelativeSource={RelativeSource AncestorType=local:StringSettingButton}}" ToolTipService.ToolTip="{Binding Content, RelativeSource={RelativeSource Self}}" />
 
-            <local:SvgImageButton1 Grid.Column="2" Style="{DynamicResource SvgChangeSettingButtonLayout}" HorizontalAlignment="Right"
-                                   Click="Click_Internal"/>
+            <local:SvgImageButton1 Grid.Column="2" Style="{DynamicResource SvgChangeSettingButtonLayout}" HorizontalAlignment="Right" IsEnabled="False" />
         </Grid>
     </Button>
 </UserControl>

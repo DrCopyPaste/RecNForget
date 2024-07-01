@@ -34,15 +34,5 @@ namespace RecNForget.Controls
         {
             DialogResult = true;
         }
-
-        private void Configure_OutputPath_Click(object sender, RoutedEventArgs e)
-        {
-            ((NewToApplicationViewModel)DataContext).UpdateOutputFolderCommand.Execute(this);
-        }
-
-        private void OpenSettings_Click(object sender, RoutedEventArgs e)
-        {
-            ((NewToApplicationViewModel)DataContext).OpenSettingsCommand.Execute(this);
-        }
     }
 }

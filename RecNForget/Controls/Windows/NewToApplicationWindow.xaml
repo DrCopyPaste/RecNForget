@@ -35,7 +35,7 @@
             <local:StringSettingButton HorizontalAlignment="Stretch"
                 SettingCaption="Output folder" SettingValue="{Binding Path=OutputFolder, Mode=TwoWay}"
                 d:SettingValue="C:\TargetPathToFile"
-                Click="Configure_OutputPath_Click" />
+                RelayCommand="{Binding UpdateOutputFolderCommand}" />
 
             <local:HotkeySettingButton HorizontalAlignment="Stretch"
                 SettingCaption="Toggle Record" SettingValue="{Binding Path=HotKey_StartStopRecording, Mode=TwoWay}"
@@ -49,7 +49,7 @@
                 <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                            HorizontalAlignment="Left"
                 Text="You'll find More options in the settings menu" />
-                <local:SvgImageButton1 Style="{DynamicResource SvgWindowSettingsButton}" HorizontalAlignment="Right" Click="OpenSettings_Click" />
+                <local:SvgImageButton1 Style="{DynamicResource SvgWindowSettingsButton}" HorizontalAlignment="Right" RelayCommand="{Binding OpenSettingsCommand}" />
             </Grid>
 
             <CheckBox  Style="{DynamicResource DefaultCheckboxStyle}"

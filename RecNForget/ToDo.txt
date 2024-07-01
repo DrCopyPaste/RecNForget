@@ -10,8 +10,7 @@ viewmodel testing
 owners for dialogs if opened from viewmodels (pass as para?)
 stacked buttons ontop of each other (StringSettingsButton, others?)
 extra button in StringSettingsButton is useless now
-commands for StringSettingsButton
-ActionService for ALL actions?
+ActionService for ALL actions? not for actions that modify settings (that need display changing at runtime => i.e. viewmodellogic)
 dialogs, topmost, viewposition, dragging and exiting (also via esc)
 
 timing control looks different design time (doubled numbers?)
@@ -21,3 +20,6 @@ rethink designtime services/viewmodels?
 IsEnabledCondition1/IsEnabledCondition2 should be not needed when using viewmodels
 
 fix stylechanges for playpause- and togglerecord-buttons (with glyph icons?)
+
+Commands on usercontrols should be properly named "ActionNameRelayCommand" :D
+how best to ensure settings/about/ other windows open on top of main window if main window is set to always on top? (also affects other dialogs opened from another window)

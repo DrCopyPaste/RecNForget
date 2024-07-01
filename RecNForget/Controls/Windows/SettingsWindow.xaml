@@ -6,7 +6,6 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:RecNForget.Controls"
         mc:Ignorable="d"
-        Topmost="True"
         Style="{DynamicResource Settings_WindowStyle}"
         WindowStartupLocation="CenterOwner"
         Title="RecNForget - Settings"
@@ -49,12 +48,12 @@
                         <local:StringSettingButton HorizontalAlignment="Stretch"
                                                    SettingCaption="Output folder" SettingValue="{Binding Path=OutputPath, Mode=TwoWay}"
                                                    d:SettingValue="C:\TargetPathToFile"
-                                                   Click="Configure_OutputPath_Click"/>
+                                                   RelayCommand="{Binding Configure_OutputPathCommand}" />
                         
                         <local:StringSettingButton HorizontalAlignment="Stretch"
                                                    SettingCaption="File name pattern" SettingValue="{Binding Path=FilenamePrefix, Mode=TwoWay}"
                                                    d:SettingValue="RecNForget_"
-                                                   Click="Configure_FileNamePattern_Click"/>
+                                                   RelayCommand="{Binding Configure_FileNamePatternCommand}"/>
 
                         <Separator Style="{DynamicResource TransparentSeparator_Style}" />
                         <Label Style="{DynamicResource ControlLabelStyle}" Content="MP3 Export Settings"/>
@@ -106,7 +105,7 @@
                         <local:StringSettingButton HorizontalAlignment="Stretch"
                                                    SettingCaption="Export folder" SettingValue="{Binding Path=ExportOutputPath, Mode=TwoWay}"
                                                    d:SettingValue="C:\TargetPathToFile\Export"
-                                                   Click="Configure_ExportOutputPath_Click"/>
+                                                   RelayCommand="{Binding Configure_ExportOutputPathCommand}" />
                         <CheckBox Style="{DynamicResource DefaultCheckboxStyle}"
                         IsChecked="{Binding Path=PromptForExportFileName}">
                             prompt for exported file name

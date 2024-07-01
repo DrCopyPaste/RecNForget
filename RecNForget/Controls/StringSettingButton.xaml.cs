@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,41 +9,39 @@ namespace RecNForget.Controls
     /// <summary>
     /// Interaction logic for StringSettingButton.xaml
     /// </summary>
-    public partial class StringSettingButton : UserControl, INotifyPropertyChanged
+    public partial class StringSettingButton : UserControl
     {
-        public event RoutedEventHandler Click;
-
-        public static readonly DependencyProperty SettingCaptionProperty =
-            DependencyProperty.Register("SettingCaption", typeof(string), typeof(StringSettingButton), new PropertyMetadata(string.Empty));
-        public string SettingCaption
-        {
-            get { return (string)GetValue(SettingCaptionProperty); }
-            set { SetValue(SettingCaptionProperty, value); OnPropertyChanged(); }
-        }
-
-        public static readonly DependencyProperty SettingValueProperty =
-            DependencyProperty.Register("SettingValue", typeof(string), typeof(StringSettingButton), new PropertyMetadata(string.Empty));
-        public string SettingValue
-        {
-            get { return (string)GetValue(SettingValueProperty); }
-            set { SetValue(SettingValueProperty, value); OnPropertyChanged(); }
-        }
-
         public StringSettingButton()
         {
             InitializeComponent();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public RelayCommand RelayCommand
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return (RelayCommand)GetValue(RelayCommandProperty); }
+            set { SetValue(RelayCommandProperty, value); }
         }
 
-        private void Click_Internal(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RelayCommandProperty =
+            DependencyProperty.Register("RelayCommand", typeof(RelayCommand), typeof(StringSettingButton), new PropertyMetadata(null));
+
+        public string SettingCaption
         {
-            Click?.Invoke(sender, e);
+            get { return (string)GetValue(SettingCaptionProperty); }
+            set { SetValue(SettingCaptionProperty, value); }
         }
+
+        public static readonly DependencyProperty SettingCaptionProperty =
+            DependencyProperty.Register("SettingCaption", typeof(string), typeof(StringSettingButton), new PropertyMetadata(string.Empty));
+
+        public string SettingValue
+        {
+            get { return (string)GetValue(SettingValueProperty); }
+            set { SetValue(SettingValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty SettingValueProperty =
+            DependencyProperty.Register("SettingValue", typeof(string), typeof(StringSettingButton), new PropertyMetadata(string.Empty));
     }
 }
