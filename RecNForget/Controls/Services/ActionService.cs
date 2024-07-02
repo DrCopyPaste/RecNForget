@@ -68,7 +68,7 @@ namespace RecNForget.Controls.Services
             if (!string.IsNullOrEmpty(appSettingService.OutputPath))
             {
                 dialog.DefaultDirectory = appSettingService.OutputPath;
-            };
+            }
 
             bool result =
                 OwnerControl != null ?

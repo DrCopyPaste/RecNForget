@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 using RecNForget.Controls;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
@@ -13,12 +14,18 @@ public partial class NewToApplicationViewModel : ObservableValidator
     private readonly IApplicationHotkeyService hotkeyService;
     private readonly IAppSettingService settingService;
     private readonly IActionService actionService;
+    private readonly ISelectedFileService selectedFileService;
 
-    public NewToApplicationViewModel(IApplicationHotkeyService hotkeyService, IAppSettingService settingService, IActionService actionService)
+    public NewToApplicationViewModel(
+        IActionService actionService,
+        IAppSettingService settingService,
+        IApplicationHotkeyService hotkeyService,
+        ISelectedFileService selectedFileService)
     {
         this.hotkeyService = hotkeyService;
         this.settingService = settingService;
         this.actionService = actionService;
+        this.selectedFileService = selectedFileService;
 
         OutputFolder = settingService.OutputPath;
     }
@@ -41,8 +48,19 @@ public partial class NewToApplicationViewModel : ObservableValidator
     [RelayCommand]
     private void UpdateOutputFolder()
     {
-        actionService.ChangeOutputFolder();
-        OutputFolder = settingService.OutputPath;
+        var dialog = new OpenFolderDialog();
+        if (!string.IsNullOrEmpty(settingService.OutputPath))
+        {
+            dialog.DefaultDirectory = settingService.OutputPath;
+        }
+
+        var result = dialog.ShowDialog();
+
+        if (result.HasValue && result.Value)
+        {
+            OutputFolder = dialog.FolderName;
+            selectedFileService.SelectLatestFile();
+        }
     }
 
     [RelayCommand]
