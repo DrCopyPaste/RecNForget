@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using Notifications.Wpf.Core;
 using RecNForget.Controls;
 using RecNForget.Controls.Services;
 using RecNForget.Services;
@@ -14,20 +15,21 @@ namespace RecNForget.ViewModels;
 
 public partial class SettingsViewModel : ObservableValidator
 {
-    private readonly IActionService actionService;
     private readonly IAppSettingService settingService;
     private readonly IApplicationHotkeyService hotkeyService;
     private readonly ISelectedFileService selectedFileService;
+    private readonly MainWindow mainWindow;
+    private readonly NotificationManager notificationManager = new NotificationManager();
 
     public SettingsViewModel(
-        IActionService actionService,
         IAppSettingService settingService,
         IApplicationHotkeyService hotkeyService,
-        ISelectedFileService selectedFileService)
+        ISelectedFileService selectedFileService,
+        MainWindow mainWindow)
     {
-        this.actionService = actionService;
         this.settingService = settingService;
         this.hotkeyService = hotkeyService;
+        this.mainWindow = mainWindow;
         this.selectedFileService = selectedFileService;
     }
 
@@ -167,6 +169,17 @@ public partial class SettingsViewModel : ObservableValidator
         set
         {
             SetProperty(settingService.MinimizedToTray, value, settingService, (x, y) => x.MinimizedToTray = y);
+
+            if (value)
+            {
+                mainWindow.Hide();
+                notificationManager.ShowAsync(new NotificationContent() { Type = NotificationType.Information, Title = "Running in background now!", Message = @"RecNForget is now running in the background. Double click tray icon to restore" });
+            }
+            else
+            {
+                mainWindow.Show();
+            }
+
             settingService.Persist();
         }
     }

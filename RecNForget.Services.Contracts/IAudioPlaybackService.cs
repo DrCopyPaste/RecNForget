@@ -31,5 +31,6 @@ namespace RecNForget.Services.Contracts
         void KillAudio(bool reset = false);
 
         string GetFileLengthInSecondsFormatted(string filePath);
+        bool QueueFiles(string[] filePaths);
     }
 }

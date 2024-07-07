@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Win32;
 using NAudio.Wave;
 using Notifications.Wpf.Core;
 using RecNForget.Controls.Extensions;
@@ -8,13 +7,9 @@ using RecNForget.Help;
 using RecNForget.Services.Contracts;
 using RecNForget.WPF.Services.Contracts;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -32,276 +27,25 @@ namespace RecNForget.Controls.Services
         public Control OwnerControl { get; set; }
 
         // public ActionService(ISelectedFileService selectedFileService, IAudioPlaybackService audioPlaybackService, IAppSettingService appSettingService)
-        public ActionService()
+        public ActionService
+        (
+            ISelectedFileService selectedFileService,
+            IAudioPlaybackService audioPlaybackService,
+            IAudioRecordingService audioRecordingService,
+            IAppSettingService appSettingService
+        )
         {
-            this.selectedFileService = ConfiguredServices.ServiceProvider.GetRequiredService<ISelectedFileService>();
-            this.appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
-            this.audioPlaybackService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioPlaybackService>();
-            this.audioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
+            this.selectedFileService = selectedFileService;
+            this.appSettingService = appSettingService;
+            this.audioPlaybackService = audioPlaybackService;
+            this.audioRecordingService = audioRecordingService;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void ChangeFileNamePattern()
-        {
-            CustomMessageBox tempDialog = new CustomMessageBox(
-                caption: "Type in a new pattern for file name generation.",
-                icon: CustomMessageBoxIcon.Question,
-                buttons: CustomMessageBoxButtons.OkAndCancel,
-                messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
-                prompt: appSettingService.FilenamePrefix,
-                controlFocus: CustomMessageBoxFocus.Prompt,
-                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
-
-            tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-            {
-                appSettingService.FilenamePrefix = tempDialog.PromptContent;
-                appSettingService.Persist();
-            }
-        }
-
-        public void ChangeOutputFolder()
-        {
-            var dialog = new OpenFolderDialog();
-            if (!string.IsNullOrEmpty(appSettingService.OutputPath))
-            {
-                dialog.DefaultDirectory = appSettingService.OutputPath;
-            }
-
-            bool result =
-                OwnerControl != null ?
-                dialog.ShowDialog(Window.GetWindow(OwnerControl)) == true :
-                dialog.ShowDialog() == true;
-
-            if (result)
-            {
-                appSettingService.OutputPath = dialog.FolderName;
-                appSettingService.Persist();
-
-                selectedFileService.SelectLatestFile();
-            }
-        }
-
-        public void ExportSelectedFile()
-        {
-            var preferredFileName = string.Empty;
-
-            if (appSettingService.PromptForExportFileName)
-            {
-                CustomMessageBox tempDialog = new CustomMessageBox(
-                    caption: "Select a filename for the exported file",
-                    icon: CustomMessageBoxIcon.Question,
-                    buttons: CustomMessageBoxButtons.OkAndCancel,
-                    messageRows: new List<string>(),
-                    prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
-                    controlFocus: CustomMessageBoxFocus.Prompt,
-                    promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
-
-                tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-                if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
-                {
-                    return;
-                }
-
-                preferredFileName = tempDialog.PromptContent;
-            }
-
-            var task = Task.Run(() =>
-            {
-                _notificationManager.ShowAsync(
-                  content: new NotificationContent()
-                  {
-                      Type = NotificationType.Information,
-                      Title = $"Exporting {selectedFileService.SelectedFile.Name} MP3 @ {appSettingService.Mp3ExportBitrate} kbps",
-                      Message = $"Export has started, this may take a moment..."
-                  });
-
-                var exportedFileName = selectedFileService.ExportFile(preferredFileName);
-
-                if (string.IsNullOrEmpty(exportedFileName))
-                {
-                    _notificationManager.ShowAsync(
-                        content: new NotificationContent()
-                        {
-                            Title = "Something went wrong",
-                            Message = "An unknown error occurred trying to export the selected file",
-                            Type = NotificationType.Error
-                        },
-                        expirationTime: TimeSpan.FromSeconds(10));
-                    return;
-                }
-
-                _notificationManager.ShowAsync(
-                  content: new NotificationContent()
-                  {
-                      Type = NotificationType.Success,
-                      Title = $"{selectedFileService.SelectedFile.Name} exported to MP3!",
-                      Message = $"Export was successful, file has been exported to {exportedFileName}."
-                  },
-                  onClick: () =>
-                  {
-                      string argument = "/select, \"" + exportedFileName + "\"";
-                      System.Diagnostics.Process.Start("explorer.exe", argument);
-                  });
-            });
-        }
-
-        public void ChangeSelectedFileName()
-        {
-            audioPlaybackService.Stop();
-            audioPlaybackService.KillAudio();
-
-            CustomMessageBox tempDialog = new CustomMessageBox(
-                caption: "Rename the selected file",
-                icon: CustomMessageBoxIcon.Question,
-                buttons: CustomMessageBoxButtons.OkAndCancel,
-                messageRows: new List<string>(),
-                prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
-                controlFocus: CustomMessageBoxFocus.Prompt,
-                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
-
-            tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-            {
-                if (!selectedFileService.RenameSelectedFileWithoutExtension(tempDialog.PromptContent))
-                {
-                    _notificationManager.ShowAsync(
-                        content: new NotificationContent()
-                        {
-                            Title = "Something went wrong",
-                            Message = "An unknown error occurred trying to rename the selected file",
-                            Type = NotificationType.Error
-                        },
-                        expirationTime: TimeSpan.FromSeconds(10));
-                }
-            }
-        }
-
-        public async Task<bool> CheckForUpdatesAsync(bool showMessages = false)
-        {
-            if (checkingForUpdates) return false;
-            checkingForUpdates = true;
-
-            try
-            {
-                var newerReleases = await UpdateChecker.GetNewerReleases(oldVersionString: appSettingService.RuntimeVersionString);
-
-                if (newerReleases.Any())
-                {
-                    string changeLog = UpdateChecker.GetAllChangeLogs(newerReleases);
-
-                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        var installUpdateDialog = new ReleaseInstallationDialog(newerReleases.First(), UpdateChecker.GetValidVersionStringMsiAsset(newerReleases.First()), changeLog);
-
-                        installUpdateDialog.TrySetViewablePositionFromOwner(OwnerControl);
-                        installUpdateDialog.ShowDialog();
-                    });
-                }
-                else
-                {
-                    if (showMessages)
-                    {
-                        System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            _notificationManager.ShowAsync(
-                                content: new NotificationContent()
-                                {
-                                    Title = "No newer version found.",
-                                    Message = "RecNForget is already up to date.",
-                                    Type = NotificationType.Information
-                                },
-                                expirationTime: TimeSpan.FromSeconds(10));
-                        });
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                if (showMessages)
-                {
-                    System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        _notificationManager.ShowAsync(
-                            content: new NotificationContent()
-                            {
-                                Title = "Error during update",
-                                Message = "An error occurred trying to get updates:",
-                                Type = NotificationType.Error
-                            },
-                            expirationTime: TimeSpan.FromSeconds(10));
-                    });
-                }
-            }
-            finally
-            {
-                checkingForUpdates = false;
-            }
-
-            return false;
-        }
-
-        public void DeleteSelectedFile()
-        {
-            audioPlaybackService.Stop();
-            audioPlaybackService.KillAudio();
-
-            CustomMessageBox tempDialog = new CustomMessageBox(
-                caption: "Are you sure you want to delete this file?",
-                icon: CustomMessageBoxIcon.Question,
-                buttons: CustomMessageBoxButtons.OkAndCancel,
-                messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
-                controlFocus: CustomMessageBoxFocus.Ok);
-
-            tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
-
-            if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
-            {
-                if (!selectedFileService.DeleteSelectedFile())
-                {
-                    _notificationManager.ShowAsync(
-                        content: new NotificationContent()
-                        {
-                            Title = "Something went wrong",
-                            Message = "An unknown error occurred trying to delete the selected file.",
-                            Type = NotificationType.Error
-                        },
-                        expirationTime: TimeSpan.FromSeconds(10));
-                }
-            }
-        }
-
         public void Exit()
         {
             Application.Current.Shutdown();
-        }
-
-        public void OpenOutputFolderInExplorer()
-        {
-            var directory = new DirectoryInfo(appSettingService.OutputPath);
-
-            if (selectedFileService.HasSelectedFile && selectedFileService.SelectedFile.Exists)
-            {
-                // if there is a result select it in an explorer window
-                string argument = "/select, \"" + selectedFileService.SelectedFile.FullName + "\"";
-                System.Diagnostics.Process.Start("explorer.exe", argument);
-            }
-            else
-            {
-                if (!directory.Exists)
-                {
-                    directory.Create();
-                }
-
-                // otherwise just open output path in explorer
-                Process.Start(appSettingService.OutputPath);
-            }
         }
 
         public void SelectNextFile()
@@ -418,12 +162,6 @@ namespace RecNForget.Controls.Services
             }
 
             return true;
-        }
-
-        public void ShowApplicationMenu()
-        {
-            var myMenu = new ApplicationMenu();
-
         }
 
         public void ShowAboutWindow()

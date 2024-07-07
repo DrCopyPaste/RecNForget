@@ -1,15 +1,14 @@
-﻿using NAudio.Wave;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Notifications.Wpf.Core;
+using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
 using RecNForget.ViewModels;
-using RecNForget.WPF.Services.Contracts;
 using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace RecNForget.Controls
@@ -19,10 +18,7 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
-        private NotifyIcon trayIcon;
-
         private IAudioRecordingService audioRecordingService = null;
-        private IActionService actionService = null;
         private IApplicationHotkeyService hotkeyService = null;
         private IAppSettingService settingService = null;
         private IAudioPlaybackService audioPlaybackService = null;
@@ -33,7 +29,6 @@ namespace RecNForget.Controls
         public MainWindow(
             MainViewModel mainViewModel,
             IAudioRecordingService audioRecordingService,
-            IActionService actionService,
             IApplicationHotkeyService hotkeyService,
             IAppSettingService settingService,
             IAudioPlaybackService audioPlaybackService,
@@ -44,7 +39,6 @@ namespace RecNForget.Controls
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                this.actionService = new DesignerActionService();
                 this.hotkeyService = new DesignerApplicationHotkeyService();
                 SelectedFileService = new DesignerSelectedFileService();
                 SettingService = new DesignerAppSettingService();
@@ -54,7 +48,6 @@ namespace RecNForget.Controls
             }
             else
             {
-                this.actionService = actionService;
                 this.hotkeyService = hotkeyService;
                 SelectedFileService = selectedFileService;
                 SettingService = settingService;
@@ -75,17 +68,8 @@ namespace RecNForget.Controls
                     this.Top = SettingService.MainWindowTopY.Value;
                 }
 
-                this.KeyDown += Window_KeyDown;
+                //this.KeyDown += Window_KeyDown;
                 this.MouseRightButtonUp += MainWindow_MouseRightButtonUp;
-
-                trayIcon = new System.Windows.Forms.NotifyIcon
-                {
-                    Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName),
-                    Visible = true
-                };
-
-                trayIcon.Click += new EventHandler(TrayIcon_Click);
-                trayIcon.DoubleClick += new EventHandler(TrayIconMenu_DoubleClick);
 
                 // initialize control visibility (is being toggled via SettingService_PropertyChanged - binding with bool to visibility converter did not update)
                 OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
@@ -225,7 +209,8 @@ namespace RecNForget.Controls
 
         private void WindowOptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            actionService.ShowApplicationMenu();
+            var menuCommands = ConfiguredServices.ServiceProvider.GetRequiredService<ContextMenuCommands>();
+            menuCommands.ContextMenu.IsOpen = true;
         }
 
         private void TaskBarIcon_TrayBalloonTipClicked(object sender, EventArgs e)
@@ -276,70 +261,57 @@ namespace RecNForget.Controls
 
         private void MainWindow_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            actionService.ShowApplicationMenu();
+            var menuCommands = ConfiguredServices.ServiceProvider.GetRequiredService<ContextMenuCommands>();
+            menuCommands.ContextMenu.IsOpen = true;
         }
 
-        private void TrayIcon_Click(object sender, EventArgs e)
-        {
-            if ((e as System.Windows.Forms.MouseEventArgs).Button == MouseButtons.Right)
-            {
-                actionService.ShowApplicationMenu();
-            }
-        }
+        //private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        //{
+        //    // ToDo these keys should be configurable
+        //    // ensure not triggering any of these if hotkey to record is the same
 
-        private void TrayIconMenu_DoubleClick(object sender, EventArgs e)
-        {
-            SettingService.MinimizedToTray = false;
-            SwitchToForegroundMode();
-        }
+        //    var recHotkey = settingService.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty);
 
-        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            // ToDo these keys should be configurable
-            // ensure not triggering any of these if hotkey to record is the same
-
-            var recHotkey = settingService.GetHotkeySettingAsList(SettingService.HotKey_StartStopRecording, string.Empty, string.Empty);
-
-            if (!recHotkey.Contains(e.Key.ToString()))
-            {
-                if (e.Key == Key.Return)
-                {
-                    actionService.ChangeSelectedFileName();
-                }
-                else if (e.Key == Key.Delete)
-                {
-                    actionService.DeleteSelectedFile();
-                }
-                else if (e.Key == Key.Down)
-                {
-                    actionService.OpenOutputFolderInExplorer();
-                }
-                else if (e.Key == Key.Left)
-                {
-                    actionService.SelectPreviousFile();
-                }
-                else if (e.Key == Key.Right)
-                {
-                    actionService.SelectNextFile();
-                }
-                else if (e.Key == Key.Space)
-                {
-                    actionService.TogglePlayPauseSelectedFile();
-                }
-                else if (e.Key == Key.Escape)
-                {
-                    actionService.StopPlayingSelectedFile();
-                }
-                else if (e.Key == Key.X)
-                {
-                    actionService.ExportSelectedFile();
-                }
-            }
-        }
+        //    if (!recHotkey.Contains(e.Key.ToString()))
+        //    {
+        //        if (e.Key == Key.Return)
+        //        {
+        //            actionService.ChangeSelectedFileName();
+        //        }
+        //        else if (e.Key == Key.Delete)
+        //        {
+        //            actionService.DeleteSelectedFile();
+        //        }
+        //        else if (e.Key == Key.Down)
+        //        {
+        //            actionService.OpenOutputFolderInExplorer();
+        //        }
+        //        else if (e.Key == Key.Left)
+        //        {
+        //            actionService.SelectPreviousFile();
+        //        }
+        //        else if (e.Key == Key.Right)
+        //        {
+        //            actionService.SelectNextFile();
+        //        }
+        //        else if (e.Key == Key.Space)
+        //        {
+        //            actionService.TogglePlayPauseSelectedFile();
+        //        }
+        //        else if (e.Key == Key.Escape)
+        //        {
+        //            actionService.StopPlayingSelectedFile();
+        //        }
+        //        else if (e.Key == Key.X)
+        //        {
+        //            actionService.ExportSelectedFile();
+        //        }
+        //    }
+        //}
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            actionService.Exit();
+            Application.Current.Shutdown();
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)

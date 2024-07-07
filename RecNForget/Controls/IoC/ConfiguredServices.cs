@@ -5,6 +5,7 @@ using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.ViewModels;
 using System;
+using System.Windows.Controls;
 
 namespace RecNForget.Controls.IoC;
 
@@ -67,5 +68,7 @@ public class ConfiguredServices
         serviceCollection.AddSingleton<NewToApplicationViewModel>();
         serviceCollection.AddSingleton<QuickTipViewModel>();
         serviceCollection.AddSingleton<SettingsViewModel>();
+
+        serviceCollection.AddSingleton<ContextMenuCommands>();
     }
 }

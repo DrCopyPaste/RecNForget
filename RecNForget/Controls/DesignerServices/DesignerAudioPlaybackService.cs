@@ -60,5 +60,10 @@ namespace RecNForget.Services.Designer
         {
             throw new NotImplementedException();
         }
+
+        public bool QueueFiles(string[] filePaths)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

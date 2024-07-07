@@ -1,33 +1,34 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 using NAudio.Wave;
 using Notifications.Wpf.Core;
+using RecNForget.Controls;
 using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Contracts.Events;
-using RecNForget.WPF.Services.Contracts;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace RecNForget.ViewModels;
 
 public partial class MainViewModel : ObservableValidator
 {
     private readonly NotificationManager notificationManager = new NotificationManager();
-    private readonly IActionService actionService;
     private readonly IAppSettingService appSettingService;
     private readonly IAudioRecordingService audioRecordingService;
     private readonly IAudioPlaybackService audioPlaybackService;
     private readonly ISelectedFileService selectedFileService;
 
     public MainViewModel(
-        IActionService actionService,
         IAppSettingService appSettingService,
         IAudioRecordingService audioRecordingService,
         IAudioPlaybackService audioPlaybackService,
         ISelectedFileService selectedFileService)
     {
-        this.actionService = actionService;
         this.appSettingService = appSettingService;
         this.audioRecordingService = audioRecordingService;
         this.audioPlaybackService = audioPlaybackService;
@@ -93,20 +94,32 @@ public partial class MainViewModel : ObservableValidator
         {
             if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording || appSettingService.AutoReplayAudioAfterRecording)
             {
+                var fileQueue = new List<string>();
+
                 if (appSettingService.PlayAudioFeedBackMarkingStartAndStopRecording)
                 {
-                    actionService.QueueAudioPlayback(fileName: audioPlaybackService.RecordStopAudioFeedbackPath);
+                    fileQueue.Add(audioPlaybackService.RecordStopAudioFeedbackPath);
                 }
+
+                
 
                 if (appSettingService.AutoReplayAudioAfterRecording)
                 {
-                    actionService.QueueAudioPlayback(
-                        fileName: audioRecordingService.LastFileName,
-                        startIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStartAudioFeedbackPath : null,
-                        endIndicatorFileName: appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying ? audioPlaybackService.ReplayStopAudioFeedbackPath : null);
+                    if (appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying)
+                    {
+                        fileQueue.Add(audioPlaybackService.ReplayStartAudioFeedbackPath);
+                    }
+
+                    fileQueue.Add(audioRecordingService.LastFileName);
+
+                    if (appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying)
+                    {
+                        fileQueue.Add(audioPlaybackService.ReplayStopAudioFeedbackPath);
+                    }
                 }
 
-                actionService.TogglePlayPauseAudio();
+                audioPlaybackService.QueueFiles(fileQueue.ToArray());
+                TogglePlaySelectedFileCommand.Execute(this);
             }
 
             TaskBar_ProgressState = "None";
@@ -184,25 +197,160 @@ public partial class MainViewModel : ObservableValidator
     [RelayCommand]
     private void ChangeSelectedFileName()
     {
-        if (selectedFileService.HasSelectedFile) actionService.ChangeSelectedFileName();
+        if (!selectedFileService.HasSelectedFile) return;
+
+        audioPlaybackService.Stop();
+        audioPlaybackService.KillAudio();
+
+        CustomMessageBox tempDialog = new CustomMessageBox(
+            caption: "Rename the selected file",
+            icon: CustomMessageBoxIcon.Question,
+            buttons: CustomMessageBoxButtons.OkAndCancel,
+            messageRows: new List<string>(),
+            prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
+            controlFocus: CustomMessageBoxFocus.Prompt,
+            promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+        // tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+        if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+        {
+            if (!selectedFileService.RenameSelectedFileWithoutExtension(tempDialog.PromptContent))
+            {
+                notificationManager.ShowAsync(
+                    content: new NotificationContent()
+                    {
+                        Title = "Something went wrong",
+                        Message = "An unknown error occurred trying to rename the selected file",
+                        Type = NotificationType.Error
+                    },
+                    expirationTime: TimeSpan.FromSeconds(10));
+            }
+        }
     }
 
     [RelayCommand]
     private void DeleteSelectedFile()
     {
-        if (selectedFileService.HasSelectedFile) actionService.DeleteSelectedFile();
+        if (!selectedFileService.HasSelectedFile) return;
+
+        audioPlaybackService.Stop();
+        audioPlaybackService.KillAudio();
+
+        CustomMessageBox tempDialog = new CustomMessageBox(
+            caption: "Are you sure you want to delete this file?",
+            icon: CustomMessageBoxIcon.Question,
+            buttons: CustomMessageBoxButtons.OkAndCancel,
+            messageRows: new List<string>() { selectedFileService.SelectedFile.FullName },
+            controlFocus: CustomMessageBoxFocus.Ok);
+
+        //tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+        if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+        {
+            if (!selectedFileService.DeleteSelectedFile())
+            {
+                notificationManager.ShowAsync(
+                    content: new NotificationContent()
+                    {
+                        Title = "Something went wrong",
+                        Message = "An unknown error occurred trying to delete the selected file.",
+                        Type = NotificationType.Error
+                    },
+                    expirationTime: TimeSpan.FromSeconds(10));
+            }
+        }
     }
 
     [RelayCommand]
     private void ExportSelectedFile()
     {
-        if (selectedFileService.HasSelectedFile) actionService.ExportSelectedFile();
+        if (!selectedFileService.HasSelectedFile) return;
+
+        var preferredFileName = string.Empty;
+
+        if (appSettingService.PromptForExportFileName)
+        {
+            CustomMessageBox tempDialog = new CustomMessageBox(
+                caption: "Select a filename for the exported file",
+                icon: CustomMessageBoxIcon.Question,
+                buttons: CustomMessageBoxButtons.OkAndCancel,
+                messageRows: new List<string>(),
+                prompt: Path.GetFileNameWithoutExtension(selectedFileService.SelectedFile.Name),
+                controlFocus: CustomMessageBoxFocus.Prompt,
+                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+            // tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+            if (!tempDialog.ShowDialog().HasValue || !tempDialog.Ok)
+            {
+                return;
+            }
+
+            preferredFileName = tempDialog.PromptContent;
+        }
+
+        var task = Task.Run(() =>
+        {
+            notificationManager.ShowAsync(
+              content: new NotificationContent()
+              {
+                  Type = NotificationType.Information,
+                  Title = $"Exporting {selectedFileService.SelectedFile.Name} MP3 @ {appSettingService.Mp3ExportBitrate} kbps",
+                  Message = $"Export has started, this may take a moment..."
+              });
+
+            var exportedFileName = selectedFileService.ExportFile(preferredFileName);
+
+            if (string.IsNullOrEmpty(exportedFileName))
+            {
+                notificationManager.ShowAsync(
+                    content: new NotificationContent()
+                    {
+                        Title = "Something went wrong",
+                        Message = "An unknown error occurred trying to export the selected file",
+                        Type = NotificationType.Error
+                    },
+                    expirationTime: TimeSpan.FromSeconds(10));
+                return;
+            }
+
+            notificationManager.ShowAsync(
+              content: new NotificationContent()
+              {
+                  Type = NotificationType.Success,
+                  Title = $"{selectedFileService.SelectedFile.Name} exported to MP3!",
+                  Message = $"Export was successful, file has been exported to {exportedFileName}."
+              },
+              onClick: () =>
+              {
+                  string argument = "/select, \"" + exportedFileName + "\"";
+                  System.Diagnostics.Process.Start("explorer.exe", argument);
+              });
+        });
     }
 
     [RelayCommand]
     private void SelectInExplorer()
     {
-        if (selectedFileService.HasSelectedFile) actionService.OpenOutputFolderInExplorer();
+        var directory = new DirectoryInfo(appSettingService.OutputPath);
+
+        if (selectedFileService.HasSelectedFile && selectedFileService.SelectedFile.Exists)
+        {
+            // if there is a result select it in an explorer window
+            string argument = "/select, \"" + selectedFileService.SelectedFile.FullName + "\"";
+            System.Diagnostics.Process.Start("explorer.exe", argument);
+        }
+        else
+        {
+            if (!directory.Exists)
+            {
+                directory.Create();
+            }
+
+            // otherwise just open output path in explorer
+            Process.Start(appSettingService.OutputPath);
+        }
     }
 
     [RelayCommand]
@@ -214,13 +362,39 @@ public partial class MainViewModel : ObservableValidator
     [RelayCommand]
     private void TogglePlaySelectedFile()
     {
-        actionService.TogglePlayPauseSelectedFile();
+        if (audioPlaybackService.ItemsCount == 0)
+        {
+            if (appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying)
+            {
+                audioPlaybackService.QueueFile(audioPlaybackService.ReplayStartAudioFeedbackPath);
+            }
+
+            audioPlaybackService.QueueFile(selectedFileService.SelectedFile.FullName);
+
+            if (appSettingService.PlayAudioFeedBackMarkingStartAndStopReplaying)
+            {
+                audioPlaybackService.QueueFile(audioPlaybackService.ReplayStopAudioFeedbackPath);
+            }
+        }
+
+        if (audioPlaybackService.PlaybackState == PlaybackState.Stopped)
+        {
+            audioPlaybackService.Play();
+        }
+        else if (audioPlaybackService.PlaybackState == PlaybackState.Playing)
+        {
+            audioPlaybackService.Pause();
+        }
+        else if (audioPlaybackService.PlaybackState == PlaybackState.Paused)
+        {
+            audioPlaybackService.Play();
+        }
     }
 
     [RelayCommand]
     private void StopPlaying()
     {
-        actionService.StopPlayingSelectedFile();
+        audioPlaybackService.Stop();
     }
 
     [RelayCommand]
@@ -232,20 +406,51 @@ public partial class MainViewModel : ObservableValidator
     [RelayCommand]
     private void ToggleRecording()
     {
-        actionService.ToggleStartStopRecording();
+        audioRecordingService.ToggleRecording();
     }
 
     [RelayCommand]
     private void UpdateFileNamePattern()
     {
-        actionService.ChangeFileNamePattern();
+        CustomMessageBox tempDialog = new CustomMessageBox(
+                caption: "Type in a new pattern for file name generation.",
+                icon: CustomMessageBoxIcon.Question,
+                buttons: CustomMessageBoxButtons.OkAndCancel,
+                messageRows: new List<string>() { "Supported placeholders:", "(Date), (Guid)", "If you do not provide a placeholder to create unique file names, RecNForget will do it for you." },
+                prompt: appSettingService.FilenamePrefix,
+                controlFocus: CustomMessageBoxFocus.Prompt,
+                promptValidationMode: CustomMessageBoxPromptValidation.EraseIllegalPathCharacters);
+
+        // tempDialog.TrySetViewablePositionFromOwner(OwnerControl);
+
+        if (tempDialog.ShowDialog().HasValue && tempDialog.Ok)
+        {
+            appSettingService.FilenamePrefix = tempDialog.PromptContent;
+            appSettingService.Persist();
+        }
+
         ProjectedOutputPathIncludingFilePattern = audioRecordingService.GetTargetPathTemplateString();
     }
 
     [RelayCommand]
     private void UpdateOutputFolder()
     {
-        actionService.ChangeOutputFolder();
+        var dialog = new OpenFolderDialog();
+        if (!string.IsNullOrEmpty(appSettingService.OutputPath))
+        {
+            dialog.DefaultDirectory = appSettingService.OutputPath;
+        }
+
+        var result = dialog.ShowDialog();
+
+        if (result.HasValue && result.Value)
+        {
+            appSettingService.OutputPath = dialog.FolderName;
+            appSettingService.Persist();
+
+            selectedFileService.SelectLatestFile();
+        }
+
         ProjectedOutputPathIncludingFilePattern = audioRecordingService.GetTargetPathTemplateString();
     }
 

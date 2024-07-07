@@ -1,14 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using H.NotifyIcon;
+using Microsoft.Extensions.DependencyInjection;
 using RecNForget.Controls;
 using RecNForget.Controls.Helper;
 using RecNForget.Controls.IoC;
 using RecNForget.Controls.Services;
-using System;
-using System.Threading.Tasks;
-using System.Windows;
-using RecNForget.WPF.Services.Contracts;
 using RecNForget.Services.Contracts;
-using RecNForget.Services;
+using RecNForget.ViewModels;
+using RecNForget.WPF.Services.Contracts;
+using System;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace RecNForget
 {
@@ -37,6 +39,8 @@ namespace RecNForget
                 app.Run();
             }
         }
+
+        public static ContextMenu ContextMenu { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -72,6 +76,20 @@ namespace RecNForget
             actionService.OwnerControl = mainWindow;
 
             HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService);
+
+            Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/RecNForget;component/Images/logo.ico")).Stream;
+            var icon = new System.Drawing.Icon(iconStream);
+            var menuCommands = ConfiguredServices.ServiceProvider.GetRequiredService<ContextMenuCommands>();
+
+            ContextMenu = menuCommands.ContextMenu;
+
+            TaskbarIcon taskbarIcon = new TaskbarIcon
+            {
+                Icon = icon,
+                ContextMenu = ContextMenu
+            };
+
+            taskbarIcon.ForceCreate();
         }
 
         private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService)
@@ -96,7 +114,8 @@ namespace RecNForget
 
             if (appSettingService.CheckForUpdateOnStart)
             {
-                Task.Run(() => { actionService.CheckForUpdatesAsync(showMessages: false); });
+                var aboutViewModel = ConfiguredServices.ServiceProvider.GetRequiredService<AboutViewModel>();
+                aboutViewModel.CheckForUpdatesCommand.Execute(false);
             }
         }
     }

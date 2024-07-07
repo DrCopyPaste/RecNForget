@@ -1,24 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace RecNForget.WPF.Services.Contracts
 {
     public interface IActionService
     {
         System.Windows.Controls.Control OwnerControl { get; set; }
-
-        // change output directory (with dialog)
-        void ChangeOutputFolder();
-
-        // change file name pattern (with dialog)
-        void ChangeFileNamePattern();
-
-        Task<bool> CheckForUpdatesAsync(bool showMessages = false);
-
-        // open explorer for output folder (select file if there is any)
-        void OpenOutputFolderInExplorer();
 
         // skip to previous file
         void SelectPreviousFile();
@@ -35,15 +21,7 @@ namespace RecNForget.WPF.Services.Contracts
         // toggle start recording/ stop recording (and saving as file)
         void ToggleStartStopRecording();
 
-        // change selected file name (with dialog)
-        void ChangeSelectedFileName();
-
-        // delete selected file (with dialog)
-        void DeleteSelectedFile();
-
         bool QueueAudioPlayback(string fileName = null, string startIndicatorFileName = null, string endIndicatorFileName = null);
-
-        void ShowApplicationMenu();
 
         void TogglePlayPauseAudio();
         void ShowSettingsMenu();
@@ -55,7 +33,6 @@ namespace RecNForget.WPF.Services.Contracts
         void ShowNewToApplicationWindow();
         void ShowNewToVersionDialog(Version currentFileVersion, Version lastInstalledVersion);
         void ShowRandomApplicationTip();
-        void ExportSelectedFile();
         void ToggleRecordingTimerControlVisibility();
     }
 }

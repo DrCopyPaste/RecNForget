@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 
 namespace RecNForget.Services
 {
@@ -45,6 +46,17 @@ namespace RecNForget.Services
         public PlaybackState PlaybackState => audioOutputDevice == null ? PlaybackState.Stopped : audioOutputDevice.PlaybackState;
 
         public int ItemsCount => filePathList.Count;
+
+        public bool QueueFiles(string[] filePaths)
+        {
+            var results = new List<bool>();
+            foreach (var filePath in filePaths)
+            {
+                results.Add(QueueFile(filePath));
+            }
+
+            return results.All(x => x);
+        }
 
         public bool QueueFile(string filePath)
         {

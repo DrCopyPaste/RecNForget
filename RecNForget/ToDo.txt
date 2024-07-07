@@ -23,3 +23,10 @@ fix stylechanges for playpause- and togglerecord-buttons (with glyph icons?)
 
 Commands on usercontrols should be properly named "ActionNameRelayCommand" :D
 how best to ensure settings/about/ other windows open on top of main window if main window is set to always on top? (also affects other dialogs opened from another window)
+
+menu item icons
+theme selector
+
+windowpositions for subwindows (context menu)
+
+non global hotkeys disabled for now

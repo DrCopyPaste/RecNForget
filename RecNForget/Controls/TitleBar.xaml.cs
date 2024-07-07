@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
+using System.Windows.Forms.Design;
 
 namespace RecNForget.Controls
 {
@@ -14,8 +15,6 @@ namespace RecNForget.Controls
     /// </summary>
     public partial class TitleBar : UserControl, INotifyPropertyChanged
     {
-        private IActionService actionService = null;
-
         private bool withSettingsButton = false;
 
         public bool WithSettingsButton
@@ -43,16 +42,6 @@ namespace RecNForget.Controls
         public TitleBar()
         {
             InitializeComponent();
-
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                this.actionService = new RecNForget.Services.Designer.DesignerActionService();
-                return;
-            }
-            else
-            {
-                this.actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
-            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -64,7 +53,7 @@ namespace RecNForget.Controls
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            actionService.ShowApplicationMenu();
+            App.ContextMenu.IsOpen = true;
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)

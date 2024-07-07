@@ -12,22 +12,18 @@ namespace RecNForget.Services
         private readonly IAppSettingService appSettingService;
         private readonly IAudioRecordingService audioRecordingService;
         private readonly IAudioPlaybackService audioPlaybackService;
-        private readonly IActionService actionService;
         private readonly ISimpleGlobalHotkeyService globalHotkeyService;
 
         public ApplicationHotkeyService(
             ISimpleGlobalHotkeyService globalHotkeyService,
             IAppSettingService appSettingService,
             IAudioRecordingService audioRecordingService,
-            IAudioPlaybackService audioPlaybackService,
-            IActionService actionService)
+            IAudioPlaybackService audioPlaybackService)
         {
             this.globalHotkeyService = globalHotkeyService;
             this.appSettingService = appSettingService;
             this.audioRecordingService = audioRecordingService;
             this.audioPlaybackService = audioPlaybackService;
-
-            this.actionService = actionService;
             //ResetAndReadHotkeysFromConfig();
         }
 
@@ -45,7 +41,7 @@ namespace RecNForget.Services
             // hotkey action should not make hotkeyservice/hook wait
             globalHotkeyService.AddOrUpdateOnReleaseHotkey(
                 PressedKeysInfo.FromString(appSettingService.HotKey_StartStopRecording),
-                () => { if (audioPlaybackService.PlaybackState == PlaybackState.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } });
+                () => { if (audioPlaybackService.PlaybackState == PlaybackState.Stopped) { currentDispatcher.Invoke(() => audioRecordingService.ToggleRecording()); } });
             //() =>
             //{
             //    var task = Task.Run(() => { if (audioPlaybackService.Stopped) { currentDispatcher.Invoke(() => actionService.ToggleStartStopRecording()); } });
