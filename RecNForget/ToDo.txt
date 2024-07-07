@@ -30,3 +30,5 @@ theme selector
 windowpositions for subwindows (context menu)
 
 non global hotkeys disabled for now
+
+notificationmanager via di

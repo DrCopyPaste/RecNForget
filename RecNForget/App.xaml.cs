@@ -1,14 +1,15 @@
 ﻿using H.NotifyIcon;
 using Microsoft.Extensions.DependencyInjection;
+using Notifications.Wpf.Core;
 using RecNForget.Controls;
 using RecNForget.Controls.Helper;
 using RecNForget.Controls.IoC;
-using RecNForget.Controls.Services;
+using RecNForget.Help;
 using RecNForget.Services.Contracts;
 using RecNForget.ViewModels;
-using RecNForget.WPF.Services.Contracts;
 using System;
 using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,7 +21,7 @@ namespace RecNForget
     public partial class App : Application
     {
         private MainWindow mainWindow = null;
-        private IActionService actionService;
+        private readonly NotificationManager notificationManager = new NotificationManager();
 
         [STAThread]
         public static void Main()
@@ -44,7 +45,6 @@ namespace RecNForget
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ConfiguredServices.ServiceCollection.AddSingleton<IActionService, ActionService>();
             ConfiguredServices.ServiceCollection.BuildServiceProvider();
 
             var appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
@@ -68,14 +68,12 @@ namespace RecNForget
 
             var hotkeyService = ConfiguredServices.ServiceProvider.GetRequiredService<IApplicationHotkeyService>();
 
-            actionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
             ThemeManager.ChangeTheme(appSettingService.WindowTheme);
 
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
             mainWindow = ConfiguredServices.ServiceProvider.GetRequiredService<MainWindow>();
-            actionService.OwnerControl = mainWindow;
 
-            HandleFirstStartAndUpdates(actionService, appSettingService, hotkeyService);
+            HandleFirstStartAndUpdates(appSettingService, hotkeyService);
 
             Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/RecNForget;component/Images/logo.ico")).Stream;
             var icon = new System.Drawing.Icon(iconStream);
@@ -92,7 +90,7 @@ namespace RecNForget
             taskbarIcon.ForceCreate();
         }
 
-        private void HandleFirstStartAndUpdates(IActionService actionService, IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService)
+        private void HandleFirstStartAndUpdates(IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService)
         {
             var previouslyInstalledVersion = appSettingService.LastInstalledVersion;
             hotkeyService.ResetAndReadHotkeysFromConfig();
@@ -101,15 +99,17 @@ namespace RecNForget
 
             if (appSettingService.FirstApplicationStart)
             {
-                actionService.ShowNewToApplicationWindow();
+                var newToApplicationWindow = ConfiguredServices.ServiceProvider.GetRequiredService<NewToApplicationWindow>();
+                newToApplicationWindow.ShowDialog();
             }
             else if (configVersionWasUpdated)
             {
-                actionService.ShowNewToVersionDialog(appSettingService.LastInstalledVersion, previouslyInstalledVersion);
+                var newToVersionDialog = new NewToVersionDialog(previouslyInstalledVersion, appSettingService.LastInstalledVersion, appSettingService);
+                newToVersionDialog.ShowDialog();
             }
             else if (appSettingService.ShowTipsAtApplicationStart)
             {
-                actionService.ShowRandomApplicationTip();
+                ShowRandomApplicationTip();
             }
 
             if (appSettingService.CheckForUpdateOnStart)
@@ -117,6 +117,45 @@ namespace RecNForget
                 var aboutViewModel = ConfiguredServices.ServiceProvider.GetRequiredService<AboutViewModel>();
                 aboutViewModel.CheckForUpdatesCommand.Execute(false);
             }
+        }
+
+        private void ShowRandomApplicationTip()
+        {
+            var randomTip = HelpFeature.GetRandomFeature();
+
+            int rowCount = 0;
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Did you know?");
+            sb.AppendLine();
+
+            foreach (var line in randomTip.HelpLines)
+            {
+                if (rowCount > 3) break;
+
+                sb.AppendLine(line.Content);
+                rowCount++;
+            }
+
+            if (rowCount < randomTip.HelpLines.Count)
+            {
+                sb.AppendLine();
+                sb.AppendLine("... (click to read more)");
+            }
+
+            notificationManager.ShowAsync(
+                content: new NotificationContent()
+                {
+                    Title = randomTip.Title,
+                    Message = sb.ToString(),
+                    Type = NotificationType.Information
+                },
+                expirationTime: TimeSpan.FromSeconds(10),
+                onClick: () =>
+                {
+                    var quickTip = ConfiguredServices.ServiceProvider.GetRequiredService<QuickTipDialog>();
+                    quickTip.SetQuickTip(randomTip);
+                    quickTip.ShowDialog();
+                });
         }
     }
 }

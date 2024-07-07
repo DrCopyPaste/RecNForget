@@ -42,8 +42,6 @@ public class ConfiguredServices
     private static ServiceProvider internalServiceProvider = null;
     private static void AddConfiguredServices(ServiceCollection serviceCollection)
     {
-        //serviceCollection.AddSingleton<IActionService, ActionService>();
-
         serviceCollection.AddSingleton<IAppSettingService>(UserConfigurationService.Init());
         serviceCollection.AddSingleton<ISelectedFileService, SelectedFileService>();
         serviceCollection.AddSingleton<IAudioPlaybackService, AudioPlaybackService>();

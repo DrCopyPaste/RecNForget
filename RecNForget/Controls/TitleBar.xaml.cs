@@ -1,12 +1,7 @@
-﻿using RecNForget.Controls.IoC;
-using RecNForget.WPF.Services.Contracts;
-using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Extensions.DependencyInjection;
-using System.Windows.Forms.Design;
 
 namespace RecNForget.Controls
 {

@@ -1,8 +1,4 @@
-﻿using RecNForget.WPF.Services.Contracts;
-using System.ComponentModel;
-using System.Windows;
-
-namespace RecNForget.Services.Contracts
+﻿namespace RecNForget.Services.Contracts
 {
     public interface IApplicationHotkeyService
     {

@@ -1,15 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Notifications.Wpf.Core;
-using RecNForget.Controls.Services;
 using RecNForget.Controls;
+using RecNForget.Controls.Services;
 using RecNForget.Services.Contracts;
-using RecNForget.WPF.Services.Contracts;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Linq;
-using RecNForget.Controls.Extensions;
+using System.Threading.Tasks;
 
 namespace RecNForget.ViewModels;
 

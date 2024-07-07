@@ -1,13 +1,6 @@
-﻿using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
-using RecNForget.WPF.Services.Contracts;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using RecNForget.ViewModels;
 using System.Windows;
 using System.Windows.Input;
-using Microsoft.Win32;
-using RecNForget.Services;
-using RecNForget.ViewModels;
 
 namespace RecNForget.Controls
 {

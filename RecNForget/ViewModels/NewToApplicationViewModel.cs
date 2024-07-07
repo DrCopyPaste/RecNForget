@@ -1,10 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Microsoft.Extensions.DependencyInjection;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using RecNForget.Controls;
-using RecNForget.Services;
+using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
-using RecNForget.WPF.Services.Contracts;
 using System.Windows;
 
 namespace RecNForget.ViewModels;
@@ -13,18 +13,15 @@ public partial class NewToApplicationViewModel : ObservableValidator
 {
     private readonly IApplicationHotkeyService hotkeyService;
     private readonly IAppSettingService settingService;
-    private readonly IActionService actionService;
     private readonly ISelectedFileService selectedFileService;
 
     public NewToApplicationViewModel(
-        IActionService actionService,
         IAppSettingService settingService,
         IApplicationHotkeyService hotkeyService,
         ISelectedFileService selectedFileService)
     {
         this.hotkeyService = hotkeyService;
         this.settingService = settingService;
-        this.actionService = actionService;
         this.selectedFileService = selectedFileService;
 
         OutputFolder = settingService.OutputPath;
@@ -66,7 +63,8 @@ public partial class NewToApplicationViewModel : ObservableValidator
     [RelayCommand]
     private void OpenSettings()
     {
-        actionService.ShowSettingsMenu();
+        var appSettingService = ConfiguredServices.ServiceProvider.GetRequiredService<SettingsWindow>();
+        appSettingService.ShowDialog();
     }
 
     [ObservableProperty]

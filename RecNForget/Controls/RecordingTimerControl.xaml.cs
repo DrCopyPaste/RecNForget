@@ -2,7 +2,6 @@
 using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Designer;
-using RecNForget.WPF.Services.Contracts;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -16,7 +15,6 @@ namespace RecNForget.Controls
     public partial class RecordingTimerControl : UserControl, INotifyPropertyChanged
     {
         private IAppSettingService settingService;
-        private IActionService actionService;
         private IAudioRecordingService audioRecordingService;
 
         public RecordingTimerControl()
@@ -25,7 +23,6 @@ namespace RecNForget.Controls
 
             if (DesignerProperties.GetIsInDesignMode(this))
             {
-                ActionService = new DesignerActionService();
                 SettingService = new DesignerAppSettingService();
                 AudioRecordingService = new DesignerAudioRecordingService();
 
@@ -33,24 +30,11 @@ namespace RecNForget.Controls
             }
             else
             {
-                ActionService = ConfiguredServices.ServiceProvider.GetRequiredService<IActionService>();
                 SettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
                 AudioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
             }
         }
-        public IActionService ActionService
-        {
-            get
-            {
-                return actionService;
-            }
 
-            set
-            {
-                actionService = value;
-                OnPropertyChanged();
-            }
-        }
         public IAppSettingService SettingService
         {
             get

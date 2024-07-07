@@ -1,9 +1,7 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Threading;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 using PressingIssue.Services.Contracts;
 using RecNForget.Services.Contracts;
-using RecNForget.WPF.Services.Contracts;
+using System.Windows.Threading;
 
 namespace RecNForget.Services
 {

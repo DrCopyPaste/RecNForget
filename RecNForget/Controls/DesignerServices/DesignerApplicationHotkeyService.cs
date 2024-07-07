@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RecNForget.Services.Contracts;
-using RecNForget.WPF.Services.Contracts;
+﻿using RecNForget.Services.Contracts;
+using System;
 
 namespace RecNForget.Services.Designer
 {
