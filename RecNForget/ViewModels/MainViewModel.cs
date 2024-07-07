@@ -43,6 +43,11 @@ public partial class MainViewModel : ObservableValidator
         RecordButtonEnabled = true;
 
         selectedFileService.SelectLatestFile();
+
+        OutputPathControlVisible = appSettingService.OutputPathControlVisible;
+        SelectedFileControlVisible = appSettingService.SelectedFileControlVisible;
+        RecordingTimerControlVisible = appSettingService.RecordingTimerControlVisible;
+
     }
 
     ~MainViewModel()
@@ -459,6 +464,15 @@ public partial class MainViewModel : ObservableValidator
         HasSelectedFile = false;
         SelectedFilePath = "(no file found or selected)";
     }
+
+    [ObservableProperty]
+    private bool outputPathControlVisible;
+
+    [ObservableProperty]
+    private bool selectedFileControlVisible;
+
+    [ObservableProperty]
+    private bool recordingTimerControlVisible;
 
     [ObservableProperty]
     private bool skipPrevButtonEnabled;

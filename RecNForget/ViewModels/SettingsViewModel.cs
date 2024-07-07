@@ -16,17 +16,22 @@ public partial class SettingsViewModel : ObservableValidator
     private readonly IApplicationHotkeyService hotkeyService;
     private readonly ISelectedFileService selectedFileService;
     private readonly MainWindow mainWindow;
+    private readonly MainViewModel mainViewModel
+;
     private readonly NotificationManager notificationManager = new NotificationManager();
 
     public SettingsViewModel(
         IAppSettingService settingService,
         IApplicationHotkeyService hotkeyService,
         ISelectedFileService selectedFileService,
-        MainWindow mainWindow)
+        MainWindow mainWindow,
+        MainViewModel mainViewModel
+        )
     {
         this.settingService = settingService;
         this.hotkeyService = hotkeyService;
         this.mainWindow = mainWindow;
+        this.mainViewModel = mainViewModel;
         this.selectedFileService = selectedFileService;
     }
 
@@ -277,6 +282,9 @@ public partial class SettingsViewModel : ObservableValidator
         set
         {
             SetProperty(settingService.OutputPathControlVisible, value, settingService, (x, y) => x.OutputPathControlVisible = y);
+
+            mainViewModel.OutputPathControlVisible = value;
+
             settingService.Persist();
         }
     }
@@ -287,6 +295,9 @@ public partial class SettingsViewModel : ObservableValidator
         set
         {
             SetProperty(settingService.SelectedFileControlVisible, value, settingService, (x, y) => x.SelectedFileControlVisible = y);
+
+            mainViewModel.SelectedFileControlVisible = value;
+
             settingService.Persist();
         }
     }
@@ -357,6 +368,9 @@ public partial class SettingsViewModel : ObservableValidator
         set
         {
             SetProperty(settingService.RecordingTimerControlVisible, value, settingService, (x, y) => x.RecordingTimerControlVisible = y);
+
+            mainViewModel.RecordingTimerControlVisible = value;
+
             settingService.Persist();
         }
     }

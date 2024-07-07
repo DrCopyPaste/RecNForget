@@ -72,21 +72,21 @@ public partial class ContextMenuCommands : ObservableObject
                 Header = "Show Output Path Control",
                 Command = ToggleOutputPathControlCommand,
                 IsCheckable = true,
-                IsChecked = OutputPathControlVisible
+                IsChecked = settingsViewModel.OutputPathControlVisible
             });
             contextMenu.Items.Add(new MenuItem
             {
                 Header = "Show Selected File Control",
                 Command = ToggleSelectedFileControlCommand,
                 IsCheckable = true,
-                IsChecked = SelectedFileControlVisible
+                IsChecked = settingsViewModel.SelectedFileControlVisible
             });
             contextMenu.Items.Add(new MenuItem
             {
                 Header = "Show Recording Timer Control",
                 Command = ToggleRecordingTimerControlCommand,
                 IsCheckable = true,
-                IsChecked = RecordingTimerControlVisible
+                IsChecked = settingsViewModel.RecordingTimerControlVisible
             });
 
             contextMenu.Items.Add(new Separator());
@@ -135,19 +135,19 @@ public partial class ContextMenuCommands : ObservableObject
     [RelayCommand]
     private void ToggleOutputPathControl()
     {
-        OutputPathControlVisible = !OutputPathControlVisible;
+        settingsViewModel.OutputPathControlVisible = !settingsViewModel.OutputPathControlVisible;
     }
 
     [RelayCommand]
     private void ToggleSelectedFileControl()
     {
-        SelectedFileControlVisible = !SelectedFileControlVisible;
+        settingsViewModel.SelectedFileControlVisible = !settingsViewModel.SelectedFileControlVisible;
     }
 
     [RelayCommand]
     private void ToggleRecordingTimerControl()
     {
-        RecordingTimerControlVisible = !RecordingTimerControlVisible;
+        settingsViewModel.RecordingTimerControlVisible = !settingsViewModel.RecordingTimerControlVisible;
     }
 
     [RelayCommand]
@@ -198,33 +198,6 @@ public partial class ContextMenuCommands : ObservableObject
         set
         {
             SetProperty(settingsViewModel.MinimizedToTray, value, settingsViewModel, (x, y) => x.MinimizedToTray = y);
-        }
-    }
-
-    public bool OutputPathControlVisible
-    {
-        get => settingsViewModel.OutputPathControlVisible;
-        set
-        {
-            SetProperty(settingsViewModel.OutputPathControlVisible, value, settingsViewModel, (x, y) => x.OutputPathControlVisible = y);
-        }
-    }
-
-    public bool SelectedFileControlVisible
-    {
-        get => settingsViewModel.SelectedFileControlVisible;
-        set
-        {
-            SetProperty(settingsViewModel.SelectedFileControlVisible, value, settingsViewModel, (x, y) => x.SelectedFileControlVisible = y);
-        }
-    }
-
-    public bool RecordingTimerControlVisible
-    {
-        get => settingsViewModel.RecordingTimerControlVisible;
-        set
-        {
-            SetProperty(settingsViewModel.RecordingTimerControlVisible, value, settingsViewModel, (x, y) => x.RecordingTimerControlVisible = y);
         }
     }
 }

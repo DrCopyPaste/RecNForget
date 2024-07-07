@@ -70,15 +70,6 @@ namespace RecNForget.Controls
 
                 //this.KeyDown += Window_KeyDown;
                 this.MouseRightButtonUp += MainWindow_MouseRightButtonUp;
-
-                // initialize control visibility (is being toggled via SettingService_PropertyChanged - binding with bool to visibility converter did not update)
-                OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                OutputPathControlSpacer.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                SelectedFileControlSpacer.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                RecordingTimerControl.Visibility = SettingService.RecordingTimerControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                RecordingTimerControlSpacer.Visibility = SettingService.RecordingTimerControlVisible ? Visibility.Visible : Visibility.Collapsed;
-
                 this.Topmost = SettingService.WindowAlwaysOnTop;
 
 
@@ -181,27 +172,6 @@ namespace RecNForget.Controls
                 case nameof(SettingService.WindowAlwaysOnTop):
                 {
                     this.Topmost = SettingService.WindowAlwaysOnTop;
-                    break;
-                }
-
-                case nameof(SettingService.OutputPathControlVisible):
-                {
-                    OutputPathControl.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                    OutputPathControlSpacer.Visibility = SettingService.OutputPathControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                    break;
-                }
-
-                case nameof(SettingService.SelectedFileControlVisible):
-                {
-                    SelectedFileControl.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                    SelectedFileControlSpacer.Visibility = SettingService.SelectedFileControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                    break;
-                }
-
-                case nameof(SettingService.RecordingTimerControlVisible):
-                {
-                    RecordingTimerControl.Visibility = SettingService.RecordingTimerControlVisible ? Visibility.Visible : Visibility.Collapsed;
-                    RecordingTimerControlSpacer.Visibility = SettingService.RecordingTimerControlVisible ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 }
             }

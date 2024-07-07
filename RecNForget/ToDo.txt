@@ -7,10 +7,9 @@ getting updates should be cancellable
 renew/ improve? copyright helper/ content helpers
 better place for lame mp3 dlls?
 viewmodel testing
-owners for dialogs if opened from viewmodels (pass as para?)
+
 stacked buttons ontop of each other (StringSettingsButton, others?)
 extra button in StringSettingsButton is useless now
-ActionService for ALL actions? not for actions that modify settings (that need display changing at runtime => i.e. viewmodellogic)
 dialogs, topmost, viewposition, dragging and exiting (also via esc)
 
 timing control looks different design time (doubled numbers?)

@@ -8,6 +8,9 @@
         Style="{DynamicResource DefaultWindowStyle}"
         AllowsTransparency="True"
         Title="RecNForget">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
     <!-- Try to follow this node convention: (pretty much: everything that defines the grid coordinates comes first and ONLY style,
 	everything that is not defined by style must not be in the opening tags starting line
 	
@@ -29,24 +32,27 @@
 
             <Border Style="{DynamicResource DefaultWindowBorderStyle}" Grid.Column="0" Grid.Row="1">
                 <StackPanel>
-                    <local:OutputPathControl x:Name="OutputPathControl"
+                    <local:OutputPathControl Visibility="{Binding OutputPathControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                         ProjectedOutputPathIncludingFilePattern="{Binding ProjectedOutputPathIncludingFilePattern}"
                         d:ProjectedOutputPathIncludingFilePattern="C:\Path\To\File(Date)_(Guid).ext"
                         UpdateFileNamePatternCommand="{Binding UpdateFileNamePatternCommand}"
                         UpdateOutputFolderCommand="{Binding UpdateOutputFolderCommand}"
                         />
-                    <Separator x:Name="OutputPathControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
-                    <local:SelectedFileControl
+                    <Separator Visibility="{Binding OutputPathControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Style="{DynamicResource DefaultSeparator_Style}" />
+
+                    <local:SelectedFileControl Visibility="{Binding SelectedFileControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                         FileInfoText="{Binding FileInfoText}"
                         SelectedFilePath="{Binding SelectedFilePath}"
                         ChangeSelectedFileNameCommand="{Binding ChangeSelectedFileNameCommand}"
                         DeleteSelectedFileCommand="{Binding DeleteSelectedFileCommand}"
-                        ExportSelectedFileCommand="{Binding ExportSelectedFileCommand}"
-                            x:Name="SelectedFileControl" />
-                    <Separator x:Name="SelectedFileControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
-                    <local:RecordingTimerControl
-                            x:Name="RecordingTimerControl"/>
-                    <Separator x:Name="RecordingTimerControlSpacer" Style="{DynamicResource DefaultSeparator_Style}" />
+                        ExportSelectedFileCommand="{Binding ExportSelectedFileCommand}" />
+                    <Separator x:Name="SelectedFileControlSpacer" Visibility="{Binding SelectedFileControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Style="{DynamicResource DefaultSeparator_Style}" />
+
+                    <local:RecordingTimerControl Visibility="{Binding RecordingTimerControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Separator Visibility="{Binding RecordingTimerControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Style="{DynamicResource DefaultSeparator_Style}" />
                     <local:RecordingAndPlaybackControl
                         SkipPrevButtonEnabled="{Binding SkipPrevButtonEnabled}"
                         PlayPauseButtonEnabled="{Binding PlayPauseButtonEnabled}"
