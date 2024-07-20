@@ -7,10 +7,8 @@ namespace RecNForget.Services.Contracts
 {
     public interface IAudioRecordingService
     {
-        string CurrentRecordingStartAfterTimer { get; set; }
-        string CurrentRecordingStopAfterTimer { get; set; }
-        bool TimerForRecordingStartAfterNotRunning { get; set; }
-        bool TimerForRecordingStopAfterNotRunning { get; set; }
+        bool TimerForRecordingStartAfterNotRunning { get; }
+        bool TimerForRecordingStopAfterNotRunning { get; }
         string CurrentFileName { get; }
 
         string LastFileName { get; }
@@ -20,6 +18,10 @@ namespace RecNForget.Services.Contracts
         bool CurrentlyNotRecording { get; }
 
         event EventHandler<AudioRecordingServiceEventArgs> AudioRecordingStateChanged;
+        event EventHandler<TimerTickEventArgs> StartAfterTimerTick;
+        event EventHandler<TimerTickEventArgs> StopAfterTimerTick;
+        event EventHandler<TimerStateToggleEventArgs> StopAfterTimerStateToggle;
+        event EventHandler<TimerStateToggleEventArgs> StartAfterTimerStateToggle;
 
         // starts or stops recording according to CurrentlyRecording state
         void ToggleRecording();

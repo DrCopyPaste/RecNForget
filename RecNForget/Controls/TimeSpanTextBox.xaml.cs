@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -21,15 +22,8 @@ namespace RecNForget.Controls
     /// When enabled this textbox updates the bound value from "TextValueTimeSpan" according to current valid text contents
     /// When disabled this does not update the underlying bound value (can be used for countdown timer mode in which u dont want to update the underlyling setting every second)
     /// </summary>
-    public partial class TimeSpanTextBox : UserControl, INotifyPropertyChanged
+    public partial class TimeSpanTextBox : UserControl
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public string TimerBoundTextValueTimeSpan
         {
             get { return (string)GetValue(TimerBoundTextValueTimeSpanProperty); }
@@ -45,10 +39,7 @@ namespace RecNForget.Controls
         public string SettingTextValueTimeSpan
         {
             get { return (string)GetValue(SettingTextValueTimeSpanProperty); }
-            set {
-                SetValue(SettingTextValueTimeSpanProperty, value);
-                OnPropertyChanged();
-            }
+            set { SetValue(SettingTextValueTimeSpanProperty, value); }
         }
 
         public static readonly DependencyProperty SettingTextValueTimeSpanProperty =
@@ -56,11 +47,8 @@ namespace RecNForget.Controls
 
         public TimeSpanTextBox()
         {
-            DataContext = this;
             InitializeComponent();
-
             this.IsEnabledChanged += TimeSpanTextBox_IsEnabledChanged;
-            ShowEditableTextBoxConditionally();
         }
 
         private void TimeSpanTextBox_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -70,14 +58,15 @@ namespace RecNForget.Controls
 
         private void ShowEditableTextBoxConditionally()
         {
-            // if enabled show editable timespanbox SettingTextValueTimeSpanBoxTextBox which binds to SettingTextValueTimeSpan
-            // otherwise show disabled timespanbox TimerBoundTextValueTimeSpan which binds to SettingTextValueTimeSpan
+            // IsEnabled means setting can be edited, IsEnabled == false means timer is running
             SettingTextValueTimeSpanBoxTextBox.Visibility = IsEnabled ? Visibility.Visible : Visibility.Collapsed;
             TimerBoundTextValueTimeSpanTextBox.Visibility = IsEnabled ? Visibility.Collapsed : Visibility.Visible;
         }
 
         void TimeSpanTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!e.Changes.Any()) return;
+
             var newValue = (sender as TextBox).Text;
             var tbEntry = sender as TextBox;
 
@@ -93,19 +82,22 @@ namespace RecNForget.Controls
             workingValue = workingValue.Insert(workingValue.Length - 5, ":");
             workingValue = workingValue.Insert(workingValue.Length - 8, ":");
 
-            // maybe only write back setting value when focus is lost?
-            tbEntry.Text = workingValue;
-            tbEntry.CaretIndex = tbEntry.Text.Length;
-
             var parseSuccessful = TimeSpan.TryParseExact(workingValue, Formats.TimeSpanFormat, CultureInfo.InvariantCulture, out TimeSpan outputTimeSpan);
             ValidationErrorMark.Visibility = parseSuccessful ? Visibility.Hidden : Visibility.Visible;
 
             // only update underlying bound value if the entered value was valid
-            if (parseSuccessful)
+            if (!parseSuccessful)
             {
-                BindingExpression binding = SettingTextValueTimeSpanBoxTextBox.GetBindingExpression(TextBox.TextProperty);
-                binding.UpdateSource();
+                e.Handled = true;
+                return;
             }
+
+            var binding = BindingOperations.GetBindingExpression((TextBox)sender, TextBox.TextProperty);
+            binding.Target.SetCurrentValue(TextBox.TextProperty, workingValue);
+            binding.UpdateSource();
+
+            tbEntry.CaretIndex = tbEntry.Text.Length;
+            e.Handled = true;
         }
     }
 }

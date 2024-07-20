@@ -50,9 +50,20 @@
                     <Separator x:Name="SelectedFileControlSpacer" Visibility="{Binding SelectedFileControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Style="{DynamicResource DefaultSeparator_Style}" />
 
-                    <local:RecordingTimerControl Visibility="{Binding RecordingTimerControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <local:RecordingTimerControl Visibility="{Binding RecordingTimerControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        RecordingTimerStartAfterMax="{Binding RecordingTimerStartAfterMax}"
+                        RecordingTimerStopAfterMax="{Binding RecordingTimerStopAfterMax}"
+                        CurrentRecordingStartAfterTimer="{Binding CurrentRecordingStartAfterTimer}"
+                        CurrentRecordingStopAfterTimer="{Binding CurrentRecordingStopAfterTimer}"
+                        StartAfterTimerIsRunning="{Binding StartAfterTimerIsEditable}" d:StartAfterTimerIsRunning="True"
+                        StopAfterTimerIsRunning="{Binding StopAfterTimerIsEditable}" d:StopAfterTimerIsRunning="True"
+                        ToggleStartAfterTimerIsEnabledRelayCommand="{Binding ToggleStartAfterTimerCommand}"
+                        ToggleStopAfterTimerIsEnabledRelayCommand="{Binding ToggleStopAfterTimerCommand}"
+                        TimerStartAfterIsEnabled="{Binding TimerStartAfterIsEnabled}"
+                        TimerStopAfterIsEnabled="{Binding TimerStopAfterIsEnabled}" />
                     <Separator Visibility="{Binding RecordingTimerControlVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Style="{DynamicResource DefaultSeparator_Style}" />
+                    
                     <local:RecordingAndPlaybackControl
                         SkipPrevButtonEnabled="{Binding SkipPrevButtonEnabled}"
                         PlayPauseButtonEnabled="{Binding PlayPauseButtonEnabled}"

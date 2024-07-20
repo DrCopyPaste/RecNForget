@@ -12,6 +12,46 @@ namespace RecNForget.Services
 {
     public class AudioRecordingService : IAudioRecordingService
     {
+        public event EventHandler<TimerStateToggleEventArgs> StopAfterTimerStateToggle;
+        protected virtual void OnStopAfterTimerStateToggle(TimerStateToggleEventArgs e)
+        {
+            EventHandler<TimerStateToggleEventArgs> handler = StopAfterTimerStateToggle;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<TimerStateToggleEventArgs> StartAfterTimerStateToggle;
+        protected virtual void OnStartAfterTimerStateToggle(TimerStateToggleEventArgs e)
+        {
+            EventHandler<TimerStateToggleEventArgs> handler = StartAfterTimerStateToggle;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<TimerTickEventArgs> StartAfterTimerTick;
+        protected virtual void OnStartAfterTimerTick(TimerTickEventArgs e)
+        {
+            EventHandler<TimerTickEventArgs> handler = StartAfterTimerTick;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<TimerTickEventArgs> StopAfterTimerTick;
+        protected virtual void OnStopAfterTimerTick(TimerTickEventArgs e)
+        {
+            EventHandler<TimerTickEventArgs> handler = StopAfterTimerTick;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
         private static string outputFilePathPattern = @"{0}\{1}.wav";
         private static string outputFileDateFormat = "yyyy_MM_dd_HH_mm_ss_fff";
 
@@ -23,15 +63,6 @@ namespace RecNForget.Services
         private DispatcherTimer startAfterDispatcherTimer = new DispatcherTimer();
         private DispatcherTimer stopAfterdispatcherTimer = new DispatcherTimer();
 
-        private string GetCurrentStartAfterDispatcherTimeString()
-        {
-            return startAfterDispatcherTimerCurrentTime.ToString(Formats.TimeSpanFormat);
-        }
-
-        private string GetCurrentStopAfterDispatcherTimeString()
-        {
-            return stopAfterDispatcherTimerCurrentTime.ToString(Formats.TimeSpanFormat);
-        }
 
         private TimeSpan startAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
         private TimeSpan stopAfterDispatcherTimerCurrentTime = TimeSpan.Zero;
@@ -83,42 +114,29 @@ namespace RecNForget.Services
             }
         }
 
-        private bool timerForRecordingStartAfterNotRunning = true;
-        public bool TimerForRecordingStartAfterNotRunning
-        {
-            get { return timerForRecordingStartAfterNotRunning; }
-            set { timerForRecordingStartAfterNotRunning = value; OnPropertyChanged(); }
-        }
-
-        private bool timerForRecordingStopAfterNotRunning = true;
-
-        public bool TimerForRecordingStopAfterNotRunning
-        {
-            get { return timerForRecordingStopAfterNotRunning; }
-            set { timerForRecordingStopAfterNotRunning = value; OnPropertyChanged(); }
-        }
+        public bool TimerForRecordingStartAfterNotRunning { get; private set; }
+        public bool TimerForRecordingStopAfterNotRunning { get; private set; }
 
 
-        private string currentRecordingStopAfterTimer = "0:00:00:00";
+        //private string currentRecordingStopAfterTimer = "0:00:00:00";
 
-        public string CurrentRecordingStopAfterTimer
-        {
-            get { return currentRecordingStopAfterTimer; }
-            set { currentRecordingStopAfterTimer = value; OnPropertyChanged(); }
-        }
+        //public string CurrentRecordingStopAfterTimer
+        //{
+        //    get { return currentRecordingStopAfterTimer; }
+        //    set { currentRecordingStopAfterTimer = value; OnPropertyChanged(); }
+        //}
 
-        private string currentRecordingStartAfterTimer = "0:00:00:00";
+        //private string currentRecordingStartAfterTimer = "0:00:00:00";
 
-        public string CurrentRecordingStartAfterTimer
-        {
-            get { return currentRecordingStartAfterTimer; }
-            set { currentRecordingStartAfterTimer = value; OnPropertyChanged(); }
-        }
+        //public string CurrentRecordingStartAfterTimer
+        //{
+        //    get { return currentRecordingStartAfterTimer; }
+        //    set { currentRecordingStartAfterTimer = value; OnPropertyChanged(); }
+        //}
 
         private void StartAfter_DispatcherTimer_Tick(object sender, EventArgs e)
         {
             startAfterDispatcherTimerCurrentTime = startAfterDispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));
-            CurrentRecordingStartAfterTimer = GetCurrentStartAfterDispatcherTimeString();
 
             if (startAfterDispatcherTimerCurrentTime.TotalSeconds < 1)
             {
@@ -135,12 +153,13 @@ namespace RecNForget.Services
 
                 ResetStartAfterDispatcherTimer();
             }
+
+            OnStartAfterTimerTick(new TimerTickEventArgs(startAfterDispatcherTimerCurrentTime));
         }
 
         private void StopAfter_DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            stopAfterDispatcherTimerCurrentTime = stopAfterDispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));
-            CurrentRecordingStopAfterTimer = GetCurrentStopAfterDispatcherTimeString();
+            stopAfterDispatcherTimerCurrentTime = stopAfterDispatcherTimerCurrentTime.Subtract(TimeSpan.FromSeconds(1));            
 
             if (stopAfterDispatcherTimerCurrentTime.TotalSeconds < 1)
             {
@@ -169,6 +188,8 @@ namespace RecNForget.Services
 
                 ResetStopAfterDispatcherTimer();
             }
+
+            OnStopAfterTimerTick(new TimerTickEventArgs(stopAfterDispatcherTimerCurrentTime));
         }
 
         public void StartTimerToStartRecordingAfter()
@@ -176,9 +197,9 @@ namespace RecNForget.Services
             // reset all other possibly running timers
             ResetStartAfterDispatcherTimer();
             startAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, Formats.TimeSpanFormat, CultureInfo.InvariantCulture);
-            CurrentRecordingStartAfterTimer = GetCurrentStartAfterDispatcherTimeString();
             TimerForRecordingStartAfterNotRunning = false;
 
+            OnStartAfterTimerStateToggle(new TimerStateToggleEventArgs(true));
             startAfterDispatcherTimer.Start();
         }
 
@@ -187,26 +208,30 @@ namespace RecNForget.Services
             // reset all other possibly running timers
             ResetStopAfterDispatcherTimer();
             stopAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, Formats.TimeSpanFormat, CultureInfo.InvariantCulture);
-            CurrentRecordingStopAfterTimer = GetCurrentStopAfterDispatcherTimeString();
             TimerForRecordingStopAfterNotRunning = false;
 
+            OnStopAfterTimerStateToggle(new TimerStateToggleEventArgs(true));
             stopAfterdispatcherTimer.Start();
         }
 
         public void ResetStartAfterDispatcherTimer()
         {
+            OnStartAfterTimerStateToggle(new TimerStateToggleEventArgs(false));
+
             startAfterDispatcherTimer.Stop();
             TimerForRecordingStartAfterNotRunning = true;
             startAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStartAfterMax, Formats.TimeSpanFormat, CultureInfo.InvariantCulture);
-            CurrentRecordingStartAfterTimer = appSettingService.RecordingTimerStartAfterMax;
+            OnStartAfterTimerTick(new TimerTickEventArgs(startAfterDispatcherTimerCurrentTime));
         }
 
         public void ResetStopAfterDispatcherTimer()
         {
+            OnStopAfterTimerStateToggle(new TimerStateToggleEventArgs(false));
+
             stopAfterdispatcherTimer.Stop();
             TimerForRecordingStopAfterNotRunning = true;
             stopAfterDispatcherTimerCurrentTime = TimeSpan.ParseExact(appSettingService.RecordingTimerStopAfterMax, Formats.TimeSpanFormat, CultureInfo.InvariantCulture);
-            CurrentRecordingStopAfterTimer = appSettingService.RecordingTimerStopAfterMax;
+            OnStopAfterTimerTick(new TimerTickEventArgs(stopAfterDispatcherTimerCurrentTime));
         }
 
         public void ResetAllTimers()
@@ -245,6 +270,7 @@ namespace RecNForget.Services
                     if (appSettingService.RecordingTimerStopAfterIsEnabled)
                     {
                         StartTimerToStopRecordingAfter();
+                        OnStartAfterTimerStateToggle(new TimerStateToggleEventArgs(true));
                     }
 
                     return;
@@ -260,6 +286,7 @@ namespace RecNForget.Services
                 if (appSettingService.RecordingTimerStopAfterIsEnabled)
                 {
                     StartTimerToStopRecordingAfter();
+                    OnStopAfterTimerStateToggle(new TimerStateToggleEventArgs(true));
                 }
             }
         }
@@ -355,11 +382,6 @@ namespace RecNForget.Services
             }
 
             return tempString;
-        }
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

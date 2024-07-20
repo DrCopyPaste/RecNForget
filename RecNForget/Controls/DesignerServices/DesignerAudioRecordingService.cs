@@ -22,6 +22,10 @@ namespace RecNForget.Services.Designer
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<AudioRecordingServiceEventArgs> AudioRecordingStateChanged;
+        public event EventHandler<TimerTickEventArgs> StartAfterTimerTick;
+        public event EventHandler<TimerTickEventArgs> StopAfterTimerTick;
+        public event EventHandler<TimerStateToggleEventArgs> StopAfterTimerStateToggle;
+        public event EventHandler<TimerStateToggleEventArgs> StartAfterTimerStateToggle;
 
         public string GetTargetPathTemplateString() => @"C:\imaginary\Path\demo(guid).wav";
 

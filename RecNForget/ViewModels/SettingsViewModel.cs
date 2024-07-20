@@ -1,8 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Microsoft.Extensions.DependencyInjection;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using Notifications.Wpf.Core;
 using RecNForget.Controls;
+using RecNForget.Controls.IoC;
 using RecNForget.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -15,23 +17,16 @@ public partial class SettingsViewModel : ObservableValidator
     private readonly IAppSettingService settingService;
     private readonly IApplicationHotkeyService hotkeyService;
     private readonly ISelectedFileService selectedFileService;
-    private readonly MainWindow mainWindow;
-    private readonly MainViewModel mainViewModel
-;
     private readonly NotificationManager notificationManager = new NotificationManager();
 
     public SettingsViewModel(
         IAppSettingService settingService,
         IApplicationHotkeyService hotkeyService,
-        ISelectedFileService selectedFileService,
-        MainWindow mainWindow,
-        MainViewModel mainViewModel
+        ISelectedFileService selectedFileService
         )
     {
         this.settingService = settingService;
         this.hotkeyService = hotkeyService;
-        this.mainWindow = mainWindow;
-        this.mainViewModel = mainViewModel;
         this.selectedFileService = selectedFileService;
     }
 
@@ -174,12 +169,12 @@ public partial class SettingsViewModel : ObservableValidator
 
             if (value)
             {
-                mainWindow.Hide();
+                ConfiguredServices.ServiceProvider.GetRequiredService<MainWindow>().Hide();
                 notificationManager.ShowAsync(new NotificationContent() { Type = NotificationType.Information, Title = "Running in background now!", Message = @"RecNForget is now running in the background. Double click tray icon to restore" });
             }
             else
             {
-                mainWindow.Show();
+                ConfiguredServices.ServiceProvider.GetRequiredService<MainWindow>().Show();
             }
 
             settingService.Persist();
@@ -283,7 +278,7 @@ public partial class SettingsViewModel : ObservableValidator
         {
             SetProperty(settingService.OutputPathControlVisible, value, settingService, (x, y) => x.OutputPathControlVisible = y);
 
-            mainViewModel.OutputPathControlVisible = value;
+            ConfiguredServices.ServiceProvider.GetRequiredService<MainViewModel>().OutputPathControlVisible = value;
 
             settingService.Persist();
         }
@@ -296,7 +291,7 @@ public partial class SettingsViewModel : ObservableValidator
         {
             SetProperty(settingService.SelectedFileControlVisible, value, settingService, (x, y) => x.SelectedFileControlVisible = y);
 
-            mainViewModel.SelectedFileControlVisible = value;
+            ConfiguredServices.ServiceProvider.GetRequiredService<MainViewModel>().SelectedFileControlVisible = value;
 
             settingService.Persist();
         }
@@ -369,7 +364,7 @@ public partial class SettingsViewModel : ObservableValidator
         {
             SetProperty(settingService.RecordingTimerControlVisible, value, settingService, (x, y) => x.RecordingTimerControlVisible = y);
 
-            mainViewModel.RecordingTimerControlVisible = value;
+            ConfiguredServices.ServiceProvider.GetRequiredService<MainViewModel>().RecordingTimerControlVisible = value;
 
             settingService.Persist();
         }

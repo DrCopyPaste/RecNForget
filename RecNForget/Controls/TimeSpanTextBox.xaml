@@ -4,16 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RecNForget.Controls" xmlns:svg1="clr-namespace:SVGImage.SVG;assembly=DotNetProjects.SVGImage"
-             IsEnabled="False"
              mc:Ignorable="d" >
     <Border CornerRadius="3" Padding="1" x:Name="ControlBorder" Background="{DynamicResource Transparent_Brush}" BorderBrush="{DynamicResource Primary_Brush}" BorderThickness="1">
-        <StackPanel Orientation="Horizontal">
+        <DockPanel LastChildFill="False" HorizontalAlignment="Stretch">
             <TextBox Style="{DynamicResource TimeSpanTextBoxStyle}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="SettingTextValueTimeSpanBoxTextBox"
                             TextChanged="TimeSpanTextBox_TextChanged"
                             
                             IsEnabled="True"
-                            d:IsEnabled="True"
                             Text="{Binding Path=SettingTextValueTimeSpan, RelativeSource={RelativeSource AncestorType=local:TimeSpanTextBox}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
                             d:Text="0:00:00:00"
                             d:Visibility="Visible">
@@ -21,7 +19,6 @@
             <TextBox Style="{DynamicResource TimeSpanTextBoxStyle}" Background="{DynamicResource Transparent_Brush}"
                             x:Name="TimerBoundTextValueTimeSpanTextBox"                    
                             IsEnabled="True"
-                            d:IsEnabled="False"
                             Text="{Binding Path=TimerBoundTextValueTimeSpan, RelativeSource={RelativeSource AncestorType=local:TimeSpanTextBox},Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                             d:Visibility="Visible"
                             d:Text="0:00:00:00"
@@ -30,6 +27,6 @@
             <Label Style="{DynamicResource Base_Label}" Name="ValidationErrorMark" VerticalAlignment="Center" Visibility="Hidden">
                 !
             </Label>
-        </StackPanel>
+        </DockPanel>
     </Border>
 </UserControl>

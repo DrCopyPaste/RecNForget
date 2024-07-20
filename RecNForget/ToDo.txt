@@ -1,6 +1,5 @@
 add Signature!?!
 
-replace overly specialized (and service bound) controls (simple string selection, file selection, folder selection, etc.)
 playback/recordingservice events mess up taskbar state
 try migrate old settings from appsettingsservice to new userconfigurationservice settings on start
 getting updates should be cancellable
@@ -11,8 +10,6 @@ viewmodel testing
 stacked buttons ontop of each other (StringSettingsButton, others?)
 extra button in StringSettingsButton is useless now
 dialogs, topmost, viewposition, dragging and exiting (also via esc)
-
-timing control looks different design time (doubled numbers?)
 
 rethink designtime services/viewmodels?
 
@@ -31,3 +28,7 @@ windowpositions for subwindows (context menu)
 non global hotkeys disabled for now
 
 notificationmanager via di
+
+using IRecipient-interfaces for messages between viewmodels instead of directly accessing viewmodels from one another
+
+editorconfig/ codecleanup rules

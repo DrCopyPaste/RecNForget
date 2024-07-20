@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RecNForget.Controls" d:DataContext="{d:DesignInstance Type=local:RecordingTimerControl}"
+             xmlns:local="clr-namespace:RecNForget.Controls"
              mc:Ignorable="d">
     <Border Style="{DynamicResource DefaultControlBorderStyle}" HorizontalAlignment="Stretch">
         <StackPanel>
@@ -14,36 +14,44 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                        x:Name="StopAfter_CheckBox"
-                        HorizontalAlignment="Stretch"
-                        Checked="StopAfter_Checked_Changed" Unchecked="StopAfter_Checked_Changed"
-                        IsChecked="{Binding Path=SettingService.RecordingTimerStopAfterIsEnabled}">
-                    <DockPanel HorizontalAlignment="Right">
-                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource Base_Label}" Margin="0,0,3,0">Stop after</Label>
-                        <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
-                            x:Name="StopAfterTimeSpanTextBox"
-                            IsEnabled="{Binding Path=AudioRecordingService.TimerForRecordingStopAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
-                            TimerBoundTextValueTimeSpan="{Binding Path=AudioRecordingService.CurrentRecordingStopAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
-                            SettingTextValueTimeSpan="{Binding Path=SettingService.RecordingTimerStopAfterMax, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            />
-                    </DockPanel>
-                </CheckBox>
-                <CheckBox Grid.Column="1" Style="{DynamicResource DefaultCheckboxStyle}"
+                <DockPanel Grid.Column="0">
+                    <CheckBox DockPanel.Dock="Left" Style="{DynamicResource DefaultCheckboxStyle}"
+                            x:Name="StopAfter_CheckBox"
+                            HorizontalAlignment="Stretch"
+                            Command="{Binding ToggleStopAfterTimerIsEnabledRelayCommand, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}}"
+                            CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                            IsChecked="{Binding TimerStopAfterIsEnabled}">
+                        <DockPanel HorizontalAlignment="Right">
+                            <Label HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource Base_Label}" Margin="0,0,3,0">Stop after</Label>
+                        </DockPanel>
+                    </CheckBox>
+                    <local:TimeSpanTextBox DockPanel.Dock="Left" Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
+                        x:Name="StopAfterTimeSpanTextBox"
+                        IsEnabled="{Binding StopAfterTimerIsRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                        d:IsEnabled="False"
+                        TimerBoundTextValueTimeSpan="{Binding CurrentRecordingStopAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                        SettingTextValueTimeSpan="{Binding RecordingTimerStopAfterMax, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        d:SettingTextValueTimeSpan="1:12:34"
+                        />
+                </DockPanel>
+                <DockPanel Grid.Column="1">
+                    <CheckBox DockPanel.Dock="Left" Style="{DynamicResource DefaultCheckboxStyle}"
                         x:Name="StartAfter_CheckBox"
                         HorizontalAlignment="Stretch"
-                        Checked="StartAfter_Checked_Changed" Unchecked="StartAfter_Checked_Changed"
-                        IsChecked="{Binding Path=SettingService.RecordingTimerStartAfterIsEnabled}">
-                    <DockPanel HorizontalAlignment="Right">
+                        Command="{Binding ToggleStartAfterTimerIsEnabledRelayCommand, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}}"
+                        CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}, Mode=OneWay}"
+                        IsChecked="{Binding TimerStartAfterIsEnabled}">
                         <Label HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource Base_Label}" Margin="0,0,3,0">Start after</Label>
-                        <local:TimeSpanTextBox Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
-                            x:Name="StartAfterTimeSpanTextBox"
-                            IsEnabled="{Binding Path=AudioRecordingService.TimerForRecordingStartAfterNotRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
-                            TimerBoundTextValueTimeSpan="{Binding Path=AudioRecordingService.CurrentRecordingStartAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
-                            SettingTextValueTimeSpan="{Binding Path=SettingService.RecordingTimerStartAfterMax, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            />
-                    </DockPanel>
-                </CheckBox>
+                    </CheckBox>
+                    <local:TimeSpanTextBox DockPanel.Dock="Left" Style="{DynamicResource TimeSpanTextBoxStyle2}" Background="{DynamicResource Transparent_Brush}"
+                        x:Name="StartAfterTimeSpanTextBox"
+                        d:IsEnabled="False"
+                        IsEnabled="{Binding StartAfterTimerIsRunning, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                        TimerBoundTextValueTimeSpan="{Binding CurrentRecordingStartAfterTimer, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, UpdateSourceTrigger=PropertyChanged}"
+                        SettingTextValueTimeSpan="{Binding RecordingTimerStartAfterMax, RelativeSource={RelativeSource AncestorType=local:RecordingTimerControl}, StringFormat=d\\:hh\\:mm\\:ss, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        d:SettingTextValueTimeSpan="1:12:34"
+                        />
+                </DockPanel>
             </Grid>
         </StackPanel>
     </Border>

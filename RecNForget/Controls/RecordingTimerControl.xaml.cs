@@ -1,9 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using RecNForget.Controls.IoC;
-using RecNForget.Services.Contracts;
-using RecNForget.Services.Designer;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,86 +7,111 @@ namespace RecNForget.Controls
     /// <summary>
     /// Interaction logic for RecordingTimerControl.xaml
     /// </summary>
-    public partial class RecordingTimerControl : UserControl, INotifyPropertyChanged
+    public partial class RecordingTimerControl : UserControl
     {
-        private IAppSettingService settingService;
-        private IAudioRecordingService audioRecordingService;
-
         public RecordingTimerControl()
         {
             InitializeComponent();
-
-            if (DesignerProperties.GetIsInDesignMode(this))
-            {
-                SettingService = new DesignerAppSettingService();
-                AudioRecordingService = new DesignerAudioRecordingService();
-
-                return;
-            }
-            else
-            {
-                SettingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAppSettingService>();
-                AudioRecordingService = ConfiguredServices.ServiceProvider.GetRequiredService<IAudioRecordingService>();
-            }
         }
 
-        public IAppSettingService SettingService
+        public bool TimerStartAfterIsEnabled
         {
-            get
-            {
-                return settingService;
-            }
-
-            set
-            {
-                settingService = value;
-                OnPropertyChanged();
-            }
+            get { return (bool)GetValue(TimerStartAfterIsEnabledProperty); }
+            set { SetValue(TimerStartAfterIsEnabledProperty, value); }
         }
 
-        public IAudioRecordingService AudioRecordingService
+        // Using a DependencyProperty as the backing store for TimerStartAfterIsEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TimerStartAfterIsEnabledProperty =
+            DependencyProperty.Register("TimerStartAfterIsEnabled", typeof(bool), typeof(RecordingTimerControl), new PropertyMetadata(false));
+
+        public bool TimerStopAfterIsEnabled
         {
-            get
-            {
-                return audioRecordingService;
-            }
-
-            set
-            {
-                audioRecordingService = value;
-                OnPropertyChanged();
-            }
+            get { return (bool)GetValue(TimerStopAfterIsEnabledProperty); }
+            set { SetValue(TimerStopAfterIsEnabledProperty, value); }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        // Using a DependencyProperty as the backing store for TimerStopAfterIsEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TimerStopAfterIsEnabledProperty =
+            DependencyProperty.Register("TimerStopAfterIsEnabled", typeof(bool), typeof(RecordingTimerControl), new PropertyMetadata(false));
 
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public string CurrentRecordingStartAfterTimer
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get { return (string)GetValue(CurrentRecordingStartAfterTimerProperty); }
+            set { SetValue(CurrentRecordingStartAfterTimerProperty, value); }
         }
 
-        private void StopAfter_Checked_Changed(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for CurrentRecordingStartAfterTimer.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentRecordingStartAfterTimerProperty =
+            DependencyProperty.Register("CurrentRecordingStartAfterTimer", typeof(string), typeof(RecordingTimerControl), new PropertyMetadata(string.Empty));
+
+        public string CurrentRecordingStopAfterTimer
         {
-            if (StopAfter_CheckBox.IsChecked.HasValue && StopAfter_CheckBox.IsChecked.Value)
-            {
-                if (AudioRecordingService.CurrentlyRecording)
-                {
-                    AudioRecordingService.StartTimerToStopRecordingAfter();
-                }
-            }
-
-            if (!AudioRecordingService.TimerForRecordingStopAfterNotRunning && (!StopAfter_CheckBox.IsChecked.HasValue || !StopAfter_CheckBox.IsChecked.Value))
-            {
-                AudioRecordingService.ResetStopAfterDispatcherTimer();
-            }
+            get { return (string)GetValue(CurrentRecordingStopAfterTimerProperty); }
+            set { SetValue(CurrentRecordingStopAfterTimerProperty, value); }
         }
 
-        private void StartAfter_Checked_Changed(object sender, RoutedEventArgs e)
+        // Using a DependencyProperty as the backing store for CurrentRecordingStopAfterTimer.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentRecordingStopAfterTimerProperty =
+            DependencyProperty.Register("CurrentRecordingStopAfterTimer", typeof(string), typeof(RecordingTimerControl), new PropertyMetadata(string.Empty));
+
+        public RelayCommand ToggleStartAfterTimerIsEnabledRelayCommand
         {
-            if (!AudioRecordingService.TimerForRecordingStartAfterNotRunning && (!StartAfter_CheckBox.IsChecked.HasValue || !StartAfter_CheckBox.IsChecked.Value))
-            {
-                AudioRecordingService.ResetStartAfterDispatcherTimer();
-            }
+            get { return (RelayCommand)GetValue(ToggleStartAfterTimerIsEnabledRelayCommandProperty); }
+            set { SetValue(ToggleStartAfterTimerIsEnabledRelayCommandProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for ToggleStartAfterTimerIsEnabledRelayCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ToggleStartAfterTimerIsEnabledRelayCommandProperty =
+            DependencyProperty.Register("ToggleStartAfterTimerIsEnabledRelayCommand", typeof(RelayCommand), typeof(RecordingTimerControl), new PropertyMetadata(null));
+
+        public RelayCommand ToggleStopAfterTimerIsEnabledRelayCommand
+        {
+            get { return (RelayCommand)GetValue(ToggleStopAfterTimerIsEnabledRelayCommandProperty); }
+            set { SetValue(ToggleStopAfterTimerIsEnabledRelayCommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ToggleStopAfterTimerIsEnabledRelayCommand.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ToggleStopAfterTimerIsEnabledRelayCommandProperty =
+            DependencyProperty.Register("ToggleStopAfterTimerIsEnabledRelayCommand", typeof(RelayCommand), typeof(RecordingTimerControl), new PropertyMetadata(null));
+
+        public bool StartAfterTimerIsRunning
+        {
+            get { return (bool)GetValue(StartAfterTimerIsRunningProperty); }
+            set { SetValue(StartAfterTimerIsRunningProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for StartAfterTimerIsRunning.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StartAfterTimerIsRunningProperty =
+            DependencyProperty.Register("StartAfterTimerIsRunning", typeof(bool), typeof(RecordingTimerControl), new PropertyMetadata(null));
+
+        public bool StopAfterTimerIsRunning
+        {
+            get { return (bool)GetValue(StopAfterTimerIsRunningProperty); }
+            set { SetValue(StopAfterTimerIsRunningProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for StopAfterTimerIsRunning.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StopAfterTimerIsRunningProperty =
+            DependencyProperty.Register("StopAfterTimerIsRunning", typeof(bool), typeof(RecordingTimerControl), new PropertyMetadata(null));
+
+        public string RecordingTimerStartAfterMax
+        {
+            get { return (string)GetValue(RecordingTimerStartAfterMaxProperty); }
+            set { SetValue(RecordingTimerStartAfterMaxProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RecordingTimerStartAfterMax.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RecordingTimerStartAfterMaxProperty =
+            DependencyProperty.Register("RecordingTimerStartAfterMax", typeof(string), typeof(RecordingTimerControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public string RecordingTimerStopAfterMax
+        {
+            get { return (string)GetValue(RecordingTimerStopAfterMaxProperty); }
+            set { SetValue(RecordingTimerStopAfterMaxProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RecordingTimerStopAfterMax.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RecordingTimerStopAfterMaxProperty =
+            DependencyProperty.Register("RecordingTimerStopAfterMax", typeof(string), typeof(RecordingTimerControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
     }
 }

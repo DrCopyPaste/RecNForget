@@ -4,7 +4,6 @@ using Microsoft.Win32;
 using NAudio.Wave;
 using Notifications.Wpf.Core;
 using RecNForget.Controls;
-using RecNForget.Services;
 using RecNForget.Services.Contracts;
 using RecNForget.Services.Contracts.Events;
 using System;
@@ -22,21 +21,29 @@ public partial class MainViewModel : ObservableValidator
     private readonly IAudioRecordingService audioRecordingService;
     private readonly IAudioPlaybackService audioPlaybackService;
     private readonly ISelectedFileService selectedFileService;
+    private readonly SettingsViewModel settingsViewModel;
 
     public MainViewModel(
         IAppSettingService appSettingService,
         IAudioRecordingService audioRecordingService,
         IAudioPlaybackService audioPlaybackService,
-        ISelectedFileService selectedFileService)
+        ISelectedFileService selectedFileService,
+        SettingsViewModel settingsViewModel)
     {
         this.appSettingService = appSettingService;
         this.audioRecordingService = audioRecordingService;
         this.audioPlaybackService = audioPlaybackService;
         this.selectedFileService = selectedFileService;
+        this.settingsViewModel = settingsViewModel;
 
         selectedFileService.SelectedFileChanged += SelectedFileService_SelectedFileChanged;
         audioPlaybackService.AudioPlaybackChanged += AudioPlaybackService_AudioPlaybackChanged;
         audioRecordingService.AudioRecordingStateChanged += AudioRecordingService_AudioRecordingStateChanged;
+
+        audioRecordingService.StartAfterTimerTick += AudioRecordingService_StartAfterTimerTick;
+        audioRecordingService.StopAfterTimerTick += AudioRecordingService_StopAfterTimerTick;
+        audioRecordingService.StartAfterTimerStateToggle += AudioRecordingService_StartAfterTimerStateToggle;
+        audioRecordingService.StopAfterTimerStateToggle += AudioRecordingService_StopAfterTimerStateToggle;
 
         TaskBar_ProgressState = "None";
         ProjectedOutputPathIncludingFilePattern = audioRecordingService.GetTargetPathTemplateString();
@@ -48,6 +55,28 @@ public partial class MainViewModel : ObservableValidator
         SelectedFileControlVisible = appSettingService.SelectedFileControlVisible;
         RecordingTimerControlVisible = appSettingService.RecordingTimerControlVisible;
 
+        StartAfterTimerIsEditable = true;
+        StopAfterTimerIsEditable = true;
+    }
+
+    private void AudioRecordingService_StartAfterTimerStateToggle(object sender, TimerStateToggleEventArgs e)
+    {
+        StartAfterTimerIsEditable = !e.TimerIsRunning;
+    }
+
+    private void AudioRecordingService_StopAfterTimerStateToggle(object sender, TimerStateToggleEventArgs e)
+    {
+        StopAfterTimerIsEditable = !e.TimerIsRunning;
+    }
+
+    private void AudioRecordingService_StartAfterTimerTick(object sender, TimerTickEventArgs e)
+    {
+        CurrentRecordingStartAfterTimer = e.CurrentTimeSpan.ToString(Formats.TimeSpanFormat);
+    }
+
+    private void AudioRecordingService_StopAfterTimerTick(object sender, TimerTickEventArgs e)
+    {
+        CurrentRecordingStopAfterTimer = e.CurrentTimeSpan.ToString(Formats.TimeSpanFormat);
     }
 
     ~MainViewModel()
@@ -55,6 +84,10 @@ public partial class MainViewModel : ObservableValidator
         selectedFileService.SelectedFileChanged -= SelectedFileService_SelectedFileChanged;
         audioPlaybackService.AudioPlaybackChanged -= AudioPlaybackService_AudioPlaybackChanged;
         audioRecordingService.AudioRecordingStateChanged -= AudioRecordingService_AudioRecordingStateChanged;
+        audioRecordingService.StartAfterTimerTick -= AudioRecordingService_StartAfterTimerTick;
+        audioRecordingService.StopAfterTimerTick -= AudioRecordingService_StopAfterTimerTick;
+        audioRecordingService.StartAfterTimerStateToggle -= AudioRecordingService_StartAfterTimerStateToggle;
+        audioRecordingService.StopAfterTimerStateToggle -= AudioRecordingService_StopAfterTimerStateToggle;
     }
 
     private void AudioRecordingService_AudioRecordingStateChanged(object sender, AudioRecordingServiceEventArgs e)
@@ -106,7 +139,7 @@ public partial class MainViewModel : ObservableValidator
                     fileQueue.Add(audioPlaybackService.RecordStopAudioFeedbackPath);
                 }
 
-                
+
 
                 if (appSettingService.AutoReplayAudioAfterRecording)
                 {
@@ -459,6 +492,29 @@ public partial class MainViewModel : ObservableValidator
         ProjectedOutputPathIncludingFilePattern = audioRecordingService.GetTargetPathTemplateString();
     }
 
+    [RelayCommand]
+    private void ToggleStartAfterTimer(bool toggleOn)
+    {
+        if (!audioRecordingService.TimerForRecordingStartAfterNotRunning && !toggleOn)
+        {
+            audioRecordingService.ResetStartAfterDispatcherTimer();
+        }
+    }
+
+    [RelayCommand]
+    private void ToggleStopAfterTimer(bool toggleOn)
+    {
+        if (toggleOn && audioRecordingService.CurrentlyRecording)
+        {
+            audioRecordingService.StartTimerToStopRecordingAfter();
+        }
+
+        if (!audioRecordingService.TimerForRecordingStopAfterNotRunning && !toggleOn)
+        {
+            audioRecordingService.ResetStopAfterDispatcherTimer();
+        }
+    }
+
     private void ResetSelectedFile()
     {
         HasSelectedFile = false;
@@ -473,6 +529,43 @@ public partial class MainViewModel : ObservableValidator
 
     [ObservableProperty]
     private bool recordingTimerControlVisible;
+
+    [ObservableProperty]
+    private string currentRecordingStartAfterTimer;
+
+    [ObservableProperty]
+    private string currentRecordingStopAfterTimer;
+
+
+    public bool TimerStartAfterIsEnabled
+    {
+        get => settingsViewModel.RecordingTimerStartAfterIsEnabled;
+        set => SetProperty(settingsViewModel.RecordingTimerStartAfterIsEnabled, value, settingsViewModel, (x, y) => x.RecordingTimerStartAfterIsEnabled = y);
+    }
+
+    public bool TimerStopAfterIsEnabled
+    {
+        get => settingsViewModel.RecordingTimerStopAfterIsEnabled;
+        set => SetProperty(settingsViewModel.RecordingTimerStopAfterIsEnabled, value, settingsViewModel, (x, y) => x.RecordingTimerStopAfterIsEnabled = y);
+    }
+
+    public string RecordingTimerStartAfterMax
+    {
+        get => settingsViewModel.RecordingTimerStartAfterMax;
+        set => SetProperty(settingsViewModel.RecordingTimerStartAfterMax, value, settingsViewModel, (x, y) => x.RecordingTimerStartAfterMax = y);
+    }
+
+    public string RecordingTimerStopAfterMax
+    {
+        get => settingsViewModel.RecordingTimerStopAfterMax;
+        set => SetProperty(settingsViewModel.RecordingTimerStopAfterMax, value, settingsViewModel, (x, y) => x.RecordingTimerStopAfterMax = y);
+    }
+
+    [ObservableProperty]
+    private bool stopAfterTimerIsEditable;
+
+    [ObservableProperty]
+    private bool startAfterTimerIsEditable;
 
     [ObservableProperty]
     private bool skipPrevButtonEnabled;
