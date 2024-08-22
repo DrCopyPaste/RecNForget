@@ -56,7 +56,7 @@ public class ConfiguredServices
         //serviceCollection.AddSingleton<HotkeyPromptWindow>();
         
         serviceCollection.AddTransient<NewToApplicationWindow>();
-        //serviceCollection.AddSingleton<NewToVersionDialog>();
+        serviceCollection.AddSingleton<NewToVersionDialog>();
         serviceCollection.AddTransient<QuickTipDialog>();
         //serviceCollection.AddSingleton<ReleaseInstallationDialog>();
         serviceCollection.AddTransient<SettingsWindow>();
@@ -64,6 +64,7 @@ public class ConfiguredServices
         serviceCollection.AddSingleton<AboutViewModel>();
         serviceCollection.AddSingleton<MainViewModel>();
         serviceCollection.AddSingleton<NewToApplicationViewModel>();
+        serviceCollection.AddSingleton<NewToVersionViewModel>();
         serviceCollection.AddSingleton<QuickTipViewModel>();
         serviceCollection.AddSingleton<SettingsViewModel>();
 

@@ -100,23 +100,26 @@ namespace RecNForget.Help
         /// </summary>
         public List<HelpFeatureDetailLine> HoverHelpLines { get; set; } = new List<HelpFeatureDetailLine>();
 
-        public string HelpLinesAsString()
+        public string HelpLinesAsString
         {
-            StringBuilder detailsHelpBuilder = new StringBuilder(string.Empty);
-
-            for (int i = 0; i < this.HelpLines.Count; i++)
+            get
             {
-                if (i == (this.HelpLines.Count - 1))
-                {
-                    detailsHelpBuilder.Append(this.HelpLines[i].Content);
-                }
-                else
-                {
-                    detailsHelpBuilder.AppendLine(this.HelpLines[i].Content);
-                }
-            }
+                StringBuilder detailsHelpBuilder = new StringBuilder(string.Empty);
 
-            return detailsHelpBuilder.ToString();
+                for (int i = 0; i < this.HelpLines.Count; i++)
+                {
+                    if (i == (this.HelpLines.Count - 1))
+                    {
+                        detailsHelpBuilder.Append(this.HelpLines[i].Content);
+                    }
+                    else
+                    {
+                        detailsHelpBuilder.AppendLine(this.HelpLines[i].Content);
+                    }
+                }
+
+                return detailsHelpBuilder.ToString();
+            }
         }
     }
 }

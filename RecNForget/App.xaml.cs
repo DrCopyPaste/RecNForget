@@ -20,7 +20,6 @@ namespace RecNForget
     /// </summary>
     public partial class App : Application
     {
-        private MainWindow mainWindow = null;
         private readonly NotificationManager notificationManager = new NotificationManager();
 
         [STAThread]
@@ -42,6 +41,7 @@ namespace RecNForget
         }
 
         public static ContextMenu ContextMenu { get; private set; }
+        public static Version LastInstalledVersion { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -71,7 +71,7 @@ namespace RecNForget
             ThemeManager.ChangeTheme(appSettingService.WindowTheme);
 
             // Show main window first, so that windows popping up (like new updates/new to app) are in foreground and escapable
-            mainWindow = ConfiguredServices.ServiceProvider.GetRequiredService<MainWindow>();
+            var mainWindow = ConfiguredServices.ServiceProvider.GetRequiredService<MainWindow>();
 
             HandleFirstStartAndUpdates(appSettingService, hotkeyService);
 
@@ -92,7 +92,7 @@ namespace RecNForget
 
         private void HandleFirstStartAndUpdates(IAppSettingService appSettingService, IApplicationHotkeyService hotkeyService)
         {
-            var previouslyInstalledVersion = appSettingService.LastInstalledVersion;
+            LastInstalledVersion = appSettingService.LastInstalledVersion;
             hotkeyService.ResetAndReadHotkeysFromConfig();
 
             var configVersionWasUpdated = appSettingService.UpdateConfigVersion();
@@ -104,7 +104,7 @@ namespace RecNForget
             }
             else if (configVersionWasUpdated)
             {
-                var newToVersionDialog = new NewToVersionDialog(previouslyInstalledVersion, appSettingService.LastInstalledVersion, appSettingService);
+                var newToVersionDialog = ConfiguredServices.ServiceProvider.GetRequiredService<NewToVersionDialog>(); // new NewToVersionDialog(previouslyInstalledVersion, appSettingService.LastInstalledVersion, appSettingService);
                 newToVersionDialog.ShowDialog();
             }
             else if (appSettingService.ShowTipsAtApplicationStart)

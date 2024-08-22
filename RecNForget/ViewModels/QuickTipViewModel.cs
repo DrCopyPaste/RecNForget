@@ -19,7 +19,7 @@ public partial class QuickTipViewModel : ObservableObject
     private void SetFeature(HelpFeature helpFeature)
     {
         FeatureCaption = helpFeature.Title;
-        FeatureContents = helpFeature.HelpLinesAsString();
+        FeatureContents = helpFeature.HelpLinesAsString;
     }
 
     [RelayCommand]
@@ -28,7 +28,7 @@ public partial class QuickTipViewModel : ObservableObject
         HelpFeature randomFeature = HelpFeature.GetRandomFeature();
 
         FeatureCaption = randomFeature.Title;
-        FeatureContents = randomFeature.HelpLinesAsString();
+        FeatureContents = randomFeature.HelpLinesAsString;
     }
 
     [ObservableProperty]

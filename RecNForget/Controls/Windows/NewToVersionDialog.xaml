@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecNForget.Controls"
+        xmlns:svg="https://github.com/dotnetprojects/SVGImage"
         mc:Ignorable="d"
         Topmost="True"
         Style="{DynamicResource DefaultWindowStyle}"
@@ -30,39 +31,71 @@
             <TextBlock Style="{DynamicResource DefaultTextBlockStyle}"
                 Name="VersionInfoCaption"
                 Text="Have a look at what's new!" />
-            <Border Style="{DynamicResource DefaultWindowBorderStyle}">
-                <ScrollViewer Style="{DynamicResource NewToVersion_FeatureList_ScrollViewer_Style}">
-                    <Grid
-                        Name="VersionInfoFeatureList">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Style="{DynamicResource GrowForContainedControlsColumnStyle}" />
-                            <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
-                        </Grid.ColumnDefinitions>
-                        <!-- Row Definitions dynamic (depending on how many features are found) -->
-                    </Grid>
-                </ScrollViewer>
+            <Border Style="{DynamicResource DefaultWindowBorderStyle}" MaxHeight="300">
+                <ListView ItemsSource="{Binding PatchNotes}" d:ItemsSource="{d:SampleData ItemCount=20}" BorderBrush="Transparent">
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        </Style>
+                    </ListView.Resources>
+                    <ListView.Template>
+                        <ControlTemplate>
+                            <ScrollViewer>
+                                <ItemsPresenter></ItemsPresenter>
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ListView.Template>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="Focusable" Value="False" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <svg:SVGImage x:Name="ItemName" Style="{DynamicResource AddedFeature_Image_Style}" />
+                                        
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding FeatureClass}" Value="BugFix">
+                                                <Setter TargetName="ItemName" Property="Style" Value="{DynamicResource BugFix_Image_Style}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding FeatureClass}" Value="NewFeature">
+                                                <Setter TargetName="ItemName" Property="Style" Value="{DynamicResource AddedFeature_Image_Style}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding FeatureClass}" Value="Information">
+                                                <Setter TargetName="ItemName" Property="Style" Value="{DynamicResource VerboseInformationFeature_Image_Style}"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Title}" Style="{DynamicResource DefaultTextBlockStyle}" ToolTip="{Binding HelpLinesAsString}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Border>
-            <CheckBox Grid.Row="10" Grid.Column="0" Style="{DynamicResource DefaultCheckboxStyle}"
-                    IsChecked="{Binding Path=SettingService.CheckForUpdateOnStart}" >
-                check for updates on start
-            </CheckBox>
 
             <local:SvgImageButton1 Grid.Row="11" Style="{DynamicResource SvgAcceptButton}"
                 HorizontalAlignment="Right"
                 ToolTip="good to know"
                 Click="Exit_Click"/>
         </StackPanel>
-        
-        
-        <!--<Grid Style="{DynamicResource DefaultGridStyle}"
-            >
-
-
-            
-
-            
-
-            
-        </Grid>-->
     </Border>
 </Window>
