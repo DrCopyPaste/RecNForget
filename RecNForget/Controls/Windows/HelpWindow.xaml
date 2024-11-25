@@ -24,37 +24,18 @@
     <Border Style="{DynamicResource DefaultWindowBorderStyle}" MouseDown="Window_MouseDown">
         <StackPanel Orientation="Vertical">
             <local:TitleBar HorizontalAlignment="Stretch" />
-            <StackPanel Orientation="Horizontal">
-                <ScrollViewer Style="{DynamicResource HelpTopicList_ScrollViewer_Style}">
-                    <Grid
-                    Name="TopicListGrid">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
-                        </Grid.ColumnDefinitions>
-                        <!-- Row Definitions dynamic (depending on how many topics are found) -->
-                    </Grid>
-                </ScrollViewer>
-                <StackPanel Orientation="Vertical">
-                    <Label Style="{DynamicResource HeadlineLabelStyle}"
-                Name="TopicTitle"
-                Content="Help - Topic"/>
-
-                    <ScrollViewer Style="{DynamicResource HelpTopic_ScrollViewer_Style}">
-                        <Grid
-                    Name="HelpLinesGrid">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Style="{DynamicResource GrowForRemainingSpaceColumnStyle}" />
-                            </Grid.ColumnDefinitions>
-                            <!-- Row Definitions dynamic (depending on how many help lines are found) -->
-                        </Grid>
-                    </ScrollViewer>
-                </StackPanel>
-            </StackPanel>
+                <TabControl Style="{DynamicResource TabControlStyle}" ItemsSource="{Binding Features}" d:ItemsSource="{d:SampleData ItemCount=10}">
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}" />
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                        <TextBlock Text="{Binding HelpLinesAsString}" d:Text="This might be usefule to someone who reads useful things.&#x0a;There are even multiple lines. &#x0a; &#x0a; And much much more." />
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
         </StackPanel>
-        <!--
-            
-
-            
-        </Grid>-->
     </Border>
 </Window>

@@ -62,6 +62,7 @@ public class ConfiguredServices
         serviceCollection.AddTransient<SettingsWindow>();
 
         serviceCollection.AddSingleton<AboutViewModel>();
+        serviceCollection.AddSingleton<HelpViewModel>();
         serviceCollection.AddSingleton<MainViewModel>();
         serviceCollection.AddSingleton<NewToApplicationViewModel>();
         serviceCollection.AddSingleton<NewToVersionViewModel>();

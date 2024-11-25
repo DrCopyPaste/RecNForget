@@ -1484,6 +1484,7 @@
                             <ContentPresenter
                                     x:Name="PART_SelectedContentHost"
                                     ContentSource="SelectedContent"
+                                    HorizontalAlignment="Left"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
@@ -1542,7 +1543,7 @@
                                      HorizontalAlignment="Stretch" MinWidth="75" MaxHeight="20"
                                      Margin="0" BorderThickness="1" CornerRadius="0" Padding="0">
                             <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center"
-                              HorizontalAlignment="Center"
+                              HorizontalAlignment="Left"
                               ContentSource="Header" Margin="0"
                               RecognizesAccessKey="True" />
                         </Border>
