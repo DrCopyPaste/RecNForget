@@ -1,0 +1,242 @@
+Yes. For a .NET WPF project, there are two separate challenges:
+
+Building the project on Xubuntu.
+Running the resulting WPF application on Linux.
+
+The best approach depends heavily on which .NET version you're targeting.
+
+First: Check Your Project Type
+
+Open your .csproj file and look for something like:
+
+<TargetFramework>net8.0-windows</TargetFramework>
+
+or
+
+<TargetFramework>net6.0-windows</TargetFramework>
+
+or
+
+<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+Scenario A: Modern .NET (6/7/8/9)
+
+Example:
+
+<TargetFramework>net8.0-windows</TargetFramework>
+<UseWPF>true</UseWPF>
+Scenario B: .NET Framework
+
+Example:
+
+<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+
+The setup differs significantly.
+
+Recommended Option for Modern WPF (.NET 6+)
+
+For modern SDK-style WPF projects, use:
+
+Native Linux .NET SDK
+Wine only for running/testing
+
+This is usually the cleanest solution.
+
+Step 1: Install .NET SDK
+
+On Xubuntu:
+
+sudo apt update
+sudo apt install wget apt-transport-https
+
+Add Microsoft repository:
+
+wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt update
+
+Install SDK:
+
+sudo apt install dotnet-sdk-8.0
+
+Verify:
+
+dotnet --info
+Step 2: Enable Windows Targeting
+
+Modern WPF projects target Windows.
+
+Build with:
+
+dotnet build -p:EnableWindowsTargeting=true
+
+or:
+
+dotnet publish \
+  -r win-x64 \
+  -c Release \
+  -p:EnableWindowsTargeting=true
+
+The Linux SDK can often compile Windows-targeted projects because the reference assemblies are downloaded by NuGet.
+
+Step 3: Install Wine
+
+Enable 32-bit support:
+
+sudo dpkg --add-architecture i386
+sudo apt update
+
+Install Wine:
+
+sudo apt install wine64 wine32
+
+Check:
+
+wine --version
+Step 4: Create Wine Prefix
+export WINEPREFIX=$HOME/.wine-wpf
+wineboot
+Step 5: Install .NET Runtime in Wine
+
+For self-contained deployments, you can skip this.
+
+Publish:
+
+dotnet publish \
+  -c Release \
+  -r win-x64 \
+  --self-contained true
+
+This bundles the runtime.
+
+Step 6: Run Your WPF App
+wine MyApp.exe
+
+or
+
+cd bin/Release/net8.0-windows/win-x64/publish
+wine MyApp.exe
+Recommended Option for .NET Framework 4.x WPF
+
+If you're targeting .NET Framework 4.8:
+
+<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+
+then Linux compilation is much harder.
+
+You generally need:
+
+Wine
+Visual Studio Build Tools running under Wine
+
+or
+
+A Windows VM
+
+The Windows VM is usually more reliable.
+
+Alternative: Use Mono
+
+Install:
+
+sudo apt install mono-complete
+
+Build:
+
+msbuild MyProject.sln
+
+However:
+
+WPF support in Mono is incomplete
+Many WPF applications won't build correctly
+Modern WPF features often fail
+
+I generally do not recommend Mono for serious WPF work in 2025+.
+
+Better Alternative: Use a Windows Build Container or VM
+
+If your goal is CI/CD or reproducible builds, these are usually better than Wine.
+
+Option 1: Windows VM
+
+Install:
+
+VirtualBox
+KVM/QEMU
+
+Create:
+
+Windows 11 VM
+Visual Studio Build Tools
+
+Build inside VM.
+
+Pros:
+
+Nearly 100% compatibility.
+
+Cons:
+
+Uses more disk and RAM.
+Option 2: GitHub Actions
+
+Build Windows artifacts in CI:
+
+runs-on: windows-latest
+
+Then from Linux:
+
+git push
+
+and download the produced artifacts.
+
+This is often the easiest solution.
+
+Can WPF Run Reliably on Linux?
+
+This is the bigger limitation.
+
+WPF depends on:
+
+DirectX
+Windows Presentation Foundation APIs
+Windows desktop infrastructure
+
+Wine compatibility varies by application.
+
+Simple WPF apps:
+
+Often work.
+
+Complex apps:
+
+Hardware acceleration issues.
+Rendering glitches.
+DPI problems.
+Third-party control failures.
+
+If Linux support is important long-term, consider migrating UI layers to:
+
+Avalonia UI
+Uno Platform
+
+These run natively on Linux and Windows.
+
+My Practical Recommendation
+
+If your project is WPF on .NET 6/7/8/9:
+
+Install the Linux .NET SDK.
+Build with:
+dotnet build -p:EnableWindowsTargeting=true
+Publish self-contained:
+dotnet publish -c Release -r win-x64 --self-contained true
+Install Wine.
+Run the generated .exe with Wine.
+
+If you tell me:
+
+your target framework (net8.0-windows, net48, etc.),
+Xubuntu version,
+whether you're using Visual Studio solution files or only a single project,
+
+I can give exact commands tailored to your project.
