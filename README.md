@@ -38,6 +38,22 @@ But, if you feel extra keen to try out the latest, you can
 - be excited, not even I know :-)
 - Upgraded to .net 7.0 and used third party libraries
 
+# Building on Linux (debian)
+## wine using apt 
+### do we need these? (seems not, ?!? tryout again :))
+sudo apt update
+sudo apt install wget apt-transport-https
+
+### Add Microsoft repository: (adjust for distro and version see https://learn.microsoft.com/en-us/linux/packages )
+wget https://packages.microsoft.com/config/ubuntu/26.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt update
+
+Install SDK:
+sudo apt install dotnet-sdk-10.0
+
+# running on Linux
+
 # Copyright and License
 RecNForget is written in C# using [.NET 7](https://dotnet.microsoft.com/download/dotnet/7.0) and [WPF.](https://github.com/dotnet/wpf)
 

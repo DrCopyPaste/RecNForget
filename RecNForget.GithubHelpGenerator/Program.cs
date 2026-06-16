@@ -39,12 +39,12 @@ namespace RecNForget.GithubHelpGenerator
             tocPageContents.AppendLine(HeadingLine("RecNForget - Help Topics"));
 
             tocPageContents.AppendLine(FeatureHyperLinkLine(quickStart.Title, quickStart.Id));
-            File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", quickStart.Id)), quickStart.HelpLinesAsString());
+            File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", quickStart.Id)), quickStart.HelpLinesAsString);
 
             foreach (var feature in allFeatures)
             {
                 tocPageContents.AppendLine(FeatureHyperLinkLine(feature.Title, feature.Id));
-                File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", feature.Id)), feature.HelpLinesAsString());
+                File.WriteAllText(Path.Combine(featuresPath, string.Format("{0}.md", feature.Id)), feature.HelpLinesAsString);
             }
 
             File.WriteAllText(Path.Combine(tocPath, "toc.md"), tocPageContents.ToString());

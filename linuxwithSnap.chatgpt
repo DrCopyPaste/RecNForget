@@ -1,0 +1,170 @@
+Yes. Building a .NET 8 WPF application on Xubuntu is possible, but there are some important caveats:
+
+WPF is Windows-only.
+The .NET SDK on Linux cannot build WPF projects natively because WPF depends on Windows desktop targeting packs.
+The usual workaround is to run the Windows .NET SDK inside Wine and build the project there.
+The resulting executable is still a Windows application.
+
+If your goal is:
+
+Develop on Xubuntu and produce Windows binaries → Wine + Windows .NET SDK works.
+Run the WPF application on Linux → WPF itself is not supported. You would need Wine to run it, or migrate to something like Avalonia.
+Option 1: Build using Wine (recommended for WPF)
+Step 1: Install Wine
+
+If a Snap version is available on your Xubuntu release:
+
+sudo snap install wine-platform-runtime
+sudo snap install wine-platform-6-stable
+
+However, Wine Snap support is inconsistent across Ubuntu releases.
+
+The more reliable method is usually:
+
+sudo apt update
+sudo apt install wine64 winbind
+
+Verify:
+
+wine --version
+Step 2: Create a clean Wine prefix
+export WINEPREFIX=$HOME/.wine-dotnet8
+wineboot
+
+This creates a dedicated Windows environment.
+
+Step 3: Install Windows .NET 8 SDK
+
+Download the Windows x64 SDK installer:
+
+mkdir ~/downloads
+cd ~/downloads
+
+Get the SDK from Microsoft's official site:
+
+Microsoft .NET Downloads
+
+Run:
+
+wine dotnet-sdk-8.0.xxx-win-x64.exe
+
+Follow the installer wizard.
+
+Step 4: Verify .NET inside Wine
+
+Locate the installed SDK:
+
+wine cmd
+
+Inside cmd:
+
+dotnet --info
+
+You should see the SDK information.
+
+Exit:
+
+exit
+Step 5: Install Visual Studio Build Tools (optional but often necessary)
+
+Many WPF projects require MSBuild components not present in the standalone SDK.
+
+Download:
+
+Visual Studio Build Tools
+
+Run:
+
+wine vs_BuildTools.exe
+
+Select:
+
+MSBuild
+.NET Desktop Build Tools
+.NET 8 SDK
+Windows SDK
+
+This can take a while.
+
+Step 6: Clone your project
+git clone <repo>
+cd <repo>
+Step 7: Build via Wine
+
+Example:
+
+wine cmd /c dotnet restore
+
+then:
+
+wine cmd /c dotnet build -c Release
+
+or:
+
+wine cmd /c dotnet publish -c Release
+Option 2: Use a Windows build container inside Docker
+
+This is generally easier and more reproducible than Wine.
+
+Unfortunately:
+
+Windows containers require a Windows kernel.
+Linux Docker hosts cannot run Windows containers directly.
+
+So on Xubuntu this isn't practical unless you're using a remote Windows builder.
+
+Option 3: Use a Windows VM (often the easiest)
+
+Install:
+
+VirtualBox
+
+Create a lightweight Windows 11 VM.
+
+Install:
+
+.NET 8 SDK
+Build Tools
+
+Then build via:
+
+dotnet build
+
+This is often more reliable than Wine for WPF.
+
+Typical WPF project file settings
+
+Ensure your .csproj contains something like:
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+</Project>
+CI/CD alternative (highly recommended)
+
+Many teams developing on Linux avoid local WPF builds entirely and use:
+
+GitHub Actions
+Azure DevOps
+
+with a Windows runner:
+
+runs-on: windows-latest
+
+and:
+
+- uses: actions/setup-dotnet@v4
+  with:
+    dotnet-version: 8.0.x
+
+- run: dotnet build MyProject.sln -c Release
+
+This is usually the least painful solution because WPF is fundamentally tied to Windows build tooling.
+
+If you share your .csproj and whether you're using packages such as WinForms, WebView2, ClickOnce, COM references, or native DLLs, I can give a more exact Wine setup and point out any parts likely to fail under Wine.
