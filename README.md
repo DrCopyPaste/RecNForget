@@ -52,7 +52,49 @@ sudo apt update
 Install SDK:
 sudo apt install dotnet-sdk-10.0
 
+Verify:
+dotnet --info
+
+## Enable 32-bit support (do we need this? skipping for now)
+sudo dpkg --add-architecture i386
+sudo apt update
+
+Install Wine:
+sudo apt install wine64 wine32
+
+Check:
+wine --version
+
+Step 4: Create Wine Prefix (see also https://superuser.com/questions/1651113/is-it-possible-to-create-a-wineprefix-from-the-command-line-silently-unattende )
+
+export WINEPREFIX=$HOME/.wine-wpf
+wineboot
+
+(if errors show up on wineboot - repeat and see if it was only a first start issue ?!?)
+(see also https://gitlab.winehq.org/wine/wine/-/wikis/Commands/wineboot )
+
+
 # running on Linux
+
+Step 5: Install .NET Runtime in Wine
+
+Download the Windows x64 .NET Desktop Runtime 8 installer from Microsoft's website.
+Run it inside the same Wine prefix: (ajust for version/ platform)
+
+Install Runtime: https://learn.microsoft.com/en-us/dotnet/core/install/linux
+https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.28-windows-x64-installer
+
+WINEPREFIX=$HOME/.wine-wpf wine windowsdesktop-runtime-8.0.28-win-x64.exe
+
+then verify using:
+WINEPREFIX=$HOME/.wine-wpf wine dotnet --list-runtimes
+
+then build like this:
+dotnet publish -c Release -r win-x64
+
+and then run like this:
+WINEPREFIX=$HOME/.wine-wpf wine RecNForget.exe
+
 
 # Copyright and License
 RecNForget is written in C# using [.NET 7](https://dotnet.microsoft.com/download/dotnet/7.0) and [WPF.](https://github.com/dotnet/wpf)
